@@ -6,9 +6,12 @@
     "generate": "turbo run generate",
     "build": "turbo run build",
     "tsc": "turbo run tsc",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "format": "pnpm exec biome format --write",
+    "check": "pnpm exec biome check --write"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
     "@changesets/cli": "^2.29.5",
     "@openapi-codegen/cli": "^3.1.0",
     "@openapi-codegen/typescript": "^11.0.1",

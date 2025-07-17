@@ -6,34 +6,19 @@
       "persistent": true
     },
     "generate": {
-      "dependsOn": [
-        "^generate"
-      ],
-      "inputs": [
-        "openapi-codegen.config.ts",
-        "kubb.config.ts"
-      ],
+      "dependsOn": ["^generate"],
+      "inputs": ["openapi-codegen.config.ts", "kubb.config.ts"],
       "outputs": []
     },
     "tsc": {
-      "dependsOn": [
-        "^tsc"
-      ],
-      "inputs": [
-        "src/**"
-      ],
+      "dependsOn": ["^tsc"],
+      "inputs": ["src/**"],
       "outputs": []
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "src/**"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["src/**"],
+      "outputs": ["dist/**"]
     }
   }
 }

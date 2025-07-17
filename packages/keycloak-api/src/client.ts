@@ -1,7 +1,7 @@
-import { operationsByPath as adminOperations } from './admin/extra';
-import { operationsByPath as accountOperations } from './account/extra';
-import { FetcherExtraProps, fetch as fetchRequest } from './common/fetcher';
-import { FetchImpl } from './utils/fetch';
+import type { operationsByPath as accountOperations } from './account/extra';
+import type { operationsByPath as adminOperations } from './admin/extra';
+import { type FetcherExtraProps, fetch as fetchRequest } from './common/fetcher';
+import type { FetchImpl } from './utils/fetch';
 
 export interface KeycloakAdminApiOptions {
   baseUrl: string;
@@ -50,7 +50,14 @@ export class KeycloakAdminApi {
     const [method = '', url = ''] = endpoint.split(' ');
     const extraParams = (params || {}) as Record<string, unknown>;
 
-    const result = await fetchRequest({ ...extraParams, method, url, baseUrl: this.#baseUrl, token: this.#token, fetchImpl: this.#fetch });
+    const result = await fetchRequest({
+      ...extraParams,
+      method,
+      url,
+      baseUrl: this.#baseUrl,
+      token: this.#token,
+      fetchImpl: this.#fetch
+    });
     return result as AdminRequestEndpointResult<Endpoint>;
   }
 }
@@ -78,7 +85,14 @@ export class KeycloakAccountApi {
     const [method = '', url = ''] = endpoint.split(' ');
     const extraParams = (params || {}) as Record<string, unknown>;
 
-    const result = await fetchRequest({ ...extraParams, method, url, baseUrl, token: this.#token, fetchImpl: this.#fetch });
+    const result = await fetchRequest({
+      ...extraParams,
+      method,
+      url,
+      baseUrl,
+      token: this.#token,
+      fetchImpl: this.#fetch
+    });
     return result as AccountRequestEndpointResult<Endpoint>;
   }
 }

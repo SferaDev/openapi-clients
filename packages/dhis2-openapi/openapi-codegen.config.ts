@@ -1,5 +1,5 @@
 import { defineConfig } from '@openapi-codegen/cli';
-import { Context } from '@openapi-codegen/cli/lib/types';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 
 export default defineConfig({

@@ -41,73 +41,73 @@ export type AaaAlertInterval = string;
  * @x-auditable true
  */
 export type AaaAlertType =
-  | 'access_custom_certificate_expiration_type'
-  | 'advanced_ddos_attack_l4_alert'
-  | 'advanced_ddos_attack_l7_alert'
-  | 'advanced_http_alert_error'
-  | 'bgp_hijack_notification'
-  | 'billing_usage_alert'
-  | 'block_notification_block_removed'
-  | 'block_notification_new_block'
-  | 'block_notification_review_rejected'
-  | 'bot_traffic_basic_alert'
-  | 'brand_protection_alert'
-  | 'brand_protection_digest'
-  | 'clickhouse_alert_fw_anomaly'
-  | 'clickhouse_alert_fw_ent_anomaly'
-  | 'cloudforce_one_request_notification'
-  | 'custom_analytics'
-  | 'custom_bot_detection_alert'
-  | 'custom_ssl_certificate_event_type'
-  | 'dedicated_ssl_certificate_event_type'
-  | 'device_connectivity_anomaly_alert'
-  | 'dos_attack_l4'
-  | 'dos_attack_l7'
-  | 'expiring_service_token_alert'
-  | 'failing_logpush_job_disabled_alert'
-  | 'fbm_auto_advertisement'
-  | 'fbm_dosd_attack'
-  | 'fbm_volumetric_attack'
-  | 'health_check_status_notification'
-  | 'hostname_aop_custom_certificate_expiration_type'
-  | 'http_alert_edge_error'
-  | 'http_alert_origin_error'
-  | 'image_notification'
-  | 'image_resizing_notification'
-  | 'incident_alert'
-  | 'load_balancing_health_alert'
-  | 'load_balancing_pool_enablement_alert'
-  | 'logo_match_alert'
-  | 'magic_tunnel_health_check_event'
-  | 'magic_wan_tunnel_health'
-  | 'maintenance_event_notification'
-  | 'mtls_certificate_store_certificate_expiration_type'
-  | 'pages_event_alert'
-  | 'radar_notification'
-  | 'real_origin_monitoring'
-  | 'scriptmonitor_alert_new_code_change_detections'
-  | 'scriptmonitor_alert_new_hosts'
-  | 'scriptmonitor_alert_new_malicious_hosts'
-  | 'scriptmonitor_alert_new_malicious_scripts'
-  | 'scriptmonitor_alert_new_malicious_url'
-  | 'scriptmonitor_alert_new_max_length_resource_url'
-  | 'scriptmonitor_alert_new_resources'
-  | 'secondary_dns_all_primaries_failing'
-  | 'secondary_dns_primaries_failing'
-  | 'secondary_dns_warning'
-  | 'secondary_dns_zone_successfully_updated'
-  | 'secondary_dns_zone_validation_warning'
-  | 'security_insights_alert'
-  | 'sentinel_alert'
-  | 'stream_live_notifications'
-  | 'synthetic_test_latency_alert'
-  | 'synthetic_test_low_availability_alert'
-  | 'traffic_anomalies_alert'
-  | 'tunnel_health_event'
-  | 'tunnel_update_event'
-  | 'universal_ssl_event_type'
-  | 'web_analytics_metrics_update'
-  | 'zone_aop_custom_certificate_expiration_type';
+  | "access_custom_certificate_expiration_type"
+  | "advanced_ddos_attack_l4_alert"
+  | "advanced_ddos_attack_l7_alert"
+  | "advanced_http_alert_error"
+  | "bgp_hijack_notification"
+  | "billing_usage_alert"
+  | "block_notification_block_removed"
+  | "block_notification_new_block"
+  | "block_notification_review_rejected"
+  | "bot_traffic_basic_alert"
+  | "brand_protection_alert"
+  | "brand_protection_digest"
+  | "clickhouse_alert_fw_anomaly"
+  | "clickhouse_alert_fw_ent_anomaly"
+  | "cloudforce_one_request_notification"
+  | "custom_analytics"
+  | "custom_bot_detection_alert"
+  | "custom_ssl_certificate_event_type"
+  | "dedicated_ssl_certificate_event_type"
+  | "device_connectivity_anomaly_alert"
+  | "dos_attack_l4"
+  | "dos_attack_l7"
+  | "expiring_service_token_alert"
+  | "failing_logpush_job_disabled_alert"
+  | "fbm_auto_advertisement"
+  | "fbm_dosd_attack"
+  | "fbm_volumetric_attack"
+  | "health_check_status_notification"
+  | "hostname_aop_custom_certificate_expiration_type"
+  | "http_alert_edge_error"
+  | "http_alert_origin_error"
+  | "image_notification"
+  | "image_resizing_notification"
+  | "incident_alert"
+  | "load_balancing_health_alert"
+  | "load_balancing_pool_enablement_alert"
+  | "logo_match_alert"
+  | "magic_tunnel_health_check_event"
+  | "magic_wan_tunnel_health"
+  | "maintenance_event_notification"
+  | "mtls_certificate_store_certificate_expiration_type"
+  | "pages_event_alert"
+  | "radar_notification"
+  | "real_origin_monitoring"
+  | "scriptmonitor_alert_new_code_change_detections"
+  | "scriptmonitor_alert_new_hosts"
+  | "scriptmonitor_alert_new_malicious_hosts"
+  | "scriptmonitor_alert_new_malicious_scripts"
+  | "scriptmonitor_alert_new_malicious_url"
+  | "scriptmonitor_alert_new_max_length_resource_url"
+  | "scriptmonitor_alert_new_resources"
+  | "secondary_dns_all_primaries_failing"
+  | "secondary_dns_primaries_failing"
+  | "secondary_dns_warning"
+  | "secondary_dns_zone_successfully_updated"
+  | "secondary_dns_zone_validation_warning"
+  | "security_insights_alert"
+  | "sentinel_alert"
+  | "stream_live_notifications"
+  | "synthetic_test_latency_alert"
+  | "synthetic_test_low_availability_alert"
+  | "traffic_anomalies_alert"
+  | "tunnel_health_event"
+  | "tunnel_update_event"
+  | "universal_ssl_event_type"
+  | "web_analytics_metrics_update"
+  | "zone_aop_custom_certificate_expiration_type";
 
 export type AaaApiResponseCollection = AaaApiResponseCommon & {
   result_info?: AaaSchemasResultInfo;
@@ -181,7 +181,7 @@ export type AaaAuditLogs = {
      *
      * @example user
      */
-    type?: 'user' | 'admin' | 'Cloudflare';
+    type?: "user" | "admin" | "Cloudflare";
   };
   /**
    * A string that uniquely identifies the audit log.
@@ -294,7 +294,7 @@ export type AaaAuditLogsV2 = {
     /**
      * @example dash
      */
-    context?: 'api_key' | 'api_token' | 'dash' | 'oauth' | 'origin_ca_key';
+    context?: "api_key" | "api_token" | "dash" | "oauth" | "origin_ca_key";
     /**
      * The email of the actor who performed the action.
      *
@@ -328,7 +328,7 @@ export type AaaAuditLogsV2 = {
      *
      * @example user
      */
-    type?: 'account' | 'cloudflare_admin' | 'system' | 'user';
+    type?: "account" | "cloudflare_admin" | "system" | "user";
   };
   id?: AaaSchemasIdentifier;
   /**
@@ -472,9 +472,10 @@ export type AaaComponentsSchemasDescription = string;
  */
 export type AaaComponentsSchemasName = string;
 
-export type AaaComponentsSchemasResponseCollection = AaaApiResponseCollection & {
-  result?: AaaPagerduty[];
-};
+export type AaaComponentsSchemasResponseCollection =
+  AaaApiResponseCollection & {
+    result?: AaaPagerduty[];
+  };
 
 /**
  * Type of webhook endpoint.
@@ -482,7 +483,7 @@ export type AaaComponentsSchemasResponseCollection = AaaApiResponseCollection & 
  * @example slack
  * @x-auditable true
  */
-export type AaaComponentsSchemasType = 'slack' | 'generic' | 'gchat';
+export type AaaComponentsSchemasType = "slack" | "generic" | "gchat";
 
 /**
  * Timestamp of when the webhook destination was created.
@@ -608,10 +609,10 @@ export type AaaFilters = {
    * Used for configuring incident_alert
    */
   incident_impact?: (
-    | 'INCIDENT_IMPACT_NONE'
-    | 'INCIDENT_IMPACT_MINOR'
-    | 'INCIDENT_IMPACT_MAJOR'
-    | 'INCIDENT_IMPACT_CRITICAL'
+    | "INCIDENT_IMPACT_NONE"
+    | "INCIDENT_IMPACT_MINOR"
+    | "INCIDENT_IMPACT_MAJOR"
+    | "INCIDENT_IMPACT_CRITICAL"
   )[];
   /**
    * Used for configuring stream_live_notifications
@@ -704,7 +705,7 @@ export type AaaFilters = {
   /**
    * Used for configuring traffic_anomalies_alert
    */
-  traffic_exclusions?: 'security_events'[];
+  traffic_exclusions?: "security_events"[];
   /**
    * Used for configuring tunnel_health_event
    */
@@ -735,16 +736,17 @@ export type AaaHistory = {
   sent?: AaaSent;
 };
 
-export type AaaHistoryComponentsSchemasResponseCollection = AaaApiResponseCollection & {
-  /**
-   * @example {"alert_body":{"data":{"custom_csr_id":"","expires_on":null,"hosts":[],"id":"11111111111","issuer":"","method":"txt","serial_number":"","settings":null,"signature":"","status":"","type":"","uploaded_on":null,"validation_errors":[],"validation_records":[{"cname":"","cname_target":"","emails":[],"http_body":"","http_url":"","txt_name":"_acme-challenge.example.com","txt_value":"11111111111"}]},"metadata":{"account":null,"event":{"created_at":null,"id":"","type":"ssl.certificate.validation.failed"},"zone":{"id":"11111111111"}}},"alert_type":"universal_ssl_event_type","description":"Universal Certificate validation status, issuance, renewal, and expiration notices.","id":"f174e90a-fafe-4643-bbbc-4a0ed4fc8415","mechanism":"test@example.com","mechanism_type":"email","name":"SSL Notification Event Policy","policy_id":"35040955-3102-4710-938c-0f4eaf736e25","sent":"2021-10-08T17:52:17.571336Z"}
-   */
-  result?: AaaHistory[];
-  /**
-   * @example {"count":1,"page":1,"per_page":20}
-   */
-  result_info?: Record<string, any>;
-};
+export type AaaHistoryComponentsSchemasResponseCollection =
+  AaaApiResponseCollection & {
+    /**
+     * @example {"alert_body":{"data":{"custom_csr_id":"","expires_on":null,"hosts":[],"id":"11111111111","issuer":"","method":"txt","serial_number":"","settings":null,"signature":"","status":"","type":"","uploaded_on":null,"validation_errors":[],"validation_records":[{"cname":"","cname_target":"","emails":[],"http_body":"","http_url":"","txt_name":"_acme-challenge.example.com","txt_value":"11111111111"}]},"metadata":{"account":null,"event":{"created_at":null,"id":"","type":"ssl.certificate.validation.failed"},"zone":{"id":"11111111111"}}},"alert_type":"universal_ssl_event_type","description":"Universal Certificate validation status, issuance, renewal, and expiration notices.","id":"f174e90a-fafe-4643-bbbc-4a0ed4fc8415","mechanism":"test@example.com","mechanism_type":"email","name":"SSL Notification Event Policy","policy_id":"35040955-3102-4710-938c-0f4eaf736e25","sent":"2021-10-08T17:52:17.571336Z"}
+     */
+    result?: AaaHistory[];
+    /**
+     * @example {"count":1,"page":1,"per_page":20}
+     */
+    result_info?: Record<string, any>;
+  };
 
 export type AaaIdResponse = AaaApiResponseSingle & {
   result?: {
@@ -799,7 +801,7 @@ export type AaaMechanism = string;
  *
  * @example email
  */
-export type AaaMechanismType = 'email' | 'pagerduty' | 'webhook';
+export type AaaMechanismType = "email" | "pagerduty" | "webhook";
 
 /**
  * List of IDs that will be used when dispatching a notification. IDs for email type will be the email address.
@@ -866,9 +868,10 @@ export type AaaPolicies = {
   name?: AaaSchemasName;
 };
 
-export type AaaPoliciesComponentsSchemasResponseCollection = AaaApiResponseCollection & {
-  result?: AaaPolicies[];
-};
+export type AaaPoliciesComponentsSchemasResponseCollection =
+  AaaApiResponseCollection & {
+    result?: AaaPolicies[];
+  };
 
 /**
  * The unique identifier of a notification policy
@@ -1018,7 +1021,7 @@ export type AaaSchemasSingleResponse = AaaApiResponseSingle & {
  * @example email
  * @x-auditable true
  */
-export type AaaSchemasType = 'email' | 'pagerduty' | 'webhook';
+export type AaaSchemasType = "email" | "pagerduty" | "webhook";
 
 /**
  * Optional secret that will be passed in the `cf-webhook-auth` header when dispatching generic webhook notifications or formatted for supported destinations. Secrets are not returned in any API response body.
@@ -1105,9 +1108,10 @@ export type AaaWebhooks = {
   url?: AaaUrl;
 };
 
-export type AaaWebhooksComponentsSchemasResponseCollection = AaaApiResponseCollection & {
-  result?: AaaWebhooks[];
-};
+export type AaaWebhooksComponentsSchemasResponseCollection =
+  AaaApiResponseCollection & {
+    result?: AaaWebhooks[];
+  };
 
 /**
  * Report has invalid type
@@ -2088,7 +2092,7 @@ export type AbuseReportsNoSigError = string;
 /**
  * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
  */
-export type AbuseReportsNotification = 'send' | 'send-anon' | 'none';
+export type AbuseReportsNotification = "send" | "send-anon" | "none";
 
 export type AbuseReportsPhishingReport = {
   act: AbuseReportsReportType;
@@ -2431,14 +2435,14 @@ export type AbuseReportsRegistrarWhoisReport = {
  * @example abuse_general
  */
 export type AbuseReportsReportType =
-  | 'abuse_dmca'
-  | 'abuse_trademark'
-  | 'abuse_general'
-  | 'abuse_phishing'
-  | 'abuse_children'
-  | 'abuse_threat'
-  | 'abuse_registrar_whois'
-  | 'abuse_ncsei';
+  | "abuse_dmca"
+  | "abuse_trademark"
+  | "abuse_general"
+  | "abuse_phishing"
+  | "abuse_children"
+  | "abuse_threat"
+  | "abuse_registrar_whois"
+  | "abuse_ncsei";
 
 export type AbuseReportsSubmitErrorResponse = {
   error_code: AbuseReportsErrorCode;
@@ -2841,9 +2845,10 @@ export type AccessAccessRequests = {
   user_email?: AccessComponentsSchemasEmail;
 };
 
-export type AccessAccessRequestsComponentsSchemasResponseCollection = AccessApiResponseCommon & {
-  result?: AccessAccessRequests[];
-};
+export type AccessAccessRequestsComponentsSchemasResponseCollection =
+  AccessApiResponseCommon & {
+    result?: AccessAccessRequests[];
+  };
 
 /**
  * Matches an Access group.
@@ -3005,15 +3010,15 @@ export type AccessAllowedIdps = string[];
  * @example GET
  */
 export type AccessAllowedMethods = (
-  | 'GET'
-  | 'POST'
-  | 'HEAD'
-  | 'PUT'
-  | 'DELETE'
-  | 'CONNECT'
-  | 'OPTIONS'
-  | 'TRACE'
-  | 'PATCH'
+  | "GET"
+  | "POST"
+  | "HEAD"
+  | "PUT"
+  | "DELETE"
+  | "CONNECT"
+  | "OPTIONS"
+  | "TRACE"
+  | "PATCH"
 )[];
 
 /**
@@ -3094,19 +3099,22 @@ export type AccessApiResponseCommonFailure = {
 
 export type AccessApiResponseSingle = AccessApiResponseCommon;
 
-export type AccessAppPoliciesComponentsSchemasIdResponse = AccessApiResponseSingle & {
-  result?: {
-    id?: AccessUuid;
+export type AccessAppPoliciesComponentsSchemasIdResponse =
+  AccessApiResponseSingle & {
+    result?: {
+      id?: AccessUuid;
+    };
   };
-};
 
-export type AccessAppPoliciesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessAppPolicyResponse[];
-};
+export type AccessAppPoliciesComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessAppPolicyResponse[];
+  };
 
-export type AccessAppPoliciesComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessAppPolicyResponse;
-};
+export type AccessAppPoliciesComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessAppPolicyResponse;
+  };
 
 /**
  * Number of access applications currently using this policy.
@@ -3201,16 +3209,32 @@ export type AccessAppReqEmbeddedScimConfig = {
 };
 
 export type AccessAppRequest =
-  | (AccessSelfHostedProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessSaasProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessSshProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessVncProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessAppLauncherProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessWarpProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
-  | (AccessBisoProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
+  | (AccessSelfHostedProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessSaasProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessSshProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessVncProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessAppLauncherProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessWarpProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
+  | (AccessBisoProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig)
   | (AccessBookmarkProps & AccessAppReqEmbeddedScimConfig)
   | (AccessInfraProps & AccessInfraAppReqEmbeddedPolicies)
-  | (AccessRdpProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig);
+  | (AccessRdpProps &
+      AccessAppReqEmbeddedPolicies &
+      AccessAppReqEmbeddedScimConfig);
 
 /**
  * The policies that Access applies to the application.
@@ -3227,16 +3251,34 @@ export type AccessAppRespEmbeddedTargetCriteria = {
 };
 
 export type AccessAppResponse =
-  | (AccessBasicAppResponseProps & AccessSelfHostedProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessSaasProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessSshProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessVncProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessAppLauncherProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessWarpProps & AccessAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessBisoProps & AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessSelfHostedProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessSaasProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessSshProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessVncProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessAppLauncherProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessWarpProps &
+      AccessAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessBisoProps &
+      AccessAppRespEmbeddedPolicies)
   | (AccessBasicAppResponseProps & AccessBookmarkProps)
-  | (AccessBasicAppResponseProps & AccessInfraProps & AccessInfraAppRespEmbeddedPolicies)
-  | (AccessBasicAppResponseProps & AccessRdpProps & AccessAppRespEmbeddedPolicies);
+  | (AccessBasicAppResponseProps &
+      AccessInfraProps &
+      AccessInfraAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps &
+      AccessRdpProps &
+      AccessAppRespEmbeddedPolicies);
 
 export type AccessAppSettingsRequest = {
   allow_iframe?: AccessAllowIframe;
@@ -3311,13 +3353,15 @@ export type AccessApps =
  */
 export type AccessAppsComponentsSchemasName = string;
 
-export type AccessAppsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessAppResponse[];
-};
+export type AccessAppsComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessAppResponse[];
+  };
 
-export type AccessAppsComponentsSchemasResponseCollection2 = AccessApiResponseCollection & {
-  result?: AccessApps[];
-};
+export type AccessAppsComponentsSchemasResponseCollection2 =
+  AccessApiResponseCollection & {
+    result?: AccessApps[];
+  };
 
 /**
  * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
@@ -3327,13 +3371,15 @@ export type AccessAppsComponentsSchemasResponseCollection2 = AccessApiResponseCo
  */
 export type AccessAppsComponentsSchemasSessionDuration = string;
 
-export type AccessAppsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessAppResponse;
-};
+export type AccessAppsComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessAppResponse;
+  };
 
-export type AccessAppsComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
-  result?: AccessApps;
-};
+export type AccessAppsComponentsSchemasSingleResponse2 =
+  AccessApiResponseSingle & {
+    result?: AccessApps;
+  };
 
 /**
  * The hostnames of the applications that will use this certificate.
@@ -3430,7 +3476,7 @@ export type AccessAzureAD = {
        *
        * @x-auditable true
        */
-      prompt?: 'login' | 'select_account' | 'none';
+      prompt?: "login" | "select_account" | "none";
       /**
        * Should Cloudflare try to load groups from your account
        *
@@ -3459,7 +3505,7 @@ export type AccessAzureAD = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -3495,20 +3541,20 @@ export type AccessAzureAD = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -3633,13 +3679,15 @@ export type AccessBookmarks = {
  */
 export type AccessBookmarksComponentsSchemasName = string;
 
-export type AccessBookmarksComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessBookmarks[];
-};
+export type AccessBookmarksComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessBookmarks[];
+  };
 
-export type AccessBookmarksComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessBookmarks;
-};
+export type AccessBookmarksComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessBookmarks;
+  };
 
 /**
  * The background color of the log in button on the landing page.
@@ -3667,21 +3715,25 @@ export type AccessCaComponentsSchemasIdResponse = AccessApiResponseSingle & {
   };
 };
 
-export type AccessCaComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessCa[];
-};
+export type AccessCaComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessCa[];
+  };
 
-export type AccessCaComponentsSchemasResponseCollection2 = AccessApiResponseCollection & {
-  result?: AccessSchemasCa[];
-};
+export type AccessCaComponentsSchemasResponseCollection2 =
+  AccessApiResponseCollection & {
+    result?: AccessSchemasCa[];
+  };
 
-export type AccessCaComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessCa;
-};
+export type AccessCaComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessCa;
+  };
 
-export type AccessCaComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
-  result?: AccessSchemasCa;
-};
+export type AccessCaComponentsSchemasSingleResponse2 =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasCa;
+  };
 
 export type AccessCentrify = {
   /**
@@ -3725,7 +3777,7 @@ export type AccessCentrify = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -3761,20 +3813,20 @@ export type AccessCentrify = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -3820,21 +3872,25 @@ export type AccessCertificatesComponentsSchemasName = string;
  */
 export type AccessCertificatesComponentsSchemasName2 = string;
 
-export type AccessCertificatesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessCertificates[];
-};
+export type AccessCertificatesComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessCertificates[];
+  };
 
-export type AccessCertificatesComponentsSchemasResponseCollection2 = AccessApiResponseCollection & {
-  result?: AccessComponentsSchemasCertificates[];
-};
+export type AccessCertificatesComponentsSchemasResponseCollection2 =
+  AccessApiResponseCollection & {
+    result?: AccessComponentsSchemasCertificates[];
+  };
 
-export type AccessCertificatesComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessCertificates;
-};
+export type AccessCertificatesComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessCertificates;
+  };
 
-export type AccessCertificatesComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
-  result?: AccessComponentsSchemasCertificates;
-};
+export type AccessCertificatesComponentsSchemasSingleResponse2 =
+  AccessApiResponseSingle & {
+    result?: AccessComponentsSchemasCertificates;
+  };
 
 /**
  * The unique Cloudflare-generated Id of the SCIM Group resource; also known as the "Id".
@@ -3955,9 +4011,10 @@ export type AccessComponentsSchemasName = string;
  */
 export type AccessComponentsSchemasRequire = AccessRule[];
 
-export type AccessComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessServiceTokens[];
-};
+export type AccessComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessServiceTokens[];
+  };
 
 /**
  * The amount of time that tokens issued for the application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
@@ -3977,15 +4034,15 @@ export type AccessComponentsSchemasSingleResponse = AccessApiResponseSingle & {
  * @example self_hosted
  */
 export type AccessComponentsSchemasType =
-  | 'self_hosted'
-  | 'saas'
-  | 'ssh'
-  | 'vnc'
-  | 'app_launcher'
-  | 'warp'
-  | 'biso'
-  | 'bookmark'
-  | 'dash_sso';
+  | "self_hosted"
+  | "saas"
+  | "ssh"
+  | "vnc"
+  | "app_launcher"
+  | "warp"
+  | "biso"
+  | "bookmark"
+  | "dash_sso";
 
 /**
  * The IdP used to authenticate.
@@ -4075,13 +4132,15 @@ export type AccessCustomClaimsSupport = {
  */
 export type AccessCustomPagesComponentsSchemasName = string;
 
-export type AccessCustomPagesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessCustomPageWithoutHtml[];
-};
+export type AccessCustomPagesComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessCustomPageWithoutHtml[];
+  };
 
-export type AccessCustomPagesComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessCustomPage;
-};
+export type AccessCustomPagesComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessCustomPage;
+  };
 
 /**
  * The custom error message shown to a user when they are denied access to the application.
@@ -4151,7 +4210,7 @@ export type AccessDaysUntilNextRotation = number;
  *
  * @example allow
  */
-export type AccessDecision = 'allow' | 'deny' | 'non_identity' | 'bypass';
+export type AccessDecision = "allow" | "deny" | "non_identity" | "bypass";
 
 /**
  * List of destinations secured by Access. This supersedes `self_hosted_domains` to allow for more flexibility in defining different types of domains. If `destinations` are provided, then `self_hosted_domains` will be ignored.
@@ -4164,7 +4223,7 @@ export type AccessDecision = 'allow' | 'deny' | 'non_identity' | 'bypass';
  */
 export type AccessDestinations = (
   | {
-      type?: 'public';
+      type?: "public";
       /**
        * The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
        */
@@ -4182,12 +4241,12 @@ export type AccessDestinations = (
       /**
        * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.
        */
-      l4_protocol?: 'tcp' | 'udp';
+      l4_protocol?: "tcp" | "udp";
       /**
        * The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.
        */
       port_range?: string;
-      type?: 'private';
+      type?: "private";
       /**
        * The VNET ID to match the destination. When omitted, all VNETs will match.
        */
@@ -4236,7 +4295,7 @@ export type AccessDeviceSession = {
  * @default desc
  * @example desc
  */
-export type AccessDirection = 'desc' | 'asc';
+export type AccessDirection = "desc" | "asc";
 
 /**
  * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.  Note that the maximum duration for this setting is the same as the key rotation period on the account. Default expiration is 24h
@@ -4401,7 +4460,7 @@ export type AccessFacebook = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -4437,20 +4496,20 @@ export type AccessFacebook = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessFailedLoginResponse = AccessApiResponseCollection & {
@@ -4505,13 +4564,15 @@ export type AccessFooterLinks = {
   url: string;
 }[];
 
-export type AccessGatewayCaComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessSchemasCertificates[];
-};
+export type AccessGatewayCaComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessSchemasCertificates[];
+  };
 
-export type AccessGatewayCaComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessSchemasCertificates;
-};
+export type AccessGatewayCaComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasCertificates;
+  };
 
 /**
  * True if the seat is part of Gateway.
@@ -4573,7 +4634,7 @@ export type AccessGithub = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -4609,20 +4670,20 @@ export type AccessGithub = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -4630,7 +4691,7 @@ export type AccessGithub = {
  * Requires a Github identity provider.
  */
 export type AccessGithubOrganizationRule = {
-  ['github-organization']: {
+  ["github-organization"]: {
     /**
      * The ID of your Github identity provider.
      *
@@ -4678,7 +4739,7 @@ export type AccessGoogle = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -4714,20 +4775,20 @@ export type AccessGoogle = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessGoogleApps = {
@@ -4764,7 +4825,7 @@ export type AccessGoogleApps = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -4800,20 +4861,20 @@ export type AccessGoogleApps = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessGroups = {
@@ -4856,17 +4917,20 @@ export type AccessGroupsComponentsSchemasName = string;
  */
 export type AccessGroupsComponentsSchemasName2 = string;
 
-export type AccessGroupsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessComponentsSchemasGroups[];
-};
+export type AccessGroupsComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessComponentsSchemasGroups[];
+  };
 
-export type AccessGroupsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessSchemasGroups;
-};
+export type AccessGroupsComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasGroups;
+  };
 
-export type AccessGroupsComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
-  result?: AccessComponentsSchemasGroups;
-};
+export type AccessGroupsComponentsSchemasSingleResponse2 =
+  AccessApiResponseSingle & {
+    result?: AccessComponentsSchemasGroups;
+  };
 
 /**
  * Matches a group in Google Workspace.
@@ -5025,7 +5089,7 @@ export type AccessIdentityProvider = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -5061,20 +5125,20 @@ export type AccessIdentityProvider = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessIdentityProviders =
@@ -5093,28 +5157,30 @@ export type AccessIdentityProviders =
   | AccessYandex
   | AccessOnetimepin;
 
-export type AccessIdentityProvidersComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: (
-    | AccessSchemasAzureAD
-    | AccessSchemasCentrify
-    | AccessSchemasFacebook
-    | AccessSchemasGithub
-    | AccessSchemasGoogle
-    | AccessSchemasGoogleApps
-    | AccessSchemasLinkedin
-    | AccessSchemasOidc
-    | AccessSchemasOkta
-    | AccessSchemasOnelogin
-    | AccessSchemasPingone
-    | AccessSchemasSaml
-    | AccessSchemasYandex
-    | AccessSchemasOnetimepin
-  )[];
-};
+export type AccessIdentityProvidersComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: (
+      | AccessSchemasAzureAD
+      | AccessSchemasCentrify
+      | AccessSchemasFacebook
+      | AccessSchemasGithub
+      | AccessSchemasGoogle
+      | AccessSchemasGoogleApps
+      | AccessSchemasLinkedin
+      | AccessSchemasOidc
+      | AccessSchemasOkta
+      | AccessSchemasOnelogin
+      | AccessSchemasPingone
+      | AccessSchemasSaml
+      | AccessSchemasYandex
+      | AccessSchemasOnetimepin
+    )[];
+  };
 
-export type AccessIdentityProvidersComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessSchemasIdentityProviders;
-};
+export type AccessIdentityProvidersComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasIdentityProviders;
+  };
 
 /**
  * The unique Id of the IdP that has SCIM enabled.
@@ -5251,9 +5317,10 @@ export type AccessKeyConfig = {
  */
 export type AccessKeyRotationIntervalDays = number;
 
-export type AccessKeysComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessKeyConfig;
-};
+export type AccessKeysComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessKeyConfig;
+  };
 
 /**
  * The design of the App Launcher landing page shown to users when they log in.
@@ -5321,7 +5388,7 @@ export type AccessLinkedin = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -5357,20 +5424,20 @@ export type AccessLinkedin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessLoginDesign = {
@@ -5552,7 +5619,7 @@ export type AccessOidc = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -5588,20 +5655,20 @@ export type AccessOidc = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -5655,7 +5722,7 @@ export type AccessOidcSaasApp = {
    *
    * @example oidc
    */
-  auth_type?: 'saml' | 'oidc';
+  auth_type?: "saml" | "oidc";
   /**
    * The application client id
    *
@@ -5688,7 +5755,7 @@ export type AccessOidcSaasApp = {
      *
      * @example profile
      */
-    scope?: 'groups' | 'profile' | 'email' | 'openid';
+    scope?: "groups" | "profile" | "email" | "openid";
     source?: {
       /**
        * The name of the IdP claim.
@@ -5711,7 +5778,13 @@ export type AccessOidcSaasApp = {
    *
    * @example authorization_code
    */
-  grant_types?: ('authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit')[];
+  grant_types?: (
+    | "authorization_code"
+    | "authorization_code_with_pkce"
+    | "refresh_tokens"
+    | "hybrid"
+    | "implicit"
+  )[];
   /**
    * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
    *
@@ -5756,7 +5829,7 @@ export type AccessOidcSaasApp = {
    * @example email
    * @example profile
    */
-  scopes?: ('openid' | 'groups' | 'email' | 'profile')[];
+  scopes?: ("openid" | "groups" | "email" | "profile")[];
   updated_at?: AccessTimestamp;
 };
 
@@ -5801,7 +5874,7 @@ export type AccessOkta = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -5837,20 +5910,20 @@ export type AccessOkta = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -5909,7 +5982,7 @@ export type AccessOnelogin = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -5945,20 +6018,20 @@ export type AccessOnelogin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessOnetimepin = {
@@ -5989,7 +6062,7 @@ export type AccessOnetimepin = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -6025,20 +6098,20 @@ export type AccessOnetimepin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -6076,9 +6149,10 @@ export type AccessOrganizationsComponentsSchemasIdentifier = void;
  */
 export type AccessOrganizationsComponentsSchemasName = string;
 
-export type AccessOrganizationsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessSchemasOrganizations;
-};
+export type AccessOrganizationsComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasOrganizations;
+  };
 
 /**
  * Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default
@@ -6154,7 +6228,7 @@ export type AccessPingone = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -6190,20 +6264,20 @@ export type AccessPingone = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessPolicies = {
@@ -6230,13 +6304,15 @@ export type AccessPolicies = {
  */
 export type AccessPoliciesComponentsSchemasName = string;
 
-export type AccessPoliciesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessPolicies[];
-};
+export type AccessPoliciesComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessPolicies[];
+  };
 
-export type AccessPoliciesComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessPolicies;
-};
+export type AccessPoliciesComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessPolicies;
+  };
 
 export type AccessPolicyCheckResponse = AccessApiResponseSingle & {
   result?: {
@@ -6397,7 +6473,7 @@ export type AccessPrecedence = number;
  * @example SSH
  * @x-auditable true
  */
-export type AccessProtocol = 'SSH';
+export type AccessProtocol = "SSH";
 
 /**
  * The public key to add to your SSH server configuration.
@@ -6485,7 +6561,7 @@ export type AccessReadServiceTokensFromHeader = string;
  * @example DELETE
  * @example PATCH
  */
-export type AccessRequestMethod = ('DELETE' | 'PATCH' | 'POST' | 'PUT')[];
+export type AccessRequestMethod = ("DELETE" | "PATCH" | "POST" | "PUT")[];
 
 /**
  * The unique Cloudflare-generated Id of the SCIM resource.
@@ -6505,7 +6581,7 @@ export type AccessRequestsIdpResourceId = string;
  * @example FAILURE
  * @example SUCCESS
  */
-export type AccessRequestsStatus = ('FAILURE' | 'SUCCESS')[];
+export type AccessRequestsStatus = ("FAILURE" | "SUCCESS")[];
 
 /**
  * Rules evaluated with an AND logical operator. To match a policy, a user must meet all of the Require rules.
@@ -6525,7 +6601,7 @@ export type AccessResourceGroupName = string;
  * @example USER
  * @example GROUP
  */
-export type AccessResourceType = ('USER' | 'GROUP')[];
+export type AccessResourceType = ("USER" | "GROUP")[];
 
 /**
  * The email address of the SCIM User resource.
@@ -6622,19 +6698,22 @@ export type AccessResponses = {
   status?: string;
 };
 
-export type AccessReusablePoliciesComponentsSchemasIdResponse = AccessApiResponseSingle & {
-  result?: {
-    id?: AccessSchemasUuid;
+export type AccessReusablePoliciesComponentsSchemasIdResponse =
+  AccessApiResponseSingle & {
+    result?: {
+      id?: AccessSchemasUuid;
+    };
   };
-};
 
-export type AccessReusablePoliciesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessReusablePolicyResp[];
-};
+export type AccessReusablePoliciesComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessReusablePolicyResp[];
+  };
 
-export type AccessReusablePoliciesComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessReusablePolicyResp;
-};
+export type AccessReusablePoliciesComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessReusablePolicyResp;
+  };
 
 export type AccessReusablePolicyResp = AccessPolicyResp & {
   app_count?: AccessAppCount;
@@ -6769,7 +6848,7 @@ export type AccessSaml = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -6805,20 +6884,20 @@ export type AccessSaml = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -6854,7 +6933,7 @@ export type AccessSamlSaasApp = {
    *
    * @example saml
    */
-  auth_type?: 'saml' | 'oidc';
+  auth_type?: "saml" | "oidc";
   /**
    * The service provider's endpoint that is responsible for receiving and parsing a SAML assertion.
    *
@@ -6881,9 +6960,9 @@ export type AccessSamlSaasApp = {
      * @example urn:oasis:names:tc:SAML:2.0:attrname-format:basic
      */
     name_format?:
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:basic"
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:uri";
     /**
      * If the attribute is required when building a SAML assertion.
      *
@@ -6934,7 +7013,7 @@ export type AccessSamlSaasApp = {
    *
    * @example id
    */
-  name_id_format?: 'id' | 'email';
+  name_id_format?: "id" | "email";
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's user identities into a NameID value for its SAML assertion. This expression should evaluate to a singular string. The output of this expression can override the `name_id_format` setting.
    *
@@ -7117,7 +7196,7 @@ export type AccessSchemasAzureAD = {
     /**
      * Indicates the type of user interaction that is required. prompt=login forces the user to enter their credentials on that request, negating single-sign on. prompt=none is the opposite. It ensures that the user isn't presented with any interactive prompt. If the request can't be completed silently by using single-sign on, the Microsoft identity platform returns an interaction_required error. prompt=select_account interrupts single sign-on providing account selection experience listing all the accounts either in session or any remembered account or an option to choose to use a different account altogether.
      */
-    prompt?: 'login' | 'select_account' | 'none';
+    prompt?: "login" | "select_account" | "none";
     /**
      * Should Cloudflare try to load groups from your account
      */
@@ -7142,7 +7221,7 @@ export type AccessSchemasAzureAD = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7174,20 +7253,20 @@ export type AccessSchemasAzureAD = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasBasicAppResponseProps = {
@@ -7283,7 +7362,7 @@ export type AccessSchemasCentrify = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7315,20 +7394,20 @@ export type AccessSchemasCentrify = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasCertificates = {
@@ -7385,7 +7464,11 @@ export type AccessSchemasCustomPages = string[];
  *
  * @example allow
  */
-export type AccessSchemasDecision = 'allow' | 'deny' | 'non_identity' | 'bypass';
+export type AccessSchemasDecision =
+  | "allow"
+  | "deny"
+  | "non_identity"
+  | "bypass";
 
 export type AccessSchemasDevicePostureRule = {
   check?: AccessDevicePostureCheck;
@@ -7478,7 +7561,7 @@ export type AccessSchemasFacebook = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7510,20 +7593,20 @@ export type AccessSchemasFacebook = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasFeatureAppProps = {
@@ -7582,7 +7665,7 @@ export type AccessSchemasGithub = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7614,20 +7697,20 @@ export type AccessSchemasGithub = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasGoogle = {
@@ -7654,7 +7737,7 @@ export type AccessSchemasGoogle = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7686,20 +7769,20 @@ export type AccessSchemasGoogle = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasGoogleApps = {
@@ -7733,7 +7816,7 @@ export type AccessSchemasGoogleApps = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7765,20 +7848,20 @@ export type AccessSchemasGoogleApps = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasGroups = {
@@ -7840,7 +7923,7 @@ export type AccessSchemasIdentityProvider = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7872,20 +7955,20 @@ export type AccessSchemasIdentityProvider = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasIdentityProviders =
@@ -7947,7 +8030,7 @@ export type AccessSchemasLinkedin = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -7979,20 +8062,20 @@ export type AccessSchemasLinkedin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasLoginDesign = {
@@ -8102,7 +8185,7 @@ export type AccessSchemasOidc = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8134,20 +8217,20 @@ export type AccessSchemasOidc = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasOidcSaasApp = {
@@ -8174,7 +8257,7 @@ export type AccessSchemasOidcSaasApp = {
    *
    * @example oidc
    */
-  auth_type?: 'saml' | 'oidc';
+  auth_type?: "saml" | "oidc";
   /**
    * The application client id
    *
@@ -8207,7 +8290,7 @@ export type AccessSchemasOidcSaasApp = {
      *
      * @example profile
      */
-    scope?: 'groups' | 'profile' | 'email' | 'openid';
+    scope?: "groups" | "profile" | "email" | "openid";
     source?: {
       /**
        * The name of the IdP claim.
@@ -8239,7 +8322,13 @@ export type AccessSchemasOidcSaasApp = {
    *
    * @example authorization_code
    */
-  grant_types?: ('authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit')[];
+  grant_types?: (
+    | "authorization_code"
+    | "authorization_code_with_pkce"
+    | "refresh_tokens"
+    | "hybrid"
+    | "implicit"
+  )[];
   /**
    * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint.
    *
@@ -8284,7 +8373,7 @@ export type AccessSchemasOidcSaasApp = {
    * @example email
    * @example profile
    */
-  scopes?: ('openid' | 'groups' | 'email' | 'profile')[];
+  scopes?: ("openid" | "groups" | "email" | "profile")[];
   updated_at?: AccessTimestamp;
 };
 
@@ -8319,7 +8408,7 @@ export type AccessSchemasOkta = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8351,20 +8440,20 @@ export type AccessSchemasOkta = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasOnelogin = {
@@ -8398,7 +8487,7 @@ export type AccessSchemasOnelogin = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8430,20 +8519,20 @@ export type AccessSchemasOnelogin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasOnetimepin = {
@@ -8472,7 +8561,7 @@ export type AccessSchemasOnetimepin = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8504,20 +8593,20 @@ export type AccessSchemasOnetimepin = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -8570,7 +8659,7 @@ export type AccessSchemasPingone = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8602,20 +8691,20 @@ export type AccessSchemasPingone = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasPolicyCheckResponse = AccessApiResponseSingle & {
@@ -8707,9 +8796,10 @@ export type AccessSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessSchemasGroups[];
 };
 
-export type AccessSchemasResponseCollectionHostnames = AccessApiResponseCollection & {
-  result?: AccessSchemasSettings[];
-};
+export type AccessSchemasResponseCollectionHostnames =
+  AccessApiResponseCollection & {
+    result?: AccessSchemasSettings[];
+  };
 
 export type AccessSchemasSaasProps = {
   allowed_idps?: AccessAllowedIdps;
@@ -8798,7 +8888,7 @@ export type AccessSchemasSaml = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -8830,20 +8920,20 @@ export type AccessSchemasSaml = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 export type AccessSchemasSamlSaasApp = {
@@ -8852,7 +8942,7 @@ export type AccessSchemasSamlSaasApp = {
    *
    * @example saml
    */
-  auth_type?: 'saml' | 'oidc';
+  auth_type?: "saml" | "oidc";
   /**
    * The service provider's endpoint that is responsible for receiving and parsing a SAML assertion.
    *
@@ -8879,9 +8969,9 @@ export type AccessSchemasSamlSaasApp = {
      * @example urn:oasis:names:tc:SAML:2.0:attrname-format:basic
      */
     name_format?:
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:basic"
+      | "urn:oasis:names:tc:SAML:2.0:attrname-format:uri";
     /**
      * If the attribute is required when building a SAML assertion.
      *
@@ -8917,7 +9007,7 @@ export type AccessSchemasSamlSaasApp = {
    *
    * @example id
    */
-  name_id_format?: 'id' | 'email';
+  name_id_format?: "id" | "email";
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's user identities into a NameID value for its SAML assertion. This expression should evaluate to a singular string. The output of this expression can override the `name_id_format` setting.
    *
@@ -8951,7 +9041,9 @@ export type AccessSchemasSamlSaasApp = {
  * Configuration for provisioning to this application via SCIM. This is currently in closed beta.
  */
 export type AccessSchemasScimConfig = {
-  authentication?: AccessSchemasScimConfigSingleAuthentication | AccessSchemasScimConfigMultiAuthentication;
+  authentication?:
+    | AccessSchemasScimConfigSingleAuthentication
+    | AccessSchemasScimConfigMultiAuthentication;
   /**
    * If false, we propagate DELETE requests to the target application for SCIM resources. If true, we only set `active` to false on the SCIM resource. This is useful because some targets do not support DELETE operations.
    */
@@ -8981,7 +9073,7 @@ export type AccessSchemasScimConfigAuthenticationOauthBearerToken = {
   /**
    * The authentication scheme to use when making SCIM requests to this application.
    */
-  scheme: 'oauthbearertoken';
+  scheme: "oauthbearertoken";
   /**
    * Token used to authenticate with the remote SCIM service.
    */
@@ -8991,7 +9083,8 @@ export type AccessSchemasScimConfigAuthenticationOauthBearerToken = {
 /**
  * Multiple authentication schemes
  */
-export type AccessSchemasScimConfigMultiAuthentication = AccessSchemasScimConfigSingleAuthentication[];
+export type AccessSchemasScimConfigMultiAuthentication =
+  AccessSchemasScimConfigSingleAuthentication[];
 
 export type AccessSchemasScimConfigSingleAuthentication =
   | AccessScimConfigAuthenticationHttpBasic
@@ -9112,7 +9205,7 @@ export type AccessSchemasSshProps = {
  *
  * @x-auditable true
  */
-export type AccessSchemasType = 'identity_denied' | 'forbidden';
+export type AccessSchemasType = "identity_denied" | "forbidden";
 
 /**
  * The amount of time a user seat is inactive before it expires. When the user seat exceeds the set time of inactivity, the user is removed as an active seat and no longer counts against your Teams seat count. Must be in the format `300ms` or `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
@@ -9214,7 +9307,7 @@ export type AccessSchemasYandex = {
      * @default no_action
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      */
@@ -9246,27 +9339,29 @@ export type AccessSchemasYandex = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
  * Configuration for provisioning to this application via SCIM. This is currently in closed beta.
  */
 export type AccessScimConfig = {
-  authentication?: AccessScimConfigSingleAuthentication | AccessScimConfigMultiAuthentication;
+  authentication?:
+    | AccessScimConfigSingleAuthentication
+    | AccessScimConfigMultiAuthentication;
   /**
    * If false, propagates DELETE requests to the target application for SCIM resources. If true, sets 'active' to false on the SCIM resource. Note: Some targets do not support DELETE operations.
    */
@@ -9306,7 +9401,7 @@ export type AccessScimConfigAuthenticationAccessServiceToken = {
   /**
    * The authentication scheme to use when making SCIM requests to this application.
    */
-  scheme: 'access_service_token';
+  scheme: "access_service_token";
 };
 
 /**
@@ -9320,7 +9415,7 @@ export type AccessScimConfigAuthenticationHttpBasic = {
   /**
    * The authentication scheme to use when making SCIM requests to this application.
    */
-  scheme: 'httpbasic';
+  scheme: "httpbasic";
   /**
    * User name used to authenticate with the remote SCIM service.
    */
@@ -9348,7 +9443,7 @@ export type AccessScimConfigAuthenticationOauth2 = {
   /**
    * The authentication scheme to use when making SCIM requests to this application.
    */
-  scheme: 'oauth2';
+  scheme: "oauth2";
   /**
    * The authorization scopes to request when generating the token used to authenticate with the remove SCIM service.
    */
@@ -9366,7 +9461,7 @@ export type AccessScimConfigAuthenticationOauthBearerToken = {
   /**
    * The authentication scheme to use when making SCIM requests to this application.
    */
-  scheme: 'oauthbearertoken';
+  scheme: "oauthbearertoken";
   /**
    * Token used to authenticate with the remote SCIM service.
    *
@@ -9400,7 +9495,7 @@ export type AccessScimConfigMapping = {
     /**
      * Whether or not this mapping applies to DELETE operations.
      */
-    ['delete']?: boolean;
+    ["delete"]?: boolean;
     /**
      * Whether or not this mapping applies to update (PATCH/PUT) operations.
      */
@@ -9415,7 +9510,7 @@ export type AccessScimConfigMapping = {
   /**
    * The level of adherence to outbound resource schemas when provisioning to this mapping. ‘Strict’ removes unknown values, while ‘passthrough’ passes unknown values to the target.
    */
-  strictness?: 'strict' | 'passthrough';
+  strictness?: "strict" | "passthrough";
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms the resource before provisioning it in the application.
    *
@@ -9427,7 +9522,8 @@ export type AccessScimConfigMapping = {
 /**
  * Multiple authentication schemes
  */
-export type AccessScimConfigMultiAuthentication = AccessScimConfigSingleAuthentication[];
+export type AccessScimConfigMultiAuthentication =
+  AccessScimConfigSingleAuthentication[];
 
 export type AccessScimConfigSingleAuthentication =
   | AccessScimConfigAuthenticationHttpBasic
@@ -9470,9 +9566,10 @@ export type AccessSeats = {
   updated_at?: AccessTimestamp;
 };
 
-export type AccessSeatsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessSeats[];
-};
+export type AccessSeatsComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessSeats[];
+  };
 
 export type AccessSeatsDefinition = AccessSeat[];
 
@@ -9544,13 +9641,15 @@ export type AccessServiceTokens = {
  */
 export type AccessServiceTokensComponentsSchemasName = string;
 
-export type AccessServiceTokensComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessSchemasServiceTokens[];
-};
+export type AccessServiceTokensComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessSchemasServiceTokens[];
+  };
 
-export type AccessServiceTokensComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessSchemasServiceTokens;
-};
+export type AccessServiceTokensComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessSchemasServiceTokens;
+  };
 
 /**
  * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -9680,7 +9779,7 @@ export type AccessSshProps = {
  * @example success
  * @x-auditable true
  */
-export type AccessStatus = 'success';
+export type AccessStatus = "success";
 
 export type AccessStringKeyMapDeviceSession = {
   [key: string]: AccessDeviceSession;
@@ -9723,13 +9822,15 @@ export type AccessTags = string[];
  */
 export type AccessTagsComponentsSchemasName = string;
 
-export type AccessTagsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessTag[];
-};
+export type AccessTagsComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result?: AccessTag[];
+  };
 
-export type AccessTagsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessTag;
-};
+export type AccessTagsComponentsSchemasSingleResponse =
+  AccessApiResponseSingle & {
+    result?: AccessTag;
+  };
 
 /**
  * Contains a map of target attribute keys to target attribute values.
@@ -9775,17 +9876,17 @@ export type AccessTotalUsers = number;
  * @example self_hosted
  */
 export type AccessType =
-  | 'self_hosted'
-  | 'saas'
-  | 'ssh'
-  | 'vnc'
-  | 'app_launcher'
-  | 'warp'
-  | 'biso'
-  | 'bookmark'
-  | 'dash_sso'
-  | 'infrastructure'
-  | 'rdp';
+  | "self_hosted"
+  | "saas"
+  | "ssh"
+  | "vnc"
+  | "app_launcher"
+  | "warp"
+  | "biso"
+  | "bookmark"
+  | "dash_sso"
+  | "infrastructure"
+  | "rdp";
 
 /**
  * A description of the reason why the UI read only field is being toggled.
@@ -9813,7 +9914,11 @@ export type AccessUntil = string;
  * @example complete
  * @x-auditable true
  */
-export type AccessUpdateStatus = 'blocked' | 'processing' | 'exceeded time' | 'complete';
+export type AccessUpdateStatus =
+  | "blocked"
+  | "processing"
+  | "exceeded time"
+  | "complete";
 
 /**
  * Policy evaluation result for an individual user.
@@ -9821,7 +9926,7 @@ export type AccessUpdateStatus = 'blocked' | 'processing' | 'exceeded time' | 'c
  * @example approved
  * @x-auditable true
  */
-export type AccessUserResult = 'approved' | 'blocked' | 'error';
+export type AccessUserResult = "approved" | "blocked" | "error";
 
 /**
  * The amount of time a user seat is inactive before it expires. When the user seat exceeds the set time of inactivity, the user is removed as an active seat and no longer counts against your Teams seat count.  Minimum value for this setting is 1 month (730h). Must be in the format `300ms` or `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
@@ -9940,28 +10045,29 @@ export type AccessUsersBlocked = number;
  */
 export type AccessUsersComponentsSchemasName = string;
 
-export type AccessUsersComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result_info?: {
-    /**
-     * @example 1
-     */
-    count?: void;
-    /**
-     * @example 1
-     */
-    page?: void;
-    /**
-     * @example 100
-     */
-    per_page?: void;
-    /**
-     * @example 1
-     */
-    total_count?: void;
+export type AccessUsersComponentsSchemasResponseCollection =
+  AccessApiResponseCollection & {
+    result_info?: {
+      /**
+       * @example 1
+       */
+      count?: void;
+      /**
+       * @example 1
+       */
+      page?: void;
+      /**
+       * @example 100
+       */
+      per_page?: void;
+      /**
+       * @example 1
+       */
+      total_count?: void;
+    };
+  } & {
+    result?: AccessSchemasUsers[];
   };
-} & {
-  result?: AccessSchemasUsers[];
-};
 
 /**
  * The number of (processed) users errored based on policy evaluation results.
@@ -10074,7 +10180,7 @@ export type AccessYandex = {
      * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
-    identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
+    identity_update_behavior?: "automatic" | "reauth" | "no_action";
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
      *
@@ -10110,20 +10216,20 @@ export type AccessYandex = {
    * @example onetimepin
    */
   type:
-    | 'onetimepin'
-    | 'azureAD'
-    | 'saml'
-    | 'centrify'
-    | 'facebook'
-    | 'github'
-    | 'google-apps'
-    | 'google'
-    | 'linkedin'
-    | 'oidc'
-    | 'okta'
-    | 'onelogin'
-    | 'pingone'
-    | 'yandex';
+    | "onetimepin"
+    | "azureAD"
+    | "saml"
+    | "centrify"
+    | "facebook"
+    | "github"
+    | "google-apps"
+    | "google"
+    | "linkedin"
+    | "oidc"
+    | "okta"
+    | "onelogin"
+    | "pingone"
+    | "yandex";
 };
 
 /**
@@ -10341,13 +10447,15 @@ export type AddressingCanModifyIps = boolean;
  */
 export type AddressingCidr = string;
 
-export type AddressingComponentsSchemasResponseCollection = AddressingApiResponseCollection & {
-  result?: AddressingAddressMaps[];
-};
+export type AddressingComponentsSchemasResponseCollection =
+  AddressingApiResponseCollection & {
+    result?: AddressingAddressMaps[];
+  };
 
-export type AddressingComponentsSchemasSingleResponse = AddressingApiResponseSingle & {
-  result?: AddressingAddressMaps;
-};
+export type AddressingComponentsSchemasSingleResponse =
+  AddressingApiResponseSingle & {
+    result?: AddressingAddressMaps;
+  };
 
 export type AddressingCreateBindingRequest = {
   cidr?: AddressingCidr;
@@ -10492,7 +10600,7 @@ export type AddressingIps = AddressingAddressMapsIp[];
  * @example zone
  * @x-auditable true
  */
-export type AddressingKind = 'zone' | 'account';
+export type AddressingKind = "zone" | "account";
 
 /**
  * Identifier for the uploaded LOA document.
@@ -10576,16 +10684,17 @@ export type AddressingProvisioning = {
    * @example provisioning
    * @x-auditable true
    */
-  state?: 'provisioning' | 'active';
+  state?: "provisioning" | "active";
 };
 
 export type AddressingResponseCollection = AddressingApiResponseCollection & {
   result?: AddressingIpamPrefixes[];
 };
 
-export type AddressingResponseCollectionBgp = AddressingApiResponseCollection & {
-  result?: AddressingIpamBgpPrefixes[];
-};
+export type AddressingResponseCollectionBgp =
+  AddressingApiResponseCollection & {
+    result?: AddressingIpamBgpPrefixes[];
+  };
 
 /**
  * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
@@ -10612,9 +10721,10 @@ export type AddressingSchemasCanDelete = boolean;
  */
 export type AddressingSchemasDescription = string | null;
 
-export type AddressingSchemasResponseCollection = AddressingApiResponseCollection & {
-  result?: AddressingIpamDelegations[];
-};
+export type AddressingSchemasResponseCollection =
+  AddressingApiResponseCollection & {
+    result?: AddressingIpamDelegations[];
+  };
 
 export type AddressingSchemasSingleResponse = AddressingApiResponseSingle & {
   result?: AddressingIpamDelegations;
@@ -10775,7 +10885,10 @@ export type ApiShieldApiResponseSingle = ApiShieldApiResponseCommon;
  *
  * @x-auditable true
  */
-export type ApiShieldApiDiscoveryOrigin = 'ML' | 'SessionIdentifier' | 'LabelDiscovery';
+export type ApiShieldApiDiscoveryOrigin =
+  | "ML"
+  | "SessionIdentifier"
+  | "LabelDiscovery";
 
 /**
  * @example {"3818d821-5901-4147-a474-f5f5aec1d54e":{"state":"ignored"},"b17c8043-99a0-4202-b7d9-8f7cdbee02cd":{"state":"review"}}
@@ -10799,7 +10912,7 @@ export type ApiShieldApiDiscoveryPatchMultipleRequestEntry = {
  *
  * @x-auditable true
  */
-export type ApiShieldApiDiscoveryState = 'review' | 'saved' | 'ignored';
+export type ApiShieldApiDiscoveryState = "review" | "saved" | "ignored";
 
 /**
  * Mark state of operation in API Discovery
@@ -10808,7 +10921,7 @@ export type ApiShieldApiDiscoveryState = 'review' | 'saved' | 'ignored';
  *
  * @x-auditable true
  */
-export type ApiShieldApiDiscoveryStatePatch = 'review' | 'ignored';
+export type ApiShieldApiDiscoveryStatePatch = "review" | "ignored";
 
 /**
  * Auth ID Characteristic
@@ -10828,7 +10941,7 @@ export type ApiShieldAuthIdCharacteristic = {
    * @example header
    * @x-auditable true
    */
-  type: 'header' | 'cookie';
+  type: "header" | "cookie";
 };
 
 /**
@@ -10854,14 +10967,17 @@ export type ApiShieldAuthIdCharacteristicJwtClaim = {
    * @example jwt
    * @x-auditable true
    */
-  type: 'jwt';
+  type: "jwt";
 };
 
 /**
  * @maxItems 10
  * @uniqueItems true
  */
-export type ApiShieldAuthIdCharacteristics = (ApiShieldAuthIdCharacteristic | ApiShieldAuthIdCharacteristicJwtClaim)[];
+export type ApiShieldAuthIdCharacteristics = (
+  | ApiShieldAuthIdCharacteristic
+  | ApiShieldAuthIdCharacteristicJwtClaim
+)[];
 
 /**
  * The total number of auth-ids seen across this calculation.
@@ -10900,9 +11016,10 @@ export type ApiShieldConfiguration = {
   auth_id_characteristics: ApiShieldAuthIdCharacteristics;
 };
 
-export type ApiShieldConfigurationSingleResponse = ApiShieldApiResponseCommon & {
-  result: ApiShieldConfiguration;
-};
+export type ApiShieldConfigurationSingleResponse =
+  ApiShieldApiResponseCommon & {
+    result: ApiShieldConfiguration;
+  };
 
 /**
  * The number of data points used for the threshold suggestion calculation.
@@ -10945,7 +11062,7 @@ export type ApiShieldGlobalSettingChangeBase = {
    * @example block
    * @x-auditable true
    */
-  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+  validation_default_mitigation_action?: "none" | "log" | "block";
   /**
    * When set, this overrides both zone level and operation level mitigation actions.
    *
@@ -10954,7 +11071,7 @@ export type ApiShieldGlobalSettingChangeBase = {
    *
    * @x-auditable true
    */
-  validation_override_mitigation_action?: 'none' | any | null;
+  validation_override_mitigation_action?: "none" | any | null;
 };
 
 export type ApiShieldGlobalSettings = {
@@ -10970,7 +11087,7 @@ export type ApiShieldGlobalSettings = {
    * @example block
    * @x-auditable true
    */
-  validation_default_mitigation_action: 'none' | 'log' | 'block';
+  validation_default_mitigation_action: "none" | "log" | "block";
   /**
    * When not null, this overrides global both zone level and operation level mitigation actions. This can serve as a quick way to disable schema validation for the whole zone.
    *
@@ -10978,7 +11095,7 @@ export type ApiShieldGlobalSettings = {
    *
    * @x-auditable true
    */
-  validation_override_mitigation_action?: 'none';
+  validation_override_mitigation_action?: "none";
 };
 
 /**
@@ -11006,7 +11123,7 @@ export type ApiShieldIdentifier = string;
  * @example openapi_v3
  * @x-auditable true
  */
-export type ApiShieldKind = 'openapi_v3';
+export type ApiShieldKind = "openapi_v3";
 
 export type ApiShieldMessages = {
   /**
@@ -11026,15 +11143,25 @@ export type ApiShieldMessages = {
  * @example GET
  * @x-auditable true
  */
-export type ApiShieldMethod = 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
+export type ApiShieldMethod =
+  | "GET"
+  | "POST"
+  | "HEAD"
+  | "OPTIONS"
+  | "PUT"
+  | "DELETE"
+  | "CONNECT"
+  | "PATCH"
+  | "TRACE";
 
 export type ApiShieldMultipleOperationResponse = ApiShieldApiResponseCommon & {
   result: ApiShieldOperation[];
 };
 
-export type ApiShieldMultipleOperationResponsePaginated = ApiShieldApiResponseCollection & {
-  result: ApiShieldOperation[];
-};
+export type ApiShieldMultipleOperationResponsePaginated =
+  ApiShieldApiResponseCollection & {
+    result: ApiShieldOperation[];
+  };
 
 export type ApiShieldObjectWithOperationId = {
   /**
@@ -11152,7 +11279,7 @@ export type ApiShieldOperationFeatureSchemaInfo = {
      * @example block
      * @x-auditable true
      */
-    mitigation_action?: 'none' | 'log' | 'block' | null;
+    mitigation_action?: "none" | "log" | "block" | null;
   };
 };
 
@@ -11188,7 +11315,12 @@ export type ApiShieldOperationFeatures =
  * @example block
  * @x-auditable true
  */
-export type ApiShieldOperationMitigationAction = 'log' | 'block' | 'none' | any | null;
+export type ApiShieldOperationMitigationAction =
+  | "log"
+  | "block"
+  | "none"
+  | any
+  | null;
 
 export type ApiShieldOperationSchemaValidationSettings = {
   mitigation_action?: ApiShieldOperationMitigationAction;
@@ -11282,7 +11414,7 @@ export type ApiShieldPerOperationSetting = {
    * @example block
    * @x-auditable true
    */
-  mitigation_action: 'log' | 'block' | 'none';
+  mitigation_action: "log" | "block" | "none";
   operation_id: ApiShieldSchemasUuid;
 };
 
@@ -11298,7 +11430,7 @@ export type ApiShieldPerOperationSettingChangeBase = {
    * @example block
    * @x-auditable true
    */
-  mitigation_action?: 'log' | 'block' | 'none' | any | null;
+  mitigation_action?: "log" | "block" | "none" | any | null;
 };
 
 /**
@@ -11314,7 +11446,7 @@ export type ApiShieldPeriodSeconds = number;
  * @example auth_id_characteristics
  * @uniqueItems true
  */
-export type ApiShieldProperties = 'auth_id_characteristics'[];
+export type ApiShieldProperties = "auth_id_characteristics"[];
 
 export type ApiShieldPublicSchema = {
   created_at: ApiShieldSchemasTimestamp;
@@ -11391,15 +11523,16 @@ export type ApiShieldResponseUserSchemasHosts = {
   schema_id: ApiShieldSchemasUuid;
 };
 
-export type ApiShieldSchemaResponseWithThresholds = ApiShieldApiResponseCommon & {
-  result: {
-    schemas?: ApiShieldOpenapiWithThresholds[];
-    /**
-     * @x-auditable true
-     */
-    timestamp?: string;
+export type ApiShieldSchemaResponseWithThresholds =
+  ApiShieldApiResponseCommon & {
+    result: {
+      schemas?: ApiShieldOpenapiWithThresholds[];
+      /**
+       * @x-auditable true
+       */
+      timestamp?: string;
+    };
   };
-};
 
 export type ApiShieldSchemaHosts = {
   created_at: ApiShieldSchemasTimestamp;
@@ -11519,7 +11652,7 @@ export type ApiShieldSchemasPublicSchema = {
    * @example openapi_v3
    * @x-auditable true
    */
-  kind: 'openapi_v3';
+  kind: "openapi_v3";
   /**
    * A human-readable name for the schema
    *
@@ -11632,7 +11765,10 @@ export type ApiShieldUuid = string;
  * @example block
  * @x-auditable true
  */
-export type ApiShieldValidationDefaultMitigationAction = 'none' | 'log' | 'block';
+export type ApiShieldValidationDefaultMitigationAction =
+  | "none"
+  | "log"
+  | "block";
 
 /**
  * The default mitigation action used when there is no mitigation action defined on the operation
@@ -11648,7 +11784,12 @@ export type ApiShieldValidationDefaultMitigationAction = 'none' | 'log' | 'block
  * @example block
  * @x-auditable true
  */
-export type ApiShieldValidationDefaultMitigationActionPatch = 'none' | 'log' | 'block' | any | null;
+export type ApiShieldValidationDefaultMitigationActionPatch =
+  | "none"
+  | "log"
+  | "block"
+  | any
+  | null;
 
 /**
  * Flag whether schema is enabled for validation.
@@ -11666,7 +11807,7 @@ export type ApiShieldValidationEnabled = boolean;
  * @example disable_override
  * @x-auditable true
  */
-export type ApiShieldValidationOverrideMitigationAction = 'none' | any | null;
+export type ApiShieldValidationOverrideMitigationAction = "none" | any | null;
 
 /**
  * When set, this overrides both zone level and operation level mitigation actions.
@@ -11680,7 +11821,11 @@ export type ApiShieldValidationOverrideMitigationAction = 'none' | any | null;
  * @example none
  * @x-auditable true
  */
-export type ApiShieldValidationOverrideMitigationActionPatch = 'none' | 'disable_override' | any | null;
+export type ApiShieldValidationOverrideMitigationActionPatch =
+  | "none"
+  | "disable_override"
+  | any
+  | null;
 
 /**
  * When set, this overrides both zone level and operation level mitigation actions.
@@ -11693,7 +11838,11 @@ export type ApiShieldValidationOverrideMitigationActionPatch = 'none' | 'disable
  * @example none
  * @x-auditable true
  */
-export type ApiShieldValidationOverrideMitigationActionWrite = 'none' | 'disable_override' | any | null;
+export type ApiShieldValidationOverrideMitigationActionWrite =
+  | "none"
+  | "disable_override"
+  | any
+  | null;
 
 export type ApiShieldZoneSchemaValidationSettings = {
   validation_default_mitigation_action?: ApiShieldValidationDefaultMitigationAction;
@@ -11843,15 +11992,17 @@ export type ArgoConfigResponseSingle = ArgoConfigApiResponseSingle & {
  * @example on
  * @x-auditable true
  */
-export type ArgoConfigValue = 'on' | 'off';
+export type ArgoConfigValue = "on" | "off";
 
-export type BillSubsApiAccountSubscriptionResponseCollection = BillSubsApiApiResponseCollection & {
-  result?: BillSubsApiSubscription[];
-};
+export type BillSubsApiAccountSubscriptionResponseCollection =
+  BillSubsApiApiResponseCollection & {
+    result?: BillSubsApiSubscription[];
+  };
 
-export type BillSubsApiAccountSubscriptionResponseSingle = BillSubsApiApiResponseSingle & {
-  result?: BillSubsApiSubscription;
-};
+export type BillSubsApiAccountSubscriptionResponseSingle =
+  BillSubsApiApiResponseSingle & {
+    result?: BillSubsApiSubscription;
+  };
 
 /**
  * The billing item action.
@@ -11945,9 +12096,10 @@ export type BillSubsApiBillingHistory = {
   zone: BillSubsApiSchemasZone;
 };
 
-export type BillSubsApiBillingHistoryCollection = BillSubsApiApiResponseCollection & {
-  result?: BillSubsApiBillingHistory[];
-};
+export type BillSubsApiBillingHistoryCollection =
+  BillSubsApiApiResponseCollection & {
+    result?: BillSubsApiBillingHistory[];
+  };
 
 export type BillSubsApiBillingResponseSingle = BillSubsApiApiResponseSingle & {
   result?: {
@@ -12119,7 +12271,7 @@ export type BillSubsApiBillingResponseSingle = BillSubsApiApiResponseSingle & {
 export type BillSubsApiCanSubscribe = boolean;
 
 export type BillSubsApiComponentValue = {
-  ['default']?: BillSubsApiDefault;
+  ["default"]?: BillSubsApiDefault;
   name?: BillSubsApiComponentsSchemasName;
   unit_price?: BillSubsApiUnitPrice;
 };
@@ -12143,10 +12295,10 @@ export type BillSubsApiComponentsSchemasIdentifier = string;
  * @example page_rules
  */
 export type BillSubsApiComponentsSchemasName =
-  | 'zones'
-  | 'page_rules'
-  | 'dedicated_certificates'
-  | 'dedicated_certificates_custom';
+  | "zones"
+  | "page_rules"
+  | "dedicated_certificates"
+  | "dedicated_certificates_custom";
 
 /**
  * The monetary unit in which pricing information is displayed.
@@ -12206,7 +12358,11 @@ export type BillSubsApiExternallyManaged = boolean;
  *
  * @example monthly
  */
-export type BillSubsApiFrequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+export type BillSubsApiFrequency =
+  | "weekly"
+  | "monthly"
+  | "quarterly"
+  | "yearly";
 
 /**
  * Identifier
@@ -12269,9 +12425,10 @@ export type BillSubsApiName = string;
  */
 export type BillSubsApiOccurredAt = string;
 
-export type BillSubsApiPlanResponseCollection = BillSubsApiApiResponseCollection & {
-  result?: BillSubsApiSchemasRatePlan[];
-};
+export type BillSubsApiPlanResponseCollection =
+  BillSubsApiApiResponseCollection & {
+    result?: BillSubsApiSchemasRatePlan[];
+  };
 
 /**
  * The price of the subscription that will be billed, in US dollars.
@@ -12333,7 +12490,11 @@ export type BillSubsApiSchemasComponentValues = BillSubsApiComponentValue[];
  *
  * @example monthly
  */
-export type BillSubsApiSchemasFrequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+export type BillSubsApiSchemasFrequency =
+  | "weekly"
+  | "monthly"
+  | "quarterly"
+  | "yearly";
 
 /**
  * Subscription identifier tag.
@@ -12370,13 +12531,13 @@ export type BillSubsApiSchemasZone = {
  * @example Paid
  */
 export type BillSubsApiState =
-  | 'Trial'
-  | 'Provisioned'
-  | 'Paid'
-  | 'AwaitingPayment'
-  | 'Cancelled'
-  | 'Failed'
-  | 'Expired';
+  | "Trial"
+  | "Provisioned"
+  | "Paid"
+  | "AwaitingPayment"
+  | "Cancelled"
+  | "Failed"
+  | "Expired";
 
 export type BillSubsApiSubscription = BillSubsApiSubscriptionV2;
 
@@ -12411,13 +12572,15 @@ export type BillSubsApiType = string;
  */
 export type BillSubsApiUnitPrice = number;
 
-export type BillSubsApiUserSubscriptionResponseCollection = BillSubsApiApiResponseCollection & {
-  result?: BillSubsApiSubscription[];
-};
+export type BillSubsApiUserSubscriptionResponseCollection =
+  BillSubsApiApiResponseCollection & {
+    result?: BillSubsApiSubscription[];
+  };
 
-export type BillSubsApiUserSubscriptionResponseSingle = BillSubsApiApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type BillSubsApiUserSubscriptionResponseSingle =
+  BillSubsApiApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * A simple zone object. May have null properties if not a zone subscription.
@@ -12427,9 +12590,10 @@ export type BillSubsApiZone = {
   name?: BillSubsApiName;
 };
 
-export type BillSubsApiZoneSubscriptionResponseSingle = BillSubsApiApiResponseSingle & {
-  result?: BillSubsApiSubscription;
-};
+export type BillSubsApiZoneSubscriptionResponseSingle =
+  BillSubsApiApiResponseSingle & {
+    result?: BillSubsApiSubscription;
+  };
 
 /**
  * Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.
@@ -12438,7 +12602,10 @@ export type BillSubsApiZoneSubscriptionResponseSingle = BillSubsApiApiResponseSi
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementAiBotsProtection = 'block' | 'disabled' | 'only_on_ad_pages';
+export type BotManagementAiBotsProtection =
+  | "block"
+  | "disabled"
+  | "only_on_ad_pages";
 
 export type BotManagementApiResponseCommon = {
   errors: BotManagementMessages;
@@ -12516,13 +12683,14 @@ export type BotManagementBotFightModeConfig = BotManagementBaseConfig & {
   };
 };
 
-export type BotManagementBotManagementResponseBody = BotManagementApiResponseSingle & {
-  result?:
-    | BotManagementBotFightModeConfig
-    | BotManagementSbfmDefinitelyConfig
-    | BotManagementSbfmLikelyConfig
-    | BotManagementBmSubscriptionConfig;
-};
+export type BotManagementBotManagementResponseBody =
+  BotManagementApiResponseSingle & {
+    result?:
+      | BotManagementBotFightModeConfig
+      | BotManagementSbfmDefinitelyConfig
+      | BotManagementSbfmLikelyConfig
+      | BotManagementBmSubscriptionConfig;
+  };
 
 export type BotManagementConfigSingle =
   | BotManagementBotFightModeConfig
@@ -12537,7 +12705,7 @@ export type BotManagementConfigSingle =
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
+export type BotManagementCrawlerProtection = "enabled" | "disabled";
 
 /**
  * Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
@@ -12610,7 +12778,10 @@ export type BotManagementOptimizeWordpressTurnedOn = boolean;
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementSbfmDefinitelyAutomated = 'allow' | 'block' | 'managed_challenge';
+export type BotManagementSbfmDefinitelyAutomated =
+  | "allow"
+  | "block"
+  | "managed_challenge";
 
 /**
  * Indicates that the zone's definitely automated requests are being blocked or challenged.
@@ -12640,7 +12811,10 @@ export type BotManagementSbfmDefinitelyConfig = BotManagementBaseConfig & {
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementSbfmLikelyAutomated = 'allow' | 'block' | 'managed_challenge';
+export type BotManagementSbfmLikelyAutomated =
+  | "allow"
+  | "block"
+  | "managed_challenge";
 
 /**
  * Indicates that the zone's likely automated requests are being blocked or challenged.
@@ -12688,7 +12862,7 @@ export type BotManagementSbfmStaticResourceProtectionTurnedOn = string;
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementSbfmVerifiedBots = 'allow' | 'block';
+export type BotManagementSbfmVerifiedBots = "allow" | "block";
 
 /**
  * Indicates that the zone's verified bot requests are being blocked.
@@ -12935,7 +13109,7 @@ export type CacheRulesAegis = {
    * @x-auditable true
    * @example aegis
    */
-  id: 'aegis';
+  id: "aegis";
   /**
    * Last time this setting was modified.
    *
@@ -13024,7 +13198,7 @@ export type CacheRulesCacheReserve = {
    * @x-auditable true
    * @example cache_reserve
    */
-  id: 'cache_reserve';
+  id: "cache_reserve";
   /**
    * Last time this setting was modified.
    *
@@ -13045,7 +13219,7 @@ export type CacheRulesCacheReserveClear = {
    * @x-auditable true
    * @example cache_reserve_clear
    */
-  id: 'cache_reserve_clear';
+  id: "cache_reserve_clear";
   /**
    * Last time this setting was modified.
    *
@@ -13091,7 +13265,7 @@ export type CacheRulesCacheReserveClearStartTs = string;
  * @example In-progress
  * @x-auditable true
  */
-export type CacheRulesCacheReserveClearState = 'In-progress' | 'Completed';
+export type CacheRulesCacheReserveClearState = "In-progress" | "Completed";
 
 export type CacheRulesCacheReserveResponseValue = {
   /**
@@ -13108,7 +13282,7 @@ export type CacheRulesCacheReserveResponseValue = {
  * @default off
  * @x-auditable true
  */
-export type CacheRulesCacheReserveValue = 'on' | 'off';
+export type CacheRulesCacheReserveValue = "on" | "off";
 
 /**
  * Identifier
@@ -13137,7 +13311,7 @@ export type CacheRulesOriginH2MaxStreams = {
    * @x-auditable true
    * @example origin_h2_max_streams
    */
-  id: 'origin_h2_max_streams';
+  id: "origin_h2_max_streams";
   /**
    * Last time this setting was modified.
    *
@@ -13173,7 +13347,7 @@ export type CacheRulesOriginMaxHttpVersion = {
    * @x-auditable true
    * @example origin_max_http_version
    */
-  id: 'origin_max_http_version';
+  id: "origin_max_http_version";
   /**
    * Last time this setting was modified.
    *
@@ -13194,7 +13368,7 @@ export type CacheRulesOriginMaxHttpVersionResponseValue = {
  *
  * @x-auditable true
  */
-export type CacheRulesOriginMaxHttpVersionValue = '2' | '1';
+export type CacheRulesOriginMaxHttpVersionValue = "2" | "1";
 
 /**
  * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
@@ -13206,7 +13380,7 @@ export type CacheRulesOriginPostQuantumEncryption = {
    * @x-auditable true
    * @example origin_pqe
    */
-  id: 'origin_pqe';
+  id: "origin_pqe";
   /**
    * Last time this setting was modified.
    *
@@ -13232,7 +13406,10 @@ export type CacheRulesOriginPostQuantumEncryptionResponseValue = {
  * @default supported
  * @x-auditable true
  */
-export type CacheRulesOriginPostQuantumEncryptionValue = 'preferred' | 'supported' | 'off';
+export type CacheRulesOriginPostQuantumEncryptionValue =
+  | "preferred"
+  | "supported"
+  | "off";
 
 /**
  * Update enablement of Tiered Caching
@@ -13251,7 +13428,7 @@ export type CacheRulesRegionalTieredCache = {
    * @x-auditable true
    * @example tc_regional
    */
-  id: 'tc_regional';
+  id: "tc_regional";
   /**
    * Last time this setting was modified.
    *
@@ -13277,7 +13454,7 @@ export type CacheRulesRegionalTieredCacheResponseValue = {
  * @default off
  * @x-auditable true
  */
-export type CacheRulesRegionalTieredCacheValue = 'on' | 'off';
+export type CacheRulesRegionalTieredCacheValue = "on" | "off";
 
 export type CacheRulesResultObject = {
   /**
@@ -13364,7 +13541,7 @@ export type CacheRulesSmartTieredCache = {
    * @x-auditable true
    * @example tiered_cache_smart_topology_enable
    */
-  id: 'tiered_cache_smart_topology_enable';
+  id: "tiered_cache_smart_topology_enable";
   /**
    * Last time this setting was modified.
    *
@@ -13385,7 +13562,7 @@ export type CacheRulesSmartTieredCachePatch = {
    * @example on
    * @x-auditable true
    */
-  value: 'on' | 'off';
+  value: "on" | "off";
 };
 
 export type CacheRulesSmartTieredCacheResponseValue = {
@@ -13400,7 +13577,7 @@ export type CacheRulesSmartTieredCacheResponseValue = {
  * @default off
  * @x-auditable true
  */
-export type CacheRulesSmartTieredCacheValue = 'on' | 'off';
+export type CacheRulesSmartTieredCacheValue = "on" | "off";
 
 export type CacheRulesTieredCache = {
   /**
@@ -13409,7 +13586,7 @@ export type CacheRulesTieredCache = {
    * @x-auditable true
    * @example tiered_caching
    */
-  id: 'tiered_caching';
+  id: "tiered_caching";
   /**
    * Last time this setting was modified.
    *
@@ -13432,7 +13609,7 @@ export type CacheRulesTieredCacheResponseValue = {
  * @default off
  * @x-auditable true
  */
-export type CacheRulesTieredCacheValue = 'on' | 'off';
+export type CacheRulesTieredCacheValue = "on" | "off";
 
 /**
  * Enables Tiered Caching.
@@ -13440,7 +13617,7 @@ export type CacheRulesTieredCacheValue = 'on' | 'off';
  * @example on
  * @x-auditable true
  */
-export type CacheRulesValue = 'on' | 'off';
+export type CacheRulesValue = "on" | "off";
 
 /**
  * Variant support enables caching variants of images with certain file extensions in addition to the original. This only applies when the origin server sends the 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but does not serve the variant requested, the response will not be cached. This will be indicated with BYPASS cache status in the response headers.
@@ -13452,7 +13629,7 @@ export type CacheRulesVariants = {
    * @x-auditable true
    * @example variants
    */
-  id: 'variants';
+  id: "variants";
   /**
    * Last time this setting was modified.
    *
@@ -13566,17 +13743,20 @@ export type CacheRulesVariantsValue = {
   webp?: string[];
 };
 
-export type CacheRulesZoneCacheSettingsDeleteResponseSingle = CacheRulesApiResponseCommon & {
-  result?: CacheRulesResultObjectDelete;
-};
+export type CacheRulesZoneCacheSettingsDeleteResponseSingle =
+  CacheRulesApiResponseCommon & {
+    result?: CacheRulesResultObjectDelete;
+  };
 
-export type CacheRulesZoneCacheSettingsResponseSingle = CacheRulesApiResponseCommon & {
-  result?: CacheRulesResultObject;
-};
+export type CacheRulesZoneCacheSettingsResponseSingle =
+  CacheRulesApiResponseCommon & {
+    result?: CacheRulesResultObject;
+  };
 
-export type CacheRulesZoneComplexCacheSettingsResponseSingle = CacheRulesApiResponseCommon & {
-  result?: CacheRulesResultObjectComplex;
-};
+export type CacheRulesZoneComplexCacheSettingsResponseSingle =
+  CacheRulesApiResponseCommon & {
+    result?: CacheRulesResultObjectComplex;
+  };
 
 export type CacheApiResponseCommon = {
   errors: CacheMessages;
@@ -13642,7 +13822,7 @@ export type CacheRecommendationId = string;
 /**
  * @example strict
  */
-export type CacheRecommendationValue = 'flexible' | 'full' | 'strict';
+export type CacheRecommendationValue = "flexible" | "full" | "strict";
 
 export type CacheResponseBase = {
   /**
@@ -13672,7 +13852,7 @@ export type CacheResponseBase = {
    *
    * @example auto
    */
-  value: 'auto' | 'custom';
+  value: "auto" | "custom";
 };
 
 /**
@@ -13687,7 +13867,7 @@ export type CacheSchemasPatch = {
  *
  * @example auto
  */
-export type CacheSchemasValue = 'auto' | 'custom';
+export type CacheSchemasValue = "auto" | "custom";
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -13931,7 +14111,11 @@ export type CloudConnectorMessages = {
  * @example aws_s3
  * @x-auditable true
  */
-export type CloudConnectorProvider = 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
+export type CloudConnectorProvider =
+  | "aws_s3"
+  | "cloudflare_r2"
+  | "gcp_storage"
+  | "azure_storage";
 
 export type CloudConnectorRule = {
   /**
@@ -14028,12 +14212,12 @@ export type CloudflarePipelinesWorkersPipelinesPipeline = {
        * @default gzip
        * @example gzip
        */
-      type: 'none' | 'gzip' | 'deflate';
+      type: "none" | "gzip" | "deflate";
     };
     /**
      * Specifies the format of data to deliver.
      */
-    format: 'json';
+    format: "json";
     /**
      * @example {"bucket":"bucket","prefix":"base"}
      */
@@ -14066,7 +14250,7 @@ export type CloudflarePipelinesWorkersPipelinesPipeline = {
     /**
      * Specifies the type of destination.
      */
-    type: 'r2';
+    type: "r2";
   };
   /**
    * Indicates the endpoint URL to send traffic.
@@ -14092,11 +14276,11 @@ export type CloudflarePipelinesWorkersPipelinesPipeline = {
    * @minItems 1
    */
   source: (
-    | (Omit<CloudflarePipelinesWorkersPipelinesHttpSource, 'type'> & {
-        type: 'http';
+    | (Omit<CloudflarePipelinesWorkersPipelinesHttpSource, "type"> & {
+        type: "http";
       })
-    | (Omit<CloudflarePipelinesWorkersPipelinesBindingSource, 'type'> & {
-        type: 'binding';
+    | (Omit<CloudflarePipelinesWorkersPipelinesBindingSource, "type"> & {
+        type: "binding";
       })
   )[];
   /**
@@ -14111,7 +14295,7 @@ export type CloudflarePipelinesWorkersPipelinesBindingSource = {
   /**
    * Specifies the format of source data.
    */
-  format: 'json';
+  format: "json";
   type: string;
 };
 
@@ -14132,7 +14316,7 @@ export type CloudflarePipelinesWorkersPipelinesHttpSource = {
   /**
    * Specifies the format of source data.
    */
-  format: 'json';
+  format: "json";
   type: string;
 };
 
@@ -14295,7 +14479,7 @@ export type CloudforceOneRequestsMessages = {
 /**
  * @x-auditable true
  */
-export type CloudforceOneRequestsPriority = 'routine' | 'high' | 'urgent';
+export type CloudforceOneRequestsPriority = "routine" | "high" | "urgent";
 
 export type CloudforceOneRequestsPriorityEdit = {
   labels: CloudforceOneRequestsLabels;
@@ -14581,7 +14765,7 @@ export type CloudforceOneRequestsRequestList = {
   /**
    * Sort order (asc or desc).
    */
-  sort_order?: 'asc' | 'desc';
+  sort_order?: "asc" | "desc";
   status?: CloudforceOneRequestsRequestStatus;
 };
 
@@ -14711,7 +14895,7 @@ export type CloudforceOneRequestsRequestMessageList = {
   /**
    * Sort order (asc or desc).
    */
-  sort_order?: 'asc' | 'desc';
+  sort_order?: "asc" | "desc";
 };
 
 /**
@@ -14728,12 +14912,12 @@ export type CloudforceOneRequestsRequestReadableId = string;
  * @x-auditable true
  */
 export type CloudforceOneRequestsRequestStatus =
-  | 'open'
-  | 'accepted'
-  | 'reported'
-  | 'approved'
-  | 'completed'
-  | 'declined';
+  | "open"
+  | "accepted"
+  | "reported"
+  | "approved"
+  | "completed"
+  | "declined";
 
 /**
  * Brief description of the request.
@@ -14769,7 +14953,12 @@ export type CloudforceOneRequestsTime = string;
  *
  * @x-auditable true
  */
-export type CloudforceOneRequestsTlp = 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
+export type CloudforceOneRequestsTlp =
+  | "clear"
+  | "amber"
+  | "amber-strict"
+  | "green"
+  | "red";
 
 /**
  * UUID.
@@ -14806,7 +14995,8 @@ export type CloudforceOneWhoisApiResponseCommonFailure = {
   success: false;
 };
 
-export type CloudforceOneWhoisApiResponseSingle = CloudforceOneWhoisApiResponseCommon;
+export type CloudforceOneWhoisApiResponseSingle =
+  CloudforceOneWhoisApiResponseCommon;
 
 /**
  * @example cloudflare.com
@@ -14841,9 +15031,10 @@ export type CloudforceOneWhoisSchemasMessages = {
   };
 }[];
 
-export type CloudforceOneWhoisSchemasSingleResponse = CloudforceOneWhoisApiResponseSingle & {
-  result?: CloudforceOneWhoisWhois;
-};
+export type CloudforceOneWhoisSchemasSingleResponse =
+  CloudforceOneWhoisApiResponseSingle & {
+    result?: CloudforceOneWhoisWhois;
+  };
 
 export type CloudforceOneWhoisWhois = {
   administrative_city?: string;
@@ -15003,7 +15194,8 @@ export type CustomIndicatorFeedsApiResponseCommon = {
   success: true;
 };
 
-export type CustomIndicatorFeedsApiResponseSingle = CustomIndicatorFeedsApiResponseCommon;
+export type CustomIndicatorFeedsApiResponseSingle =
+  CustomIndicatorFeedsApiResponseCommon;
 
 export type CustomIndicatorFeedsApiResponseCommonFailure = {
   /**
@@ -15029,9 +15221,10 @@ export type CustomIndicatorFeedsCreateFeed = {
   name?: CustomIndicatorFeedsName;
 };
 
-export type CustomIndicatorFeedsCreateFeedResponse = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsIndicatorFeedItem;
-};
+export type CustomIndicatorFeedsCreateFeedResponse =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsIndicatorFeedItem;
+  };
 
 /**
  * The description of the example test
@@ -15111,7 +15304,13 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
    *
    * @x-auditable true
    */
-  latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
+  latest_upload_status?:
+    | "Mirroring"
+    | "Unifying"
+    | "Loading"
+    | "Provisioning"
+    | "Complete"
+    | "Error";
   /**
    * The date and time when the data entry was last modified
    *
@@ -15124,21 +15323,24 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
   provider_name?: CustomIndicatorFeedsProviderName;
 };
 
-export type CustomIndicatorFeedsIndicatorFeedMetadataResponse = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsIndicatorFeedMetadata;
-};
+export type CustomIndicatorFeedsIndicatorFeedMetadataResponse =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsIndicatorFeedMetadata;
+  };
 
-export type CustomIndicatorFeedsIndicatorFeedResponse = CustomIndicatorFeedsApiResponseCommon & {
-  /**
-   * @example {"created_on":"2023-05-12T12:21:56.777653Z","description":"user specified description 1","id":1,"modified_on":"2023-06-18T03:13:34.123321Z","name":"user_specified_name_1"}
-   * @example {"created_on":"2023-05-21T21:43:52.867525Z","description":"User specified description 2","id":2,"modified_on":"2023-06-28T18:46:18.764425Z","name":"user_specified_name_2"}
-   */
-  result?: CustomIndicatorFeedsIndicatorFeedItem[];
-};
+export type CustomIndicatorFeedsIndicatorFeedResponse =
+  CustomIndicatorFeedsApiResponseCommon & {
+    /**
+     * @example {"created_on":"2023-05-12T12:21:56.777653Z","description":"user specified description 1","id":1,"modified_on":"2023-06-18T03:13:34.123321Z","name":"user_specified_name_1"}
+     * @example {"created_on":"2023-05-21T21:43:52.867525Z","description":"User specified description 2","id":2,"modified_on":"2023-06-28T18:46:18.764425Z","name":"user_specified_name_2"}
+     */
+    result?: CustomIndicatorFeedsIndicatorFeedItem[];
+  };
 
-export type CustomIndicatorFeedsIndicatorFeedResponseSingle = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsIndicatorFeedItem;
-};
+export type CustomIndicatorFeedsIndicatorFeedResponseSingle =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsIndicatorFeedItem;
+  };
 
 /**
  * Whether the indicator feed can be attributed to a provider
@@ -15185,13 +15387,14 @@ export type CustomIndicatorFeedsPermissionListItem = {
   name?: CustomIndicatorFeedsName;
 };
 
-export type CustomIndicatorFeedsPermissionListItemResponse = CustomIndicatorFeedsApiResponseCommon & {
-  /**
-   * @example {"description":"An important indicator list","id":1,"is_attributable":false,"is_downloadable":false,"is_public":false,"name":"indicator_list_1"}
-   * @example {"description":"An even more important indicator list","id":2,"is_attributable":true,"is_downloadable":false,"is_public":true,"name":"indicator_list_2"}
-   */
-  result?: CustomIndicatorFeedsPermissionListItem[];
-};
+export type CustomIndicatorFeedsPermissionListItemResponse =
+  CustomIndicatorFeedsApiResponseCommon & {
+    /**
+     * @example {"description":"An important indicator list","id":1,"is_attributable":false,"is_downloadable":false,"is_public":false,"name":"indicator_list_1"}
+     * @example {"description":"An even more important indicator list","id":2,"is_attributable":true,"is_downloadable":false,"is_public":true,"name":"indicator_list_2"}
+     */
+    result?: CustomIndicatorFeedsPermissionListItem[];
+  };
 
 export type CustomIndicatorFeedsPermissionsRequest = {
   /**
@@ -15210,9 +15413,10 @@ export type CustomIndicatorFeedsPermissionsRequest = {
   feed_id?: number;
 };
 
-export type CustomIndicatorFeedsPermissionsResponse = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsPermissionsUpdate;
-};
+export type CustomIndicatorFeedsPermissionsResponse =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsPermissionsUpdate;
+  };
 
 export type CustomIndicatorFeedsPermissionsUpdate = {
   /**
@@ -15273,9 +15477,10 @@ export type CustomIndicatorFeedsUpdateFeed = {
   status?: string;
 };
 
-export type CustomIndicatorFeedsUpdateFeedResponse = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsUpdateFeed;
-};
+export type CustomIndicatorFeedsUpdateFeedResponse =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsUpdateFeed;
+  };
 
 export type CustomIndicatorFeedsUpdatePublicFieldRequest = {
   /**
@@ -15315,9 +15520,10 @@ export type CustomIndicatorFeedsUpdatePublicFieldRequest = {
   name?: string;
 };
 
-export type CustomIndicatorFeedsUpdatePublicFieldResponse = CustomIndicatorFeedsApiResponseSingle & {
-  result?: CustomIndicatorFeedsIndicatorFeedItem;
-};
+export type CustomIndicatorFeedsUpdatePublicFieldResponse =
+  CustomIndicatorFeedsApiResponseSingle & {
+    result?: CustomIndicatorFeedsIndicatorFeedItem;
+  };
 
 export type CustomPagesApiResponseCollection = {
   errors: CustomPagesMessages;
@@ -15372,13 +15578,15 @@ export type CustomPagesApiResponseSingle = {
   success: true;
 };
 
-export type CustomPagesCustomPagesResponseCollection = CustomPagesApiResponseCollection & {
-  result?: Record<string, any>[];
-};
+export type CustomPagesCustomPagesResponseCollection =
+  CustomPagesApiResponseCollection & {
+    result?: Record<string, any>[];
+  };
 
-export type CustomPagesCustomPagesResponseSingle = CustomPagesApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type CustomPagesCustomPagesResponseSingle =
+  CustomPagesApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * Identifier
@@ -15428,7 +15636,7 @@ export type CustomPagesResultInfo = {
  *
  * @example default
  */
-export type CustomPagesState = 'default' | 'customized';
+export type CustomPagesState = "default" | "customized";
 
 /**
  * The URL associated with the custom page.
@@ -15575,7 +15783,13 @@ export type D1Params = string[];
  * @example wnam
  * @x-auditable true
  */
-export type D1PrimaryLocationHint = 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
+export type D1PrimaryLocationHint =
+  | "wnam"
+  | "enam"
+  | "weur"
+  | "eeur"
+  | "apac"
+  | "oc";
 
 export type D1QueryMeta = {
   /**
@@ -15668,7 +15882,7 @@ export type D1ReadReplicationDetails = {
  * @example auto
  * @x-auditable true
  */
-export type D1ReadReplicationMode = 'auto' | 'disabled';
+export type D1ReadReplicationMode = "auto" | "disabled";
 
 /**
  * Region location hint of the database instance that handled the query.
@@ -15676,7 +15890,13 @@ export type D1ReadReplicationMode = 'auto' | 'disabled';
  * @example EEUR
  * @x-auditable true
  */
-export type D1ServedByRegion = 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+export type D1ServedByRegion =
+  | "WNAM"
+  | "ENAM"
+  | "WEUR"
+  | "EEUR"
+  | "APAC"
+  | "OC";
 
 /**
  * Your SQL query. Supports multiple statements, joined by semicolons, which will be executed as a batch.
@@ -15707,7 +15927,7 @@ export type DigitalExperienceMonitoringAggregateStat = {
 };
 
 export type DigitalExperienceMonitoringAggregateTimePeriod = {
-  units: 'hours' | 'days' | 'testRuns';
+  units: "hours" | "days" | "testRuns";
   value: number;
 };
 
@@ -15716,38 +15936,40 @@ export type DigitalExperienceMonitoringAggregateTimeSlot = {
   timestamp: string;
 };
 
-export type DigitalExperienceMonitoringApiResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
-  result_info?: {
-    /**
-     * Total number of results for the requested service.
-     *
-     * @example 1
-     */
-    count?: number;
-    /**
-     * Current page within paginated list of results.
-     *
-     * @example 1
-     */
-    page?: number;
-    /**
-     * Number of results per page of results.
-     *
-     * @example 20
-     */
-    per_page?: number;
-    /**
-     * Total results available without any search parameters.
-     *
-     * @example 2000
-     */
-    total_count?: number;
+export type DigitalExperienceMonitoringApiResponseCollection =
+  DigitalExperienceMonitoringApiResponseCommon & {
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
-};
 
-export type DigitalExperienceMonitoringApiResponseCollectionCommon = DigitalExperienceMonitoringApiResponseCommon & {
-  result?: any[] | null;
-};
+export type DigitalExperienceMonitoringApiResponseCollectionCommon =
+  DigitalExperienceMonitoringApiResponseCommon & {
+    result?: any[] | null;
+  };
 
 export type DigitalExperienceMonitoringApiResponseCommon = {
   errors: DigitalExperienceMonitoringMessages;
@@ -15776,7 +15998,8 @@ export type DigitalExperienceMonitoringApiResponseCommonFailure = {
   success: false;
 };
 
-export type DigitalExperienceMonitoringApiResponseSingle = DigitalExperienceMonitoringApiResponseCommon;
+export type DigitalExperienceMonitoringApiResponseSingle =
+  DigitalExperienceMonitoringApiResponseCommon;
 
 /**
  * Cloudflare colo
@@ -15998,7 +16221,8 @@ export type DigitalExperienceMonitoringDeviceDexTestSchemasName = string;
 /**
  * DEX rules targeted by this test
  */
-export type DigitalExperienceMonitoringDeviceDexTestTargetPolicies = DigitalExperienceMonitoringDexTargetPolicy[];
+export type DigitalExperienceMonitoringDeviceDexTestTargetPolicies =
+  DigitalExperienceMonitoringDexTargetPolicy[];
 
 /**
  * Device-specific ID, given as UUID v4
@@ -16007,26 +16231,28 @@ export type DigitalExperienceMonitoringDeviceDexTestTargetPolicies = DigitalExpe
  */
 export type DigitalExperienceMonitoringDeviceId = string;
 
-export type DigitalExperienceMonitoringDexDeleteResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
-  result?: {
-    dex_tests?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+export type DigitalExperienceMonitoringDexDeleteResponseCollection =
+  DigitalExperienceMonitoringApiResponseCommon & {
+    result?: {
+      dex_tests?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+    };
   };
-};
 
 export type DigitalExperienceMonitoringDexResponseCollection =
   DigitalExperienceMonitoringApiResponseCollectionCommon & {
     result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
   };
 
-export type DigitalExperienceMonitoringDexSingleResponse = DigitalExperienceMonitoringApiResponseSingle & {
-  result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp;
-};
+export type DigitalExperienceMonitoringDexSingleResponse =
+  DigitalExperienceMonitoringApiResponseSingle & {
+    result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp;
+  };
 
 export type DigitalExperienceMonitoringDexTargetPolicy = {
   /**
    * Whether the DEX rule is the account default
    */
-  ['default']?: boolean;
+  ["default"]?: boolean;
   /**
    * The id of the DEX rule
    */
@@ -16037,22 +16263,24 @@ export type DigitalExperienceMonitoringDexTargetPolicy = {
   name?: string;
 };
 
-export type DigitalExperienceMonitoringFleetStatusDevicesResponse = DigitalExperienceMonitoringApiResponseCollection & {
-  result?: DigitalExperienceMonitoringDevice[];
-};
+export type DigitalExperienceMonitoringFleetStatusDevicesResponse =
+  DigitalExperienceMonitoringApiResponseCollection & {
+    result?: DigitalExperienceMonitoringDevice[];
+  };
 
-export type DigitalExperienceMonitoringFleetStatusLiveResponse = DigitalExperienceMonitoringApiResponseSingle & {
-  result?: {
-    deviceStats?: {
-      byColo?: DigitalExperienceMonitoringLiveStat[] | null;
-      byMode?: DigitalExperienceMonitoringLiveStat[] | null;
-      byPlatform?: DigitalExperienceMonitoringLiveStat[] | null;
-      byStatus?: DigitalExperienceMonitoringLiveStat[] | null;
-      byVersion?: DigitalExperienceMonitoringLiveStat[] | null;
-      uniqueDevicesTotal?: DigitalExperienceMonitoringUniqueDevicesTotal;
+export type DigitalExperienceMonitoringFleetStatusLiveResponse =
+  DigitalExperienceMonitoringApiResponseSingle & {
+    result?: {
+      deviceStats?: {
+        byColo?: DigitalExperienceMonitoringLiveStat[] | null;
+        byMode?: DigitalExperienceMonitoringLiveStat[] | null;
+        byPlatform?: DigitalExperienceMonitoringLiveStat[] | null;
+        byStatus?: DigitalExperienceMonitoringLiveStat[] | null;
+        byVersion?: DigitalExperienceMonitoringLiveStat[] | null;
+        uniqueDevicesTotal?: DigitalExperienceMonitoringUniqueDevicesTotal;
+      };
     };
   };
-};
 
 export type DigitalExperienceMonitoringGetCommandsQuotaResponse = {
   /**
@@ -16157,7 +16385,7 @@ export type DigitalExperienceMonitoringHttpDetailsResponse = {
    * @example 0h5m0s
    */
   interval?: string;
-  kind?: 'http';
+  kind?: "http";
   /**
    * The HTTP method to use when running the test
    *
@@ -16175,7 +16403,7 @@ export type DigitalExperienceMonitoringHttpDetailsResponse = {
         /**
          * Whether the policy is the default for the account
          */
-        ['default']: boolean;
+        ["default"]: boolean;
         id: string;
         name: string;
       }[]
@@ -16292,7 +16520,7 @@ export type DigitalExperienceMonitoringPostCommandsResponse = {
     /**
      * Current status of the command
      */
-    status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
+    status?: "PENDING_EXEC" | "PENDING_UPLOAD" | "SUCCESS" | "FAILED";
     /**
      * Type of the command (e.g., "pcap" or "warp-diag")
      */
@@ -16332,13 +16560,13 @@ export type DigitalExperienceMonitoringSinceMinutes = number;
  * @default timestamp
  */
 export type DigitalExperienceMonitoringSortBy =
-  | 'colo'
-  | 'device_id'
-  | 'mode'
-  | 'platform'
-  | 'status'
-  | 'timestamp'
-  | 'version';
+  | "colo"
+  | "device_id"
+  | "mode"
+  | "platform"
+  | "status"
+  | "timestamp"
+  | "version";
 
 /**
  * Specifies fleet status details source
@@ -16346,7 +16574,7 @@ export type DigitalExperienceMonitoringSortBy =
  * @default last_seen
  * @example last_seen
  */
-export type DigitalExperienceMonitoringSource = 'last_seen' | 'hourly' | 'raw';
+export type DigitalExperienceMonitoringSource = "last_seen" | "hourly" | "raw";
 
 /**
  * Network status
@@ -16464,7 +16692,7 @@ export type DigitalExperienceMonitoringTestsResponse = {
     /**
      * test type, http or traceroute
      */
-    kind: 'http' | 'traceroute';
+    kind: "http" | "traceroute";
     /**
      * for HTTP, the method to use when running the test
      */
@@ -16478,7 +16706,7 @@ export type DigitalExperienceMonitoringTestsResponse = {
           /**
            * Whether the policy is the default for the account
            */
-          ['default']: boolean;
+          ["default"]: boolean;
           id: string;
           name: string;
         }[]
@@ -16542,7 +16770,7 @@ export type DigitalExperienceMonitoringTracerouteDetailsResponse = {
    * @example 0h5m0s
    */
   interval: string;
-  kind: 'traceroute';
+  kind: "traceroute";
   /**
    * The name of the Traceroute synthetic application test
    *
@@ -16554,7 +16782,7 @@ export type DigitalExperienceMonitoringTracerouteDetailsResponse = {
         /**
          * Whether the policy is the default for the account
          */
-        ['default']: boolean;
+        ["default"]: boolean;
         id: string;
         name: string;
       }[]
@@ -16599,14 +16827,14 @@ export type DigitalExperienceMonitoringTracerouteTestNetworkPathResponse = {
    * @example 0h5m0s
    */
   interval?: string;
-  kind?: 'traceroute';
+  kind?: "traceroute";
   name?: string;
   networkPath?: {
     /**
      * Specifies the sampling applied, if any, to the slots response. When sampled, results shown represent the first test run to the start of each sampling interval.
      */
     sampling?: {
-      unit: 'hours';
+      unit: "hours";
       value: number;
     } | null;
     slots: {
@@ -16641,39 +16869,45 @@ export type DigitalExperienceMonitoringTracerouteTestNetworkPathResponse = {
   url?: string;
 };
 
-export type DigitalExperienceMonitoringTracerouteTestResultNetworkPathResponse = {
-  /**
-   * name of the device associated with this network path response
-   */
-  deviceName?: string;
-  /**
-   * an array of the hops taken by the device to reach the end destination
-   */
-  hops: {
-    asn?: number | null;
-    aso?: string | null;
-    ipAddress?: string | null;
-    location?: {
-      city?: string | null;
-      state?: string | null;
-      zip?: string | null;
-    } | null;
-    mile?: 'client-to-app' | 'client-to-cf-egress' | 'client-to-cf-ingress' | 'client-to-isp' | null;
-    name?: string | null;
+export type DigitalExperienceMonitoringTracerouteTestResultNetworkPathResponse =
+  {
     /**
-     * @format float
+     * name of the device associated with this network path response
      */
-    packetLossPct?: number | null;
-    rttMs?: number | null;
-    ttl: number;
-  }[];
-  resultId: DigitalExperienceMonitoringUuid;
-  testId?: DigitalExperienceMonitoringUuid;
-  /**
-   * name of the tracroute test
-   */
-  testName?: string;
-};
+    deviceName?: string;
+    /**
+     * an array of the hops taken by the device to reach the end destination
+     */
+    hops: {
+      asn?: number | null;
+      aso?: string | null;
+      ipAddress?: string | null;
+      location?: {
+        city?: string | null;
+        state?: string | null;
+        zip?: string | null;
+      } | null;
+      mile?:
+        | "client-to-app"
+        | "client-to-cf-egress"
+        | "client-to-cf-ingress"
+        | "client-to-isp"
+        | null;
+      name?: string | null;
+      /**
+       * @format float
+       */
+      packetLossPct?: number | null;
+      rttMs?: number | null;
+      ttl: number;
+    }[];
+    resultId: DigitalExperienceMonitoringUuid;
+    testId?: DigitalExperienceMonitoringUuid;
+    /**
+     * name of the tracroute test
+     */
+    testName?: string;
+  };
 
 /**
  * Number of unique devices
@@ -16762,7 +16996,7 @@ export type DigitalExperienceMonitoringWarpToggleChangeEvent = {
   /**
    * The state of the WARP toggle.
    */
-  toggle?: 'on' | 'off';
+  toggle?: "on" | "off";
   /**
    * Email tied to the device
    */
@@ -16780,10 +17014,10 @@ export type DlpAddinAccountMapping = {
 export type DlpAddinAuth =
   | {
       allowed_microsoft_organizations: string[];
-      type: 'Org';
+      type: "Org";
     }
   | {
-      type: 'NoAuth';
+      type: "NoAuth";
     };
 
 export type DlpBehavior = {
@@ -16799,7 +17033,7 @@ export type DlpBehaviors = {
   };
 };
 
-export type DlpConfidence = 'low' | 'medium' | 'high' | 'very_high';
+export type DlpConfidence = "low" | "medium" | "high" | "very_high";
 
 /**
  * Scan the context of predefined entries to only return matches surrounded by keywords.
@@ -17078,7 +17312,13 @@ export type DlpDatasetUpload = {
   version: number;
 };
 
-export type DlpDatasetUploadStatus = 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+export type DlpDatasetUploadStatus =
+  | "empty"
+  | "uploading"
+  | "pending"
+  | "processing"
+  | "failed"
+  | "complete";
 
 export type DlpDocumentFingerprintEntry = {
   /**
@@ -17126,7 +17366,7 @@ export type DlpEmailRule = {
 };
 
 export type DlpEmailRuleAction = {
-  action: 'Block';
+  action: "Block";
   message?: string | null;
 };
 
@@ -17138,9 +17378,13 @@ export type DlpEmailRuleCondition = {
   value: DlpEmailRuleValue;
 };
 
-export type DlpEmailRuleOperator = 'InList' | 'NotInList' | 'MatchRegex' | 'NotMatchRegex';
+export type DlpEmailRuleOperator =
+  | "InList"
+  | "NotInList"
+  | "MatchRegex"
+  | "NotMatchRegex";
 
-export type DlpEmailRuleSelector = 'Recipients' | 'Sender' | 'DLPProfiles';
+export type DlpEmailRuleSelector = "Recipients" | "Sender" | "DLPProfiles";
 
 export type DlpEmailRuleValue = string[] | string;
 
@@ -17148,22 +17392,22 @@ export type DlpEmpty = Record<string, any> | null;
 
 export type DlpEntry =
   | (DlpCustomEntry & {
-      type: 'custom';
+      type: "custom";
     })
   | (DlpPredefinedEntry & {
-      type: 'predefined';
+      type: "predefined";
     })
   | (DlpIntegrationEntry & {
-      type: 'integration';
+      type: "integration";
     })
   | (DlpExactDataEntry & {
-      type: 'exact_data';
+      type: "exact_data";
     })
   | (DlpDocumentFingerprintEntry & {
-      type: 'document_fingerprint';
+      type: "document_fingerprint";
     })
   | (DlpWordListEntry & {
-      type: 'word_list';
+      type: "word_list";
     });
 
 export type DlpEntryConfidence = {
@@ -17185,13 +17429,13 @@ export type DlpEntryUpdate = DlpEntryUpdateType & {
 
 export type DlpEntryUpdateType =
   | (DlpCustomEntryUpdateType & {
-      type: 'custom';
+      type: "custom";
     })
   | {
-      type: 'predefined';
+      type: "predefined";
     }
   | {
-      type: 'integration';
+      type: "integration";
     };
 
 export type DlpExactDataEntry = {
@@ -17396,7 +17640,7 @@ export type DlpNewSharedEntry =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'custom';
+      entry_type: "custom";
     }
   | {
       enabled: boolean;
@@ -17404,7 +17648,7 @@ export type DlpNewSharedEntry =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'predefined';
+      entry_type: "predefined";
     }
   | {
       enabled: boolean;
@@ -17412,7 +17656,7 @@ export type DlpNewSharedEntry =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'integration';
+      entry_type: "integration";
     }
   | {
       enabled: boolean;
@@ -17420,7 +17664,7 @@ export type DlpNewSharedEntry =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'exact_data';
+      entry_type: "exact_data";
     }
   | {
       enabled: boolean;
@@ -17428,7 +17672,7 @@ export type DlpNewSharedEntry =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'document_fingerprint';
+      entry_type: "document_fingerprint";
     };
 
 export type DlpNewWordListEntry = {
@@ -17526,13 +17770,13 @@ export type DlpPredefinedProfileUpdate = {
 
 export type DlpProfile =
   | (DlpCustomProfile & {
-      type: 'custom';
+      type: "custom";
     })
   | (DlpPredefinedProfile & {
-      type: 'predefined';
+      type: "predefined";
     })
   | (DlpIntegrationProfile & {
-      type: 'integration';
+      type: "integration";
     });
 
 export type DlpProfileArray = DlpProfile[];
@@ -17585,7 +17829,7 @@ export type DlpRiskEvents = {
   risk_level?: DlpRiskLevel;
 };
 
-export type DlpRiskLevel = 'low' | 'medium' | 'high';
+export type DlpRiskLevel = "low" | "medium" | "high";
 
 export type DlpRiskScoreIntegration = {
   /**
@@ -17627,7 +17871,7 @@ export type DlpRiskScoreIntegration = {
 
 export type DlpRiskScoreIntegrationArray = DlpRiskScoreIntegration[];
 
-export type DlpRiskScoreIntegrationType = 'Okta';
+export type DlpRiskScoreIntegrationType = "Okta";
 
 export type DlpRiskSummary = {
   users: DlpUserRiskInfo[];
@@ -17640,7 +17884,7 @@ export type DlpSharedEntryUpdate =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'predefined';
+      entry_type: "predefined";
     }
   | {
       enabled: boolean;
@@ -17648,7 +17892,7 @@ export type DlpSharedEntryUpdate =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'integration';
+      entry_type: "integration";
     }
   | {
       enabled: boolean;
@@ -17656,7 +17900,7 @@ export type DlpSharedEntryUpdate =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'exact_data';
+      entry_type: "exact_data";
     }
   | {
       enabled: boolean;
@@ -17664,7 +17908,7 @@ export type DlpSharedEntryUpdate =
        * @format uuid
        */
       entry_id: string;
-      entry_type: 'document_fingerprint';
+      entry_type: "document_fingerprint";
     };
 
 /**
@@ -17741,7 +17985,7 @@ export type DlpUserRiskInfo = {
 /**
  * @deprecated true
  */
-export type DlpValidation = 'luhn';
+export type DlpValidation = "luhn";
 
 export type DlpWordListEntry = {
   /**
@@ -18186,16 +18430,16 @@ export type DnsAnalyticsSort = string;
  * @example hour
  */
 export type DnsAnalyticsTimeDelta =
-  | 'all'
-  | 'auto'
-  | 'year'
-  | 'quarter'
-  | 'month'
-  | 'week'
-  | 'day'
-  | 'hour'
-  | 'dekaminute'
-  | 'minute';
+  | "all"
+  | "auto"
+  | "year"
+  | "quarter"
+  | "month"
+  | "week"
+  | "day"
+  | "hour"
+  | "dekaminute"
+  | "minute";
 
 /**
  * End date and time of requesting data period in ISO 8601 format.
@@ -18219,7 +18463,7 @@ export type DnsCustomNameserversCustomNS = {
      * @example A
      * @x-auditable true
      */
-    type?: 'A' | 'AAAA';
+    type?: "A" | "AAAA";
     /**
      * DNS record contents (an IPv4 or IPv6 address).
      *
@@ -18237,7 +18481,7 @@ export type DnsCustomNameserversCustomNS = {
    * @example verified
    * @x-auditable true
    */
-  status: 'moved' | 'pending' | 'verified';
+  status: "moved" | "pending" | "verified";
   zone_tag: DnsCustomNameserversSchemasIdentifier;
 };
 
@@ -18246,17 +18490,20 @@ export type DnsCustomNameserversCustomNSInput = {
   ns_set?: DnsCustomNameserversNsSet;
 };
 
-export type DnsCustomNameserversAcnsResponseCollection = DnsCustomNameserversApiResponseCollection & {
-  result?: DnsCustomNameserversCustomNS[];
-};
+export type DnsCustomNameserversAcnsResponseCollection =
+  DnsCustomNameserversApiResponseCollection & {
+    result?: DnsCustomNameserversCustomNS[];
+  };
 
-export type DnsCustomNameserversAcnsResponseSingle = DnsCustomNameserversApiResponseSingle & {
-  result?: DnsCustomNameserversCustomNS;
-};
+export type DnsCustomNameserversAcnsResponseSingle =
+  DnsCustomNameserversApiResponseSingle & {
+    result?: DnsCustomNameserversCustomNS;
+  };
 
-export type DnsCustomNameserversApiResponseCollection = DnsCustomNameserversApiResponseCommon & {
-  result_info?: DnsCustomNameserversResultInfo;
-};
+export type DnsCustomNameserversApiResponseCollection =
+  DnsCustomNameserversApiResponseCommon & {
+    result_info?: DnsCustomNameserversResultInfo;
+  };
 
 export type DnsCustomNameserversApiResponseCommon = {
   errors: DnsCustomNameserversMessages;
@@ -18285,17 +18532,19 @@ export type DnsCustomNameserversApiResponseCommonFailure = {
   success: false;
 };
 
-export type DnsCustomNameserversApiResponseSingle = DnsCustomNameserversApiResponseCommon;
+export type DnsCustomNameserversApiResponseSingle =
+  DnsCustomNameserversApiResponseCommon;
 
-export type DnsCustomNameserversEmptyResponse = DnsCustomNameserversApiResponseCollection & {
-  /**
-   * @maxItems 0
-   */
-  result?: string[];
-};
+export type DnsCustomNameserversEmptyResponse =
+  DnsCustomNameserversApiResponseCollection & {
+    /**
+     * @maxItems 0
+     */
+    result?: string[];
+  };
 
-export type DnsCustomNameserversGetResponse = DnsCustomNameserversApiResponseCollection &
-  DnsCustomNameserversZoneMetadata;
+export type DnsCustomNameserversGetResponse =
+  DnsCustomNameserversApiResponseCollection & DnsCustomNameserversZoneMetadata;
 
 /**
  * Account identifier tag.
@@ -18361,12 +18610,13 @@ export type DnsCustomNameserversResultInfo = {
   total_count?: number;
 };
 
-export type DnsCustomNameserversSchemasEmptyResponse = DnsCustomNameserversApiResponseCollection & {
-  /**
-   * @maxItems 0
-   */
-  result?: string[];
-};
+export type DnsCustomNameserversSchemasEmptyResponse =
+  DnsCustomNameserversApiResponseCollection & {
+    /**
+     * @maxItems 0
+     */
+    result?: string[];
+  };
 
 /**
  * Identifier
@@ -18500,11 +18750,12 @@ export type DnsFirewallDnsFirewallClusterPatch = DnsFirewallDnsFirewallCluster;
 
 export type DnsFirewallDnsFirewallClusterPost = DnsFirewallDnsFirewallCluster;
 
-export type DnsFirewallDnsFirewallClusterResponse = DnsFirewallDnsFirewallCluster & {
-  dns_firewall_ips: DnsFirewallDnsFirewallIps;
-  id: DnsFirewallIdentifier;
-  modified_on: DnsFirewallModifiedOn;
-};
+export type DnsFirewallDnsFirewallClusterResponse =
+  DnsFirewallDnsFirewallCluster & {
+    dns_firewall_ips: DnsFirewallDnsFirewallIps;
+    id: DnsFirewallIdentifier;
+    modified_on: DnsFirewallModifiedOn;
+  };
 
 export type DnsFirewallDnsFirewallReverseDns = {
   /**
@@ -18515,9 +18766,11 @@ export type DnsFirewallDnsFirewallReverseDns = {
   };
 };
 
-export type DnsFirewallDnsFirewallReverseDnsPatch = DnsFirewallDnsFirewallReverseDns;
+export type DnsFirewallDnsFirewallReverseDnsPatch =
+  DnsFirewallDnsFirewallReverseDns;
 
-export type DnsFirewallDnsFirewallReverseDnsResponse = DnsFirewallDnsFirewallReverseDns;
+export type DnsFirewallDnsFirewallReverseDnsResponse =
+  DnsFirewallDnsFirewallReverseDns;
 
 /**
  * @example 203.0.113.1
@@ -18527,13 +18780,15 @@ export type DnsFirewallDnsFirewallReverseDnsResponse = DnsFirewallDnsFirewallRev
  */
 export type DnsFirewallDnsFirewallIps = (string | string)[];
 
-export type DnsFirewallDnsFirewallResponseCollection = DnsFirewallApiResponseCollection & {
-  result?: DnsFirewallDnsFirewallClusterResponse[];
-};
+export type DnsFirewallDnsFirewallResponseCollection =
+  DnsFirewallApiResponseCollection & {
+    result?: DnsFirewallDnsFirewallClusterResponse[];
+  };
 
-export type DnsFirewallDnsFirewallSingleResponse = DnsFirewallApiResponseSingle & {
-  result?: DnsFirewallDnsFirewallClusterResponse;
-};
+export type DnsFirewallDnsFirewallSingleResponse =
+  DnsFirewallApiResponseSingle & {
+    result?: DnsFirewallDnsFirewallClusterResponse;
+  };
 
 /**
  * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
@@ -18659,7 +18914,7 @@ export type DnsRecordsAAAARecord = DnsRecordsDnsRecordSharedFields & {
    * @example AAAA
    * @x-auditable true
    */
-  type?: 'AAAA';
+  type?: "AAAA";
 };
 
 export type DnsRecordsARecord = DnsRecordsDnsRecordSharedFields & {
@@ -18677,7 +18932,7 @@ export type DnsRecordsARecord = DnsRecordsDnsRecordSharedFields & {
    * @example A
    * @x-auditable true
    */
-  type?: 'A';
+  type?: "A";
 };
 
 export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
@@ -18720,7 +18975,7 @@ export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
    * @example CAA
    * @x-auditable true
    */
-  type?: 'CAA';
+  type?: "CAA";
 };
 
 export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
@@ -18767,7 +19022,7 @@ export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
    * @example CERT
    * @x-auditable true
    */
-  type?: 'CERT';
+  type?: "CERT";
 };
 
 export type DnsRecordsCNAMERecord = {
@@ -18789,7 +19044,7 @@ export type DnsRecordsCNAMERecord = {
    * @example CNAME
    * @x-auditable true
    */
-  type?: 'CNAME';
+  type?: "CNAME";
 };
 
 export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
@@ -18836,7 +19091,7 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
    * @example DNSKEY
    * @x-auditable true
    */
-  type?: 'DNSKEY';
+  type?: "DNSKEY";
 };
 
 export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
@@ -18883,7 +19138,7 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
    * @example DS
    * @x-auditable true
    */
-  type?: 'DS';
+  type?: "DS";
 };
 
 export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
@@ -18922,7 +19177,7 @@ export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
    * @example HTTPS
    * @x-auditable true
    */
-  type?: 'HTTPS';
+  type?: "HTTPS";
 };
 
 export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
@@ -18957,7 +19212,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      *
      * @example N
      */
-    lat_direction?: 'N' | 'S';
+    lat_direction?: "N" | "S";
     /**
      * Minutes of latitude.
      *
@@ -18987,7 +19242,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      *
      * @example W
      */
-    long_direction?: 'E' | 'W';
+    long_direction?: "E" | "W";
     /**
      * Minutes of longitude.
      *
@@ -19035,7 +19290,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
    * @example LOC
    * @x-auditable true
    */
-  type?: 'LOC';
+  type?: "LOC";
 };
 
 export type DnsRecordsMXRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19054,7 +19309,7 @@ export type DnsRecordsMXRecord = DnsRecordsDnsRecordSharedFields & {
    * @example MX
    * @x-auditable true
    */
-  type?: 'MX';
+  type?: "MX";
 };
 
 export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19105,7 +19360,7 @@ export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
    * @example NAPTR
    * @x-auditable true
    */
-  type?: 'NAPTR';
+  type?: "NAPTR";
 };
 
 export type DnsRecordsNSRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19122,7 +19377,7 @@ export type DnsRecordsNSRecord = DnsRecordsDnsRecordSharedFields & {
    * @example NS
    * @x-auditable true
    */
-  type?: 'NS';
+  type?: "NS";
 };
 
 export type DnsRecordsOPENPGPKEYRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19136,7 +19391,7 @@ export type DnsRecordsOPENPGPKEYRecord = DnsRecordsDnsRecordSharedFields & {
    * @example OPENPGPKEY
    * @x-auditable true
    */
-  type?: 'OPENPGPKEY';
+  type?: "OPENPGPKEY";
 };
 
 export type DnsRecordsPTRRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19153,7 +19408,7 @@ export type DnsRecordsPTRRecord = DnsRecordsDnsRecordSharedFields & {
    * @example PTR
    * @x-auditable true
    */
-  type?: 'PTR';
+  type?: "PTR";
 };
 
 export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
@@ -19200,7 +19455,7 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
    * @example SMIMEA
    * @x-auditable true
    */
-  type?: 'SMIMEA';
+  type?: "SMIMEA";
 };
 
 export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19245,7 +19500,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
    * @example SRV
    * @x-auditable true
    */
-  type?: 'SRV';
+  type?: "SRV";
 };
 
 export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19284,7 +19539,7 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
    * @example SSHFP
    * @x-auditable true
    */
-  type?: 'SSHFP';
+  type?: "SSHFP";
 };
 
 export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19323,7 +19578,7 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
    * @example SVCB
    * @x-auditable true
    */
-  type?: 'SVCB';
+  type?: "SVCB";
 };
 
 export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
@@ -19370,7 +19625,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
    * @example TLSA
    * @x-auditable true
    */
-  type?: 'TLSA';
+  type?: "TLSA";
 };
 
 export type DnsRecordsTXTRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19388,7 +19643,7 @@ export type DnsRecordsTXTRecord = DnsRecordsDnsRecordSharedFields & {
    * @example TXT
    * @x-auditable true
    */
-  type?: 'TXT';
+  type?: "TXT";
 };
 
 export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
@@ -19422,7 +19677,7 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
    * @example URI
    * @x-auditable true
    */
-  type?: 'URI';
+  type?: "URI";
 };
 
 export type DnsRecordsApiResponseCollection = DnsRecordsApiResponseCommon & {
@@ -19496,7 +19751,7 @@ export type DnsRecordsComment = string;
  *
  * @default asc
  */
-export type DnsRecordsDirection = 'asc' | 'desc';
+export type DnsRecordsDirection = "asc" | "desc";
 
 export type DnsRecordsDnsRecordBatchDelete = {
   id?: DnsRecordsIdentifier;
@@ -19512,11 +19767,17 @@ export type DnsRecordsDnsRecordBatchPut = DnsRecordsDnsRecordPost & {
   id: DnsRecordsIdentifier;
 };
 
-export type DnsRecordsDnsRecordPatch = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
+export type DnsRecordsDnsRecordPatch =
+  | DnsRecordsDnsRecordWithoutData
+  | DnsRecordsDnsRecordWithData;
 
-export type DnsRecordsDnsRecordPost = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
+export type DnsRecordsDnsRecordPost =
+  | DnsRecordsDnsRecordWithoutData
+  | DnsRecordsDnsRecordWithData;
 
-export type DnsRecordsDnsRecordResponse = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
+export type DnsRecordsDnsRecordResponse =
+  | DnsRecordsDnsRecordWithoutData
+  | DnsRecordsDnsRecordWithData;
 
 export type DnsRecordsDnsRecordSharedFields = {
   comment?: DnsRecordsComment;
@@ -19570,9 +19831,10 @@ export type DnsRecordsDnsResponseBatch = DnsRecordsApiResponseSingle & {
   result?: DnsRecordsDnsResponseBatchObject;
 };
 
-export type DnsRecordsDnsResponseCollection = DnsRecordsApiResponseCollection & {
-  result?: DnsRecordsDnsRecordResponse[];
-};
+export type DnsRecordsDnsResponseCollection =
+  DnsRecordsApiResponseCollection & {
+    result?: DnsRecordsDnsRecordResponse[];
+  };
 
 export type DnsRecordsDnsResponseImportScan = DnsRecordsApiResponseSingle & {
   result?: {
@@ -19610,7 +19872,7 @@ export type DnsRecordsIdentifier = string;
  * @default all
  * @example any
  */
-export type DnsRecordsMatch = 'any' | 'all';
+export type DnsRecordsMatch = "any" | "all";
 
 export type DnsRecordsMessages = {
   /**
@@ -19638,7 +19900,7 @@ export type DnsRecordsName = string;
  *
  * @default type
  */
-export type DnsRecordsOrder = 'type' | 'name' | 'content' | 'ttl' | 'proxied';
+export type DnsRecordsOrder = "type" | "name" | "content" | "ttl" | "proxied";
 
 /**
  * Page number of paginated results.
@@ -19711,7 +19973,7 @@ export type DnsRecordsSettings = {
  * @default all
  * @example any
  */
-export type DnsRecordsTagMatch = 'any' | 'all';
+export type DnsRecordsTagMatch = "any" | "all";
 
 /**
  * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -19732,27 +19994,27 @@ export type DnsRecordsTtl = number | 1;
  * @example A
  */
 export type DnsRecordsType =
-  | 'A'
-  | 'AAAA'
-  | 'CAA'
-  | 'CERT'
-  | 'CNAME'
-  | 'DNSKEY'
-  | 'DS'
-  | 'HTTPS'
-  | 'LOC'
-  | 'MX'
-  | 'NAPTR'
-  | 'NS'
-  | 'OPENPGPKEY'
-  | 'PTR'
-  | 'SMIMEA'
-  | 'SRV'
-  | 'SSHFP'
-  | 'SVCB'
-  | 'TLSA'
-  | 'TXT'
-  | 'URI';
+  | "A"
+  | "AAAA"
+  | "CAA"
+  | "CERT"
+  | "CNAME"
+  | "DNSKEY"
+  | "DS"
+  | "HTTPS"
+  | "LOC"
+  | "MX"
+  | "NAPTR"
+  | "NS"
+  | "OPENPGPKEY"
+  | "PTR"
+  | "SMIMEA"
+  | "SRV"
+  | "SSHFP"
+  | "SVCB"
+  | "TLSA"
+  | "TXT"
+  | "URI";
 
 export type DnsSettingsAccountSettings = {
   zone_defaults?: DnsSettingsDnsSettingsAccount;
@@ -19830,7 +20092,7 @@ export type DnsSettingsCreatedTime = string;
  *
  * @default asc
  */
-export type DnsSettingsDirection = 'asc' | 'desc';
+export type DnsSettingsDirection = "asc" | "desc";
 
 export type DnsSettingsDnsSettings = {
   flatten_all_cnames?: DnsSettingsFlattenAllCnames;
@@ -19854,7 +20116,11 @@ export type DnsSettingsDnsSettingsAccount = DnsSettingsDnsSettings & {
      * @example cloudflare.standard
      * @x-auditable true
      */
-    type: 'cloudflare.standard' | 'cloudflare.standard.random' | 'custom.account' | 'custom.tenant';
+    type:
+      | "cloudflare.standard"
+      | "cloudflare.standard.random"
+      | "custom.account"
+      | "custom.tenant";
   };
 };
 
@@ -19878,7 +20144,11 @@ export type DnsSettingsDnsSettingsZone = DnsSettingsDnsSettings & {
      * @example cloudflare.standard
      * @x-auditable true
      */
-    type: 'cloudflare.standard' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type:
+      | "cloudflare.standard"
+      | "custom.account"
+      | "custom.tenant"
+      | "custom.zone";
   };
 };
 
@@ -19901,9 +20171,10 @@ export type DnsSettingsDnsResponseSingle = DnsSettingsApiResponseSingle & {
   result?: DnsSettingsAccountSettings;
 };
 
-export type DnsSettingsDnsViewResponseCollection = DnsSettingsApiResponseCollection & {
-  result?: DnsSettingsDnsViewResponse[];
-};
+export type DnsSettingsDnsViewResponseCollection =
+  DnsSettingsApiResponseCollection & {
+    result?: DnsSettingsDnsViewResponse[];
+  };
 
 export type DnsSettingsDnsViewResponseSingle = DnsSettingsApiResponseSingle & {
   result?: DnsSettingsDnsViewResponse;
@@ -19952,7 +20223,7 @@ export type DnsSettingsInternalDns = {
  * @default all
  * @example any
  */
-export type DnsSettingsMatch = 'any' | 'all';
+export type DnsSettingsMatch = "any" | "all";
 
 export type DnsSettingsMessages = {
   /**
@@ -20008,7 +20279,7 @@ export type DnsSettingsNsTtl = number;
  *
  * @default type
  */
-export type DnsSettingsOrder = 'name' | 'created_on' | 'modified_on';
+export type DnsSettingsOrder = "name" | "created_on" | "modified_on";
 
 /**
  * Page number of paginated results.
@@ -20028,9 +20299,10 @@ export type DnsSettingsPage = number;
  */
 export type DnsSettingsPerPage = number;
 
-export type DnsSettingsSchemasDnsResponseSingle = DnsSettingsApiResponseSingle & {
-  result?: DnsSettingsDnsSettingsZone;
-};
+export type DnsSettingsSchemasDnsResponseSingle =
+  DnsSettingsApiResponseSingle & {
+    result?: DnsSettingsDnsSettingsZone;
+  };
 
 /**
  * Allows a Secondary DNS zone to use (proxied) override records and CNAME flattening at the zone apex.
@@ -20111,7 +20383,7 @@ export type DnsSettingsSoa = {
  * @example dns_only
  * @x-auditable true
  */
-export type DnsSettingsZoneMode = 'standard' | 'cdn_only' | 'dns_only';
+export type DnsSettingsZoneMode = "standard" | "cdn_only" | "dns_only";
 
 /**
  * The list of zones linked to this view.
@@ -20323,7 +20595,12 @@ export type DnssecPublicKey = string | null;
  * @example active
  * @x-auditable true
  */
-export type DnssecStatus = 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
+export type DnssecStatus =
+  | "active"
+  | "pending"
+  | "disabled"
+  | "pending-disabled"
+  | "error";
 
 export type DosApiResponseCommon = {
   errors: DosMessages;
@@ -20369,7 +20646,7 @@ export type DosAsnDescription = string;
  *
  * @example hosting_provider
  */
-export type DosAsnType = 'hosting_provider' | 'isp' | 'organization';
+export type DosAsnType = "hosting_provider" | "isp" | "organization";
 
 /**
  * Identifier.
@@ -20686,7 +20963,12 @@ export type EmailSecurityCreateTrustedDomain = {
   pattern: string;
 };
 
-export type EmailSecurityDeliveryMode = 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
+export type EmailSecurityDeliveryMode =
+  | "DIRECT"
+  | "BCC"
+  | "JOURNAL"
+  | "API"
+  | "RETRO_SCAN";
 
 export type EmailSecurityDisplayName = {
   /**
@@ -20732,16 +21014,16 @@ export type EmailSecurityDisplayName = {
 };
 
 export type EmailSecurityDispositionLabel =
-  | 'MALICIOUS'
-  | 'MALICIOUS-BEC'
-  | 'SUSPICIOUS'
-  | 'SPOOF'
-  | 'SPAM'
-  | 'BULK'
-  | 'ENCRYPTED'
-  | 'EXTERNAL'
-  | 'UNKNOWN'
-  | 'NONE';
+  | "MALICIOUS"
+  | "MALICIOUS-BEC"
+  | "SUSPICIOUS"
+  | "SPOOF"
+  | "SPAM"
+  | "BULK"
+  | "ENCRYPTED"
+  | "EXTERNAL"
+  | "UNKNOWN"
+  | "NONE";
 
 /**
  * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
@@ -20786,7 +21068,7 @@ export type EmailSecurityDomain = {
    * @format int32
    */
   id: number;
-  inbox_provider?: 'Microsoft' | 'Google' | null;
+  inbox_provider?: "Microsoft" | "Google" | null;
   /**
    * @format uuid
    */
@@ -20867,24 +21149,24 @@ export type EmailSecurityMessage = {
 };
 
 export type EmailSecurityMessageDeliveryMode =
-  | 'DIRECT'
-  | 'BCC'
-  | 'JOURNAL'
-  | 'REVIEW_SUBMISSION'
-  | 'DMARC_UNVERIFIED'
-  | 'DMARC_FAILURE_REPORT'
-  | 'DMARC_AGGREGATE_REPORT'
-  | 'THREAT_INTEL_SUBMISSION'
-  | 'SIMULATION_SUBMISSION'
-  | 'API'
-  | 'RETRO_SCAN';
+  | "DIRECT"
+  | "BCC"
+  | "JOURNAL"
+  | "REVIEW_SUBMISSION"
+  | "DMARC_UNVERIFIED"
+  | "DMARC_FAILURE_REPORT"
+  | "DMARC_AGGREGATE_REPORT"
+  | "THREAT_INTEL_SUBMISSION"
+  | "SIMULATION_SUBMISSION"
+  | "API"
+  | "RETRO_SCAN";
 
 export type EmailSecurityMessageHeader = {
   name: string;
   value: string;
 };
 
-export type EmailSecurityPatternType = 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+export type EmailSecurityPatternType = "EMAIL" | "DOMAIN" | "IP" | "UNKNOWN";
 
 /**
  * The identifier of the message.
@@ -20947,9 +21229,9 @@ export type EmailSecurityRetractionResponseItem = {
   status?: string | null;
 };
 
-export type EmailSecurityScannableFolder = 'AllItems' | 'Inbox';
+export type EmailSecurityScannableFolder = "AllItems" | "Inbox";
 
-export type EmailSecuritySortingDirection = 'asc' | 'desc';
+export type EmailSecuritySortingDirection = "asc" | "desc";
 
 export type EmailSecuritySubmission = {
   original_disposition?: EmailSecurityDispositionLabel & (string | null);
@@ -21112,7 +21394,12 @@ export type EmailSecurityUpdateBlockedSender = {
   pattern_type?: EmailSecurityPatternType & (string | null);
 };
 
-export type EmailSecurityValidationStatus = 'pass' | 'neutral' | 'fail' | 'error' | 'none';
+export type EmailSecurityValidationStatus =
+  | "pass"
+  | "neutral"
+  | "fail"
+  | "error"
+  | "none";
 
 export type EmailAccountId = EmailIdentifier;
 
@@ -21224,27 +21511,28 @@ export type EmailDestinationAddressResponseSingle = EmailApiResponseSingle & {
  */
 export type EmailDestinationAddressTag = string;
 
-export type EmailDestinationAddressesResponseCollection = EmailApiResponseCollection & {
-  result?: EmailAddresses[];
-  result_info?: {
-    /**
-     * @example 1
-     */
-    count?: void;
-    /**
-     * @example 1
-     */
-    page?: void;
-    /**
-     * @example 20
-     */
-    per_page?: void;
-    /**
-     * @example 1
-     */
-    total_count?: void;
+export type EmailDestinationAddressesResponseCollection =
+  EmailApiResponseCollection & {
+    result?: EmailAddresses[];
+    result_info?: {
+      /**
+       * @example 1
+       */
+      count?: void;
+      /**
+       * @example 1
+       */
+      page?: void;
+      /**
+       * @example 20
+       */
+      per_page?: void;
+      /**
+       * @example 1
+       */
+      total_count?: void;
+    };
   };
-};
 
 /**
  * List of records needed to enable an Email Routing zone.
@@ -21287,24 +21575,24 @@ export type EmailDnsRecord = {
    * @x-auditable true
    */
   type?:
-    | 'A'
-    | 'AAAA'
-    | 'CNAME'
-    | 'HTTPS'
-    | 'TXT'
-    | 'SRV'
-    | 'LOC'
-    | 'MX'
-    | 'NS'
-    | 'CERT'
-    | 'DNSKEY'
-    | 'DS'
-    | 'NAPTR'
-    | 'SMIMEA'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TLSA'
-    | 'URI';
+    | "A"
+    | "AAAA"
+    | "CNAME"
+    | "HTTPS"
+    | "TXT"
+    | "SRV"
+    | "LOC"
+    | "MX"
+    | "NS"
+    | "CERT"
+    | "DNSKEY"
+    | "DS"
+    | "NAPTR"
+    | "SMIMEA"
+    | "SSHFP"
+    | "SVCB"
+    | "TLSA"
+    | "URI";
 };
 
 export type EmailDnsSettingsResponseCollection = EmailApiResponseCollection & {
@@ -21332,7 +21620,8 @@ export type EmailEmailRoutingGetResponseDnsError = {
   missing?: EmailDnsRecord;
 };
 
-export type EmailEmailRoutingGetResponseDnsErrors = EmailEmailRoutingGetResponseDnsError[];
+export type EmailEmailRoutingGetResponseDnsErrors =
+  EmailEmailRoutingGetResponseDnsError[];
 
 /**
  * The date and time the settings have been created.
@@ -21391,7 +21680,12 @@ export type EmailEmailSettingSkipWizard = true | false;
  *
  * @example ready
  */
-export type EmailEmailSettingStatus = 'ready' | 'unconfigured' | 'misconfigured' | 'misconfigured/locked' | 'unlocked';
+export type EmailEmailSettingStatus =
+  | "ready"
+  | "unconfigured"
+  | "misconfigured"
+  | "misconfigured/locked"
+  | "unlocked";
 
 /**
  * Email Routing settings tag. (Deprecated, replaced by Email Routing settings identifier)
@@ -21456,7 +21750,7 @@ export type EmailRuleAction = {
    * @example forward
    * @x-auditable true
    */
-  type: 'drop' | 'forward' | 'worker';
+  type: "drop" | "forward" | "worker";
   value?: string[];
 };
 
@@ -21475,7 +21769,7 @@ export type EmailRuleCatchallAction = {
    * @example forward
    * @x-auditable true
    */
-  type: 'drop' | 'forward' | 'worker';
+  type: "drop" | "forward" | "worker";
   value?: string[];
 };
 
@@ -21494,7 +21788,7 @@ export type EmailRuleCatchallMatcher = {
    * @example all
    * @x-auditable true
    */
-  type: 'all';
+  type: "all";
 };
 
 /**
@@ -21530,14 +21824,14 @@ export type EmailRuleMatcher = {
    * @example to
    * @x-auditable true
    */
-  field?: 'to';
+  field?: "to";
   /**
    * Type of matcher.
    *
    * @example literal
    * @x-auditable true
    */
-  type: 'all' | 'literal';
+  type: "all" | "literal";
   /**
    * Value for matcher.
    *
@@ -21667,7 +21961,7 @@ export type FirewallAction = {
  *
  * @default challenge
  */
-export type FirewallActionMode = 'simulate' | 'block' | 'challenge';
+export type FirewallActionMode = "simulate" | "block" | "challenge";
 
 /**
  * A summary of the purpose/function of the WAF package.
@@ -21778,7 +22072,7 @@ export type FirewallAsnConfiguration = {
    *
    * @example asn
    */
-  target?: 'asn';
+  target?: "asn";
   /**
    * The AS number to match.
    *
@@ -21802,7 +22096,7 @@ export type FirewallBypass = {
   /**
    * @example url
    */
-  name?: 'url';
+  name?: "url";
   /**
    * The URL to bypass.
    *
@@ -21817,7 +22111,7 @@ export type FirewallCidrConfiguration = {
    *
    * @example ip_range
    */
-  target?: 'ip_range';
+  target?: "ip_range";
   /**
    * The IP address range to match. You can only use prefix lengths `/16` and `/24` for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
    *
@@ -21857,7 +22151,11 @@ export type FirewallComponentsSchemasIdentifier = string;
  * @example js_challenge
  * @maxLength 12
  */
-export type FirewallComponentsSchemasMode = 'block' | 'challenge' | 'js_challenge' | 'managed_challenge';
+export type FirewallComponentsSchemasMode =
+  | "block"
+  | "challenge"
+  | "js_challenge"
+  | "managed_challenge";
 
 /**
  * When true, indicates that the firewall rule is currently paused.
@@ -21904,7 +22202,10 @@ export type FirewallConfiguration =
 /**
  * A list of IP addresses or CIDR ranges that will be allowed to access the URLs specified in the Zone Lockdown rule. You can include any number of `ip` or `ip_range` configurations.
  */
-export type FirewallConfigurations = (FirewallSchemasIpConfiguration | FirewallSchemasCidrConfiguration)[];
+export type FirewallConfigurations = (
+  | FirewallSchemasIpConfiguration
+  | FirewallSchemasCidrConfiguration
+)[];
 
 /**
  * The content type of the body. Must be one of the following: `text/plain`, `text/xml`, or `application/json`.
@@ -21921,7 +22222,7 @@ export type FirewallCountryConfiguration = {
    *
    * @example country
    */
-  target?: 'country';
+  target?: "country";
   /**
    * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
    *
@@ -21988,7 +22289,7 @@ export type FirewallDescriptionSearch = string;
  *
  * @example traditional
  */
-export type FirewallDetectionMode = 'anomaly' | 'traditional';
+export type FirewallDetectionMode = "anomaly" | "traditional";
 
 /**
  * When true, indicates that the rate limit is currently disabled.
@@ -22029,9 +22330,10 @@ export type FirewallFilter = {
   ref?: FirewallSchemasRef;
 };
 
-export type FirewallFilterDeleteResponseCollection = FirewallApiResponseCollection & {
-  result?: FirewallFilter[];
-};
+export type FirewallFilterDeleteResponseCollection =
+  FirewallApiResponseCollection & {
+    result?: FirewallFilter[];
+  };
 
 export type FirewallFilterDeleteResponseSingle = FirewallApiResponseSingle & {
   result: {
@@ -22065,21 +22367,24 @@ export type FirewallFilterRuleResponse = FirewallFilterRuleBase & {
   filter?: FirewallFilter | FirewallDeletedFilter;
 };
 
-export type FirewallFilterRulesResponseCollection = FirewallApiResponseCollection & {
-  result: FirewallFilterRuleResponse[];
-};
+export type FirewallFilterRulesResponseCollection =
+  FirewallApiResponseCollection & {
+    result: FirewallFilterRuleResponse[];
+  };
 
-export type FirewallFilterRulesResponseCollectionDelete = FirewallApiResponseCollection & {
-  result: FirewallFilterRuleResponse[];
-};
+export type FirewallFilterRulesResponseCollectionDelete =
+  FirewallApiResponseCollection & {
+    result: FirewallFilterRuleResponse[];
+  };
 
 export type FirewallFilterRulesSingleResponse = FirewallApiResponseSingle & {
   result: FirewallFilterRuleResponse;
 };
 
-export type FirewallFilterRulesSingleResponseDelete = FirewallApiResponseSingle & {
-  result: FirewallFilterRuleResponse;
-};
+export type FirewallFilterRulesSingleResponseDelete =
+  FirewallApiResponseSingle & {
+    result: FirewallFilterRuleResponse;
+  };
 
 export type FirewallFilters = {
   /**
@@ -22088,21 +22393,21 @@ export type FirewallFilters = {
    * @example ip
    * @x-auditable true
    */
-  ['configuration.target']?: 'ip' | 'ip_range' | 'asn' | 'country';
+  ["configuration.target"]?: "ip" | "ip_range" | "asn" | "country";
   /**
    * The target value to search for in existing rules: an IP address, an IP address range, or a country code, depending on the provided `configuration.target`.
    * Notes: You can search for a single IPv4 address, an IP address range with a subnet of '/16' or '/24', or a two-letter ISO-3166-1 alpha-2 country code.
    *
    * @example 198.51.100.4
    */
-  ['configuration.value']?: string;
+  ["configuration.value"]?: string;
   /**
    * When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.
    *
    * @default all
    * @x-auditable true
    */
-  match?: 'any' | 'all';
+  match?: "any" | "all";
   mode?: FirewallSchemasMode;
   /**
    * The string to search for in the notes of existing IP Access rules.
@@ -22201,7 +22506,7 @@ export type FirewallHeaderName = string;
  * @example ne
  * @x-auditable true
  */
-export type FirewallHeaderOp = 'eq' | 'ne';
+export type FirewallHeaderOp = "eq" | "ne";
 
 /**
  * The value of the response header, which must match exactly.
@@ -22234,7 +22539,7 @@ export type FirewallIpConfiguration = {
    *
    * @example ip
    */
-  target?: 'ip';
+  target?: "ip";
   /**
    * The IP address to match. This address will be compared to the IP address of incoming requests.
    *
@@ -22264,7 +22569,7 @@ export type FirewallIpv6Configuration = {
    *
    * @example ip6
    */
-  target?: 'ip6';
+  target?: "ip6";
   /**
    * The IPv6 address to match.
    *
@@ -22323,7 +22628,15 @@ export type FirewallMessages = {
  * @example GET
  * @example POST
  */
-export type FirewallMethods = ('GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_')[];
+export type FirewallMethods = (
+  | "GET"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "PATCH"
+  | "HEAD"
+  | "_ALL_"
+)[];
 
 /**
  * The action to perform.
@@ -22331,7 +22644,12 @@ export type FirewallMethods = ('GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HE
  * @example challenge
  * @x-auditable true
  */
-export type FirewallMode = 'simulate' | 'ban' | 'challenge' | 'js_challenge' | 'managed_challenge';
+export type FirewallMode =
+  | "simulate"
+  | "ban"
+  | "challenge"
+  | "js_challenge"
+  | "managed_challenge";
 
 /**
  * The timestamp of when the rule was last modified.
@@ -22376,9 +22694,10 @@ export type FirewallOverride = {
   urls?: FirewallUrls;
 };
 
-export type FirewallOverrideResponseCollection = FirewallApiResponseCollection & {
-  result: FirewallOverride[];
-};
+export type FirewallOverrideResponseCollection =
+  FirewallApiResponseCollection & {
+    result: FirewallOverride[];
+  };
 
 export type FirewallOverrideResponseSingle = FirewallApiResponseSingle & {
   result: FirewallOverride;
@@ -22393,7 +22712,9 @@ export type FirewallOverrideResponseSingle = FirewallApiResponseSingle & {
  */
 export type FirewallOverridesId = string;
 
-export type FirewallPackage = FirewallPackageDefinition | FirewallAnomalyPackage;
+export type FirewallPackage =
+  | FirewallPackageDefinition
+  | FirewallAnomalyPackage;
 
 export type FirewallPackageDefinition = {
   description: FirewallSchemasDescription;
@@ -22451,7 +22772,15 @@ export type FirewallPeriod = number;
  */
 export type FirewallPriority = number;
 
-export type FirewallProducts = ('zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf')[];
+export type FirewallProducts = (
+  | "zoneLockdown"
+  | "uaBlock"
+  | "bic"
+  | "hot"
+  | "securityLevel"
+  | "rateLimit"
+  | "waf"
+)[];
 
 export type FirewallRateLimits = FirewallRatelimit;
 
@@ -22474,9 +22803,10 @@ export type FirewallRatelimit = {
   threshold?: FirewallThreshold;
 };
 
-export type FirewallRatelimitResponseCollection = FirewallApiResponseCollection & {
-  result?: FirewallRateLimits[];
-};
+export type FirewallRatelimitResponseCollection =
+  FirewallApiResponseCollection & {
+    result?: FirewallRateLimits[];
+  };
 
 export type FirewallRatelimitResponseSingle = FirewallApiResponseSingle & {
   result?: FirewallRateLimits;
@@ -22531,7 +22861,7 @@ export type FirewallResultInfo = {
 export type FirewallRewriteAction = {
   block?: FirewallWafRewriteAction;
   challenge?: FirewallWafRewriteAction;
-  ['default']?: FirewallWafRewriteAction;
+  ["default"]?: FirewallWafRewriteAction;
   disable?: FirewallWafRewriteAction;
   simulate?: FirewallWafRewriteAction;
 };
@@ -22612,13 +22942,13 @@ export type FirewallRulesComponentsSchemasDescription = string;
  * @example block
  */
 export type FirewallSchemasAction =
-  | 'block'
-  | 'challenge'
-  | 'js_challenge'
-  | 'managed_challenge'
-  | 'allow'
-  | 'log'
-  | 'bypass';
+  | "block"
+  | "challenge"
+  | "js_challenge"
+  | "managed_challenge"
+  | "allow"
+  | "log"
+  | "bypass";
 
 export type FirewallSchemasCidrConfiguration = {
   /**
@@ -22626,7 +22956,7 @@ export type FirewallSchemasCidrConfiguration = {
    *
    * @example ip_range
    */
-  target?: 'ip_range';
+  target?: "ip_range";
   /**
    * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
    *
@@ -22690,7 +23020,7 @@ export type FirewallSchemasIpConfiguration = {
    *
    * @example ip
    */
-  target?: 'ip';
+  target?: "ip";
   /**
    * The IP address to match. This address will be compared to the IP address of incoming requests.
    *
@@ -22705,7 +23035,12 @@ export type FirewallSchemasIpConfiguration = {
  * @example challenge
  * @x-auditable true
  */
-export type FirewallSchemasMode = 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+export type FirewallSchemasMode =
+  | "block"
+  | "challenge"
+  | "whitelist"
+  | "js_challenge"
+  | "managed_challenge";
 
 /**
  * When true, indicates that the rule is currently paused.
@@ -22743,7 +23078,7 @@ export type FirewallSchemasRule = FirewallRule & {
      *
      * @example user
      */
-    type?: 'user' | 'organization';
+    type?: "user" | "organization";
   };
 };
 
@@ -22766,14 +23101,14 @@ export type FirewallSchemes = string[];
  *
  * @default high
  */
-export type FirewallSensitivity = 'high' | 'medium' | 'low' | 'off';
+export type FirewallSensitivity = "high" | "medium" | "low" | "off";
 
 /**
  * When set to `active`, indicates that the WAF package will be applied to the zone.
  *
  * @default active
  */
-export type FirewallStatus = 'active';
+export type FirewallStatus = "active";
 
 /**
  * The threshold that will trigger the configured mitigation action. Configure this value along with the `period` property to establish a threshold per period.
@@ -22801,7 +23136,7 @@ export type FirewallUaConfiguration = {
    *
    * @example ua
    */
-  target?: 'ua';
+  target?: "ua";
   /**
    * the user agent to exactly match
    *
@@ -22836,14 +23171,24 @@ export type FirewallUrls = string[];
 /**
  * The WAF rule action to apply.
  */
-export type FirewallWafAction = 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+export type FirewallWafAction =
+  | "challenge"
+  | "block"
+  | "simulate"
+  | "disable"
+  | "default";
 
 /**
  * The WAF rule action to apply.
  *
  * @x-auditable true
  */
-export type FirewallWafRewriteAction = 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+export type FirewallWafRewriteAction =
+  | "challenge"
+  | "block"
+  | "simulate"
+  | "disable"
+  | "default";
 
 export type FirewallZonelockdown = {
   configurations: FirewallConfigurations;
@@ -22855,9 +23200,10 @@ export type FirewallZonelockdown = {
   urls: FirewallSchemasUrls;
 };
 
-export type FirewallZonelockdownResponseCollection = FirewallApiResponseCollection & {
-  result: FirewallZonelockdown[];
-};
+export type FirewallZonelockdownResponseCollection =
+  FirewallApiResponseCollection & {
+    result: FirewallZonelockdown[];
+  };
 
 export type FirewallZonelockdownResponseSingle = FirewallApiResponseSingle & {
   result: FirewallZonelockdown;
@@ -22914,7 +23260,9 @@ export type HealthchecksApiResponseCommonFailure = {
 export type HealthchecksApiResponseSingle = {
   errors: HealthchecksMessages;
   messages: HealthchecksMessages;
-  result: (Record<string, any> | any[] | string) | (Record<string, any> | any[] | string);
+  result:
+    | (Record<string, any> | any[] | string)
+    | (Record<string, any> | any[] | string);
   /**
    * Whether the API call was successful
    *
@@ -22931,20 +23279,20 @@ export type HealthchecksApiResponseSingle = {
  */
 export type HealthchecksCheckRegions =
   | (
-      | 'WNAM'
-      | 'ENAM'
-      | 'WEU'
-      | 'EEU'
-      | 'NSAM'
-      | 'SSAM'
-      | 'OC'
-      | 'ME'
-      | 'NAF'
-      | 'SAF'
-      | 'IN'
-      | 'SEAS'
-      | 'NEAS'
-      | 'ALL_REGIONS'
+      | "WNAM"
+      | "ENAM"
+      | "WEU"
+      | "EEU"
+      | "NSAM"
+      | "SSAM"
+      | "OC"
+      | "ME"
+      | "NAF"
+      | "SAF"
+      | "IN"
+      | "SEAS"
+      | "NEAS"
+      | "ALL_REGIONS"
     )[]
   | null;
 
@@ -23040,7 +23388,7 @@ export type HealthchecksHttpConfig = {
    *
    * @default GET
    */
-  method?: 'GET' | 'HEAD';
+  method?: "GET" | "HEAD";
   /**
    * The endpoint path to health check against.
    *
@@ -23108,9 +23456,10 @@ export type HealthchecksQueryHealthcheck = {
   type?: HealthchecksType;
 };
 
-export type HealthchecksResponseCollection = HealthchecksApiResponseCollection & {
-  result?: HealthchecksHealthchecks[];
-};
+export type HealthchecksResponseCollection =
+  HealthchecksApiResponseCollection & {
+    result?: HealthchecksHealthchecks[];
+  };
 
 export type HealthchecksResultInfo = {
   /**
@@ -23155,7 +23504,11 @@ export type HealthchecksSingleResponse = HealthchecksApiResponseSingle & {
  *
  * @example healthy
  */
-export type HealthchecksStatus = 'unknown' | 'healthy' | 'unhealthy' | 'suspended';
+export type HealthchecksStatus =
+  | "unknown"
+  | "healthy"
+  | "unhealthy"
+  | "suspended";
 
 /**
  * If suspended, no health checks are sent to the origin.
@@ -23173,7 +23526,7 @@ export type HealthchecksTcpConfig = {
    *
    * @default connection_established
    */
-  method?: 'connection_established';
+  method?: "connection_established";
   /**
    * Port number to connect to for the health check. Defaults to 80.
    *
@@ -23237,7 +23590,9 @@ export type HyperdriveApiResponseCommonFailure = {
 
 export type HyperdriveApiResponseSingle = HyperdriveApiResponseCommon;
 
-export type HyperdriveHyperdriveCaching = HyperdriveHyperdriveCachingDisabled | HyperdriveHyperdriveCachingEnabled;
+export type HyperdriveHyperdriveCaching =
+  | HyperdriveHyperdriveCachingDisabled
+  | HyperdriveHyperdriveCachingEnabled;
 
 export type HyperdriveHyperdriveCachingCommon = {
   /**
@@ -23248,24 +23603,26 @@ export type HyperdriveHyperdriveCachingCommon = {
   disabled?: boolean;
 };
 
-export type HyperdriveHyperdriveCachingDisabled = HyperdriveHyperdriveCachingCommon;
+export type HyperdriveHyperdriveCachingDisabled =
+  HyperdriveHyperdriveCachingCommon;
 
-export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingCommon & {
-  /**
-   * Specify the maximum duration items should persist in the cache. Not returned if set to the default (60).
-   *
-   * @example 60
-   * @x-auditable true
-   */
-  max_age?: number;
-  /**
-   * Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).
-   *
-   * @example 15
-   * @x-auditable true
-   */
-  stale_while_revalidate?: number;
-};
+export type HyperdriveHyperdriveCachingEnabled =
+  HyperdriveHyperdriveCachingCommon & {
+    /**
+     * Specify the maximum duration items should persist in the cache. Not returned if set to the default (60).
+     *
+     * @example 60
+     * @x-auditable true
+     */
+    max_age?: number;
+    /**
+     * Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).
+     *
+     * @example 15
+     * @x-auditable true
+     */
+    stale_while_revalidate?: number;
+  };
 
 export type HyperdriveHyperdriveConfig = {
   caching?: HyperdriveHyperdriveCaching;
@@ -23298,7 +23655,9 @@ export type HyperdriveHyperdriveConfigPatch = {
   caching?: HyperdriveHyperdriveCaching;
   mtls?: HyperdriveHyperdriveMtls;
   name?: HyperdriveHyperdriveName;
-  origin?: HyperdriveHyperdriveDatabase | (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
+  origin?:
+    | HyperdriveHyperdriveDatabase
+    | (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
   origin_connection_limit?: HyperdriveHyperdriveOriginConnectionLimit;
 };
 
@@ -23375,7 +23734,7 @@ export type HyperdriveHyperdriveOriginConnectionLimit = number;
  *
  * @x-auditable true
  */
-export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql' | 'mysql';
+export type HyperdriveHyperdriveScheme = "postgres" | "postgresql" | "mysql";
 
 /**
  * Define configurations using a unique string identifier.
@@ -23468,7 +23827,7 @@ export type HyperdriveResultInfo = {
  * @example allow
  * @x-auditable true
  */
-export type IamAccess = 'allow' | 'deny';
+export type IamAccess = "allow" | "deny";
 
 export type IamAccount = {
   /**
@@ -23582,17 +23941,19 @@ export type IamCidrList = string[];
  */
 export type IamCode = string;
 
-export type IamCollectionMemberResponseWithPolicies = IamApiResponseCollection & {
-  result?: IamMemberWithPolicies[];
-};
+export type IamCollectionMemberResponseWithPolicies =
+  IamApiResponseCollection & {
+    result?: IamMemberWithPolicies[];
+  };
 
 export type IamCollectionMembershipResponse = IamApiResponseCollection & {
   result?: IamMembership[];
 };
 
-export type IamCollectionMembershipResponseWithPolicies = IamApiResponseCollection & {
-  result?: IamMembershipWithPolicies[];
-};
+export type IamCollectionMembershipResponseWithPolicies =
+  IamApiResponseCollection & {
+    result?: IamMembershipWithPolicies[];
+  };
 
 export type IamCollectionOrganizationResponse = IamApiResponseCollection & {
   result?: IamOrganization[];
@@ -23632,7 +23993,7 @@ export type IamComponentsSchemasAccount = IamAccount;
  * @example member
  * @x-auditable true
  */
-export type IamComponentsSchemasStatus = 'member' | 'invited';
+export type IamComponentsSchemasStatus = "member" | "invited";
 
 export type IamCondition = {
   request_ip?: IamRequestIp;
@@ -23657,7 +24018,7 @@ export type IamCreateAccount = {
    * @example standard
    * @x-auditable true
    */
-  type: 'standard' | 'enterprise';
+  type: "standard" | "enterprise";
   /**
    * information related to the tenant unit, and optionally, an id of the unit to create the account on. see https://developers.cloudflare.com/tenant/how-to/manage-accounts/
    */
@@ -23682,7 +24043,7 @@ export type IamCreateMemberWithPolicies = {
    * @default pending
    * @x-auditable true
    */
-  status?: 'accepted' | 'pending';
+  status?: "accepted" | "pending";
 };
 
 export type IamCreateMemberWithRoles = {
@@ -23695,7 +24056,7 @@ export type IamCreateMemberWithRoles = {
    * @default pending
    * @x-auditable true
    */
-  status?: 'accepted' | 'pending';
+  status?: "accepted" | "pending";
 };
 
 /**
@@ -23785,7 +24146,7 @@ export type IamCreatedResourceGroupResponse = {
  * @example allow
  * @x-auditable true
  */
-export type IamEffect = 'allow' | 'deny';
+export type IamEffect = "allow" | "deny";
 
 /**
  * The contact email address of the user.
@@ -23963,7 +24324,7 @@ export type IamMemberWithPolicies = {
    * @example accepted
    * @x-auditable true
    */
-  status?: 'accepted' | 'pending';
+  status?: "accepted" | "pending";
   /**
    * Details of the user associated to the membership.
    */
@@ -24171,10 +24532,10 @@ export type IamPermissionsGroupResponseCollection = IamApiResponseCollection & {
      * Resources to which the Permission Group is scoped
      */
     scopes?: (
-      | 'com.cloudflare.api.account'
-      | 'com.cloudflare.api.account.zone'
-      | 'com.cloudflare.api.user'
-      | 'com.cloudflare.edge.r2.bucket'
+      | "com.cloudflare.api.account"
+      | "com.cloudflare.api.account.zone"
+      | "com.cloudflare.api.user"
+      | "com.cloudflare.edge.r2.bucket"
     )[];
   }[];
 };
@@ -24211,7 +24572,7 @@ export type IamRequestCreateResourceGroup = {
  * @example {"in":["123.123.123.0/24","2606:4700::/32"],"not_in":["123.123.123.100/24","2606:4700:4700::/48"]}
  */
 export type IamRequestIp = {
-  ['in']?: IamCidrList;
+  ["in"]?: IamCidrList;
   not_in?: IamCidrList;
 };
 
@@ -24432,7 +24793,7 @@ export type IamSchemasPermissions = string[];
  * @example accepted
  * @x-auditable true
  */
-export type IamSchemasStatus = 'accepted' | 'pending' | 'rejected';
+export type IamSchemasStatus = "accepted" | "pending" | "rejected";
 
 /**
  * A scope is a combination of scope objects which provides additional context.
@@ -24602,7 +24963,7 @@ export type IamTokenPolicies = IamPolicyWithPermissionGroupsAndResources[];
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type IamTokenStatus = 'active' | 'disabled' | 'expired';
+export type IamTokenStatus = "active" | "disabled" | "expired";
 
 export type IamTokenVerifyResponseSingleSegment = IamApiResponseSingle & {
   result?: {
@@ -24658,7 +25019,7 @@ export type IamUpdateMemberWithRoles = {
    * @example accepted
    * @x-auditable true
    */
-  status?: 'accepted' | 'pending';
+  status?: "accepted" | "pending";
   /**
    * Details of the user associated to the membership.
    */
@@ -24756,7 +25117,7 @@ export type IamUserGroupMember = {
    *
    * @example accepted
    */
-  status?: 'accepted' | 'pending';
+  status?: "accepted" | "pending";
 };
 
 /**
@@ -24822,7 +25183,7 @@ export type IamUserInvite = {
    * @example accepted
    * @x-auditable true
    */
-  status?: 'pending' | 'accepted' | 'rejected' | 'expired';
+  status?: "pending" | "accepted" | "rejected" | "expired";
 };
 
 /**
@@ -25159,7 +25520,12 @@ export type ImagesImageVariantDefinition = {
  * @example scale-down
  * @x-auditable true
  */
-export type ImagesImageVariantFit = 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
+export type ImagesImageVariantFit =
+  | "scale-down"
+  | "contain"
+  | "cover"
+  | "crop"
+  | "pad";
 
 /**
  * Maximum height in image pixels.
@@ -25233,7 +25599,7 @@ export type ImagesImageVariantResponse = {
  * @example none
  * @x-auditable true
  */
-export type ImagesImageVariantSchemasMetadata = 'keep' | 'copyright' | 'none';
+export type ImagesImageVariantSchemasMetadata = "keep" | "copyright" | "none";
 
 export type ImagesImageVariantSimpleResponse = ImagesApiResponseSingle & {
   result?: ImagesImageVariantResponse;
@@ -25255,7 +25621,11 @@ export type ImagesImageVariantWidth = number;
  * @example https://imagedelivery.net/MTt4OTd0b0w5aj/107b9558-dd06-4bbd-5fef-9c2c16bb7900/hero
  * @example https://imagedelivery.net/MTt4OTd0b0w5aj/107b9558-dd06-4bbd-5fef-9c2c16bb7900/original
  */
-export type ImagesImageVariants = (ImagesImageThumbnailUrl | ImagesImageHeroUrl | ImagesImageOriginalUrl)[];
+export type ImagesImageVariants = (
+  | ImagesImageThumbnailUrl
+  | ImagesImageHeroUrl
+  | ImagesImageOriginalUrl
+)[];
 
 export type ImagesImageVariantsResponse = {
   variants?: ImagesImageVariantPublicRequest;
@@ -25393,7 +25763,7 @@ export type InfraIPInfo = {
   };
 };
 
-export type InfraSortingDirection = 'asc' | 'desc';
+export type InfraSortingDirection = "asc" | "desc";
 
 export type InfraTarget = {
   /**
@@ -25514,13 +25884,14 @@ export type IntelSinkholesApiResponseCommon = {
 
 export type IntelSinkholesEmptyObjectResponse = Record<string, any>;
 
-export type IntelSinkholesGetSinkholesResponse = IntelSinkholesApiResponseCommon & {
-  /**
-   * @example {"account_tag":"233f45e61fd1f7e21e1e154ede4q2859","created_on":"2023-05-12T12:21:56.777653Z","description":"user specified description 1","id":1,"modified_on":"2023-06-18T03:13:34.123321Z","name":"sinkhole_1","r2_bucket":"my_bucket","r2_id":"<r2_id>"}
-   * @example {"account_tag":"233f45e61fd1f7e21e1e154ede4q2859","created_on":"2023-05-21T21:43:52.867525Z","description":"user specified description 2","id":2,"modified_on":"2023-06-28T18:46:18.764425Z","name":"sinkhole_1","r2_bucket":"my_bucket","r2_id":"<r2_id>"}
-   */
-  result?: IntelSinkholesSinkholeItem[];
-};
+export type IntelSinkholesGetSinkholesResponse =
+  IntelSinkholesApiResponseCommon & {
+    /**
+     * @example {"account_tag":"233f45e61fd1f7e21e1e154ede4q2859","created_on":"2023-05-12T12:21:56.777653Z","description":"user specified description 1","id":1,"modified_on":"2023-06-18T03:13:34.123321Z","name":"sinkhole_1","r2_bucket":"my_bucket","r2_id":"<r2_id>"}
+     * @example {"account_tag":"233f45e61fd1f7e21e1e154ede4q2859","created_on":"2023-05-21T21:43:52.867525Z","description":"user specified description 2","id":2,"modified_on":"2023-06-28T18:46:18.764425Z","name":"sinkhole_1","r2_bucket":"my_bucket","r2_id":"<r2_id>"}
+     */
+    result?: IntelSinkholesSinkholeItem[];
+  };
 
 /**
  * The unique identifier for the sinkhole
@@ -25600,7 +25971,11 @@ export type IntelAdditionalInformation = {
 export type IntelApiResponseCollection = {
   errors: IntelMessages;
   messages: IntelMessages;
-  result: Record<string, any> | (string | Record<string, any>)[] | string | null;
+  result:
+    | Record<string, any>
+    | (string | Record<string, any>)[]
+    | string
+    | null;
   /**
    * Whether the API call was successful.
    *
@@ -25682,9 +26057,10 @@ export type IntelAsnDescription = string;
  * @example hosting_provider
  * @x-auditable true
  */
-export type IntelAsnType = 'hosting_provider' | 'isp' | 'organization';
+export type IntelAsnType = "hosting_provider" | "isp" | "organization";
 
-export type IntelCategoriesWithSuperCategoryIdsExampleEmpty = IntelCategoryWithSuperCategoryId[];
+export type IntelCategoriesWithSuperCategoryIdsExampleEmpty =
+  IntelCategoryWithSuperCategoryId[];
 
 export type IntelCategoryWithSuperCategoryId = {
   /**
@@ -25720,9 +26096,10 @@ export type IntelComponentsSchemasResponse = IntelApiResponseCollection & {
   result?: IntelIpList[];
 };
 
-export type IntelComponentsSchemasSingleResponse = IntelSchemasApiResponseCollection & {
-  result?: IntelPassiveDnsByIp;
-};
+export type IntelComponentsSchemasSingleResponse =
+  IntelSchemasApiResponseCollection & {
+    result?: IntelPassiveDnsByIp;
+  };
 
 /**
  * @example {"id":155,"name":"Technology","super_category_id":26}
@@ -25809,7 +26186,8 @@ export type IntelDomainName = string;
  */
 export type IntelIdentifier = string;
 
-export type IntelInheritedContentCategories = IntelCategoriesWithSuperCategoryIdsExampleEmpty;
+export type IntelInheritedContentCategories =
+  IntelCategoriesWithSuperCategoryIdsExampleEmpty;
 
 /**
  * Domain from which `inherited_content_categories` and `inherited_risk_types` are inherited, if applicable.
@@ -25818,7 +26196,8 @@ export type IntelInheritedContentCategories = IntelCategoriesWithSuperCategoryId
  */
 export type IntelInheritedFrom = string;
 
-export type IntelInheritedRiskTypes = IntelCategoriesWithSuperCategoryIdsExampleEmpty;
+export type IntelInheritedRiskTypes =
+  IntelCategoriesWithSuperCategoryIdsExampleEmpty;
 
 /**
  * @x-auditable true
@@ -25880,7 +26259,7 @@ export type IntelMiscategorization = {
    * @example domain
    * @x-auditable true
    */
-  indicator_type?: 'domain' | 'ipv4' | 'ipv6' | 'url';
+  indicator_type?: "domain" | "ipv4" | "ipv6" | "url";
   /**
    * Provide only if indicator_type is `ipv4` or `ipv6`.
    *
@@ -26080,9 +26459,10 @@ export type IntelPhishingUrlInfo = {
   url?: string;
 };
 
-export type IntelPhishingUrlInfoComponentsSchemasSingleResponse = IntelApiResponseSingle & {
-  result?: IntelPhishingUrlInfo;
-};
+export type IntelPhishingUrlInfoComponentsSchemasSingleResponse =
+  IntelApiResponseSingle & {
+    result?: IntelPhishingUrlInfo;
+  };
 
 export type IntelPhishingUrlSubmit = {
   /**
@@ -26137,9 +26517,10 @@ export type IntelPhishingUrlSubmit = {
   }[];
 };
 
-export type IntelPhishingUrlSubmitComponentsSchemasSingleResponse = IntelApiResponseSingle & {
-  result?: IntelPhishingUrlSubmit;
-};
+export type IntelPhishingUrlSubmitComponentsSchemasSingleResponse =
+  IntelApiResponseSingle & {
+    result?: IntelPhishingUrlSubmit;
+  };
 
 /**
  * Global Cloudflare 100k ranking for the last 30 days, if available for the hostname. The top ranked domain is 1, the lowest ranked domain is 100,000.
@@ -26202,9 +26583,10 @@ export type IntelRiskScore = number;
 
 export type IntelRiskTypes = IntelCategoriesWithSuperCategoryIdsExampleEmpty;
 
-export type IntelSchemasApiResponseCollection = IntelSchemasApiResponseCommon & {
-  result_info?: IntelSchemasResultInfo;
-};
+export type IntelSchemasApiResponseCollection =
+  IntelSchemasApiResponseCommon & {
+    result_info?: IntelSchemasResultInfo;
+  };
 
 export type IntelSchemasApiResponseCommon = {
   errors: IntelSchemasMessages;
@@ -26258,7 +26640,7 @@ export type IntelSchemasIp = {
      * @example hosting_provider
      * @x-auditable true
      */
-    type?: 'hosting_provider' | 'isp' | 'organization';
+    type?: "hosting_provider" | "isp" | "organization";
     /**
      * @x-auditable true
      */
@@ -26637,7 +27019,7 @@ export type ListsItemsUpdateRequestCollection = {
  *
  * @example ip
  */
-export type ListsKind = 'ip' | 'redirect' | 'hostname' | 'asn';
+export type ListsKind = "ip" | "redirect" | "hostname" | "asn";
 
 export type ListsList = {
   created_on?: ListsCreatedOn;
@@ -26762,7 +27144,7 @@ export type ListsOperation = {
    * @example failed
    * @x-auditable true
    */
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  status: "pending" | "running" | "completed" | "failed";
 };
 
 /**
@@ -26829,9 +27211,10 @@ export type LoadBalancingAnalytics = {
   timestamp?: string;
 };
 
-export type LoadBalancingApiPaginatedResponseCollection = LoadBalancingApiResponseCommon & {
-  result_info?: LoadBalancingResultInfo;
-};
+export type LoadBalancingApiPaginatedResponseCollection =
+  LoadBalancingApiResponseCommon & {
+    result_info?: LoadBalancingResultInfo;
+  };
 
 export type LoadBalancingApiResponseCommon = {
   errors: LoadBalancingMessages;
@@ -26872,20 +27255,20 @@ export type LoadBalancingApiResponseSingle = LoadBalancingApiResponseCommon & {
  */
 export type LoadBalancingCheckRegions =
   | (
-      | 'WNAM'
-      | 'ENAM'
-      | 'WEU'
-      | 'EEU'
-      | 'NSAM'
-      | 'SSAM'
-      | 'OC'
-      | 'ME'
-      | 'NAF'
-      | 'SAF'
-      | 'SAS'
-      | 'SEAS'
-      | 'NEAS'
-      | 'ALL_REGIONS'
+      | "WNAM"
+      | "ENAM"
+      | "WEU"
+      | "EEU"
+      | "NSAM"
+      | "SSAM"
+      | "OC"
+      | "ME"
+      | "NAF"
+      | "SAF"
+      | "SAS"
+      | "SEAS"
+      | "NEAS"
+      | "ALL_REGIONS"
     )[]
   | null;
 
@@ -26906,11 +27289,12 @@ export type LoadBalancingComponentsSchemasDescription = string;
  */
 export type LoadBalancingComponentsSchemasEnabled = boolean;
 
-export type LoadBalancingComponentsSchemasIdResponse = LoadBalancingApiResponseSingle & {
-  result?: {
-    id?: LoadBalancingLoadBalancerComponentsSchemasIdentifier;
+export type LoadBalancingComponentsSchemasIdResponse =
+  LoadBalancingApiResponseSingle & {
+    result?: {
+      id?: LoadBalancingLoadBalancerComponentsSchemasIdentifier;
+    };
   };
-};
 
 /**
  * Identifier
@@ -26929,18 +27313,20 @@ export type LoadBalancingComponentsSchemasIdentifier = string;
  */
 export type LoadBalancingComponentsSchemasName = string;
 
-export type LoadBalancingComponentsSchemasResponseCollection = LoadBalancingApiPaginatedResponseCollection & {
-  result?: LoadBalancingAnalytics[];
-};
+export type LoadBalancingComponentsSchemasResponseCollection =
+  LoadBalancingApiPaginatedResponseCollection & {
+    result?: LoadBalancingAnalytics[];
+  };
 
-export type LoadBalancingComponentsSchemasSingleResponse = LoadBalancingApiResponseSingle & {
-  /**
-   * A list of countries and subdivisions mapped to a region.
-   *
-   * @example {"iso_standard":"Country and subdivision codes follow ISO 3166-1 alpha-2 and ISO 3166-2","regions":[{"countries":[{"country_code_a2":"CA","country_name":"Canada","country_subdivisions":[{"subdivision_code_a2":"AB","subdivision_name":"Alberta"},{"subdivision_code_a2":"BC","subdivision_name":"British Columbia"}]},{"country_code_a2":"HT","country_name":"Haiti"},{"country_code_a2":"MX","country_name":"Mexico"},{"country_code_a2":"US","country_name":"United States","country_subdivisions":[{"subdivision_code_a2":"AZ","subdivision_name":"Arizona"},{"subdivision_code_a2":"CA","subdivision_name":"California"},{"subdivision_code_a2":"CO","subdivision_name":"Colorado"},{"subdivision_code_a2":"HI","subdivision_name":"Hawaii"},{"subdivision_code_a2":"MN","subdivision_name":"Minnesota"},{"subdivision_code_a2":"MO","subdivision_name":"Missouri"},{"subdivision_code_a2":"NV","subdivision_name":"Nevada"},{"subdivision_code_a2":"OR","subdivision_name":"Oregon"},{"subdivision_code_a2":"TX","subdivision_name":"Texas"},{"subdivision_code_a2":"UT","subdivision_name":"Utah"},{"subdivision_code_a2":"WA","subdivision_name":"Washington"}]}],"region_code":"WNAM"}]}
-   */
-  result?: Record<string, any>;
-};
+export type LoadBalancingComponentsSchemasSingleResponse =
+  LoadBalancingApiResponseSingle & {
+    /**
+     * A list of countries and subdivisions mapped to a region.
+     *
+     * @example {"iso_standard":"Country and subdivision codes follow ISO 3166-1 alpha-2 and ISO 3166-2","regions":[{"countries":[{"country_code_a2":"CA","country_name":"Canada","country_subdivisions":[{"subdivision_code_a2":"AB","subdivision_name":"Alberta"},{"subdivision_code_a2":"BC","subdivision_name":"British Columbia"}]},{"country_code_a2":"HT","country_name":"Haiti"},{"country_code_a2":"MX","country_name":"Mexico"},{"country_code_a2":"US","country_name":"United States","country_subdivisions":[{"subdivision_code_a2":"AZ","subdivision_name":"Arizona"},{"subdivision_code_a2":"CA","subdivision_name":"California"},{"subdivision_code_a2":"CO","subdivision_name":"Colorado"},{"subdivision_code_a2":"HI","subdivision_name":"Hawaii"},{"subdivision_code_a2":"MN","subdivision_name":"Minnesota"},{"subdivision_code_a2":"MO","subdivision_name":"Missouri"},{"subdivision_code_a2":"NV","subdivision_name":"Nevada"},{"subdivision_code_a2":"OR","subdivision_name":"Oregon"},{"subdivision_code_a2":"TX","subdivision_name":"Texas"},{"subdivision_code_a2":"UT","subdivision_name":"Utah"},{"subdivision_code_a2":"WA","subdivision_name":"Washington"}]}],"region_code":"WNAM"}]}
+     */
+    result?: Record<string, any>;
+  };
 
 /**
  * @example example.com
@@ -27161,9 +27547,10 @@ export type LoadBalancingLoadBalancerComponentsSchemasResponseCollection =
     result?: LoadBalancingLoadBalancer[];
   };
 
-export type LoadBalancingLoadBalancerComponentsSchemasSingleResponse = LoadBalancingApiResponseSingle & {
-  result?: LoadBalancingLoadBalancer;
-};
+export type LoadBalancingLoadBalancerComponentsSchemasSingleResponse =
+  LoadBalancingApiResponseSingle & {
+    result?: LoadBalancingLoadBalancer;
+  };
 
 /**
  * Configures load shedding policies and percentages for the pool.
@@ -27184,7 +27571,7 @@ export type LoadBalancingLoadShedding = {
    * @default random
    * @x-auditable true
    */
-  default_policy?: 'random' | 'hash';
+  default_policy?: "random" | "hash";
   /**
    * The percent of existing sessions to shed from the pool, according to the session policy.
    *
@@ -27200,7 +27587,7 @@ export type LoadBalancingLoadShedding = {
    * @default hash
    * @x-auditable true
    */
-  session_policy?: 'hash';
+  session_policy?: "hash";
 };
 
 /**
@@ -27216,7 +27603,7 @@ export type LoadBalancingLocationStrategy = {
    * @example resolver_ip
    * @x-auditable true
    */
-  mode?: 'pop' | 'resolver_ip';
+  mode?: "pop" | "resolver_ip";
   /**
    * Whether the EDNS Client Subnet (ECS) GeoIP should be preferred as the authoritative location.
    * - `"always"`: Always prefer ECS.
@@ -27228,7 +27615,7 @@ export type LoadBalancingLocationStrategy = {
    * @example always
    * @x-auditable true
    */
-  prefer_ecs?: 'always' | 'never' | 'proximity' | 'geo';
+  prefer_ecs?: "always" | "never" | "proximity" | "geo";
 };
 
 /**
@@ -27288,39 +27675,42 @@ export type LoadBalancingMonitorEditable = {
   type?: LoadBalancingType;
 };
 
-export type LoadBalancingMonitorReferencesResponse = LoadBalancingApiResponseCommon & {
-  /**
-   * List of resources that reference a given monitor.
-   *
-   * @example {"reference_type":"referrer","resource_id":"17b5962d775c646f3f9725cbc7a53df4","resource_name":"primary-dc-1","resource_type":"pool"}
-   */
-  result?: {
+export type LoadBalancingMonitorReferencesResponse =
+  LoadBalancingApiResponseCommon & {
     /**
-     * @x-auditable true
+     * List of resources that reference a given monitor.
+     *
+     * @example {"reference_type":"referrer","resource_id":"17b5962d775c646f3f9725cbc7a53df4","resource_name":"primary-dc-1","resource_type":"pool"}
      */
-    reference_type?: '*' | 'referral' | 'referrer';
-    /**
-     * @x-auditable true
-     */
-    resource_id?: string;
-    /**
-     * @x-auditable true
-     */
-    resource_name?: string;
-    /**
-     * @x-auditable true
-     */
-    resource_type?: string;
-  }[];
-};
+    result?: {
+      /**
+       * @x-auditable true
+       */
+      reference_type?: "*" | "referral" | "referrer";
+      /**
+       * @x-auditable true
+       */
+      resource_id?: string;
+      /**
+       * @x-auditable true
+       */
+      resource_name?: string;
+      /**
+       * @x-auditable true
+       */
+      resource_type?: string;
+    }[];
+  };
 
-export type LoadBalancingMonitorResponseCollection = LoadBalancingApiPaginatedResponseCollection & {
-  result?: LoadBalancingMonitor[];
-};
+export type LoadBalancingMonitorResponseCollection =
+  LoadBalancingApiPaginatedResponseCollection & {
+    result?: LoadBalancingMonitor[];
+  };
 
-export type LoadBalancingMonitorResponseSingle = LoadBalancingApiResponseSingle & {
-  result?: LoadBalancingMonitor;
-};
+export type LoadBalancingMonitorResponseSingle =
+  LoadBalancingApiResponseSingle & {
+    result?: LoadBalancingMonitor;
+  };
 
 /**
  * The ID of the Monitor to use for checking the health of origins within this pool.
@@ -27491,7 +27881,11 @@ export type LoadBalancingOriginSteering = {
    * @default random
    * @x-auditable true
    */
-  policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
+  policy?:
+    | "random"
+    | "hash"
+    | "least_outstanding_requests"
+    | "least_connections";
 };
 
 /**
@@ -27504,7 +27898,7 @@ export type LoadBalancingOrigins = LoadBalancingOrigin[];
  *
  * @example
  */
-export type LoadBalancingPatchPoolsNotificationEmail = '';
+export type LoadBalancingPatchPoolsNotificationEmail = "";
 
 /**
  * The endpoint path you want to conduct a health check against. This parameter is only valid for HTTP and HTTPS monitors.
@@ -27544,32 +27938,33 @@ export type LoadBalancingPool = {
  */
 export type LoadBalancingPoolName = string;
 
-export type LoadBalancingPoolsReferencesResponse = LoadBalancingApiResponseCommon & {
-  /**
-   * List of resources that reference a given pool.
-   *
-   * @example {"reference_type":"referrer","resource_id":"699d98642c564d2e855e9661899b7252","resource_name":"www.example.com","resource_type":"load_balancer"}
-   * @example {"reference_type":"referral","resource_id":"f1aba936b94213e5b8dca0c0dbf1f9cc","resource_name":"Login page monitor","resource_type":"monitor"}
-   */
-  result?: {
+export type LoadBalancingPoolsReferencesResponse =
+  LoadBalancingApiResponseCommon & {
     /**
-     * @x-auditable true
+     * List of resources that reference a given pool.
+     *
+     * @example {"reference_type":"referrer","resource_id":"699d98642c564d2e855e9661899b7252","resource_name":"www.example.com","resource_type":"load_balancer"}
+     * @example {"reference_type":"referral","resource_id":"f1aba936b94213e5b8dca0c0dbf1f9cc","resource_name":"Login page monitor","resource_type":"monitor"}
      */
-    reference_type?: '*' | 'referral' | 'referrer';
-    /**
-     * @x-auditable true
-     */
-    resource_id?: string;
-    /**
-     * @x-auditable true
-     */
-    resource_name?: string;
-    /**
-     * @x-auditable true
-     */
-    resource_type?: string;
-  }[];
-};
+    result?: {
+      /**
+       * @x-auditable true
+       */
+      reference_type?: "*" | "referral" | "referrer";
+      /**
+       * @x-auditable true
+       */
+      resource_id?: string;
+      /**
+       * @x-auditable true
+       */
+      resource_name?: string;
+      /**
+       * @x-auditable true
+       */
+      resource_type?: string;
+    }[];
+  };
 
 /**
  * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any PoPs not explicitly defined will fall back to using the corresponding country_pool, then region_pool mapping if it exists else to default_pools.
@@ -27624,9 +28019,10 @@ export type LoadBalancingPreviewResult = {
   };
 };
 
-export type LoadBalancingPreviewResultResponse = LoadBalancingApiResponseSingle & {
-  result?: LoadBalancingPreviewResult;
-};
+export type LoadBalancingPreviewResultResponse =
+  LoadBalancingApiResponseSingle & {
+    result?: LoadBalancingPreviewResult;
+  };
 
 /**
  * Assign this monitor to emulate the specified zone while probing. This parameter is only valid for HTTP and HTTPS monitors.
@@ -27679,23 +28075,24 @@ export type LoadBalancingRandomSteering = {
  * @example WNAM
  */
 export type LoadBalancingRegionCode =
-  | 'WNAM'
-  | 'ENAM'
-  | 'WEU'
-  | 'EEU'
-  | 'NSAM'
-  | 'SSAM'
-  | 'OC'
-  | 'ME'
-  | 'NAF'
-  | 'SAF'
-  | 'SAS'
-  | 'SEAS'
-  | 'NEAS';
+  | "WNAM"
+  | "ENAM"
+  | "WEU"
+  | "EEU"
+  | "NSAM"
+  | "SSAM"
+  | "OC"
+  | "ME"
+  | "NAF"
+  | "SAF"
+  | "SAS"
+  | "SEAS"
+  | "NEAS";
 
-export type LoadBalancingRegionComponentsSchemasResponseCollection = LoadBalancingApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type LoadBalancingRegionComponentsSchemasResponseCollection =
+  LoadBalancingApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * A mapping of region codes to a list of pool IDs (ordered by their failover priority) for the given region. Any regions not explicitly defined will fall back to using default_pools.
@@ -27715,7 +28112,7 @@ export type LoadBalancingResourceReference = {
    *
    * @x-auditable true
    */
-  reference_type?: 'referral' | 'referrer';
+  reference_type?: "referral" | "referrer";
   /**
    * A list of references to (referrer) or from (referral) this resource.
    *
@@ -27740,7 +28137,7 @@ export type LoadBalancingResourceReference = {
    * @example pool
    * @x-auditable true
    */
-  resource_type?: 'load_balancer' | 'monitor' | 'pool';
+  resource_type?: "load_balancer" | "monitor" | "pool";
 };
 
 export type LoadBalancingResultInfo = {
@@ -27936,13 +28333,15 @@ export type LoadBalancingSchemasName = string;
  */
 export type LoadBalancingSchemasPreviewId = string;
 
-export type LoadBalancingSchemasResponseCollection = LoadBalancingApiPaginatedResponseCollection & {
-  result?: LoadBalancingPool[];
-};
+export type LoadBalancingSchemasResponseCollection =
+  LoadBalancingApiPaginatedResponseCollection & {
+    result?: LoadBalancingPool[];
+  };
 
-export type LoadBalancingSchemasSingleResponse = LoadBalancingApiResponseSingle & {
-  result?: LoadBalancingPool;
-};
+export type LoadBalancingSchemasSingleResponse =
+  LoadBalancingApiResponseSingle & {
+    result?: LoadBalancingPool;
+  };
 
 export type LoadBalancingSearch = {
   /**
@@ -27965,7 +28364,11 @@ export type LoadBalancingSearchResult = {
  * @example cookie
  * @x-auditable true
  */
-export type LoadBalancingSessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header';
+export type LoadBalancingSessionAffinity =
+  | "none"
+  | "cookie"
+  | "ip_cookie"
+  | "header";
 
 /**
  * Configures attributes for session affinity.
@@ -28001,7 +28404,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    * @example Auto
    * @x-auditable true
    */
-  samesite?: 'Auto' | 'Lax' | 'None' | 'Strict';
+  samesite?: "Auto" | "Lax" | "None" | "Strict";
   /**
    * Configures the Secure attribute on session affinity cookie. Value "Always" indicates the Secure attribute will be set in the Set-Cookie header, "Never" indicates the Secure attribute will not be set, and "Auto" will set the Secure attribute depending if Always Use HTTPS is enabled.
    *
@@ -28009,7 +28412,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    * @example Auto
    * @x-auditable true
    */
-  secure?: 'Auto' | 'Always' | 'Never';
+  secure?: "Auto" | "Always" | "Never";
   /**
    * Configures the zero-downtime failover between origins within a pool when session affinity is enabled. This feature is currently incompatible with Argo, Tiered Cache, and Bandwidth Alliance. The supported values are:
    * - `"none"`: No failover takes place for sessions pinned to the origin (default).
@@ -28020,7 +28423,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    * @example sticky
    * @x-auditable true
    */
-  zero_downtime_failover?: 'none' | 'temporary' | 'sticky';
+  zero_downtime_failover?: "none" | "temporary" | "sticky";
 };
 
 /**
@@ -28049,14 +28452,14 @@ export type LoadBalancingSessionAffinityTtl = number;
  * @x-auditable true
  */
 export type LoadBalancingSteeringPolicy =
-  | 'off'
-  | 'geo'
-  | 'random'
-  | 'dynamic_latency'
-  | 'proximity'
-  | 'least_outstanding_requests'
-  | 'least_connections'
-  | '';
+  | "off"
+  | "geo"
+  | "random"
+  | "dynamic_latency"
+  | "proximity"
+  | "least_outstanding_requests"
+  | "least_connections"
+  | "";
 
 /**
  * Two-letter subdivision code followed in ISO 3166-2.
@@ -28096,7 +28499,13 @@ export type LoadBalancingTtl = number;
  * @example https
  * @x-auditable true
  */
-export type LoadBalancingType = 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
+export type LoadBalancingType =
+  | "http"
+  | "https"
+  | "tcp"
+  | "udp_icmp"
+  | "icmp_ping"
+  | "smtp";
 
 /**
  * End date and time of requesting data period in the ISO8601 format.
@@ -28216,9 +28625,10 @@ export type LogcontrolRetentionFlag = {
   flag?: LogcontrolFlag;
 } | null;
 
-export type LogcontrolRetentionFlagResponseSingle = LogcontrolApiResponseSingle & {
-  result?: LogcontrolRetentionFlag;
-};
+export type LogcontrolRetentionFlagResponseSingle =
+  LogcontrolApiResponseSingle & {
+    result?: LogcontrolRetentionFlag;
+  };
 
 export type LogcontrolZoneIdentifier = LogcontrolIdentifier;
 
@@ -28259,30 +28669,30 @@ export type LogpushApiResponseSingle = LogpushApiResponseCommon;
  * @x-auditable true
  */
 export type LogpushDataset =
-  | 'access_requests'
-  | 'audit_logs'
-  | 'biso_user_actions'
-  | 'casb_findings'
-  | 'device_posture_results'
-  | 'dlp_forensic_copies'
-  | 'dns_firewall_logs'
-  | 'dns_logs'
-  | 'email_security_alerts'
-  | 'firewall_events'
-  | 'gateway_dns'
-  | 'gateway_http'
-  | 'gateway_network'
-  | 'http_requests'
-  | 'magic_ids_detections'
-  | 'nel_reports'
-  | 'network_analytics_logs'
-  | 'page_shield_events'
-  | 'sinkhole_http_logs'
-  | 'spectrum_events'
-  | 'ssh_logs'
-  | 'workers_trace_events'
-  | 'zaraz_events'
-  | 'zero_trust_network_sessions'
+  | "access_requests"
+  | "audit_logs"
+  | "biso_user_actions"
+  | "casb_findings"
+  | "device_posture_results"
+  | "dlp_forensic_copies"
+  | "dns_firewall_logs"
+  | "dns_logs"
+  | "email_security_alerts"
+  | "firewall_events"
+  | "gateway_dns"
+  | "gateway_http"
+  | "gateway_network"
+  | "http_requests"
+  | "magic_ids_detections"
+  | "nel_reports"
+  | "network_analytics_logs"
+  | "page_shield_events"
+  | "sinkhole_http_logs"
+  | "spectrum_events"
+  | "ssh_logs"
+  | "workers_trace_events"
+  | "zaraz_events"
+  | "zero_trust_network_sessions"
   | null;
 
 /**
@@ -28342,7 +28752,7 @@ export type LogpushFilter = string | null;
  * @example high
  * @x-auditable true
  */
-export type LogpushFrequency = 'high' | 'low' | null;
+export type LogpushFrequency = "high" | "low" | null;
 
 export type LogpushGetOwnershipResponse = LogpushApiResponseCommon & {
   result?: {
@@ -28389,9 +28799,10 @@ export type LogpushInstantLogsJob = {
   session_id?: LogpushSessionId;
 } | null;
 
-export type LogpushInstantLogsJobResponseCollection = LogpushApiResponseCommon & {
-  result?: LogpushInstantLogsJob[];
-};
+export type LogpushInstantLogsJobResponseCollection =
+  LogpushApiResponseCommon & {
+    result?: LogpushInstantLogsJob[];
+  };
 
 export type LogpushInstantLogsJobResponseSingle = LogpushApiResponseSingle & {
   result?: LogpushInstantLogsJob;
@@ -28405,7 +28816,7 @@ export type LogpushInstantLogsJobResponseSingle = LogpushApiResponseSingle & {
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type LogpushKind = '' | 'edge';
+export type LogpushKind = "" | "edge";
 
 /**
  * Records the last time for which logs have been successfully pushed. If the last successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z then the value of this field will be 2018-07-23T10:01:00Z. If the job has never run or has just been enabled and hasn't run yet then the field will be empty.
@@ -28522,7 +28933,7 @@ export type LogpushOutputOptions = {
    * @default false
    * @x-auditable true
    */
-  ['CVE-2021-44228']?: boolean | null;
+  ["CVE-2021-44228"]?: boolean | null;
   /**
    * String to be prepended before each batch.
    *
@@ -28556,7 +28967,7 @@ export type LogpushOutputOptions = {
    * @example ndjson
    * @x-auditable true
    */
-  output_type?: 'ndjson' | 'csv';
+  output_type?: "ndjson" | "csv";
   /**
    * String to be inserted in-between the records as separator.
    *
@@ -28597,7 +29008,7 @@ export type LogpushOutputOptions = {
    * @default unixnano
    * @x-auditable true
    */
-  timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
+  timestamp_format?: "unixnano" | "unix" | "rfc3339";
 } | null;
 
 /**
@@ -28774,7 +29185,7 @@ export type LogshareStart = string | number;
  * @example unixnano
  * @x-auditable true
  */
-export type LogshareTimestamps = 'unix' | 'unixnano' | 'rfc3339';
+export type LogshareTimestamps = "unix" | "unixnano" | "rfc3339";
 
 export type LogshareZoneIdentifier = LogshareIdentifier;
 
@@ -28864,11 +29275,11 @@ export type MagicTransitColos = string[];
  * @example
  */
 export type MagicTransitError =
-  | ''
-  | 'Could not gather traceroute data: Code 1'
-  | 'Could not gather traceroute data: Code 2'
-  | 'Could not gather traceroute data: Code 3'
-  | 'Could not gather traceroute data: Code 4';
+  | ""
+  | "Could not gather traceroute data: Code 1"
+  | "Could not gather traceroute data: Code 2"
+  | "Could not gather traceroute data: Code 3"
+  | "Could not gather traceroute data: Code 4";
 
 export type MagicTransitHopResult = {
   /**
@@ -28972,7 +29383,12 @@ export type MagicTransitPacketCount = number;
  * @default icmp
  * @example icmp
  */
-export type MagicTransitPacketType = 'icmp' | 'tcp' | 'udp' | 'gre' | 'gre+icmp';
+export type MagicTransitPacketType =
+  | "icmp"
+  | "tcp"
+  | "udp"
+  | "gre"
+  | "gre+icmp";
 
 /**
  * Number of packets where no response was received.
@@ -29038,9 +29454,10 @@ export type MagicTransitTargetSummary = Record<string, any>;
  */
 export type MagicTransitTargets = string[];
 
-export type MagicTransitTracerouteResponseCollection = MagicTransitApiResponseCollection & {
-  result?: MagicTransitTargetResult[];
-};
+export type MagicTransitTracerouteResponseCollection =
+  MagicTransitApiResponseCollection & {
+    result?: MagicTransitTargetResult[];
+  };
 
 /**
  * Total time of traceroute in ms.
@@ -29155,11 +29572,13 @@ export type MagicVisibilityMnmMnmConfigName = string;
  */
 export type MagicVisibilityMnmMnmConfigRouterIp = string;
 
-export type MagicVisibilityMnmMnmConfigRouterIps = MagicVisibilityMnmMnmConfigRouterIp[];
+export type MagicVisibilityMnmMnmConfigRouterIps =
+  MagicVisibilityMnmMnmConfigRouterIp[];
 
-export type MagicVisibilityMnmMnmConfigSingleResponse = MagicVisibilityMnmApiResponseSingle & {
-  result?: MagicVisibilityMnmMnmConfig;
-};
+export type MagicVisibilityMnmMnmConfigSingleResponse =
+  MagicVisibilityMnmApiResponseSingle & {
+    result?: MagicVisibilityMnmMnmConfig;
+  };
 
 /**
  * Object representing a warp device with an ID and name.
@@ -29188,7 +29607,8 @@ export type MagicVisibilityMnmMnmConfigWarpDevice = {
   router_ip: string;
 };
 
-export type MagicVisibilityMnmMnmConfigWarpDevices = MagicVisibilityMnmMnmConfigWarpDevice[];
+export type MagicVisibilityMnmMnmConfigWarpDevices =
+  MagicVisibilityMnmMnmConfigWarpDevice[];
 
 export type MagicVisibilityMnmMnmRule = {
   automatic_advertisement: MagicVisibilityMnmMnmRuleAutomaticAdvertisement;
@@ -29208,9 +29628,10 @@ export type MagicVisibilityMnmMnmRuleAdvertisableResponse = {
   automatic_advertisement: MagicVisibilityMnmMnmRuleAutomaticAdvertisement;
 } | null;
 
-export type MagicVisibilityMnmMnmRuleAdvertisementSingleResponse = MagicVisibilityMnmApiResponseSingle & {
-  result?: MagicVisibilityMnmMnmRuleAdvertisableResponse;
-};
+export type MagicVisibilityMnmMnmRuleAdvertisementSingleResponse =
+  MagicVisibilityMnmApiResponseSingle & {
+    result?: MagicVisibilityMnmMnmRuleAdvertisableResponse;
+  };
 
 /**
  * Toggle on if you would like Cloudflare to automatically advertise the IP Prefixes within the rule via Magic Transit when the rule is triggered. Only available for users of Magic Transit.
@@ -29236,7 +29657,15 @@ export type MagicVisibilityMnmMnmRuleBandwidthThreshold = number;
  * @example 300s
  * @x-auditable true
  */
-export type MagicVisibilityMnmMnmRuleDuration = '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
+export type MagicVisibilityMnmMnmRuleDuration =
+  | "1m"
+  | "5m"
+  | "10m"
+  | "15m"
+  | "20m"
+  | "30m"
+  | "45m"
+  | "60m";
 
 /**
  * The IP prefixes that are monitored for this rule. Must be a CIDR range like 203.0.113.0/24. Max 5000 different CIDR ranges.
@@ -29246,7 +29675,8 @@ export type MagicVisibilityMnmMnmRuleDuration = '1m' | '5m' | '10m' | '15m' | '2
  */
 export type MagicVisibilityMnmMnmRuleIpPrefix = string;
 
-export type MagicVisibilityMnmMnmRuleIpPrefixes = MagicVisibilityMnmMnmRuleIpPrefix[];
+export type MagicVisibilityMnmMnmRuleIpPrefixes =
+  MagicVisibilityMnmMnmRuleIpPrefix[];
 
 /**
  * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9, underscore (_), dash (-), period (.), and tilde (~). You can’t have a space in the rule name. Max 256 characters.
@@ -29271,7 +29701,11 @@ export type MagicVisibilityMnmMnmRulePacketThreshold = number;
  * @example exact
  * @x-auditable true
  */
-export type MagicVisibilityMnmMnmRulePrefixMatch = 'exact' | 'subnet' | 'supernet' | null;
+export type MagicVisibilityMnmMnmRulePrefixMatch =
+  | "exact"
+  | "subnet"
+  | "supernet"
+  | null;
 
 /**
  * MNM rule type.
@@ -29279,7 +29713,10 @@ export type MagicVisibilityMnmMnmRulePrefixMatch = 'exact' | 'subnet' | 'superne
  * @example zscore
  * @x-auditable true
  */
-export type MagicVisibilityMnmMnmRuleType = 'threshold' | 'zscore' | 'advanced_ddos';
+export type MagicVisibilityMnmMnmRuleType =
+  | "threshold"
+  | "zscore"
+  | "advanced_ddos";
 
 /**
  * Level of sensitivity set for zscore rules.
@@ -29287,7 +29724,11 @@ export type MagicVisibilityMnmMnmRuleType = 'threshold' | 'zscore' | 'advanced_d
  * @example high
  * @x-auditable true
  */
-export type MagicVisibilityMnmMnmRuleZscoreSensitivity = 'low' | 'medium' | 'high' | null;
+export type MagicVisibilityMnmMnmRuleZscoreSensitivity =
+  | "low"
+  | "medium"
+  | "high"
+  | null;
 
 /**
  * Target of the zscore rule analysis.
@@ -29295,19 +29736,22 @@ export type MagicVisibilityMnmMnmRuleZscoreSensitivity = 'low' | 'medium' | 'hig
  * @example bits
  * @x-auditable true
  */
-export type MagicVisibilityMnmMnmRuleZscoreTarget = 'bits' | 'packets' | null;
+export type MagicVisibilityMnmMnmRuleZscoreTarget = "bits" | "packets" | null;
 
-export type MagicVisibilityMnmMnmRulesCollectionResponse = MagicVisibilityMnmApiResponseCollection & {
-  result?: MagicVisibilityMnmMnmRule[] | null;
-};
+export type MagicVisibilityMnmMnmRulesCollectionResponse =
+  MagicVisibilityMnmApiResponseCollection & {
+    result?: MagicVisibilityMnmMnmRule[] | null;
+  };
 
-export type MagicVisibilityMnmMnmRulesSingleResponse = MagicVisibilityMnmApiResponseSingle & {
-  result?: MagicVisibilityMnmMnmRule;
-};
+export type MagicVisibilityMnmMnmRulesSingleResponse =
+  MagicVisibilityMnmApiResponseSingle & {
+    result?: MagicVisibilityMnmMnmRule;
+  };
 
-export type MagicVisibilityMnmMnmVpcFlowsSingleResponse = MagicVisibilityMnmApiResponseSingle & {
-  result?: MagicVisibilityMnmMnmVpcFlowsToken;
-};
+export type MagicVisibilityMnmMnmVpcFlowsSingleResponse =
+  MagicVisibilityMnmApiResponseSingle & {
+    result?: MagicVisibilityMnmMnmVpcFlowsToken;
+  };
 
 /**
  * Authentication token to be used for VPC Flows export authentication.
@@ -29431,9 +29875,13 @@ export type MagicVisibilityPcapsMessages = {
  */
 export type MagicVisibilityPcapsPcapsByteLimit = number;
 
-export type MagicVisibilityPcapsPcapsCollectionResponse = MagicVisibilityPcapsApiResponseCollection & {
-  result?: (MagicVisibilityPcapsPcapsResponseSimple | MagicVisibilityPcapsPcapsResponseFull)[];
-};
+export type MagicVisibilityPcapsPcapsCollectionResponse =
+  MagicVisibilityPcapsApiResponseCollection & {
+    result?: (
+      | MagicVisibilityPcapsPcapsResponseSimple
+      | MagicVisibilityPcapsPcapsResponseFull
+    )[];
+  };
 
 /**
  * The name of the data center used for the packet capture. This can be a specific colo (ord02) or a multi-colo name (ORD). This field only applies to `full` packet captures.
@@ -29524,9 +29972,10 @@ export type MagicVisibilityPcapsPcapsOffsetTime = string;
  */
 export type MagicVisibilityPcapsPcapsOwnershipChallenge = string;
 
-export type MagicVisibilityPcapsPcapsOwnershipCollection = MagicVisibilityPcapsApiResponseCollection & {
-  result?: MagicVisibilityPcapsPcapsOwnershipResponse[] | null;
-};
+export type MagicVisibilityPcapsPcapsOwnershipCollection =
+  MagicVisibilityPcapsApiResponseCollection & {
+    result?: MagicVisibilityPcapsPcapsOwnershipResponse[] | null;
+  };
 
 export type MagicVisibilityPcapsPcapsOwnershipRequest = {
   destination_conf: MagicVisibilityPcapsPcapsDestinationConf;
@@ -29548,7 +29997,7 @@ export type MagicVisibilityPcapsPcapsOwnershipResponse = {
    *
    * @example success
    */
-  status: 'pending' | 'success' | 'failed';
+  status: "pending" | "success" | "failed";
   /**
    * The RFC 3339 timestamp when the bucket was added to packet captures API.
    *
@@ -29646,9 +30095,12 @@ export type MagicVisibilityPcapsPcapsResponseSimple = {
   type?: MagicVisibilityPcapsPcapsType;
 };
 
-export type MagicVisibilityPcapsPcapsSingleResponse = MagicVisibilityPcapsApiResponseSingle & {
-  result?: MagicVisibilityPcapsPcapsResponseSimple | MagicVisibilityPcapsPcapsResponseFull;
-};
+export type MagicVisibilityPcapsPcapsSingleResponse =
+  MagicVisibilityPcapsApiResponseSingle & {
+    result?:
+      | MagicVisibilityPcapsPcapsResponseSimple
+      | MagicVisibilityPcapsPcapsResponseFull;
+  };
 
 /**
  * The status of the packet capture request.
@@ -29656,14 +30108,14 @@ export type MagicVisibilityPcapsPcapsSingleResponse = MagicVisibilityPcapsApiRes
  * @example success
  */
 export type MagicVisibilityPcapsPcapsStatus =
-  | 'unknown'
-  | 'success'
-  | 'pending'
-  | 'running'
-  | 'conversion_pending'
-  | 'conversion_running'
-  | 'complete'
-  | 'failed';
+  | "unknown"
+  | "success"
+  | "pending"
+  | "running"
+  | "conversion_pending"
+  | "conversion_running"
+  | "complete"
+  | "failed";
 
 /**
  * The RFC 3339 timestamp when stopping the packet capture was requested. This field only applies to `full` packet captures.
@@ -29685,7 +30137,7 @@ export type MagicVisibilityPcapsPcapsSubmitted = string;
  * @example magic-transit
  * @x-auditable true
  */
-export type MagicVisibilityPcapsPcapsSystem = 'magic-transit';
+export type MagicVisibilityPcapsPcapsSystem = "magic-transit";
 
 /**
  * The packet capture duration in seconds.
@@ -29713,7 +30165,7 @@ export type MagicVisibilityPcapsPcapsTimeLimitSampled = number;
  * @example simple
  * @x-auditable true
  */
-export type MagicVisibilityPcapsPcapsType = 'simple' | 'full';
+export type MagicVisibilityPcapsPcapsType = "simple" | "full";
 
 export type MagicVisibilityPcapsResultInfo = {
   /**
@@ -29780,7 +30232,7 @@ export type MagicAcl = {
    * @example PIN Pad - Cash Register
    */
   name?: string;
-  protocols?: ('tcp' | 'udp' | 'icmp')[];
+  protocols?: ("tcp" | "udp" | "icmp")[];
   unidirectional?: MagicUnidirectional;
 };
 
@@ -29821,7 +30273,7 @@ export type MagicAclUpdateRequest = {
    * @example PIN Pad - Cash Register
    */
   name?: string;
-  protocols?: ('tcp' | 'udp' | 'icmp')[];
+  protocols?: ("tcp" | "udp" | "icmp")[];
   unidirectional?: MagicUnidirectional;
 };
 
@@ -29844,7 +30296,7 @@ export type MagicAclsAddSingleRequest = {
    * @example PIN Pad - Cash Register
    */
   name: string;
-  protocols?: ('tcp' | 'udp' | 'icmp')[];
+  protocols?: ("tcp" | "udp" | "icmp")[];
   unidirectional?: MagicUnidirectional;
 };
 
@@ -30148,15 +30600,16 @@ export type MagicColoRegions = MagicColoRegion[];
  */
 export type MagicComponentsSchemasDescription = string;
 
-export type MagicComponentsSchemasModifiedTunnelsCollectionResponse = MagicApiResponseSingle & {
-  result?: {
-    /**
-     * @example true
-     */
-    modified?: boolean;
-    modified_interconnects?: MagicInterconnect[];
+export type MagicComponentsSchemasModifiedTunnelsCollectionResponse =
+  MagicApiResponseSingle & {
+    result?: {
+      /**
+       * @example true
+       */
+      modified?: boolean;
+      modified_interconnects?: MagicInterconnect[];
+    };
   };
-};
 
 /**
  * The name of the interconnect. The name cannot share a name with other tunnels.
@@ -30165,27 +30618,30 @@ export type MagicComponentsSchemasModifiedTunnelsCollectionResponse = MagicApiRe
  */
 export type MagicComponentsSchemasName = string;
 
-export type MagicComponentsSchemasTunnelModifiedResponse = MagicApiResponseSingle & {
-  result?: {
-    /**
-     * @example true
-     */
-    modified?: boolean;
-    modified_interconnect?: MagicInterconnect;
+export type MagicComponentsSchemasTunnelModifiedResponse =
+  MagicApiResponseSingle & {
+    result?: {
+      /**
+       * @example true
+       */
+      modified?: boolean;
+      modified_interconnect?: MagicInterconnect;
+    };
   };
-};
 
-export type MagicComponentsSchemasTunnelSingleResponse = MagicApiResponseSingle & {
-  result?: {
-    interconnect?: MagicInterconnect;
+export type MagicComponentsSchemasTunnelSingleResponse =
+  MagicApiResponseSingle & {
+    result?: {
+      interconnect?: MagicInterconnect;
+    };
   };
-};
 
-export type MagicComponentsSchemasTunnelsCollectionResponse = MagicApiResponseSingle & {
-  result?: {
-    interconnects?: MagicInterconnect[];
+export type MagicComponentsSchemasTunnelsCollectionResponse =
+  MagicApiResponseSingle & {
+    result?: {
+      interconnects?: MagicInterconnect[];
+    };
   };
-};
 
 /**
  * Magic Connector identifier tag.
@@ -30323,7 +30779,7 @@ export type MagicHealthCheckBase = {
    * @example low
    * @x-auditable true
    */
-  rate?: 'low' | 'mid' | 'high';
+  rate?: "low" | "mid" | "high";
   /**
    * The destination address in a request type health check. After the healthcheck is decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded to this address. This field defaults to `customer_gre_endpoint address`. This field is ignored for bidirectional healthchecks as the interface_address (not assigned to the Cloudflare side of the tunnel) is used as the target. Must be in object form if the x-magic-new-hc-target header is set to true and string form if x-magic-new-hc-target is absent or set to false.
    */
@@ -30335,7 +30791,7 @@ export type MagicHealthCheckBase = {
    * @example request
    * @x-auditable true
    */
-  type?: 'reply' | 'request';
+  type?: "reply" | "request";
 };
 
 /**
@@ -30808,15 +31264,16 @@ export type MagicSchemasIdentifier = string;
  */
 export type MagicSchemasModifiedOn = string;
 
-export type MagicSchemasModifiedTunnelsCollectionResponse = MagicApiResponseSingle & {
-  result?: {
-    /**
-     * @example true
-     */
-    modified?: boolean;
-    modified_ipsec_tunnels?: MagicIpsecTunnel[];
+export type MagicSchemasModifiedTunnelsCollectionResponse =
+  MagicApiResponseSingle & {
+    result?: {
+      /**
+       * @example true
+       */
+      modified?: boolean;
+      modified_ipsec_tunnels?: MagicIpsecTunnel[];
+    };
   };
-};
 
 /**
  * The Maximum Transmission Unit (MTU) in bytes for the interconnect. The minimum value is 576.
@@ -30979,7 +31436,7 @@ export type MagicTunnelHealthCheck = MagicHealthCheckBase & {
    * @default unidirectional
    * @example bidirectional
    */
-  direction?: 'unidirectional' | 'bidirectional';
+  direction?: "unidirectional" | "bidirectional";
 };
 
 export type MagicTunnelModifiedResponse = MagicApiResponseSingle & {
@@ -31024,7 +31481,7 @@ export type MagicWan = {
    * @default mid
    * @example low
    */
-  health_check_rate?: 'low' | 'mid' | 'high';
+  health_check_rate?: "low" | "mid" | "high";
   id?: MagicIdentifier;
   name?: string;
   physport?: MagicPort;
@@ -31156,7 +31613,7 @@ export type McnCatalogSyncDestinationId = string;
 /**
  * @x-auditable true
  */
-export type McnCatalogSyncDestinationType = 'NONE' | 'ZERO_TRUST_LIST';
+export type McnCatalogSyncDestinationType = "NONE" | "ZERO_TRUST_LIST";
 
 /**
  * @format uuid
@@ -31166,7 +31623,7 @@ export type McnCatalogSyncId = string;
 /**
  * @x-auditable true
  */
-export type McnCatalogSyncUpdateMode = 'AUTO' | 'MANUAL';
+export type McnCatalogSyncUpdateMode = "AUTO" | "MANUAL";
 
 export type McnCatalogSyncsPrebuiltPoliciesResponse = McnGoodResponse & {
   result?: McnCatalogSyncsPrebuiltPolicy[];
@@ -31191,7 +31648,7 @@ export type McnCloudPlatformClient = {
   /**
    * @x-auditable true
    */
-  client_type: 'MAGIC_WAN_CLOUD_ONRAMP';
+  client_type: "MAGIC_WAN_CLOUD_ONRAMP";
   id: McnPlatformClientId;
   /**
    * @x-auditable true
@@ -31202,7 +31659,7 @@ export type McnCloudPlatformClient = {
 /**
  * @x-auditable true
  */
-export type McnCloudType = 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
+export type McnCloudType = "AWS" | "AZURE" | "GOOGLE" | "CLOUDFLARE";
 
 /**
  * @format uuid
@@ -31665,7 +32122,7 @@ export type McnOnramp = {
 /**
  * @x-auditable true
  */
-export type McnOnrampCloudType = 'AWS' | 'AZURE' | 'GOOGLE';
+export type McnOnrampCloudType = "AWS" | "AZURE" | "GOOGLE";
 
 /**
  * @format uuid
@@ -31677,18 +32134,18 @@ export type McnOnrampId = string;
  * @x-auditable true
  */
 export type McnOnrampLifecycleState =
-  | 'OnrampNeedsApply'
-  | 'OnrampPendingPlan'
-  | 'OnrampPlanning'
-  | 'OnrampPlanFailed'
-  | 'OnrampPendingApproval'
-  | 'OnrampPendingApply'
-  | 'OnrampApplying'
-  | 'OnrampApplyFailed'
-  | 'OnrampActive'
-  | 'OnrampPendingDestroy'
-  | 'OnrampDestroying'
-  | 'OnrampDestroyFailed';
+  | "OnrampNeedsApply"
+  | "OnrampPendingPlan"
+  | "OnrampPlanning"
+  | "OnrampPlanFailed"
+  | "OnrampPendingApproval"
+  | "OnrampPendingApply"
+  | "OnrampApplying"
+  | "OnrampApplyFailed"
+  | "OnrampActive"
+  | "OnrampPendingDestroy"
+  | "OnrampDestroying"
+  | "OnrampDestroyFailed";
 
 export type McnOnrampStatus = {
   apply_progress: McnApplyProgress;
@@ -31704,7 +32161,7 @@ export type McnOnrampStatus = {
 /**
  * @x-auditable true
  */
-export type McnOnrampType = 'OnrampTypeSingle' | 'OnrampTypeHub';
+export type McnOnrampType = "OnrampTypeSingle" | "OnrampTypeHub";
 
 export type McnOnrampWithAccount = McnOnramp & {
   account_id: McnAccountId;
@@ -31724,7 +32181,12 @@ export type McnPlanProgress = {
 /**
  * @x-auditable true
  */
-export type McnPlannedAction = 'no_op' | 'create' | 'update' | 'replace' | 'destroy';
+export type McnPlannedAction =
+  | "no_op"
+  | "create"
+  | "update"
+  | "replace"
+  | "destroy";
 
 /**
  * @format uuid
@@ -31787,7 +32249,12 @@ export type McnProviderDiscoveryProgress = {
 /**
  * @x-auditable true
  */
-export type McnProviderDiscoveryStatus = 'UNSPECIFIED' | 'PENDING' | 'DISCOVERING' | 'FAILED' | 'SUCCEEDED';
+export type McnProviderDiscoveryStatus =
+  | "UNSPECIFIED"
+  | "PENDING"
+  | "DISCOVERING"
+  | "FAILED"
+  | "SUCCEEDED";
 
 /**
  * @format uuid
@@ -31802,7 +32269,7 @@ export type McnProviderInitialSetupResponse = McnGoodResponse & {
 /**
  * @x-auditable true
  */
-export type McnProviderLifecycleState = 'ACTIVE' | 'PENDING_SETUP' | 'RETIRED';
+export type McnProviderLifecycleState = "ACTIVE" | "PENDING_SETUP" | "RETIRED";
 
 export type McnProviderStatus = {
   /**
@@ -31939,7 +32406,12 @@ export type McnResourceDetailsSection = {
 export type McnResourceDetailsSectionItem = {
   helpText?: string;
   name?: string;
-  value?: McnStringItem | McnYamlItem | McnYamlDiffItem | McnResourcePreviewItem | McnListItem;
+  value?:
+    | McnStringItem
+    | McnYamlItem
+    | McnYamlDiffItem
+    | McnResourcePreviewItem
+    | McnListItem;
 };
 
 export type McnResourceDiff = {
@@ -31977,63 +32449,63 @@ export type McnResourcePreviewItem = {
  * @x-auditable true
  */
 export type McnResourceType =
-  | 'aws_customer_gateway'
-  | 'aws_egress_only_internet_gateway'
-  | 'aws_internet_gateway'
-  | 'aws_instance'
-  | 'aws_network_interface'
-  | 'aws_route'
-  | 'aws_route_table'
-  | 'aws_route_table_association'
-  | 'aws_subnet'
-  | 'aws_vpc'
-  | 'aws_vpc_ipv4_cidr_block_association'
-  | 'aws_vpn_connection'
-  | 'aws_vpn_connection_route'
-  | 'aws_vpn_gateway'
-  | 'aws_security_group'
-  | 'aws_vpc_security_group_ingress_rule'
-  | 'aws_vpc_security_group_egress_rule'
-  | 'aws_ec2_managed_prefix_list'
-  | 'aws_ec2_transit_gateway'
-  | 'aws_ec2_transit_gateway_prefix_list_reference'
-  | 'aws_ec2_transit_gateway_vpc_attachment'
-  | 'azurerm_application_security_group'
-  | 'azurerm_lb'
-  | 'azurerm_lb_backend_address_pool'
-  | 'azurerm_lb_nat_pool'
-  | 'azurerm_lb_nat_rule'
-  | 'azurerm_lb_rule'
-  | 'azurerm_local_network_gateway'
-  | 'azurerm_network_interface'
-  | 'azurerm_network_interface_application_security_group_association'
-  | 'azurerm_network_interface_backend_address_pool_association'
-  | 'azurerm_network_interface_security_group_association'
-  | 'azurerm_network_security_group'
-  | 'azurerm_public_ip'
-  | 'azurerm_route'
-  | 'azurerm_route_table'
-  | 'azurerm_subnet'
-  | 'azurerm_subnet_route_table_association'
-  | 'azurerm_virtual_machine'
-  | 'azurerm_virtual_network_gateway_connection'
-  | 'azurerm_virtual_network'
-  | 'azurerm_virtual_network_gateway'
-  | 'google_compute_network'
-  | 'google_compute_subnetwork'
-  | 'google_compute_vpn_gateway'
-  | 'google_compute_vpn_tunnel'
-  | 'google_compute_route'
-  | 'google_compute_address'
-  | 'google_compute_global_address'
-  | 'google_compute_router'
-  | 'google_compute_interconnect_attachment'
-  | 'google_compute_ha_vpn_gateway'
-  | 'google_compute_forwarding_rule'
-  | 'google_compute_network_firewall_policy'
-  | 'google_compute_network_firewall_policy_rule'
-  | 'cloudflare_static_route'
-  | 'cloudflare_ipsec_tunnel';
+  | "aws_customer_gateway"
+  | "aws_egress_only_internet_gateway"
+  | "aws_internet_gateway"
+  | "aws_instance"
+  | "aws_network_interface"
+  | "aws_route"
+  | "aws_route_table"
+  | "aws_route_table_association"
+  | "aws_subnet"
+  | "aws_vpc"
+  | "aws_vpc_ipv4_cidr_block_association"
+  | "aws_vpn_connection"
+  | "aws_vpn_connection_route"
+  | "aws_vpn_gateway"
+  | "aws_security_group"
+  | "aws_vpc_security_group_ingress_rule"
+  | "aws_vpc_security_group_egress_rule"
+  | "aws_ec2_managed_prefix_list"
+  | "aws_ec2_transit_gateway"
+  | "aws_ec2_transit_gateway_prefix_list_reference"
+  | "aws_ec2_transit_gateway_vpc_attachment"
+  | "azurerm_application_security_group"
+  | "azurerm_lb"
+  | "azurerm_lb_backend_address_pool"
+  | "azurerm_lb_nat_pool"
+  | "azurerm_lb_nat_rule"
+  | "azurerm_lb_rule"
+  | "azurerm_local_network_gateway"
+  | "azurerm_network_interface"
+  | "azurerm_network_interface_application_security_group_association"
+  | "azurerm_network_interface_backend_address_pool_association"
+  | "azurerm_network_interface_security_group_association"
+  | "azurerm_network_security_group"
+  | "azurerm_public_ip"
+  | "azurerm_route"
+  | "azurerm_route_table"
+  | "azurerm_subnet"
+  | "azurerm_subnet_route_table_association"
+  | "azurerm_virtual_machine"
+  | "azurerm_virtual_network_gateway_connection"
+  | "azurerm_virtual_network"
+  | "azurerm_virtual_network_gateway"
+  | "google_compute_network"
+  | "google_compute_subnetwork"
+  | "google_compute_vpn_gateway"
+  | "google_compute_vpn_tunnel"
+  | "google_compute_route"
+  | "google_compute_address"
+  | "google_compute_global_address"
+  | "google_compute_router"
+  | "google_compute_interconnect_attachment"
+  | "google_compute_ha_vpn_gateway"
+  | "google_compute_forwarding_rule"
+  | "google_compute_network_firewall_policy"
+  | "google_compute_network_firewall_policy_rule"
+  | "cloudflare_static_route"
+  | "cloudflare_ipsec_tunnel";
 
 export type McnResourcesCatalogPolicyPreview = string;
 
@@ -32384,9 +32856,10 @@ export type MconnAdminMacrosDiagnoseConnectorResult = {
   site?: MconnAdminSite;
 };
 
-export type MconnAdminMacrosProvisionLicensedConnectorResponse = MconnGoodResponse & {
-  result?: MconnAdminMacrosProvisionLicensedConnectorResult;
-};
+export type MconnAdminMacrosProvisionLicensedConnectorResponse =
+  MconnGoodResponse & {
+    result?: MconnAdminMacrosProvisionLicensedConnectorResult;
+  };
 
 export type MconnAdminMacrosProvisionLicensedConnectorResult = {
   connector: MconnAdminConnector;
@@ -32394,9 +32867,10 @@ export type MconnAdminMacrosProvisionLicensedConnectorResult = {
   license_key: string;
 };
 
-export type MconnAdminMacrosProvisionPhysicalConnectorResponse = MconnGoodResponse & {
-  result?: MconnAdminMacrosProvisionPhysicalConnectorResult;
-};
+export type MconnAdminMacrosProvisionPhysicalConnectorResponse =
+  MconnGoodResponse & {
+    result?: MconnAdminMacrosProvisionPhysicalConnectorResult;
+  };
 
 export type MconnAdminMacrosProvisionPhysicalConnectorResult = {
   connector: MconnAdminConnector;
@@ -32497,11 +32971,13 @@ export type MconnControllerAttestationSession = {
   nonce: string;
 };
 
-export type MconnControllerBeginAttestationSessionResponse = MconnGoodResponse & {
-  result?: MconnControllerBeginAttestationSessionResult;
-};
+export type MconnControllerBeginAttestationSessionResponse =
+  MconnGoodResponse & {
+    result?: MconnControllerBeginAttestationSessionResult;
+  };
 
-export type MconnControllerBeginAttestationSessionResult = MconnControllerAttestationSession;
+export type MconnControllerBeginAttestationSessionResult =
+  MconnControllerAttestationSession;
 
 export type MconnControllerConnector = {
   account_id: MconnAccountId;
@@ -32549,7 +33025,8 @@ export type MconnControllerEndAttestationSessionResponse = MconnGoodResponse & {
   result?: MconnControllerEndAttestationSessionResult;
 };
 
-export type MconnControllerEndAttestationSessionResult = MconnControllerAttestationSession;
+export type MconnControllerEndAttestationSessionResult =
+  MconnControllerAttestationSession;
 
 export type MconnControllerFetchCloudflaredTokenResponse = MconnGoodResponse & {
   result?: MconnControllerFetchCloudflaredTokenResult;
@@ -32804,73 +33281,73 @@ export type MconnEvent =
       /**
        * Initialized process
        */
-      k: 'Init';
+      k: "Init";
     }
   | {
       /**
        * Stopped process
        */
-      k: 'Leave';
+      k: "Leave";
     }
   | {
       /**
        * Started attestation
        */
-      k: 'StartAttestation';
+      k: "StartAttestation";
     }
   | {
       /**
        * Finished attestation
        */
-      k: 'FinishAttestationSuccess';
+      k: "FinishAttestationSuccess";
     }
   | {
       /**
        * Failed attestation
        */
-      k: 'FinishAttestationFailure';
+      k: "FinishAttestationFailure";
     }
   | {
       /**
        * Started crypt key rotation
        */
-      k: 'StartRotateCryptKey';
+      k: "StartRotateCryptKey";
     }
   | {
       /**
        * Finished crypt key rotation
        */
-      k: 'FinishRotateCryptKeySuccess';
+      k: "FinishRotateCryptKeySuccess";
     }
   | {
       /**
        * Failed crypt key rotation
        */
-      k: 'FinishRotateCryptKeyFailure';
+      k: "FinishRotateCryptKeyFailure";
     }
   | {
       /**
        * Started PKI rotation
        */
-      k: 'StartRotatePki';
+      k: "StartRotatePki";
     }
   | {
       /**
        * Finished PKI rotation
        */
-      k: 'FinishRotatePkiSuccess';
+      k: "FinishRotatePkiSuccess";
     }
   | {
       /**
        * Failed PKI rotation
        */
-      k: 'FinishRotatePkiFailure';
+      k: "FinishRotatePkiFailure";
     }
   | {
       /**
        * Started upgrade
        */
-      k: 'StartUpgrade';
+      k: "StartUpgrade";
       /**
        * Location of upgrade bundle
        */
@@ -32880,25 +33357,25 @@ export type MconnEvent =
       /**
        * Finished upgrade
        */
-      k: 'FinishUpgradeSuccess';
+      k: "FinishUpgradeSuccess";
     }
   | {
       /**
        * Failed upgrade
        */
-      k: 'FinishUpgradeFailure';
+      k: "FinishUpgradeFailure";
     }
   | {
       /**
        * Reconciled
        */
-      k: 'Reconcile';
+      k: "Reconcile";
     }
   | {
       /**
        * Configured Cloudflared tunnel
        */
-      k: 'ConfigureCloudflaredTunnel';
+      k: "ConfigureCloudflaredTunnel";
     };
 
 export type MconnEventMetadata = {
@@ -34045,7 +34522,7 @@ export type MqHttpConsumer = {
   /**
    * @x-auditable true
    */
-  type?: 'http_pull';
+  type?: "http_pull";
 };
 
 /**
@@ -34133,7 +34610,7 @@ export type MqQueueMessageJson = {
   /**
    * @x-auditable true
    */
-  content_type?: 'json';
+  content_type?: "json";
 };
 
 export type MqQueueMessageText = {
@@ -34141,7 +34618,7 @@ export type MqQueueMessageText = {
   /**
    * @x-auditable true
    */
-  content_type?: 'text';
+  content_type?: "text";
 };
 
 /**
@@ -34209,7 +34686,7 @@ export type MqR2Producer = {
   /**
    * @x-auditable true
    */
-  type?: 'r2_bucket';
+  type?: "r2_bucket";
 };
 
 /**
@@ -34267,7 +34744,7 @@ export type MqWorkerConsumer = {
   /**
    * @x-auditable true
    */
-  type?: 'worker';
+  type?: "worker";
 };
 
 export type MqWorkerProducer = {
@@ -34278,7 +34755,7 @@ export type MqWorkerProducer = {
   /**
    * @x-auditable true
    */
-  type?: 'worker';
+  type?: "worker";
 };
 
 /**
@@ -34290,18 +34767,18 @@ export type NscAccountTag = string;
  * Bandwidth structure as visible through the customer-facing API.
  */
 export type NscApiBandwidth =
-  | '50M'
-  | '100M'
-  | '200M'
-  | '300M'
-  | '400M'
-  | '500M'
-  | '1G'
-  | '2G'
-  | '5G'
-  | '10G'
-  | '20G'
-  | '50G';
+  | "50M"
+  | "100M"
+  | "200M"
+  | "300M"
+  | "400M"
+  | "500M"
+  | "1G"
+  | "2G"
+  | "5G"
+  | "10G"
+  | "20G"
+  | "50G";
 
 export type NscBgpControl = {
   /**
@@ -34394,19 +34871,19 @@ export type NscFacilityInfo = {
 };
 
 export type NscInterconnect =
-  | (Omit<NscInterconnectPhysicalBody, 'type'> & {
-      type: 'direct';
+  | (Omit<NscInterconnectPhysicalBody, "type"> & {
+      type: "direct";
     })
-  | (Omit<NscInterconnectGcpPartnerBody, 'type'> & {
-      type: 'gcp_partner';
+  | (Omit<NscInterconnectGcpPartnerBody, "type"> & {
+      type: "gcp_partner";
     });
 
 export type NscInterconnectCreate =
-  | (Omit<NscInterconnectCreatePhysicalBody, 'type'> & {
-      type: 'direct';
+  | (Omit<NscInterconnectCreatePhysicalBody, "type"> & {
+      type: "direct";
     })
-  | (Omit<NscInterconnectCreateGcpPartnerBody, 'type'> & {
-      type: 'gcp_partner';
+  | (Omit<NscInterconnectCreateGcpPartnerBody, "type"> & {
+      type: "gcp_partner";
     });
 
 export type NscInterconnectCreateGcpPartnerBody = {
@@ -34512,24 +34989,24 @@ export type NscSlotList = {
 
 export type NscStatusInfo =
   | {
-      state: 'Pending';
+      state: "Pending";
     }
   | {
       /**
        * Diagnostic information, if available
        */
       reason?: string | null;
-      state: 'Down';
+      state: "Down";
     }
   | {
       /**
        * Diagnostic information, if available
        */
       reason?: string | null;
-      state: 'Unhealthy';
+      state: "Unhealthy";
     }
   | {
-      state: 'Healthy';
+      state: "Healthy";
     };
 
 export type ObservatoryApiResponseCollection = ObservatoryApiResponseCommon;
@@ -34641,7 +35118,7 @@ export type ObservatoryCreateScheduleResponse = ObservatoryApiResponseSingle & {
  * @example DESKTOP
  * @x-auditable true
  */
-export type ObservatoryDeviceType = 'DESKTOP' | 'MOBILE';
+export type ObservatoryDeviceType = "DESKTOP" | "MOBILE";
 
 /**
  * Identifier.
@@ -34671,11 +35148,11 @@ export type ObservatoryLabeledRegion = {
  * @x-auditable true
  */
 export type ObservatoryLighthouseErrorCode =
-  | 'NOT_REACHABLE'
-  | 'DNS_FAILURE'
-  | 'NOT_HTML'
-  | 'LIGHTHOUSE_TIMEOUT'
-  | 'UNKNOWN';
+  | "NOT_REACHABLE"
+  | "DNS_FAILURE"
+  | "NOT_HTML"
+  | "LIGHTHOUSE_TIMEOUT"
+  | "UNKNOWN";
 
 /**
  * The Lighthouse report.
@@ -34770,7 +35247,7 @@ export type ObservatoryLighthouseReport = {
  * @example COMPLETE
  * @x-auditable true
  */
-export type ObservatoryLighthouseState = 'RUNNING' | 'COMPLETE' | 'FAILED';
+export type ObservatoryLighthouseState = "RUNNING" | "COMPLETE" | "FAILED";
 
 export type ObservatoryMessages = {
   /**
@@ -34784,11 +35261,12 @@ export type ObservatoryMessages = {
   message: string;
 }[];
 
-export type ObservatoryPageTestResponseCollection = ObservatoryApiResponseCollection & {
-  result?: ObservatoryPageTest[];
-} & {
-  result_info?: ObservatoryResultInfo;
-};
+export type ObservatoryPageTestResponseCollection =
+  ObservatoryApiResponseCollection & {
+    result?: ObservatoryPageTest[];
+  } & {
+    result_info?: ObservatoryResultInfo;
+  };
 
 export type ObservatoryPageTestResponseSingle = ObservatoryApiResponseSingle & {
   result?: ObservatoryPageTest;
@@ -34804,14 +35282,15 @@ export type ObservatoryPageTest = {
   url?: ObservatoryUrl;
 };
 
-export type ObservatoryPagesResponseCollection = ObservatoryApiResponseCollection & {
-  result?: {
-    region?: ObservatoryLabeledRegion;
-    scheduleFrequency?: ObservatoryScheduleFrequency;
-    tests?: ObservatoryPageTest[];
-    url?: ObservatoryUrl;
-  }[];
-};
+export type ObservatoryPagesResponseCollection =
+  ObservatoryApiResponseCollection & {
+    result?: {
+      region?: ObservatoryLabeledRegion;
+      scheduleFrequency?: ObservatoryScheduleFrequency;
+      tests?: ObservatoryPageTest[];
+      url?: ObservatoryUrl;
+    }[];
+  };
 
 /**
  * Counts per account plan.
@@ -34846,27 +35325,27 @@ export type ObservatoryPlanPropertiesInfo = {
  * @x-auditable true
  */
 export type ObservatoryRegion =
-  | 'asia-east1'
-  | 'asia-northeast1'
-  | 'asia-northeast2'
-  | 'asia-south1'
-  | 'asia-southeast1'
-  | 'australia-southeast1'
-  | 'europe-north1'
-  | 'europe-southwest1'
-  | 'europe-west1'
-  | 'europe-west2'
-  | 'europe-west3'
-  | 'europe-west4'
-  | 'europe-west8'
-  | 'europe-west9'
-  | 'me-west1'
-  | 'southamerica-east1'
-  | 'us-central1'
-  | 'us-east1'
-  | 'us-east4'
-  | 'us-south1'
-  | 'us-west1';
+  | "asia-east1"
+  | "asia-northeast1"
+  | "asia-northeast2"
+  | "asia-south1"
+  | "asia-southeast1"
+  | "australia-southeast1"
+  | "europe-north1"
+  | "europe-southwest1"
+  | "europe-west1"
+  | "europe-west2"
+  | "europe-west3"
+  | "europe-west4"
+  | "europe-west8"
+  | "europe-west9"
+  | "me-west1"
+  | "southamerica-east1"
+  | "us-central1"
+  | "us-east1"
+  | "us-east4"
+  | "us-south1"
+  | "us-west1";
 
 export type ObservatoryResultInfo = {
   /**
@@ -34910,7 +35389,7 @@ export type ObservatoryScheduleResponseSingle = ObservatoryApiResponseSingle & {
  * @example DAILY
  * @x-auditable true
  */
-export type ObservatoryScheduleFrequency = 'DAILY' | 'WEEKLY';
+export type ObservatoryScheduleFrequency = "DAILY" | "WEEKLY";
 
 export type ObservatorySchemasMessages = {
   /**
@@ -34991,9 +35470,10 @@ export type PageShieldApiGetResponseCollection = PageShieldApiResponseCommon & {
   result?: Record<string, any> | null;
 };
 
-export type PageShieldApiListResponseCollection = PageShieldApiResponseCommon & {
-  result_info: PageShieldResultInfo;
-};
+export type PageShieldApiListResponseCollection =
+  PageShieldApiResponseCommon & {
+    result_info: PageShieldResultInfo;
+  };
 
 export type PageShieldApiResponseCommon = {
   errors?: PageShieldMessages;
@@ -35127,7 +35607,7 @@ export type PageShieldCookie = {
   /**
    * @example strict
    */
-  same_site_attribute?: 'lax' | 'strict' | 'none';
+  same_site_attribute?: "lax" | "strict" | "none";
   /**
    * @example true
    */
@@ -35135,7 +35615,7 @@ export type PageShieldCookie = {
   /**
    * @example first_party
    */
-  type: 'first_party' | 'unknown';
+  type: "first_party" | "unknown";
 };
 
 /**
@@ -35167,26 +35647,30 @@ export type PageShieldEnabled = boolean;
  */
 export type PageShieldFetchedAt = string | null;
 
-export type PageShieldGetZoneConnectionResponse = PageShieldApiGetResponseCollection & {
-  result: PageShieldConnection;
-};
-
-export type PageShieldGetZoneCookieResponse = PageShieldApiGetResponseCollection & {
-  result: PageShieldCookie;
-};
-
-export type PageShieldGetZonePolicyResponse = PageShieldApiGetResponseCollection & {
-  result: PageShieldPolicyWithId;
-};
-
-export type PageShieldGetZoneScriptResponse = PageShieldApiGetResponseCollection & {
-  result: PageShieldScript & {
-    /**
-     * @example {"cryptomining_score":20,"dataflow_score":2,"fetched_at":"2021-08-18T10:51:08Z","hash":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b423","js_integrity_score":2,"magecart_score":10,"malware_score":5,"obfuscation_score":10}
-     */
-    versions?: PageShieldVersion[] | null;
+export type PageShieldGetZoneConnectionResponse =
+  PageShieldApiGetResponseCollection & {
+    result: PageShieldConnection;
   };
-};
+
+export type PageShieldGetZoneCookieResponse =
+  PageShieldApiGetResponseCollection & {
+    result: PageShieldCookie;
+  };
+
+export type PageShieldGetZonePolicyResponse =
+  PageShieldApiGetResponseCollection & {
+    result: PageShieldPolicyWithId;
+  };
+
+export type PageShieldGetZoneScriptResponse =
+  PageShieldApiGetResponseCollection & {
+    result: PageShieldScript & {
+      /**
+       * @example {"cryptomining_score":20,"dataflow_score":2,"fetched_at":"2021-08-18T10:51:08Z","hash":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b423","js_integrity_score":2,"magecart_score":10,"malware_score":5,"obfuscation_score":10}
+       */
+      versions?: PageShieldVersion[] | null;
+    };
+  };
 
 export type PageShieldGetZoneSettingsResponse = {
   enabled: PageShieldEnabled;
@@ -35220,21 +35704,25 @@ export type PageShieldId = string;
  */
 export type PageShieldJsIntegrityScore = number | null;
 
-export type PageShieldListZoneConnectionsResponse = PageShieldApiListResponseCollection & {
-  result?: PageShieldConnection[];
-};
+export type PageShieldListZoneConnectionsResponse =
+  PageShieldApiListResponseCollection & {
+    result?: PageShieldConnection[];
+  };
 
-export type PageShieldListZoneCookiesResponse = PageShieldApiListResponseCollection & {
-  result: PageShieldCookie[];
-};
+export type PageShieldListZoneCookiesResponse =
+  PageShieldApiListResponseCollection & {
+    result: PageShieldCookie[];
+  };
 
-export type PageShieldListZonePoliciesResponse = PageShieldApiListResponseCollection & {
-  result: PageShieldPolicyWithId[];
-};
+export type PageShieldListZonePoliciesResponse =
+  PageShieldApiListResponseCollection & {
+    result: PageShieldPolicyWithId[];
+  };
 
-export type PageShieldListZoneScriptsResponse = PageShieldApiListResponseCollection & {
-  result: PageShieldScript[];
-};
+export type PageShieldListZoneScriptsResponse =
+  PageShieldApiListResponseCollection & {
+    result: PageShieldScript[];
+  };
 
 /**
  * The magecart score of the JavaScript content.
@@ -35282,7 +35770,7 @@ export type PageShieldPolicy = {
  * @example allow
  * @x-auditable true
  */
-export type PageShieldPolicyAction = 'allow' | 'log';
+export type PageShieldPolicyAction = "allow" | "log";
 
 /**
  * A description for the policy
@@ -35462,9 +35950,10 @@ export type PageShieldVersion = {
   obfuscation_score?: PageShieldObfuscationScore;
 };
 
-export type PageShieldZoneSettingsResponseSingle = PageShieldApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type PageShieldZoneSettingsResponseSingle =
+  PageShieldApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 export type PagesApiResponseCommon = {
   errors: PagesMessages;
@@ -35831,7 +36320,12 @@ export type PagesDeploymentConfigsValues = {
  *
  * @example deploy
  */
-export type PagesDeploymentStageName = 'queued' | 'initialize' | 'clone_repo' | 'build' | 'deploy';
+export type PagesDeploymentStageName =
+  | "queued"
+  | "initialize"
+  | "clone_repo"
+  | "build"
+  | "deploy";
 
 export type PagesDeployments = {
   /**
@@ -35880,7 +36374,7 @@ export type PagesDeployments = {
      *
      * @example ad_hoc
      */
-    type?: 'push' | 'ad_hoc';
+    type?: "push" | "ad_hoc";
   };
   env_vars?: PagesEnvVars;
   /**
@@ -35888,7 +36382,7 @@ export type PagesDeployments = {
    *
    * @example preview
    */
-  environment?: 'preview' | 'production';
+  environment?: "preview" | "production";
   /**
    * Id of the deployment.
    *
@@ -35950,7 +36444,7 @@ export type PagesDomainObject = {
   /**
    * @example lets_encrypt
    */
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority?: "google" | "lets_encrypt";
   created_on?: string;
   domain_id?: string;
   id?: string;
@@ -35958,17 +36452,23 @@ export type PagesDomainObject = {
    * @example example.com
    */
   name?: string;
-  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  status?:
+    | "initializing"
+    | "pending"
+    | "active"
+    | "deactivated"
+    | "blocked"
+    | "error";
   validation_data?: {
     error_message?: string;
-    method?: 'http' | 'txt';
-    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+    method?: "http" | "txt";
+    status?: "initializing" | "pending" | "active" | "deactivated" | "error";
     txt_name?: string;
     txt_value?: string;
   };
   verification_data?: {
     error_message?: string;
-    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+    status?: "pending" | "active" | "deactivated" | "blocked" | "error";
   };
   zone_tag?: string;
 };
@@ -36026,7 +36526,7 @@ export type PagesMessages = {
  * @example {"type":"plain_text","value":"hello world"}
  */
 export type PagesPlainTextEnvVar = {
-  type: 'plain_text';
+  type: "plain_text";
   /**
    * Environment variable value.
    */
@@ -36113,7 +36613,7 @@ export type PagesProjectsResponse = PagesApiResponseCommon &
  * @example {"type":"secret_text","value":""}
  */
 export type PagesSecretTextEnvVar = {
-  type: 'secret_text';
+  type: "secret_text";
   /**
    * Secret value.
    *
@@ -36131,7 +36631,7 @@ export type PagesSource = {
     pr_comments_enabled?: boolean;
     preview_branch_excludes?: string[];
     preview_branch_includes?: string[];
-    preview_deployment_setting?: 'all' | 'none' | 'custom';
+    preview_deployment_setting?: "all" | "none" | "custom";
     production_branch?: string;
     production_deployments_enabled?: boolean;
     repo_name?: string;
@@ -36155,7 +36655,7 @@ export type PagesStage = {
    *
    * @example deploy
    */
-  name?: 'queued' | 'initialize' | 'clone_repo' | 'build' | 'deploy';
+  name?: "queued" | "initialize" | "clone_repo" | "build" | "deploy";
   /**
    * When the stage started.
    *
@@ -36168,7 +36668,7 @@ export type PagesStage = {
    *
    * @example success
    */
-  status?: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
+  status?: "success" | "idle" | "active" | "failure" | "canceled";
 };
 
 export type PublicIpApiResponseCommon = {
@@ -36248,7 +36748,7 @@ export type PublicIpMessages = {
 }[];
 
 export type R2SlurperConnectivityResponse = {
-  connectivityStatus?: 'success' | 'error';
+  connectivityStatus?: "success" | "error";
 };
 
 export type R2SlurperCreateJobRequest = {
@@ -36271,28 +36771,28 @@ export type R2SlurperGCSLikeCredsSchema = {
 export type R2SlurperGCSSourceSchema = {
   bucket?: string;
   secret?: R2SlurperGCSLikeCredsSchema;
-  vendor?: 'gcs';
+  vendor?: "gcs";
 };
 
 export type R2SlurperJobLogResponse = {
   createdAt?: string;
   job?: string;
   logType?:
-    | 'migrationStart'
-    | 'migrationComplete'
-    | 'migrationAbort'
-    | 'migrationError'
-    | 'migrationPause'
-    | 'migrationResume'
-    | 'migrationErrorFailedContinuation'
-    | 'importErrorRetryExhaustion'
-    | 'importSkippedStorageClass'
-    | 'importSkippedOversized'
-    | 'importSkippedEmptyObject'
-    | 'importSkippedUnsupportedContentType'
-    | 'importSkippedExcludedContentType'
-    | 'importSkippedInvalidMedia'
-    | 'importSkippedRequiresRetrieval';
+    | "migrationStart"
+    | "migrationComplete"
+    | "migrationAbort"
+    | "migrationError"
+    | "migrationPause"
+    | "migrationResume"
+    | "migrationErrorFailedContinuation"
+    | "importErrorRetryExhaustion"
+    | "importSkippedStorageClass"
+    | "importSkippedOversized"
+    | "importSkippedEmptyObject"
+    | "importSkippedUnsupportedContentType"
+    | "importSkippedExcludedContentType"
+    | "importSkippedInvalidMedia"
+    | "importSkippedRequiresRetrieval";
   message?: string | null;
   objectKey?: string | null;
 };
@@ -36317,36 +36817,36 @@ export type R2SlurperJobResponse = {
         bucket?: string;
         endpoint?: string | null;
         pathPrefix?: string | null;
-        vendor?: 's3';
+        vendor?: "s3";
       }
     | {
         bucket?: string;
         pathPrefix?: string | null;
-        vendor?: 'gcs';
+        vendor?: "gcs";
       }
     | {
         bucket?: string;
         jurisdiction?: R2SlurperJurisdiction;
         pathPrefix?: string | null;
-        vendor?: 'r2';
+        vendor?: "r2";
       };
   status?: R2SlurperJobStatus;
   target?: {
     bucket?: string;
     jurisdiction?: R2SlurperJurisdiction;
-    vendor?: 'r2';
+    vendor?: "r2";
   };
 };
 
-export type R2SlurperJobStatus = 'running' | 'paused' | 'aborted' | 'completed';
+export type R2SlurperJobStatus = "running" | "paused" | "aborted" | "completed";
 
-export type R2SlurperJurisdiction = 'default' | 'eu' | 'fedramp';
+export type R2SlurperJurisdiction = "default" | "eu" | "fedramp";
 
 export type R2SlurperR2SourceSchema = {
   bucket?: string;
   jurisdiction?: R2SlurperJurisdiction;
   secret?: R2SlurperS3LikeCredsSchema;
-  vendor?: 'r2';
+  vendor?: "r2";
 };
 
 export type R2SlurperR2TargetSchema = R2SlurperR2SourceSchema;
@@ -36363,10 +36863,13 @@ export type R2SlurperS3SourceSchema = {
   bucket?: string;
   endpoint?: string | null;
   secret?: R2SlurperS3LikeCredsSchema;
-  vendor?: 's3';
+  vendor?: "s3";
 };
 
-export type R2SlurperSourceJobSchema = R2SlurperS3SourceSchema | R2SlurperGCSSourceSchema | R2SlurperR2SourceSchema;
+export type R2SlurperSourceJobSchema =
+  | R2SlurperS3SourceSchema
+  | R2SlurperGCSSourceSchema
+  | R2SlurperR2SourceSchema;
 
 /**
  * @example {"code":7003,"message":"No route for the URI"}
@@ -36446,7 +36949,7 @@ export type R2AddCustomDomainRequest = {
    *
    * @x-auditable true
    */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+  minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
   /**
    * Zone ID of the custom domain.
    *
@@ -36474,7 +36977,7 @@ export type R2AddCustomDomainResponse = {
    *
    * @x-auditable true
    */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+  minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
 };
 
 /**
@@ -36505,7 +37008,10 @@ export type R2BucketConfig = {
 };
 
 export type R2BucketLockRule = {
-  condition: R2LockRuleAgeCondition | R2LockRuleDateCondition | R2LockRuleIndefiniteCondition;
+  condition:
+    | R2LockRuleAgeCondition
+    | R2LockRuleDateCondition
+    | R2LockRuleIndefiniteCondition;
   /**
    * Whether or not this rule is in effect.
    *
@@ -36537,7 +37043,13 @@ export type R2BucketLockRuleConfig = {
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
  */
-export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
+export type R2BucketLocation =
+  | "apac"
+  | "eeur"
+  | "enam"
+  | "weur"
+  | "wnam"
+  | "oc";
 
 /**
  * Name of the bucket.
@@ -36570,7 +37082,7 @@ export type R2CorsRule = {
     /**
      * Specifies the value for the Access-Control-Allow-Methods header R2 sets when requesting objects in a bucket from a browser.
      */
-    methods: ('GET' | 'PUT' | 'POST' | 'DELETE' | 'HEAD')[];
+    methods: ("GET" | "PUT" | "POST" | "DELETE" | "HEAD")[];
     /**
      * Specifies the value for the Access-Control-Allow-Origin header R2 sets when requesting objects in a bucket from a browser.
      */
@@ -36619,7 +37131,7 @@ export type R2EditCustomDomainRequest = {
    *
    * @x-auditable true
    */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+  minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
 };
 
 /**
@@ -36643,7 +37155,7 @@ export type R2EditCustomDomainResponse = {
    *
    * @x-auditable true
    */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+  minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
 };
 
 /**
@@ -36675,7 +37187,7 @@ export type R2EnableSippyAws = {
     /**
      * @x-auditable true
      */
-    provider?: 'r2';
+    provider?: "r2";
     /**
      * Value of a Cloudflare API token.
      * This is the value labelled "Secret Access Key" when creating an API.
@@ -36705,7 +37217,7 @@ export type R2EnableSippyAws = {
     /**
      * @x-auditable true
      */
-    provider?: 'aws';
+    provider?: "aws";
     /**
      * Name of the AWS availability zone.
      *
@@ -36735,7 +37247,7 @@ export type R2EnableSippyGcs = {
      * best to scope this token to the bucket you're enabling Sippy for.
      */
     accessKeyId?: string;
-    provider?: 'r2';
+    provider?: "r2";
     /**
      * Value of a Cloudflare API token.
      * This is the value labelled "Secret Access Key" when creating an API.
@@ -36768,7 +37280,7 @@ export type R2EnableSippyGcs = {
      * @x-sensitive true
      */
     privateKey?: string;
-    provider?: 'gcs';
+    provider?: "gcs";
   };
 };
 
@@ -36801,20 +37313,32 @@ export type R2GetCustomDomainResponse = {
    *
    * @x-auditable true
    */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+  minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
   status: {
     /**
      * Ownership status of the domain.
      *
      * @x-auditable true
      */
-    ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
+    ownership:
+      | "pending"
+      | "active"
+      | "deactivated"
+      | "blocked"
+      | "error"
+      | "unknown";
     /**
      * SSL certificate status.
      *
      * @x-auditable true
      */
-    ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
+    ssl:
+      | "initializing"
+      | "pending"
+      | "active"
+      | "deactivated"
+      | "error"
+      | "unknown";
   };
   /**
    * Zone ID of the custom domain resides in.
@@ -36837,7 +37361,7 @@ export type R2GetCustomDomainResponse = {
  * @x-auditable true
  * @x-stainless-param jurisdiction
  */
-export type R2Jurisdiction = 'default' | 'eu' | 'fedramp';
+export type R2Jurisdiction = "default" | "eu" | "fedramp";
 
 /**
  * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
@@ -36850,7 +37374,7 @@ export type R2LifecycleAgeCondition = {
   /**
    * @x-auditable true
    */
-  type: 'Age';
+  type: "Age";
 };
 
 export type R2LifecycleConfig = {
@@ -36869,7 +37393,7 @@ export type R2LifecycleDateCondition = {
   /**
    * @x-auditable true
    */
-  type: 'Date';
+  type: "Date";
 };
 
 export type R2LifecycleRule = {
@@ -36923,7 +37447,7 @@ export type R2LifecycleStorageTransition = {
   /**
    * @x-auditable true
    */
-  storageClass: 'InfrequentAccess';
+  storageClass: "InfrequentAccess";
 };
 
 /**
@@ -36948,20 +37472,32 @@ export type R2ListCustomDomainsResponse = {
      *
      * @x-auditable true
      */
-    minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+    minTLS?: "1.0" | "1.1" | "1.2" | "1.3";
     status: {
       /**
        * Ownership status of the domain.
        *
        * @x-auditable true
        */
-      ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
+      ownership:
+        | "pending"
+        | "active"
+        | "deactivated"
+        | "blocked"
+        | "error"
+        | "unknown";
       /**
        * SSL certificate status.
        *
        * @x-auditable true
        */
-      ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
+      ssl:
+        | "initializing"
+        | "pending"
+        | "active"
+        | "deactivated"
+        | "error"
+        | "unknown";
     };
     /**
      * Zone ID of the custom domain resides in.
@@ -36990,7 +37526,7 @@ export type R2LockRuleAgeCondition = {
   /**
    * @x-auditable true
    */
-  type: 'Age';
+  type: "Age";
 };
 
 /**
@@ -37005,7 +37541,7 @@ export type R2LockRuleDateCondition = {
   /**
    * @x-auditable true
    */
-  type: 'Date';
+  type: "Date";
 };
 
 /**
@@ -37015,7 +37551,7 @@ export type R2LockRuleIndefiniteCondition = {
   /**
    * @x-auditable true
    */
-  type: 'Indefinite';
+  type: "Indefinite";
 };
 
 /**
@@ -37137,7 +37673,12 @@ export type R2QueuesConfig = {
 /**
  * @x-auditable true
  */
-export type R2R2Action = 'PutObject' | 'CopyObject' | 'DeleteObject' | 'CompleteMultipartUpload' | 'LifecycleDeletion';
+export type R2R2Action =
+  | "PutObject"
+  | "CopyObject"
+  | "DeleteObject"
+  | "CompleteMultipartUpload"
+  | "LifecycleDeletion";
 
 /**
  * @example {"domain":"example-domain/custom-domain.com"}
@@ -37221,7 +37762,7 @@ export type R2Sippy = {
     /**
      * @x-auditable true
      */
-    provider?: 'r2';
+    provider?: "r2";
   };
   /**
    * State of Sippy for this bucket.
@@ -37242,7 +37783,7 @@ export type R2Sippy = {
     /**
      * @x-auditable true
      */
-    provider?: 'aws' | 'gcs';
+    provider?: "aws" | "gcs";
     /**
      * Region where the bucket resides (AWS only).
      *
@@ -37258,7 +37799,7 @@ export type R2Sippy = {
  * @default Standard
  * @x-auditable true
  */
-export type R2StorageClass = 'Standard' | 'InfrequentAccess';
+export type R2StorageClass = "Standard" | "InfrequentAccess";
 
 /**
  * @example {"bucket":"example-bucket","objects":["example-object"],"parentAccessKeyId":"example-access-key-id","permission":"object-read-write","prefixes":["example-prefix/"],"ttlSeconds":3600}
@@ -37283,7 +37824,11 @@ export type R2TempAccessCredsRequest = {
    *
    * @x-auditable true
    */
-  permission: 'admin-read-write' | 'admin-read-only' | 'object-read-write' | 'object-read-only';
+  permission:
+    | "admin-read-write"
+    | "admin-read-only"
+    | "object-read-write"
+    | "object-read-only";
   /**
    * Optional prefix paths to scope the credentials to.
    */
@@ -37521,9 +38066,10 @@ export type RegistrarApiDomainProperties = {
   updated_at?: RegistrarApiUpdatedAt;
 };
 
-export type RegistrarApiDomainResponseCollection = RegistrarApiApiResponseCollection & {
-  result?: RegistrarApiDomains[];
-};
+export type RegistrarApiDomainResponseCollection =
+  RegistrarApiApiResponseCollection & {
+    result?: RegistrarApiDomains[];
+  };
 
 export type RegistrarApiDomainResponseSingle = RegistrarApiApiResponseSingle & {
   result?: Record<string, any>;
@@ -37685,13 +38231,19 @@ export type RegistrarApiTransferIn = {
    *
    * @example needed
    */
-  accept_foa?: 'needed' | 'ok';
+  accept_foa?: "needed" | "ok";
   /**
    * Shows transfer status with the registry.
    *
    * @example unknown
    */
-  approve_transfer?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected' | 'unknown';
+  approve_transfer?:
+    | "needed"
+    | "ok"
+    | "pending"
+    | "trying"
+    | "rejected"
+    | "unknown";
   /**
    * Indicates if cancellation is still possible.
    *
@@ -37703,19 +38255,19 @@ export type RegistrarApiTransferIn = {
    *
    * @example ok
    */
-  disable_privacy?: 'needed' | 'ok' | 'unknown';
+  disable_privacy?: "needed" | "ok" | "unknown";
   /**
    * Auth code has been entered and verified.
    *
    * @example needed
    */
-  enter_auth_code?: 'needed' | 'ok' | 'pending' | 'trying' | 'rejected';
+  enter_auth_code?: "needed" | "ok" | "pending" | "trying" | "rejected";
   /**
    * Domain is unlocked at the foreign registrar.
    *
    * @example ok
    */
-  unlock_domain?: 'needed' | 'ok' | 'pending' | 'trying' | 'unknown';
+  unlock_domain?: "needed" | "ok" | "pending" | "trying" | "unknown";
 };
 
 /**
@@ -37940,10 +38492,10 @@ export type ResourceSharingOrganizationId = string;
  * Share Recipient association status.
  */
 export type ResourceSharingRecipientAssociationStatus =
-  | 'associating'
-  | 'associated'
-  | 'disassociating'
-  | 'disassociated';
+  | "associating"
+  | "associated"
+  | "disassociating"
+  | "disassociated";
 
 /**
  * Share Recipient identifier tag.
@@ -37984,12 +38536,12 @@ export type ResourceSharingResourceResourceId = string;
 /**
  * Resource Status.
  */
-export type ResourceSharingResourceStatus = 'active' | 'deleting' | 'deleted';
+export type ResourceSharingResourceStatus = "active" | "deleting" | "deleted";
 
 /**
  * Resource Type.
  */
-export type ResourceSharingResourceType = 'custom-ruleset' | 'widget';
+export type ResourceSharingResourceType = "custom-ruleset" | "widget";
 
 /**
  * Resource Version.
@@ -38037,7 +38589,7 @@ export type ResourceSharingResultInfo = {
  */
 export type ResourceSharingShareId = string;
 
-export type ResourceSharingShareKind = 'sent' | 'received';
+export type ResourceSharingShareKind = "sent" | "received";
 
 /**
  * The name of the share.
@@ -38068,9 +38620,10 @@ export type ResourceSharingShareRecipientObject = {
   status_message: ResourceSharingRecipientStatusMessage;
 };
 
-export type ResourceSharingShareRecipientResponseCollection = ResourceSharingApiResponseCollection & {
-  result?: ResourceSharingShareRecipientObject[];
-};
+export type ResourceSharingShareRecipientResponseCollection =
+  ResourceSharingApiResponseCollection & {
+    result?: ResourceSharingShareRecipientObject[];
+  };
 
 export type ResourceSharingShareRecipientResponseSingle = {
   errors: ResourceSharingV4errors;
@@ -38095,9 +38648,10 @@ export type ResourceSharingShareResourceObject = {
   status: ResourceSharingResourceStatus;
 };
 
-export type ResourceSharingShareResourceResponseCollection = ResourceSharingApiResponseCollection & {
-  result?: ResourceSharingShareResourceObject[];
-};
+export type ResourceSharingShareResourceResponseCollection =
+  ResourceSharingApiResponseCollection & {
+    result?: ResourceSharingShareResourceObject[];
+  };
 
 export type ResourceSharingShareResourceResponseSingle = {
   errors: ResourceSharingV4errors;
@@ -38110,9 +38664,10 @@ export type ResourceSharingShareResourceResponseSingle = {
   success: boolean;
 };
 
-export type ResourceSharingShareResponseCollection = ResourceSharingApiResponseCollection & {
-  result?: ResourceSharingShareObject[];
-};
+export type ResourceSharingShareResponseCollection =
+  ResourceSharingApiResponseCollection & {
+    result?: ResourceSharingShareObject[];
+  };
 
 export type ResourceSharingShareResponseSingle = {
   errors: ResourceSharingV4errors;
@@ -38125,9 +38680,9 @@ export type ResourceSharingShareResponseSingle = {
   success: boolean;
 };
 
-export type ResourceSharingShareStatus = 'active' | 'deleting' | 'deleted';
+export type ResourceSharingShareStatus = "active" | "deleting" | "deleted";
 
-export type ResourceSharingShareTargetType = 'account' | 'organization';
+export type ResourceSharingShareTargetType = "account" | "organization";
 
 export type ResourceSharingUpdateShareRequest = {
   name: ResourceSharingShareName;
@@ -38486,7 +39041,7 @@ export type RulesetsCompressResponseRule = {
       /**
        * Name of compression algorithm to enable.
        */
-      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
+      name?: "none" | "auto" | "default" | "gzip" | "brotli" | "zstd";
     }[];
   };
   /**
@@ -39037,7 +39592,11 @@ export type RulesetsExecuteRule = {
   version: string;
 };
 
-export type RulesetsExecuteSensitivityLevel = 'default' | 'medium' | 'low' | 'eoff';
+export type RulesetsExecuteSensitivityLevel =
+  | "default"
+  | "medium"
+  | "low"
+  | "eoff";
 
 export type RulesetsForceConnectionCloseRule = {
   action?: RulesetsRuleAction;
@@ -40170,59 +40729,59 @@ export type RulesetsRedirectRule = {
 };
 
 export type RulesetsRequestRule =
-  | (Omit<RulesetsBlockRule, 'action'> & {
-      action: 'block';
+  | (Omit<RulesetsBlockRule, "action"> & {
+      action: "block";
     })
-  | (Omit<RulesetsChallengeRule, 'action'> & {
-      action: 'challenge';
+  | (Omit<RulesetsChallengeRule, "action"> & {
+      action: "challenge";
     })
-  | (Omit<RulesetsCompressResponseRule, 'action'> & {
-      action: 'compress_response';
+  | (Omit<RulesetsCompressResponseRule, "action"> & {
+      action: "compress_response";
     })
-  | (Omit<RulesetsExecuteRule, 'action'> & {
-      action: 'execute';
+  | (Omit<RulesetsExecuteRule, "action"> & {
+      action: "execute";
     })
-  | (Omit<RulesetsJsChallengeRule, 'action'> & {
-      action: 'js_challenge';
+  | (Omit<RulesetsJsChallengeRule, "action"> & {
+      action: "js_challenge";
     })
-  | (Omit<RulesetsLogRule, 'action'> & {
-      action: 'log';
+  | (Omit<RulesetsLogRule, "action"> & {
+      action: "log";
     })
-  | (Omit<RulesetsManagedChallengeRule, 'action'> & {
-      action: 'managed_challenge';
+  | (Omit<RulesetsManagedChallengeRule, "action"> & {
+      action: "managed_challenge";
     })
-  | (Omit<RulesetsRedirectRule, 'action'> & {
-      action: 'redirect';
+  | (Omit<RulesetsRedirectRule, "action"> & {
+      action: "redirect";
     })
-  | (Omit<RulesetsRewriteRule, 'action'> & {
-      action: 'rewrite';
+  | (Omit<RulesetsRewriteRule, "action"> & {
+      action: "rewrite";
     })
-  | (Omit<RulesetsRouteRule, 'action'> & {
-      action: 'route';
+  | (Omit<RulesetsRouteRule, "action"> & {
+      action: "route";
     })
-  | (Omit<RulesetsScoreRule, 'action'> & {
-      action: 'score';
+  | (Omit<RulesetsScoreRule, "action"> & {
+      action: "score";
     })
-  | (Omit<RulesetsServeErrorRule, 'action'> & {
-      action: 'serve_error';
+  | (Omit<RulesetsServeErrorRule, "action"> & {
+      action: "serve_error";
     })
-  | (Omit<RulesetsSetConfigRule, 'action'> & {
-      action: 'set_config';
+  | (Omit<RulesetsSetConfigRule, "action"> & {
+      action: "set_config";
     })
-  | (Omit<RulesetsSkipRule, 'action'> & {
-      action: 'skip';
+  | (Omit<RulesetsSkipRule, "action"> & {
+      action: "skip";
     })
-  | (Omit<RulesetsSetCacheSettingsRule, 'action'> & {
-      action: 'set_cache_settings';
+  | (Omit<RulesetsSetCacheSettingsRule, "action"> & {
+      action: "set_cache_settings";
     })
-  | (Omit<RulesetsLogCustomFieldRule, 'action'> & {
-      action: 'log_custom_field';
+  | (Omit<RulesetsLogCustomFieldRule, "action"> & {
+      action: "log_custom_field";
     })
-  | (Omit<RulesetsDDoSDynamicRule, 'action'> & {
-      action: 'ddos_dynamic';
+  | (Omit<RulesetsDDoSDynamicRule, "action"> & {
+      action: "ddos_dynamic";
     })
-  | (Omit<RulesetsForceConnectionCloseRule, 'action'> & {
-      action: 'force_connection_close';
+  | (Omit<RulesetsForceConnectionCloseRule, "action"> & {
+      action: "force_connection_close";
     });
 
 /**
@@ -40279,10 +40838,10 @@ export type RulesetsRewriteRule = {
     headers?: {
       [key: string]:
         | {
-            operation: 'remove';
+            operation: "remove";
           }
         | {
-            operation: 'add';
+            operation: "add";
             /**
              * Static value for the header.
              *
@@ -40292,7 +40851,7 @@ export type RulesetsRewriteRule = {
             value: string;
           }
         | {
-            operation: 'set';
+            operation: "set";
             /**
              * Static value for the header.
              *
@@ -40309,7 +40868,7 @@ export type RulesetsRewriteRule = {
              * @minLength 1
              */
             expression: string;
-            operation: 'add';
+            operation: "add";
           }
         | {
             /**
@@ -40319,7 +40878,7 @@ export type RulesetsRewriteRule = {
              * @minLength 1
              */
             expression: string;
-            operation: 'set';
+            operation: "set";
           };
     };
     /**
@@ -40910,7 +41469,7 @@ export type RulesetsRulesetId = string;
  *
  * @example root
  */
-export type RulesetsRulesetKind = 'managed' | 'custom' | 'root' | 'zone';
+export type RulesetsRulesetKind = "managed" | "custom" | "root" | "zone";
 
 /**
  * The phase of the ruleset.
@@ -40918,29 +41477,29 @@ export type RulesetsRulesetKind = 'managed' | 'custom' | 'root' | 'zone';
  * @example http_request_firewall_custom
  */
 export type RulesetsRulesetPhase =
-  | 'ddos_l4'
-  | 'ddos_l7'
-  | 'http_config_settings'
-  | 'http_custom_errors'
-  | 'http_log_custom_fields'
-  | 'http_ratelimit'
-  | 'http_request_cache_settings'
-  | 'http_request_dynamic_redirect'
-  | 'http_request_firewall_custom'
-  | 'http_request_firewall_managed'
-  | 'http_request_late_transform'
-  | 'http_request_origin'
-  | 'http_request_redirect'
-  | 'http_request_sanitize'
-  | 'http_request_sbfm'
-  | 'http_request_transform'
-  | 'http_response_compression'
-  | 'http_response_firewall_managed'
-  | 'http_response_headers_transform'
-  | 'magic_transit'
-  | 'magic_transit_ids_managed'
-  | 'magic_transit_managed'
-  | 'magic_transit_ratelimit';
+  | "ddos_l4"
+  | "ddos_l7"
+  | "http_config_settings"
+  | "http_custom_errors"
+  | "http_log_custom_fields"
+  | "http_ratelimit"
+  | "http_request_cache_settings"
+  | "http_request_dynamic_redirect"
+  | "http_request_firewall_custom"
+  | "http_request_firewall_managed"
+  | "http_request_late_transform"
+  | "http_request_origin"
+  | "http_request_redirect"
+  | "http_request_sanitize"
+  | "http_request_sbfm"
+  | "http_request_transform"
+  | "http_response_compression"
+  | "http_response_firewall_managed"
+  | "http_response_headers_transform"
+  | "magic_transit"
+  | "magic_transit_ids_managed"
+  | "magic_transit_managed"
+  | "magic_transit_ratelimit";
 
 /**
  * The version of the ruleset.
@@ -41122,7 +41681,7 @@ export type RulesetsServeErrorRule = {
      *
      * @example application/json
      */
-    content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
+    content_type?: "application/json" | "text/xml" | "text/plain" | "text/html";
     /**
      * The status code to use for the error.
      *
@@ -41291,11 +41850,11 @@ export type RulesetsSetCacheSettingsRule = {
       /**
        * The TTL (in seconds) if you choose override_origin mode.
        */
-      ['default']?: number;
+      ["default"]?: number;
       /**
        * Determines which browser ttl mode to use.
        */
-      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+      mode: "respect_origin" | "bypass_by_default" | "override_origin";
     };
     /**
      * Mark whether the request’s response from origin is eligible for caching. Caching itself will still depend on the cache-control header and your other caching configurations.
@@ -41477,11 +42036,11 @@ export type RulesetsSetCacheSettingsRule = {
        * @maximum 9223372036854776000
        * @minimum 0
        */
-      ['default']: number;
+      ["default"]: number;
       /**
        * Edge TTL options.
        */
-      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+      mode: "respect_origin" | "bypass_by_default" | "override_origin";
       /**
        * List of single status codes, or status code ranges to apply the selected mode.
        */
@@ -41740,7 +42299,7 @@ export type RulesetsSetConfigRule = {
     /**
      * Configure the Polish level.
      */
-    polish?: 'off' | 'lossless' | 'lossy' | 'webp';
+    polish?: "off" | "lossless" | "lossy" | "webp";
     /**
      * Turn on or off Rocket Loader.
      */
@@ -41748,7 +42307,13 @@ export type RulesetsSetConfigRule = {
     /**
      * Configure the Security Level.
      */
-    security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+    security_level?:
+      | "off"
+      | "essentially_off"
+      | "low"
+      | "medium"
+      | "high"
+      | "under_attack";
     /**
      * Turn on or off Server Side Excludes.
      */
@@ -41756,7 +42321,7 @@ export type RulesetsSetConfigRule = {
     /**
      * Configure the SSL level.
      */
-    ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
+    ssl?: "off" | "flexible" | "full" | "strict" | "origin_pull";
     /**
      * Turn on or off Signed Exchanges (SXG).
      */
@@ -41921,7 +42486,15 @@ export type RulesetsSkipRule = {
      * @minItems 1
      * @uniqueItems true
      */
-    products?: ('bic' | 'hot' | 'rateLimit' | 'securityLevel' | 'uaBlock' | 'waf' | 'zoneLockdown')[];
+    products?: (
+      | "bic"
+      | "hot"
+      | "rateLimit"
+      | "securityLevel"
+      | "uaBlock"
+      | "waf"
+      | "zoneLockdown"
+    )[];
     /**
      * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the execution of. This option is incompatible with the ruleset option.
      *
@@ -41934,7 +42507,7 @@ export type RulesetsSkipRule = {
     /**
      * A ruleset to skip the execution of. This option is incompatible with the rulesets option.
      */
-    ruleset?: 'current';
+    ruleset?: "current";
     /**
      * A list of ruleset IDs to skip the execution of. This option is incompatible with the ruleset and phases options.
      *
@@ -42089,13 +42662,13 @@ export type RulesetsUrlNormalization = {
    *
    * @example incoming
    */
-  scope: 'incoming' | 'both';
+  scope: "incoming" | "both";
   /**
    * The type of URL normalization performed by Cloudflare.
    *
    * @example cloudflare
    */
-  type: 'cloudflare' | 'rfc3986';
+  type: "cloudflare" | "rfc3986";
 };
 
 /**
@@ -42265,7 +42838,7 @@ export type RumModifyRulesRequest = {
  *
  * @example host
  */
-export type RumOrderBy = 'host' | 'created';
+export type RumOrderBy = "host" | "created";
 
 /**
  * Current page within the paginated list of results.
@@ -42543,34 +43116,35 @@ export type SecondaryDnsAclComponentsSchemasName = string;
  */
 export type SecondaryDnsAlgo = string;
 
-export type SecondaryDnsApiResponseCollection = SecondaryDnsApiResponseCommon & {
-  result_info?: {
-    /**
-     * Total number of results for the requested service.
-     *
-     * @example 1
-     */
-    count?: number;
-    /**
-     * Current page within paginated list of results.
-     *
-     * @example 1
-     */
-    page?: number;
-    /**
-     * Number of results per page of results.
-     *
-     * @example 20
-     */
-    per_page?: number;
-    /**
-     * Total results available without any search parameters.
-     *
-     * @example 2000
-     */
-    total_count?: number;
+export type SecondaryDnsApiResponseCollection =
+  SecondaryDnsApiResponseCommon & {
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
-};
 
 export type SecondaryDnsApiResponseCommon = {
   errors: SecondaryDnsMessages;
@@ -42610,11 +43184,12 @@ export type SecondaryDnsApiResponseSingle = SecondaryDnsApiResponseCommon;
  */
 export type SecondaryDnsAutoRefreshSeconds = number;
 
-export type SecondaryDnsComponentsSchemasIdResponse = SecondaryDnsApiResponseSingle & {
-  result?: {
-    id?: SecondaryDnsComponentsSchemasIdentifier;
+export type SecondaryDnsComponentsSchemasIdResponse =
+  SecondaryDnsApiResponseSingle & {
+    result?: {
+      id?: SecondaryDnsComponentsSchemasIdentifier;
+    };
   };
-};
 
 /**
  * @example 23ff594956f20c2a721606e94745a8aa
@@ -42630,17 +43205,20 @@ export type SecondaryDnsComponentsSchemasIdentifier = string;
  */
 export type SecondaryDnsComponentsSchemasName = string;
 
-export type SecondaryDnsComponentsSchemasResponseCollection = SecondaryDnsApiResponseCollection & {
-  result?: SecondaryDnsAcl[];
-};
+export type SecondaryDnsComponentsSchemasResponseCollection =
+  SecondaryDnsApiResponseCollection & {
+    result?: SecondaryDnsAcl[];
+  };
 
-export type SecondaryDnsComponentsSchemasSingleResponse = SecondaryDnsApiResponseSingle & {
-  result?: SecondaryDnsAcl;
-};
+export type SecondaryDnsComponentsSchemasSingleResponse =
+  SecondaryDnsApiResponseSingle & {
+    result?: SecondaryDnsAcl;
+  };
 
-export type SecondaryDnsDisableTransferResponse = SecondaryDnsApiResponseSingle & {
-  result?: SecondaryDnsDisableTransferResult;
-};
+export type SecondaryDnsDisableTransferResponse =
+  SecondaryDnsApiResponseSingle & {
+    result?: SecondaryDnsDisableTransferResult;
+  };
 
 /**
  * The zone transfer status of a primary zone
@@ -42657,9 +43235,10 @@ export type SecondaryDnsDnsSecondarySecondaryZone = {
   peers: SecondaryDnsPeers;
 };
 
-export type SecondaryDnsEnableTransferResponse = SecondaryDnsApiResponseSingle & {
-  result?: SecondaryDnsEnableTransferResult;
-};
+export type SecondaryDnsEnableTransferResponse =
+  SecondaryDnsApiResponseSingle & {
+    result?: SecondaryDnsEnableTransferResult;
+  };
 
 /**
  * The zone transfer status of a primary zone
@@ -42762,9 +43341,10 @@ export type SecondaryDnsPeers = SecondaryDnsIdentifier[];
  */
 export type SecondaryDnsPort = number;
 
-export type SecondaryDnsResponseCollection = SecondaryDnsApiResponseCollection & {
-  result?: SecondaryDnsTsig[];
-};
+export type SecondaryDnsResponseCollection =
+  SecondaryDnsApiResponseCollection & {
+    result?: SecondaryDnsTsig[];
+  };
 
 export type SecondaryDnsSchemasForceResponse = SecondaryDnsApiResponseSingle & {
   result?: SecondaryDnsSchemasForceResult;
@@ -42798,13 +43378,15 @@ export type SecondaryDnsSchemasIdentifier = string;
  */
 export type SecondaryDnsSchemasName = string;
 
-export type SecondaryDnsSchemasResponseCollection = SecondaryDnsApiResponseCollection & {
-  result?: SecondaryDnsPeer[];
-};
+export type SecondaryDnsSchemasResponseCollection =
+  SecondaryDnsApiResponseCollection & {
+    result?: SecondaryDnsPeer[];
+  };
 
-export type SecondaryDnsSchemasSingleResponse = SecondaryDnsApiResponseSingle & {
-  result?: SecondaryDnsPeer;
-};
+export type SecondaryDnsSchemasSingleResponse =
+  SecondaryDnsApiResponseSingle & {
+    result?: SecondaryDnsPeer;
+  };
 
 /**
  * TSIG secret.
@@ -42824,30 +43406,32 @@ export type SecondaryDnsSingleResponse = SecondaryDnsApiResponseSingle & {
   result?: SecondaryDnsTsig;
 };
 
-export type SecondaryDnsSingleResponseIncoming = SecondaryDnsApiResponseSingle & {
-  result?: {
-    auto_refresh_seconds?: SecondaryDnsAutoRefreshSeconds;
-    checked_time?: SecondaryDnsTime;
-    created_time?: SecondaryDnsTime;
-    id?: SecondaryDnsIdentifier;
-    modified_time?: SecondaryDnsTime;
-    name?: SecondaryDnsName;
-    peers?: SecondaryDnsPeers;
-    soa_serial?: SecondaryDnsSoaSerial;
+export type SecondaryDnsSingleResponseIncoming =
+  SecondaryDnsApiResponseSingle & {
+    result?: {
+      auto_refresh_seconds?: SecondaryDnsAutoRefreshSeconds;
+      checked_time?: SecondaryDnsTime;
+      created_time?: SecondaryDnsTime;
+      id?: SecondaryDnsIdentifier;
+      modified_time?: SecondaryDnsTime;
+      name?: SecondaryDnsName;
+      peers?: SecondaryDnsPeers;
+      soa_serial?: SecondaryDnsSoaSerial;
+    };
   };
-};
 
-export type SecondaryDnsSingleResponseOutgoing = SecondaryDnsApiResponseSingle & {
-  result?: {
-    checked_time?: SecondaryDnsTime;
-    created_time?: SecondaryDnsTime;
-    id?: SecondaryDnsIdentifier;
-    last_transferred_time?: SecondaryDnsTime;
-    name?: SecondaryDnsName;
-    peers?: SecondaryDnsPeers;
-    soa_serial?: SecondaryDnsSoaSerial;
+export type SecondaryDnsSingleResponseOutgoing =
+  SecondaryDnsApiResponseSingle & {
+    result?: {
+      checked_time?: SecondaryDnsTime;
+      created_time?: SecondaryDnsTime;
+      id?: SecondaryDnsIdentifier;
+      last_transferred_time?: SecondaryDnsTime;
+      name?: SecondaryDnsName;
+      peers?: SecondaryDnsPeers;
+      soa_serial?: SecondaryDnsSoaSerial;
+    };
   };
-};
 
 /**
  * The serial number of the SOA for the given zone.
@@ -42883,7 +43467,7 @@ export type SecondaryDnsTsigId = string;
 /**
  * @x-auditable true
  */
-export type SecretsStoreSecretStatus = 'pending' | 'active' | 'deleted';
+export type SecretsStoreSecretStatus = "pending" | "active" | "deleted";
 
 /**
  * Account Identifier
@@ -42893,9 +43477,10 @@ export type SecretsStoreSecretStatus = 'pending' | 'active' | 'deleted';
  */
 export type SecretsStoreAccountIdentifier = string;
 
-export type SecretsStoreApiResponseCollection = SecretsStoreApiResponseCommon & {
-  result_info?: SecretsStoreResultInfo;
-};
+export type SecretsStoreApiResponseCollection =
+  SecretsStoreApiResponseCommon & {
+    result_info?: SecretsStoreResultInfo;
+  };
 
 export type SecretsStoreApiResponseCommon = {
   errors: SecretsStoreMessages;
@@ -43069,9 +43654,10 @@ export type SecretsStoreSecretsUsageObject = {
   secrets: SecretsStoreUsageQuotaObject;
 };
 
-export type SecretsStoreSecretsResponseCollection = SecretsStoreApiResponseCollection & {
-  result?: SecretsStoreSecretObject[];
-};
+export type SecretsStoreSecretsResponseCollection =
+  SecretsStoreApiResponseCollection & {
+    result?: SecretsStoreSecretObject[];
+  };
 
 export type SecretsStoreStoreObject = {
   created: SecretsStoreCreated;
@@ -43100,9 +43686,10 @@ export type SecretsStoreStoreResponse = SecretsStoreApiResponseCollection & {
   result?: SecretsStoreStoreObject;
 };
 
-export type SecretsStoreStoresResponseCollection = SecretsStoreApiResponseCollection & {
-  result?: SecretsStoreStoreObject[];
-};
+export type SecretsStoreStoresResponseCollection =
+  SecretsStoreApiResponseCollection & {
+    result?: SecretsStoreStoreObject[];
+  };
 
 /**
  * The number of secrets the account is currently using
@@ -43203,7 +43790,7 @@ export type SecurityCenterIssue = {
   /**
    * @x-auditable true
    */
-  severity?: 'Low' | 'Moderate' | 'Critical';
+  severity?: "Low" | "Moderate" | "Critical";
   /**
    * @format date-time
    * @x-auditable true
@@ -43233,11 +43820,11 @@ export type SecurityCenterIssueClasses = SecurityCenterIssueClass[];
  * @x-auditable true
  */
 export type SecurityCenterIssueType =
-  | 'compliance_violation'
-  | 'email_security'
-  | 'exposed_infrastructure'
-  | 'insecure_configuration'
-  | 'weak_authentication';
+  | "compliance_violation"
+  | "email_security"
+  | "exposed_infrastructure"
+  | "insecure_configuration"
+  | "weak_authentication";
 
 /**
  * @example compliance_violation
@@ -43329,7 +43916,11 @@ export type SecurityCenterSecurityTxt = {
  * @example low
  * @example moderate
  */
-export type SecurityCenterSeverityQueryParam = ('low' | 'moderate' | 'critical')[];
+export type SecurityCenterSeverityQueryParam = (
+  | "low"
+  | "moderate"
+  | "critical"
+)[];
 
 /**
  * @example example.com
@@ -43339,19 +43930,20 @@ export type SecurityCenterSubject = string;
 
 export type SecurityCenterSubjects = SecurityCenterSubject[];
 
-export type SecurityCenterValueCountsResponse = SecurityCenterApiResponseCommon & {
-  result?: {
-    /**
-     * @example 1
-     * @x-auditable true
-     */
-    count?: number;
-    /**
-     * @x-auditable true
-     */
-    value?: string;
-  }[];
-};
+export type SecurityCenterValueCountsResponse =
+  SecurityCenterApiResponseCommon & {
+    result?: {
+      /**
+       * @example 1
+       * @x-auditable true
+       */
+      count?: number;
+      /**
+       * @x-auditable true
+       */
+      value?: string;
+    }[];
+  };
 
 export type SecurityCenterZoneId = SecurityCenterIdentifier;
 
@@ -43473,7 +44065,8 @@ export type SpectrumAnalyticsApiResponseCommonFailure = {
   success: false;
 };
 
-export type SpectrumAnalyticsApiResponseSingle = SpectrumAnalyticsApiResponseCommon;
+export type SpectrumAnalyticsApiResponseSingle =
+  SpectrumAnalyticsApiResponseCommon;
 
 /**
  * Comma-delimited list of Spectrum Application Id(s). If provided, the response will be limited to Spectrum Application Id(s) that match.
@@ -43500,7 +44093,12 @@ export type SpectrumAnalyticsColumn = {
  * @example event
  * @example appID
  */
-export type SpectrumAnalyticsDimensions = ('event' | 'appID' | 'coloName' | 'ipVersion')[];
+export type SpectrumAnalyticsDimensions = (
+  | "event"
+  | "appID"
+  | "coloName"
+  | "ipVersion"
+)[];
 
 /**
  * Used to filter rows by one or more dimensions. Filters can be combined using OR and AND boolean logic. AND takes precedence over OR in all the expressions. The OR operator is defined using a comma (,) or OR keyword surrounded by whitespace. The AND operator is defined using a semicolon (;) or AND keyword surrounded by whitespace. Note that the semicolon is a reserved character in URLs (rfc1738) and needs to be percent-encoded as %3B. Comparison options are:
@@ -43556,13 +44154,13 @@ export type SpectrumAnalyticsMessages = {
  * @example bytesIngress
  */
 export type SpectrumAnalyticsMetrics = (
-  | 'count'
-  | 'bytesIngress'
-  | 'bytesEgress'
-  | 'durationAvg'
-  | 'durationMedian'
-  | 'duration90th'
-  | 'duration99th'
+  | "count"
+  | "bytesIngress"
+  | "bytesEgress"
+  | "durationAvg"
+  | "durationMedian"
+  | "duration90th"
+  | "duration99th"
 )[];
 
 export type SpectrumAnalyticsQuery = {
@@ -43578,80 +44176,82 @@ export type SpectrumAnalyticsQuery = {
   until?: SpectrumAnalyticsUntil;
 };
 
-export type SpectrumAnalyticsQueryResponseAggregate = SpectrumAnalyticsApiResponseSingle & {
-  result?: {
-    /**
-     * Identifier.
-     *
-     * @example 023e105f4ecef8ad9ca31a8372d0c353
-     * @maxLength 32
-     * @x-auditable true
-     */
-    appID: void & SpectrumAnalyticsIdentifier;
-    /**
-     * Number of bytes sent
-     */
-    bytesEgress: number;
-    /**
-     * Number of bytes received
-     */
-    bytesIngress: number;
-    /**
-     * Number of connections
-     */
-    connections: number;
-    /**
-     * Average duration of connections
-     */
-    durationAvg: number;
-  }[];
-};
-
-export type SpectrumAnalyticsQueryResponseSingle = SpectrumAnalyticsApiResponseSingle & {
-  result?: {
-    /**
-     * List of columns returned by the analytics query.
-     */
-    data: SpectrumAnalyticsColumn[];
-    /**
-     * Number of seconds between current time and last processed event, i.e. how many seconds of data could be missing.
-     *
-     * @example 3
-     * @minimum 0
-     */
-    data_lag: number;
-    /**
-     * Maximum result for each selected metrics across all data.
-     *
-     * @example {"bytesEgress":100,"bytesIngress":50}
-     */
-    max: void & SpectrumAnalyticsStat;
-    /**
-     * Minimum result for each selected metrics across all data.
-     *
-     * @example {"bytesEgress":100,"bytesIngress":50}
-     */
-    min: void & SpectrumAnalyticsStat;
-    query: SpectrumAnalyticsQuery;
-    /**
-     * Total number of rows in the result.
-     *
-     * @example 5
-     * @minimum 0
-     */
-    rows: number;
-    /**
-     * List of time interval buckets: [start, end]
-     */
-    time_intervals?: SpectrumAnalyticsTimestamp[][];
-    /**
-     * Total result for each selected metrics across all data.
-     *
-     * @example {"bytesEgress":100,"bytesIngress":50}
-     */
-    totals: void & SpectrumAnalyticsStat;
+export type SpectrumAnalyticsQueryResponseAggregate =
+  SpectrumAnalyticsApiResponseSingle & {
+    result?: {
+      /**
+       * Identifier.
+       *
+       * @example 023e105f4ecef8ad9ca31a8372d0c353
+       * @maxLength 32
+       * @x-auditable true
+       */
+      appID: void & SpectrumAnalyticsIdentifier;
+      /**
+       * Number of bytes sent
+       */
+      bytesEgress: number;
+      /**
+       * Number of bytes received
+       */
+      bytesIngress: number;
+      /**
+       * Number of connections
+       */
+      connections: number;
+      /**
+       * Average duration of connections
+       */
+      durationAvg: number;
+    }[];
   };
-};
+
+export type SpectrumAnalyticsQueryResponseSingle =
+  SpectrumAnalyticsApiResponseSingle & {
+    result?: {
+      /**
+       * List of columns returned by the analytics query.
+       */
+      data: SpectrumAnalyticsColumn[];
+      /**
+       * Number of seconds between current time and last processed event, i.e. how many seconds of data could be missing.
+       *
+       * @example 3
+       * @minimum 0
+       */
+      data_lag: number;
+      /**
+       * Maximum result for each selected metrics across all data.
+       *
+       * @example {"bytesEgress":100,"bytesIngress":50}
+       */
+      max: void & SpectrumAnalyticsStat;
+      /**
+       * Minimum result for each selected metrics across all data.
+       *
+       * @example {"bytesEgress":100,"bytesIngress":50}
+       */
+      min: void & SpectrumAnalyticsStat;
+      query: SpectrumAnalyticsQuery;
+      /**
+       * Total number of rows in the result.
+       *
+       * @example 5
+       * @minimum 0
+       */
+      rows: number;
+      /**
+       * List of time interval buckets: [start, end]
+       */
+      time_intervals?: SpectrumAnalyticsTimestamp[][];
+      /**
+       * Total result for each selected metrics across all data.
+       *
+       * @example {"bytesEgress":100,"bytesIngress":50}
+       */
+      totals: void & SpectrumAnalyticsStat;
+    };
+  };
 
 /**
  * Start of time interval to query, defaults to `until` - 6 hours. Timestamp must be in RFC3339 format and uses UTC unless otherwise specified.
@@ -43693,34 +44293,35 @@ export type SpectrumAnalyticsTimestamp = string;
  */
 export type SpectrumAnalyticsUntil = void & SpectrumAnalyticsTimestamp;
 
-export type SpectrumConfigApiResponseCollection = SpectrumConfigApiResponseCommon & {
-  result_info?: {
-    /**
-     * Total number of results for the requested service.
-     *
-     * @example 1
-     */
-    count?: number;
-    /**
-     * Current page within paginated list of results.
-     *
-     * @example 1
-     */
-    page?: number;
-    /**
-     * Number of results per page of results.
-     *
-     * @example 20
-     */
-    per_page?: number;
-    /**
-     * Total results available without any search parameters.
-     *
-     * @example 2000
-     */
-    total_count?: number;
+export type SpectrumConfigApiResponseCollection =
+  SpectrumConfigApiResponseCommon & {
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
-};
 
 export type SpectrumConfigApiResponseCommon = {
   errors: SpectrumConfigMessages;
@@ -43751,11 +44352,12 @@ export type SpectrumConfigApiResponseCommonFailure = {
 
 export type SpectrumConfigApiResponseSingle = SpectrumConfigApiResponseCommon;
 
-export type SpectrumConfigApiResponseSingleId = SpectrumConfigApiResponseCommon & {
-  result?: {
-    id: SpectrumConfigIdentifier;
-  } | null;
-};
+export type SpectrumConfigApiResponseSingleId =
+  SpectrumConfigApiResponseCommon & {
+    result?: {
+      id: SpectrumConfigIdentifier;
+    } | null;
+  };
 
 export type SpectrumConfigAppConfig = SpectrumConfigBaseAppConfig & {
   argo_smart_routing?: SpectrumConfigArgoSmartRouting;
@@ -43771,9 +44373,10 @@ export type SpectrumConfigAppConfig = SpectrumConfigBaseAppConfig & {
   traffic_type: SpectrumConfigTrafficType;
 };
 
-export type SpectrumConfigAppConfigCollection = SpectrumConfigApiResponseCollection & {
-  result?: SpectrumConfigAppConfig[] | SpectrumConfigPaygoAppConfig[];
-};
+export type SpectrumConfigAppConfigCollection =
+  SpectrumConfigApiResponseCollection & {
+    result?: SpectrumConfigAppConfig[] | SpectrumConfigPaygoAppConfig[];
+  };
 
 export type SpectrumConfigAppConfigSingle = SpectrumConfigApiResponseSingle & {
   result?: SpectrumConfigAppConfig | SpectrumConfigPaygoAppConfig;
@@ -43786,7 +44389,9 @@ export type SpectrumConfigAppConfigSingle = SpectrumConfigApiResponseSingle & {
  * @maxLength 32
  * @x-auditable true
  */
-export type SpectrumConfigAppIdentifier = void & void & SpectrumConfigIdentifier;
+export type SpectrumConfigAppIdentifier = void &
+  void &
+  SpectrumConfigIdentifier;
 
 /**
  * Enables Argo Smart Routing for this application.
@@ -43840,7 +44445,7 @@ export type SpectrumConfigDnsTtl = number;
  *
  * @example CNAME
  */
-export type SpectrumConfigDnsType = 'CNAME' | 'ADDRESS';
+export type SpectrumConfigDnsType = "CNAME" | "ADDRESS";
 
 /**
  * The anycast edge IP configuration for the hostname of this application.
@@ -43854,13 +44459,13 @@ export type SpectrumConfigEdgeIps =
        *
        * @example all
        */
-      connectivity?: 'all' | 'ipv4' | 'ipv6';
+      connectivity?: "all" | "ipv4" | "ipv6";
       /**
        * The type of edge IP configuration specified. Dynamically allocated edge IPs use Spectrum anycast IPs in accordance with the connectivity you specify. Only valid with CNAME DNS names.
        *
        * @example dynamic
        */
-      type?: 'dynamic';
+      type?: "dynamic";
     }
   | {
       /**
@@ -43874,7 +44479,7 @@ export type SpectrumConfigEdgeIps =
        *
        * @example static
        */
-      type?: 'static';
+      type?: "static";
     };
 
 /**
@@ -43942,7 +44547,7 @@ export type SpectrumConfigOriginDnsName = string;
  *
  * @example
  */
-export type SpectrumConfigOriginDnsType = '' | 'A' | 'AAAA' | 'SRV';
+export type SpectrumConfigOriginDnsType = "" | "A" | "AAAA" | "SRV";
 
 /**
  * The destination port at the origin. Only specified in conjunction with origin_dns. May use an integer to specify a single origin port, for example `1000`, or a string to specify a range of origin ports, for example `"1000-2000"`.
@@ -43973,7 +44578,7 @@ export type SpectrumConfigProtocol = string;
  * @default off
  * @example off
  */
-export type SpectrumConfigProxyProtocol = 'off' | 'v1' | 'v2' | 'simple';
+export type SpectrumConfigProxyProtocol = "off" | "v1" | "v2" | "simple";
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -43987,7 +44592,7 @@ export type SpectrumConfigTimestamp = string;
  *
  * @example full
  */
-export type SpectrumConfigTls = 'off' | 'flexible' | 'full' | 'strict';
+export type SpectrumConfigTls = "off" | "flexible" | "full" | "strict";
 
 /**
  * Determines how data travels from the edge to your origin. When set to "direct", Spectrum will send traffic directly to your origin, and the application's type is derived from the `protocol`. When set to "http" or "https", Spectrum will apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and the application type matches this property exactly.
@@ -43995,9 +44600,11 @@ export type SpectrumConfigTls = 'off' | 'flexible' | 'full' | 'strict';
  * @default direct
  * @example direct
  */
-export type SpectrumConfigTrafficType = 'direct' | 'http' | 'https';
+export type SpectrumConfigTrafficType = "direct" | "http" | "https";
 
-export type SpectrumConfigUpdateAppConfig = SpectrumConfigAppConfig | SpectrumConfigPaygoAppConfig;
+export type SpectrumConfigUpdateAppConfig =
+  | SpectrumConfigAppConfig
+  | SpectrumConfigPaygoAppConfig;
 
 /**
  * Identifier.
@@ -44006,7 +44613,9 @@ export type SpectrumConfigUpdateAppConfig = SpectrumConfigAppConfig | SpectrumCo
  * @maxLength 32
  * @x-auditable true
  */
-export type SpectrumConfigZoneIdentifier = void & void & SpectrumConfigIdentifier;
+export type SpectrumConfigZoneIdentifier = void &
+  void &
+  SpectrumConfigIdentifier;
 
 export type SpeedApiResponseCommon = {
   errors: SpeedMessages;
@@ -44072,7 +44681,7 @@ export type SpeedBase = {
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -44093,7 +44702,7 @@ export type SpeedCloudflareFonts = {
    * @example fonts
    * @x-auditable true
    */
-  id?: 'fonts';
+  id?: "fonts";
   /**
    * last time this setting was modified.
    *
@@ -44117,7 +44726,7 @@ export type SpeedCloudflareFonts = {
  * @default off
  * @x-auditable true
  */
-export type SpeedCloudflareFontsValue = 'on' | 'off';
+export type SpeedCloudflareFontsValue = "on" | "off";
 
 export type SpeedCloudflareSpeedBrainResponse = {
   /**
@@ -44149,7 +44758,7 @@ export type SpeedCloudflareSpeedBrainResponse = {
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -44183,7 +44792,7 @@ export type StreamAccessRules = {
    * @example allow
    * @x-auditable true
    */
-  action?: 'allow' | 'block';
+  action?: "allow" | "block";
   /**
    * An array of 2-letter country codes in ISO 3166-1 Alpha-2 format used to match requests.
    */
@@ -44198,7 +44807,7 @@ export type StreamAccessRules = {
    * @example ip.src
    * @x-auditable true
    */
-  type?: 'any' | 'ip.src' | 'ip.geoip.country';
+  type?: "any" | "ip.src" | "ip.geoip.country";
 };
 
 /**
@@ -44215,7 +44824,7 @@ export type StreamAddAudioTrackResponse = StreamApiResponseCommon & {
 };
 
 export type StreamAdditionalAudio = {
-  ['default']?: StreamAudioDefault;
+  ["default"]?: StreamAudioDefault;
   label?: StreamAudioLabel;
   status?: StreamAudioState;
   uid?: StreamIdentifier;
@@ -44295,7 +44904,7 @@ export type StreamAudioLabel = string;
  *
  * @x-auditable true
  */
-export type StreamAudioState = 'queued' | 'ready' | 'error';
+export type StreamAudioState = "queued" | "ready" | "error";
 
 export type StreamCaptionBasicUpload = {
   /**
@@ -44312,7 +44921,7 @@ export type StreamCaptionBasicUpload = {
  *
  * @x-auditable true
  */
-export type StreamCaptionStatus = 'ready' | 'inprogress' | 'error';
+export type StreamCaptionStatus = "ready" | "inprogress" | "error";
 
 export type StreamCaptions = {
   generated?: StreamGeneratedCaption;
@@ -44473,7 +45082,7 @@ export type StreamDownloadsResponse = StreamApiResponseSingle & {
 export type StreamDuration = number;
 
 export type StreamEditAudioTrack = {
-  ['default']?: StreamAudioDefault;
+  ["default"]?: StreamAudioDefault;
   label?: StreamAudioLabel;
 };
 
@@ -44771,7 +45380,7 @@ export type StreamLiveInputRecordingHideLiveViewerCount = boolean;
  * @example automatic
  * @x-auditable true
  */
-export type StreamLiveInputRecordingMode = 'off' | 'automatic';
+export type StreamLiveInputRecordingMode = "off" | "automatic";
 
 /**
  * Indicates if a video using the live input has the `requireSignedURLs` property set. Also enforces access controls on any video recording of the livestream with the live input.
@@ -44832,14 +45441,14 @@ export type StreamLiveInputResponseSingle = StreamApiResponseSingle & {
  */
 export type StreamLiveInputStatus =
   | any
-  | 'connected'
-  | 'reconnected'
-  | 'reconnecting'
-  | 'client_disconnect'
-  | 'ttl_exceeded'
-  | 'failed_to_connect'
-  | 'failed_to_reconnect'
-  | 'new_configuration_accepted'
+  | "connected"
+  | "reconnected"
+  | "reconnecting"
+  | "client_disconnect"
+  | "ttl_exceeded"
+  | "failed_to_connect"
+  | "failed_to_reconnect"
+  | "new_configuration_accepted"
   | null;
 
 /**
@@ -44864,7 +45473,13 @@ export type StreamMediaMetadata = Record<string, any>;
  * @example inprogress
  * @x-auditable true
  */
-export type StreamMediaState = 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
+export type StreamMediaState =
+  | "pendingupload"
+  | "downloading"
+  | "queued"
+  | "inprogress"
+  | "ready"
+  | "error";
 
 /**
  * Specifies a detailed status for a video. If the `state` is `inprogress` or `error`, the `step` field returns `encoding` or `manifest`. If the `state` is `inprogress`, `pctComplete` returns a number between 0 and 100 to indicate the approximate percent of completion. If the `state` is `error`, `errorReasonCode` and `errorReasonText` provide additional details.
@@ -45313,7 +45928,7 @@ export type StreamThumbnailUrl = string;
  * @example 1.0.0
  * @x-auditable true
  */
-export type StreamTusResumable = '1.0.0';
+export type StreamTusResumable = "1.0.0";
 
 /**
  * Specifies whether the video is `vod` or `live`.
@@ -45661,7 +46276,7 @@ export type TeamsDevicesApplicationInputRequest = {
    * @example mac
    * @x-auditable true
    */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: "windows" | "linux" | "mac";
   /**
    * Path for the application.
    *
@@ -45708,7 +46323,7 @@ export type TeamsDevicesCarbonblackInputRequest = {
    * @example mac
    * @x-auditable true
    */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: "windows" | "linux" | "mac";
   /**
    * File path.
    *
@@ -45793,7 +46408,7 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
    *
    * @example windows
    */
-  operating_system: 'windows' | 'mac' | 'linux';
+  operating_system: "windows" | "mac" | "linux";
   /**
    * List of certificate Subject Alternative Names.
    *
@@ -45811,13 +46426,15 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
  */
 export type TeamsDevicesComponentsSchemasName = string;
 
-export type TeamsDevicesComponentsSchemasResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesDeviceManagedNetworks[];
-};
+export type TeamsDevicesComponentsSchemasResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesDeviceManagedNetworks[];
+  };
 
-export type TeamsDevicesComponentsSchemasSingleResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesDeviceManagedNetworks;
-};
+export type TeamsDevicesComponentsSchemasSingleResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesDeviceManagedNetworks;
+  };
 
 /**
  * The type of device managed network.
@@ -45825,7 +46442,7 @@ export type TeamsDevicesComponentsSchemasSingleResponse = TeamsDevicesApiRespons
  * @example tls
  * @x-auditable true
  */
-export type TeamsDevicesComponentsSchemasType = 'tls';
+export type TeamsDevicesComponentsSchemasType = "tls";
 
 /**
  * UUID.
@@ -45918,7 +46535,7 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    * @example >
    * @x-auditable true
    */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: "<" | "<=" | ">" | ">=" | "==";
   /**
    * Os Version.
    *
@@ -45946,7 +46563,7 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    * @example online
    * @x-auditable true
    */
-  state?: 'online' | 'offline' | 'unknown';
+  state?: "online" | "offline" | "unknown";
   /**
    * Version.
    *
@@ -45960,7 +46577,7 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    * @example >
    * @x-auditable true
    */
-  versionOperator?: '<' | '<=' | '>' | '>=' | '==';
+  versionOperator?: "<" | "<=" | ">" | ">=" | "==";
 };
 
 /**
@@ -46022,7 +46639,7 @@ export type TeamsDevicesCustomS2sInputRequest = {
    *
    * @example >
    */
-  operator: '<' | '<=' | '>' | '>=' | '==';
+  operator: "<" | "<=" | ">" | ">=" | "==";
   /**
    * A value between 0-100 assigned to devices set by the 3rd party posture provider.
    *
@@ -46049,7 +46666,7 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
    *
    * @example true
    */
-  ['default']?: boolean;
+  ["default"]?: boolean;
   disable_auto_fallback?: TeamsDevicesDisableAutoFallback;
   /**
    * Whether the policy will be applied to matching devices.
@@ -46070,9 +46687,10 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
   tunnel_protocol?: TeamsDevicesTunnelProtocol;
 };
 
-export type TeamsDevicesDefaultDeviceSettingsResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesDefaultDeviceSettingsPolicy;
-};
+export type TeamsDevicesDefaultDeviceSettingsResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesDefaultDeviceSettingsPolicy;
+  };
 
 /**
  * True if the device was deleted.
@@ -46180,7 +46798,8 @@ export type TeamsDevicesDeviceDexTestSchemasName = string;
 /**
  * Device settings profiles targeted by this test.
  */
-export type TeamsDevicesDeviceDexTestTargetPolicies = TeamsDevicesDexTargetPolicy[];
+export type TeamsDevicesDeviceDexTestTargetPolicies =
+  TeamsDevicesDexTargetPolicy[];
 
 export type TeamsDevicesDeviceManagedNetworks = {
   config?: TeamsDevicesSchemasConfigResponse;
@@ -46226,7 +46845,7 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   allowed_to_leave?: TeamsDevicesAllowedToLeave;
   auto_connect?: TeamsDevicesAutoConnect;
   captive_portal?: TeamsDevicesCaptivePortal;
-  ['default']?: TeamsDevicesDefault;
+  ["default"]?: TeamsDevicesDefault;
   description?: TeamsDevicesSchemasDescription;
   disable_auto_fallback?: TeamsDevicesDisableAutoFallback;
   /**
@@ -46261,13 +46880,15 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   tunnel_protocol?: TeamsDevicesTunnelProtocol;
 };
 
-export type TeamsDevicesDeviceSettingsResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesDeviceSettingsPolicy;
-};
+export type TeamsDevicesDeviceSettingsResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesDeviceSettingsPolicy;
+  };
 
-export type TeamsDevicesDeviceSettingsResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesDeviceSettingsPolicy[];
-};
+export type TeamsDevicesDeviceSettingsResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesDeviceSettingsPolicy[];
+  };
 
 /**
  * @example windows
@@ -46307,9 +46928,10 @@ export type TeamsDevicesDevicesPolicyCertificates = {
   enabled: boolean;
 };
 
-export type TeamsDevicesDevicesPolicyCertificatesSingle = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesDevicesPolicyCertificates;
-};
+export type TeamsDevicesDevicesPolicyCertificatesSingle =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesDevicesPolicyCertificates;
+  };
 
 export type TeamsDevicesDevicesResponse = TeamsDevicesApiResponseCollection & {
   result?: TeamsDevicesDevices[];
@@ -46332,9 +46954,10 @@ export type TeamsDevicesDexDeleteResponseCollection = {
   success: true;
 };
 
-export type TeamsDevicesDexResponseCollection = TeamsDevicesApiResponseCollectionCommon & {
-  result?: TeamsDevicesDeviceDexTestSchemasHttp[];
-};
+export type TeamsDevicesDexResponseCollection =
+  TeamsDevicesApiResponseCollectionCommon & {
+    result?: TeamsDevicesDeviceDexTestSchemasHttp[];
+  };
 
 export type TeamsDevicesDexSingleResponse = TeamsDevicesApiResponseSingle & {
   result?: TeamsDevicesDeviceDexTestSchemasHttp;
@@ -46344,7 +46967,7 @@ export type TeamsDevicesDexTargetPolicy = {
   /**
    * Whether the profile is the account default.
    */
-  ['default']?: boolean;
+  ["default"]?: boolean;
   /**
    * The id of the device settings profile.
    */
@@ -46370,31 +46993,31 @@ export type TeamsDevicesDisableForTime = {
    *
    * @example 9106681
    */
-  ['1']?: string;
+  ["1"]?: string;
   /**
    * Override code that is valid for 3 hours.
    *
    * @example 5356247
    */
-  ['3']?: string;
+  ["3"]?: string;
   /**
    * Override code that is valid for 6 hours.
    *
    * @example 9478972
    */
-  ['6']?: string;
+  ["6"]?: string;
   /**
    * Override code that is valid for 12 hour2.
    *
    * @example 3424359
    */
-  ['12']?: string;
+  ["12"]?: string;
   /**
    * Override code that is valid for 24 hour.2.
    *
    * @example 2887634
    */
-  ['24']?: string;
+  ["24"]?: string;
 };
 
 /**
@@ -46424,7 +47047,7 @@ export type TeamsDevicesDomainJoinedInputRequest = {
    * @example windows
    * @x-auditable true
    */
-  operating_system: 'windows';
+  operating_system: "windows";
 };
 
 /**
@@ -46493,7 +47116,7 @@ export type TeamsDevicesExpiration = string;
 /**
  * @x-auditable true
  */
-export type TeamsDevicesExtendedKeyUsageEnum = 'clientAuth' | 'emailProtection';
+export type TeamsDevicesExtendedKeyUsageEnum = "clientAuth" | "emailProtection";
 
 export type TeamsDevicesFallbackDomain = {
   /**
@@ -46517,9 +47140,10 @@ export type TeamsDevicesFallbackDomain = {
   suffix: string;
 };
 
-export type TeamsDevicesFallbackDomainResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesFallbackDomain[];
-};
+export type TeamsDevicesFallbackDomainResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesFallbackDomain[];
+  };
 
 /**
  * @default {"suffix":"intranet"}
@@ -46553,7 +47177,7 @@ export type TeamsDevicesFileInputRequest = {
    * @example mac
    * @x-auditable true
    */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: "windows" | "linux" | "mac";
   /**
    * File path.
    *
@@ -46589,7 +47213,7 @@ export type TeamsDevicesFirewallInputRequest = {
    * @example windows
    * @x-auditable true
    */
-  operating_system: 'windows' | 'mac';
+  operating_system: "windows" | "mac";
 };
 
 /**
@@ -46613,9 +47237,10 @@ export type TeamsDevicesGlobalWarpOverrideRequest = {
   justification?: TeamsDevicesJustification;
 };
 
-export type TeamsDevicesGlobalWarpOverrideResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesGlobalWarpOverride;
-};
+export type TeamsDevicesGlobalWarpOverrideResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesGlobalWarpOverride;
+  };
 
 export type TeamsDevicesIdResponse = TeamsDevicesApiResponseSingle & {
   result?: {
@@ -46733,7 +47358,13 @@ export type TeamsDevicesIntuneInputRequest = {
    * @example compliant
    * @x-auditable true
    */
-  compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
+  compliance_status:
+    | "compliant"
+    | "noncompliant"
+    | "unknown"
+    | "notapplicable"
+    | "ingraceperiod"
+    | "error";
   /**
    * Posture Integration ID.
    *
@@ -46804,7 +47435,7 @@ export type TeamsDevicesKolideInputRequest = {
    * @example >
    * @x-auditable true
    */
-  countOperator: '<' | '<=' | '>' | '>=' | '==';
+  countOperator: "<" | "<=" | ">" | ">=" | "==";
   /**
    * The Number of Issues.
    *
@@ -46921,14 +47552,14 @@ export type TeamsDevicesOsVersionInputRequest = {
    * @example windows
    * @x-auditable true
    */
-  operating_system: 'windows';
+  operating_system: "windows";
   /**
    * Operator.
    *
    * @example 13.3.0
    * @x-auditable true
    */
-  operator: '<' | '<=' | '>' | '>=' | '==';
+  operator: "<" | "<=" | ">" | ">=" | "==";
   /**
    * Operating System Distribution Name (linux only).
    *
@@ -46965,11 +47596,12 @@ export type TeamsDevicesOverrideCodes = {
   };
 };
 
-export type TeamsDevicesOverrideCodesResponse = TeamsDevicesApiResponseCollection & {
-  result?: {
-    disable_for_time?: TeamsDevicesDisableForTime;
+export type TeamsDevicesOverrideCodesResponse =
+  TeamsDevicesApiResponseCollection & {
+    result?: {
+      disable_for_time?: TeamsDevicesDisableForTime;
+    };
   };
-};
 
 /**
  * List of paths to check for client certificate on linux.
@@ -47109,7 +47741,13 @@ export type TeamsDevicesPhysicalDevice = {
  * @example windows
  * @x-auditable true
  */
-export type TeamsDevicesPlatform = 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
+export type TeamsDevicesPlatform =
+  | "windows"
+  | "mac"
+  | "linux"
+  | "android"
+  | "ios"
+  | "chromeos";
 
 /**
  * The precedence of the policy. Lower values indicate higher precedence. Policies will be evaluated in ascending order of this field.
@@ -47241,9 +47879,10 @@ export type TeamsDevicesRegistrationId = string;
  */
 export type TeamsDevicesRequireAll = boolean;
 
-export type TeamsDevicesResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesDevicePostureRules[];
-};
+export type TeamsDevicesResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesDevicePostureRules[];
+  };
 
 export type TeamsDevicesResultInfo = {
   /**
@@ -47345,13 +47984,15 @@ export type TeamsDevicesSchemasMatch = string;
  */
 export type TeamsDevicesSchemasName = string;
 
-export type TeamsDevicesSchemasResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesDevicePostureIntegrations[];
-};
+export type TeamsDevicesSchemasResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesDevicePostureIntegrations[];
+  };
 
-export type TeamsDevicesSchemasSingleResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesDevicePostureIntegrations;
-};
+export type TeamsDevicesSchemasSingleResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesDevicePostureIntegrations;
+  };
 
 /**
  * The unique identifier for the test.
@@ -47368,14 +48009,14 @@ export type TeamsDevicesSchemasTestId = string;
  * @x-auditable true
  */
 export type TeamsDevicesSchemasType =
-  | 'workspace_one'
-  | 'crowdstrike_s2s'
-  | 'uptycs'
-  | 'intune'
-  | 'kolide'
-  | 'tanium_s2s'
-  | 'sentinelone_s2s'
-  | 'custom_s2s';
+  | "workspace_one"
+  | "crowdstrike_s2s"
+  | "uptycs"
+  | "intune"
+  | "kolide"
+  | "tanium_s2s"
+  | "sentinelone_s2s"
+  | "custom_s2s";
 
 /**
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
@@ -47391,7 +48032,7 @@ export type TeamsDevicesSentineloneInputRequest = {
    * @example mac
    * @x-auditable true
    */
-  operating_system: 'windows' | 'linux' | 'mac';
+  operating_system: "windows" | "linux" | "mac";
   /**
    * File path.
    *
@@ -47461,24 +48102,28 @@ export type TeamsDevicesSentineloneS2sInputRequest = {
    *
    * @example connected
    */
-  network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+  network_status?:
+    | "connected"
+    | "disconnected"
+    | "disconnecting"
+    | "connecting";
   /**
    * Agent operational state.
    */
   operational_state?:
-    | 'na'
-    | 'partially_disabled'
-    | 'auto_fully_disabled'
-    | 'fully_disabled'
-    | 'auto_partially_disabled'
-    | 'disabled_error'
-    | 'db_corruption';
+    | "na"
+    | "partially_disabled"
+    | "auto_fully_disabled"
+    | "fully_disabled"
+    | "auto_partially_disabled"
+    | "disabled_error"
+    | "db_corruption";
   /**
    * Operator.
    *
    * @example >
    */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: "<" | "<=" | ">" | ">=" | "==";
 };
 
 /**
@@ -47539,13 +48184,15 @@ export type TeamsDevicesSplitTunnelInclude =
   | TeamsDevicesIncludeSplitTunnelWithAddress
   | TeamsDevicesIncludeSplitTunnelWithHost;
 
-export type TeamsDevicesSplitTunnelIncludeResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesSplitTunnelInclude[];
-};
+export type TeamsDevicesSplitTunnelIncludeResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesSplitTunnelInclude[];
+  };
 
-export type TeamsDevicesSplitTunnelResponseCollection = TeamsDevicesApiResponseCollection & {
-  result?: TeamsDevicesSplitTunnel[];
-};
+export type TeamsDevicesSplitTunnelResponseCollection =
+  TeamsDevicesApiResponseCollection & {
+    result?: TeamsDevicesSplitTunnel[];
+  };
 
 /**
  * The URL to launch when the Send Feedback button is clicked.
@@ -47614,21 +48261,21 @@ export type TeamsDevicesTaniumInputRequest = {
    * @example >
    * @x-auditable true
    */
-  operator?: '<' | '<=' | '>' | '>=' | '==';
+  operator?: "<" | "<=" | ">" | ">=" | "==";
   /**
    * For more details on risk level, refer to the Tanium documentation.
    *
    * @example low
    * @x-auditable true
    */
-  risk_level?: 'low' | 'medium' | 'high' | 'critical';
+  risk_level?: "low" | "medium" | "high" | "critical";
   /**
    * Score Operator.
    *
    * @example >
    * @x-auditable true
    */
-  scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
+  scoreOperator?: "<" | "<=" | ">" | ">=" | "==";
   /**
    * For more details on total score, refer to the Tanium documentation.
    *
@@ -47703,7 +48350,7 @@ export type TeamsDevicesTrustStores = TeamsDevicesTrustStoresEnum[];
 /**
  * @x-auditable true
  */
-export type TeamsDevicesTrustStoresEnum = 'system' | 'user';
+export type TeamsDevicesTrustStoresEnum = "system" | "user";
 
 /**
  * Determines which tunnel protocol to use.
@@ -47728,28 +48375,28 @@ export type TeamsDevicesTunnelType = string;
  * @x-auditable true
  */
 export type TeamsDevicesType =
-  | 'file'
-  | 'application'
-  | 'tanium'
-  | 'gateway'
-  | 'warp'
-  | 'disk_encryption'
-  | 'serial_number'
-  | 'sentinelone'
-  | 'carbonblack'
-  | 'firewall'
-  | 'os_version'
-  | 'domain_joined'
-  | 'client_certificate'
-  | 'client_certificate_v2'
-  | 'unique_client_id'
-  | 'kolide'
-  | 'tanium_s2s'
-  | 'crowdstrike_s2s'
-  | 'intune'
-  | 'workspace_one'
-  | 'sentinelone_s2s'
-  | 'custom_s2s';
+  | "file"
+  | "application"
+  | "tanium"
+  | "gateway"
+  | "warp"
+  | "disk_encryption"
+  | "serial_number"
+  | "sentinelone"
+  | "carbonblack"
+  | "firewall"
+  | "os_version"
+  | "domain_joined"
+  | "client_certificate"
+  | "client_certificate_v2"
+  | "unique_client_id"
+  | "kolide"
+  | "tanium_s2s"
+  | "crowdstrike_s2s"
+  | "intune"
+  | "workspace_one"
+  | "sentinelone_s2s"
+  | "custom_s2s";
 
 export type TeamsDevicesUniqueClientIdInputRequest = {
   /**
@@ -47765,7 +48412,7 @@ export type TeamsDevicesUniqueClientIdInputRequest = {
    * @example android
    * @x-auditable true
    */
-  operating_system: 'android' | 'ios' | 'chromeos';
+  operating_system: "android" | "ios" | "chromeos";
 };
 
 /**
@@ -47907,7 +48554,7 @@ export type TeamsDevicesWorkspaceOneInputRequest = {
    * @example compliant
    * @x-auditable true
    */
-  compliance_status: 'compliant' | 'noncompliant' | 'unknown';
+  compliance_status: "compliant" | "noncompliant" | "unknown";
   /**
    * Posture Integration ID.
    *
@@ -47948,9 +48595,10 @@ export type TeamsDevicesZeroTrustAccountDeviceSettings = {
   use_zt_virtual_ip?: boolean;
 };
 
-export type TeamsDevicesZeroTrustAccountDeviceSettingsResponse = TeamsDevicesApiResponseSingle & {
-  result?: TeamsDevicesZeroTrustAccountDeviceSettings;
-};
+export type TeamsDevicesZeroTrustAccountDeviceSettingsResponse =
+  TeamsDevicesApiResponseSingle & {
+    result?: TeamsDevicesZeroTrustAccountDeviceSettings;
+  };
 
 export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
   TlsCertificatesAndHostnamesApiResponseSingle & {
@@ -47972,11 +48620,12 @@ export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
  * @example advanced
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesAdvancedType = 'advanced';
+export type TlsCertificatesAndHostnamesAdvancedType = "advanced";
 
-export type TlsCertificatesAndHostnamesApiResponseCollection = TlsCertificatesAndHostnamesApiResponseCommon & {
-  result_info?: TlsCertificatesAndHostnamesResultInfo;
-};
+export type TlsCertificatesAndHostnamesApiResponseCollection =
+  TlsCertificatesAndHostnamesApiResponseCommon & {
+    result_info?: TlsCertificatesAndHostnamesResultInfo;
+  };
 
 export type TlsCertificatesAndHostnamesApiResponseCommon = {
   errors: TlsCertificatesAndHostnamesMessages;
@@ -48005,7 +48654,8 @@ export type TlsCertificatesAndHostnamesApiResponseCommonFailure = {
   success: false;
 };
 
-export type TlsCertificatesAndHostnamesApiResponseSingle = TlsCertificatesAndHostnamesApiResponseCommon;
+export type TlsCertificatesAndHostnamesApiResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseCommon;
 
 export type TlsCertificatesAndHostnamesAssociationObject = {
   service?: TlsCertificatesAndHostnamesService;
@@ -48065,7 +48715,10 @@ export type TlsCertificatesAndHostnamesBrandCheck = boolean;
  * @example ubiquitous
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesBundleMethod = 'ubiquitous' | 'optimal' | 'force';
+export type TlsCertificatesAndHostnamesBundleMethod =
+  | "ubiquitous"
+  | "optimal"
+  | "force";
 
 /**
  * Indicates whether the certificate is a CA or leaf certificate.
@@ -48127,27 +48780,28 @@ export type TlsCertificatesAndHostnamesCertificate = string;
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus =
-  | 'initializing'
-  | 'pending_validation'
-  | 'deleted'
-  | 'pending_issuance'
-  | 'pending_deployment'
-  | 'pending_deletion'
-  | 'pending_expiration'
-  | 'expired'
-  | 'active'
-  | 'initializing_timed_out'
-  | 'validation_timed_out'
-  | 'issuance_timed_out'
-  | 'deployment_timed_out'
-  | 'deletion_timed_out'
-  | 'pending_cleanup'
-  | 'staging_deployment'
-  | 'staging_active'
-  | 'deactivating'
-  | 'inactive'
-  | 'backup_issued'
-  | 'holding_deployment';
+
+    | "initializing"
+    | "pending_validation"
+    | "deleted"
+    | "pending_issuance"
+    | "pending_deployment"
+    | "pending_deletion"
+    | "pending_expiration"
+    | "expired"
+    | "active"
+    | "initializing_timed_out"
+    | "validation_timed_out"
+    | "issuance_timed_out"
+    | "deployment_timed_out"
+    | "deletion_timed_out"
+    | "pending_cleanup"
+    | "staging_deployment"
+    | "staging_active"
+    | "deactivating"
+    | "inactive"
+    | "backup_issued"
+    | "holding_deployment";
 
 export type TlsCertificatesAndHostnamesCertificateObject = {
   certificate?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate;
@@ -48172,9 +48826,10 @@ export type TlsCertificatesAndHostnamesCertificateObjectPost = {
   uploaded_on?: TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn;
 };
 
-export type TlsCertificatesAndHostnamesCertificateAnalyzeResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type TlsCertificatesAndHostnamesCertificateAnalyzeResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * The Certificate Authority that will issue the certificate
@@ -48182,41 +48837,50 @@ export type TlsCertificatesAndHostnamesCertificateAnalyzeResponse = TlsCertifica
  * @example google
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesCertificateAuthority = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
+export type TlsCertificatesAndHostnamesCertificateAuthority =
+  | "digicert"
+  | "google"
+  | "lets_encrypt"
+  | "ssl_com";
 
-export type TlsCertificatesAndHostnamesCertificatePackQuotaResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    advanced?: TlsCertificatesAndHostnamesQuota;
+export type TlsCertificatesAndHostnamesCertificatePackQuotaResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      advanced?: TlsCertificatesAndHostnamesQuota;
+    };
   };
-};
 
 export type TlsCertificatesAndHostnamesCertificatePackResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
     result?: Record<string, any>[];
   };
 
-export type TlsCertificatesAndHostnamesCertificatePackResponseSingle = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type TlsCertificatesAndHostnamesCertificatePackResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 export type TlsCertificatesAndHostnamesCertificateResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
     result?: TlsCertificatesAndHostnamesCustomCertificate[];
   };
 
-export type TlsCertificatesAndHostnamesCertificateResponseIdOnly = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    id?: TlsCertificatesAndHostnamesIdentifier;
+export type TlsCertificatesAndHostnamesCertificateResponseIdOnly =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      id?: TlsCertificatesAndHostnamesIdentifier;
+    };
   };
-};
 
-export type TlsCertificatesAndHostnamesCertificateResponseSingle = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesCustomCertificate;
-};
+export type TlsCertificatesAndHostnamesCertificateResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesCustomCertificate;
+  };
 
-export type TlsCertificatesAndHostnamesCertificateResponseSinglePost = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesCertificateObjectPost;
-};
+export type TlsCertificatesAndHostnamesCertificateResponseSinglePost =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesCertificateObjectPost;
+  };
 
 export type TlsCertificatesAndHostnamesCertificateRevokeResponse = {
   result?: {
@@ -48232,13 +48896,13 @@ export type TlsCertificatesAndHostnamesCertificateRevokeResponse = {
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificateStatus =
-  | 'initializing'
-  | 'authorizing'
-  | 'active'
-  | 'expired'
-  | 'issuing'
-  | 'timing_out'
-  | 'pending_deployment';
+  | "initializing"
+  | "authorizing"
+  | "active"
+  | "expired"
+  | "issuing"
+  | "timing_out"
+  | "pending_deployment";
 
 export type TlsCertificatesAndHostnamesCertificates = {
   certificate?: TlsCertificatesAndHostnamesComponentsSchemasCertificate;
@@ -48255,23 +48919,25 @@ export type TlsCertificatesAndHostnamesCertificates = {
  *
  * @example -----BEGIN CERTIFICATE-----\nMIIDmDCCAoC...dhDDE\n-----END CERTIFICATE-----
  */
-export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificate = string;
+export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificate =
+  string;
 
 /**
  * Certificate Authority used to issue the Client Certificate
  */
-export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificateAuthority = {
-  /**
-   * @example 568b6b74-7b0c-4755-8840-4e3b8c24adeb
-   * @x-auditable true
-   */
-  id?: string;
-  /**
-   * @example Cloudflare Managed CA for account
-   * @x-auditable true
-   */
-  name?: string;
-};
+export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificateAuthority =
+  {
+    /**
+     * @example 568b6b74-7b0c-4755-8840-4e3b8c24adeb
+     * @x-auditable true
+     */
+    id?: string;
+    /**
+     * @example Cloudflare Managed CA for account
+     * @x-auditable true
+     */
+    name?: string;
+  };
 
 /**
  * Client Certificates may be active or revoked, and the pending_reactivation or pending_revocation represent in-progress asynchronous transitions
@@ -48280,10 +48946,7 @@ export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertif
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasStatus =
-  | 'active'
-  | 'pending_reactivation'
-  | 'pending_revocation'
-  | 'revoked';
+  "active" | "pending_reactivation" | "pending_revocation" | "revoked";
 
 export type TlsCertificatesAndHostnamesClientCertificate = {
   certificate?: TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificate;
@@ -48373,7 +49036,10 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificateObject = {
  * @example google
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
+export type TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority =
+  | "google"
+  | "lets_encrypt"
+  | "ssl_com";
 
 export type TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
@@ -48452,22 +49118,22 @@ export type TlsCertificatesAndHostnamesComponentsSchemasSignature = string;
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
-  | 'active'
-  | 'pending'
-  | 'active_redeploying'
-  | 'moved'
-  | 'pending_deletion'
-  | 'deleted'
-  | 'pending_blocked'
-  | 'pending_migration'
-  | 'pending_provisioned'
-  | 'test_pending'
-  | 'test_active'
-  | 'test_active_apex'
-  | 'test_blocked'
-  | 'test_failed'
-  | 'provisioned'
-  | 'blocked';
+  | "active"
+  | "pending"
+  | "active_redeploying"
+  | "moved"
+  | "pending_deletion"
+  | "deleted"
+  | "pending_blocked"
+  | "pending_migration"
+  | "pending_provisioned"
+  | "test_pending"
+  | "test_active"
+  | "test_active_apex"
+  | "test_blocked"
+  | "test_failed"
+  | "provisioned"
+  | "blocked";
 
 /**
  * This is the time the certificate was updated.
@@ -48491,7 +49157,8 @@ export type TlsCertificatesAndHostnamesComponentsSchemasValidationMethod = {
   validation_method: TlsCertificatesAndHostnamesValidationMethodDefinition;
 };
 
-export type TlsCertificatesAndHostnamesConfig = TlsCertificatesAndHostnamesHostnameCertidInput[];
+export type TlsCertificatesAndHostnamesConfig =
+  TlsCertificatesAndHostnamesHostnameCertidInput[];
 
 /**
  * Country, provided by the CSR
@@ -48571,12 +49238,13 @@ export type TlsCertificatesAndHostnamesCustomHostname = {
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSchemasStatus =
-  | 'initializing'
-  | 'pending_deployment'
-  | 'pending_deletion'
-  | 'active'
-  | 'deployment_timed_out'
-  | 'deletion_timed_out';
+
+    | "initializing"
+    | "pending_deployment"
+    | "pending_deletion"
+    | "active"
+    | "deployment_timed_out"
+    | "deletion_timed_out";
 
 export type TlsCertificatesAndHostnamesCustomCertAndKey = {
   /**
@@ -48604,16 +49272,18 @@ export type TlsCertificatesAndHostnamesCustomCertAndKey = {
  * @maxItems 2
  * @minItems 1
  */
-export type TlsCertificatesAndHostnamesCustomCertBundle = TlsCertificatesAndHostnamesCustomCertAndKey[];
+export type TlsCertificatesAndHostnamesCustomCertBundle =
+  TlsCertificatesAndHostnamesCustomCertAndKey[];
 
 export type TlsCertificatesAndHostnamesCustomHostnameResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
     result?: TlsCertificatesAndHostnamesCustomHostname[];
   };
 
-export type TlsCertificatesAndHostnamesCustomHostnameResponseSingle = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesCustomHostname;
-};
+export type TlsCertificatesAndHostnamesCustomHostnameResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesCustomHostname;
+  };
 
 /**
  * Unique key/value metadata for this hostname. These are per-hostname (customer) settings.
@@ -48652,9 +49322,10 @@ export type TlsCertificatesAndHostnamesCustomhostname = {
   verification_errors?: TlsCertificatesAndHostnamesVerificationErrors;
 };
 
-export type TlsCertificatesAndHostnamesDcvDelegationResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesUuidObject;
-};
+export type TlsCertificatesAndHostnamesDcvDelegationResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesUuidObject;
+  };
 
 export type TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSingle =
   TlsCertificatesAndHostnamesApiResponseSingle & {
@@ -48671,11 +49342,12 @@ export type TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSing
  */
 export type TlsCertificatesAndHostnamesEnabled = boolean;
 
-export type TlsCertificatesAndHostnamesEnabledResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    enabled?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled;
+export type TlsCertificatesAndHostnamesEnabledResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      enabled?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled;
+    };
   };
-};
 
 /**
  * Whether or not the Keyless SSL is on or off.
@@ -48710,9 +49382,10 @@ export type TlsCertificatesAndHostnamesExpiredOn = string;
  */
 export type TlsCertificatesAndHostnamesExpiresOn = string;
 
-export type TlsCertificatesAndHostnamesFallbackOriginResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesFallbackorigin;
-};
+export type TlsCertificatesAndHostnamesFallbackOriginResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesFallbackorigin;
+  };
 
 export type TlsCertificatesAndHostnamesFallbackorigin = {
   created_at?: TlsCertificatesAndHostnamesSchemasCreatedAt;
@@ -48738,7 +49411,7 @@ export type TlsCertificatesAndHostnamesGeoRestrictions = {
    * @example us
    * @x-auditable true
    */
-  label?: 'us' | 'eu' | 'highest_security';
+  label?: "us" | "eu" | "highest_security";
 };
 
 /**
@@ -48805,7 +49478,8 @@ SvD8RX+T01wzox/Qb+lnnNnOlaWpqu8eoOenybxKp1a9ULzIVvN/LAcc+14vioFq
 YbjM2rxXiyLGxB4Bol7QTv4zHif7Zt89FReT/NBy4rzaskDJY5L6xmY=
 -----END CERTIFICATE-----
  */
-export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificate = string;
+export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificate =
+  string;
 
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
@@ -48823,7 +49497,8 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * @example true
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled = boolean | null;
+export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled =
+  boolean | null;
 
 /**
  * The date when the certificate expires.
@@ -48832,7 +49507,8 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * @format date-time
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasExpiresOn = string;
+export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasExpiresOn =
+  string;
 
 /**
  * Status of the certificate or the association.
@@ -48841,13 +49517,14 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus =
-  | 'initializing'
-  | 'pending_deployment'
-  | 'pending_deletion'
-  | 'active'
-  | 'deleted'
-  | 'deployment_timed_out'
-  | 'deletion_timed_out';
+
+    | "initializing"
+    | "pending_deployment"
+    | "pending_deletion"
+    | "active"
+    | "deleted"
+    | "deployment_timed_out"
+    | "deletion_timed_out";
 
 /**
  * This is the time the tls setting was originally created for this hostname.
@@ -48856,7 +49533,8 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * @format date-time
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreatedAt = string;
+export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreatedAt =
+  string;
 
 /**
  * Deployment status for the given tls setting.
@@ -48864,7 +49542,8 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreat
  * @example pending_deployment
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatus = string;
+export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatus =
+  string;
 
 /**
  * This is the time the tls setting was updated.
@@ -48873,16 +49552,18 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatu
  * @format date-time
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasUpdatedAt = string;
+export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasUpdatedAt =
+  string;
 
 export type TlsCertificatesAndHostnamesHostnameAopResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
     result?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPull[];
   };
 
-export type TlsCertificatesAndHostnamesHostnameAopSingleResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesHostnameCertidObject;
-};
+export type TlsCertificatesAndHostnamesHostnameAopSingleResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesHostnameCertidObject;
+  };
 
 export type TlsCertificatesAndHostnamesHostnameAssociation = {
   hostnames?: TlsCertificatesAndHostnamesSchemasHostnames;
@@ -48896,11 +49577,12 @@ export type TlsCertificatesAndHostnamesHostnameAssociation = {
   mtls_certificate_id?: string;
 };
 
-export type TlsCertificatesAndHostnamesHostnameAssociationsResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    hostnames?: TlsCertificatesAndHostnamesSchemasHostnames;
+export type TlsCertificatesAndHostnamesHostnameAssociationsResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      hostnames?: TlsCertificatesAndHostnamesSchemasHostnames;
+    };
   };
-};
 
 export type TlsCertificatesAndHostnamesHostnameCertidInput = {
   cert_id?: TlsCertificatesAndHostnamesCertId;
@@ -48968,7 +49650,8 @@ export type TlsCertificatesAndHostnamesIssuedOn = string;
  */
 export type TlsCertificatesAndHostnamesIssuer = string;
 
-export type TlsCertificatesAndHostnamesKeylessCertificate = TlsCertificatesAndHostnamesBase;
+export type TlsCertificatesAndHostnamesKeylessCertificate =
+  TlsCertificatesAndHostnamesBase;
 
 /**
  * Private IP of the Key Server Host
@@ -48978,19 +49661,22 @@ export type TlsCertificatesAndHostnamesKeylessCertificate = TlsCertificatesAndHo
  */
 export type TlsCertificatesAndHostnamesKeylessPrivateIp = string;
 
-export type TlsCertificatesAndHostnamesKeylessResponseCollection = TlsCertificatesAndHostnamesApiResponseCollection & {
-  result?: TlsCertificatesAndHostnamesKeylessCertificate[];
-};
-
-export type TlsCertificatesAndHostnamesKeylessResponseSingle = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesBase;
-};
-
-export type TlsCertificatesAndHostnamesKeylessResponseSingleId = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    id?: TlsCertificatesAndHostnamesIdentifier;
+export type TlsCertificatesAndHostnamesKeylessResponseCollection =
+  TlsCertificatesAndHostnamesApiResponseCollection & {
+    result?: TlsCertificatesAndHostnamesKeylessCertificate[];
   };
-};
+
+export type TlsCertificatesAndHostnamesKeylessResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesBase;
+  };
+
+export type TlsCertificatesAndHostnamesKeylessResponseSingleId =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      id?: TlsCertificatesAndHostnamesIdentifier;
+    };
+  };
 
 /**
  * Configuration for using Keyless SSL through a Cloudflare Tunnel
@@ -49079,7 +49765,8 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificat
  * @format date-time
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn = string;
+export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn =
+  string;
 
 /**
  * Certificate deployment status for the given service.
@@ -49087,7 +49774,8 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn 
  * @example pending_deployment
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = string;
+export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus =
+  string;
 
 /**
  * This is the time the certificate was uploaded.
@@ -49096,7 +49784,8 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = s
  * @format date-time
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn = string;
+export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn =
+  string;
 
 /**
  * The keyless SSL name.
@@ -49158,7 +49847,7 @@ export type TlsCertificatesAndHostnamesOwnershipVerification = {
    * @example txt
    * @x-auditable true
    */
-  type?: 'txt';
+  type?: "txt";
   /**
    * Content for the record.
    *
@@ -49185,9 +49874,10 @@ export type TlsCertificatesAndHostnamesOwnershipVerificationHttp = {
   http_url?: string;
 };
 
-export type TlsCertificatesAndHostnamesPerHostnameSettingsResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesSettingObject;
-};
+export type TlsCertificatesAndHostnamesPerHostnameSettingsResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesSettingObject;
+  };
 
 export type TlsCertificatesAndHostnamesPerHostnameSettingsResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
@@ -49312,7 +50002,10 @@ export type TlsCertificatesAndHostnamesQuota = {
  * @example origin-rsa
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+export type TlsCertificatesAndHostnamesRequestType =
+  | "origin-rsa"
+  | "origin-ecc"
+  | "keyless-certificate";
 
 /**
  * The number of days for which the certificate should be valid.
@@ -49321,7 +50014,14 @@ export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc'
  * @example 5475
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesRequestedValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+export type TlsCertificatesAndHostnamesRequestedValidity =
+  | 7
+  | 30
+  | 90
+  | 365
+  | 730
+  | 1095
+  | 5475;
 
 export type TlsCertificatesAndHostnamesResultInfo = {
   /**
@@ -49383,7 +50083,10 @@ export type TlsCertificatesAndHostnamesSchemasCertificateObject = {
  * @example lets_encrypt
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
+export type TlsCertificatesAndHostnamesSchemasCertificateAuthority =
+  | "google"
+  | "lets_encrypt"
+  | "ssl_com";
 
 export type TlsCertificatesAndHostnamesSchemasCertificateResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
@@ -49541,7 +50244,10 @@ export type TlsCertificatesAndHostnamesSchemasSerialNumber = string;
  *
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'SHA1WithRSA' | 'SHA256WithRSA';
+export type TlsCertificatesAndHostnamesSchemasSignature =
+  | "ECDSAWithSHA256"
+  | "SHA1WithRSA"
+  | "SHA256WithRSA";
 
 /**
  * Status of the Keyless SSL.
@@ -49549,7 +50255,7 @@ export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'S
  * @example active
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesSchemasStatus = 'active' | 'deleted';
+export type TlsCertificatesAndHostnamesSchemasStatus = "active" | "deleted";
 
 /**
  * The time when the certificate was updated.
@@ -49575,7 +50281,10 @@ export type TlsCertificatesAndHostnamesSchemasUploadedOn = string;
  * @example txt
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesSchemasValidationMethod = 'http' | 'cname' | 'txt';
+export type TlsCertificatesAndHostnamesSchemasValidationMethod =
+  | "http"
+  | "cname"
+  | "txt";
 
 /**
  * The number of days the Client Certificate will be valid after the issued_on date
@@ -49622,7 +50331,10 @@ export type TlsCertificatesAndHostnamesSettingObjectDelete = {
  *
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesSettingId = 'ciphers' | 'min_tls_version' | 'http2';
+export type TlsCertificatesAndHostnamesSettingId =
+  | "ciphers"
+  | "min_tls_version"
+  | "http2";
 
 /**
  * The type of hash used for the certificate.
@@ -49651,7 +50363,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * @example ubiquitous
    * @x-auditable true
    */
-  bundle_method?: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method?: "ubiquitous" | "optimal" | "force";
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
   /**
    * If a custom uploaded certificate is used.
@@ -49736,7 +50448,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * @example txt
    * @x-auditable true
    */
-  method?: 'http' | 'txt' | 'email';
+  method?: "http" | "txt" | "email";
   /**
    * The serial number on a custom uploaded certificate.
    *
@@ -49759,34 +50471,34 @@ export type TlsCertificatesAndHostnamesSsl = {
    * @x-auditable true
    */
   status?:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+    | "initializing"
+    | "pending_validation"
+    | "deleted"
+    | "pending_issuance"
+    | "pending_deployment"
+    | "pending_deletion"
+    | "pending_expiration"
+    | "expired"
+    | "active"
+    | "initializing_timed_out"
+    | "validation_timed_out"
+    | "issuance_timed_out"
+    | "deployment_timed_out"
+    | "deletion_timed_out"
+    | "pending_cleanup"
+    | "staging_deployment"
+    | "staging_active"
+    | "deactivating"
+    | "inactive"
+    | "backup_issued"
+    | "holding_deployment";
   /**
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
    *
    * @example dv
    * @x-auditable true
    */
-  type?: 'dv';
+  type?: "dv";
   /**
    * The time the custom certificate was uploaded.
    *
@@ -49817,9 +50529,10 @@ export type TlsCertificatesAndHostnamesSsl = {
   wildcard?: boolean;
 };
 
-export type TlsCertificatesAndHostnamesSslUniversalSettingsResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: TlsCertificatesAndHostnamesUniversal;
-};
+export type TlsCertificatesAndHostnamesSslUniversalSettingsResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesUniversal;
+  };
 
 export type TlsCertificatesAndHostnamesSslValidationMethodResponseCollection =
   TlsCertificatesAndHostnamesApiResponseSingle & {
@@ -49844,7 +50557,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * @example ubiquitous
    * @x-auditable true
    */
-  bundle_method?: 'ubiquitous' | 'optimal' | 'force';
+  bundle_method?: "ubiquitous" | "optimal" | "force";
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
   /**
    * Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true
@@ -49900,7 +50613,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * @example http
    * @x-auditable true
    */
-  method?: 'http' | 'txt' | 'email';
+  method?: "http" | "txt" | "email";
   settings?: TlsCertificatesAndHostnamesSslsettings;
   /**
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
@@ -49908,7 +50621,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * @example dv
    * @x-auditable true
    */
-  type?: 'dv';
+  type?: "dv";
   /**
    * Indicates whether the certificate covers a wildcard.
    *
@@ -49936,28 +50649,28 @@ export type TlsCertificatesAndHostnamesSslsettings = {
    * @example on
    * @x-auditable true
    */
-  early_hints?: 'on' | 'off';
+  early_hints?: "on" | "off";
   /**
    * Whether or not HTTP2 is enabled.
    *
    * @example on
    * @x-auditable true
    */
-  http2?: 'on' | 'off';
+  http2?: "on" | "off";
   /**
    * The minimum TLS version supported.
    *
    * @example 1.2
    * @x-auditable true
    */
-  min_tls_version?: '1.0' | '1.1' | '1.2' | '1.3';
+  min_tls_version?: "1.0" | "1.1" | "1.2" | "1.3";
   /**
    * Whether or not TLS 1.3 is enabled.
    *
    * @example on
    * @x-auditable true
    */
-  tls_1_3?: 'on' | 'off';
+  tls_1_3?: "on" | "off";
 };
 
 /**
@@ -49974,15 +50687,21 @@ export type TlsCertificatesAndHostnamesState = string;
  * @example active
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesStatus = 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
+export type TlsCertificatesAndHostnamesStatus =
+  | "active"
+  | "expired"
+  | "deleted"
+  | "pending"
+  | "initializing";
 
-export type TlsCertificatesAndHostnamesTotalTlsSettingsResponse = TlsCertificatesAndHostnamesApiResponseSingle & {
-  result?: {
-    certificate_authority?: TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority;
-    enabled?: TlsCertificatesAndHostnamesComponentsSchemasEnabled;
-    validity_period?: TlsCertificatesAndHostnamesValidityPeriod;
+export type TlsCertificatesAndHostnamesTotalTlsSettingsResponse =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      certificate_authority?: TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority;
+      enabled?: TlsCertificatesAndHostnamesComponentsSchemasEnabled;
+      validity_period?: TlsCertificatesAndHostnamesValidityPeriod;
+    };
   };
-};
 
 /**
  * The type 'legacy_custom' enables support for legacy clients which do not include SNI in the TLS handshake.
@@ -49991,7 +50710,7 @@ export type TlsCertificatesAndHostnamesTotalTlsSettingsResponse = TlsCertificate
  * @example sni_custom
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesType = 'legacy_custom' | 'sni_custom';
+export type TlsCertificatesAndHostnamesType = "legacy_custom" | "sni_custom";
 
 export type TlsCertificatesAndHostnamesUniversal = {
   enabled?: TlsCertificatesAndHostnamesSchemasEnabled;
@@ -50033,7 +50752,10 @@ export type TlsCertificatesAndHostnamesUuidObject = {
  * @example txt
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'email';
+export type TlsCertificatesAndHostnamesValidationMethod =
+  | "txt"
+  | "http"
+  | "email";
 
 /**
  * Result status.
@@ -50041,7 +50763,8 @@ export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'emai
  * @example pending_validation
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus = string;
+export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus =
+  string;
 
 /**
  * Desired validation method.
@@ -50049,7 +50772,11 @@ export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus =
  * @example txt
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesValidationMethodDefinition = 'http' | 'cname' | 'txt' | 'email';
+export type TlsCertificatesAndHostnamesValidationMethodDefinition =
+  | "http"
+  | "cname"
+  | "txt"
+  | "email";
 
 /**
  * Certificate's required validation record.
@@ -50140,7 +50867,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    * @format hostname
    * @x-auditable true
    */
-  record_name?: 'record_name' | 'http_url' | 'cname' | 'txt_name';
+  record_name?: "record_name" | "http_url" | "cname" | "txt_name";
   /**
    * Target of CNAME record.
    *
@@ -50148,7 +50875,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    * @format hostname
    * @x-auditable true
    */
-  record_target?: 'record_value' | 'http_body' | 'cname_target' | 'txt_value';
+  record_target?: "record_value" | "http_body" | "cname_target" | "txt_value";
 };
 
 /**
@@ -50165,7 +50892,7 @@ export type TlsCertificatesAndHostnamesVerificationStatus = boolean;
  * @example cname
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesVerificationType = 'cname' | 'meta tag';
+export type TlsCertificatesAndHostnamesVerificationType = "cname" | "meta tag";
 
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPull = {
   certificate?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate;
@@ -50205,7 +50932,8 @@ SvD8RX+T01wzox/Qb+lnnNnOlaWpqu8eoOenybxKp1a9ULzIVvN/LAcc+14vioFq
 YbjM2rxXiyLGxB4Bol7QTv4zHif7Zt89FReT/NBy4rzaskDJY5L6xmY=
 -----END CERTIFICATE-----
  */
-export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate = string;
+export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate =
+  string;
 
 /**
  * Indicates whether zone-level authenticated origin pulls is enabled.
@@ -50213,7 +50941,8 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * @example true
  * @x-auditable true
  */
-export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled = boolean;
+export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled =
+  boolean;
 
 /**
  * Status of the certificate activation.
@@ -50222,13 +50951,14 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasStatus =
-  | 'initializing'
-  | 'pending_deployment'
-  | 'pending_deletion'
-  | 'active'
-  | 'deleted'
-  | 'deployment_timed_out'
-  | 'deletion_timed_out';
+
+    | "initializing"
+    | "pending_deployment"
+    | "pending_deletion"
+    | "active"
+    | "deleted"
+    | "deployment_timed_out"
+    | "deletion_timed_out";
 
 /**
  * Cloudflare account ID
@@ -50244,7 +50974,7 @@ export type TunnelAccountId = string;
  *
  * @example v4
  */
-export type TunnelAddressFamily = 'v4' | 'v6';
+export type TunnelAddressFamily = "v4" | "v6";
 
 export type TunnelApiResponseCollection = {
   errors: TunnelMessages;
@@ -50356,7 +51086,7 @@ export type TunnelConfig = {
   /**
    * Enable private network access from WARP users to private network routes. This is enabled if the tunnel has an assigned route.
    */
-  ['warp-routing']?: {
+  ["warp-routing"]?: {
     enabled?: boolean;
   };
 };
@@ -50367,7 +51097,7 @@ export type TunnelConfig = {
  * @default local
  * @example cloudflare
  */
-export type TunnelConfigSrc = 'local' | 'cloudflare';
+export type TunnelConfigSrc = "local" | "cloudflare";
 
 /**
  * The version of the remote tunnel configuration. Used internally to sync cloudflared with the Zero Trust dashboard.
@@ -50564,9 +51294,10 @@ export type TunnelIsDefaultNetworkOptional = boolean;
  */
 export type TunnelIsPendingReconnect = boolean;
 
-export type TunnelLegacyTunnelResponseCollection = TunnelApiResponseCollection & {
-  result?: TunnelArgoTunnel[];
-};
+export type TunnelLegacyTunnelResponseCollection =
+  TunnelApiResponseCollection & {
+    result?: TunnelArgoTunnel[];
+  };
 
 export type TunnelLegacyTunnelResponseSingle = {
   errors: TunnelMessages;
@@ -50585,7 +51316,7 @@ export type TunnelLegacyTunnelResponseSingle = {
  *
  * @example logs
  */
-export type TunnelManagementResources = 'logs';
+export type TunnelManagementResources = "logs";
 
 export type TunnelMessages = {
   /**
@@ -50834,7 +51565,7 @@ export type TunnelSchemasApiResponseSingle = TunnelSchemasApiResponseCommon;
  * @example cloudflare
  * @x-stainless-terraform-configurability computed_optional
  */
-export type TunnelSchemasConfigSrc = 'local' | 'cloudflare';
+export type TunnelSchemasConfigSrc = "local" | "cloudflare";
 
 /**
  * The version of the Tunnel Configuration.
@@ -50889,7 +51620,7 @@ export type TunnelSchemasTunnelId = string;
  *
  * @example healthy
  */
-export type TunnelStatus = 'inactive' | 'degraded' | 'healthy' | 'down';
+export type TunnelStatus = "inactive" | "degraded" | "healthy" | "down";
 
 export type TunnelSubnet = {
   comment?: TunnelSubnetComment;
@@ -50978,7 +51709,7 @@ export type TunnelSubnetResponseSingle = {
  * @example cloudflare_source
  * @x-auditable true
  */
-export type TunnelSubnetType = 'cloudflare_source';
+export type TunnelSubnetType = "cloudflare_source";
 
 export type TunnelTeamnet = {
   comment?: TunnelRouteComment;
@@ -51124,7 +51855,14 @@ export type TunnelTunnelToken = string;
  * @example cfd_tunnel
  * @x-auditable true
  */
-export type TunnelTunnelType = 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+export type TunnelTunnelType =
+  | "cfd_tunnel"
+  | "warp_connector"
+  | "warp"
+  | "magic"
+  | "ip_sec"
+  | "gre"
+  | "cni";
 
 /**
  * The types of tunnels to filter by, separated by commas.
@@ -51280,7 +52018,11 @@ export type TurnstileBotFightMode = boolean;
  * @example interactive
  * @x-auditable true
  */
-export type TurnstileClearanceLevel = 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+export type TurnstileClearanceLevel =
+  | "no_clearance"
+  | "jschallenge"
+  | "managed"
+  | "interactive";
 
 /**
  * When the widget was created.
@@ -51367,7 +52109,7 @@ export type TurnstileOfflabel = boolean;
  * @default world
  * @x-auditable true
  */
-export type TurnstileRegion = 'world' | 'china';
+export type TurnstileRegion = "world" | "china";
 
 export type TurnstileResultInfo = {
   /**
@@ -51454,7 +52196,7 @@ export type TurnstileWidgetList = {
  * @example invisible
  * @x-auditable true
  */
-export type TurnstileWidgetMode = 'non-interactive' | 'invisible' | 'managed';
+export type TurnstileWidgetMode = "non-interactive" | "invisible" | "managed";
 
 export type VectorizeApiResponseCollection = {
   errors: VectorizeMessages;
@@ -51546,7 +52288,7 @@ export type VectorizeCreateMetadataIndexRequest = {
    *
    * @x-auditable true
    */
-  indexType: 'string' | 'number' | 'boolean';
+  indexType: "string" | "number" | "boolean";
   /**
    * Specifies the metadata property to index.
    *
@@ -51586,7 +52328,9 @@ export type VectorizeIdentifier = string;
 /**
  * Specifies the type of configuration to use for the index.
  */
-export type VectorizeIndexConfiguration = VectorizeIndexDimensionConfiguration | VectorizeIndexPresetConfiguration;
+export type VectorizeIndexConfiguration =
+  | VectorizeIndexDimensionConfiguration
+  | VectorizeIndexPresetConfiguration;
 
 export type VectorizeIndexDeleteVectorsByIdRequest = {
   /**
@@ -51704,7 +52448,7 @@ export type VectorizeIndexInsertV2Response = {
  *
  * @x-auditable true
  */
-export type VectorizeIndexMetric = 'cosine' | 'euclidean' | 'dot-product';
+export type VectorizeIndexMetric = "cosine" | "euclidean" | "dot-product";
 
 /**
  * @example example-index
@@ -51720,11 +52464,11 @@ export type VectorizeIndexName = string;
  * @x-auditable true
  */
 export type VectorizeIndexPreset =
-  | '@cf/baai/bge-small-en-v1.5'
-  | '@cf/baai/bge-base-en-v1.5'
-  | '@cf/baai/bge-large-en-v1.5'
-  | 'openai/text-embedding-ada-002'
-  | 'cohere/embed-multilingual-v2.0';
+  | "@cf/baai/bge-small-en-v1.5"
+  | "@cf/baai/bge-base-en-v1.5"
+  | "@cf/baai/bge-large-en-v1.5"
+  | "openai/text-embedding-ada-002"
+  | "cohere/embed-multilingual-v2.0";
 
 export type VectorizeIndexPresetConfiguration = {
   preset: VectorizeIndexPreset;
@@ -51797,7 +52541,7 @@ export type VectorizeIndexQueryV2Request = {
    *
    * @default none
    */
-  returnMetadata?: 'none' | 'indexed' | 'all';
+  returnMetadata?: "none" | "indexed" | "all";
   /**
    * Whether to return the values associated with the closest vectors.
    *
@@ -51872,7 +52616,7 @@ export type VectorizeListMetadataIndexResponse = {
      *
      * @x-auditable true
      */
-    indexType?: 'string' | 'number' | 'boolean';
+    indexType?: "string" | "number" | "boolean";
     /**
      * Specifies the indexed metadata property.
      *
@@ -51953,7 +52697,8 @@ export type WafManagedRulesAllowedModes = WafManagedRulesMode[];
  * @example on
  * @example off
  */
-export type WafManagedRulesAllowedModesAllowTraditional = WafManagedRulesModeAllowTraditional[];
+export type WafManagedRulesAllowedModesAllowTraditional =
+  WafManagedRulesModeAllowTraditional[];
 
 /**
  * Defines the available modes for the current WAF rule. Applies to anomaly detection WAF rules.
@@ -51972,7 +52717,8 @@ export type WafManagedRulesAllowedModesAnomaly = WafManagedRulesModeAnomaly[];
  * @example block
  * @example challenge
  */
-export type WafManagedRulesAllowedModesDenyTraditional = WafManagedRulesModeDenyTraditional[];
+export type WafManagedRulesAllowedModesDenyTraditional =
+  WafManagedRulesModeDenyTraditional[];
 
 /**
  * When triggered, anomaly detection WAF rules contribute to an overall threat score that will determine if a request is considered malicious. You can configure the total scoring threshold through the 'sensitivity' property of the WAF package.
@@ -51982,9 +52728,10 @@ export type WafManagedRulesAnomalyRule = WafManagedRulesSchemasBase & {
   mode?: WafManagedRulesModeAnomaly;
 };
 
-export type WafManagedRulesApiResponseCollection = WafManagedRulesApiResponseCommon & {
-  result_info?: WafManagedRulesResultInfo;
-};
+export type WafManagedRulesApiResponseCollection =
+  WafManagedRulesApiResponseCommon & {
+    result_info?: WafManagedRulesResultInfo;
+  };
 
 export type WafManagedRulesApiResponseCommon = {
   errors: WafManagedRulesMessages;
@@ -52013,9 +52760,10 @@ export type WafManagedRulesApiResponseCommonFailure = {
   success: false;
 };
 
-export type WafManagedRulesApiResponseSingle = WafManagedRulesApiResponseCommon & {
-  result?: (Record<string, any> | null) | (string | null);
-};
+export type WafManagedRulesApiResponseSingle =
+  WafManagedRulesApiResponseCommon & {
+    result?: (Record<string, any> | null) | (string | null);
+  };
 
 export type WafManagedRulesBase = {
   description?: WafManagedRulesSchemasDescription;
@@ -52045,7 +52793,11 @@ export type WafManagedRulesComponentsSchemasIdentifier = string;
  *
  * @example block
  */
-export type WafManagedRulesDefaultMode = 'disable' | 'simulate' | 'block' | 'challenge';
+export type WafManagedRulesDefaultMode =
+  | "disable"
+  | "simulate"
+  | "block"
+  | "challenge";
 
 /**
  * Defines an informative summary of what the rule group does.
@@ -52087,7 +52839,7 @@ export type WafManagedRulesMessages = {
  * @default on
  * @x-auditable true
  */
-export type WafManagedRulesMode = 'on' | 'off';
+export type WafManagedRulesMode = "on" | "off";
 
 /**
  * When set to `on`, the current rule will be used when evaluating the request. Applies to traditional (allow) WAF rules.
@@ -52095,7 +52847,7 @@ export type WafManagedRulesMode = 'on' | 'off';
  * @example on
  * @x-auditable true
  */
-export type WafManagedRulesModeAllowTraditional = 'on' | 'off';
+export type WafManagedRulesModeAllowTraditional = "on" | "off";
 
 /**
  * Defines the mode anomaly. When set to `on`, the current WAF rule will be used when evaluating the request. Applies to anomaly detection WAF rules.
@@ -52103,7 +52855,7 @@ export type WafManagedRulesModeAllowTraditional = 'on' | 'off';
  * @example on
  * @x-auditable true
  */
-export type WafManagedRulesModeAnomaly = 'on' | 'off';
+export type WafManagedRulesModeAnomaly = "on" | "off";
 
 /**
  * Defines the action that the current WAF rule will perform when triggered. Applies to traditional (deny) WAF rules.
@@ -52111,7 +52863,12 @@ export type WafManagedRulesModeAnomaly = 'on' | 'off';
  * @example block
  * @x-auditable true
  */
-export type WafManagedRulesModeDenyTraditional = 'default' | 'disable' | 'simulate' | 'block' | 'challenge';
+export type WafManagedRulesModeDenyTraditional =
+  | "default"
+  | "disable"
+  | "simulate"
+  | "block"
+  | "challenge";
 
 /**
  * Defines the number of rules within the group that have been modified from their default configuration.
@@ -52178,21 +52935,25 @@ export type WafManagedRulesRule =
  */
 export type WafManagedRulesRuleComponentsSchemasIdentifier = string;
 
-export type WafManagedRulesRuleGroupResponseCollection = WafManagedRulesApiResponseCollection & {
-  result?: WafManagedRulesSchemasGroup[];
-};
+export type WafManagedRulesRuleGroupResponseCollection =
+  WafManagedRulesApiResponseCollection & {
+    result?: WafManagedRulesSchemasGroup[];
+  };
 
-export type WafManagedRulesRuleGroupResponseSingle = WafManagedRulesApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type WafManagedRulesRuleGroupResponseSingle =
+  WafManagedRulesApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
-export type WafManagedRulesRuleResponseCollection = WafManagedRulesApiResponseCollection & {
-  result?: WafManagedRulesRule[];
-};
+export type WafManagedRulesRuleResponseCollection =
+  WafManagedRulesApiResponseCollection & {
+    result?: WafManagedRulesRule[];
+  };
 
-export type WafManagedRulesRuleResponseSingle = WafManagedRulesApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type WafManagedRulesRuleResponseSingle =
+  WafManagedRulesApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * Defines the number of rules in the current rule group.
@@ -52368,21 +53129,25 @@ export type WafProductApiBundleMessages = {
   message: string;
 }[];
 
-export type WafProductApiBundleResponseCustomDetection = WafProductApiBundleApiResponseSingle & {
-  result?: WafProductApiBundleCustomDetection;
-};
+export type WafProductApiBundleResponseCustomDetection =
+  WafProductApiBundleApiResponseSingle & {
+    result?: WafProductApiBundleCustomDetection;
+  };
 
-export type WafProductApiBundleResponseCustomDetectionCollection = WafProductApiBundleApiResponseCollection & {
-  result?: WafProductApiBundleCustomDetection[];
-};
+export type WafProductApiBundleResponseCustomDetectionCollection =
+  WafProductApiBundleApiResponseCollection & {
+    result?: WafProductApiBundleCustomDetection[];
+  };
 
-export type WafProductApiBundleResponseCustomScanCollection = WafProductApiBundleSchemasApiResponseCollection & {
-  result?: WafProductApiBundleCustomScan[];
-};
+export type WafProductApiBundleResponseCustomScanCollection =
+  WafProductApiBundleSchemasApiResponseCollection & {
+    result?: WafProductApiBundleCustomScan[];
+  };
 
-export type WafProductApiBundleResponseStatus = WafProductApiBundleApiResponseSingle & {
-  result?: WafProductApiBundleStatus;
-};
+export type WafProductApiBundleResponseStatus =
+  WafProductApiBundleApiResponseSingle & {
+    result?: WafProductApiBundleStatus;
+  };
 
 export type WafProductApiBundleSchemasApiResponseCollection = {
   errors: WafProductApiBundleMessages;
@@ -52436,9 +53201,10 @@ export type WafProductApiBundleSchemasApiResponseSingle = {
   success: true;
 };
 
-export type WafProductApiBundleSchemasResponseStatus = WafProductApiBundleSchemasApiResponseSingle & {
-  result?: WafProductApiBundleSchemasStatus;
-};
+export type WafProductApiBundleSchemasResponseStatus =
+  WafProductApiBundleSchemasApiResponseSingle & {
+    result?: WafProductApiBundleSchemasStatus;
+  };
 
 /**
  * Defines the status for Content Scanning.
@@ -52494,34 +53260,35 @@ export type WaitingroomAdditionalRoutes = {
   path?: string;
 }[];
 
-export type WaitingroomApiResponseCollection = WaitingroomSchemasApiResponseCommon & {
-  result_info?: {
-    /**
-     * Total number of results for the requested service.
-     *
-     * @example 1
-     */
-    count?: number;
-    /**
-     * Current page within paginated list of results.
-     *
-     * @example 1
-     */
-    page?: number;
-    /**
-     * Number of results per page of results.
-     *
-     * @example 20
-     */
-    per_page?: number;
-    /**
-     * Total results available without any search parameters.
-     *
-     * @example 2000
-     */
-    total_count?: number;
+export type WaitingroomApiResponseCollection =
+  WaitingroomSchemasApiResponseCommon & {
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
-};
 
 export type WaitingroomApiResponseCommon = Record<string, any>;
 
@@ -52556,7 +53323,7 @@ export type WaitingroomCookieAttributes = {
    * @example auto
    * @x-auditable true
    */
-  samesite?: 'auto' | 'lax' | 'none' | 'strict';
+  samesite?: "auto" | "lax" | "none" | "strict";
   /**
    * Configures the Secure attribute on the waiting room cookie. Value `always` indicates that the Secure attribute will be set in the Set-Cookie header, `never` indicates that the Secure attribute will not be set, and `auto` will set the Secure attribute depending if **Always Use HTTPS** is enabled.
    *
@@ -52564,7 +53331,7 @@ export type WaitingroomCookieAttributes = {
    * @example auto
    * @x-auditable true
    */
-  secure?: 'auto' | 'always' | 'never';
+  secure?: "auto" | "always" | "never";
 };
 
 /**
@@ -52607,44 +53374,44 @@ export type WaitingroomCustomPageHtml = string;
  * @x-auditable true
  */
 export type WaitingroomDefaultTemplateLanguage =
-  | 'en-US'
-  | 'es-ES'
-  | 'de-DE'
-  | 'fr-FR'
-  | 'it-IT'
-  | 'ja-JP'
-  | 'ko-KR'
-  | 'pt-BR'
-  | 'zh-CN'
-  | 'zh-TW'
-  | 'nl-NL'
-  | 'pl-PL'
-  | 'id-ID'
-  | 'tr-TR'
-  | 'ar-EG'
-  | 'ru-RU'
-  | 'fa-IR'
-  | 'bg-BG'
-  | 'hr-HR'
-  | 'cs-CZ'
-  | 'da-DK'
-  | 'fi-FI'
-  | 'lt-LT'
-  | 'ms-MY'
-  | 'nb-NO'
-  | 'ro-RO'
-  | 'el-GR'
-  | 'he-IL'
-  | 'hi-IN'
-  | 'hu-HU'
-  | 'sr-BA'
-  | 'sk-SK'
-  | 'sl-SI'
-  | 'sv-SE'
-  | 'tl-PH'
-  | 'th-TH'
-  | 'uk-UA'
-  | 'vi-VN';
+  | "en-US"
+  | "es-ES"
+  | "de-DE"
+  | "fr-FR"
+  | "it-IT"
+  | "ja-JP"
+  | "ko-KR"
+  | "pt-BR"
+  | "zh-CN"
+  | "zh-TW"
+  | "nl-NL"
+  | "pl-PL"
+  | "id-ID"
+  | "tr-TR"
+  | "ar-EG"
+  | "ru-RU"
+  | "fa-IR"
+  | "bg-BG"
+  | "hr-HR"
+  | "cs-CZ"
+  | "da-DK"
+  | "fi-FI"
+  | "lt-LT"
+  | "ms-MY"
+  | "nb-NO"
+  | "ro-RO"
+  | "el-GR"
+  | "he-IL"
+  | "hi-IN"
+  | "hu-HU"
+  | "sr-BA"
+  | "sk-SK"
+  | "sl-SI"
+  | "sv-SE"
+  | "tl-PH"
+  | "th-TH"
+  | "uk-UA"
+  | "vi-VN";
 
 /**
  * A note that you can use to add more details about the waiting room.
@@ -52667,7 +53434,7 @@ export type WaitingroomDisableSessionRenewal = boolean;
 /**
  * A list of enabled origin commands.
  */
-export type WaitingroomEnabledOriginCommands = 'revoke'[];
+export type WaitingroomEnabledOriginCommands = "revoke"[];
 
 /**
  * @x-auditable true
@@ -52816,9 +53583,10 @@ export type WaitingroomEventResponse = WaitingroomApiResponseSingle & {
   result?: WaitingroomEventResult;
 };
 
-export type WaitingroomEventResponseCollection = WaitingroomApiResponseCollection & {
-  result?: WaitingroomEventResult[];
-};
+export type WaitingroomEventResponseCollection =
+  WaitingroomApiResponseCollection & {
+    result?: WaitingroomEventResult[];
+  };
 
 export type WaitingroomEventResult = {
   created_on?: WaitingroomTimestamp;
@@ -52888,14 +53656,19 @@ export type WaitingroomEventTotalActiveUsers = number | null;
  *
  * @x-auditable true
  */
-export type WaitingroomEventTurnstileAction = 'log' | 'infinite_queue' | null;
+export type WaitingroomEventTurnstileAction = "log" | "infinite_queue" | null;
 
 /**
  * If set, the event will override the waiting room's `turnstile_mode` property while it is active. If null, the event will inherit it.
  *
  * @x-auditable true
  */
-export type WaitingroomEventTurnstileMode = 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
+export type WaitingroomEventTurnstileMode =
+  | "off"
+  | "invisible"
+  | "visible_non_interactive"
+  | "visible_managed"
+  | null;
 
 /**
  * The host name to which the waiting room will be applied (no wildcards). Please do not include the scheme (http:// or https://). The host and path combination must be unique.
@@ -53160,7 +53933,11 @@ export type WaitingroomQueueAll = boolean;
  * @example fifo
  * @x-auditable true
  */
-export type WaitingroomQueueingMethod = 'fifo' | 'random' | 'passthrough' | 'reject';
+export type WaitingroomQueueingMethod =
+  | "fifo"
+  | "random"
+  | "passthrough"
+  | "reject";
 
 /**
  * HTTP status code returned to a user while in the queue.
@@ -53181,7 +53958,7 @@ export type WaitingroomResponseCollection = WaitingroomApiResponseCollection & {
  * @example bypass_waiting_room
  * @x-auditable true
  */
-export type WaitingroomRuleAction = 'bypass_waiting_room';
+export type WaitingroomRuleAction = "bypass_waiting_room";
 
 /**
  * The description of the rule.
@@ -53266,9 +54043,10 @@ export type WaitingroomRuleResult = {
  */
 export type WaitingroomRuleVersion = string;
 
-export type WaitingroomRulesResponseCollection = WaitingroomApiResponseCollection & {
-  result?: WaitingroomRuleResult[];
-};
+export type WaitingroomRulesResponseCollection =
+  WaitingroomApiResponseCollection & {
+    result?: WaitingroomRuleResult[];
+  };
 
 export type WaitingroomSchemasApiResponseCommon = {
   errors: WaitingroomMessages;
@@ -53310,7 +54088,11 @@ export type WaitingroomSingleResponse = WaitingroomApiResponseSingle & {
  * @example queueing
  * @x-auditable true
  */
-export type WaitingroomStatus = 'event_prequeueing' | 'not_queueing' | 'queueing' | 'suspended';
+export type WaitingroomStatus =
+  | "event_prequeueing"
+  | "not_queueing"
+  | "queueing"
+  | "suspended";
 
 /**
  * @example 25756b2dfe6e378a06b033b670413757
@@ -53362,7 +54144,7 @@ export type WaitingroomTotalActiveUsers = number;
  * @default log
  * @x-auditable true
  */
-export type WaitingroomTurnstileAction = 'log' | 'infinite_queue';
+export type WaitingroomTurnstileAction = "log" | "infinite_queue";
 
 /**
  * Which Turnstile widget type to use for detecting bot traffic. See
@@ -53374,7 +54156,11 @@ export type WaitingroomTurnstileAction = 'log' | 'infinite_queue';
  * @default invisible
  * @x-auditable true
  */
-export type WaitingroomTurnstileMode = 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
+export type WaitingroomTurnstileMode =
+  | "off"
+  | "invisible"
+  | "visible_non_interactive"
+  | "visible_managed";
 
 export type WaitingroomUpdateRules = WaitingroomCreateRule[];
 
@@ -53513,7 +54299,7 @@ export type Web3CollectionResponse = Web3ApiResponseCollection & {
  *
  * @example block
  */
-export type Web3ContentListAction = 'block';
+export type Web3ContentListAction = "block";
 
 export type Web3ContentListDetails = {
   action?: Web3ContentListAction;
@@ -53540,11 +54326,12 @@ export type Web3ContentListEntry = {
   type?: Web3ContentListEntryType;
 };
 
-export type Web3ContentListEntryCollectionResponse = Web3ApiResponseCollection & {
-  result?: {
-    entries?: Web3ContentListEntries;
+export type Web3ContentListEntryCollectionResponse =
+  Web3ApiResponseCollection & {
+    result?: {
+      entries?: Web3ContentListEntries;
+    };
   };
-};
 
 /**
  * Specify the CID or content path of content to block.
@@ -53577,7 +54364,7 @@ export type Web3ContentListEntrySingleResponse = Web3ApiResponseSingle & {
  *
  * @example cid
  */
-export type Web3ContentListEntryType = 'cid' | 'content_path';
+export type Web3ContentListEntryType = "cid" | "content_path";
 
 export type Web3ContentListUpdateRequest = {
   action: Web3ContentListAction;
@@ -53671,14 +54458,14 @@ export type Web3SingleResponse = Web3ApiResponseSingle & {
  *
  * @example active
  */
-export type Web3Status = 'active' | 'pending' | 'deleting' | 'error';
+export type Web3Status = "active" | "pending" | "deleting" | "error";
 
 /**
  * Specify the target gateway of the hostname.
  *
  * @example ipfs
  */
-export type Web3Target = 'ethereum' | 'ipfs' | 'ipfs_universal_path';
+export type Web3Target = "ethereum" | "ipfs" | "ipfs_universal_path";
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -54044,46 +54831,46 @@ export type WorkersObservabilityQuery = {
     calculations?: {
       alias?: string;
       key?: string;
-      keyType?: 'string' | 'number' | 'boolean';
+      keyType?: "string" | "number" | "boolean";
       operator:
-        | 'uniq'
-        | 'count'
-        | 'max'
-        | 'min'
-        | 'sum'
-        | 'avg'
-        | 'median'
-        | 'p001'
-        | 'p01'
-        | 'p05'
-        | 'p10'
-        | 'p25'
-        | 'p75'
-        | 'p90'
-        | 'p95'
-        | 'p99'
-        | 'p999'
-        | 'stddev'
-        | 'variance'
-        | 'COUNT_DISTINCT'
-        | 'COUNT'
-        | 'MAX'
-        | 'MIN'
-        | 'SUM'
-        | 'AVG'
-        | 'MEDIAN'
-        | 'P001'
-        | 'P01'
-        | 'P05'
-        | 'P10'
-        | 'P25'
-        | 'P75'
-        | 'P90'
-        | 'P95'
-        | 'P99'
-        | 'P999'
-        | 'STDDEV'
-        | 'VARIANCE';
+        | "uniq"
+        | "count"
+        | "max"
+        | "min"
+        | "sum"
+        | "avg"
+        | "median"
+        | "p001"
+        | "p01"
+        | "p05"
+        | "p10"
+        | "p25"
+        | "p75"
+        | "p90"
+        | "p95"
+        | "p99"
+        | "p999"
+        | "stddev"
+        | "variance"
+        | "COUNT_DISTINCT"
+        | "COUNT"
+        | "MAX"
+        | "MIN"
+        | "SUM"
+        | "AVG"
+        | "MEDIAN"
+        | "P001"
+        | "P01"
+        | "P05"
+        | "P10"
+        | "P25"
+        | "P75"
+        | "P90"
+        | "P95"
+        | "P99"
+        | "P999"
+        | "STDDEV"
+        | "VARIANCE";
     }[];
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -54092,49 +54879,49 @@ export type WorkersObservabilityQuery = {
     /**
      * Set a Flag to describe how to combine the filters on the query.
      */
-    filterCombination?: 'and' | 'or' | 'AND' | 'OR';
+    filterCombination?: "and" | "or" | "AND" | "OR";
     /**
      * Configure the Filters to apply to the query.
      */
     filters?: {
       key: string;
       operation:
-        | 'includes'
-        | 'not_includes'
-        | 'starts_with'
-        | 'regex'
-        | 'exists'
-        | 'is_null'
-        | 'in'
-        | 'not_in'
-        | 'eq'
-        | 'neq'
-        | 'gt'
-        | 'gte'
-        | 'lt'
-        | 'lte'
-        | '='
-        | '!='
-        | '>'
-        | '>='
-        | '<'
-        | '<='
-        | 'INCLUDES'
-        | 'DOES_NOT_INCLUDE'
-        | 'MATCH_REGEX'
-        | 'EXISTS'
-        | 'DOES_NOT_EXIST'
-        | 'IN'
-        | 'NOT_IN'
-        | 'STARTS_WITH';
-      type: 'string' | 'number' | 'boolean';
+        | "includes"
+        | "not_includes"
+        | "starts_with"
+        | "regex"
+        | "exists"
+        | "is_null"
+        | "in"
+        | "not_in"
+        | "eq"
+        | "neq"
+        | "gt"
+        | "gte"
+        | "lt"
+        | "lte"
+        | "="
+        | "!="
+        | ">"
+        | ">="
+        | "<"
+        | "<="
+        | "INCLUDES"
+        | "DOES_NOT_INCLUDE"
+        | "MATCH_REGEX"
+        | "EXISTS"
+        | "DOES_NOT_EXIST"
+        | "IN"
+        | "NOT_IN"
+        | "STARTS_WITH";
+      type: "string" | "number" | "boolean";
       value?: string | number | boolean;
     }[];
     /**
      * Define how to group the results of the query.
      */
     groupBys?: {
-      type: 'string' | 'number' | 'boolean';
+      type: "string" | "number" | "boolean";
       value: string;
     }[];
     /**
@@ -54142,7 +54929,7 @@ export type WorkersObservabilityQuery = {
      */
     havings?: {
       key: string;
-      operation: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte';
+      operation: "eq" | "neq" | "gt" | "gte" | "lt" | "lte";
       value: number;
     }[];
     /**
@@ -54167,7 +54954,7 @@ export type WorkersObservabilityQuery = {
       /**
        * Set the order of the results
        */
-      order?: 'asc' | 'desc';
+      order?: "asc" | "desc";
       /**
        * Configure which Calculation to order the results by.
        */
@@ -54351,7 +55138,7 @@ export type WorkersObservabilityQueryRun = {
      */
     rows_read: number;
   };
-  status: 'STARTED' | 'COMPLETED';
+  status: "STARTED" | "COMPLETED";
   timeframe: {
     /**
      * Set the start time for your query using UNIX time in milliseconds.
@@ -54455,22 +55242,26 @@ export type WorkersObservabilityTelemetryEvent = {
                   | number
                   | boolean
                   | {
-                      [key: string]: (string | number | boolean)[] | string | number | boolean;
+                      [key: string]:
+                        | (string | number | boolean)[]
+                        | string
+                        | number
+                        | boolean;
                     };
               };
         };
         eventType:
-          | 'fetch'
-          | 'scheduled'
-          | 'alarm'
-          | 'cron'
-          | 'queue'
-          | 'email'
-          | 'tail'
-          | 'rpc'
-          | 'websocket'
-          | 'unknown';
-        executionModel?: 'durableObject' | 'stateless';
+          | "fetch"
+          | "scheduled"
+          | "alarm"
+          | "cron"
+          | "queue"
+          | "email"
+          | "tail"
+          | "rpc"
+          | "websocket"
+          | "unknown";
+        executionModel?: "durableObject" | "stateless";
         outcome: string;
         requestId: string;
         scriptName: string;
@@ -54494,17 +55285,17 @@ export type WorkersObservabilityTelemetryEvent = {
           [key: string]: string | number | boolean;
         };
         eventType:
-          | 'fetch'
-          | 'scheduled'
-          | 'alarm'
-          | 'cron'
-          | 'queue'
-          | 'email'
-          | 'tail'
-          | 'rpc'
-          | 'websocket'
-          | 'unknown';
-        executionModel?: 'durableObject' | 'stateless';
+          | "fetch"
+          | "scheduled"
+          | "alarm"
+          | "cron"
+          | "queue"
+          | "email"
+          | "tail"
+          | "rpc"
+          | "websocket"
+          | "unknown";
+        executionModel?: "durableObject" | "stateless";
         outcome: string;
         requestId: string;
         scriptName: string;
@@ -54640,7 +55431,7 @@ export type WorkersBindingKindAi = {
    *
    * @x-auditable true
    */
-  type: 'ai';
+  type: "ai";
 };
 
 export type WorkersBindingKindAnalyticsEngine = {
@@ -54657,7 +55448,7 @@ export type WorkersBindingKindAnalyticsEngine = {
    *
    * @x-auditable true
    */
-  type: 'analytics_engine';
+  type: "analytics_engine";
 };
 
 export type WorkersBindingKindAssets = {
@@ -54667,7 +55458,7 @@ export type WorkersBindingKindAssets = {
    *
    * @x-auditable true
    */
-  type: 'assets';
+  type: "assets";
 };
 
 export type WorkersBindingKindBrowser = {
@@ -54677,7 +55468,7 @@ export type WorkersBindingKindBrowser = {
    *
    * @x-auditable true
    */
-  type: 'browser';
+  type: "browser";
 };
 
 export type WorkersBindingKindD1 = {
@@ -54694,7 +55485,7 @@ export type WorkersBindingKindD1 = {
    *
    * @x-auditable true
    */
-  type: 'd1';
+  type: "d1";
 };
 
 export type WorkersBindingKindDispatchNamespace = {
@@ -54737,7 +55528,7 @@ export type WorkersBindingKindDispatchNamespace = {
    *
    * @x-auditable true
    */
-  type: 'dispatch_namespace';
+  type: "dispatch_namespace";
 };
 
 export type WorkersBindingKindDurableObjectNamespace = {
@@ -54779,7 +55570,7 @@ export type WorkersBindingKindDurableObjectNamespace = {
    *
    * @x-auditable true
    */
-  type: 'durable_object_namespace';
+  type: "durable_object_namespace";
 };
 
 export type WorkersBindingKindHyperdrive = {
@@ -54796,7 +55587,7 @@ export type WorkersBindingKindHyperdrive = {
    *
    * @x-auditable true
    */
-  type: 'hyperdrive';
+  type: "hyperdrive";
 };
 
 export type WorkersBindingKindJson = {
@@ -54812,7 +55603,7 @@ export type WorkersBindingKindJson = {
    *
    * @x-auditable true
    */
-  type: 'json';
+  type: "json";
 };
 
 export type WorkersBindingKindKvNamespace = {
@@ -54823,7 +55614,7 @@ export type WorkersBindingKindKvNamespace = {
    *
    * @x-auditable true
    */
-  type: 'kv_namespace';
+  type: "kv_namespace";
 };
 
 export type WorkersBindingKindMtlsCertificate = {
@@ -54840,7 +55631,7 @@ export type WorkersBindingKindMtlsCertificate = {
    *
    * @x-auditable true
    */
-  type: 'mtls_certificate';
+  type: "mtls_certificate";
 };
 
 export type WorkersBindingKindPipelines = {
@@ -54857,7 +55648,7 @@ export type WorkersBindingKindPipelines = {
    *
    * @x-auditable true
    */
-  type: 'pipelines';
+  type: "pipelines";
 };
 
 export type WorkersBindingKindPlainText = {
@@ -54874,7 +55665,7 @@ export type WorkersBindingKindPlainText = {
    *
    * @x-auditable true
    */
-  type: 'plain_text';
+  type: "plain_text";
 };
 
 export type WorkersBindingKindQueue = {
@@ -54890,7 +55681,7 @@ export type WorkersBindingKindQueue = {
    *
    * @x-auditable true
    */
-  type: 'queue';
+  type: "queue";
 };
 
 export type WorkersBindingKindR2Bucket = {
@@ -54907,7 +55698,7 @@ export type WorkersBindingKindR2Bucket = {
    *
    * @x-auditable true
    */
-  type: 'r2_bucket';
+  type: "r2_bucket";
 };
 
 export type WorkersBindingKindSecretKey = {
@@ -54923,7 +55714,7 @@ export type WorkersBindingKindSecretKey = {
    * @example raw
    * @x-auditable true
    */
-  format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+  format: "raw" | "pkcs8" | "spki" | "jwk";
   /**
    * Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".
    *
@@ -54942,7 +55733,7 @@ export type WorkersBindingKindSecretKey = {
    *
    * @x-auditable true
    */
-  type: 'secret_key';
+  type: "secret_key";
   /**
    * Allowed operations with the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
    *
@@ -54950,7 +55741,16 @@ export type WorkersBindingKindSecretKey = {
    * @example decrypt
    * @x-auditable true
    */
-  usages: ('encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey')[];
+  usages: (
+    | "encrypt"
+    | "decrypt"
+    | "sign"
+    | "verify"
+    | "deriveKey"
+    | "deriveBits"
+    | "wrapKey"
+    | "unwrapKey"
+  )[];
 };
 
 export type WorkersBindingKindSecretText = {
@@ -54967,7 +55767,7 @@ export type WorkersBindingKindSecretText = {
    *
    * @x-auditable true
    */
-  type: 'secret_text';
+  type: "secret_text";
 };
 
 export type WorkersBindingKindSecretsStoreSecret = {
@@ -54991,7 +55791,7 @@ export type WorkersBindingKindSecretsStoreSecret = {
    *
    * @x-auditable true
    */
-  type: 'secrets_store_secret';
+  type: "secrets_store_secret";
 };
 
 export type WorkersBindingKindService = {
@@ -55015,7 +55815,7 @@ export type WorkersBindingKindService = {
    *
    * @x-auditable true
    */
-  type: 'service';
+  type: "service";
 };
 
 export type WorkersBindingKindTailConsumer = {
@@ -55032,7 +55832,7 @@ export type WorkersBindingKindTailConsumer = {
    *
    * @x-auditable true
    */
-  type: 'tail_consumer';
+  type: "tail_consumer";
 };
 
 export type WorkersBindingKindVectorize = {
@@ -55049,7 +55849,7 @@ export type WorkersBindingKindVectorize = {
    *
    * @x-auditable true
    */
-  type: 'vectorize';
+  type: "vectorize";
 };
 
 export type WorkersBindingKindVersionMetadata = {
@@ -55059,7 +55859,7 @@ export type WorkersBindingKindVersionMetadata = {
    *
    * @x-auditable true
    */
-  type: 'version_metadata';
+  type: "version_metadata";
 };
 
 export type WorkersBindingKindWorkflow = {
@@ -55080,7 +55880,7 @@ export type WorkersBindingKindWorkflow = {
   /**
    * The kind of resource that the binding provides.
    */
-  type: 'workflow';
+  type: "workflow";
   /**
    * Name of the Workflow to bind to.
    *
@@ -55156,20 +55956,21 @@ export type WorkersCreateAssetsUploadSessionObject = {
   };
 };
 
-export type WorkersCreateAssetsUploadSessionResponse = WorkersApiResponseCommon & {
-  result?: {
-    /**
-     * The requests to make to upload assets.
-     */
-    buckets?: string[][];
-    /**
-     * A JWT to use as authentication for uploading assets.
-     *
-     * @x-sensitive true
-     */
-    jwt?: string;
+export type WorkersCreateAssetsUploadSessionResponse =
+  WorkersApiResponseCommon & {
+    result?: {
+      /**
+       * The requests to make to upload assets.
+       */
+      buckets?: string[][];
+      /**
+       * A JWT to use as authentication for uploading assets.
+       *
+       * @x-sensitive true
+       */
+      jwt?: string;
+    };
   };
-};
 
 /**
  * When the script was created.
@@ -55203,7 +56004,7 @@ export type WorkersDeploymentsBase = {
      * @maxLength 100
      * @x-auditable true
      */
-    ['workers/message']?: string;
+    ["workers/message"]?: string;
   };
   /**
    * @example user@example.com
@@ -55232,11 +56033,13 @@ export type WorkersDeploymentsBase = {
   strategy?: string;
 };
 
-export type WorkersDeploymentsCreateBody = WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage;
+export type WorkersDeploymentsCreateBody = WorkersDeploymentsBase &
+  WorkersDeploymentsStrategyPercentage;
 
 export type WorkersDeploymentsListResponse = WorkersApiResponseCommon & {
   result?: {
-    deployments?: (WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage)[];
+    deployments?: (WorkersDeploymentsBase &
+      WorkersDeploymentsStrategyPercentage)[];
   };
 };
 
@@ -55248,7 +56051,7 @@ export type WorkersDeploymentsStrategyPercentage = {
   /**
    * @x-auditable true
    */
-  strategy: 'percentage';
+  strategy: "percentage";
   versions: {
     /**
      * @example 100
@@ -55496,13 +56299,17 @@ export type WorkersMultipartScript = {
          *
          * @example auto-trailing-slash
          */
-        html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
+        html_handling?:
+          | "auto-trailing-slash"
+          | "force-trailing-slash"
+          | "drop-trailing-slash"
+          | "none";
         /**
          * Determines the response when a request does not match a static asset, and there is no Worker script.
          *
          * @example 404-page
          */
-        not_found_handling?: 'none' | '404-page' | 'single-page-application';
+        not_found_handling?: "none" | "404-page" | "single-page-application";
         run_worker_first?: string[] | boolean;
         /**
          * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
@@ -55570,7 +56377,7 @@ export type WorkersMultipleStepMigrations = WorkersMigrationTagConditions & {
 };
 
 export type WorkersNamespace = {
-  ['class']?: string;
+  ["class"]?: string;
   id?: string;
   name?: string;
   script?: string;
@@ -55706,14 +56513,17 @@ export type WorkersPlacementInfoNoStatus = {
  *
  * @x-auditable true
  */
-export type WorkersPlacementMode = 'smart';
+export type WorkersPlacementMode = "smart";
 
 /**
  * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
  *
  * @x-auditable true
  */
-export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
+export type WorkersPlacementStatus =
+  | "SUCCESS"
+  | "UNSUPPORTED_APPLICATION"
+  | "INSUFFICIENT_INVOCATIONS";
 
 export type WorkersRoute = {
   /**
@@ -55857,9 +56667,10 @@ export type WorkersScriptAndVersionSettingsItem = {
   usage_model?: WorkersUsageModel & string;
 };
 
-export type WorkersScriptAndVersionSettingsResponse = WorkersApiResponseCommon & {
-  result: WorkersScriptAndVersionSettingsItem;
-};
+export type WorkersScriptAndVersionSettingsResponse =
+  WorkersApiResponseCommon & {
+    result: WorkersScriptAndVersionSettingsItem;
+  };
 
 export type WorkersScriptResponse = {
   created_on?: WorkersCreatedOn;
@@ -55958,7 +56769,9 @@ export type WorkersScriptName = string;
 /**
  * A secret value accessible through a binding.
  */
-export type WorkersSecret = WorkersBindingKindSecretText | WorkersBindingKindSecretKey;
+export type WorkersSecret =
+  | WorkersBindingKindSecretText
+  | WorkersBindingKindSecretKey;
 
 /**
  * A JavaScript variable name for the secret binding.
@@ -55979,7 +56792,8 @@ export type WorkersService = string;
 /**
  * A single set of migrations to apply.
  */
-export type WorkersSingleStepMigrations = WorkersMigrationTagConditions & WorkersMigrationStep;
+export type WorkersSingleStepMigrations = WorkersMigrationTagConditions &
+  WorkersMigrationStep;
 
 export type WorkersSubdomain = {
   /**
@@ -56080,7 +56894,7 @@ export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
  * @example standard
  * @x-auditable true
  */
-export type WorkersUsageModel = 'standard';
+export type WorkersUsageModel = "standard";
 
 /**
  * API Resource UUID tag.
@@ -56154,7 +56968,7 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
       /**
        * @example standard
        */
-      usage_model?: 'bundled' | 'unbound' | 'standard';
+      usage_model?: "bundled" | "unbound" | "standard";
     };
   };
 };
@@ -56189,16 +57003,16 @@ export type WorkersVersionItemShort = {
      * @example api
      */
     source?:
-      | 'unknown'
-      | 'api'
-      | 'wrangler'
-      | 'terraform'
-      | 'dash'
-      | 'dash_template'
-      | 'integration'
-      | 'quick_editor'
-      | 'playground'
-      | 'workersci';
+      | "unknown"
+      | "api"
+      | "wrangler"
+      | "terraform"
+      | "dash"
+      | "dash_template"
+      | "integration"
+      | "quick_editor"
+      | "playground"
+      | "workersci";
   };
   /**
    * @example 1
@@ -56395,7 +57209,7 @@ export type ZarazClickListenerRule = {
   /**
    * @x-auditable true
    */
-  action: 'clickListener';
+  action: "clickListener";
   /**
    * @x-auditable true
    */
@@ -56408,7 +57222,7 @@ export type ZarazClickListenerRule = {
     /**
      * @x-auditable true
      */
-    type: 'xpath' | 'css';
+    type: "xpath" | "css";
     /**
      * @minimum 0
      * @x-auditable true
@@ -56418,7 +57232,7 @@ export type ZarazClickListenerRule = {
 };
 
 export type ZarazCustomManagedComponent = ZarazBaseMc & {
-  type: 'custom-mc';
+  type: "custom-mc";
   /**
    * Cloudflare worker that acts as a managed component
    */
@@ -56438,7 +57252,7 @@ export type ZarazElementVisibilityRule = {
   /**
    * @x-auditable true
    */
-  action: 'elementVisibility';
+  action: "elementVisibility";
   /**
    * @x-auditable true
    */
@@ -56455,7 +57269,7 @@ export type ZarazFormSubmissionRule = {
   /**
    * @x-auditable true
    */
-  action: 'formSubmission';
+  action: "formSubmission";
   /**
    * @x-auditable true
    */
@@ -56494,16 +57308,16 @@ export type ZarazLoadRule = {
    * @x-auditable true
    */
   op:
-    | 'CONTAINS'
-    | 'EQUALS'
-    | 'STARTS_WITH'
-    | 'ENDS_WITH'
-    | 'MATCH_REGEX'
-    | 'NOT_MATCH_REGEX'
-    | 'GREATER_THAN'
-    | 'GREATER_THAN_OR_EQUAL'
-    | 'LESS_THAN'
-    | 'LESS_THAN_OR_EQUAL';
+    | "CONTAINS"
+    | "EQUALS"
+    | "STARTS_WITH"
+    | "ENDS_WITH"
+    | "MATCH_REGEX"
+    | "NOT_MATCH_REGEX"
+    | "GREATER_THAN"
+    | "GREATER_THAN_OR_EQUAL"
+    | "LESS_THAN"
+    | "LESS_THAN_OR_EQUAL";
   /**
    * @x-auditable true
    */
@@ -56511,7 +57325,7 @@ export type ZarazLoadRule = {
 };
 
 export type ZarazManagedComponent = ZarazBaseMc & {
-  type: 'component';
+  type: "component";
 };
 
 export type ZarazMessages = {
@@ -56530,7 +57344,7 @@ export type ZarazScrollDepthRule = {
   /**
    * @x-auditable true
    */
-  action: 'scrollDepth';
+  action: "scrollDepth";
   /**
    * @x-auditable true
    */
@@ -56551,7 +57365,7 @@ export type ZarazSecretVariable = {
   /**
    * @x-auditable true
    */
-  type: 'secret';
+  type: "secret";
   /**
    * @x-auditable true
    * @x-sensitive true
@@ -56567,7 +57381,7 @@ export type ZarazStringVariable = {
   /**
    * @x-auditable true
    */
-  type: 'string';
+  type: "string";
   /**
    * @x-auditable true
    */
@@ -56578,7 +57392,7 @@ export type ZarazTimerRule = {
   /**
    * @x-auditable true
    */
-  action: 'timer';
+  action: "timer";
   /**
    * @x-auditable true
    */
@@ -56601,7 +57415,7 @@ export type ZarazVariableMatchRule = {
   /**
    * @x-auditable true
    */
-  action: 'variableMatch';
+  action: "variableMatch";
   /**
    * @x-auditable true
    */
@@ -56626,7 +57440,7 @@ export type ZarazWorkerVariable = {
   /**
    * @x-auditable true
    */
-  type: 'worker';
+  type: "worker";
   value: {
     /**
      * @x-auditable true
@@ -56933,14 +57747,17 @@ export type ZarazZarazConfigBase = {
       /**
        * @x-auditable true
        */
-      system?: 'pageload';
+      system?: "pageload";
     };
   };
   /**
    * Variables set up under Zaraz configuration, where key is the variable alpha-numeric ID and value is the variable configuration. Values of variables of type secret are not included.
    */
   variables: {
-    [key: string]: ZarazStringVariable | ZarazSecretVariable | ZarazWorkerVariable;
+    [key: string]:
+      | ZarazStringVariable
+      | ZarazSecretVariable
+      | ZarazWorkerVariable;
   };
   /**
    * Zaraz internal version of the config.
@@ -57039,7 +57856,7 @@ export type ZarazZarazHistoryResponse = ZarazApiResponseCommon & {
  *
  * @x-auditable true
  */
-export type ZarazZarazWorkflow = 'realtime' | 'preview';
+export type ZarazZarazWorkflow = "realtime" | "preview";
 
 export type ZarazZarazWorkflowResponse = ZarazApiResponseCommon & {
   result?: ZarazZarazWorkflow;
@@ -57073,22 +57890,22 @@ export type ZeroTrustGatewayAccountLogOptions = {
  * @x-auditable true
  */
 export type ZeroTrustGatewayAction =
-  | 'on'
-  | 'off'
-  | 'allow'
-  | 'block'
-  | 'scan'
-  | 'noscan'
-  | 'safesearch'
-  | 'ytrestricted'
-  | 'isolate'
-  | 'noisolate'
-  | 'override'
-  | 'l4_override'
-  | 'egress'
-  | 'resolve'
-  | 'quarantine'
-  | 'redirect';
+  | "on"
+  | "off"
+  | "allow"
+  | "block"
+  | "scan"
+  | "noscan"
+  | "safesearch"
+  | "ytrestricted"
+  | "isolate"
+  | "noisolate"
+  | "override"
+  | "l4_override"
+  | "egress"
+  | "resolve"
+  | "quarantine"
+  | "redirect";
 
 /**
  * Activity log settings.
@@ -57113,9 +57930,10 @@ export type ZeroTrustGatewayAntiVirusSettings = {
   notification_settings?: ZeroTrustGatewayNotificationSettings;
 } | null;
 
-export type ZeroTrustGatewayApiResponseCollection = ZeroTrustGatewayApiResponseCommon & {
-  result_info?: ZeroTrustGatewayResultInfo;
-};
+export type ZeroTrustGatewayApiResponseCollection =
+  ZeroTrustGatewayApiResponseCommon & {
+    result_info?: ZeroTrustGatewayResultInfo;
+  };
 
 export type ZeroTrustGatewayApiResponseCommon = {
   errors: ZeroTrustGatewayMessages;
@@ -57144,9 +57962,12 @@ export type ZeroTrustGatewayApiResponseCommonFailure = {
   success: false;
 };
 
-export type ZeroTrustGatewayApiResponseSingle = ZeroTrustGatewayApiResponseCommon;
+export type ZeroTrustGatewayApiResponseSingle =
+  ZeroTrustGatewayApiResponseCommon;
 
-export type ZeroTrustGatewayAppTypes = ZeroTrustGatewayApplication | ZeroTrustGatewayApplicationType;
+export type ZeroTrustGatewayAppTypes =
+  | ZeroTrustGatewayApplication
+  | ZeroTrustGatewayApplicationType;
 
 /**
  * The name of the application or application type.
@@ -57156,9 +57977,10 @@ export type ZeroTrustGatewayAppTypes = ZeroTrustGatewayApplication | ZeroTrustGa
  */
 export type ZeroTrustGatewayAppTypesComponentsSchemasName = string;
 
-export type ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayAppTypes[];
-};
+export type ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayAppTypes[];
+  };
 
 /**
  * The identifier for this application. There is only one application per ID.
@@ -57193,9 +58015,10 @@ export type ZeroTrustGatewayApplicationType = {
   name?: ZeroTrustGatewayAppTypesComponentsSchemasName;
 };
 
-export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewaySettings;
-};
+export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewaySettings;
+  };
 
 /**
  * Seed ID
@@ -57219,7 +58042,11 @@ export type ZeroTrustGatewayBeta = boolean;
  *
  * @x-auditable true
  */
-export type ZeroTrustGatewayBindingStatus = 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
+export type ZeroTrustGatewayBindingStatus =
+  | "pending_deployment"
+  | "available"
+  | "pending_deletion"
+  | "inactive";
 
 /**
  * Block page layout settings.
@@ -57285,7 +58112,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @default customized_block_page
    * @x-auditable true
    */
-  mode?: 'customized_block_page' | 'redirect_uri';
+  mode?: "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -57355,7 +58182,7 @@ export type ZeroTrustGatewayBrowserIsolationSettings = {
 
 export type ZeroTrustGatewayCategories = {
   beta?: ZeroTrustGatewayBeta;
-  ['class']?: ZeroTrustGatewayClass;
+  ["class"]?: ZeroTrustGatewayClass;
   description?: ZeroTrustGatewayComponentsSchemasDescription;
   id?: ZeroTrustGatewayId;
   name?: ZeroTrustGatewayCategoriesComponentsSchemasName;
@@ -57372,9 +58199,10 @@ export type ZeroTrustGatewayCategories = {
  */
 export type ZeroTrustGatewayCategoriesComponentsSchemasName = string;
 
-export type ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayCategories[];
-};
+export type ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayCategories[];
+  };
 
 /**
  * Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.
@@ -57446,7 +58274,12 @@ export type ZeroTrustGatewayCfAccountId = string;
  * @example premium
  * @x-auditable true
  */
-export type ZeroTrustGatewayClass = 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
+export type ZeroTrustGatewayClass =
+  | "free"
+  | "premium"
+  | "blocked"
+  | "removalPending"
+  | "noBlock";
 
 /**
  * True if the location is the default location.
@@ -57482,13 +58315,15 @@ export type ZeroTrustGatewayComponentsSchemasIdentifier = string;
  */
 export type ZeroTrustGatewayComponentsSchemasName = string;
 
-export type ZeroTrustGatewayComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayLocations[];
-};
+export type ZeroTrustGatewayComponentsSchemasResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayLocations[];
+  };
 
-export type ZeroTrustGatewayComponentsSchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayRules;
-};
+export type ZeroTrustGatewayComponentsSchemasSingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayRules;
+  };
 
 /**
  * @example ed35569b41ce4d1facfe683550f54086
@@ -57692,9 +58527,10 @@ export type ZeroTrustGatewayDotEndpoint = {
  */
 export type ZeroTrustGatewayEcsSupport = boolean;
 
-export type ZeroTrustGatewayEmptyResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type ZeroTrustGatewayEmptyResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: Record<string, any>;
+  };
 
 /**
  * True if the rule is enabled.
@@ -57811,7 +58647,13 @@ export type ZeroTrustGatewayFailClosed = boolean;
  *
  * @example http
  */
-export type ZeroTrustGatewayFilters = ('http' | 'dns' | 'l4' | 'egress' | 'dns_resolver')[];
+export type ZeroTrustGatewayFilters = (
+  | "http"
+  | "dns"
+  | "l4"
+  | "egress"
+  | "dns_resolver"
+)[];
 
 /**
  * FIPS settings.
@@ -57845,9 +58687,10 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
   };
 };
 
-export type ZeroTrustGatewayGatewayAccountLoggingSettingsResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayGatewayAccountLoggingSettings;
-};
+export type ZeroTrustGatewayGatewayAccountLoggingSettingsResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayGatewayAccountLoggingSettings;
+  };
 
 /**
  * Account settings
@@ -57873,23 +58716,25 @@ export type ZeroTrustGatewayGatewayAccountSettings = {
   };
 };
 
-export type ZeroTrustGatewayGatewayAccount = ZeroTrustGatewayApiResponseSingle & {
-  result?: {
-    gateway_tag?: ZeroTrustGatewayGatewayTag;
-    id?: ZeroTrustGatewayCfAccountId;
-    provider_name?: ZeroTrustGatewayProviderName;
+export type ZeroTrustGatewayGatewayAccount =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: {
+      gateway_tag?: ZeroTrustGatewayGatewayTag;
+      id?: ZeroTrustGatewayCfAccountId;
+      provider_name?: ZeroTrustGatewayProviderName;
+    };
   };
-};
 
-export type ZeroTrustGatewayGatewayAccountConfig = ZeroTrustGatewayApiResponseSingle & {
-  /**
-   * Account settings
-   */
-  result?: ZeroTrustGatewayGatewayAccountSettings & {
-    created_at?: ZeroTrustGatewayReadOnlyTimestamp;
-    updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+export type ZeroTrustGatewayGatewayAccountConfig =
+  ZeroTrustGatewayApiResponseSingle & {
+    /**
+     * Account settings
+     */
+    result?: ZeroTrustGatewayGatewayAccountSettings & {
+      created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+      updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+    };
   };
-};
 
 /**
  * Gateway internal ID.
@@ -58039,43 +58884,45 @@ export type ZeroTrustGatewayItemsInput = {
   value?: ZeroTrustGatewayValue;
 }[];
 
-export type ZeroTrustGatewayListItemResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayItems[];
-} & {
-  result_info?: {
-    /**
-     * Total results returned based on your search parameters.
-     *
-     * @example 1
-     */
-    count?: number;
-    /**
-     * Current page within paginated list of results.
-     *
-     * @example 1
-     */
-    page?: number;
-    /**
-     * Number of results per page of results.
-     *
-     * @example 20
-     */
-    per_page?: number;
-    /**
-     * Total results available without any search parameters.
-     *
-     * @example 2000
-     */
-    total_count?: number;
+export type ZeroTrustGatewayListItemResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayItems[];
+  } & {
+    result_info?: {
+      /**
+       * Total results returned based on your search parameters.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
-};
 
 /**
  * @x-auditable true
  */
-export type ZeroTrustGatewayListSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayLists;
-};
+export type ZeroTrustGatewayListSingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayLists;
+  };
 
 export type ZeroTrustGatewayLists = {
   count?: ZeroTrustGatewayCount;
@@ -58210,9 +59057,10 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasResponseCollection =
     result?: ZeroTrustGatewayProxyEndpoints[];
   };
 
-export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayProxyEndpoints;
-};
+export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayProxyEndpoints;
+  };
 
 /**
  * Base64 encoded HPKE public key used to encrypt all your ssh session logs. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
@@ -58228,9 +59076,10 @@ export type ZeroTrustGatewayPublicKey = string;
  */
 export type ZeroTrustGatewayReadOnlyTimestamp = string;
 
-export type ZeroTrustGatewayResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayCertificates[];
-};
+export type ZeroTrustGatewayResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayCertificates[];
+  };
 
 export type ZeroTrustGatewayResultInfo = {
   /**
@@ -58300,7 +59149,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example remote_only
      * @x-auditable true
      */
-    copy?: 'enabled' | 'disabled' | 'remote_only';
+    copy?: "enabled" | "disabled" | "remote_only";
     /**
      * Set to false to enable copy-pasting. Only applies when `version == "v1"`.
      *
@@ -58331,7 +59180,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example enabled
      * @x-auditable true
      */
-    download?: 'enabled' | 'disabled' | 'remote_only';
+    download?: "enabled" | "disabled" | "remote_only";
     /**
      * Set to false to enable printing. Only applies when `version == "v1"`.
      *
@@ -58354,35 +59203,35 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example enabled
      * @x-auditable true
      */
-    keyboard?: 'enabled' | 'disabled';
+    keyboard?: "enabled" | "disabled";
     /**
      * Configure whether pasting is enabled or not. When set with "remote_only", pasting content from the user's local clipboard into isolated pages is disabled. When absent, paste is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
      * @x-auditable true
      */
-    paste?: 'enabled' | 'disabled' | 'remote_only';
+    paste?: "enabled" | "disabled" | "remote_only";
     /**
      * Configure whether printing is enabled or not. When absent, printing is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
      * @x-auditable true
      */
-    printing?: 'enabled' | 'disabled';
+    printing?: "enabled" | "disabled";
     /**
      * Configure whether uploading is enabled or not. When absent, uploading is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
      * @x-auditable true
      */
-    upload?: 'enabled' | 'disabled';
+    upload?: "enabled" | "disabled";
     /**
      * Indicates which version of the browser isolation controls should apply.
      *
      * @default v1
      * @x-auditable true
      */
-    version?: 'v1' | 'v2';
+    version?: "v1" | "v2";
   } | null;
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
@@ -58584,19 +59433,19 @@ export type ZeroTrustGatewayRuleSettings = {
      * Types of files to sandbox.
      */
     file_types?: (
-      | 'exe'
-      | 'pdf'
-      | 'doc'
-      | 'docm'
-      | 'docx'
-      | 'rtf'
-      | 'ppt'
-      | 'pptx'
-      | 'xls'
-      | 'xlsm'
-      | 'xlsx'
-      | 'zip'
-      | 'rar'
+      | "exe"
+      | "pdf"
+      | "doc"
+      | "docm"
+      | "docx"
+      | "rtf"
+      | "ppt"
+      | "pptx"
+      | "xls"
+      | "xlsm"
+      | "xlsx"
+      | "zip"
+      | "rar"
     )[];
   } | null;
   /**
@@ -58632,7 +59481,7 @@ export type ZeroTrustGatewayRuleSettings = {
      *
      * @x-auditable true
      */
-    fallback?: 'none' | 'public_dns';
+    fallback?: "none" | "public_dns";
     /**
      * The internal DNS view identifier that's passed to the internal DNS service.
      *
@@ -58657,7 +59506,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example error
      * @x-auditable true
      */
-    action?: 'pass_through' | 'block' | 'error';
+    action?: "pass_through" | "block" | "error";
   } | null;
 };
 
@@ -58682,9 +59531,10 @@ export type ZeroTrustGatewayRules = {
   warning_status?: ZeroTrustGatewayWarningStatus;
 };
 
-export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayRules[];
-};
+export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayRules[];
+  };
 
 /**
  * The API resource UUID.
@@ -58711,7 +59561,7 @@ export type ZeroTrustGatewaySandbox = {
    *
    * @x-auditable true
    */
-  fallback_action?: 'allow' | 'block';
+  fallback_action?: "allow" | "block";
 } | null;
 
 /**
@@ -58798,13 +59648,15 @@ export type ZeroTrustGatewaySchemasIdentifier = string;
  */
 export type ZeroTrustGatewaySchemasName = string;
 
-export type ZeroTrustGatewaySchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
-  result?: ZeroTrustGatewayLists[];
-};
+export type ZeroTrustGatewaySchemasResponseCollection =
+  ZeroTrustGatewayApiResponseCollection & {
+    result?: ZeroTrustGatewayLists[];
+  };
 
-export type ZeroTrustGatewaySchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayLocations;
-};
+export type ZeroTrustGatewaySchemasSingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayLocations;
+  };
 
 /**
  * The subdomain to be used as the destination in the proxy client.
@@ -58820,7 +59672,12 @@ export type ZeroTrustGatewaySchemasSubdomain = string;
  * @example SERIAL
  * @x-auditable true
  */
-export type ZeroTrustGatewaySchemasType = 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+export type ZeroTrustGatewaySchemasType =
+  | "SERIAL"
+  | "URL"
+  | "DOMAIN"
+  | "EMAIL"
+  | "IP";
 
 /**
  * API Resource UUID tag.
@@ -58838,25 +59695,27 @@ export type ZeroTrustGatewaySettings = {
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
-export type ZeroTrustGatewaySingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayCertificates;
-};
-
-export type ZeroTrustGatewaySingleResponseWithListItems = ZeroTrustGatewayApiResponseSingle & {
-  result?: {
-    created_at?: ZeroTrustGatewayReadOnlyTimestamp;
-    description?: ZeroTrustGatewayDescription;
-    id?: ZeroTrustGatewaySchemasUuid;
-    items?: ZeroTrustGatewayItems;
-    name?: ZeroTrustGatewayName;
-    type?: ZeroTrustGatewaySchemasType;
-    updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+export type ZeroTrustGatewaySingleResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: ZeroTrustGatewayCertificates;
   };
-};
+
+export type ZeroTrustGatewaySingleResponseWithListItems =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: {
+      created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+      description?: ZeroTrustGatewayDescription;
+      id?: ZeroTrustGatewaySchemasUuid;
+      items?: ZeroTrustGatewayItems;
+      name?: ZeroTrustGatewayName;
+      type?: ZeroTrustGatewaySchemasType;
+      updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+    };
+  };
 
 export type ZeroTrustGatewaySubcategory = {
   beta?: ZeroTrustGatewayBeta;
-  ['class']?: ZeroTrustGatewayClass;
+  ["class"]?: ZeroTrustGatewayClass;
   description?: ZeroTrustGatewayComponentsSchemasDescription;
   id?: ZeroTrustGatewayId;
   name?: ZeroTrustGatewayCategoriesComponentsSchemasName;
@@ -58904,7 +59763,7 @@ export type ZeroTrustGatewayTraffic = string;
  * @example gateway_managed
  * @x-auditable true
  */
-export type ZeroTrustGatewayType = 'custom' | 'gateway_managed';
+export type ZeroTrustGatewayType = "custom" | "gateway_managed";
 
 /**
  * Certificate UUID tag.
@@ -59074,15 +59933,15 @@ export type ZoneAnalyticsApiBandwidth = {
     /**
      * The number of requests served over TLS v1.1.
      */
-    ['TLSv1.1']?: number;
+    ["TLSv1.1"]?: number;
     /**
      * The number of requests served over TLS v1.2.
      */
-    ['TLSv1.2']?: number;
+    ["TLSv1.2"]?: number;
     /**
      * The number of requests served over TLS v1.3.
      */
-    ['TLSv1.3']?: number;
+    ["TLSv1.3"]?: number;
     /**
      * The number of requests served over HTTP.
      */
@@ -59125,10 +59984,11 @@ export type ZoneAnalyticsApiDashboard = {
   totals?: ZoneAnalyticsApiTotals;
 };
 
-export type ZoneAnalyticsApiDashboardResponse = ZoneAnalyticsApiApiResponseSingle & {
-  query?: ZoneAnalyticsApiQueryResponse;
-  result?: ZoneAnalyticsApiDashboard;
-};
+export type ZoneAnalyticsApiDashboardResponse =
+  ZoneAnalyticsApiApiResponseSingle & {
+    query?: ZoneAnalyticsApiQueryResponse;
+    result?: ZoneAnalyticsApiDashboard;
+  };
 
 /**
  * A breakdown of all dashboard analytics data by co-locations. This is limited to Enterprise zones only.
@@ -59244,15 +60104,15 @@ export type ZoneAnalyticsApiRequests = {
     /**
      * The number of requests served over TLS v1.1.
      */
-    ['TLSv1.1']?: number;
+    ["TLSv1.1"]?: number;
     /**
      * The number of requests served over TLS v1.2.
      */
-    ['TLSv1.2']?: number;
+    ["TLSv1.2"]?: number;
     /**
      * The number of requests served over TLS v1.3.
      */
-    ['TLSv1.3']?: number;
+    ["TLSv1.3"]?: number;
     /**
      * The number of requests served over HTTP.
      */
@@ -59411,7 +60271,7 @@ export type Zones0rtt = {
    *
    * @example 0rtt
    */
-  id: '0rtt';
+  id: "0rtt";
   /**
    * last time this setting was modified.
    *
@@ -59432,7 +60292,7 @@ export type Zones0rtt = {
  *
  * @default off
  */
-export type Zones0rttValue = 'on' | 'off';
+export type Zones0rttValue = "on" | "off";
 
 /**
  * The set of actions to perform if the targets of this rule match the
@@ -59493,7 +60353,7 @@ export type ZonesAdvancedDdos = {
    *
    * @example advanced_ddos
    */
-  id: 'advanced_ddos';
+  id: "advanced_ddos";
   /**
    * last time this setting was modified.
    *
@@ -59515,7 +60375,7 @@ export type ZonesAdvancedDdos = {
  *
  * @default off
  */
-export type ZonesAdvancedDdosValue = 'on' | 'off';
+export type ZonesAdvancedDdosValue = "on" | "off";
 
 /**
  * When enabled, Cloudflare serves limited copies of web pages available from the [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is offline. Refer to [Always Online](https://developers.cloudflare.com/cache/about/always-online) for more information.
@@ -59532,7 +60392,7 @@ export type ZonesAlwaysOnline = {
    *
    * @example always_online
    */
-  id: 'always_online';
+  id: "always_online";
   /**
    * last time this setting was modified.
    *
@@ -59553,7 +60413,7 @@ export type ZonesAlwaysOnline = {
  *
  * @default on
  */
-export type ZonesAlwaysOnlineValue = 'on' | 'off';
+export type ZonesAlwaysOnlineValue = "on" | "off";
 
 export type ZonesAlwaysUseHttps = {
   /**
@@ -59562,7 +60422,7 @@ export type ZonesAlwaysUseHttps = {
    *
    * @x-auditable true
    */
-  id?: 'always_use_https';
+  id?: "always_use_https";
 };
 
 /**
@@ -59570,7 +60430,7 @@ export type ZonesAlwaysUseHttps = {
  *
  * @default off
  */
-export type ZonesAlwaysUseHttpsValue = 'on' | 'off';
+export type ZonesAlwaysUseHttpsValue = "on" | "off";
 
 export type ZonesApiResponseCommon = {
   errors: ZonesMessages;
@@ -59613,14 +60473,14 @@ export type ZonesAutomaticHttpsRewrites = {
    *
    * @x-auditable true
    */
-  id?: 'automatic_https_rewrites';
+  id?: "automatic_https_rewrites";
   /**
    * The status of Automatic HTTPS Rewrites.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -59629,7 +60489,7 @@ export type ZonesAutomaticHttpsRewrites = {
  *
  * @default on
  */
-export type ZonesAutomaticHttpsRewritesValue = 'on' | 'off';
+export type ZonesAutomaticHttpsRewritesValue = "on" | "off";
 
 export type ZonesAutomaticPlatformOptimization = {
   /**
@@ -59719,7 +60579,7 @@ export type ZonesBrotli = {
    *
    * @example brotli
    */
-  id: 'brotli';
+  id: "brotli";
   /**
    * last time this setting was modified.
    *
@@ -59740,7 +60600,7 @@ export type ZonesBrotli = {
  *
  * @default off
  */
-export type ZonesBrotliValue = 'off' | 'on';
+export type ZonesBrotliValue = "off" | "on";
 
 export type ZonesBrowserCacheTtl = {
   /**
@@ -59748,7 +60608,7 @@ export type ZonesBrowserCacheTtl = {
    *
    * @x-auditable true
    */
-  id?: 'browser_cache_ttl';
+  id?: "browser_cache_ttl";
   /**
    * The number of seconds to cache resources for. The API prohibits
    * setting this to 0 for non-Enterprise domains.
@@ -59804,14 +60664,14 @@ export type ZonesBrowserCheck = {
    *
    * @x-auditable true
    */
-  id?: 'browser_check';
+  id?: "browser_check";
   /**
    * The status of Browser Integrity Check.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -59819,7 +60679,7 @@ export type ZonesBrowserCheck = {
  *
  * @default on
  */
-export type ZonesBrowserCheckValue = 'on' | 'off';
+export type ZonesBrowserCheckValue = "on" | "off";
 
 export type ZonesBypassCacheOnCookie = {
   /**
@@ -59828,7 +60688,7 @@ export type ZonesBypassCacheOnCookie = {
    *
    * @x-auditable true
    */
-  id?: 'bypass_cache_on_cookie';
+  id?: "bypass_cache_on_cookie";
   /**
    * The regular expression to use for matching cookie names in the
    * request. Refer to [Bypass Cache on Cookie
@@ -59853,7 +60713,7 @@ export type ZonesCacheRulesAegis = {
    * @x-auditable true
    * @example aegis
    */
-  id: 'aegis';
+  id: "aegis";
   /**
    * Last time this setting was modified.
    *
@@ -59911,7 +60771,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
    * @x-auditable true
    * @example origin_h2_max_streams
    */
-  id: 'origin_h2_max_streams';
+  id: "origin_h2_max_streams";
   /**
    * Last time this setting was modified.
    *
@@ -59943,7 +60803,7 @@ export type ZonesCacheRulesOriginMaxHttpVersion = {
    * @x-auditable true
    * @example origin_max_http_version
    */
-  id: 'origin_max_http_version';
+  id: "origin_max_http_version";
   /**
    * Last time this setting was modified.
    *
@@ -59960,7 +60820,7 @@ export type ZonesCacheRulesOriginMaxHttpVersion = {
  *
  * @x-auditable true
  */
-export type ZonesCacheRulesOriginMaxHttpVersionValue = '2' | '1';
+export type ZonesCacheRulesOriginMaxHttpVersionValue = "2" | "1";
 
 export type ZonesCacheByDeviceType = {
   /**
@@ -59968,14 +60828,14 @@ export type ZonesCacheByDeviceType = {
    *
    * @x-auditable true
    */
-  id?: 'cache_by_device_type';
+  id?: "cache_by_device_type";
   /**
    * The status of Cache By Device Type.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 export type ZonesCacheDeceptionArmor = {
@@ -59986,14 +60846,14 @@ export type ZonesCacheDeceptionArmor = {
    *
    * @x-auditable true
    */
-  id?: 'cache_deception_armor';
+  id?: "cache_deception_armor";
   /**
    * The status of Cache Deception Armor.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 export type ZonesCacheKeyFields = {
@@ -60002,7 +60862,7 @@ export type ZonesCacheKeyFields = {
    * resources to cache. This allows customers to determine what to cache
    * based on something other than just the URL.
    */
-  id?: 'cache_key_fields';
+  id?: "cache_key_fields";
   value?: {
     /**
      * Controls which cookies appear in the Cache Key.
@@ -60077,8 +60937,8 @@ export type ZonesCacheKeyFields = {
      * Key. Exactly one of `include` or `exclude` is expected.
      */
     query_string?: {
-      exclude?: '*' | string[];
-      include?: '*' | string[];
+      exclude?: "*" | string[];
+      include?: "*" | string[];
     };
     /**
      * Feature fields to add features about the end-user (client) into
@@ -60109,7 +60969,7 @@ export type ZonesCacheLevel = {
    *
    * @x-auditable true
    */
-  id?: 'cache_level';
+  id?: "cache_level";
   /**
    * * `bypass`: Cloudflare does not cache.
    * * `basic`: Delivers resources from cache when there is no query
@@ -60124,7 +60984,7 @@ export type ZonesCacheLevel = {
    * @example bypass
    * @x-auditable true
    */
-  value?: 'bypass' | 'basic' | 'simplified' | 'aggressive' | 'cache_everything';
+  value?: "bypass" | "basic" | "simplified" | "aggressive" | "cache_everything";
 };
 
 /**
@@ -60132,7 +60992,7 @@ export type ZonesCacheLevel = {
  *
  * @default aggressive
  */
-export type ZonesCacheLevelValue = 'aggressive' | 'basic' | 'simplified';
+export type ZonesCacheLevelValue = "aggressive" | "basic" | "simplified";
 
 export type ZonesCacheOnCookie = {
   /**
@@ -60141,7 +61001,7 @@ export type ZonesCacheOnCookie = {
    *
    * @x-auditable true
    */
-  id?: 'cache_on_cookie';
+  id?: "cache_on_cookie";
   /**
    * The regular expression to use for matching cookie names in the
    * request.
@@ -60170,7 +61030,7 @@ export type ZonesCacheTtlByStatus = {
    *
    * @x-auditable true
    */
-  id?: 'cache_ttl_by_status';
+  id?: "cache_ttl_by_status";
   /**
    * A JSON object containing status codes and their corresponding TTLs.
    * Each key-value pair in the cache TTL by status cache rule has the
@@ -60188,7 +61048,7 @@ export type ZonesCacheTtlByStatus = {
    * @example {"200-299":86400,"300-499":"no-cache","500-599":"no-store"}
    */
   value?: {
-    [key: string]: ('no-cache' | 'no-store') | number;
+    [key: string]: ("no-cache" | "no-store") | number;
   };
 };
 
@@ -60207,7 +61067,7 @@ export type ZonesChallengeTtl = {
    *
    * @example challenge_ttl
    */
-  id: 'challenge_ttl';
+  id: "challenge_ttl";
   /**
    * last time this setting was modified.
    *
@@ -60259,7 +61119,7 @@ export type ZonesChinaNetworkEnabled = {
    *
    * @example china_network_enabled
    */
-  id: 'china_network_enabled';
+  id: "china_network_enabled";
   /**
    * last time this setting was modified.
    *
@@ -60280,7 +61140,7 @@ export type ZonesChinaNetworkEnabled = {
  *
  * @default off
  */
-export type ZonesChinaNetworkEnabledValue = 'on' | 'off';
+export type ZonesChinaNetworkEnabledValue = "on" | "off";
 
 /**
  * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
@@ -60297,7 +61157,7 @@ export type ZonesCiphers = {
    *
    * @example ciphers
    */
-  id: 'ciphers';
+  id: "ciphers";
   /**
    * last time this setting was modified.
    *
@@ -60340,7 +61200,7 @@ export type ZonesCnameFlattening = {
    *
    * @example development_mode
    */
-  id: 'cname_flattening';
+  id: "cname_flattening";
   /**
    * last time this setting was modified.
    *
@@ -60363,7 +61223,7 @@ export type ZonesCnameFlattening = {
  * @deprecated true
  * @x-stainless-deprecation-message This zone setting is deprecated; please use the DNS Settings route instead. More information at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
  */
-export type ZonesCnameFlatteningValue = 'flatten_at_root' | 'flatten_all';
+export type ZonesCnameFlatteningValue = "flatten_at_root" | "flatten_all";
 
 export type ZonesComponentsSchemasApiResponseCommon = {
   errors: ZonesMessages;
@@ -60417,7 +61277,7 @@ export type ZonesDevelopmentMode = {
    *
    * @example development_mode
    */
-  id: 'development_mode';
+  id: "development_mode";
   /**
    * last time this setting was modified.
    *
@@ -60445,7 +61305,7 @@ export type ZonesDevelopmentMode = {
  *
  * @default off
  */
-export type ZonesDevelopmentModeValue = 'on' | 'off';
+export type ZonesDevelopmentModeValue = "on" | "off";
 
 export type ZonesDisableApps = {
   /**
@@ -60454,7 +61314,7 @@ export type ZonesDisableApps = {
    *
    * @x-auditable true
    */
-  id?: 'disable_apps';
+  id?: "disable_apps";
 };
 
 export type ZonesDisablePerformance = {
@@ -60466,7 +61326,7 @@ export type ZonesDisablePerformance = {
    *
    * @x-auditable true
    */
-  id?: 'disable_performance';
+  id?: "disable_performance";
 };
 
 export type ZonesDisableSecurity = {
@@ -60480,7 +61340,7 @@ export type ZonesDisableSecurity = {
    *
    * @x-auditable true
    */
-  id?: 'disable_security';
+  id?: "disable_security";
 };
 
 export type ZonesDisableZaraz = {
@@ -60489,7 +61349,7 @@ export type ZonesDisableZaraz = {
    *
    * @x-auditable true
    */
-  id?: 'disable_zaraz';
+  id?: "disable_zaraz";
 };
 
 /**
@@ -60507,7 +61367,7 @@ export type ZonesEarlyHints = {
    *
    * @example early_hints
    */
-  id: 'early_hints';
+  id: "early_hints";
   /**
    * last time this setting was modified.
    *
@@ -60528,7 +61388,7 @@ export type ZonesEarlyHints = {
  *
  * @default off
  */
-export type ZonesEarlyHintsValue = 'on' | 'off';
+export type ZonesEarlyHintsValue = "on" | "off";
 
 export type ZonesEdgeCacheTtl = {
   /**
@@ -60537,7 +61397,7 @@ export type ZonesEdgeCacheTtl = {
    *
    * @x-auditable true
    */
-  id?: 'edge_cache_ttl';
+  id?: "edge_cache_ttl";
   /**
    * @maximum 31536000
    * @minimum 1
@@ -60581,14 +61441,14 @@ export type ZonesEmailObfuscation = {
    *
    * @x-auditable true
    */
-  id?: 'email_obfuscation';
+  id?: "email_obfuscation";
   /**
    * The status of Email Obfuscation.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -60596,7 +61456,7 @@ export type ZonesEmailObfuscation = {
  *
  * @default on
  */
-export type ZonesEmailObfuscationValue = 'on' | 'off';
+export type ZonesEmailObfuscationValue = "on" | "off";
 
 export type ZonesExplicitCacheControl = {
   /**
@@ -60605,14 +61465,14 @@ export type ZonesExplicitCacheControl = {
    *
    * @x-auditable true
    */
-  id?: 'explicit_cache_control';
+  id?: "explicit_cache_control";
   /**
    * The status of Origin Cache Control.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 export type ZonesForwardingUrl = {
@@ -60623,7 +61483,7 @@ export type ZonesForwardingUrl = {
    * @example forwarding_url
    * @x-auditable true
    */
-  id?: 'forwarding_url';
+  id?: "forwarding_url";
   value?: {
     /**
      * The status code to use for the URL redirect. 301 is a permanent
@@ -60660,7 +61520,7 @@ export type ZonesH2Prioritization = {
    *
    * @example h2_prioritization
    */
-  id: 'h2_prioritization';
+  id: "h2_prioritization";
   /**
    * last time this setting was modified.
    *
@@ -60681,7 +61541,7 @@ export type ZonesH2Prioritization = {
  *
  * @default off
  */
-export type ZonesH2PrioritizationValue = 'on' | 'off' | 'custom';
+export type ZonesH2PrioritizationValue = "on" | "off" | "custom";
 
 export type ZonesHostHeaderOverride = {
   /**
@@ -60689,7 +61549,7 @@ export type ZonesHostHeaderOverride = {
    *
    * @x-auditable true
    */
-  id?: 'host_header_override';
+  id?: "host_header_override";
   /**
    * The hostname to use in the `Host` header
    *
@@ -60715,7 +61575,7 @@ export type ZonesHotlinkProtection = {
    *
    * @example hotlink_protection
    */
-  id: 'hotlink_protection';
+  id: "hotlink_protection";
   /**
    * last time this setting was modified.
    *
@@ -60736,7 +61596,7 @@ export type ZonesHotlinkProtection = {
  *
  * @default off
  */
-export type ZonesHotlinkProtectionValue = 'on' | 'off';
+export type ZonesHotlinkProtectionValue = "on" | "off";
 
 /**
  * HTTP2 enabled for this zone.
@@ -60753,7 +61613,7 @@ export type ZonesHttp2 = {
    *
    * @example http2
    */
-  id: 'http2';
+  id: "http2";
   /**
    * last time this setting was modified.
    *
@@ -60774,7 +61634,7 @@ export type ZonesHttp2 = {
  *
  * @default off
  */
-export type ZonesHttp2Value = 'on' | 'off';
+export type ZonesHttp2Value = "on" | "off";
 
 /**
  * HTTP3 enabled for this zone.
@@ -60791,7 +61651,7 @@ export type ZonesHttp3 = {
    *
    * @example http3
    */
-  id: 'http3';
+  id: "http3";
   /**
    * last time this setting was modified.
    *
@@ -60812,7 +61672,7 @@ export type ZonesHttp3 = {
  *
  * @default off
  */
-export type ZonesHttp3Value = 'on' | 'off';
+export type ZonesHttp3Value = "on" | "off";
 
 /**
  * Identifier
@@ -60837,7 +61697,7 @@ export type ZonesImageResizing = {
    *
    * @example image_resizing
    */
-  id: 'image_resizing';
+  id: "image_resizing";
   /**
    * last time this setting was modified.
    *
@@ -60858,7 +61718,7 @@ export type ZonesImageResizing = {
  *
  * @default off
  */
-export type ZonesImageResizingValue = 'on' | 'off' | 'open';
+export type ZonesImageResizingValue = "on" | "off" | "open";
 
 export type ZonesIpGeolocation = {
   /**
@@ -60867,14 +61727,14 @@ export type ZonesIpGeolocation = {
    * @example ip_geolocation
    * @x-auditable true
    */
-  id?: 'ip_geolocation';
+  id?: "ip_geolocation";
   /**
    * The status of adding the IP Geolocation Header.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -60882,7 +61742,7 @@ export type ZonesIpGeolocation = {
  *
  * @default on
  */
-export type ZonesIpGeolocationValue = 'on' | 'off';
+export type ZonesIpGeolocationValue = "on" | "off";
 
 /**
  * Enable IPv6 on all subdomains that are Cloudflare enabled.  (https://support.cloudflare.com/hc/en-us/articles/200168586).
@@ -60899,7 +61759,7 @@ export type ZonesIpv6 = {
    *
    * @example ipv6
    */
-  id: 'ipv6';
+  id: "ipv6";
   /**
    * last time this setting was modified.
    *
@@ -60920,7 +61780,7 @@ export type ZonesIpv6 = {
  *
  * @default off
  */
-export type ZonesIpv6Value = 'off' | 'on';
+export type ZonesIpv6Value = "off" | "on";
 
 /**
  * Maximum size of an allowable upload.
@@ -60937,7 +61797,7 @@ export type ZonesMaxUpload = {
    *
    * @example max_upload
    */
-  id: 'max_upload';
+  id: "max_upload";
   /**
    * last time this setting was modified.
    *
@@ -61004,7 +61864,7 @@ export type ZonesMinTlsVersion = {
    *
    * @example min_tls_version
    */
-  id: 'min_tls_version';
+  id: "min_tls_version";
   /**
    * last time this setting was modified.
    *
@@ -61025,7 +61885,7 @@ export type ZonesMinTlsVersion = {
  *
  * @default 1.0
  */
-export type ZonesMinTlsVersionValue = '1.0' | '1.1' | '1.2' | '1.3';
+export type ZonesMinTlsVersionValue = "1.0" | "1.1" | "1.2" | "1.3";
 
 export type ZonesMirage = {
   /**
@@ -61035,14 +61895,14 @@ export type ZonesMirage = {
    * @example mirage
    * @x-auditable true
    */
-  id?: 'mirage';
+  id?: "mirage";
   /**
    * The status of Mirage.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -61050,7 +61910,7 @@ export type ZonesMirage = {
  *
  * @default off
  */
-export type ZonesMirageValue = 'on' | 'off';
+export type ZonesMirageValue = "on" | "off";
 
 /**
  * The timestamp of when the Page Rule was last modified.
@@ -61145,7 +62005,7 @@ export type ZonesNel = {
    *
    * @example nel
    */
-  id: 'nel';
+  id: "nel";
   /**
    * last time this setting was modified.
    *
@@ -61182,14 +62042,14 @@ export type ZonesOpportunisticEncryption = {
    * @example opportunistic_encryption
    * @x-auditable true
    */
-  id?: 'opportunistic_encryption';
+  id?: "opportunistic_encryption";
   /**
    * The status of Opportunistic Encryption.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -61198,7 +62058,7 @@ export type ZonesOpportunisticEncryption = {
  *
  * @default on
  */
-export type ZonesOpportunisticEncryptionValue = 'on' | 'off';
+export type ZonesOpportunisticEncryptionValue = "on" | "off";
 
 /**
  * Add an Alt-Svc header to all legitimate requests from Tor, allowing the connection to use our onion services instead of exit nodes.
@@ -61217,7 +62077,7 @@ export type ZonesOpportunisticOnion = {
    *
    * @example opportunistic_onion
    */
-  id: 'opportunistic_onion';
+  id: "opportunistic_onion";
   /**
    * last time this setting was modified.
    *
@@ -61239,7 +62099,7 @@ export type ZonesOpportunisticOnion = {
  *
  * @default off
  */
-export type ZonesOpportunisticOnionValue = 'on' | 'off';
+export type ZonesOpportunisticOnionValue = "on" | "off";
 
 /**
  * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also on Cloudflare.
@@ -61256,7 +62116,7 @@ export type ZonesOrangeToOrange = {
    *
    * @example orange_to_orange
    */
-  id: 'orange_to_orange';
+  id: "orange_to_orange";
   /**
    * last time this setting was modified.
    *
@@ -61277,7 +62137,7 @@ export type ZonesOrangeToOrange = {
  *
  * @default on
  */
-export type ZonesOrangeToOrangeValue = 'on' | 'off';
+export type ZonesOrangeToOrangeValue = "on" | "off";
 
 export type ZonesOriginErrorPagePassThru = {
   /**
@@ -61286,14 +62146,14 @@ export type ZonesOriginErrorPagePassThru = {
    * @example origin_error_page_pass_thru
    * @x-auditable true
    */
-  id?: 'origin_error_page_pass_thru';
+  id?: "origin_error_page_pass_thru";
   /**
    * The status of Origin Error Page Passthru.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -61301,7 +62161,7 @@ export type ZonesOriginErrorPagePassThru = {
  *
  * @default off
  */
-export type ZonesOriginErrorPagePassThruValue = 'on' | 'off';
+export type ZonesOriginErrorPagePassThruValue = "on" | "off";
 
 export type ZonesPageRule = {
   actions: ZonesActions;
@@ -61329,14 +62189,14 @@ export type ZonesPolish = {
    * @example polish
    * @x-auditable true
    */
-  id?: 'polish';
+  id?: "polish";
   /**
    * The level of Polish you want applied to your origin.
    *
    * @example lossless
    * @x-auditable true
    */
-  value?: 'off' | 'lossless' | 'lossy';
+  value?: "off" | "lossless" | "lossy";
 };
 
 /**
@@ -61344,7 +62204,7 @@ export type ZonesPolish = {
  *
  * @default off
  */
-export type ZonesPolishValue = 'off' | 'lossless' | 'lossy';
+export type ZonesPolishValue = "off" | "lossless" | "lossy";
 
 /**
  * Cloudflare will prefetch any URLs that are included in the response headers. This is limited to Enterprise Zones.
@@ -61363,7 +62223,7 @@ export type ZonesPrefetchPreload = {
    *
    * @example prefetch_preload
    */
-  id: 'prefetch_preload';
+  id: "prefetch_preload";
   /**
    * last time this setting was modified.
    *
@@ -61384,7 +62244,7 @@ export type ZonesPrefetchPreload = {
  *
  * @default off
  */
-export type ZonesPrefetchPreloadValue = 'on' | 'off';
+export type ZonesPrefetchPreloadValue = "on" | "off";
 
 /**
  * The priority of the rule, used to define which Page Rule is processed
@@ -61417,7 +62277,7 @@ export type ZonesPrivacyPass = {
    *
    * @example privacy_pass
    */
-  id: 'privacy_pass';
+  id: "privacy_pass";
   /**
    * last time this setting was modified.
    *
@@ -61440,7 +62300,7 @@ export type ZonesPrivacyPass = {
  * @deprecated true
  * @x-stainless-deprecation-message Privacy Pass v1 was deprecated in 2023. (Announcement - https://blog.cloudflare.com/privacy-pass-standard/) and (API deprecation details - https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2024-03-31)
  */
-export type ZonesPrivacyPassValue = 'on' | 'off';
+export type ZonesPrivacyPassValue = "on" | "off";
 
 /**
  * Maximum time between two read operations from origin.
@@ -61457,7 +62317,7 @@ export type ZonesProxyReadTimeout = {
    *
    * @example proxy_read_timeout
    */
-  id: 'proxy_read_timeout';
+  id: "proxy_read_timeout";
   /**
    * last time this setting was modified.
    *
@@ -61497,7 +62357,7 @@ export type ZonesPseudoIpv4 = {
    * @example development_mode
    * @default pseudo_ipv4
    */
-  id: 'pseudo_ipv4';
+  id: "pseudo_ipv4";
   /**
    * last time this setting was modified.
    *
@@ -61518,7 +62378,7 @@ export type ZonesPseudoIpv4 = {
  *
  * @default off
  */
-export type ZonesPseudoIpv4Value = 'off' | 'add_header' | 'overwrite_header';
+export type ZonesPseudoIpv4Value = "off" | "add_header" | "overwrite_header";
 
 /**
  * Automatically replace insecure JavaScript libraries with safer and faster alternatives provided under cdnjs and powered by Cloudflare. Currently supports the following libraries: Polyfill under polyfill.io.
@@ -61535,7 +62395,7 @@ export type ZonesReplaceInsecureJs = {
    *
    * @example replace_insecure_js
    */
-  id: 'replace_insecure_js';
+  id: "replace_insecure_js";
   /**
    * last time this setting was modified.
    *
@@ -61556,7 +62416,7 @@ export type ZonesReplaceInsecureJs = {
  *
  * @default off
  */
-export type ZonesReplaceInsecureJsValue = 'on' | 'off';
+export type ZonesReplaceInsecureJsValue = "on" | "off";
 
 export type ZonesResolveOverride = {
   /**
@@ -61565,7 +62425,7 @@ export type ZonesResolveOverride = {
    * @example resolve_override
    * @x-auditable true
    */
-  id?: 'resolve_override';
+  id?: "resolve_override";
   /**
    * The origin address you want to override with.
    *
@@ -61582,14 +62442,14 @@ export type ZonesRespectStrongEtag = {
    *
    * @x-auditable true
    */
-  id?: 'respect_strong_etag';
+  id?: "respect_strong_etag";
   /**
    * The status of Respect Strong ETags
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 export type ZonesResponseBuffering = {
@@ -61601,14 +62461,14 @@ export type ZonesResponseBuffering = {
    *
    * @x-auditable true
    */
-  id?: 'response_buffering';
+  id?: "response_buffering";
   /**
    * The status of Response Buffering
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -61616,7 +62476,7 @@ export type ZonesResponseBuffering = {
  *
  * @default off
  */
-export type ZonesResponseBufferingValue = 'on' | 'off';
+export type ZonesResponseBufferingValue = "on" | "off";
 
 export type ZonesResultInfo = {
   /**
@@ -61657,14 +62517,14 @@ export type ZonesRocketLoader = {
    *
    * @x-auditable true
    */
-  id?: 'rocket_loader';
+  id?: "rocket_loader";
   /**
    * The status of Rocket Loader
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -61672,7 +62532,7 @@ export type ZonesRocketLoader = {
  *
  * @default off
  */
-export type ZonesRocketLoaderValue = 'on' | 'off';
+export type ZonesRocketLoaderValue = "on" | "off";
 
 /**
  * Reply to all requests for URLs that use "http" with a 301 redirect to the equivalent "https" URL. If you only want to redirect for a subset of requests, consider creating an "Always use HTTPS" page rule.
@@ -61691,7 +62551,7 @@ export type ZonesSchemasAlwaysUseHttps = {
    *
    * @example always_use_https
    */
-  id: 'always_use_https';
+  id: "always_use_https";
   /**
    * last time this setting was modified.
    *
@@ -61769,7 +62629,7 @@ export type ZonesSchemasAutomaticHttpsRewrites = {
    *
    * @example automatic_https_rewrites
    */
-  id: 'automatic_https_rewrites';
+  id: "automatic_https_rewrites";
   /**
    * last time this setting was modified.
    *
@@ -61800,7 +62660,7 @@ export type ZonesSchemasAutomaticPlatformOptimization = {
    *
    * @example automatic_platform_optimization
    */
-  id: 'automatic_platform_optimization';
+  id: "automatic_platform_optimization";
   /**
    * last time this setting was modified.
    *
@@ -61831,7 +62691,7 @@ export type ZonesSchemasBrowserCacheTtl = {
    *
    * @example browser_cache_ttl
    */
-  id: 'browser_cache_ttl';
+  id: "browser_cache_ttl";
   /**
    * last time this setting was modified.
    *
@@ -61862,7 +62722,7 @@ export type ZonesSchemasBrowserCheck = {
    *
    * @example browser_check
    */
-  id: 'browser_check';
+  id: "browser_check";
   /**
    * last time this setting was modified.
    *
@@ -61893,7 +62753,7 @@ export type ZonesSchemasCacheLevel = {
    *
    * @example cache_level
    */
-  id: 'cache_level';
+  id: "cache_level";
   /**
    * last time this setting was modified.
    *
@@ -61924,7 +62784,7 @@ export type ZonesSchemasEdgeCacheTtl = {
    *
    * @example edge_cache_ttl
    */
-  id: 'edge_cache_ttl';
+  id: "edge_cache_ttl";
   /**
    * last time this setting was modified.
    *
@@ -61955,7 +62815,7 @@ export type ZonesSchemasEmailObfuscation = {
    *
    * @example email_obfuscation
    */
-  id: 'email_obfuscation';
+  id: "email_obfuscation";
   /**
    * last time this setting was modified.
    *
@@ -61995,7 +62855,7 @@ export type ZonesSchemasIpGeolocation = {
    *
    * @example ip_geolocation
    */
-  id: 'ip_geolocation';
+  id: "ip_geolocation";
   /**
    * last time this setting was modified.
    *
@@ -62040,7 +62900,7 @@ export type ZonesSchemasMirage = {
    *
    * @example mirage
    */
-  id: 'mirage';
+  id: "mirage";
   /**
    * last time this setting was modified.
    *
@@ -62071,7 +62931,7 @@ export type ZonesSchemasOpportunisticEncryption = {
    *
    * @example opportunistic_encryption
    */
-  id: 'opportunistic_encryption';
+  id: "opportunistic_encryption";
   /**
    * last time this setting was modified.
    *
@@ -62104,7 +62964,7 @@ export type ZonesSchemasOriginErrorPagePassThru = {
    *
    * @example origin_error_page_pass_thru
    */
-  id: 'origin_error_page_pass_thru';
+  id: "origin_error_page_pass_thru";
   /**
    * last time this setting was modified.
    *
@@ -62135,7 +62995,7 @@ export type ZonesSchemasPolish = {
    *
    * @example polish
    */
-  id: 'polish';
+  id: "polish";
   /**
    * last time this setting was modified.
    *
@@ -62168,7 +63028,7 @@ export type ZonesSchemasResponseBuffering = {
    *
    * @example response_buffering
    */
-  id: 'response_buffering';
+  id: "response_buffering";
   /**
    * last time this setting was modified.
    *
@@ -62199,7 +63059,7 @@ export type ZonesSchemasRocketLoader = {
    *
    * @example rocket_loader
    */
-  id: 'rocket_loader';
+  id: "rocket_loader";
   /**
    * last time this setting was modified.
    *
@@ -62230,7 +63090,7 @@ export type ZonesSchemasSecurityLevel = {
    *
    * @example security_level
    */
-  id: 'security_level';
+  id: "security_level";
   /**
    * last time this setting was modified.
    *
@@ -62263,7 +63123,7 @@ export type ZonesSchemasSortQueryStringForCache = {
    *
    * @example sort_query_string_for_cache
    */
-  id: 'sort_query_string_for_cache';
+  id: "sort_query_string_for_cache";
   /**
    * last time this setting was modified.
    *
@@ -62294,7 +63154,7 @@ export type ZonesSchemasSsl = {
    *
    * @example ssl
    */
-  id: 'ssl';
+  id: "ssl";
   /**
    * last time this setting was modified.
    *
@@ -62327,7 +63187,7 @@ export type ZonesSchemasTrueClientIpHeader = {
    *
    * @example true_client_ip_header
    */
-  id: 'true_client_ip_header';
+  id: "true_client_ip_header";
   /**
    * last time this setting was modified.
    *
@@ -62358,7 +63218,7 @@ export type ZonesSchemasWaf = {
    *
    * @example waf
    */
-  id: 'waf';
+  id: "waf";
   /**
    * last time this setting was modified.
    *
@@ -62389,7 +63249,7 @@ export type ZonesSecurityHeader = {
    *
    * @example security_header
    */
-  id: 'security_header';
+  id: "security_header";
   /**
    * last time this setting was modified.
    *
@@ -62452,12 +63312,18 @@ export type ZonesSecurityLevel = {
    *
    * @x-auditable true
    */
-  id?: 'security_level';
+  id?: "security_level";
   /**
    * @example under_attack
    * @x-auditable true
    */
-  value?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+  value?:
+    | "off"
+    | "essentially_off"
+    | "low"
+    | "medium"
+    | "high"
+    | "under_attack";
 };
 
 /**
@@ -62465,7 +63331,13 @@ export type ZonesSecurityLevel = {
  *
  * @default medium
  */
-export type ZonesSecurityLevelValue = 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+export type ZonesSecurityLevelValue =
+  | "off"
+  | "essentially_off"
+  | "low"
+  | "medium"
+  | "high"
+  | "under_attack";
 
 /**
  * If there is sensitive content on your website that you want visible to real visitors, but that you want to hide from suspicious visitors, all you have to do is wrap the content with Cloudflare SSE tags. Wrap any content that you want to be excluded from suspicious visitors in the following SSE tags: <!--sse--><!--/sse-->. For example: <!--sse-->  Bad visitors won't see my phone number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you have HTML minification enabled, you won't see the SSE tags in your HTML source when it's served through Cloudflare. SSE will still function in this case, as Cloudflare's HTML minification and SSE functionality occur on-the-fly as the resource moves through our network to the visitor's computer. (https://support.cloudflare.com/hc/en-us/articles/200170036).
@@ -62482,7 +63354,7 @@ export type ZonesServerSideExclude = {
    *
    * @example server_side_exclude
    */
-  id: 'server_side_exclude';
+  id: "server_side_exclude";
   /**
    * last time this setting was modified.
    *
@@ -62503,7 +63375,7 @@ export type ZonesServerSideExclude = {
  *
  * @default on
  */
-export type ZonesServerSideExcludeValue = 'on' | 'off';
+export type ZonesServerSideExcludeValue = "on" | "off";
 
 export type ZonesSetting =
   | Zones0rtt
@@ -62579,7 +63451,7 @@ export type ZonesSettingReadonly = false;
 /**
  * Value of the zone setting.
  */
-export type ZonesSettingToggle = 'on' | 'off';
+export type ZonesSettingToggle = "on" | "off";
 
 export type ZonesSettingValue =
   | Zones0rttValue
@@ -62693,7 +63565,7 @@ export type ZonesSha1Support = {
    *
    * @example sha1_support
    */
-  id: 'sha1_support';
+  id: "sha1_support";
   /**
    * last time this setting was modified.
    *
@@ -62714,7 +63586,7 @@ export type ZonesSha1Support = {
  *
  * @default off
  */
-export type ZonesSha1SupportValue = 'off' | 'on';
+export type ZonesSha1SupportValue = "off" | "on";
 
 export type ZonesSortQueryStringForCache = {
   /**
@@ -62723,14 +63595,14 @@ export type ZonesSortQueryStringForCache = {
    * @example sort_query_string_for_cache
    * @x-auditable true
    */
-  id?: 'sort_query_string_for_cache';
+  id?: "sort_query_string_for_cache";
   /**
    * The status of Query String Sort
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -62738,7 +63610,7 @@ export type ZonesSortQueryStringForCache = {
  *
  * @default off
  */
-export type ZonesSortQueryStringForCacheValue = 'on' | 'off';
+export type ZonesSortQueryStringForCacheValue = "on" | "off";
 
 export type ZonesSsl = {
   /**
@@ -62746,14 +63618,14 @@ export type ZonesSsl = {
    *
    * @x-auditable true
    */
-  id?: 'ssl';
+  id?: "ssl";
   /**
    * The encryption mode that Cloudflare uses to connect to your origin server.
    *
    * @example full
    * @x-auditable true
    */
-  value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
+  value?: "off" | "flexible" | "full" | "strict" | "origin_pull";
 };
 
 /**
@@ -62766,7 +63638,7 @@ export type ZonesSslRecommender = {
    *
    * @example ssl_recommender
    */
-  id?: 'ssl_recommender';
+  id?: "ssl_recommender";
 };
 
 /**
@@ -62782,7 +63654,7 @@ export type ZonesSslRecommenderEnabled = boolean;
  *
  * @default off
  */
-export type ZonesSslValue = 'off' | 'flexible' | 'full' | 'strict';
+export type ZonesSslValue = "off" | "flexible" | "full" | "strict";
 
 /**
  * The status of the Page Rule.
@@ -62791,7 +63663,7 @@ export type ZonesSslValue = 'off' | 'flexible' | 'full' | 'strict';
  * @example active
  * @x-auditable true
  */
-export type ZonesStatus = 'active' | 'disabled';
+export type ZonesStatus = "active" | "disabled";
 
 /**
  * String constraint.
@@ -62803,7 +63675,7 @@ export type ZonesStringConstraint = {
    * @default contains
    * @x-auditable true
    */
-  operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
+  operator: "matches" | "contains" | "equals" | "not_equal" | "not_contain";
   /**
    * The value to apply the operator to.
    *
@@ -62839,7 +63711,7 @@ export type ZonesTls12Only = {
    *
    * @example tls_1_2_only
    */
-  id: 'tls_1_2_only';
+  id: "tls_1_2_only";
   /**
    * last time this setting was modified.
    *
@@ -62860,7 +63732,7 @@ export type ZonesTls12Only = {
  *
  * @default off
  */
-export type ZonesTls12OnlyValue = 'off' | 'on';
+export type ZonesTls12OnlyValue = "off" | "on";
 
 /**
  * Enables Crypto TLS 1.3 feature for a zone.
@@ -62879,7 +63751,7 @@ export type ZonesTls13 = {
    *
    * @example tls_1_3
    */
-  id: 'tls_1_3';
+  id: "tls_1_3";
   /**
    * last time this setting was modified.
    *
@@ -62901,7 +63773,7 @@ export type ZonesTls13 = {
  *
  * @default off
  */
-export type ZonesTls13Value = 'on' | 'off' | 'zrt';
+export type ZonesTls13Value = "on" | "off" | "zrt";
 
 /**
  * TLS Client Auth requires Cloudflare to connect to your origin server using a client certificate (Enterprise Only).
@@ -62918,7 +63790,7 @@ export type ZonesTlsClientAuth = {
    *
    * @example tls_client_auth
    */
-  id: 'tls_client_auth';
+  id: "tls_client_auth";
   /**
    * last time this setting was modified.
    *
@@ -62939,7 +63811,7 @@ export type ZonesTlsClientAuth = {
  *
  * @default on
  */
-export type ZonesTlsClientAuthValue = 'on' | 'off';
+export type ZonesTlsClientAuthValue = "on" | "off";
 
 /**
  * Media Transformations provides on-demand resizing, conversion and optimization for images and video served through Cloudflare's network. Refer to the [Image Transformations](https://developers.cloudflare.com/images/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
@@ -62956,7 +63828,7 @@ export type ZonesTransformations = {
    *
    * @example transformations
    */
-  id: 'transformations';
+  id: "transformations";
   /**
    * last time this setting was modified.
    *
@@ -62987,7 +63859,7 @@ export type ZonesTransformationsAllowedOrigins = {
    *
    * @example transformations_allowed_origins
    */
-  id: 'transformations_allowed_origins';
+  id: "transformations_allowed_origins";
   /**
    * last time this setting was modified.
    *
@@ -63016,14 +63888,14 @@ export type ZonesTrueClientIpHeader = {
    * @example true_client_ip_header
    * @x-auditable true
    */
-  id?: 'true_client_ip_header';
+  id?: "true_client_ip_header";
   /**
    * The status of True Client IP Header.
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -63031,7 +63903,7 @@ export type ZonesTrueClientIpHeader = {
  *
  * @default off
  */
-export type ZonesTrueClientIpHeaderValue = 'on' | 'off';
+export type ZonesTrueClientIpHeaderValue = "on" | "off";
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
@@ -63040,7 +63912,7 @@ export type ZonesTrueClientIpHeaderValue = 'on' | 'off';
  * @default full
  * @example full
  */
-export type ZonesType = 'full' | 'partial' | 'secondary' | 'internal';
+export type ZonesType = "full" | "partial" | "secondary" | "internal";
 
 /**
  * URL target.
@@ -63056,7 +63928,7 @@ export type ZonesUrlTarget = {
      * @default contains
      * @x-auditable true
      */
-    operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
+    operator: "matches" | "contains" | "equals" | "not_equal" | "not_contain";
     /**
      * The URL pattern to match against the current request. The pattern may contain up to four asterisks ('*') as placeholders.
      *
@@ -63072,7 +63944,7 @@ export type ZonesUrlTarget = {
    * @example url
    * @x-auditable true
    */
-  target?: 'url';
+  target?: "url";
 };
 
 /**
@@ -63092,14 +63964,14 @@ export type ZonesWaf = {
    * @example waf
    * @x-auditable true
    */
-  id?: 'waf';
+  id?: "waf";
   /**
    * The status of WAF managed rules (previous version).
    *
    * @example on
    * @x-auditable true
    */
-  value?: 'on' | 'off';
+  value?: "on" | "off";
 };
 
 /**
@@ -63107,7 +63979,7 @@ export type ZonesWaf = {
  *
  * @default off
  */
-export type ZonesWafValue = 'on' | 'off';
+export type ZonesWafValue = "on" | "off";
 
 /**
  * When the client requesting the image supports the WebP image codec, and WebP offers a performance advantage over the original image format, Cloudflare will serve a WebP version of the original image.
@@ -63124,7 +63996,7 @@ export type ZonesWebp = {
    *
    * @example webp
    */
-  id: 'webp';
+  id: "webp";
   /**
    * last time this setting was modified.
    *
@@ -63145,7 +64017,7 @@ export type ZonesWebp = {
  *
  * @default off
  */
-export type ZonesWebpValue = 'off' | 'on';
+export type ZonesWebpValue = "off" | "on";
 
 /**
  * WebSockets are open connections sustained between the client and the origin server. Inside a WebSockets connection, the client and the origin can pass data back and forth without having to reestablish sessions. This makes exchanging data within a WebSockets connection fast. WebSockets are often used for real-time applications such as live chat and gaming. For more information refer to [Can I use Cloudflare with Websockets](https://support.cloudflare.com/hc/en-us/articles/200169466-Can-I-use-Cloudflare-with-WebSockets-).
@@ -63162,7 +64034,7 @@ export type ZonesWebsockets = {
    *
    * @example websockets
    */
-  id: 'websockets';
+  id: "websockets";
   /**
    * last time this setting was modified.
    *
@@ -63183,7 +64055,7 @@ export type ZonesWebsockets = {
  *
  * @default off
  */
-export type ZonesWebsocketsValue = 'off' | 'on';
+export type ZonesWebsocketsValue = "off" | "on";
 
 export type ZonesZone = {
   /**
@@ -63413,7 +64285,7 @@ export type ZonesZone = {
    *
    * @example active
    */
-  status?: 'initializing' | 'pending' | 'active' | 'moved';
+  status?: "initializing" | "pending" | "active" | "moved";
   /**
    * The root organizational unit that this zone belongs to (such as a tenant or organization).
    */
@@ -63448,69 +64320,70 @@ export type ZonesZone = {
   verification_key?: string;
 };
 
-export type ZonesZoneSettingsResponseCollection = ZonesSettingsApiComponentsSchemasApiResponseCommon & {
-  result?: (
-    | Zones0rtt
-    | ZonesAdvancedDdos
-    | ZonesCacheRulesAegis
-    | ZonesAlwaysOnline
-    | ZonesSchemasAlwaysUseHttps
-    | ZonesSchemasAutomaticHttpsRewrites
-    | ZonesBrotli
-    | ZonesSchemasBrowserCacheTtl
-    | ZonesSchemasBrowserCheck
-    | ZonesSchemasCacheLevel
-    | ZonesChallengeTtl
-    | ZonesCiphers
-    | ZonesCnameFlattening
-    | ZonesDevelopmentMode
-    | ZonesEarlyHints
-    | ZonesSchemasEdgeCacheTtl
-    | ZonesSchemasEmailObfuscation
-    | ZonesH2Prioritization
-    | ZonesHotlinkProtection
-    | ZonesHttp2
-    | ZonesHttp3
-    | ZonesImageResizing
-    | ZonesSchemasIpGeolocation
-    | ZonesIpv6
-    | ZonesMaxUpload
-    | ZonesMinTlsVersion
-    | ZonesSchemasMirage
-    | ZonesNel
-    | ZonesSchemasOpportunisticEncryption
-    | ZonesOpportunisticOnion
-    | ZonesOrangeToOrange
-    | ZonesSchemasOriginErrorPagePassThru
-    | ZonesCacheRulesOriginH2MaxStreams
-    | ZonesCacheRulesOriginMaxHttpVersion
-    | ZonesSchemasPolish
-    | ZonesPrefetchPreload
-    | ZonesPrivacyPass
-    | ZonesProxyReadTimeout
-    | ZonesPseudoIpv4
-    | ZonesReplaceInsecureJs
-    | ZonesSchemasResponseBuffering
-    | ZonesSchemasRocketLoader
-    | ZonesSchemasAutomaticPlatformOptimization
-    | ZonesSecurityHeader
-    | ZonesSchemasSecurityLevel
-    | ZonesServerSideExclude
-    | ZonesSha1Support
-    | ZonesSchemasSortQueryStringForCache
-    | ZonesSchemasSsl
-    | ZonesSslRecommender
-    | ZonesTls12Only
-    | ZonesTls13
-    | ZonesTlsClientAuth
-    | ZonesTransformations
-    | ZonesTransformationsAllowedOrigins
-    | ZonesSchemasTrueClientIpHeader
-    | ZonesSchemasWaf
-    | ZonesWebp
-    | ZonesWebsockets
-  )[];
-};
+export type ZonesZoneSettingsResponseCollection =
+  ZonesSettingsApiComponentsSchemasApiResponseCommon & {
+    result?: (
+      | Zones0rtt
+      | ZonesAdvancedDdos
+      | ZonesCacheRulesAegis
+      | ZonesAlwaysOnline
+      | ZonesSchemasAlwaysUseHttps
+      | ZonesSchemasAutomaticHttpsRewrites
+      | ZonesBrotli
+      | ZonesSchemasBrowserCacheTtl
+      | ZonesSchemasBrowserCheck
+      | ZonesSchemasCacheLevel
+      | ZonesChallengeTtl
+      | ZonesCiphers
+      | ZonesCnameFlattening
+      | ZonesDevelopmentMode
+      | ZonesEarlyHints
+      | ZonesSchemasEdgeCacheTtl
+      | ZonesSchemasEmailObfuscation
+      | ZonesH2Prioritization
+      | ZonesHotlinkProtection
+      | ZonesHttp2
+      | ZonesHttp3
+      | ZonesImageResizing
+      | ZonesSchemasIpGeolocation
+      | ZonesIpv6
+      | ZonesMaxUpload
+      | ZonesMinTlsVersion
+      | ZonesSchemasMirage
+      | ZonesNel
+      | ZonesSchemasOpportunisticEncryption
+      | ZonesOpportunisticOnion
+      | ZonesOrangeToOrange
+      | ZonesSchemasOriginErrorPagePassThru
+      | ZonesCacheRulesOriginH2MaxStreams
+      | ZonesCacheRulesOriginMaxHttpVersion
+      | ZonesSchemasPolish
+      | ZonesPrefetchPreload
+      | ZonesPrivacyPass
+      | ZonesProxyReadTimeout
+      | ZonesPseudoIpv4
+      | ZonesReplaceInsecureJs
+      | ZonesSchemasResponseBuffering
+      | ZonesSchemasRocketLoader
+      | ZonesSchemasAutomaticPlatformOptimization
+      | ZonesSecurityHeader
+      | ZonesSchemasSecurityLevel
+      | ZonesServerSideExclude
+      | ZonesSha1Support
+      | ZonesSchemasSortQueryStringForCache
+      | ZonesSchemasSsl
+      | ZonesSslRecommender
+      | ZonesTls12Only
+      | ZonesTls13
+      | ZonesTlsClientAuth
+      | ZonesTransformations
+      | ZonesTransformationsAllowedOrigins
+      | ZonesSchemasTrueClientIpHeader
+      | ZonesSchemasWaf
+      | ZonesWebp
+      | ZonesWebsockets
+    )[];
+  };
 
 export type ZonesZoneSettingsSingleRequest =
   | {
@@ -63529,7 +64402,7 @@ export type BillSubsApiComponentValue2 = {
    *
    * @example 5
    */
-  ['default']?: number;
+  ["default"]?: number;
   /**
    * The name of the component value.
    *
@@ -63596,9 +64469,10 @@ export type BillSubsApiRatePlan2 = {
   sets?: string[];
 };
 
-export type DnsFirewallDnsFirewallReverseDnsResponse2 = DnsFirewallApiResponseSingle & {
-  result?: DnsFirewallDnsFirewallReverseDnsResponse;
-};
+export type DnsFirewallDnsFirewallReverseDnsResponse2 =
+  DnsFirewallApiResponseSingle & {
+    result?: DnsFirewallDnsFirewallReverseDnsResponse;
+  };
 
 /**
  * If true, filter events where the origin status is healthy. If false, filter events where the origin status is unhealthy.

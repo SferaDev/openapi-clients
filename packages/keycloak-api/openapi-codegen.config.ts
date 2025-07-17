@@ -1,9 +1,9 @@
 import { defineConfig } from '@openapi-codegen/cli';
-import { Context } from '@openapi-codegen/cli/lib/types';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
-import Case from "case";
-import { PathItemObject } from "openapi3-ts/oas30";
-import { ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
+import Case from 'case';
+import type { PathItemObject } from 'openapi3-ts/oas30';
+import { type ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
 
 export default defineConfig({
@@ -32,8 +32,8 @@ export default defineConfig({
   },
   account: {
     from: {
-      source: "file",
-      relativePath: "specs/account.yaml"
+      source: 'file',
+      relativePath: 'specs/account.yaml'
     },
     outputDir: 'src/account',
     to: async (context) => {
@@ -52,7 +52,7 @@ export default defineConfig({
       await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
     }
-  },
+  }
 });
 
 function sortArrays(openAPIDocument: Context['openAPIDocument']) {
@@ -75,7 +75,7 @@ function sortArrays(openAPIDocument: Context['openAPIDocument']) {
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget['ES2020'] }
+    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
@@ -105,8 +105,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-            .map(([path, operation]) => `"${path}": ${operation}`)
-            .join(',\n')}
+              .map(([path, operation]) => `"${path}": ${operation}`)
+              .join(',\n')}
         }`
       }
     ]
@@ -115,22 +115,17 @@ function buildExtraFile(context: Context) {
   return sourceFile.getFullText();
 }
 
-function cleanOperationIds({
-  openAPIDocument,
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-}) {
+function cleanOperationIds({ openAPIDocument }: { openAPIDocument: Context['openAPIDocument'] }) {
   for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
-    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+    for (const method of ['get', 'put', 'post', 'patch', 'delete'] as const) {
       if (path[method]) {
         const operationId = path[method].operationId ?? `${method} ${key}`;
         openAPIDocument.paths[key][method] = {
           ...openAPIDocument.paths[key][method],
           operationId: Case.camel(operationId)
-        }
+        };
       }
     }
-
   }
 
   return openAPIDocument;
@@ -144,9 +139,7 @@ function warnForDuplicatedPathParameters(openAPIDocument: Context['openAPIDocume
     // Check for duplicated path parameters
     const duplicatedPathParameters = pathParameters.filter((param, index) => pathParameters.indexOf(param) !== index);
     if (duplicatedPathParameters.length > 0) {
-      console.warn(
-        `Duplicated path parameters in path "${path}": ${duplicatedPathParameters.join(', ')}`
-      );
+      console.warn(`Duplicated path parameters in path "${path}": ${duplicatedPathParameters.join(', ')}`);
     }
   }
 }

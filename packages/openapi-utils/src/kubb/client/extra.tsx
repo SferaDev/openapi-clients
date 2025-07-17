@@ -1,4 +1,4 @@
-import { PluginClient } from '@kubb/plugin-client';
+import type { PluginClient } from '@kubb/plugin-client';
 import { createReactGenerator } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter } from '@kubb/plugin-oas/utils';
@@ -23,13 +23,16 @@ export const extraGenerator = createReactGenerator<PluginClient>({
       return <File.Import key={name} name={[name]} root={file.path} path={getFile(operation).path} />;
     });
 
-    const tags = Array.from(new Set(operations.flatMap((operation) => operation.getTags().map((tag: { name: string }) => tag.name))));
+    const tags = Array.from(
+      new Set(operations.flatMap((operation) => operation.getTags().map((tag: { name: string }) => tag.name)))
+    );
 
     const operationsByPath = Object.fromEntries(
       operations
-        .filter((operation) => 
-          ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(operation.method.toUpperCase()) &&
-          operation.getOperationId() !== undefined
+        .filter(
+          (operation) =>
+            ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(operation.method.toUpperCase()) &&
+            operation.getOperationId() !== undefined
         )
         .map((operation) => [`${operation.method.toUpperCase()} ${operation.path}`, operation.getOperationId()])
     );

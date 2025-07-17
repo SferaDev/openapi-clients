@@ -1,1 +1,1 @@
-export * from "./kubb/index";
+export * from './kubb/index';

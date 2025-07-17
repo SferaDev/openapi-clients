@@ -282,7 +282,7 @@ export async function chatsFind({
   queryParams,
   config = {},
 }: {
-  queryParams?: ChatsFindQueryParams
+  queryParams?: ChatsFindQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -631,7 +631,7 @@ export async function deploymentsFindLogs({
   config = {},
 }: {
   pathParams: DeploymentsFindLogsPathParams
-  queryParams?: DeploymentsFindLogsQueryParams
+  queryParams?: DeploymentsFindLogsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -856,7 +856,7 @@ export async function rateLimitsFind({
   queryParams,
   config = {},
 }: {
-  queryParams?: RateLimitsFindQueryParams
+  queryParams?: RateLimitsFindQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -909,7 +909,7 @@ export async function userGetBilling({
   queryParams,
   config = {},
 }: {
-  queryParams?: UserGetBillingQueryParams
+  queryParams?: UserGetBillingQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config

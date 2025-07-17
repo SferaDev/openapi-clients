@@ -3,14 +3,14 @@
  *
  * @version 2.37.0
  */
-import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
-import type * as RequestBodies from './requestBodies';
-import type { ClientErrorStatus, ServerErrorStatus } from './utils';
+import type * as Fetcher from "./fetcher";
+import { fetch, FetcherExtraProps } from "./fetcher";
+import type * as RequestBodies from "./requestBodies";
+import type { ClientErrorStatus, ServerErrorStatus } from "./utils";
 
 export type ListSitesQueryParams = {
   name?: string;
-  filter?: 'all' | 'owner' | 'guest';
+  filter?: "all" | "owner" | "guest";
   /**
    * @format int32
    */
@@ -153,13 +153,18 @@ export type ListSitesVariables = {
 /**
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
-export const listSites = (variables: ListSitesVariables, signal?: AbortSignal) =>
-  fetch<ListSitesResponse, ListSitesError, undefined, {}, ListSitesQueryParams, {}>({
-    url: '/sites',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSites = (
+  variables: ListSitesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSitesResponse,
+    ListSitesError,
+    undefined,
+    {},
+    ListSitesQueryParams,
+    {}
+  >({ url: "/sites", method: "get", ...variables, signal });
 
 export type CreateSiteQueryParams = {
   configure_dns?: boolean;
@@ -298,13 +303,18 @@ export type CreateSiteVariables = {
 /**
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
  */
-export const createSite = (variables: CreateSiteVariables, signal?: AbortSignal) =>
-  fetch<CreateSiteResponse, CreateSiteError, RequestBodies.CreateSiteSite, {}, CreateSiteQueryParams, {}>({
-    url: '/sites',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createSite = (
+  variables: CreateSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateSiteResponse,
+    CreateSiteError,
+    RequestBodies.CreateSiteSite,
+    {},
+    CreateSiteQueryParams,
+    {}
+  >({ url: "/sites", method: "post", ...variables, signal });
 
 export type GetSitePathParams = {
   siteId: string;
@@ -448,12 +458,14 @@ export type GetSiteVariables = {
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
 export const getSite = (variables: GetSiteVariables, signal?: AbortSignal) =>
-  fetch<GetSiteResponse, GetSiteError, undefined, {}, GetSiteQueryParams, GetSitePathParams>({
-    url: '/sites/{siteId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    GetSiteResponse,
+    GetSiteError,
+    undefined,
+    {},
+    GetSiteQueryParams,
+    GetSitePathParams
+  >({ url: "/sites/{siteId}", method: "get", ...variables, signal });
 
 export type UpdateSitePathParams = {
   siteId: string;
@@ -592,13 +604,18 @@ export type UpdateSiteVariables = {
 /**
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [updateEnvVar](#tag/environmentVariables/operation/updateEnvVar) to update a site's environment variables.
  */
-export const updateSite = (variables: UpdateSiteVariables, signal?: AbortSignal) =>
-  fetch<UpdateSiteResponse, UpdateSiteError, RequestBodies.CreateSiteSite, {}, {}, UpdateSitePathParams>({
-    url: '/sites/{siteId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
+export const updateSite = (
+  variables: UpdateSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UpdateSiteResponse,
+    UpdateSiteError,
+    RequestBodies.CreateSiteSite,
+    {},
+    {},
+    UpdateSitePathParams
+  >({ url: "/sites/{siteId}", method: "patch", ...variables, signal });
 
 export type DeleteSitePathParams = {
   siteId: string;
@@ -619,12 +636,15 @@ export type DeleteSiteVariables = {
   pathParams: DeleteSitePathParams;
 } & FetcherExtraProps;
 
-export const deleteSite = (variables: DeleteSiteVariables, signal?: AbortSignal) =>
+export const deleteSite = (
+  variables: DeleteSiteVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, DeleteSiteError, undefined, {}, {}, DeleteSitePathParams>({
-    url: '/sites/{siteId}',
-    method: 'delete',
+    url: "/sites/{siteId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ProvisionSiteTLSCertificatePathParams = {
@@ -670,7 +690,10 @@ export type ProvisionSiteTLSCertificateVariables = {
   queryParams?: ProvisionSiteTLSCertificateQueryParams;
 } & FetcherExtraProps;
 
-export const provisionSiteTLSCertificate = (variables: ProvisionSiteTLSCertificateVariables, signal?: AbortSignal) =>
+export const provisionSiteTLSCertificate = (
+  variables: ProvisionSiteTLSCertificateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ProvisionSiteTLSCertificateResponse,
     ProvisionSiteTLSCertificateError,
@@ -678,7 +701,7 @@ export const provisionSiteTLSCertificate = (variables: ProvisionSiteTLSCertifica
     {},
     ProvisionSiteTLSCertificateQueryParams,
     ProvisionSiteTLSCertificatePathParams
-  >({ url: '/sites/{siteId}/ssl', method: 'post', ...variables, signal });
+  >({ url: "/sites/{siteId}/ssl", method: "post", ...variables, signal });
 
 export type ShowSiteTLSCertificatePathParams = {
   siteId: string;
@@ -716,7 +739,10 @@ export type ShowSiteTLSCertificateVariables = {
   pathParams: ShowSiteTLSCertificatePathParams;
 } & FetcherExtraProps;
 
-export const showSiteTLSCertificate = (variables: ShowSiteTLSCertificateVariables, signal?: AbortSignal) =>
+export const showSiteTLSCertificate = (
+  variables: ShowSiteTLSCertificateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ShowSiteTLSCertificateResponse,
     ShowSiteTLSCertificateError,
@@ -724,7 +750,7 @@ export const showSiteTLSCertificate = (variables: ShowSiteTLSCertificateVariable
     {},
     {},
     ShowSiteTLSCertificatePathParams
-  >({ url: '/sites/{siteId}/ssl', method: 'get', ...variables, signal });
+  >({ url: "/sites/{siteId}/ssl", method: "get", ...variables, signal });
 
 export type GetAllCertificatesPathParams = {
   siteId: string;
@@ -758,7 +784,10 @@ export type GetAllCertificatesVariables = {
   queryParams: GetAllCertificatesQueryParams;
 } & FetcherExtraProps;
 
-export const getAllCertificates = (variables: GetAllCertificatesVariables, signal?: AbortSignal) =>
+export const getAllCertificates = (
+  variables: GetAllCertificatesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAllCertificatesResponse,
     GetAllCertificatesError,
@@ -766,7 +795,12 @@ export const getAllCertificates = (variables: GetAllCertificatesVariables, signa
     {},
     GetAllCertificatesQueryParams,
     GetAllCertificatesPathParams
-  >({ url: '/sites/{siteId}/ssl/certificates', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/ssl/certificates",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetEnvVarsPathParams = {
   /**
@@ -779,11 +813,16 @@ export type GetEnvVarsQueryParams = {
   /**
    * Filter by deploy context
    */
-  context_name?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+  context_name?:
+    | "all"
+    | "dev"
+    | "branch-deploy"
+    | "deploy-preview"
+    | "production";
   /**
    * Filter by scope
    */
-  scope?: 'builds' | 'functions' | 'runtime' | 'post-processing';
+  scope?: "builds" | "functions" | "runtime" | "post-processing";
   /**
    * If specified, only return environment variables set on this site
    */
@@ -811,7 +850,7 @@ export type GetEnvVarsResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -833,7 +872,13 @@ export type GetEnvVarsResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -886,13 +931,18 @@ export type GetEnvVarsVariables = {
 /**
  * Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI.
  */
-export const getEnvVars = (variables: GetEnvVarsVariables, signal?: AbortSignal) =>
-  fetch<GetEnvVarsResponse, GetEnvVarsError, undefined, {}, GetEnvVarsQueryParams, GetEnvVarsPathParams>({
-    url: '/accounts/{accountId}/env',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getEnvVars = (
+  variables: GetEnvVarsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetEnvVarsResponse,
+    GetEnvVarsError,
+    undefined,
+    {},
+    GetEnvVarsQueryParams,
+    GetEnvVarsPathParams
+  >({ url: "/accounts/{accountId}/env", method: "get", ...variables, signal });
 
 export type CreateEnvVarsPathParams = {
   /**
@@ -929,7 +979,7 @@ export type CreateEnvVarsResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -951,7 +1001,13 @@ export type CreateEnvVarsResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1004,7 +1060,7 @@ export type CreateEnvVarsRequestBody = {
   /**
    * The scopes that this environment variable is set to (Pro plans and above)
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   values?: {
     /**
      * The environment variable value's universally unique ID
@@ -1021,7 +1077,13 @@ export type CreateEnvVarsRequestBody = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1042,7 +1104,10 @@ export type CreateEnvVarsVariables = {
 /**
  * Creates new environment variables. Granular scopes are available on Pro plans and above.
  */
-export const createEnvVars = (variables: CreateEnvVarsVariables, signal?: AbortSignal) =>
+export const createEnvVars = (
+  variables: CreateEnvVarsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateEnvVarsResponse,
     CreateEnvVarsError,
@@ -1050,7 +1115,7 @@ export const createEnvVars = (variables: CreateEnvVarsVariables, signal?: AbortS
     {},
     CreateEnvVarsQueryParams,
     CreateEnvVarsPathParams
-  >({ url: '/accounts/{accountId}/env', method: 'post', ...variables, signal });
+  >({ url: "/accounts/{accountId}/env", method: "post", ...variables, signal });
 
 export type GetSiteEnvVarsPathParams = {
   /**
@@ -1063,11 +1128,16 @@ export type GetSiteEnvVarsQueryParams = {
   /**
    * Filter by deploy context
    */
-  context_name?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+  context_name?:
+    | "all"
+    | "dev"
+    | "branch-deploy"
+    | "deploy-preview"
+    | "production";
   /**
    * Filter by scope
    */
-  scope?: 'builds' | 'functions' | 'runtime' | 'post_processing';
+  scope?: "builds" | "functions" | "runtime" | "post_processing";
 };
 
 export type GetSiteEnvVarsError = Fetcher.ErrorWrapper<{
@@ -1091,7 +1161,7 @@ export type GetSiteEnvVarsResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -1113,7 +1183,13 @@ export type GetSiteEnvVarsResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1166,7 +1242,10 @@ export type GetSiteEnvVarsVariables = {
 /**
  * Returns all environment variables for a site. This convenience method behaves the same as `getEnvVars` but doesn't require an `account_id` as input.
  */
-export const getSiteEnvVars = (variables: GetSiteEnvVarsVariables, signal?: AbortSignal) =>
+export const getSiteEnvVars = (
+  variables: GetSiteEnvVarsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetSiteEnvVarsResponse,
     GetSiteEnvVarsError,
@@ -1174,7 +1253,7 @@ export const getSiteEnvVars = (variables: GetSiteEnvVarsVariables, signal?: Abor
     {},
     GetSiteEnvVarsQueryParams,
     GetSiteEnvVarsPathParams
-  >({ url: '/api/v1/sites/{siteId}/env', method: 'get', ...variables, signal });
+  >({ url: "/api/v1/sites/{siteId}/env", method: "get", ...variables, signal });
 
 export type GetEnvVarPathParams = {
   /**
@@ -1215,7 +1294,7 @@ export type GetEnvVarResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -1237,7 +1316,13 @@ export type GetEnvVarResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1290,12 +1375,22 @@ export type GetEnvVarVariables = {
 /**
  * Returns an individual environment variable.
  */
-export const getEnvVar = (variables: GetEnvVarVariables, signal?: AbortSignal) =>
-  fetch<GetEnvVarResponse, GetEnvVarError, undefined, {}, GetEnvVarQueryParams, GetEnvVarPathParams>({
-    url: '/accounts/{accountId}/env/{key}',
-    method: 'get',
+export const getEnvVar = (
+  variables: GetEnvVarVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetEnvVarResponse,
+    GetEnvVarError,
+    undefined,
+    {},
+    GetEnvVarQueryParams,
+    GetEnvVarPathParams
+  >({
+    url: "/accounts/{accountId}/env/{key}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateEnvVarPathParams = {
@@ -1337,7 +1432,7 @@ export type UpdateEnvVarResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -1359,7 +1454,13 @@ export type UpdateEnvVarResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1412,7 +1513,7 @@ export type UpdateEnvVarRequestBody = {
   /**
    * The scopes that this environment variable is set to (Pro plans and above)
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   values?: {
     /**
      * The environment variable value's universally unique ID
@@ -1429,7 +1530,13 @@ export type UpdateEnvVarRequestBody = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1450,7 +1557,10 @@ export type UpdateEnvVarVariables = {
 /**
  * Updates an existing environment variable and all of its values. Existing values will be replaced by values provided.
  */
-export const updateEnvVar = (variables: UpdateEnvVarVariables, signal?: AbortSignal) =>
+export const updateEnvVar = (
+  variables: UpdateEnvVarVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateEnvVarResponse,
     UpdateEnvVarError,
@@ -1458,7 +1568,12 @@ export const updateEnvVar = (variables: UpdateEnvVarVariables, signal?: AbortSig
     {},
     UpdateEnvVarQueryParams,
     UpdateEnvVarPathParams
-  >({ url: '/accounts/{accountId}/env/{key}', method: 'put', ...variables, signal });
+  >({
+    url: "/accounts/{accountId}/env/{key}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type SetEnvVarValuePathParams = {
   /**
@@ -1499,7 +1614,7 @@ export type SetEnvVarValueResponse = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -1521,7 +1636,13 @@ export type SetEnvVarValueResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -1570,7 +1691,13 @@ export type SetEnvVarValueRequestBody = {
   /**
    * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`. `branch` must be provided with a value in `context_parameter`.
    */
-  context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+  context?:
+    | "all"
+    | "dev"
+    | "branch-deploy"
+    | "deploy-preview"
+    | "production"
+    | "branch";
   /**
    * An additional parameter for custom branches. Currently, this is used for providing a branch name when `context=branch`.
    */
@@ -1590,7 +1717,10 @@ export type SetEnvVarValueVariables = {
 /**
  * Updates or creates a new value for an existing environment variable.
  */
-export const setEnvVarValue = (variables: SetEnvVarValueVariables, signal?: AbortSignal) =>
+export const setEnvVarValue = (
+  variables: SetEnvVarValueVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     SetEnvVarValueResponse,
     SetEnvVarValueError,
@@ -1598,7 +1728,12 @@ export const setEnvVarValue = (variables: SetEnvVarValueVariables, signal?: Abor
     {},
     SetEnvVarValueQueryParams,
     SetEnvVarValuePathParams
-  >({ url: '/accounts/{accountId}/env/{key}', method: 'patch', ...variables, signal });
+  >({
+    url: "/accounts/{accountId}/env/{key}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type DeleteEnvVarPathParams = {
   /**
@@ -1637,12 +1772,22 @@ export type DeleteEnvVarVariables = {
 /**
  * Deletes an environment variable
  */
-export const deleteEnvVar = (variables: DeleteEnvVarVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteEnvVarError, undefined, {}, DeleteEnvVarQueryParams, DeleteEnvVarPathParams>({
-    url: '/accounts/{accountId}/env/{key}',
-    method: 'delete',
+export const deleteEnvVar = (
+  variables: DeleteEnvVarVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteEnvVarError,
+    undefined,
+    {},
+    DeleteEnvVarQueryParams,
+    DeleteEnvVarPathParams
+  >({
+    url: "/accounts/{accountId}/env/{key}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeleteEnvVarValuePathParams = {
@@ -1686,12 +1831,22 @@ export type DeleteEnvVarValueVariables = {
 /**
  * Deletes a specific environment variable value.
  */
-export const deleteEnvVarValue = (variables: DeleteEnvVarValueVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteEnvVarValueError, undefined, {}, DeleteEnvVarValueQueryParams, DeleteEnvVarValuePathParams>({
-    url: '/accounts/{accountId}/env/{key}/value/{id}',
-    method: 'delete',
+export const deleteEnvVarValue = (
+  variables: DeleteEnvVarValueVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteEnvVarValueError,
+    undefined,
+    {},
+    DeleteEnvVarValueQueryParams,
+    DeleteEnvVarValuePathParams
+  >({
+    url: "/accounts/{accountId}/env/{key}/value/{id}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type SearchSiteFunctionsPathParams = {
@@ -1730,7 +1885,10 @@ export type SearchSiteFunctionsVariables = {
   queryParams?: SearchSiteFunctionsQueryParams;
 } & FetcherExtraProps;
 
-export const searchSiteFunctions = (variables: SearchSiteFunctionsVariables, signal?: AbortSignal) =>
+export const searchSiteFunctions = (
+  variables: SearchSiteFunctionsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     SearchSiteFunctionsResponse,
     SearchSiteFunctionsError,
@@ -1738,7 +1896,7 @@ export const searchSiteFunctions = (variables: SearchSiteFunctionsVariables, sig
     {},
     SearchSiteFunctionsQueryParams,
     SearchSiteFunctionsPathParams
-  >({ url: '/sites/{siteId}/functions', method: 'get', ...variables, signal });
+  >({ url: "/sites/{siteId}/functions", method: "get", ...variables, signal });
 
 export type ListSiteFormsPathParams = {
   siteId: string;
@@ -1775,13 +1933,18 @@ export type ListSiteFormsVariables = {
   pathParams: ListSiteFormsPathParams;
 } & FetcherExtraProps;
 
-export const listSiteForms = (variables: ListSiteFormsVariables, signal?: AbortSignal) =>
-  fetch<ListSiteFormsResponse, ListSiteFormsError, undefined, {}, {}, ListSiteFormsPathParams>({
-    url: '/sites/{siteId}/forms',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSiteForms = (
+  variables: ListSiteFormsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSiteFormsResponse,
+    ListSiteFormsError,
+    undefined,
+    {},
+    {},
+    ListSiteFormsPathParams
+  >({ url: "/sites/{siteId}/forms", method: "get", ...variables, signal });
 
 export type DeleteSiteFormPathParams = {
   siteId: string;
@@ -1803,12 +1966,22 @@ export type DeleteSiteFormVariables = {
   pathParams: DeleteSiteFormPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteForm = (variables: DeleteSiteFormVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteFormError, undefined, {}, {}, DeleteSiteFormPathParams>({
-    url: '/sites/{siteId}/forms/{formId}',
-    method: 'delete',
+export const deleteSiteForm = (
+  variables: DeleteSiteFormVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteFormError,
+    undefined,
+    {},
+    {},
+    DeleteSiteFormPathParams
+  >({
+    url: "/sites/{siteId}/forms/{formId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteSubmissionsPathParams = {
@@ -1863,7 +2036,10 @@ export type ListSiteSubmissionsVariables = {
   queryParams?: ListSiteSubmissionsQueryParams;
 } & FetcherExtraProps;
 
-export const listSiteSubmissions = (variables: ListSiteSubmissionsVariables, signal?: AbortSignal) =>
+export const listSiteSubmissions = (
+  variables: ListSiteSubmissionsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteSubmissionsResponse,
     ListSiteSubmissionsError,
@@ -1871,7 +2047,12 @@ export const listSiteSubmissions = (variables: ListSiteSubmissionsVariables, sig
     {},
     ListSiteSubmissionsQueryParams,
     ListSiteSubmissionsPathParams
-  >({ url: '/sites/{siteId}/submissions', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/submissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListSiteFilesPathParams = {
   siteId: string;
@@ -1903,13 +2084,18 @@ export type ListSiteFilesVariables = {
   pathParams: ListSiteFilesPathParams;
 } & FetcherExtraProps;
 
-export const listSiteFiles = (variables: ListSiteFilesVariables, signal?: AbortSignal) =>
-  fetch<ListSiteFilesResponse, ListSiteFilesError, undefined, {}, {}, ListSiteFilesPathParams>({
-    url: '/sites/{siteId}/files',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSiteFiles = (
+  variables: ListSiteFilesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSiteFilesResponse,
+    ListSiteFilesError,
+    undefined,
+    {},
+    {},
+    ListSiteFilesPathParams
+  >({ url: "/sites/{siteId}/files", method: "get", ...variables, signal });
 
 export type ListSiteAssetsPathParams = {
   siteId: string;
@@ -1954,13 +2140,18 @@ export type ListSiteAssetsVariables = {
   pathParams: ListSiteAssetsPathParams;
 } & FetcherExtraProps;
 
-export const listSiteAssets = (variables: ListSiteAssetsVariables, signal?: AbortSignal) =>
-  fetch<ListSiteAssetsResponse, ListSiteAssetsError, undefined, {}, {}, ListSiteAssetsPathParams>({
-    url: '/sites/{siteId}/assets',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSiteAssets = (
+  variables: ListSiteAssetsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSiteAssetsResponse,
+    ListSiteAssetsError,
+    undefined,
+    {},
+    {},
+    ListSiteAssetsPathParams
+  >({ url: "/sites/{siteId}/assets", method: "get", ...variables, signal });
 
 export type CreateSiteAssetPathParams = {
   siteId: string;
@@ -2024,7 +2215,10 @@ export type CreateSiteAssetVariables = {
   queryParams: CreateSiteAssetQueryParams;
 } & FetcherExtraProps;
 
-export const createSiteAsset = (variables: CreateSiteAssetVariables, signal?: AbortSignal) =>
+export const createSiteAsset = (
+  variables: CreateSiteAssetVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteAssetResponse,
     CreateSiteAssetError,
@@ -2032,7 +2226,7 @@ export const createSiteAsset = (variables: CreateSiteAssetVariables, signal?: Ab
     {},
     CreateSiteAssetQueryParams,
     CreateSiteAssetPathParams
-  >({ url: '/sites/{siteId}/assets', method: 'post', ...variables, signal });
+  >({ url: "/sites/{siteId}/assets", method: "post", ...variables, signal });
 
 export type GetSiteAssetInfoPathParams = {
   siteId: string;
@@ -2078,12 +2272,22 @@ export type GetSiteAssetInfoVariables = {
   pathParams: GetSiteAssetInfoPathParams;
 } & FetcherExtraProps;
 
-export const getSiteAssetInfo = (variables: GetSiteAssetInfoVariables, signal?: AbortSignal) =>
-  fetch<GetSiteAssetInfoResponse, GetSiteAssetInfoError, undefined, {}, {}, GetSiteAssetInfoPathParams>({
-    url: '/sites/{siteId}/assets/{assetId}',
-    method: 'get',
+export const getSiteAssetInfo = (
+  variables: GetSiteAssetInfoVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteAssetInfoResponse,
+    GetSiteAssetInfoError,
+    undefined,
+    {},
+    {},
+    GetSiteAssetInfoPathParams
+  >({
+    url: "/sites/{siteId}/assets/{assetId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSiteAssetPathParams = {
@@ -2135,7 +2339,10 @@ export type UpdateSiteAssetVariables = {
   queryParams: UpdateSiteAssetQueryParams;
 } & FetcherExtraProps;
 
-export const updateSiteAsset = (variables: UpdateSiteAssetVariables, signal?: AbortSignal) =>
+export const updateSiteAsset = (
+  variables: UpdateSiteAssetVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateSiteAssetResponse,
     UpdateSiteAssetError,
@@ -2143,7 +2350,12 @@ export const updateSiteAsset = (variables: UpdateSiteAssetVariables, signal?: Ab
     {},
     UpdateSiteAssetQueryParams,
     UpdateSiteAssetPathParams
-  >({ url: '/sites/{siteId}/assets/{assetId}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/assets/{assetId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteAssetPathParams = {
   siteId: string;
@@ -2165,12 +2377,22 @@ export type DeleteSiteAssetVariables = {
   pathParams: DeleteSiteAssetPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteAsset = (variables: DeleteSiteAssetVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteAssetError, undefined, {}, {}, DeleteSiteAssetPathParams>({
-    url: '/sites/{siteId}/assets/{assetId}',
-    method: 'delete',
+export const deleteSiteAsset = (
+  variables: DeleteSiteAssetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteAssetError,
+    undefined,
+    {},
+    {},
+    DeleteSiteAssetPathParams
+  >({
+    url: "/sites/{siteId}/assets/{assetId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetSiteAssetPublicSignaturePathParams = {
@@ -2197,7 +2419,10 @@ export type GetSiteAssetPublicSignatureVariables = {
   pathParams: GetSiteAssetPublicSignaturePathParams;
 } & FetcherExtraProps;
 
-export const getSiteAssetPublicSignature = (variables: GetSiteAssetPublicSignatureVariables, signal?: AbortSignal) =>
+export const getSiteAssetPublicSignature = (
+  variables: GetSiteAssetPublicSignatureVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetSiteAssetPublicSignatureResponse,
     GetSiteAssetPublicSignatureError,
@@ -2205,7 +2430,12 @@ export const getSiteAssetPublicSignature = (variables: GetSiteAssetPublicSignatu
     {},
     {},
     GetSiteAssetPublicSignaturePathParams
-  >({ url: '/sites/{siteId}/assets/{assetId}/public_signature', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/assets/{assetId}/public_signature",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetSiteFileByPathNamePathParams = {
   siteId: string;
@@ -2238,12 +2468,22 @@ export type GetSiteFileByPathNameVariables = {
   pathParams: GetSiteFileByPathNamePathParams;
 } & FetcherExtraProps;
 
-export const getSiteFileByPathName = (variables: GetSiteFileByPathNameVariables, signal?: AbortSignal) =>
-  fetch<GetSiteFileByPathNameResponse, GetSiteFileByPathNameError, undefined, {}, {}, GetSiteFileByPathNamePathParams>({
-    url: '/sites/{siteId}/files/{filePath}',
-    method: 'get',
+export const getSiteFileByPathName = (
+  variables: GetSiteFileByPathNameVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteFileByPathNameResponse,
+    GetSiteFileByPathNameError,
+    undefined,
+    {},
+    {},
+    GetSiteFileByPathNamePathParams
+  >({
+    url: "/sites/{siteId}/files/{filePath}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type PurgeCacheError = Fetcher.ErrorWrapper<undefined>;
@@ -2261,12 +2501,15 @@ export type PurgeCacheVariables = {
 /**
  * Purges cached content from Netlify's CDN. Supports purging by Cache-Tag.
  */
-export const purgeCache = (variables: PurgeCacheVariables, signal?: AbortSignal) =>
+export const purgeCache = (
+  variables: PurgeCacheVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, PurgeCacheError, PurgeCacheRequestBody, {}, {}, {}>({
-    url: '/purge',
-    method: 'post',
+    url: "/purge",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteSnippetsPathParams = {
@@ -2301,13 +2544,18 @@ export type ListSiteSnippetsVariables = {
   pathParams: ListSiteSnippetsPathParams;
 } & FetcherExtraProps;
 
-export const listSiteSnippets = (variables: ListSiteSnippetsVariables, signal?: AbortSignal) =>
-  fetch<ListSiteSnippetsResponse, ListSiteSnippetsError, undefined, {}, {}, ListSiteSnippetsPathParams>({
-    url: '/sites/{siteId}/snippets',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSiteSnippets = (
+  variables: ListSiteSnippetsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSiteSnippetsResponse,
+    ListSiteSnippetsError,
+    undefined,
+    {},
+    {},
+    ListSiteSnippetsPathParams
+  >({ url: "/sites/{siteId}/snippets", method: "get", ...variables, signal });
 
 export type CreateSiteSnippetPathParams = {
   siteId: string;
@@ -2342,7 +2590,10 @@ export type CreateSiteSnippetVariables = {
   pathParams: CreateSiteSnippetPathParams;
 } & FetcherExtraProps;
 
-export const createSiteSnippet = (variables: CreateSiteSnippetVariables, signal?: AbortSignal) =>
+export const createSiteSnippet = (
+  variables: CreateSiteSnippetVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteSnippetResponse,
     CreateSiteSnippetError,
@@ -2350,7 +2601,7 @@ export const createSiteSnippet = (variables: CreateSiteSnippetVariables, signal?
     {},
     {},
     CreateSiteSnippetPathParams
-  >({ url: '/sites/{siteId}/snippets', method: 'post', ...variables, signal });
+  >({ url: "/sites/{siteId}/snippets", method: "post", ...variables, signal });
 
 export type GetSiteSnippetPathParams = {
   siteId: string;
@@ -2385,12 +2636,22 @@ export type GetSiteSnippetVariables = {
   pathParams: GetSiteSnippetPathParams;
 } & FetcherExtraProps;
 
-export const getSiteSnippet = (variables: GetSiteSnippetVariables, signal?: AbortSignal) =>
-  fetch<GetSiteSnippetResponse, GetSiteSnippetError, undefined, {}, {}, GetSiteSnippetPathParams>({
-    url: '/sites/{siteId}/snippets/{snippetId}',
-    method: 'get',
+export const getSiteSnippet = (
+  variables: GetSiteSnippetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteSnippetResponse,
+    GetSiteSnippetError,
+    undefined,
+    {},
+    {},
+    GetSiteSnippetPathParams
+  >({
+    url: "/sites/{siteId}/snippets/{snippetId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSiteSnippetPathParams = {
@@ -2414,10 +2675,23 @@ export type UpdateSiteSnippetVariables = {
   pathParams: UpdateSiteSnippetPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteSnippet = (variables: UpdateSiteSnippetVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateSiteSnippetError, RequestBodies.CreateSiteSnippetSnippet, {}, {}, UpdateSiteSnippetPathParams>(
-    { url: '/sites/{siteId}/snippets/{snippetId}', method: 'put', ...variables, signal }
-  );
+export const updateSiteSnippet = (
+  variables: UpdateSiteSnippetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateSiteSnippetError,
+    RequestBodies.CreateSiteSnippetSnippet,
+    {},
+    {},
+    UpdateSiteSnippetPathParams
+  >({
+    url: "/sites/{siteId}/snippets/{snippetId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteSnippetPathParams = {
   siteId: string;
@@ -2439,12 +2713,22 @@ export type DeleteSiteSnippetVariables = {
   pathParams: DeleteSiteSnippetPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteSnippet = (variables: DeleteSiteSnippetVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteSnippetError, undefined, {}, {}, DeleteSiteSnippetPathParams>({
-    url: '/sites/{siteId}/snippets/{snippetId}',
-    method: 'delete',
+export const deleteSiteSnippet = (
+  variables: DeleteSiteSnippetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteSnippetError,
+    undefined,
+    {},
+    {},
+    DeleteSiteSnippetPathParams
+  >({
+    url: "/sites/{siteId}/snippets/{snippetId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetSiteMetadataPathParams = {
@@ -2466,13 +2750,18 @@ export type GetSiteMetadataVariables = {
   pathParams: GetSiteMetadataPathParams;
 } & FetcherExtraProps;
 
-export const getSiteMetadata = (variables: GetSiteMetadataVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, GetSiteMetadataError, undefined, {}, {}, GetSiteMetadataPathParams>({
-    url: '/sites/{siteId}/metadata',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getSiteMetadata = (
+  variables: GetSiteMetadataVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    Record<string, any>,
+    GetSiteMetadataError,
+    undefined,
+    {},
+    {},
+    GetSiteMetadataPathParams
+  >({ url: "/sites/{siteId}/metadata", method: "get", ...variables, signal });
 
 export type UpdateSiteMetadataPathParams = {
   siteId: string;
@@ -2494,7 +2783,10 @@ export type UpdateSiteMetadataVariables = {
   pathParams: UpdateSiteMetadataPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteMetadata = (variables: UpdateSiteMetadataVariables, signal?: AbortSignal) =>
+export const updateSiteMetadata = (
+  variables: UpdateSiteMetadataVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateSiteMetadataError,
@@ -2502,7 +2794,7 @@ export const updateSiteMetadata = (variables: UpdateSiteMetadataVariables, signa
     {},
     {},
     UpdateSiteMetadataPathParams
-  >({ url: '/sites/{siteId}/metadata', method: 'put', ...variables, signal });
+  >({ url: "/sites/{siteId}/metadata", method: "put", ...variables, signal });
 
 export type ListSiteBuildHooksPathParams = {
   siteId: string;
@@ -2535,12 +2827,22 @@ export type ListSiteBuildHooksVariables = {
   pathParams: ListSiteBuildHooksPathParams;
 } & FetcherExtraProps;
 
-export const listSiteBuildHooks = (variables: ListSiteBuildHooksVariables, signal?: AbortSignal) =>
-  fetch<ListSiteBuildHooksResponse, ListSiteBuildHooksError, undefined, {}, {}, ListSiteBuildHooksPathParams>({
-    url: '/sites/{siteId}/build_hooks',
-    method: 'get',
+export const listSiteBuildHooks = (
+  variables: ListSiteBuildHooksVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSiteBuildHooksResponse,
+    ListSiteBuildHooksError,
+    undefined,
+    {},
+    {},
+    ListSiteBuildHooksPathParams
+  >({
+    url: "/sites/{siteId}/build_hooks",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateSiteBuildHookPathParams = {
@@ -2575,7 +2877,10 @@ export type CreateSiteBuildHookVariables = {
   pathParams: CreateSiteBuildHookPathParams;
 } & FetcherExtraProps;
 
-export const createSiteBuildHook = (variables: CreateSiteBuildHookVariables, signal?: AbortSignal) =>
+export const createSiteBuildHook = (
+  variables: CreateSiteBuildHookVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteBuildHookResponse,
     CreateSiteBuildHookError,
@@ -2583,7 +2888,12 @@ export const createSiteBuildHook = (variables: CreateSiteBuildHookVariables, sig
     {},
     {},
     CreateSiteBuildHookPathParams
-  >({ url: '/sites/{siteId}/build_hooks', method: 'post', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/build_hooks",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetSiteBuildHookPathParams = {
   siteId: string;
@@ -2617,12 +2927,22 @@ export type GetSiteBuildHookVariables = {
   pathParams: GetSiteBuildHookPathParams;
 } & FetcherExtraProps;
 
-export const getSiteBuildHook = (variables: GetSiteBuildHookVariables, signal?: AbortSignal) =>
-  fetch<GetSiteBuildHookResponse, GetSiteBuildHookError, undefined, {}, {}, GetSiteBuildHookPathParams>({
-    url: '/sites/{siteId}/build_hooks/{id}',
-    method: 'get',
+export const getSiteBuildHook = (
+  variables: GetSiteBuildHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteBuildHookResponse,
+    GetSiteBuildHookError,
+    undefined,
+    {},
+    {},
+    GetSiteBuildHookPathParams
+  >({
+    url: "/sites/{siteId}/build_hooks/{id}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSiteBuildHookPathParams = {
@@ -2646,7 +2966,10 @@ export type UpdateSiteBuildHookVariables = {
   pathParams: UpdateSiteBuildHookPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteBuildHook = (variables: UpdateSiteBuildHookVariables, signal?: AbortSignal) =>
+export const updateSiteBuildHook = (
+  variables: UpdateSiteBuildHookVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateSiteBuildHookError,
@@ -2654,7 +2977,12 @@ export const updateSiteBuildHook = (variables: UpdateSiteBuildHookVariables, sig
     {},
     {},
     UpdateSiteBuildHookPathParams
-  >({ url: '/sites/{siteId}/build_hooks/{id}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/build_hooks/{id}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteBuildHookPathParams = {
   siteId: string;
@@ -2676,12 +3004,22 @@ export type DeleteSiteBuildHookVariables = {
   pathParams: DeleteSiteBuildHookPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteBuildHook = (variables: DeleteSiteBuildHookVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteBuildHookError, undefined, {}, {}, DeleteSiteBuildHookPathParams>({
-    url: '/sites/{siteId}/build_hooks/{id}',
-    method: 'delete',
+export const deleteSiteBuildHook = (
+  variables: DeleteSiteBuildHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteBuildHookError,
+    undefined,
+    {},
+    {},
+    DeleteSiteBuildHookPathParams
+  >({
+    url: "/sites/{siteId}/build_hooks/{id}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteDeploysPathParams = {
@@ -2689,26 +3027,26 @@ export type ListSiteDeploysPathParams = {
 };
 
 export type ListSiteDeploysQueryParams = {
-  ['deploy-previews']?: boolean;
+  ["deploy-previews"]?: boolean;
   production?: boolean;
   state?:
-    | 'new'
-    | 'pending_review'
-    | 'accepted'
-    | 'rejected'
-    | 'enqueued'
-    | 'building'
-    | 'uploading'
-    | 'uploaded'
-    | 'preparing'
-    | 'prepared'
-    | 'processing'
-    | 'processed'
-    | 'ready'
-    | 'error'
-    | 'retrying';
+    | "new"
+    | "pending_review"
+    | "accepted"
+    | "rejected"
+    | "enqueued"
+    | "building"
+    | "uploading"
+    | "uploaded"
+    | "preparing"
+    | "prepared"
+    | "processing"
+    | "processed"
+    | "ready"
+    | "error"
+    | "retrying";
   branch?: string;
-  ['latest-published']?: boolean;
+  ["latest-published"]?: boolean;
   /**
    * @format int32
    */
@@ -2780,7 +3118,10 @@ export type ListSiteDeploysVariables = {
   queryParams?: ListSiteDeploysQueryParams;
 } & FetcherExtraProps;
 
-export const listSiteDeploys = (variables: ListSiteDeploysVariables, signal?: AbortSignal) =>
+export const listSiteDeploys = (
+  variables: ListSiteDeploysVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteDeploysResponse,
     ListSiteDeploysError,
@@ -2788,33 +3129,33 @@ export const listSiteDeploys = (variables: ListSiteDeploysVariables, signal?: Ab
     {},
     ListSiteDeploysQueryParams,
     ListSiteDeploysPathParams
-  >({ url: '/sites/{siteId}/deploys', method: 'get', ...variables, signal });
+  >({ url: "/sites/{siteId}/deploys", method: "get", ...variables, signal });
 
 export type CreateSiteDeployPathParams = {
   siteId: string;
 };
 
 export type CreateSiteDeployQueryParams = {
-  ['deploy-previews']?: boolean;
+  ["deploy-previews"]?: boolean;
   production?: boolean;
   state?:
-    | 'new'
-    | 'pending_review'
-    | 'accepted'
-    | 'rejected'
-    | 'enqueued'
-    | 'building'
-    | 'uploading'
-    | 'uploaded'
-    | 'preparing'
-    | 'prepared'
-    | 'processing'
-    | 'processed'
-    | 'ready'
-    | 'error'
-    | 'retrying';
+    | "new"
+    | "pending_review"
+    | "accepted"
+    | "rejected"
+    | "enqueued"
+    | "building"
+    | "uploading"
+    | "uploaded"
+    | "preparing"
+    | "prepared"
+    | "processing"
+    | "processed"
+    | "ready"
+    | "error"
+    | "retrying";
   branch?: string;
-  ['latest-published']?: boolean;
+  ["latest-published"]?: boolean;
   title?: string;
 };
 
@@ -2880,7 +3221,10 @@ export type CreateSiteDeployVariables = {
   queryParams?: CreateSiteDeployQueryParams;
 } & FetcherExtraProps;
 
-export const createSiteDeploy = (variables: CreateSiteDeployVariables, signal?: AbortSignal) =>
+export const createSiteDeploy = (
+  variables: CreateSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteDeployResponse,
     CreateSiteDeployError,
@@ -2888,7 +3232,7 @@ export const createSiteDeploy = (variables: CreateSiteDeployVariables, signal?: 
     {},
     CreateSiteDeployQueryParams,
     CreateSiteDeployPathParams
-  >({ url: '/sites/{siteId}/deploys', method: 'post', ...variables, signal });
+  >({ url: "/sites/{siteId}/deploys", method: "post", ...variables, signal });
 
 export type GetSiteDeployPathParams = {
   siteId: string;
@@ -2955,12 +3299,22 @@ export type GetSiteDeployVariables = {
   pathParams: GetSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const getSiteDeploy = (variables: GetSiteDeployVariables, signal?: AbortSignal) =>
-  fetch<GetSiteDeployResponse, GetSiteDeployError, undefined, {}, {}, GetSiteDeployPathParams>({
-    url: '/sites/{siteId}/deploys/{deployId}',
-    method: 'get',
+export const getSiteDeploy = (
+  variables: GetSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteDeployResponse,
+    GetSiteDeployError,
+    undefined,
+    {},
+    {},
+    GetSiteDeployPathParams
+  >({
+    url: "/sites/{siteId}/deploys/{deployId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSiteDeployPathParams = {
@@ -3029,7 +3383,10 @@ export type UpdateSiteDeployVariables = {
   pathParams: UpdateSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteDeploy = (variables: UpdateSiteDeployVariables, signal?: AbortSignal) =>
+export const updateSiteDeploy = (
+  variables: UpdateSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateSiteDeployResponse,
     UpdateSiteDeployError,
@@ -3037,7 +3394,12 @@ export const updateSiteDeploy = (variables: UpdateSiteDeployVariables, signal?: 
     {},
     {},
     UpdateSiteDeployPathParams
-  >({ url: '/sites/{siteId}/deploys/{deployId}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/deploys/{deployId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteDeployPathParams = {
   deployId: string;
@@ -3059,12 +3421,22 @@ export type DeleteSiteDeployVariables = {
   pathParams: DeleteSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteDeploy = (variables: DeleteSiteDeployVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteDeployError, undefined, {}, {}, DeleteSiteDeployPathParams>({
-    url: '/sites/{siteId}/deploys/{deployId}',
-    method: 'delete',
+export const deleteSiteDeploy = (
+  variables: DeleteSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteDeployError,
+    undefined,
+    {},
+    {},
+    DeleteSiteDeployPathParams
+  >({
+    url: "/sites/{siteId}/deploys/{deployId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type CancelSiteDeployPathParams = {
@@ -3131,12 +3503,22 @@ export type CancelSiteDeployVariables = {
   pathParams: CancelSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const cancelSiteDeploy = (variables: CancelSiteDeployVariables, signal?: AbortSignal) =>
-  fetch<CancelSiteDeployResponse, CancelSiteDeployError, undefined, {}, {}, CancelSiteDeployPathParams>({
-    url: '/deploys/{deployId}/cancel',
-    method: 'post',
+export const cancelSiteDeploy = (
+  variables: CancelSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CancelSiteDeployResponse,
+    CancelSiteDeployError,
+    undefined,
+    {},
+    {},
+    CancelSiteDeployPathParams
+  >({
+    url: "/deploys/{deployId}/cancel",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type RestoreSiteDeployPathParams = {
@@ -3204,12 +3586,22 @@ export type RestoreSiteDeployVariables = {
   pathParams: RestoreSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const restoreSiteDeploy = (variables: RestoreSiteDeployVariables, signal?: AbortSignal) =>
-  fetch<RestoreSiteDeployResponse, RestoreSiteDeployError, undefined, {}, {}, RestoreSiteDeployPathParams>({
-    url: '/sites/{siteId}/deploys/{deployId}/restore',
-    method: 'post',
+export const restoreSiteDeploy = (
+  variables: RestoreSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    RestoreSiteDeployResponse,
+    RestoreSiteDeployError,
+    undefined,
+    {},
+    {},
+    RestoreSiteDeployPathParams
+  >({
+    url: "/sites/{siteId}/deploys/{deployId}/restore",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteBuildsPathParams = {
@@ -3255,7 +3647,10 @@ export type ListSiteBuildsVariables = {
   queryParams?: ListSiteBuildsQueryParams;
 } & FetcherExtraProps;
 
-export const listSiteBuilds = (variables: ListSiteBuildsVariables, signal?: AbortSignal) =>
+export const listSiteBuilds = (
+  variables: ListSiteBuildsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteBuildsResponse,
     ListSiteBuildsError,
@@ -3263,7 +3658,7 @@ export const listSiteBuilds = (variables: ListSiteBuildsVariables, signal?: Abor
     {},
     ListSiteBuildsQueryParams,
     ListSiteBuildsPathParams
-  >({ url: '/sites/{siteId}/builds', method: 'get', ...variables, signal });
+  >({ url: "/sites/{siteId}/builds", method: "get", ...variables, signal });
 
 export type CreateSiteBuildPathParams = {
   siteId: string;
@@ -3302,13 +3697,18 @@ export type CreateSiteBuildVariables = {
   pathParams: CreateSiteBuildPathParams;
 } & FetcherExtraProps;
 
-export const createSiteBuild = (variables: CreateSiteBuildVariables, signal?: AbortSignal) =>
-  fetch<CreateSiteBuildResponse, CreateSiteBuildError, CreateSiteBuildRequestBody, {}, {}, CreateSiteBuildPathParams>({
-    url: '/sites/{siteId}/builds',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createSiteBuild = (
+  variables: CreateSiteBuildVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateSiteBuildResponse,
+    CreateSiteBuildError,
+    CreateSiteBuildRequestBody,
+    {},
+    {},
+    CreateSiteBuildPathParams
+  >({ url: "/sites/{siteId}/builds", method: "post", ...variables, signal });
 
 export type ListSiteDeployedBranchesPathParams = {
   siteId: string;
@@ -3338,7 +3738,10 @@ export type ListSiteDeployedBranchesVariables = {
   pathParams: ListSiteDeployedBranchesPathParams;
 } & FetcherExtraProps;
 
-export const listSiteDeployedBranches = (variables: ListSiteDeployedBranchesVariables, signal?: AbortSignal) =>
+export const listSiteDeployedBranches = (
+  variables: ListSiteDeployedBranchesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteDeployedBranchesResponse,
     ListSiteDeployedBranchesError,
@@ -3346,7 +3749,12 @@ export const listSiteDeployedBranches = (variables: ListSiteDeployedBranchesVari
     {},
     {},
     ListSiteDeployedBranchesPathParams
-  >({ url: '/sites/{siteId}/deployed-branches', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/deployed-branches",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type UnlinkSiteRepoPathParams = {
   siteId: string;
@@ -3480,12 +3888,22 @@ export type UnlinkSiteRepoVariables = {
  * - Delete outgoing webhooks for the repo
  * - Delete the site's build hooks
  */
-export const unlinkSiteRepo = (variables: UnlinkSiteRepoVariables, signal?: AbortSignal) =>
-  fetch<UnlinkSiteRepoResponse, UnlinkSiteRepoError, undefined, {}, {}, UnlinkSiteRepoPathParams>({
-    url: '/sites/{siteId}/unlink_repo',
-    method: 'put',
+export const unlinkSiteRepo = (
+  variables: UnlinkSiteRepoVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UnlinkSiteRepoResponse,
+    UnlinkSiteRepoError,
+    undefined,
+    {},
+    {},
+    UnlinkSiteRepoPathParams
+  >({
+    url: "/sites/{siteId}/unlink_repo",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetSiteBuildPathParams = {
@@ -3519,13 +3937,18 @@ export type GetSiteBuildVariables = {
   pathParams: GetSiteBuildPathParams;
 } & FetcherExtraProps;
 
-export const getSiteBuild = (variables: GetSiteBuildVariables, signal?: AbortSignal) =>
-  fetch<GetSiteBuildResponse, GetSiteBuildError, undefined, {}, {}, GetSiteBuildPathParams>({
-    url: '/builds/{buildId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getSiteBuild = (
+  variables: GetSiteBuildVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteBuildResponse,
+    GetSiteBuildError,
+    undefined,
+    {},
+    {},
+    GetSiteBuildPathParams
+  >({ url: "/builds/{buildId}", method: "get", ...variables, signal });
 
 export type UpdateSiteBuildLogPathParams = {
   buildId: string;
@@ -3546,13 +3969,18 @@ export type UpdateSiteBuildLogVariables = {
   pathParams: UpdateSiteBuildLogPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteBuildLog = (variables: UpdateSiteBuildLogVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateSiteBuildLogError, undefined, {}, {}, UpdateSiteBuildLogPathParams>({
-    url: '/builds/{buildId}/log',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const updateSiteBuildLog = (
+  variables: UpdateSiteBuildLogVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateSiteBuildLogError,
+    undefined,
+    {},
+    {},
+    UpdateSiteBuildLogPathParams
+  >({ url: "/builds/{buildId}/log", method: "post", ...variables, signal });
 
 export type NotifyBuildStartPathParams = {
   buildId: string;
@@ -3579,13 +4007,18 @@ export type NotifyBuildStartVariables = {
   queryParams?: NotifyBuildStartQueryParams;
 } & FetcherExtraProps;
 
-export const notifyBuildStart = (variables: NotifyBuildStartVariables, signal?: AbortSignal) =>
-  fetch<undefined, NotifyBuildStartError, undefined, {}, NotifyBuildStartQueryParams, NotifyBuildStartPathParams>({
-    url: '/builds/{buildId}/start',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const notifyBuildStart = (
+  variables: NotifyBuildStartVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    NotifyBuildStartError,
+    undefined,
+    {},
+    NotifyBuildStartQueryParams,
+    NotifyBuildStartPathParams
+  >({ url: "/builds/{buildId}/start", method: "post", ...variables, signal });
 
 export type GetAccountBuildStatusPathParams = {
   accountId: string;
@@ -3632,13 +4065,18 @@ export type GetAccountBuildStatusVariables = {
   pathParams: GetAccountBuildStatusPathParams;
 } & FetcherExtraProps;
 
-export const getAccountBuildStatus = (variables: GetAccountBuildStatusVariables, signal?: AbortSignal) =>
-  fetch<GetAccountBuildStatusResponse, GetAccountBuildStatusError, undefined, {}, {}, GetAccountBuildStatusPathParams>({
-    url: '/{accountId}/builds/status',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAccountBuildStatus = (
+  variables: GetAccountBuildStatusVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetAccountBuildStatusResponse,
+    GetAccountBuildStatusError,
+    undefined,
+    {},
+    {},
+    GetAccountBuildStatusPathParams
+  >({ url: "/{accountId}/builds/status", method: "get", ...variables, signal });
 
 export type GetDNSForSitePathParams = {
   siteId: string;
@@ -3702,13 +4140,18 @@ export type GetDNSForSiteVariables = {
   pathParams: GetDNSForSitePathParams;
 } & FetcherExtraProps;
 
-export const getDNSForSite = (variables: GetDNSForSiteVariables, signal?: AbortSignal) =>
-  fetch<GetDNSForSiteResponse, GetDNSForSiteError, undefined, {}, {}, GetDNSForSitePathParams>({
-    url: '/sites/{siteId}/dns',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDNSForSite = (
+  variables: GetDNSForSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDNSForSiteResponse,
+    GetDNSForSiteError,
+    undefined,
+    {},
+    {},
+    GetDNSForSitePathParams
+  >({ url: "/sites/{siteId}/dns", method: "get", ...variables, signal });
 
 export type ConfigureDNSForSitePathParams = {
   siteId: string;
@@ -3772,13 +4215,18 @@ export type ConfigureDNSForSiteVariables = {
   pathParams: ConfigureDNSForSitePathParams;
 } & FetcherExtraProps;
 
-export const configureDNSForSite = (variables: ConfigureDNSForSiteVariables, signal?: AbortSignal) =>
-  fetch<ConfigureDNSForSiteResponse, ConfigureDNSForSiteError, undefined, {}, {}, ConfigureDNSForSitePathParams>({
-    url: '/sites/{siteId}/dns',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const configureDNSForSite = (
+  variables: ConfigureDNSForSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ConfigureDNSForSiteResponse,
+    ConfigureDNSForSiteError,
+    undefined,
+    {},
+    {},
+    ConfigureDNSForSitePathParams
+  >({ url: "/sites/{siteId}/dns", method: "put", ...variables, signal });
 
 export type RollbackSiteDeployPathParams = {
   siteId: string;
@@ -3799,13 +4247,18 @@ export type RollbackSiteDeployVariables = {
   pathParams: RollbackSiteDeployPathParams;
 } & FetcherExtraProps;
 
-export const rollbackSiteDeploy = (variables: RollbackSiteDeployVariables, signal?: AbortSignal) =>
-  fetch<undefined, RollbackSiteDeployError, undefined, {}, {}, RollbackSiteDeployPathParams>({
-    url: '/sites/{siteId}/rollback',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const rollbackSiteDeploy = (
+  variables: RollbackSiteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    RollbackSiteDeployError,
+    undefined,
+    {},
+    {},
+    RollbackSiteDeployPathParams
+  >({ url: "/sites/{siteId}/rollback", method: "put", ...variables, signal });
 
 export type GetDeployPathParams = {
   deployId: string;
@@ -3871,13 +4324,18 @@ export type GetDeployVariables = {
   pathParams: GetDeployPathParams;
 } & FetcherExtraProps;
 
-export const getDeploy = (variables: GetDeployVariables, signal?: AbortSignal) =>
-  fetch<GetDeployResponse, GetDeployError, undefined, {}, {}, GetDeployPathParams>({
-    url: '/deploys/{deployId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDeploy = (
+  variables: GetDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDeployResponse,
+    GetDeployError,
+    undefined,
+    {},
+    {},
+    GetDeployPathParams
+  >({ url: "/deploys/{deployId}", method: "get", ...variables, signal });
 
 export type DeleteDeployPathParams = {
   deployId: string;
@@ -3898,13 +4356,18 @@ export type DeleteDeployVariables = {
   pathParams: DeleteDeployPathParams;
 } & FetcherExtraProps;
 
-export const deleteDeploy = (variables: DeleteDeployVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteDeployError, undefined, {}, {}, DeleteDeployPathParams>({
-    url: '/deploys/{deployId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteDeploy = (
+  variables: DeleteDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteDeployError,
+    undefined,
+    {},
+    {},
+    DeleteDeployPathParams
+  >({ url: "/deploys/{deployId}", method: "delete", ...variables, signal });
 
 export type UpdateDeployValidationsPathParams = {
   /**
@@ -3948,7 +4411,10 @@ export type UpdateDeployValidationsVariables = {
 /**
  * Updates the deploy validations report for a deploy.
  */
-export const updateDeployValidations = (variables: UpdateDeployValidationsVariables, signal?: AbortSignal) =>
+export const updateDeployValidations = (
+  variables: UpdateDeployValidationsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateDeployValidationsResponse,
     UpdateDeployValidationsError,
@@ -3956,7 +4422,12 @@ export const updateDeployValidations = (variables: UpdateDeployValidationsVariab
     {},
     {},
     UpdateDeployValidationsPathParams
-  >({ url: '/deploys/{deployId}/validations_report', method: 'patch', ...variables, signal });
+  >({
+    url: "/deploys/{deployId}/validations_report",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type LockDeployPathParams = {
   deployId: string;
@@ -4022,13 +4493,18 @@ export type LockDeployVariables = {
   pathParams: LockDeployPathParams;
 } & FetcherExtraProps;
 
-export const lockDeploy = (variables: LockDeployVariables, signal?: AbortSignal) =>
-  fetch<LockDeployResponse, LockDeployError, undefined, {}, {}, LockDeployPathParams>({
-    url: '/deploys/{deployId}/lock',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const lockDeploy = (
+  variables: LockDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    LockDeployResponse,
+    LockDeployError,
+    undefined,
+    {},
+    {},
+    LockDeployPathParams
+  >({ url: "/deploys/{deployId}/lock", method: "post", ...variables, signal });
 
 export type UnlockDeployPathParams = {
   deployId: string;
@@ -4094,12 +4570,22 @@ export type UnlockDeployVariables = {
   pathParams: UnlockDeployPathParams;
 } & FetcherExtraProps;
 
-export const unlockDeploy = (variables: UnlockDeployVariables, signal?: AbortSignal) =>
-  fetch<UnlockDeployResponse, UnlockDeployError, undefined, {}, {}, UnlockDeployPathParams>({
-    url: '/deploys/{deployId}/unlock',
-    method: 'post',
+export const unlockDeploy = (
+  variables: UnlockDeployVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UnlockDeployResponse,
+    UnlockDeployError,
+    undefined,
+    {},
+    {},
+    UnlockDeployPathParams
+  >({
+    url: "/deploys/{deployId}/unlock",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type UploadDeployFilePathParams = {
@@ -4139,7 +4625,10 @@ export type UploadDeployFileVariables = {
   queryParams?: UploadDeployFileQueryParams;
 } & FetcherExtraProps;
 
-export const uploadDeployFile = (variables: UploadDeployFileVariables, signal?: AbortSignal) =>
+export const uploadDeployFile = (
+  variables: UploadDeployFileVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UploadDeployFileResponse,
     UploadDeployFileError,
@@ -4147,7 +4636,12 @@ export const uploadDeployFile = (variables: UploadDeployFileVariables, signal?: 
     {},
     UploadDeployFileQueryParams,
     UploadDeployFilePathParams
-  >({ url: '/deploys/{deployId}/files/{path}', method: 'put', ...variables, signal });
+  >({
+    url: "/deploys/{deployId}/files/{path}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type UploadDeployFunctionPathParams = {
   deployId: string;
@@ -4162,7 +4656,7 @@ export type UploadDeployFunctionQueryParams = {
 };
 
 export type UploadDeployFunctionHeaders = {
-  ['X-Nf-Retry-Count']?: number;
+  ["X-Nf-Retry-Count"]?: number;
 };
 
 export type UploadDeployFunctionError = Fetcher.ErrorWrapper<{
@@ -4189,7 +4683,10 @@ export type UploadDeployFunctionVariables = {
   queryParams?: UploadDeployFunctionQueryParams;
 } & FetcherExtraProps;
 
-export const uploadDeployFunction = (variables: UploadDeployFunctionVariables, signal?: AbortSignal) =>
+export const uploadDeployFunction = (
+  variables: UploadDeployFunctionVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UploadDeployFunctionResponse,
     UploadDeployFunctionError,
@@ -4197,7 +4694,12 @@ export const uploadDeployFunction = (variables: UploadDeployFunctionVariables, s
     UploadDeployFunctionHeaders,
     UploadDeployFunctionQueryParams,
     UploadDeployFunctionPathParams
-  >({ url: '/deploys/{deployId}/functions/{name}', method: 'put', ...variables, signal });
+  >({
+    url: "/deploys/{deployId}/functions/{name}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type UpdatePluginPathParams = {
   siteId: string;
@@ -4232,12 +4734,22 @@ export type UpdatePluginVariables = {
 /**
  * This is an internal-only endpoint.
  */
-export const updatePlugin = (variables: UpdatePluginVariables, signal?: AbortSignal) =>
-  fetch<UpdatePluginResponse, UpdatePluginError, UpdatePluginRequestBody, {}, {}, UpdatePluginPathParams>({
-    url: '/sites/{siteId}/plugins/{package}',
-    method: 'put',
+export const updatePlugin = (
+  variables: UpdatePluginVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UpdatePluginResponse,
+    UpdatePluginError,
+    UpdatePluginRequestBody,
+    {},
+    {},
+    UpdatePluginPathParams
+  >({
+    url: "/sites/{siteId}/plugins/{package}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetLatestPluginRunsPathParams = {
@@ -4279,7 +4791,10 @@ export type GetLatestPluginRunsVariables = {
 /**
  * This is an internal-only endpoint.
  */
-export const getLatestPluginRuns = (variables: GetLatestPluginRunsVariables, signal?: AbortSignal) =>
+export const getLatestPluginRuns = (
+  variables: GetLatestPluginRunsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetLatestPluginRunsResponse,
     GetLatestPluginRunsError,
@@ -4287,7 +4802,12 @@ export const getLatestPluginRuns = (variables: GetLatestPluginRunsVariables, sig
     {},
     GetLatestPluginRunsQueryParams,
     GetLatestPluginRunsPathParams
-  >({ url: '/sites/{siteId}/plugin_runs/latest', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/plugin_runs/latest",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type CreatePluginRunPathParams = {
   deployId: string;
@@ -4333,12 +4853,22 @@ export type CreatePluginRunVariables = {
 /**
  * This is an internal-only endpoint.
  */
-export const createPluginRun = (variables: CreatePluginRunVariables, signal?: AbortSignal) =>
-  fetch<CreatePluginRunResponse, CreatePluginRunError, CreatePluginRunRequestBody, {}, {}, CreatePluginRunPathParams>({
-    url: '/deploys/{deployId}/plugin_runs',
-    method: 'post',
+export const createPluginRun = (
+  variables: CreatePluginRunVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreatePluginRunResponse,
+    CreatePluginRunError,
+    CreatePluginRunRequestBody,
+    {},
+    {},
+    CreatePluginRunPathParams
+  >({
+    url: "/deploys/{deployId}/plugin_runs",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListFormSubmissionsPathParams = {
@@ -4393,7 +4923,10 @@ export type ListFormSubmissionsVariables = {
   queryParams?: ListFormSubmissionsQueryParams;
 } & FetcherExtraProps;
 
-export const listFormSubmissions = (variables: ListFormSubmissionsVariables, signal?: AbortSignal) =>
+export const listFormSubmissions = (
+  variables: ListFormSubmissionsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListFormSubmissionsResponse,
     ListFormSubmissionsError,
@@ -4401,7 +4934,12 @@ export const listFormSubmissions = (variables: ListFormSubmissionsVariables, sig
     {},
     ListFormSubmissionsQueryParams,
     ListFormSubmissionsPathParams
-  >({ url: '/forms/{formId}/submissions', method: 'get', ...variables, signal });
+  >({
+    url: "/forms/{formId}/submissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListHooksBySiteIdQueryParams = {
   site_id: string;
@@ -4439,13 +4977,18 @@ export type ListHooksBySiteIdVariables = {
   queryParams: ListHooksBySiteIdQueryParams;
 } & FetcherExtraProps;
 
-export const listHooksBySiteId = (variables: ListHooksBySiteIdVariables, signal?: AbortSignal) =>
-  fetch<ListHooksBySiteIdResponse, ListHooksBySiteIdError, undefined, {}, ListHooksBySiteIdQueryParams, {}>({
-    url: '/hooks',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listHooksBySiteId = (
+  variables: ListHooksBySiteIdVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListHooksBySiteIdResponse,
+    ListHooksBySiteIdError,
+    undefined,
+    {},
+    ListHooksBySiteIdQueryParams,
+    {}
+  >({ url: "/hooks", method: "get", ...variables, signal });
 
 export type CreateHookBySiteIdQueryParams = {
   site_id: string;
@@ -4484,7 +5027,10 @@ export type CreateHookBySiteIdVariables = {
   queryParams: CreateHookBySiteIdQueryParams;
 } & FetcherExtraProps;
 
-export const createHookBySiteId = (variables: CreateHookBySiteIdVariables, signal?: AbortSignal) =>
+export const createHookBySiteId = (
+  variables: CreateHookBySiteIdVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateHookBySiteIdResponse,
     CreateHookBySiteIdError,
@@ -4492,7 +5038,7 @@ export const createHookBySiteId = (variables: CreateHookBySiteIdVariables, signa
     {},
     CreateHookBySiteIdQueryParams,
     {}
-  >({ url: '/hooks', method: 'post', ...variables, signal });
+  >({ url: "/hooks", method: "post", ...variables, signal });
 
 export type GetHookPathParams = {
   hookId: string;
@@ -4532,10 +5078,10 @@ export type GetHookVariables = {
 
 export const getHook = (variables: GetHookVariables, signal?: AbortSignal) =>
   fetch<GetHookResponse, GetHookError, undefined, {}, {}, GetHookPathParams>({
-    url: '/hooks/{hookId}',
-    method: 'get',
+    url: "/hooks/{hookId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateHookPathParams = {
@@ -4575,13 +5121,18 @@ export type UpdateHookVariables = {
   pathParams: UpdateHookPathParams;
 } & FetcherExtraProps;
 
-export const updateHook = (variables: UpdateHookVariables, signal?: AbortSignal) =>
-  fetch<UpdateHookResponse, UpdateHookError, RequestBodies.CreateHookBySiteIdHook, {}, {}, UpdateHookPathParams>({
-    url: '/hooks/{hookId}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const updateHook = (
+  variables: UpdateHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UpdateHookResponse,
+    UpdateHookError,
+    RequestBodies.CreateHookBySiteIdHook,
+    {},
+    {},
+    UpdateHookPathParams
+  >({ url: "/hooks/{hookId}", method: "put", ...variables, signal });
 
 export type DeleteHookPathParams = {
   hookId: string;
@@ -4593,12 +5144,15 @@ export type DeleteHookVariables = {
   pathParams: DeleteHookPathParams;
 } & FetcherExtraProps;
 
-export const deleteHook = (variables: DeleteHookVariables, signal?: AbortSignal) =>
+export const deleteHook = (
+  variables: DeleteHookVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, DeleteHookError, undefined, {}, {}, DeleteHookPathParams>({
-    url: '/hooks/{hookId}',
-    method: 'delete',
+    url: "/hooks/{hookId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type EnableHookPathParams = {
@@ -4637,13 +5191,18 @@ export type EnableHookVariables = {
   pathParams: EnableHookPathParams;
 } & FetcherExtraProps;
 
-export const enableHook = (variables: EnableHookVariables, signal?: AbortSignal) =>
-  fetch<EnableHookResponse, EnableHookError, undefined, {}, {}, EnableHookPathParams>({
-    url: '/hooks/{hookId}/enable',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const enableHook = (
+  variables: EnableHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    EnableHookResponse,
+    EnableHookError,
+    undefined,
+    {},
+    {},
+    EnableHookPathParams
+  >({ url: "/hooks/{hookId}/enable", method: "post", ...variables, signal });
 
 export type ListHookTypesError = Fetcher.ErrorWrapper<{
   status: Exclude<ClientErrorStatus | ServerErrorStatus, 200>;
@@ -4664,12 +5223,15 @@ export type ListHookTypesResponse = {
 
 export type ListHookTypesVariables = FetcherExtraProps;
 
-export const listHookTypes = (variables: ListHookTypesVariables, signal?: AbortSignal) =>
+export const listHookTypes = (
+  variables: ListHookTypesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<ListHookTypesResponse, ListHookTypesError, undefined, {}, {}, {}>({
-    url: '/hooks/types',
-    method: 'get',
+    url: "/hooks/types",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateTicketQueryParams = {
@@ -4701,13 +5263,18 @@ export type CreateTicketVariables = {
   queryParams: CreateTicketQueryParams;
 } & FetcherExtraProps;
 
-export const createTicket = (variables: CreateTicketVariables, signal?: AbortSignal) =>
-  fetch<CreateTicketResponse, CreateTicketError, undefined, {}, CreateTicketQueryParams, {}>({
-    url: '/oauth/tickets',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createTicket = (
+  variables: CreateTicketVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateTicketResponse,
+    CreateTicketError,
+    undefined,
+    {},
+    CreateTicketQueryParams,
+    {}
+  >({ url: "/oauth/tickets", method: "post", ...variables, signal });
 
 export type ShowTicketPathParams = {
   ticketId: string;
@@ -4738,13 +5305,18 @@ export type ShowTicketVariables = {
   pathParams: ShowTicketPathParams;
 } & FetcherExtraProps;
 
-export const showTicket = (variables: ShowTicketVariables, signal?: AbortSignal) =>
-  fetch<ShowTicketResponse, ShowTicketError, undefined, {}, {}, ShowTicketPathParams>({
-    url: '/oauth/tickets/{ticketId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const showTicket = (
+  variables: ShowTicketVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ShowTicketResponse,
+    ShowTicketError,
+    undefined,
+    {},
+    {},
+    ShowTicketPathParams
+  >({ url: "/oauth/tickets/{ticketId}", method: "get", ...variables, signal });
 
 export type ExchangeTicketPathParams = {
   ticketId: string;
@@ -4776,12 +5348,22 @@ export type ExchangeTicketVariables = {
   pathParams: ExchangeTicketPathParams;
 } & FetcherExtraProps;
 
-export const exchangeTicket = (variables: ExchangeTicketVariables, signal?: AbortSignal) =>
-  fetch<ExchangeTicketResponse, ExchangeTicketError, undefined, {}, {}, ExchangeTicketPathParams>({
-    url: '/oauth/tickets/{ticketId}/exchange',
-    method: 'post',
+export const exchangeTicket = (
+  variables: ExchangeTicketVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ExchangeTicketResponse,
+    ExchangeTicketError,
+    undefined,
+    {},
+    {},
+    ExchangeTicketPathParams
+  >({
+    url: "/oauth/tickets/{ticketId}/exchange",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListDeployKeysError = Fetcher.ErrorWrapper<{
@@ -4806,12 +5388,15 @@ export type ListDeployKeysResponse = {
 
 export type ListDeployKeysVariables = FetcherExtraProps;
 
-export const listDeployKeys = (variables: ListDeployKeysVariables, signal?: AbortSignal) =>
+export const listDeployKeys = (
+  variables: ListDeployKeysVariables,
+  signal?: AbortSignal,
+) =>
   fetch<ListDeployKeysResponse, ListDeployKeysError, undefined, {}, {}, {}>({
-    url: '/deploy_keys',
-    method: 'get',
+    url: "/deploy_keys",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateDeployKeyError = Fetcher.ErrorWrapper<{
@@ -4836,12 +5421,15 @@ export type CreateDeployKeyResponse = {
 
 export type CreateDeployKeyVariables = FetcherExtraProps;
 
-export const createDeployKey = (variables: CreateDeployKeyVariables, signal?: AbortSignal) =>
+export const createDeployKey = (
+  variables: CreateDeployKeyVariables,
+  signal?: AbortSignal,
+) =>
   fetch<CreateDeployKeyResponse, CreateDeployKeyError, undefined, {}, {}, {}>({
-    url: '/deploy_keys',
-    method: 'post',
+    url: "/deploy_keys",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetDeployKeyPathParams = {
@@ -4872,13 +5460,18 @@ export type GetDeployKeyVariables = {
   pathParams: GetDeployKeyPathParams;
 } & FetcherExtraProps;
 
-export const getDeployKey = (variables: GetDeployKeyVariables, signal?: AbortSignal) =>
-  fetch<GetDeployKeyResponse, GetDeployKeyError, undefined, {}, {}, GetDeployKeyPathParams>({
-    url: '/deploy_keys/{keyId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDeployKey = (
+  variables: GetDeployKeyVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDeployKeyResponse,
+    GetDeployKeyError,
+    undefined,
+    {},
+    {},
+    GetDeployKeyPathParams
+  >({ url: "/deploy_keys/{keyId}", method: "get", ...variables, signal });
 
 export type DeleteDeployKeyPathParams = {
   keyId: string;
@@ -4899,13 +5492,18 @@ export type DeleteDeployKeyVariables = {
   pathParams: DeleteDeployKeyPathParams;
 } & FetcherExtraProps;
 
-export const deleteDeployKey = (variables: DeleteDeployKeyVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteDeployKeyError, undefined, {}, {}, DeleteDeployKeyPathParams>({
-    url: '/deploy_keys/{keyId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteDeployKey = (
+  variables: DeleteDeployKeyVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteDeployKeyError,
+    undefined,
+    {},
+    {},
+    DeleteDeployKeyPathParams
+  >({ url: "/deploy_keys/{keyId}", method: "delete", ...variables, signal });
 
 export type CreateSiteInTeamPathParams = {
   accountSlug: string;
@@ -5182,7 +5780,10 @@ export type CreateSiteInTeamVariables = {
 /**
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
  */
-export const createSiteInTeam = (variables: CreateSiteInTeamVariables, signal?: AbortSignal) =>
+export const createSiteInTeam = (
+  variables: CreateSiteInTeamVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteInTeamResponse,
     CreateSiteInTeamError,
@@ -5190,7 +5791,7 @@ export const createSiteInTeam = (variables: CreateSiteInTeamVariables, signal?: 
     {},
     CreateSiteInTeamQueryParams,
     CreateSiteInTeamPathParams
-  >({ url: '/{accountSlug}/sites', method: 'post', ...variables, signal });
+  >({ url: "/{accountSlug}/sites", method: "post", ...variables, signal });
 
 export type ListSitesForAccountPathParams = {
   accountSlug: string;
@@ -5341,7 +5942,10 @@ export type ListSitesForAccountVariables = {
 /**
  * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
-export const listSitesForAccount = (variables: ListSitesForAccountVariables, signal?: AbortSignal) =>
+export const listSitesForAccount = (
+  variables: ListSitesForAccountVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSitesForAccountResponse,
     ListSitesForAccountError,
@@ -5349,7 +5953,7 @@ export const listSitesForAccount = (variables: ListSitesForAccountVariables, sig
     {},
     ListSitesForAccountQueryParams,
     ListSitesForAccountPathParams
-  >({ url: '/{accountSlug}/sites', method: 'get', ...variables, signal });
+  >({ url: "/{accountSlug}/sites", method: "get", ...variables, signal });
 
 export type ListMembersForAccountPathParams = {
   accountSlug: string;
@@ -5378,13 +5982,18 @@ export type ListMembersForAccountVariables = {
   pathParams: ListMembersForAccountPathParams;
 } & FetcherExtraProps;
 
-export const listMembersForAccount = (variables: ListMembersForAccountVariables, signal?: AbortSignal) =>
-  fetch<ListMembersForAccountResponse, ListMembersForAccountError, undefined, {}, {}, ListMembersForAccountPathParams>({
-    url: '/{accountSlug}/members',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listMembersForAccount = (
+  variables: ListMembersForAccountVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListMembersForAccountResponse,
+    ListMembersForAccountError,
+    undefined,
+    {},
+    {},
+    ListMembersForAccountPathParams
+  >({ url: "/{accountSlug}/members", method: "get", ...variables, signal });
 
 export type AddMemberToAccountPathParams = {
   accountSlug: string;
@@ -5410,7 +6019,7 @@ export type AddMemberToAccountResponse = {
 }[];
 
 export type AddMemberToAccountRequestBody = {
-  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
+  role?: "Owner" | "Developer" | "Billing Admin" | "Reviewer";
   email?: string;
 };
 
@@ -5419,7 +6028,10 @@ export type AddMemberToAccountVariables = {
   pathParams: AddMemberToAccountPathParams;
 } & FetcherExtraProps;
 
-export const addMemberToAccount = (variables: AddMemberToAccountVariables, signal?: AbortSignal) =>
+export const addMemberToAccount = (
+  variables: AddMemberToAccountVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     AddMemberToAccountResponse,
     AddMemberToAccountError,
@@ -5427,7 +6039,7 @@ export const addMemberToAccount = (variables: AddMemberToAccountVariables, signa
     {},
     {},
     AddMemberToAccountPathParams
-  >({ url: '/{accountSlug}/members', method: 'post', ...variables, signal });
+  >({ url: "/{accountSlug}/members", method: "post", ...variables, signal });
 
 export type GetAccountMemberPathParams = {
   accountSlug: string;
@@ -5457,12 +6069,22 @@ export type GetAccountMemberVariables = {
   pathParams: GetAccountMemberPathParams;
 } & FetcherExtraProps;
 
-export const getAccountMember = (variables: GetAccountMemberVariables, signal?: AbortSignal) =>
-  fetch<GetAccountMemberResponse, GetAccountMemberError, undefined, {}, {}, GetAccountMemberPathParams>({
-    url: '/{accountSlug}/members/{memberId}',
-    method: 'get',
+export const getAccountMember = (
+  variables: GetAccountMemberVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetAccountMemberResponse,
+    GetAccountMemberError,
+    undefined,
+    {},
+    {},
+    GetAccountMemberPathParams
+  >({
+    url: "/{accountSlug}/members/{memberId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateAccountMemberPathParams = {
@@ -5490,8 +6112,8 @@ export type UpdateAccountMemberResponse = {
 };
 
 export type UpdateAccountMemberRequestBody = {
-  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
-  site_access?: 'all' | 'none' | 'selected';
+  role?: "Owner" | "Developer" | "Billing Admin" | "Reviewer";
+  site_access?: "all" | "none" | "selected";
   site_ids?: string[];
 };
 
@@ -5500,7 +6122,10 @@ export type UpdateAccountMemberVariables = {
   pathParams: UpdateAccountMemberPathParams;
 } & FetcherExtraProps;
 
-export const updateAccountMember = (variables: UpdateAccountMemberVariables, signal?: AbortSignal) =>
+export const updateAccountMember = (
+  variables: UpdateAccountMemberVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateAccountMemberResponse,
     UpdateAccountMemberError,
@@ -5508,7 +6133,12 @@ export const updateAccountMember = (variables: UpdateAccountMemberVariables, sig
     {},
     {},
     UpdateAccountMemberPathParams
-  >({ url: '/{accountSlug}/members/{memberId}', method: 'put', ...variables, signal });
+  >({
+    url: "/{accountSlug}/members/{memberId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type RemoveAccountMemberPathParams = {
   accountSlug: string;
@@ -5530,12 +6160,22 @@ export type RemoveAccountMemberVariables = {
   pathParams: RemoveAccountMemberPathParams;
 } & FetcherExtraProps;
 
-export const removeAccountMember = (variables: RemoveAccountMemberVariables, signal?: AbortSignal) =>
-  fetch<undefined, RemoveAccountMemberError, undefined, {}, {}, RemoveAccountMemberPathParams>({
-    url: '/{accountSlug}/members/{memberId}',
-    method: 'delete',
+export const removeAccountMember = (
+  variables: RemoveAccountMemberVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    RemoveAccountMemberError,
+    undefined,
+    {},
+    {},
+    RemoveAccountMemberPathParams
+  >({
+    url: "/{accountSlug}/members/{memberId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListPaymentMethodsForUserError = Fetcher.ErrorWrapper<{
@@ -5571,13 +6211,18 @@ export type ListPaymentMethodsForUserResponse = {
 
 export type ListPaymentMethodsForUserVariables = FetcherExtraProps;
 
-export const listPaymentMethodsForUser = (variables: ListPaymentMethodsForUserVariables, signal?: AbortSignal) =>
-  fetch<ListPaymentMethodsForUserResponse, ListPaymentMethodsForUserError, undefined, {}, {}, {}>({
-    url: '/billing/payment_methods',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listPaymentMethodsForUser = (
+  variables: ListPaymentMethodsForUserVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListPaymentMethodsForUserResponse,
+    ListPaymentMethodsForUserError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/billing/payment_methods", method: "get", ...variables, signal });
 
 export type ListAccountTypesForUserError = Fetcher.ErrorWrapper<{
   status: Exclude<ClientErrorStatus | ServerErrorStatus, 200>;
@@ -5603,13 +6248,18 @@ export type ListAccountTypesForUserResponse = {
 
 export type ListAccountTypesForUserVariables = FetcherExtraProps;
 
-export const listAccountTypesForUser = (variables: ListAccountTypesForUserVariables, signal?: AbortSignal) =>
-  fetch<ListAccountTypesForUserResponse, ListAccountTypesForUserError, undefined, {}, {}, {}>({
-    url: '/accounts/types',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listAccountTypesForUser = (
+  variables: ListAccountTypesForUserVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListAccountTypesForUserResponse,
+    ListAccountTypesForUserError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/accounts/types", method: "get", ...variables, signal });
 
 export type ListAccountsForUserQueryParams = {
   minimal?: boolean;
@@ -5664,13 +6314,18 @@ export type ListAccountsForUserVariables = {
   queryParams?: ListAccountsForUserQueryParams;
 } & FetcherExtraProps;
 
-export const listAccountsForUser = (variables: ListAccountsForUserVariables, signal?: AbortSignal) =>
-  fetch<ListAccountsForUserResponse, ListAccountsForUserError, undefined, {}, ListAccountsForUserQueryParams, {}>({
-    url: '/accounts',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listAccountsForUser = (
+  variables: ListAccountsForUserVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListAccountsForUserResponse,
+    ListAccountsForUserError,
+    undefined,
+    {},
+    ListAccountsForUserQueryParams,
+    {}
+  >({ url: "/accounts", method: "get", ...variables, signal });
 
 export type CreateAccountError = Fetcher.ErrorWrapper<{
   status: Exclude<ClientErrorStatus | ServerErrorStatus, 201>;
@@ -5721,7 +6376,7 @@ export type CreateAccountRequestBody = {
   name: string;
   type_id: string;
   payment_method_id?: string;
-  period?: 'monthly' | 'yearly';
+  period?: "monthly" | "yearly";
   extra_seats_block?: number;
 };
 
@@ -5729,13 +6384,18 @@ export type CreateAccountVariables = {
   body: CreateAccountRequestBody;
 } & FetcherExtraProps;
 
-export const createAccount = (variables: CreateAccountVariables, signal?: AbortSignal) =>
-  fetch<CreateAccountResponse, CreateAccountError, CreateAccountRequestBody, {}, {}, {}>({
-    url: '/accounts',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createAccount = (
+  variables: CreateAccountVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateAccountResponse,
+    CreateAccountError,
+    CreateAccountRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/accounts", method: "post", ...variables, signal });
 
 export type GetAccountPathParams = {
   accountId: string;
@@ -5790,13 +6450,18 @@ export type GetAccountVariables = {
   pathParams: GetAccountPathParams;
 } & FetcherExtraProps;
 
-export const getAccount = (variables: GetAccountVariables, signal?: AbortSignal) =>
-  fetch<GetAccountResponse, GetAccountError, undefined, {}, {}, GetAccountPathParams>({
-    url: '/accounts/{accountId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAccount = (
+  variables: GetAccountVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetAccountResponse,
+    GetAccountError,
+    undefined,
+    {},
+    {},
+    GetAccountPathParams
+  >({ url: "/accounts/{accountId}", method: "get", ...variables, signal });
 
 export type UpdateAccountPathParams = {
   accountId: string;
@@ -5862,13 +6527,18 @@ export type UpdateAccountVariables = {
   pathParams: UpdateAccountPathParams;
 } & FetcherExtraProps;
 
-export const updateAccount = (variables: UpdateAccountVariables, signal?: AbortSignal) =>
-  fetch<UpdateAccountResponse, UpdateAccountError, UpdateAccountRequestBody, {}, {}, UpdateAccountPathParams>({
-    url: '/accounts/{accountId}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const updateAccount = (
+  variables: UpdateAccountVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UpdateAccountResponse,
+    UpdateAccountError,
+    UpdateAccountRequestBody,
+    {},
+    {},
+    UpdateAccountPathParams
+  >({ url: "/accounts/{accountId}", method: "put", ...variables, signal });
 
 export type CancelAccountPathParams = {
   accountId: string;
@@ -5889,13 +6559,18 @@ export type CancelAccountVariables = {
   pathParams: CancelAccountPathParams;
 } & FetcherExtraProps;
 
-export const cancelAccount = (variables: CancelAccountVariables, signal?: AbortSignal) =>
-  fetch<undefined, CancelAccountError, undefined, {}, {}, CancelAccountPathParams>({
-    url: '/accounts/{accountId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const cancelAccount = (
+  variables: CancelAccountVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    CancelAccountError,
+    undefined,
+    {},
+    {},
+    CancelAccountPathParams
+  >({ url: "/accounts/{accountId}", method: "delete", ...variables, signal });
 
 export type ListAccountAuditEventsPathParams = {
   accountId: string;
@@ -5948,7 +6623,10 @@ export type ListAccountAuditEventsVariables = {
   queryParams?: ListAccountAuditEventsQueryParams;
 } & FetcherExtraProps;
 
-export const listAccountAuditEvents = (variables: ListAccountAuditEventsVariables, signal?: AbortSignal) =>
+export const listAccountAuditEvents = (
+  variables: ListAccountAuditEventsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListAccountAuditEventsResponse,
     ListAccountAuditEventsError,
@@ -5956,7 +6634,12 @@ export const listAccountAuditEvents = (variables: ListAccountAuditEventsVariable
     {},
     ListAccountAuditEventsQueryParams,
     ListAccountAuditEventsPathParams
-  >({ url: '/accounts/{accountId}/audit', method: 'get', ...variables, signal });
+  >({
+    url: "/accounts/{accountId}/audit",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListFormSubmissionPathParams = {
   submissionId: string;
@@ -6011,7 +6694,10 @@ export type ListFormSubmissionVariables = {
   queryParams?: ListFormSubmissionQueryParams;
 } & FetcherExtraProps;
 
-export const listFormSubmission = (variables: ListFormSubmissionVariables, signal?: AbortSignal) =>
+export const listFormSubmission = (
+  variables: ListFormSubmissionVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListFormSubmissionResponse,
     ListFormSubmissionError,
@@ -6019,7 +6705,12 @@ export const listFormSubmission = (variables: ListFormSubmissionVariables, signa
     {},
     ListFormSubmissionQueryParams,
     ListFormSubmissionPathParams
-  >({ url: '/submissions/{submissionId}', method: 'get', ...variables, signal });
+  >({
+    url: "/submissions/{submissionId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSubmissionPathParams = {
   submissionId: string;
@@ -6040,12 +6731,22 @@ export type DeleteSubmissionVariables = {
   pathParams: DeleteSubmissionPathParams;
 } & FetcherExtraProps;
 
-export const deleteSubmission = (variables: DeleteSubmissionVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSubmissionError, undefined, {}, {}, DeleteSubmissionPathParams>({
-    url: '/submissions/{submissionId}',
-    method: 'delete',
+export const deleteSubmission = (
+  variables: DeleteSubmissionVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSubmissionError,
+    undefined,
+    {},
+    {},
+    DeleteSubmissionPathParams
+  >({
+    url: "/submissions/{submissionId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListServiceInstancesForSitePathParams = {
@@ -6088,7 +6789,10 @@ export type ListServiceInstancesForSiteVariables = {
   pathParams: ListServiceInstancesForSitePathParams;
 } & FetcherExtraProps;
 
-export const listServiceInstancesForSite = (variables: ListServiceInstancesForSiteVariables, signal?: AbortSignal) =>
+export const listServiceInstancesForSite = (
+  variables: ListServiceInstancesForSiteVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListServiceInstancesForSiteResponse,
     ListServiceInstancesForSiteError,
@@ -6096,7 +6800,12 @@ export const listServiceInstancesForSite = (variables: ListServiceInstancesForSi
     {},
     {},
     ListServiceInstancesForSitePathParams
-  >({ url: '/sites/{siteId}/service-instances', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/service-instances",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type CreateServiceInstancePathParams = {
   siteId: string;
@@ -6140,7 +6849,10 @@ export type CreateServiceInstanceVariables = {
   pathParams: CreateServiceInstancePathParams;
 } & FetcherExtraProps;
 
-export const createServiceInstance = (variables: CreateServiceInstanceVariables, signal?: AbortSignal) =>
+export const createServiceInstance = (
+  variables: CreateServiceInstanceVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateServiceInstanceResponse,
     CreateServiceInstanceError,
@@ -6148,7 +6860,12 @@ export const createServiceInstance = (variables: CreateServiceInstanceVariables,
     {},
     {},
     CreateServiceInstancePathParams
-  >({ url: '/sites/{siteId}/services/{addon}/instances', method: 'post', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/services/{addon}/instances",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type ShowServiceInstancePathParams = {
   siteId: string;
@@ -6192,12 +6909,22 @@ export type ShowServiceInstanceVariables = {
   pathParams: ShowServiceInstancePathParams;
 } & FetcherExtraProps;
 
-export const showServiceInstance = (variables: ShowServiceInstanceVariables, signal?: AbortSignal) =>
-  fetch<ShowServiceInstanceResponse, ShowServiceInstanceError, undefined, {}, {}, ShowServiceInstancePathParams>({
-    url: '/sites/{siteId}/services/{addon}/instances/{instanceId}',
-    method: 'get',
+export const showServiceInstance = (
+  variables: ShowServiceInstanceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ShowServiceInstanceResponse,
+    ShowServiceInstanceError,
+    undefined,
+    {},
+    {},
+    ShowServiceInstancePathParams
+  >({
+    url: "/sites/{siteId}/services/{addon}/instances/{instanceId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateServiceInstancePathParams = {
@@ -6222,7 +6949,10 @@ export type UpdateServiceInstanceVariables = {
   pathParams: UpdateServiceInstancePathParams;
 } & FetcherExtraProps;
 
-export const updateServiceInstance = (variables: UpdateServiceInstanceVariables, signal?: AbortSignal) =>
+export const updateServiceInstance = (
+  variables: UpdateServiceInstanceVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateServiceInstanceError,
@@ -6230,7 +6960,12 @@ export const updateServiceInstance = (variables: UpdateServiceInstanceVariables,
     {},
     {},
     UpdateServiceInstancePathParams
-  >({ url: '/sites/{siteId}/services/{addon}/instances/{instanceId}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/services/{addon}/instances/{instanceId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteServiceInstancePathParams = {
   siteId: string;
@@ -6253,12 +6988,22 @@ export type DeleteServiceInstanceVariables = {
   pathParams: DeleteServiceInstancePathParams;
 } & FetcherExtraProps;
 
-export const deleteServiceInstance = (variables: DeleteServiceInstanceVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteServiceInstanceError, undefined, {}, {}, DeleteServiceInstancePathParams>({
-    url: '/sites/{siteId}/services/{addon}/instances/{instanceId}',
-    method: 'delete',
+export const deleteServiceInstance = (
+  variables: DeleteServiceInstanceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteServiceInstanceError,
+    undefined,
+    {},
+    {},
+    DeleteServiceInstancePathParams
+  >({
+    url: "/sites/{siteId}/services/{addon}/instances/{instanceId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetServicesQueryParams = {
@@ -6302,13 +7047,18 @@ export type GetServicesVariables = {
   queryParams?: GetServicesQueryParams;
 } & FetcherExtraProps;
 
-export const getServices = (variables: GetServicesVariables, signal?: AbortSignal) =>
-  fetch<GetServicesResponse, GetServicesError, undefined, {}, GetServicesQueryParams, {}>({
-    url: '/services/',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getServices = (
+  variables: GetServicesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetServicesResponse,
+    GetServicesError,
+    undefined,
+    {},
+    GetServicesQueryParams,
+    {}
+  >({ url: "/services/", method: "get", ...variables, signal });
 
 export type ShowServicePathParams = {
   addonName: string;
@@ -6351,13 +7101,18 @@ export type ShowServiceVariables = {
   pathParams: ShowServicePathParams;
 } & FetcherExtraProps;
 
-export const showService = (variables: ShowServiceVariables, signal?: AbortSignal) =>
-  fetch<ShowServiceResponse, ShowServiceError, undefined, {}, {}, ShowServicePathParams>({
-    url: '/services/{addonName}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const showService = (
+  variables: ShowServiceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ShowServiceResponse,
+    ShowServiceError,
+    undefined,
+    {},
+    {},
+    ShowServicePathParams
+  >({ url: "/services/{addonName}", method: "get", ...variables, signal });
 
 export type ShowServiceManifestPathParams = {
   addonName: string;
@@ -6378,12 +7133,22 @@ export type ShowServiceManifestVariables = {
   pathParams: ShowServiceManifestPathParams;
 } & FetcherExtraProps;
 
-export const showServiceManifest = (variables: ShowServiceManifestVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, ShowServiceManifestError, undefined, {}, {}, ShowServiceManifestPathParams>({
-    url: '/services/{addonName}/manifest',
-    method: 'get',
+export const showServiceManifest = (
+  variables: ShowServiceManifestVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    Record<string, any>,
+    ShowServiceManifestError,
+    undefined,
+    {},
+    {},
+    ShowServiceManifestPathParams
+  >({
+    url: "/services/{addonName}/manifest",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetCurrentUserError = Fetcher.ErrorWrapper<{
@@ -6424,12 +7189,15 @@ export type GetCurrentUserResponse = {
 
 export type GetCurrentUserVariables = FetcherExtraProps;
 
-export const getCurrentUser = (variables: GetCurrentUserVariables, signal?: AbortSignal) =>
+export const getCurrentUser = (
+  variables: GetCurrentUserVariables,
+  signal?: AbortSignal,
+) =>
   fetch<GetCurrentUserResponse, GetCurrentUserError, undefined, {}, {}, {}>({
-    url: '/user',
-    method: 'get',
+    url: "/user",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateSplitTestPathParams = {
@@ -6473,7 +7241,10 @@ export type CreateSplitTestVariables = {
   pathParams: CreateSplitTestPathParams;
 } & FetcherExtraProps;
 
-export const createSplitTest = (variables: CreateSplitTestVariables, signal?: AbortSignal) =>
+export const createSplitTest = (
+  variables: CreateSplitTestVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSplitTestResponse,
     CreateSplitTestError,
@@ -6481,7 +7252,12 @@ export const createSplitTest = (variables: CreateSplitTestVariables, signal?: Ab
     {},
     {},
     CreateSplitTestPathParams
-  >({ url: '/sites/{siteId}/traffic_splits', method: 'post', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/traffic_splits",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetSplitTestsPathParams = {
   siteId: string;
@@ -6523,12 +7299,22 @@ export type GetSplitTestsVariables = {
   pathParams: GetSplitTestsPathParams;
 } & FetcherExtraProps;
 
-export const getSplitTests = (variables: GetSplitTestsVariables, signal?: AbortSignal) =>
-  fetch<GetSplitTestsResponse, GetSplitTestsError, undefined, {}, {}, GetSplitTestsPathParams>({
-    url: '/sites/{siteId}/traffic_splits',
-    method: 'get',
+export const getSplitTests = (
+  variables: GetSplitTestsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSplitTestsResponse,
+    GetSplitTestsError,
+    undefined,
+    {},
+    {},
+    GetSplitTestsPathParams
+  >({
+    url: "/sites/{siteId}/traffic_splits",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSplitTestPathParams = {
@@ -6573,7 +7359,10 @@ export type UpdateSplitTestVariables = {
   pathParams: UpdateSplitTestPathParams;
 } & FetcherExtraProps;
 
-export const updateSplitTest = (variables: UpdateSplitTestVariables, signal?: AbortSignal) =>
+export const updateSplitTest = (
+  variables: UpdateSplitTestVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UpdateSplitTestResponse,
     UpdateSplitTestError,
@@ -6581,7 +7370,12 @@ export const updateSplitTest = (variables: UpdateSplitTestVariables, signal?: Ab
     {},
     {},
     UpdateSplitTestPathParams
-  >({ url: '/sites/{siteId}/traffic_splits/{splitTestId}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/traffic_splits/{splitTestId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetSplitTestPathParams = {
   siteId: string;
@@ -6624,12 +7418,22 @@ export type GetSplitTestVariables = {
   pathParams: GetSplitTestPathParams;
 } & FetcherExtraProps;
 
-export const getSplitTest = (variables: GetSplitTestVariables, signal?: AbortSignal) =>
-  fetch<GetSplitTestResponse, GetSplitTestError, undefined, {}, {}, GetSplitTestPathParams>({
-    url: '/sites/{siteId}/traffic_splits/{splitTestId}',
-    method: 'get',
+export const getSplitTest = (
+  variables: GetSplitTestVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSplitTestResponse,
+    GetSplitTestError,
+    undefined,
+    {},
+    {},
+    GetSplitTestPathParams
+  >({
+    url: "/sites/{siteId}/traffic_splits/{splitTestId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type EnableSplitTestPathParams = {
@@ -6652,12 +7456,22 @@ export type EnableSplitTestVariables = {
   pathParams: EnableSplitTestPathParams;
 } & FetcherExtraProps;
 
-export const enableSplitTest = (variables: EnableSplitTestVariables, signal?: AbortSignal) =>
-  fetch<undefined, EnableSplitTestError, undefined, {}, {}, EnableSplitTestPathParams>({
-    url: '/sites/{siteId}/traffic_splits/{splitTestId}/publish',
-    method: 'post',
+export const enableSplitTest = (
+  variables: EnableSplitTestVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    EnableSplitTestError,
+    undefined,
+    {},
+    {},
+    EnableSplitTestPathParams
+  >({
+    url: "/sites/{siteId}/traffic_splits/{splitTestId}/publish",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type DisableSplitTestPathParams = {
@@ -6680,12 +7494,22 @@ export type DisableSplitTestVariables = {
   pathParams: DisableSplitTestPathParams;
 } & FetcherExtraProps;
 
-export const disableSplitTest = (variables: DisableSplitTestVariables, signal?: AbortSignal) =>
-  fetch<undefined, DisableSplitTestError, undefined, {}, {}, DisableSplitTestPathParams>({
-    url: '/sites/{siteId}/traffic_splits/{splitTestId}/unpublish',
-    method: 'post',
+export const disableSplitTest = (
+  variables: DisableSplitTestVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DisableSplitTestError,
+    undefined,
+    {},
+    {},
+    DisableSplitTestPathParams
+  >({
+    url: "/sites/{siteId}/traffic_splits/{splitTestId}/unpublish",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateDnsZoneError = Fetcher.ErrorWrapper<{
@@ -6752,13 +7576,18 @@ export type CreateDnsZoneVariables = {
   body?: CreateDnsZoneRequestBody;
 } & FetcherExtraProps;
 
-export const createDnsZone = (variables: CreateDnsZoneVariables, signal?: AbortSignal) =>
-  fetch<CreateDnsZoneResponse, CreateDnsZoneError, CreateDnsZoneRequestBody, {}, {}, {}>({
-    url: '/dns_zones',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createDnsZone = (
+  variables: CreateDnsZoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateDnsZoneResponse,
+    CreateDnsZoneError,
+    CreateDnsZoneRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/dns_zones", method: "post", ...variables, signal });
 
 export type GetDnsZonesQueryParams = {
   account_slug?: string;
@@ -6822,13 +7651,18 @@ export type GetDnsZonesVariables = {
   queryParams?: GetDnsZonesQueryParams;
 } & FetcherExtraProps;
 
-export const getDnsZones = (variables: GetDnsZonesVariables, signal?: AbortSignal) =>
-  fetch<GetDnsZonesResponse, GetDnsZonesError, undefined, {}, GetDnsZonesQueryParams, {}>({
-    url: '/dns_zones',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDnsZones = (
+  variables: GetDnsZonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDnsZonesResponse,
+    GetDnsZonesError,
+    undefined,
+    {},
+    GetDnsZonesQueryParams,
+    {}
+  >({ url: "/dns_zones", method: "get", ...variables, signal });
 
 export type GetDnsZonePathParams = {
   zoneId: string;
@@ -6892,13 +7726,18 @@ export type GetDnsZoneVariables = {
   pathParams: GetDnsZonePathParams;
 } & FetcherExtraProps;
 
-export const getDnsZone = (variables: GetDnsZoneVariables, signal?: AbortSignal) =>
-  fetch<GetDnsZoneResponse, GetDnsZoneError, undefined, {}, {}, GetDnsZonePathParams>({
-    url: '/dns_zones/{zoneId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDnsZone = (
+  variables: GetDnsZoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDnsZoneResponse,
+    GetDnsZoneError,
+    undefined,
+    {},
+    {},
+    GetDnsZonePathParams
+  >({ url: "/dns_zones/{zoneId}", method: "get", ...variables, signal });
 
 export type DeleteDnsZonePathParams = {
   zoneId: string;
@@ -6919,13 +7758,18 @@ export type DeleteDnsZoneVariables = {
   pathParams: DeleteDnsZonePathParams;
 } & FetcherExtraProps;
 
-export const deleteDnsZone = (variables: DeleteDnsZoneVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteDnsZoneError, undefined, {}, {}, DeleteDnsZonePathParams>({
-    url: '/dns_zones/{zoneId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteDnsZone = (
+  variables: DeleteDnsZoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteDnsZoneError,
+    undefined,
+    {},
+    {},
+    DeleteDnsZonePathParams
+  >({ url: "/dns_zones/{zoneId}", method: "delete", ...variables, signal });
 
 export type TransferDnsZonePathParams = {
   zoneId: string;
@@ -7005,7 +7849,10 @@ export type TransferDnsZoneVariables = {
   queryParams: TransferDnsZoneQueryParams;
 } & FetcherExtraProps;
 
-export const transferDnsZone = (variables: TransferDnsZoneVariables, signal?: AbortSignal) =>
+export const transferDnsZone = (
+  variables: TransferDnsZoneVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     TransferDnsZoneResponse,
     TransferDnsZoneError,
@@ -7013,7 +7860,12 @@ export const transferDnsZone = (variables: TransferDnsZoneVariables, signal?: Ab
     {},
     TransferDnsZoneQueryParams,
     TransferDnsZonePathParams
-  >({ url: '/dns_zones/{zoneId}/transfer', method: 'put', ...variables, signal });
+  >({
+    url: "/dns_zones/{zoneId}/transfer",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetDnsRecordsPathParams = {
   zoneId: string;
@@ -7054,12 +7906,22 @@ export type GetDnsRecordsVariables = {
   pathParams: GetDnsRecordsPathParams;
 } & FetcherExtraProps;
 
-export const getDnsRecords = (variables: GetDnsRecordsVariables, signal?: AbortSignal) =>
-  fetch<GetDnsRecordsResponse, GetDnsRecordsError, undefined, {}, {}, GetDnsRecordsPathParams>({
-    url: '/dns_zones/{zoneId}/dns_records',
-    method: 'get',
+export const getDnsRecords = (
+  variables: GetDnsRecordsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDnsRecordsResponse,
+    GetDnsRecordsError,
+    undefined,
+    {},
+    {},
+    GetDnsRecordsPathParams
+  >({
+    url: "/dns_zones/{zoneId}/dns_records",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateDnsRecordPathParams = {
@@ -7129,12 +7991,22 @@ export type CreateDnsRecordVariables = {
   pathParams: CreateDnsRecordPathParams;
 } & FetcherExtraProps;
 
-export const createDnsRecord = (variables: CreateDnsRecordVariables, signal?: AbortSignal) =>
-  fetch<CreateDnsRecordResponse, CreateDnsRecordError, CreateDnsRecordRequestBody, {}, {}, CreateDnsRecordPathParams>({
-    url: '/dns_zones/{zoneId}/dns_records',
-    method: 'post',
+export const createDnsRecord = (
+  variables: CreateDnsRecordVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateDnsRecordResponse,
+    CreateDnsRecordError,
+    CreateDnsRecordRequestBody,
+    {},
+    {},
+    CreateDnsRecordPathParams
+  >({
+    url: "/dns_zones/{zoneId}/dns_records",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetIndividualDnsRecordPathParams = {
@@ -7177,7 +8049,10 @@ export type GetIndividualDnsRecordVariables = {
   pathParams: GetIndividualDnsRecordPathParams;
 } & FetcherExtraProps;
 
-export const getIndividualDnsRecord = (variables: GetIndividualDnsRecordVariables, signal?: AbortSignal) =>
+export const getIndividualDnsRecord = (
+  variables: GetIndividualDnsRecordVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetIndividualDnsRecordResponse,
     GetIndividualDnsRecordError,
@@ -7185,7 +8060,12 @@ export const getIndividualDnsRecord = (variables: GetIndividualDnsRecordVariable
     {},
     {},
     GetIndividualDnsRecordPathParams
-  >({ url: '/dns_zones/{zoneId}/dns_records/{dnsRecordId}', method: 'get', ...variables, signal });
+  >({
+    url: "/dns_zones/{zoneId}/dns_records/{dnsRecordId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteDnsRecordPathParams = {
   zoneId: string;
@@ -7207,12 +8087,22 @@ export type DeleteDnsRecordVariables = {
   pathParams: DeleteDnsRecordPathParams;
 } & FetcherExtraProps;
 
-export const deleteDnsRecord = (variables: DeleteDnsRecordVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteDnsRecordError, undefined, {}, {}, DeleteDnsRecordPathParams>({
-    url: '/dns_zones/{zoneId}/dns_records/{dnsRecordId}',
-    method: 'delete',
+export const deleteDnsRecord = (
+  variables: DeleteDnsRecordVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteDnsRecordError,
+    undefined,
+    {},
+    {},
+    DeleteDnsRecordPathParams
+  >({
+    url: "/dns_zones/{zoneId}/dns_records/{dnsRecordId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteDevServersPathParams = {
@@ -7279,7 +8169,10 @@ export type ListSiteDevServersVariables = {
   queryParams?: ListSiteDevServersQueryParams;
 } & FetcherExtraProps;
 
-export const listSiteDevServers = (variables: ListSiteDevServersVariables, signal?: AbortSignal) =>
+export const listSiteDevServers = (
+  variables: ListSiteDevServersVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteDevServersResponse,
     ListSiteDevServersError,
@@ -7287,7 +8180,12 @@ export const listSiteDevServers = (variables: ListSiteDevServersVariables, signa
     {},
     ListSiteDevServersQueryParams,
     ListSiteDevServersPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_servers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type CreateSiteDevServerPathParams = {
   siteId: string;
@@ -7346,7 +8244,10 @@ export type CreateSiteDevServerVariables = {
   queryParams?: CreateSiteDevServerQueryParams;
 } & FetcherExtraProps;
 
-export const createSiteDevServer = (variables: CreateSiteDevServerVariables, signal?: AbortSignal) =>
+export const createSiteDevServer = (
+  variables: CreateSiteDevServerVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteDevServerResponse,
     CreateSiteDevServerError,
@@ -7354,7 +8255,12 @@ export const createSiteDevServer = (variables: CreateSiteDevServerVariables, sig
     {},
     CreateSiteDevServerQueryParams,
     CreateSiteDevServerPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'post', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_servers",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteDevServersPathParams = {
   siteId: string;
@@ -7380,7 +8286,10 @@ export type DeleteSiteDevServersVariables = {
   queryParams?: DeleteSiteDevServersQueryParams;
 } & FetcherExtraProps;
 
-export const deleteSiteDevServers = (variables: DeleteSiteDevServersVariables, signal?: AbortSignal) =>
+export const deleteSiteDevServers = (
+  variables: DeleteSiteDevServersVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteSiteDevServersError,
@@ -7388,7 +8297,12 @@ export const deleteSiteDevServers = (variables: DeleteSiteDevServersVariables, s
     {},
     DeleteSiteDevServersQueryParams,
     DeleteSiteDevServersPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'delete', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_servers",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetSiteDevServerPathParams = {
   siteId: string;
@@ -7434,12 +8348,22 @@ export type GetSiteDevServerVariables = {
   pathParams: GetSiteDevServerPathParams;
 } & FetcherExtraProps;
 
-export const getSiteDevServer = (variables: GetSiteDevServerVariables, signal?: AbortSignal) =>
-  fetch<GetSiteDevServerResponse, GetSiteDevServerError, undefined, {}, {}, GetSiteDevServerPathParams>({
-    url: '/sites/{siteId}/dev_servers/{devServerId}',
-    method: 'get',
+export const getSiteDevServer = (
+  variables: GetSiteDevServerVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteDevServerResponse,
+    GetSiteDevServerError,
+    undefined,
+    {},
+    {},
+    GetSiteDevServerPathParams
+  >({
+    url: "/sites/{siteId}/dev_servers/{devServerId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MarkDevServerActivityPathParams = {
@@ -7453,12 +8377,22 @@ export type MarkDevServerActivityVariables = {
   pathParams: MarkDevServerActivityPathParams;
 } & FetcherExtraProps;
 
-export const markDevServerActivity = (variables: MarkDevServerActivityVariables, signal?: AbortSignal) =>
-  fetch<undefined, MarkDevServerActivityError, undefined, {}, {}, MarkDevServerActivityPathParams>({
-    url: '/sites/{siteId}/dev_servers/{devServerId}/activity',
-    method: 'post',
+export const markDevServerActivity = (
+  variables: MarkDevServerActivityVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MarkDevServerActivityError,
+    undefined,
+    {},
+    {},
+    MarkDevServerActivityPathParams
+  >({
+    url: "/sites/{siteId}/dev_servers/{devServerId}/activity",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSiteDevServerHooksPathParams = {
@@ -7486,14 +8420,17 @@ export type ListSiteDevServerHooksResponse = {
    * @format dateTime
    */
   created_at?: string;
-  type?: 'new_dev_server' | 'content_refresh';
+  type?: "new_dev_server" | "content_refresh";
 }[];
 
 export type ListSiteDevServerHooksVariables = {
   pathParams: ListSiteDevServerHooksPathParams;
 } & FetcherExtraProps;
 
-export const listSiteDevServerHooks = (variables: ListSiteDevServerHooksVariables, signal?: AbortSignal) =>
+export const listSiteDevServerHooks = (
+  variables: ListSiteDevServerHooksVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListSiteDevServerHooksResponse,
     ListSiteDevServerHooksError,
@@ -7501,7 +8438,12 @@ export const listSiteDevServerHooks = (variables: ListSiteDevServerHooksVariable
     {},
     {},
     ListSiteDevServerHooksPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks', method: 'get', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_server_hooks",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type CreateSiteDevServerHookPathParams = {
   siteId: string;
@@ -7528,7 +8470,7 @@ export type CreateSiteDevServerHookResponse = {
    * @format dateTime
    */
   created_at?: string;
-  type?: 'new_dev_server' | 'content_refresh';
+  type?: "new_dev_server" | "content_refresh";
 };
 
 export type CreateSiteDevServerHookVariables = {
@@ -7536,7 +8478,10 @@ export type CreateSiteDevServerHookVariables = {
   pathParams: CreateSiteDevServerHookPathParams;
 } & FetcherExtraProps;
 
-export const createSiteDevServerHook = (variables: CreateSiteDevServerHookVariables, signal?: AbortSignal) =>
+export const createSiteDevServerHook = (
+  variables: CreateSiteDevServerHookVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateSiteDevServerHookResponse,
     CreateSiteDevServerHookError,
@@ -7544,7 +8489,12 @@ export const createSiteDevServerHook = (variables: CreateSiteDevServerHookVariab
     {},
     {},
     CreateSiteDevServerHookPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks', method: 'post', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_server_hooks",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetSiteDevServerHookPathParams = {
   siteId: string;
@@ -7572,19 +8522,29 @@ export type GetSiteDevServerHookResponse = {
    * @format dateTime
    */
   created_at?: string;
-  type?: 'new_dev_server' | 'content_refresh';
+  type?: "new_dev_server" | "content_refresh";
 };
 
 export type GetSiteDevServerHookVariables = {
   pathParams: GetSiteDevServerHookPathParams;
 } & FetcherExtraProps;
 
-export const getSiteDevServerHook = (variables: GetSiteDevServerHookVariables, signal?: AbortSignal) =>
-  fetch<GetSiteDevServerHookResponse, GetSiteDevServerHookError, undefined, {}, {}, GetSiteDevServerHookPathParams>({
-    url: '/sites/{siteId}/dev_server_hooks/{id}',
-    method: 'get',
+export const getSiteDevServerHook = (
+  variables: GetSiteDevServerHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetSiteDevServerHookResponse,
+    GetSiteDevServerHookError,
+    undefined,
+    {},
+    {},
+    GetSiteDevServerHookPathParams
+  >({
+    url: "/sites/{siteId}/dev_server_hooks/{id}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSiteDevServerHookPathParams = {
@@ -7608,7 +8568,10 @@ export type UpdateSiteDevServerHookVariables = {
   pathParams: UpdateSiteDevServerHookPathParams;
 } & FetcherExtraProps;
 
-export const updateSiteDevServerHook = (variables: UpdateSiteDevServerHookVariables, signal?: AbortSignal) =>
+export const updateSiteDevServerHook = (
+  variables: UpdateSiteDevServerHookVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateSiteDevServerHookError,
@@ -7616,7 +8579,12 @@ export const updateSiteDevServerHook = (variables: UpdateSiteDevServerHookVariab
     {},
     {},
     UpdateSiteDevServerHookPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks/{id}', method: 'put', ...variables, signal });
+  >({
+    url: "/sites/{siteId}/dev_server_hooks/{id}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteSiteDevServerHookPathParams = {
   siteId: string;
@@ -7638,12 +8606,22 @@ export type DeleteSiteDevServerHookVariables = {
   pathParams: DeleteSiteDevServerHookPathParams;
 } & FetcherExtraProps;
 
-export const deleteSiteDevServerHook = (variables: DeleteSiteDevServerHookVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSiteDevServerHookError, undefined, {}, {}, DeleteSiteDevServerHookPathParams>({
-    url: '/sites/{siteId}/dev_server_hooks/{id}',
-    method: 'delete',
+export const deleteSiteDevServerHook = (
+  variables: DeleteSiteDevServerHookVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSiteDevServerHookError,
+    undefined,
+    {},
+    {},
+    DeleteSiteDevServerHookPathParams
+  >({
+    url: "/sites/{siteId}/dev_server_hooks/{id}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export const operationsByTag = {
@@ -7655,9 +8633,13 @@ export const operationsByTag = {
     deleteSite,
     unlinkSiteRepo,
     createSiteInTeam,
-    listSitesForAccount
+    listSitesForAccount,
   },
-  sniCertificate: { provisionSiteTLSCertificate, showSiteTLSCertificate, getAllCertificates },
+  sniCertificate: {
+    provisionSiteTLSCertificate,
+    showSiteTLSCertificate,
+    getAllCertificates,
+  },
   environmentVariables: {
     getEnvVars,
     createEnvVars,
@@ -7666,18 +8648,41 @@ export const operationsByTag = {
     updateEnvVar,
     setEnvVarValue,
     deleteEnvVar,
-    deleteEnvVarValue
+    deleteEnvVarValue,
   },
   function: { searchSiteFunctions, uploadDeployFunction },
   form: { listSiteForms, deleteSiteForm },
-  submission: { listSiteSubmissions, listFormSubmissions, listFormSubmission, deleteSubmission },
+  submission: {
+    listSiteSubmissions,
+    listFormSubmissions,
+    listFormSubmission,
+    deleteSubmission,
+  },
   file: { listSiteFiles, getSiteFileByPathName, uploadDeployFile },
-  asset: { listSiteAssets, createSiteAsset, getSiteAssetInfo, updateSiteAsset, deleteSiteAsset },
+  asset: {
+    listSiteAssets,
+    createSiteAsset,
+    getSiteAssetInfo,
+    updateSiteAsset,
+    deleteSiteAsset,
+  },
   assetPublicSignature: { getSiteAssetPublicSignature },
   purge: { purgeCache },
-  snippet: { listSiteSnippets, createSiteSnippet, getSiteSnippet, updateSiteSnippet, deleteSiteSnippet },
+  snippet: {
+    listSiteSnippets,
+    createSiteSnippet,
+    getSiteSnippet,
+    updateSiteSnippet,
+    deleteSiteSnippet,
+  },
   metadata: { getSiteMetadata, updateSiteMetadata },
-  buildHook: { listSiteBuildHooks, createSiteBuildHook, getSiteBuildHook, updateSiteBuildHook, deleteSiteBuildHook },
+  buildHook: {
+    listSiteBuildHooks,
+    createSiteBuildHook,
+    getSiteBuildHook,
+    updateSiteBuildHook,
+    deleteSiteBuildHook,
+  },
   deploy: {
     listSiteDeploys,
     createSiteDeploy,
@@ -7691,9 +8696,15 @@ export const operationsByTag = {
     deleteDeploy,
     updateDeployValidations,
     lockDeploy,
-    unlockDeploy
+    unlockDeploy,
   },
-  build: { listSiteBuilds, createSiteBuild, getSiteBuild, notifyBuildStart, getAccountBuildStatus },
+  build: {
+    listSiteBuilds,
+    createSiteBuild,
+    getSiteBuild,
+    notifyBuildStart,
+    getAccountBuildStatus,
+  },
   deployedBranch: { listSiteDeployedBranches },
   buildLogMsg: { updateSiteBuildLog },
   dnsZone: {
@@ -7707,35 +8718,67 @@ export const operationsByTag = {
     getDnsRecords,
     createDnsRecord,
     getIndividualDnsRecord,
-    deleteDnsRecord
+    deleteDnsRecord,
   },
   xInternal: { updatePlugin, getLatestPluginRuns, createPluginRun },
-  hook: { listHooksBySiteId, createHookBySiteId, getHook, updateHook, deleteHook, enableHook },
+  hook: {
+    listHooksBySiteId,
+    createHookBySiteId,
+    getHook,
+    updateHook,
+    deleteHook,
+    enableHook,
+  },
   hookType: { listHookTypes },
   ticket: { createTicket, showTicket },
   accessToken: { exchangeTicket },
   deployKey: { listDeployKeys, createDeployKey, getDeployKey, deleteDeployKey },
-  member: { listMembersForAccount, addMemberToAccount, getAccountMember, updateAccountMember, removeAccountMember },
+  member: {
+    listMembersForAccount,
+    addMemberToAccount,
+    getAccountMember,
+    updateAccountMember,
+    removeAccountMember,
+  },
   paymentMethod: { listPaymentMethodsForUser },
   accountType: { listAccountTypesForUser },
-  accountMembership: { listAccountsForUser, createAccount, getAccount, updateAccount, cancelAccount },
+  accountMembership: {
+    listAccountsForUser,
+    createAccount,
+    getAccount,
+    updateAccount,
+    cancelAccount,
+  },
   auditLog: { listAccountAuditEvents },
   serviceInstance: {
     listServiceInstancesForSite,
     createServiceInstance,
     showServiceInstance,
     updateServiceInstance,
-    deleteServiceInstance
+    deleteServiceInstance,
   },
   service: { getServices, showService, showServiceManifest },
   user: { getCurrentUser },
-  splitTest: { createSplitTest, getSplitTests, updateSplitTest, getSplitTest, enableSplitTest, disableSplitTest },
-  devServer: { listSiteDevServers, createSiteDevServer, deleteSiteDevServers, getSiteDevServer, markDevServerActivity },
+  splitTest: {
+    createSplitTest,
+    getSplitTests,
+    updateSplitTest,
+    getSplitTest,
+    enableSplitTest,
+    disableSplitTest,
+  },
+  devServer: {
+    listSiteDevServers,
+    createSiteDevServer,
+    deleteSiteDevServers,
+    getSiteDevServer,
+    markDevServerActivity,
+  },
   devServerHook: {
     listSiteDevServerHooks,
     createSiteDevServerHook,
     getSiteDevServerHook,
     updateSiteDevServerHook,
-    deleteSiteDevServerHook
-  }
+    deleteSiteDevServerHook,
+  },
 };

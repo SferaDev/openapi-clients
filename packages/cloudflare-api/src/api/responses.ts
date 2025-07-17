@@ -3,43 +3,51 @@
  *
  * @version 4.0.0
  */
-import type * as Schemas from './schemas';
+import type * as Schemas from "./schemas";
 
 export type ApiShieldGenericFailure = Schemas.ApiShieldApiResponseCommonFailure;
 
-export type ApiShieldGlobalSettingsEditSuccess = Schemas.ApiShieldApiResponseSingle & {
-  result: Schemas.ApiShieldGlobalSettings;
-};
-
-export type ApiShieldGlobalSettingsGetSuccess = Schemas.ApiShieldApiResponseSingle & {
-  result: Schemas.ApiShieldGlobalSettings;
-};
-
-export type ApiShieldGlobalSettingsUpdateSuccess = Schemas.ApiShieldApiResponseSingle & {
-  result: Schemas.ApiShieldGlobalSettings;
-};
-
-export type ApiShieldPerOperationSettingGetSuccess = Schemas.ApiShieldApiResponseCommon & {
-  result: Schemas.ApiShieldPerOperationSetting;
-};
-
-export type ApiShieldPerOperationSettingUpdateSuccess = Schemas.ApiShieldApiResponseCommon & {
-  result: Schemas.ApiShieldPerOperationSetting;
-};
-
-export type ApiShieldPerOperationSettingsBulkEditSuccess = Schemas.ApiShieldApiResponseCommon & {
-  result: Schemas.ApiShieldPerOperationBulkSettings;
-};
-
-export type ApiShieldPerOperationSettingsDeleteSuccess = Schemas.ApiShieldApiResponseCommon & {
-  result: {
-    operation_id?: Schemas.ApiShieldSchemasUuid;
+export type ApiShieldGlobalSettingsEditSuccess =
+  Schemas.ApiShieldApiResponseSingle & {
+    result: Schemas.ApiShieldGlobalSettings;
   };
-};
 
-export type ApiShieldPerOperationSettingsListSuccess = Schemas.ApiShieldApiResponseCollection & {
-  result: Schemas.ApiShieldPerOperationSetting[];
-};
+export type ApiShieldGlobalSettingsGetSuccess =
+  Schemas.ApiShieldApiResponseSingle & {
+    result: Schemas.ApiShieldGlobalSettings;
+  };
+
+export type ApiShieldGlobalSettingsUpdateSuccess =
+  Schemas.ApiShieldApiResponseSingle & {
+    result: Schemas.ApiShieldGlobalSettings;
+  };
+
+export type ApiShieldPerOperationSettingGetSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: Schemas.ApiShieldPerOperationSetting;
+  };
+
+export type ApiShieldPerOperationSettingUpdateSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: Schemas.ApiShieldPerOperationSetting;
+  };
+
+export type ApiShieldPerOperationSettingsBulkEditSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: Schemas.ApiShieldPerOperationBulkSettings;
+  };
+
+export type ApiShieldPerOperationSettingsDeleteSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: {
+      operation_id?: Schemas.ApiShieldSchemasUuid;
+    };
+  };
+
+export type ApiShieldPerOperationSettingsListSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldPerOperationSetting[];
+  };
 
 export type ApiShieldSchemaCreateFailure = {
   /**
@@ -62,48 +70,56 @@ export type ApiShieldSchemaCreateFailure = {
   success?: false;
 };
 
-export type ApiShieldSchemaCreateSuccess = Schemas.ApiShieldPublicSchemaSuccessResult & {
-  /**
-   * Describes errors in the schema that prohibited accepting the schema.
-   */
-  errors?: Schemas.ApiShieldSchemaIssueNotification[];
-  /**
-   * Describes issues in the schema and how they were resolved to accept the schema.
-   */
-  messages: Schemas.ApiShieldSchemaIssueNotification[];
-};
-
-export type ApiShieldSchemaDeleteSuccess = Schemas.ApiShieldApiResponseSingle & {
-  result: {
+export type ApiShieldSchemaCreateSuccess =
+  Schemas.ApiShieldPublicSchemaSuccessResult & {
     /**
-     * The ID of the schema that was just deleted
-     *
-     * @format uuid
-     * @x-auditable true
+     * Describes errors in the schema that prohibited accepting the schema.
      */
-    schema_id: string;
+    errors?: Schemas.ApiShieldSchemaIssueNotification[];
+    /**
+     * Describes issues in the schema and how they were resolved to accept the schema.
+     */
+    messages: Schemas.ApiShieldSchemaIssueNotification[];
   };
-};
 
-export type ApiShieldSchemaEditSuccess = Schemas.ApiShieldPublicSchemaSuccessResult;
+export type ApiShieldSchemaDeleteSuccess =
+  Schemas.ApiShieldApiResponseSingle & {
+    result: {
+      /**
+       * The ID of the schema that was just deleted
+       *
+       * @format uuid
+       * @x-auditable true
+       */
+      schema_id: string;
+    };
+  };
 
-export type ApiShieldSchemaGetSuccess = Schemas.ApiShieldPublicSchemaSuccessResult;
+export type ApiShieldSchemaEditSuccess =
+  Schemas.ApiShieldPublicSchemaSuccessResult;
 
-export type ApiShieldSchemaHostsGetSuccess = Schemas.ApiShieldApiResponseCollection & {
-  result: Schemas.ApiShieldSchemaHosts[];
-};
+export type ApiShieldSchemaGetSuccess =
+  Schemas.ApiShieldPublicSchemaSuccessResult;
 
-export type ApiShieldSchemasExtractOperationsGetSuccess = Schemas.ApiShieldApiResponseCollection & {
-  result: (Schemas.ApiShieldOperation | Schemas.ApiShieldBasicOperation)[];
-};
+export type ApiShieldSchemaHostsGetSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldSchemaHosts[];
+  };
 
-export type ApiShieldSchemasListSuccess = Schemas.ApiShieldApiResponseCollection & {
-  result: Schemas.ApiShieldSchemasPublicSchema[];
-};
+export type ApiShieldSchemasExtractOperationsGetSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: (Schemas.ApiShieldOperation | Schemas.ApiShieldBasicOperation)[];
+  };
+
+export type ApiShieldSchemasListSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldSchemasPublicSchema[];
+  };
 
 export type BrandProtectionApiDEFAULTERROR = Schemas.BrandProtectionApiError;
 
-export type BrandProtectionApiUNPROCESSABLECONTENT = Schemas.BrandProtectionApiError;
+export type BrandProtectionApiUNPROCESSABLECONTENT =
+  Schemas.BrandProtectionApiError;
 
 export type EmailSecurityClientError = {
   /**
@@ -211,6 +227,7 @@ export type RulesetsUrlNormalization = {
 /**
  * @example {"errors":[],"messages":[],"result":{"created_on":"2022-05-05T05:15:11.602148Z","etag":"777f24a43bef5f69174aa69ceaf1dea67968d510a31d1vw3e49d34a0187c06d1","handlers":["fetch"],"id":"this-is_my_script-01","logpush":false,"modified_on":"2022-05-20T19:02:56.446492Z","placement_mode":"smart","startup_time_ms":10,"tail_consumers":[{"environment":"production","service":"my-log-consumer"}],"usage_model":"standard"},"success":true}
  */
-export type Workers200 = Schemas.WorkersScriptResponseUploadSingle & Record<string, any>;
+export type Workers200 = Schemas.WorkersScriptResponseUploadSingle &
+  Record<string, any>;
 
 export type Workers4XX = Schemas.WorkersApiResponseCommonFailure;

@@ -1,7 +1,7 @@
 export interface PackageInfo {
-  name: string
-  version: string
-  description: string
+  name: string;
+  version: string;
+  description: string;
 }
 
 const packages = [
@@ -14,44 +14,42 @@ const packages = [
   'nuki-api-js',
   'litellm-api',
   'v0-api'
-]
+];
 
 async function fetchPackageVersion(packageName: string): Promise<PackageInfo> {
   try {
     const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`, {
       next: { revalidate: 3600 } // Cache for 1 hour
-    })
-    
+    });
+
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
+      throw new Error(`HTTP ${response.status}`);
     }
-    
-    const packageInfo = await response.json()
-    
+
+    const packageInfo = await response.json();
+
     return {
       name: packageName,
       version: packageInfo.version || 'unknown',
       description: packageInfo.description || 'Package not found on npm'
-    }
+    };
   } catch (error) {
-    console.warn(`Warning: Could not fetch ${packageName}:`, error)
+    console.warn(`Warning: Could not fetch ${packageName}:`, error);
     return {
       name: packageName,
       version: 'unknown',
       description: 'Package not found on npm'
-    }
+    };
   }
 }
 
 export async function fetchAllPackageVersions(): Promise<Record<string, PackageInfo>> {
-  const packageInfos = await Promise.all(
-    packages.map(pkg => fetchPackageVersion(pkg))
-  )
-  
-  const versionMap: Record<string, PackageInfo> = {}
-  packageInfos.forEach(info => {
-    versionMap[info.name] = info
-  })
-  
-  return versionMap
+  const packageInfos = await Promise.all(packages.map((pkg) => fetchPackageVersion(pkg)));
+
+  const versionMap: Record<string, PackageInfo> = {};
+  packageInfos.forEach((info) => {
+    versionMap[info.name] = info;
+  });
+
+  return versionMap;
 }

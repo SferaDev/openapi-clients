@@ -1,4 +1,4 @@
-import { FetchImpl } from '../utils/fetch';
+import type { FetchImpl } from '../utils/fetch';
 
 export type FetcherExtraProps = {
   baseUrl: string;

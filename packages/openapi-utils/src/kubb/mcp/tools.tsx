@@ -1,4 +1,4 @@
-import { PluginMcp } from '@kubb/plugin-mcp';
+import type { PluginMcp } from '@kubb/plugin-mcp';
 import { createReactGenerator } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter } from '@kubb/plugin-oas/utils';

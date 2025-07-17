@@ -1,7 +1,7 @@
-import { exec } from 'child_process';
+import { exec } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 import { OpenAI } from 'openai';
-import fs from 'fs';
-import path from 'path';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

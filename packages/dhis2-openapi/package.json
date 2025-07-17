@@ -28,7 +28,7 @@
     "tsc": "tsc --noEmit",
     "build": "unbuild",
     "prepack": "unbuild",
-    "generate": "openapi-codegen v40 && openapi-codegen v41"
+    "generate:disabled": "openapi-codegen v40 && openapi-codegen v41"
   },
   "repository": {
     "type": "git",

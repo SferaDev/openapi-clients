@@ -3,9 +3,9 @@
  *
  * @version 1.0
  */
-import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
-import type * as Schemas from './schemas';
+import type * as Fetcher from "./fetcher";
+import { fetch, FetcherExtraProps } from "./fetcher";
+import type * as Schemas from "./schemas";
 
 export type GetAdminRealmsQueryParams = {
   /**
@@ -22,13 +22,18 @@ export type GetAdminRealmsVariables = {
   queryParams?: GetAdminRealmsQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealms = (variables: GetAdminRealmsVariables, signal?: AbortSignal) =>
-  fetch<GetAdminRealmsResponse, GetAdminRealmsError, undefined, {}, GetAdminRealmsQueryParams, {}>({
-    url: '/admin/realms',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealms = (
+  variables: GetAdminRealmsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetAdminRealmsResponse,
+    GetAdminRealmsError,
+    undefined,
+    {},
+    GetAdminRealmsQueryParams,
+    {}
+  >({ url: "/admin/realms", method: "get", ...variables, signal });
 
 export type PostAdminRealmsError = Fetcher.ErrorWrapper<undefined>;
 
@@ -39,12 +44,15 @@ export type PostAdminRealmsVariables = {
 /**
  * Realm name must be unique.
  */
-export const postAdminRealms = (variables: PostAdminRealmsVariables, signal?: AbortSignal) =>
+export const postAdminRealms = (
+  variables: PostAdminRealmsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, PostAdminRealmsError, Blob, {}, {}, {}>({
-    url: '/admin/realms',
-    method: 'post',
+    url: "/admin/realms",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmPathParams = {
@@ -60,13 +68,18 @@ export type GetAdminRealmsRealmVariables = {
   pathParams: GetAdminRealmsRealmPathParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealm = (variables: GetAdminRealmsRealmVariables, signal?: AbortSignal) =>
-  fetch<Schemas.RealmRepresentation, GetAdminRealmsRealmError, undefined, {}, {}, GetAdminRealmsRealmPathParams>({
-    url: '/admin/realms/{realm}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealm = (
+  variables: GetAdminRealmsRealmVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    Schemas.RealmRepresentation,
+    GetAdminRealmsRealmError,
+    undefined,
+    {},
+    {},
+    GetAdminRealmsRealmPathParams
+  >({ url: "/admin/realms/{realm}", method: "get", ...variables, signal });
 
 export type PutAdminRealmsRealmPathParams = {
   /**
@@ -85,13 +98,18 @@ export type PutAdminRealmsRealmVariables = {
 /**
  * This will only update top-level attributes of the realm.
  */
-export const putAdminRealmsRealm = (variables: PutAdminRealmsRealmVariables, signal?: AbortSignal) =>
-  fetch<undefined, PutAdminRealmsRealmError, Schemas.RealmRepresentation, {}, {}, PutAdminRealmsRealmPathParams>({
-    url: '/admin/realms/{realm}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealm = (
+  variables: PutAdminRealmsRealmVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    PutAdminRealmsRealmError,
+    Schemas.RealmRepresentation,
+    {},
+    {},
+    PutAdminRealmsRealmPathParams
+  >({ url: "/admin/realms/{realm}", method: "put", ...variables, signal });
 
 export type DeleteAdminRealmsRealmPathParams = {
   /**
@@ -106,13 +124,18 @@ export type DeleteAdminRealmsRealmVariables = {
   pathParams: DeleteAdminRealmsRealmPathParams;
 } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealm = (variables: DeleteAdminRealmsRealmVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteAdminRealmsRealmError, undefined, {}, {}, DeleteAdminRealmsRealmPathParams>({
-    url: '/admin/realms/{realm}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealm = (
+  variables: DeleteAdminRealmsRealmVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteAdminRealmsRealmError,
+    undefined,
+    {},
+    {},
+    DeleteAdminRealmsRealmPathParams
+  >({ url: "/admin/realms/{realm}", method: "delete", ...variables, signal });
 
 export type GetAdminRealmsRealmAdminEventsPathParams = {
   /**
@@ -156,9 +179,11 @@ export type GetAdminRealmsRealmAdminEventsQueryParams = {
   resourceTypes?: string[];
 };
 
-export type GetAdminRealmsRealmAdminEventsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAdminEventsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAdminEventsResponse = Schemas.AdminEventRepresentation[];
+export type GetAdminRealmsRealmAdminEventsResponse =
+  Schemas.AdminEventRepresentation[];
 
 export type GetAdminRealmsRealmAdminEventsVariables = {
   pathParams: GetAdminRealmsRealmAdminEventsPathParams;
@@ -167,7 +192,7 @@ export type GetAdminRealmsRealmAdminEventsVariables = {
 
 export const getAdminRealmsRealmAdminEvents = (
   variables: GetAdminRealmsRealmAdminEventsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAdminEventsResponse,
@@ -176,7 +201,12 @@ export const getAdminRealmsRealmAdminEvents = (
     {},
     GetAdminRealmsRealmAdminEventsQueryParams,
     GetAdminRealmsRealmAdminEventsPathParams
-  >({ url: '/admin/realms/{realm}/admin-events', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/admin-events",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmAdminEventsPathParams = {
   /**
@@ -185,7 +215,8 @@ export type DeleteAdminRealmsRealmAdminEventsPathParams = {
   realm: string;
 };
 
-export type DeleteAdminRealmsRealmAdminEventsError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAdminEventsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmAdminEventsVariables = {
   pathParams: DeleteAdminRealmsRealmAdminEventsPathParams;
@@ -193,7 +224,7 @@ export type DeleteAdminRealmsRealmAdminEventsVariables = {
 
 export const deleteAdminRealmsRealmAdminEvents = (
   variables: DeleteAdminRealmsRealmAdminEventsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -202,7 +233,12 @@ export const deleteAdminRealmsRealmAdminEvents = (
     {},
     {},
     DeleteAdminRealmsRealmAdminEventsPathParams
-  >({ url: '/admin/realms/{realm}/admin-events', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/admin-events",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams = {
   /**
@@ -211,7 +247,8 @@ export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams = {
   realm: string;
 };
 
-export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersVariables = {
   pathParams: DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams;
@@ -219,7 +256,7 @@ export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersVariables = {
 
 export const deleteAdminRealmsRealmAttackDetectionBruteForceUsers = (
   variables: DeleteAdminRealmsRealmAttackDetectionBruteForceUsersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -228,17 +265,24 @@ export const deleteAdminRealmsRealmAttackDetectionBruteForceUsers = (
     {},
     {},
     DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams
-  >({ url: '/admin/realms/{realm}/attack-detection/brute-force/users', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/attack-detection/brute-force/users",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-};
+export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+  };
 
-export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdResponse = {
   [key: string]: any;
@@ -250,7 +294,7 @@ export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdVariables = {
 
 export const getAdminRealmsRealmAttackDetectionBruteForceUsersUserId = (
   variables: GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdResponse,
@@ -259,25 +303,33 @@ export const getAdminRealmsRealmAttackDetectionBruteForceUsersUserId = (
     {},
     {},
     GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/attack-detection/brute-force/users/{userId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-};
+export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+  };
 
-export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdVariables = {
-  pathParams: DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmAttackDetectionBruteForceUsersUserId = (
   variables: DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -287,20 +339,22 @@ export const deleteAdminRealmsRealmAttackDetectionBruteForceUsersUserId = (
     {},
     DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams
   >({
-    url: '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/attack-detection/brute-force/users/{userId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-};
+export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersResponse = {
   [key: string]: any;
@@ -312,7 +366,7 @@ export type GetAdminRealmsRealmAuthenticationAuthenticatorProvidersVariables = {
 
 export const getAdminRealmsRealmAuthenticationAuthenticatorProviders = (
   variables: GetAdminRealmsRealmAuthenticationAuthenticatorProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationAuthenticatorProvidersResponse,
@@ -321,28 +375,37 @@ export const getAdminRealmsRealmAuthenticationAuthenticatorProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationAuthenticatorProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/authenticator-providers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/authenticator-providers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-};
+export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersResponse = {
-  [key: string]: any;
-}[];
+export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersResponse =
+  {
+    [key: string]: any;
+  }[];
 
-export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationClientAuthenticatorProviders = (
   variables: GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersResponse,
@@ -352,10 +415,10 @@ export const getAdminRealmsRealmAuthenticationClientAuthenticatorProviders = (
     {},
     GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/client-authenticator-providers',
-    method: 'get',
+    url: "/admin/realms/{realm}/authentication/client-authenticator-providers",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type PostAdminRealmsRealmAuthenticationConfigPathParams = {
@@ -365,7 +428,8 @@ export type PostAdminRealmsRealmAuthenticationConfigPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmAuthenticationConfigError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmAuthenticationConfigVariables = {
   body?: Schemas.AuthenticatorConfigRepresentation;
@@ -374,7 +438,7 @@ export type PostAdminRealmsRealmAuthenticationConfigVariables = {
 
 export const postAdminRealmsRealmAuthenticationConfig = (
   variables: PostAdminRealmsRealmAuthenticationConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -383,25 +447,33 @@ export const postAdminRealmsRealmAuthenticationConfig = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationConfigPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/config",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  providerId: string;
-};
+export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    providerId: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationConfigDescriptionProviderId = (
   variables: GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.AuthenticatorConfigInfoRepresentation,
@@ -411,10 +483,10 @@ export const getAdminRealmsRealmAuthenticationConfigDescriptionProviderId = (
     {},
     GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/config-description/{providerId}',
-    method: 'get',
+    url: "/admin/realms/{realm}/authentication/config-description/{providerId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmAuthenticationConfigIdPathParams = {
@@ -428,7 +500,8 @@ export type GetAdminRealmsRealmAuthenticationConfigIdPathParams = {
   id: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationConfigIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationConfigIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationConfigIdVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationConfigIdPathParams;
@@ -436,7 +509,7 @@ export type GetAdminRealmsRealmAuthenticationConfigIdVariables = {
 
 export const getAdminRealmsRealmAuthenticationConfigId = (
   variables: GetAdminRealmsRealmAuthenticationConfigIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.AuthenticatorConfigRepresentation,
@@ -445,7 +518,12 @@ export const getAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/config/{id}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmAuthenticationConfigIdPathParams = {
   /**
@@ -458,7 +536,8 @@ export type PutAdminRealmsRealmAuthenticationConfigIdPathParams = {
   id: string;
 };
 
-export type PutAdminRealmsRealmAuthenticationConfigIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmAuthenticationConfigIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmAuthenticationConfigIdVariables = {
   body?: Schemas.AuthenticatorConfigRepresentation;
@@ -467,7 +546,7 @@ export type PutAdminRealmsRealmAuthenticationConfigIdVariables = {
 
 export const putAdminRealmsRealmAuthenticationConfigId = (
   variables: PutAdminRealmsRealmAuthenticationConfigIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -476,7 +555,12 @@ export const putAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/config/{id}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationConfigIdPathParams = {
   /**
@@ -489,7 +573,8 @@ export type DeleteAdminRealmsRealmAuthenticationConfigIdPathParams = {
   id: string;
 };
 
-export type DeleteAdminRealmsRealmAuthenticationConfigIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAuthenticationConfigIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmAuthenticationConfigIdVariables = {
   pathParams: DeleteAdminRealmsRealmAuthenticationConfigIdPathParams;
@@ -497,7 +582,7 @@ export type DeleteAdminRealmsRealmAuthenticationConfigIdVariables = {
 
 export const deleteAdminRealmsRealmAuthenticationConfigId = (
   variables: DeleteAdminRealmsRealmAuthenticationConfigIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -506,7 +591,12 @@ export const deleteAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/config/{id}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmAuthenticationExecutionsPathParams = {
   /**
@@ -515,7 +605,8 @@ export type PostAdminRealmsRealmAuthenticationExecutionsPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmAuthenticationExecutionsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationExecutionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmAuthenticationExecutionsVariables = {
   body?: Schemas.AuthenticationExecutionRepresentation;
@@ -524,7 +615,7 @@ export type PostAdminRealmsRealmAuthenticationExecutionsVariables = {
 
 export const postAdminRealmsRealmAuthenticationExecutions = (
   variables: PostAdminRealmsRealmAuthenticationExecutionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -533,7 +624,12 @@ export const postAdminRealmsRealmAuthenticationExecutions = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/executions",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams = {
   /**
@@ -543,7 +639,8 @@ export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams = {
   executionId: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams;
@@ -551,7 +648,7 @@ export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables = {
 
 export const getAdminRealmsRealmAuthenticationExecutionsExecutionId = (
   variables: GetAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.AuthenticationExecutionRepresentation,
@@ -560,28 +657,36 @@ export const getAdminRealmsRealmAuthenticationExecutionsExecutionId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions/{executionId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/executions/{executionId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Execution id
-   */
-  executionId: string;
-};
+export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Execution id
+     */
+    executionId: string;
+  };
 
-export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables = {
-  pathParams: DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmAuthenticationExecutionsExecutionId = (
   variables: DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -590,29 +695,37 @@ export const deleteAdminRealmsRealmAuthenticationExecutionsExecutionId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions/{executionId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/executions/{executionId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Execution id
-   */
-  executionId: string;
-};
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Execution id
+     */
+    executionId: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigVariables = {
-  body?: Schemas.AuthenticatorConfigRepresentation;
-  pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigVariables =
+  {
+    body?: Schemas.AuthenticatorConfigRepresentation;
+    pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdConfig = (
   variables: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -622,36 +735,39 @@ export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdConfig = (
     {},
     PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/executions/{executionId}/config',
-    method: 'post',
+    url: "/admin/realms/{realm}/authentication/executions/{executionId}/config",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Execution id
-   */
-  executionId: string;
-  /**
-   * Configuration id
-   */
-  id: string;
-};
+export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Execution id
+     */
+    executionId: string;
+    /**
+     * Configuration id
+     */
+    id: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigId = (
   variables: GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.AuthenticatorConfigRepresentation,
@@ -661,81 +777,89 @@ export const getAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigId = (
     {},
     GetAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigIdPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/executions/{executionId}/config/{id}',
-    method: 'get',
+    url: "/admin/realms/{realm}/authentication/executions/{executionId}/config/{id}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Execution id
-   */
-  executionId: string;
-};
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Execution id
+     */
+    executionId: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityVariables = {
-  pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityVariables =
+  {
+    pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriority = (
-  variables: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams
-  >({
-    url: '/admin/realms/{realm}/authentication/executions/{executionId}/lower-priority',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriority =
+  (
+    variables: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmAuthenticationExecutionsExecutionIdLowerPriorityPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/executions/{executionId}/lower-priority",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Execution id
-   */
-  executionId: string;
-};
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Execution id
+     */
+    executionId: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityVariables = {
-  pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityVariables =
+  {
+    pathParams: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriority = (
-  variables: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams
-  >({
-    url: '/admin/realms/{realm}/authentication/executions/{executionId}/raise-priority',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriority =
+  (
+    variables: PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmAuthenticationExecutionsExecutionIdRaisePriorityPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/executions/{executionId}/raise-priority",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmAuthenticationFlowsPathParams = {
   /**
@@ -744,9 +868,11 @@ export type GetAdminRealmsRealmAuthenticationFlowsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationFlowsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationFlowsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationFlowsResponse = Schemas.AuthenticationFlowRepresentation[];
+export type GetAdminRealmsRealmAuthenticationFlowsResponse =
+  Schemas.AuthenticationFlowRepresentation[];
 
 export type GetAdminRealmsRealmAuthenticationFlowsVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationFlowsPathParams;
@@ -754,7 +880,7 @@ export type GetAdminRealmsRealmAuthenticationFlowsVariables = {
 
 export const getAdminRealmsRealmAuthenticationFlows = (
   variables: GetAdminRealmsRealmAuthenticationFlowsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationFlowsResponse,
@@ -763,7 +889,12 @@ export const getAdminRealmsRealmAuthenticationFlows = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmAuthenticationFlowsPathParams = {
   /**
@@ -772,7 +903,8 @@ export type PostAdminRealmsRealmAuthenticationFlowsPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmAuthenticationFlowsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationFlowsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmAuthenticationFlowsVariables = {
   body?: Schemas.AuthenticationFlowRepresentation;
@@ -781,7 +913,7 @@ export type PostAdminRealmsRealmAuthenticationFlowsVariables = {
 
 export const postAdminRealmsRealmAuthenticationFlows = (
   variables: PostAdminRealmsRealmAuthenticationFlowsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -790,7 +922,12 @@ export const postAdminRealmsRealmAuthenticationFlows = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationFlowsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyPathParams = {
   /**
@@ -803,7 +940,8 @@ export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyPathParams = {
   flowAlias: string;
 };
 
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyRequestBody = {
   [key: string]: string;
@@ -816,7 +954,7 @@ export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyVariables = {
 
 export const postAdminRealmsRealmAuthenticationFlowsFlowAliasCopy = (
   variables: PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -825,31 +963,39 @@ export const postAdminRealmsRealmAuthenticationFlowsFlowAliasCopy = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/copy', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows/{flowAlias}/copy",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Flow alias
-   */
-  flowAlias: string;
-};
+export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Flow alias
+     */
+    flowAlias: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsResponse =
   Schemas.AuthenticationExecutionInfoRepresentation[];
 
-export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
   variables: GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsResponse,
@@ -858,29 +1004,37 @@ export const getAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows/{flowAlias}/executions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Flow alias
-   */
-  flowAlias: string;
-};
+export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Flow alias
+     */
+    flowAlias: string;
+  };
 
-export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables = {
-  body?: Schemas.AuthenticationExecutionInfoRepresentation;
-  pathParams: PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables =
+  {
+    body?: Schemas.AuthenticationExecutionInfoRepresentation;
+    pathParams: PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
   variables: PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -889,73 +1043,87 @@ export const putAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions', method: 'put', ...variables, signal });
-
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of parent flow
-   */
-  flowAlias: string;
-};
-
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionError = Fetcher.ErrorWrapper<undefined>;
-
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody = {
-  [key: string]: any;
-};
-
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionVariables = {
-  body?: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody;
-  pathParams: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams;
-} & FetcherExtraProps;
-
-export const postAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecution = (
-  variables: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionError,
-    PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions/execution',
-    method: 'post',
+    url: "/admin/realms/{realm}/authentication/flows/{flowAlias}/executions",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of parent authentication flow
-   */
-  flowAlias: string;
-};
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of parent flow
+     */
+    flowAlias: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowRequestBody = {
-  [key: string]: any;
-};
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody =
+  {
+    [key: string]: any;
+  };
 
-export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowVariables = {
-  body?: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowRequestBody;
-  pathParams: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionVariables =
+  {
+    body?: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody;
+    pathParams: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams;
+  } & FetcherExtraProps;
+
+export const postAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecution =
+  (
+    variables: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionError,
+      PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/flows/{flowAlias}/executions/execution",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of parent authentication flow
+     */
+    flowAlias: string;
+  };
+
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowRequestBody =
+  {
+    [key: string]: any;
+  };
+
+export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowVariables =
+  {
+    body?: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowRequestBody;
+    pathParams: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlow = (
   variables: PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -965,10 +1133,10 @@ export const postAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlow = (
     {},
     PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsFlowPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions/flow',
-    method: 'post',
+    url: "/admin/realms/{realm}/authentication/flows/{flowAlias}/executions/flow",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmAuthenticationFlowsIdPathParams = {
@@ -982,7 +1150,8 @@ export type GetAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   id: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationFlowsIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationFlowsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationFlowsIdVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationFlowsIdPathParams;
@@ -990,7 +1159,7 @@ export type GetAdminRealmsRealmAuthenticationFlowsIdVariables = {
 
 export const getAdminRealmsRealmAuthenticationFlowsId = (
   variables: GetAdminRealmsRealmAuthenticationFlowsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.AuthenticationFlowRepresentation,
@@ -999,7 +1168,12 @@ export const getAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows/{id}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   /**
@@ -1009,7 +1183,8 @@ export type PutAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   id: string;
 };
 
-export type PutAdminRealmsRealmAuthenticationFlowsIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmAuthenticationFlowsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmAuthenticationFlowsIdVariables = {
   body?: Schemas.AuthenticationFlowRepresentation;
@@ -1018,7 +1193,7 @@ export type PutAdminRealmsRealmAuthenticationFlowsIdVariables = {
 
 export const putAdminRealmsRealmAuthenticationFlowsId = (
   variables: PutAdminRealmsRealmAuthenticationFlowsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1027,7 +1202,12 @@ export const putAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows/{id}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   /**
@@ -1040,7 +1220,8 @@ export type DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   id: string;
 };
 
-export type DeleteAdminRealmsRealmAuthenticationFlowsIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAuthenticationFlowsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmAuthenticationFlowsIdVariables = {
   pathParams: DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams;
@@ -1048,7 +1229,7 @@ export type DeleteAdminRealmsRealmAuthenticationFlowsIdVariables = {
 
 export const deleteAdminRealmsRealmAuthenticationFlowsId = (
   variables: DeleteAdminRealmsRealmAuthenticationFlowsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1057,7 +1238,12 @@ export const deleteAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/flows/{id}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmAuthenticationFormActionProvidersPathParams = {
   /**
@@ -1066,7 +1252,8 @@ export type GetAdminRealmsRealmAuthenticationFormActionProvidersPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationFormActionProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationFormActionProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationFormActionProvidersResponse = {
   [key: string]: any;
@@ -1078,7 +1265,7 @@ export type GetAdminRealmsRealmAuthenticationFormActionProvidersVariables = {
 
 export const getAdminRealmsRealmAuthenticationFormActionProviders = (
   variables: GetAdminRealmsRealmAuthenticationFormActionProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationFormActionProvidersResponse,
@@ -1087,7 +1274,12 @@ export const getAdminRealmsRealmAuthenticationFormActionProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFormActionProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/form-action-providers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/form-action-providers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmAuthenticationFormProvidersPathParams = {
   /**
@@ -1096,7 +1288,8 @@ export type GetAdminRealmsRealmAuthenticationFormProvidersPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationFormProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationFormProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationFormProvidersResponse = {
   [key: string]: any;
@@ -1108,7 +1301,7 @@ export type GetAdminRealmsRealmAuthenticationFormProvidersVariables = {
 
 export const getAdminRealmsRealmAuthenticationFormProviders = (
   variables: GetAdminRealmsRealmAuthenticationFormProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationFormProvidersResponse,
@@ -1117,28 +1310,37 @@ export const getAdminRealmsRealmAuthenticationFormProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFormProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/form-providers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/form-providers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-};
+export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionResponse = {
-  [key: string]: Schemas.ConfigPropertyRepresentation[];
-};
+export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionResponse =
+  {
+    [key: string]: Schemas.ConfigPropertyRepresentation[];
+  };
 
-export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationPerClientConfigDescription = (
   variables: GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionResponse,
@@ -1147,29 +1349,38 @@ export const getAdminRealmsRealmAuthenticationPerClientConfigDescription = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams
-  >({ url: '/admin/realms/{realm}/authentication/per-client-config-description', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/per-client-config-description",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-};
+export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionRequestBody = {
-  [key: string]: string;
-};
+export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionRequestBody =
+  {
+    [key: string]: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionVariables = {
-  body?: PostAdminRealmsRealmAuthenticationRegisterRequiredActionRequestBody;
-  pathParams: PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionVariables =
+  {
+    body?: PostAdminRealmsRealmAuthenticationRegisterRequiredActionRequestBody;
+    pathParams: PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmAuthenticationRegisterRequiredAction = (
   variables: PostAdminRealmsRealmAuthenticationRegisterRequiredActionVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1178,7 +1389,12 @@ export const postAdminRealmsRealmAuthenticationRegisterRequiredAction = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams
-  >({ url: '/admin/realms/{realm}/authentication/register-required-action', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/register-required-action",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsPathParams = {
   /**
@@ -1187,9 +1403,11 @@ export type GetAdminRealmsRealmAuthenticationRequiredActionsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationRequiredActionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsResponse = Schemas.RequiredActionProviderRepresentation[];
+export type GetAdminRealmsRealmAuthenticationRequiredActionsResponse =
+  Schemas.RequiredActionProviderRepresentation[];
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsPathParams;
@@ -1197,7 +1415,7 @@ export type GetAdminRealmsRealmAuthenticationRequiredActionsVariables = {
 
 export const getAdminRealmsRealmAuthenticationRequiredActions = (
   variables: GetAdminRealmsRealmAuthenticationRequiredActionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationRequiredActionsResponse,
@@ -1206,7 +1424,12 @@ export const getAdminRealmsRealmAuthenticationRequiredActions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationRequiredActionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/required-actions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   /**
@@ -1219,7 +1442,8 @@ export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   alias: string;
 };
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasVariables = {
   pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams;
@@ -1227,7 +1451,7 @@ export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasVariables = {
 
 export const getAdminRealmsRealmAuthenticationRequiredActionsAlias = (
   variables: GetAdminRealmsRealmAuthenticationRequiredActionsAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RequiredActionProviderRepresentation,
@@ -1236,7 +1460,12 @@ export const getAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   /**
@@ -1249,7 +1478,8 @@ export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   alias: string;
 };
 
-export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasVariables = {
   body?: Schemas.RequiredActionProviderRepresentation;
@@ -1258,7 +1488,7 @@ export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasVariables = {
 
 export const putAdminRealmsRealmAuthenticationRequiredActionsAlias = (
   variables: PutAdminRealmsRealmAuthenticationRequiredActionsAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1267,28 +1497,36 @@ export const putAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasVariables = {
-  pathParams: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmAuthenticationRequiredActionsAlias = (
   variables: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1297,28 +1535,36 @@ export const deleteAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
   variables: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RequiredActionConfigRepresentation,
@@ -1328,33 +1574,36 @@ export const getAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
     {},
     GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/config',
-    method: 'get',
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}/config",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables = {
-  body?: Schemas.RequiredActionConfigRepresentation;
-  pathParams: PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables =
+  {
+    body?: Schemas.RequiredActionConfigRepresentation;
+    pathParams: PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
   variables: PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1364,32 +1613,35 @@ export const putAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
     {},
     PutAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/config',
-    method: 'put',
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}/config",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables = {
-  pathParams: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
   variables: DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1399,138 +1651,153 @@ export const deleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfig = (
     {},
     DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams
   >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/config',
-    method: 'delete',
+    url: "/admin/realms/{realm}/authentication/required-actions/{alias}/config",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescription = (
-  variables: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.RequiredActionConfigInfoRepresentation,
-    GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams
-  >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/config-description',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescription =
+  (
+    variables: GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.RequiredActionConfigInfoRepresentation,
+      GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescriptionPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/required-actions/{alias}/config-description",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityVariables = {
-  pathParams: PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityVariables =
+  {
+    pathParams: PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriority = (
-  variables: PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams
-  >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriority =
+  (
+    variables: PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriorityPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * Alias of required action
-   */
-  alias: string;
-};
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * Alias of required action
+     */
+    alias: string;
+  };
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityVariables = {
-  pathParams: PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityVariables =
+  {
+    pathParams: PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriority = (
-  variables: PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams
-  >({
-    url: '/admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriority =
+  (
+    variables: PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriorityPathParams
+    >({
+      url: "/admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-};
+export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+  };
 
-export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsResponse = {
-  [key: string]: string;
-}[];
+export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsResponse =
+  {
+    [key: string]: string;
+  }[];
 
-export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsVariables = {
-  pathParams: GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmAuthenticationUnregisteredRequiredActions = (
   variables: GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsResponse,
@@ -1539,7 +1806,12 @@ export const getAdminRealmsRealmAuthenticationUnregisteredRequiredActions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/unregistered-required-actions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/authentication/unregistered-required-actions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientDescriptionConverterPathParams = {
   /**
@@ -1548,7 +1820,8 @@ export type PostAdminRealmsRealmClientDescriptionConverterPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmClientDescriptionConverterError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientDescriptionConverterError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientDescriptionConverterVariables = {
   body?: string;
@@ -1557,7 +1830,7 @@ export type PostAdminRealmsRealmClientDescriptionConverterVariables = {
 
 export const postAdminRealmsRealmClientDescriptionConverter = (
   variables: PostAdminRealmsRealmClientDescriptionConverterVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientRepresentation,
@@ -1566,7 +1839,12 @@ export const postAdminRealmsRealmClientDescriptionConverter = (
     {},
     {},
     PostAdminRealmsRealmClientDescriptionConverterPathParams
-  >({ url: '/admin/realms/{realm}/client-description-converter', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-description-converter",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesPathParams = {
   /**
@@ -1576,10 +1854,11 @@ export type GetAdminRealmsRealmClientPoliciesPoliciesPathParams = {
 };
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesQueryParams = {
-  ['include-global-policies']?: boolean;
+  ["include-global-policies"]?: boolean;
 };
 
-export type GetAdminRealmsRealmClientPoliciesPoliciesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientPoliciesPoliciesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesVariables = {
   pathParams: GetAdminRealmsRealmClientPoliciesPoliciesPathParams;
@@ -1588,7 +1867,7 @@ export type GetAdminRealmsRealmClientPoliciesPoliciesVariables = {
 
 export const getAdminRealmsRealmClientPoliciesPolicies = (
   variables: GetAdminRealmsRealmClientPoliciesPoliciesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientPoliciesRepresentation,
@@ -1597,7 +1876,12 @@ export const getAdminRealmsRealmClientPoliciesPolicies = (
     {},
     GetAdminRealmsRealmClientPoliciesPoliciesQueryParams,
     GetAdminRealmsRealmClientPoliciesPoliciesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/policies', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-policies/policies",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientPoliciesPoliciesPathParams = {
   /**
@@ -1606,7 +1890,8 @@ export type PutAdminRealmsRealmClientPoliciesPoliciesPathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmClientPoliciesPoliciesError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientPoliciesPoliciesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientPoliciesPoliciesVariables = {
   body?: Schemas.ClientPoliciesRepresentation;
@@ -1615,7 +1900,7 @@ export type PutAdminRealmsRealmClientPoliciesPoliciesVariables = {
 
 export const putAdminRealmsRealmClientPoliciesPolicies = (
   variables: PutAdminRealmsRealmClientPoliciesPoliciesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1624,7 +1909,12 @@ export const putAdminRealmsRealmClientPoliciesPolicies = (
     {},
     {},
     PutAdminRealmsRealmClientPoliciesPoliciesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/policies', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-policies/policies",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientPoliciesProfilesPathParams = {
   /**
@@ -1634,10 +1924,11 @@ export type GetAdminRealmsRealmClientPoliciesProfilesPathParams = {
 };
 
 export type GetAdminRealmsRealmClientPoliciesProfilesQueryParams = {
-  ['include-global-profiles']?: boolean;
+  ["include-global-profiles"]?: boolean;
 };
 
-export type GetAdminRealmsRealmClientPoliciesProfilesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientPoliciesProfilesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientPoliciesProfilesVariables = {
   pathParams: GetAdminRealmsRealmClientPoliciesProfilesPathParams;
@@ -1646,7 +1937,7 @@ export type GetAdminRealmsRealmClientPoliciesProfilesVariables = {
 
 export const getAdminRealmsRealmClientPoliciesProfiles = (
   variables: GetAdminRealmsRealmClientPoliciesProfilesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientProfilesRepresentation,
@@ -1655,7 +1946,12 @@ export const getAdminRealmsRealmClientPoliciesProfiles = (
     {},
     GetAdminRealmsRealmClientPoliciesProfilesQueryParams,
     GetAdminRealmsRealmClientPoliciesProfilesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/profiles', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-policies/profiles",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientPoliciesProfilesPathParams = {
   /**
@@ -1664,7 +1960,8 @@ export type PutAdminRealmsRealmClientPoliciesProfilesPathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmClientPoliciesProfilesError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientPoliciesProfilesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientPoliciesProfilesVariables = {
   body?: Schemas.ClientProfilesRepresentation;
@@ -1673,7 +1970,7 @@ export type PutAdminRealmsRealmClientPoliciesProfilesVariables = {
 
 export const putAdminRealmsRealmClientPoliciesProfiles = (
   variables: PutAdminRealmsRealmClientPoliciesProfilesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1682,7 +1979,12 @@ export const putAdminRealmsRealmClientPoliciesProfiles = (
     {},
     {},
     PutAdminRealmsRealmClientPoliciesProfilesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/profiles', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-policies/profiles",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams = {
   /**
@@ -1691,9 +1993,11 @@ export type GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientRegistrationPolicyProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientRegistrationPolicyProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientRegistrationPolicyProvidersResponse = Schemas.ComponentTypeRepresentation[];
+export type GetAdminRealmsRealmClientRegistrationPolicyProvidersResponse =
+  Schemas.ComponentTypeRepresentation[];
 
 export type GetAdminRealmsRealmClientRegistrationPolicyProvidersVariables = {
   pathParams: GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams;
@@ -1701,7 +2005,7 @@ export type GetAdminRealmsRealmClientRegistrationPolicyProvidersVariables = {
 
 export const getAdminRealmsRealmClientRegistrationPolicyProviders = (
   variables: GetAdminRealmsRealmClientRegistrationPolicyProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientRegistrationPolicyProvidersResponse,
@@ -1710,7 +2014,12 @@ export const getAdminRealmsRealmClientRegistrationPolicyProviders = (
     {},
     {},
     GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams
-  >({ url: '/admin/realms/{realm}/client-registration-policy/providers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-registration-policy/providers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientScopesPathParams = {
   /**
@@ -1719,9 +2028,11 @@ export type GetAdminRealmsRealmClientScopesPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientScopesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmClientScopesResponse =
+  Schemas.ClientScopeRepresentation[];
 
 export type GetAdminRealmsRealmClientScopesVariables = {
   pathParams: GetAdminRealmsRealmClientScopesPathParams;
@@ -1729,7 +2040,7 @@ export type GetAdminRealmsRealmClientScopesVariables = {
 
 export const getAdminRealmsRealmClientScopes = (
   variables: GetAdminRealmsRealmClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientScopesResponse,
@@ -1738,7 +2049,12 @@ export const getAdminRealmsRealmClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientScopesPathParams = {
   /**
@@ -1747,7 +2063,8 @@ export type PostAdminRealmsRealmClientScopesPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientScopesVariables = {
   body?: Schemas.ClientScopeRepresentation;
@@ -1756,7 +2073,7 @@ export type PostAdminRealmsRealmClientScopesVariables = {
 
 export const postAdminRealmsRealmClientScopes = (
   variables: PostAdminRealmsRealmClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1765,7 +2082,12 @@ export const postAdminRealmsRealmClientScopes = (
     {},
     {},
     PostAdminRealmsRealmClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1775,7 +2097,8 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdVariables = {
   pathParams: GetAdminRealmsRealmClientScopesClientScopeIdPathParams;
@@ -1783,7 +2106,7 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdVariables = {
 
 export const getAdminRealmsRealmClientScopesClientScopeId = (
   variables: GetAdminRealmsRealmClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientScopeRepresentation,
@@ -1792,7 +2115,12 @@ export const getAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     GetAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1802,7 +2130,8 @@ export type PutAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type PutAdminRealmsRealmClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientScopesClientScopeIdVariables = {
   body?: Schemas.ClientScopeRepresentation;
@@ -1811,7 +2140,7 @@ export type PutAdminRealmsRealmClientScopesClientScopeIdVariables = {
 
 export const putAdminRealmsRealmClientScopesClientScopeId = (
   variables: PutAdminRealmsRealmClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1820,7 +2149,12 @@ export const putAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     PutAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1830,7 +2164,8 @@ export type DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdVariables = {
   pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams;
@@ -1838,7 +2173,7 @@ export type DeleteAdminRealmsRealmClientScopesClientScopeIdVariables = {
 
 export const deleteAdminRealmsRealmClientScopesClientScopeId = (
   variables: DeleteAdminRealmsRealmClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -1847,15 +2182,21 @@ export const deleteAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
 export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsError =
   Fetcher.ErrorWrapper<undefined>;
@@ -1863,215 +2204,237 @@ export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModel
 export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsRequestBody =
   Schemas.ProtocolMapperRepresentation[];
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsVariables = {
-  body?: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsRequestBody;
-  pathParams: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsVariables =
+  {
+    body?: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsRequestBody;
+    pathParams: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModels = (
-  variables: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsError,
-    PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/add-models',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModels =
+  (
+    variables: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsError,
+      PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/add-models",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsResponse =
   Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModels = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModels =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModels = (
-  variables: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError,
-    Schemas.ProtocolMapperRepresentation,
-    {},
-    {},
-    PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModels =
+  (
+    variables: PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsError,
+      Schemas.ProtocolMapperRepresentation,
+      {},
+      {},
+      PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ProtocolMapperRepresentation,
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ProtocolMapperRepresentation,
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId = (
-  variables: PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
-    Schemas.ProtocolMapperRepresentation,
-    {},
-    {},
-    PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
+      Schemas.ProtocolMapperRepresentation,
+      {},
+      {},
+      PutAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId = (
-  variables: DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdError,
+      undefined,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientScopesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  protocol: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    protocol: string;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2079,45 +2442,50 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolP
 export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolResponse =
   Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocol = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/protocol/{protocol}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocol =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdProtocolMappersProtocolProtocolPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/protocol-mappers/protocol/{protocol}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappings = (
   variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MappingsRepresentation,
@@ -2126,16 +2494,22 @@ export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappings = (
     {},
     {},
     GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2143,36 +2517,39 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClie
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2180,37 +2557,40 @@ export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsCli
 export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody =
   Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables = {
-  body?: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody;
-  pathParams: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    body?: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody;
+    pathParams: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient = (
-  variables: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
-    PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
+      PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2218,37 +2598,40 @@ export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsC
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody =
   Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables = {
-  body?: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient = (
-  variables: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientError,
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientRequestBody,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2256,45 +2639,49 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClie
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailable = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailable =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2302,48 +2689,54 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClie
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientComposite = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientComposite =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositeQueryParams,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/clients/{client}/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm = (
   variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmResponse,
@@ -2353,32 +2746,36 @@ export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm = (
     {},
     GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams
   >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm',
-    method: 'get',
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables = {
-  body?: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody;
-  pathParams: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables =
+  {
+    body?: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody;
+    pathParams: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm = (
   variables: PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2388,54 +2785,60 @@ export const postAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm = (
     {},
     PostAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams
   >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm',
-    method: 'post',
+    url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables = {
-  body?: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm = (
-  variables: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError,
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealm =
+  (
+    variables: DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmError,
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmRequestBody,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmPathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2443,44 +2846,48 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvaila
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailable = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailable =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2488,31 +2895,33 @@ export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompos
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * The method is really to show a comprehensive total view of realm-level roles associated with the client.
  */
-export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmComposite = (
-  variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeResponse,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams,
-    GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmComposite =
+  (
+    variables: GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeResponse,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositeQueryParams,
+      GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsRealmCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings/realm/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmClientSessionStatsPathParams = {
   /**
@@ -2521,7 +2930,8 @@ export type GetAdminRealmsRealmClientSessionStatsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientSessionStatsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientSessionStatsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientSessionStatsResponse = {
   [key: string]: string;
@@ -2536,7 +2946,7 @@ export type GetAdminRealmsRealmClientSessionStatsVariables = {
  */
 export const getAdminRealmsRealmClientSessionStats = (
   variables: GetAdminRealmsRealmClientSessionStatsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientSessionStatsResponse,
@@ -2545,7 +2955,12 @@ export const getAdminRealmsRealmClientSessionStats = (
     {},
     {},
     GetAdminRealmsRealmClientSessionStatsPathParams
-  >({ url: '/admin/realms/{realm}/client-session-stats', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-session-stats",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientTemplatesPathParams = {
   /**
@@ -2554,9 +2969,11 @@ export type GetAdminRealmsRealmClientTemplatesPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientTemplatesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTemplatesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientTemplatesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmClientTemplatesResponse =
+  Schemas.ClientScopeRepresentation[];
 
 export type GetAdminRealmsRealmClientTemplatesVariables = {
   pathParams: GetAdminRealmsRealmClientTemplatesPathParams;
@@ -2564,7 +2981,7 @@ export type GetAdminRealmsRealmClientTemplatesVariables = {
 
 export const getAdminRealmsRealmClientTemplates = (
   variables: GetAdminRealmsRealmClientTemplatesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientTemplatesResponse,
@@ -2573,7 +2990,12 @@ export const getAdminRealmsRealmClientTemplates = (
     {},
     {},
     GetAdminRealmsRealmClientTemplatesPathParams
-  >({ url: '/admin/realms/{realm}/client-templates', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-templates",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientTemplatesPathParams = {
   /**
@@ -2582,7 +3004,8 @@ export type PostAdminRealmsRealmClientTemplatesPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmClientTemplatesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientTemplatesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientTemplatesVariables = {
   body?: Schemas.ClientScopeRepresentation;
@@ -2591,7 +3014,7 @@ export type PostAdminRealmsRealmClientTemplatesVariables = {
 
 export const postAdminRealmsRealmClientTemplates = (
   variables: PostAdminRealmsRealmClientTemplatesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2600,7 +3023,12 @@ export const postAdminRealmsRealmClientTemplates = (
     {},
     {},
     PostAdminRealmsRealmClientTemplatesPathParams
-  >({ url: '/admin/realms/{realm}/client-templates', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-templates",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2610,7 +3038,8 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
   pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams;
@@ -2618,7 +3047,7 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
 
 export const getAdminRealmsRealmClientTemplatesClientScopeId = (
   variables: GetAdminRealmsRealmClientTemplatesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientScopeRepresentation,
@@ -2627,7 +3056,12 @@ export const getAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-templates/{clientScopeId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2637,7 +3071,8 @@ export type PutAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type PutAdminRealmsRealmClientTemplatesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientTemplatesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
   body?: Schemas.ClientScopeRepresentation;
@@ -2646,7 +3081,7 @@ export type PutAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
 
 export const putAdminRealmsRealmClientTemplatesClientScopeId = (
   variables: PutAdminRealmsRealmClientTemplatesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2655,7 +3090,12 @@ export const putAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     PutAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-templates/{clientScopeId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2665,7 +3105,8 @@ export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   clientScopeId: string;
 };
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
   pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams;
@@ -2673,7 +3114,7 @@ export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdVariables = {
 
 export const deleteAdminRealmsRealmClientTemplatesClientScopeId = (
   variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2682,15 +3123,21 @@ export const deleteAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-templates/{clientScopeId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2698,218 +3145,237 @@ export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddMo
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsRequestBody =
   Schemas.ProtocolMapperRepresentation[];
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsVariables = {
-  body?: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsRequestBody;
-  pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsVariables =
+  {
+    body?: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsRequestBody;
+    pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModels = (
-  variables: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsError,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/add-models',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModels =
+  (
+    variables: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsError,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/add-models",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsResponse =
   Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModels = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModels =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModels = (
-  variables: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError,
-    Schemas.ProtocolMapperRepresentation,
-    {},
-    {},
-    PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModels =
+  (
+    variables: PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsError,
+      Schemas.ProtocolMapperRepresentation,
+      {},
+      {},
+      PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ProtocolMapperRepresentation,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ProtocolMapperRepresentation,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
 export type PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId = (
-  variables: PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
-    Schemas.ProtocolMapperRepresentation,
-    {},
-    {},
-    PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
+      Schemas.ProtocolMapperRepresentation,
+      {},
+      {},
+      PutAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId = (
-  variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsId =
+  (
+    variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdError,
+      undefined,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersModelsIdPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/models/{id}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  protocol: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    protocol: string;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2917,45 +3383,50 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtoc
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolResponse =
   Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocol = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/protocol/{protocol}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocol =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersProtocolProtocolPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/protocol-mappers/protocol/{protocol}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappings = (
   variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MappingsRepresentation,
@@ -2965,20 +3436,21 @@ export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappings = (
     {},
     GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsPathParams
   >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings',
-    method: 'get',
+    url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -2986,36 +3458,39 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsC
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3023,37 +3498,40 @@ export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClients
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody =
   Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables = {
-  body?: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody;
-  pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    body?: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody;
+    pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient = (
-  variables: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3061,37 +3539,40 @@ export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClien
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody =
   Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables = {
-  body?: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient = (
-  variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClient =
+  (
+    variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientError,
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientRequestBody,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3099,45 +3580,49 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsC
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailable = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailable =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+    client: string;
+  };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3145,142 +3630,158 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsC
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientComposite = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientComposite =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositeQueryParams,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsClientsClientCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/clients/{client}/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody =
   Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables = {
-  body?: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody;
-  pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables =
+  {
+    body?: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody;
+    pathParams: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm = (
-  variables: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody,
-    {},
-    {},
-    PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm =
+  (
+    variables: PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody,
+      {},
+      {},
+      PostAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody =
   Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables = {
-  body?: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm = (
-  variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealm =
+  (
+    variables: DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmError,
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmRequestBody,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmPathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3288,44 +3789,48 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAva
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailable = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailable =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3333,31 +3838,33 @@ export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCom
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * The method is really to show a comprehensive total view of realm-level roles associated with the client.
  */
-export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmComposite = (
-  variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeResponse,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams,
-    GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmComposite =
+  (
+    variables: GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeResponse,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositeQueryParams,
+      GetAdminRealmsRealmClientTemplatesClientScopeIdScopeMappingsRealmCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/client-templates/{clientScopeId}/scope-mappings/realm/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmClientTypesPathParams = {
   /**
@@ -3366,7 +3873,8 @@ export type GetAdminRealmsRealmClientTypesPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientTypesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientTypesVariables = {
   pathParams: GetAdminRealmsRealmClientTypesPathParams;
@@ -3377,7 +3885,7 @@ export type GetAdminRealmsRealmClientTypesVariables = {
  */
 export const getAdminRealmsRealmClientTypes = (
   variables: GetAdminRealmsRealmClientTypesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientTypesRepresentation,
@@ -3386,7 +3894,12 @@ export const getAdminRealmsRealmClientTypes = (
     {},
     {},
     GetAdminRealmsRealmClientTypesPathParams
-  >({ url: '/admin/realms/{realm}/client-types', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-types",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientTypesPathParams = {
   /**
@@ -3395,7 +3908,8 @@ export type PutAdminRealmsRealmClientTypesPathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmClientTypesError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientTypesVariables = {
   body?: Schemas.ClientTypesRepresentation;
@@ -3407,7 +3921,7 @@ export type PutAdminRealmsRealmClientTypesVariables = {
  */
 export const putAdminRealmsRealmClientTypes = (
   variables: PutAdminRealmsRealmClientTypesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3416,7 +3930,12 @@ export const putAdminRealmsRealmClientTypes = (
     {},
     {},
     PutAdminRealmsRealmClientTypesPathParams
-  >({ url: '/admin/realms/{realm}/client-types', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/client-types",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsPathParams = {
   /**
@@ -3469,7 +3988,10 @@ export type GetAdminRealmsRealmClientsVariables = {
 /**
  * If a client can’t be retrieved from the storage due to a problem with the underlying storage, it is silently removed from the returned list. This ensures that concurrent modifications to the list don’t prevent callers from retrieving this list.
  */
-export const getAdminRealmsRealmClients = (variables: GetAdminRealmsRealmClientsVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmClients = (
+  variables: GetAdminRealmsRealmClientsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAdminRealmsRealmClientsResponse,
     GetAdminRealmsRealmClientsError,
@@ -3477,7 +3999,12 @@ export const getAdminRealmsRealmClients = (variables: GetAdminRealmsRealmClients
     {},
     GetAdminRealmsRealmClientsQueryParams,
     GetAdminRealmsRealmClientsPathParams
-  >({ url: '/admin/realms/{realm}/clients', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientsPathParams = {
   /**
@@ -3493,7 +4020,10 @@ export type PostAdminRealmsRealmClientsVariables = {
   pathParams: PostAdminRealmsRealmClientsPathParams;
 } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClients = (variables: PostAdminRealmsRealmClientsVariables, signal?: AbortSignal) =>
+export const postAdminRealmsRealmClients = (
+  variables: PostAdminRealmsRealmClientsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     PostAdminRealmsRealmClientsError,
@@ -3501,7 +4031,12 @@ export const postAdminRealmsRealmClients = (variables: PostAdminRealmsRealmClien
     {},
     {},
     PostAdminRealmsRealmClientsPathParams
-  >({ url: '/admin/realms/{realm}/clients', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsInitialAccessPathParams = {
   /**
@@ -3510,9 +4045,11 @@ export type GetAdminRealmsRealmClientsInitialAccessPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmClientsInitialAccessError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsInitialAccessError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsInitialAccessResponse = Schemas.ClientInitialAccessPresentation[];
+export type GetAdminRealmsRealmClientsInitialAccessResponse =
+  Schemas.ClientInitialAccessPresentation[];
 
 export type GetAdminRealmsRealmClientsInitialAccessVariables = {
   pathParams: GetAdminRealmsRealmClientsInitialAccessPathParams;
@@ -3520,7 +4057,7 @@ export type GetAdminRealmsRealmClientsInitialAccessVariables = {
 
 export const getAdminRealmsRealmClientsInitialAccess = (
   variables: GetAdminRealmsRealmClientsInitialAccessVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsInitialAccessResponse,
@@ -3529,7 +4066,12 @@ export const getAdminRealmsRealmClientsInitialAccess = (
     {},
     {},
     GetAdminRealmsRealmClientsInitialAccessPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients-initial-access",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientsInitialAccessPathParams = {
   /**
@@ -3538,7 +4080,8 @@ export type PostAdminRealmsRealmClientsInitialAccessPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmClientsInitialAccessError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsInitialAccessError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsInitialAccessVariables = {
   body?: Schemas.ClientInitialAccessCreatePresentation;
@@ -3547,7 +4090,7 @@ export type PostAdminRealmsRealmClientsInitialAccessVariables = {
 
 export const postAdminRealmsRealmClientsInitialAccess = (
   variables: PostAdminRealmsRealmClientsInitialAccessVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientInitialAccessCreatePresentation,
@@ -3556,7 +4099,12 @@ export const postAdminRealmsRealmClientsInitialAccess = (
     {},
     {},
     PostAdminRealmsRealmClientsInitialAccessPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients-initial-access",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientsInitialAccessIdPathParams = {
   /**
@@ -3566,7 +4114,8 @@ export type DeleteAdminRealmsRealmClientsInitialAccessIdPathParams = {
   id: string;
 };
 
-export type DeleteAdminRealmsRealmClientsInitialAccessIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsInitialAccessIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientsInitialAccessIdVariables = {
   pathParams: DeleteAdminRealmsRealmClientsInitialAccessIdPathParams;
@@ -3574,7 +4123,7 @@ export type DeleteAdminRealmsRealmClientsInitialAccessIdVariables = {
 
 export const deleteAdminRealmsRealmClientsInitialAccessId = (
   variables: DeleteAdminRealmsRealmClientsInitialAccessIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3583,7 +4132,12 @@ export const deleteAdminRealmsRealmClientsInitialAccessId = (
     {},
     {},
     DeleteAdminRealmsRealmClientsInitialAccessIdPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients-initial-access/{id}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3596,7 +4150,8 @@ export type GetAdminRealmsRealmClientsClientUuidPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidPathParams;
@@ -3604,7 +4159,7 @@ export type GetAdminRealmsRealmClientsClientUuidVariables = {
 
 export const getAdminRealmsRealmClientsClientUuid = (
   variables: GetAdminRealmsRealmClientsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientRepresentation,
@@ -3613,7 +4168,12 @@ export const getAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3626,7 +4186,8 @@ export type PutAdminRealmsRealmClientsClientUuidPathParams = {
   clientUuid: string;
 };
 
-export type PutAdminRealmsRealmClientsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientsClientUuidVariables = {
   body?: Schemas.ClientRepresentation;
@@ -3635,7 +4196,7 @@ export type PutAdminRealmsRealmClientsClientUuidVariables = {
 
 export const putAdminRealmsRealmClientsClientUuid = (
   variables: PutAdminRealmsRealmClientsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3644,7 +4205,12 @@ export const putAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3657,7 +4223,8 @@ export type DeleteAdminRealmsRealmClientsClientUuidPathParams = {
   clientUuid: string;
 };
 
-export type DeleteAdminRealmsRealmClientsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientsClientUuidVariables = {
   pathParams: DeleteAdminRealmsRealmClientsClientUuidPathParams;
@@ -3665,7 +4232,7 @@ export type DeleteAdminRealmsRealmClientsClientUuidVariables = {
 
 export const deleteAdminRealmsRealmClientsClientUuid = (
   variables: DeleteAdminRealmsRealmClientsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3674,20 +4241,27 @@ export const deleteAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams;
@@ -3695,7 +4269,7 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
   variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ResourceServerRepresentation,
@@ -3704,20 +4278,27 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables = {
   body?: Schemas.ResourceServerRepresentation;
@@ -3726,7 +4307,7 @@ export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables = {
 
 export const putAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
   variables: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3735,29 +4316,37 @@ export const putAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportVariables = {
-  body?: Schemas.ResourceServerRepresentation;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportVariables =
+  {
+    body?: Schemas.ResourceServerRepresentation;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerImport = (
   variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3767,154 +4356,167 @@ export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerImport = (
     {},
     PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/import',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/import",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams = {
-  fields?: string;
-  /**
-   * @format int32
-   */
-  first?: number;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  permission?: boolean;
-  policyId?: string;
-  resource?: string;
-  resourceType?: string;
-  scope?: string;
-  type?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams =
+  {
+    fields?: string;
+    /**
+     * @format int32
+     */
+    first?: number;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    permission?: boolean;
+    policyId?: string;
+    resource?: string;
+    resourceType?: string;
+    scope?: string;
+    type?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionResponse =
   Schemas.AbstractPolicyRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermission = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermission =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables = {
-  body?: string;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables =
+  {
+    body?: string;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPermission = (
-  variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError,
-    string,
-    {},
-    {},
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPermission =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionError,
+      string,
+      {},
+      {},
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
 export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateVariables = {
-  body?: Schemas.PolicyEvaluationRequest;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateVariables =
+  {
+    body?: Schemas.PolicyEvaluationRequest;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluate = (
-  variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.PolicyEvaluationResponse,
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateError,
-    Schemas.PolicyEvaluationRequest,
-    {},
-    {},
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/evaluate',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluate =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.PolicyEvaluationResponse,
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluateError,
+      Schemas.PolicyEvaluationRequest,
+      {},
+      {},
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionEvaluatePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/evaluate",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersError =
   Fetcher.ErrorWrapper<undefined>;
@@ -3922,114 +4524,124 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionPro
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersResponse =
   Schemas.PolicyProviderRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProviders = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/providers',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProviders =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionProvidersPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/providers",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams = {
-  fields?: string;
-  name?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams =
+  {
+    fields?: string;
+    name?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearch = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.AbstractPolicyRepresentation,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/search',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearch =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.AbstractPolicyRepresentation,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionSearchPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/permission/search",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryParams = {
-  fields?: string;
-  /**
-   * @format int32
-   */
-  first?: number;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  permission?: boolean;
-  policyId?: string;
-  resource?: string;
-  resourceType?: string;
-  scope?: string;
-  type?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryParams =
+  {
+    fields?: string;
+    /**
+     * @format int32
+     */
+    first?: number;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    permission?: boolean;
+    policyId?: string;
+    resource?: string;
+    resourceType?: string;
+    scope?: string;
+    type?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyResponse =
   Schemas.AbstractPolicyRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicy = (
   variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyResponse,
@@ -4039,33 +4651,36 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicy = (
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryParams,
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables = {
-  body?: string;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables =
+  {
+    body?: string;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicy = (
   variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -4075,59 +4690,63 @@ export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicy = (
     {},
     PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
 export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateVariables = {
-  body?: Schemas.PolicyEvaluationRequest;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateVariables =
+  {
+    body?: Schemas.PolicyEvaluationRequest;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluate = (
-  variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.PolicyEvaluationResponse,
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateError,
-    Schemas.PolicyEvaluationRequest,
-    {},
-    {},
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/evaluate',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluate =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.PolicyEvaluationResponse,
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluateError,
+      Schemas.PolicyEvaluationRequest,
+      {},
+      {},
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyEvaluatePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/evaluate",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersError =
   Fetcher.ErrorWrapper<undefined>;
@@ -4135,112 +4754,124 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvide
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersResponse =
   Schemas.PolicyProviderRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProviders = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/providers',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProviders =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyProvidersPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/providers",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams = {
-  fields?: string;
-  name?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams =
+  {
+    fields?: string;
+    name?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearch = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.AbstractPolicyRepresentation,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/search',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearch =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.AbstractPolicyRepresentation,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicySearchPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/policy/search",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResponse = Schemas.ResourceRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResponse =
+  Schemas.ResourceRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResource = (
   variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResponse,
@@ -4250,390 +4881,417 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResource = (
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams,
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables = {
-  body?: Schemas.ResourceRepresentation;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams;
-  queryParams?: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables =
+  {
+    body?: Schemas.ResourceRepresentation;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams;
+    queryParams?: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerResource = (
-  variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ResourceRepresentation,
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError,
-    Schemas.ResourceRepresentation,
-    {},
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams,
-    PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerResource =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ResourceRepresentation,
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceError,
+      Schemas.ResourceRepresentation,
+      {},
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceQueryParams,
+      PostAdminRealmsRealmClientsClientUuidAuthzResourceServerResourcePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearch = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ResourceRepresentation,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/search',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearch =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ResourceRepresentation,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceSearchPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/search",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ResourceRepresentation,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ResourceRepresentation,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables = {
-  body?: Schemas.ResourceRepresentation;
-  pathParams: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
-  queryParams?: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables =
+  {
+    body?: Schemas.ResourceRepresentation;
+    pathParams: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
+    queryParams?: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId = (
-  variables: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
-    Schemas.ResourceRepresentation,
-    {},
-    PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
-    PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId =
+  (
+    variables: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
+      Schemas.ResourceRepresentation,
+      {},
+      PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
+      PutAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
-  queryParams?: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams;
+    queryParams?: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId = (
-  variables: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
-    undefined,
-    {},
-    DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
-    DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceId =
+  (
+    variables: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdError,
+      undefined,
+      {},
+      DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdQueryParams,
+      DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributes = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/attributes',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributes =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdAttributesPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/attributes",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
@@ -4641,60 +5299,64 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResou
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsResponse =
   Schemas.PolicyRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissions = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/permissions',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissions =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/permissions",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  resourceId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    resourceId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams = {
-  _id?: string;
-  deep?: boolean;
-  exactName?: boolean;
-  /**
-   * @format int32
-   */
-  first?: number;
-  matchingUri?: boolean;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  owner?: string;
-  scope?: string;
-  type?: string;
-  uri?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams =
+  {
+    _id?: string;
+    deep?: boolean;
+    exactName?: boolean;
+    /**
+     * @format int32
+     */
+    first?: number;
+    matchingUri?: boolean;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    owner?: string;
+    scope?: string;
+    type?: string;
+    uri?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesError =
   Fetcher.ErrorWrapper<undefined>;
@@ -4702,65 +5364,72 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResou
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesResponse =
   Schemas.ScopeRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopes = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/scopes',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopes =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerResourceResourceIdScopesPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/resource/{resourceId}/scopes",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeQueryParams = {
-  /**
-   * @format int32
-   */
-  first?: number;
-  /**
-   * @format int32
-   */
-  max?: number;
-  name?: string;
-  scopeId?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeQueryParams =
+  {
+    /**
+     * @format int32
+     */
+    first?: number;
+    /**
+     * @format int32
+     */
+    max?: number;
+    name?: string;
+    scopeId?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeResponse = Schemas.ScopeRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeResponse =
+  Schemas.ScopeRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScope = (
   variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeResponse,
@@ -4770,33 +5439,36 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScope = (
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeQueryParams,
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables = {
-  body?: Schemas.ScopeRepresentation;
-  pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables =
+  {
+    body?: Schemas.ScopeRepresentation;
+    pathParams: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerScope = (
   variables: PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -4806,175 +5478,193 @@ export const postAdminRealmsRealmClientsClientUuidAuthzResourceServerScope = (
     {},
     PostAdminRealmsRealmClientsClientUuidAuthzResourceServerScopePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams = {
-  name?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams =
+  {
+    name?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchResponse = Schemas.ScopeRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchResponse =
+  Schemas.ScopeRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearch = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/search',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearch =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchQueryParams,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeSearchPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/search",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  scopeId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    scopeId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ScopeRepresentation,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ScopeRepresentation,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  scopeId: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    scopeId: string;
+  };
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables = {
-  body?: Schemas.ScopeRepresentation;
-  pathParams: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables =
+  {
+    body?: Schemas.ScopeRepresentation;
+    pathParams: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId = (
-  variables: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
-    Schemas.ScopeRepresentation,
-    {},
-    {},
-    PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId =
+  (
+    variables: PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
+      Schemas.ScopeRepresentation,
+      {},
+      {},
+      PutAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  scopeId: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    scopeId: string;
+  };
 
 export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId = (
-  variables: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeId =
+  (
+    variables: DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdError,
+      undefined,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  scopeId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    scopeId: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
@@ -4982,39 +5672,42 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdP
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsResponse =
   Schemas.PolicyRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissions = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}/permissions',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissions =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}/permissions",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  scopeId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    scopeId: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesError =
   Fetcher.ErrorWrapper<undefined>;
@@ -5022,48 +5715,53 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdR
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesResponse =
   Schemas.ResourceRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResources = (
-  variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesResponse,
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}/resources',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResources =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesResponse,
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidAuthzResourceServerScopeScopeIdResourcesPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/scope/{scopeId}/resources",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerSettings = (
   variables: GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ResourceServerRepresentation,
@@ -5073,10 +5771,10 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServerSettings = (
     {},
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerSettingsPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/settings',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server/settings",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrPathParams = {
@@ -5091,7 +5789,8 @@ export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrPathParams = {
   attr: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidCertificatesAttrPathParams;
@@ -5099,7 +5798,7 @@ export type GetAdminRealmsRealmClientsClientUuidCertificatesAttrVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidCertificatesAttr = (
   variables: GetAdminRealmsRealmClientsClientUuidCertificatesAttrVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CertificateRepresentation,
@@ -5108,30 +5807,38 @@ export const getAdminRealmsRealmClientsClientUuidCertificatesAttr = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidCertificatesAttrPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  attr: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    attr: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadVariables = {
-  body?: Schemas.KeyStoreConfig;
-  pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadVariables =
+  {
+    body?: Schemas.KeyStoreConfig;
+    pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidCertificatesAttrDownload = (
   variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Blob,
@@ -5141,33 +5848,36 @@ export const postAdminRealmsRealmClientsClientUuidCertificatesAttrDownload = (
     {},
     PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/download',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/download",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGeneratePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  attr: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGeneratePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    attr: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateVariables = {
-  pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGeneratePathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateVariables =
+  {
+    pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGeneratePathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerate = (
   variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CertificateRepresentation,
@@ -5177,71 +5887,77 @@ export const postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerate = (
     {},
     PostAdminRealmsRealmClientsClientUuidCertificatesAttrGeneratePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/generate',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/generate",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  attr: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    attr: string;
+  };
 
 export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadVariables = {
-  body?: Schemas.KeyStoreConfig;
-  pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadVariables =
+  {
+    body?: Schemas.KeyStoreConfig;
+    pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownload = (
-  variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Blob,
-    PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadError,
-    Schemas.KeyStoreConfig,
-    {},
-    {},
-    PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/generate-and-download',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownload =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Blob,
+      PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadError,
+      Schemas.KeyStoreConfig,
+      {},
+      {},
+      PostAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownloadPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/generate-and-download",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  attr: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    attr: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadVariables = {
-  pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadVariables =
+  {
+    pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidCertificatesAttrUpload = (
   variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CertificateRepresentation,
@@ -5251,48 +5967,51 @@ export const postAdminRealmsRealmClientsClientUuidCertificatesAttrUpload = (
     {},
     PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/upload',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/upload",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  attr: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    attr: string;
+  };
 
 export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateVariables = {
-  pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateVariables =
+  {
+    pathParams: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificate = (
-  variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.CertificateRepresentation,
-    PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/upload-certificate',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificate =
+  (
+    variables: PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.CertificateRepresentation,
+      PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificateError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificatePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}/upload-certificate",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmClientsClientUuidClientSecretPathParams = {
   /**
@@ -5305,7 +6024,8 @@ export type GetAdminRealmsRealmClientsClientUuidClientSecretPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidClientSecretError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidClientSecretError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidClientSecretVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidClientSecretPathParams;
@@ -5313,7 +6033,7 @@ export type GetAdminRealmsRealmClientsClientUuidClientSecretVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidClientSecret = (
   variables: GetAdminRealmsRealmClientsClientUuidClientSecretVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CredentialRepresentation,
@@ -5322,7 +6042,12 @@ export const getAdminRealmsRealmClientsClientUuidClientSecret = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidClientSecretPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/client-secret",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidClientSecretPathParams = {
   /**
@@ -5335,7 +6060,8 @@ export type PostAdminRealmsRealmClientsClientUuidClientSecretPathParams = {
   clientUuid: string;
 };
 
-export type PostAdminRealmsRealmClientsClientUuidClientSecretError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidClientSecretError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsClientUuidClientSecretVariables = {
   pathParams: PostAdminRealmsRealmClientsClientUuidClientSecretPathParams;
@@ -5343,7 +6069,7 @@ export type PostAdminRealmsRealmClientsClientUuidClientSecretVariables = {
 
 export const postAdminRealmsRealmClientsClientUuidClientSecret = (
   variables: PostAdminRealmsRealmClientsClientUuidClientSecretVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CredentialRepresentation,
@@ -5352,20 +6078,27 @@ export const postAdminRealmsRealmClientsClientUuidClientSecret = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidClientSecretPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/client-secret",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams;
@@ -5373,7 +6106,7 @@ export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidClientSecretRotated = (
   variables: GetAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.CredentialRepresentation,
@@ -5382,28 +6115,36 @@ export const getAdminRealmsRealmClientsClientUuidClientSecretRotated = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmClientsClientUuidClientSecretRotated = (
   variables: DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -5413,26 +6154,29 @@ export const deleteAdminRealmsRealmClientsClientUuidClientSecretRotated = (
     {},
     DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated',
-    method: 'delete',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesResponse =
+  Schemas.ClientScopeRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidDefaultClientScopesPathParams;
@@ -5440,7 +6184,7 @@ export type GetAdminRealmsRealmClientsClientUuidDefaultClientScopesVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidDefaultClientScopes = (
   variables: GetAdminRealmsRealmClientsClientUuidDefaultClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidDefaultClientScopesResponse,
@@ -5449,273 +6193,304 @@ export const getAdminRealmsRealmClientsClientUuidDefaultClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidDefaultClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes', method: 'get', ...variables, signal });
-
-export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  clientScopeId: string;
-};
-
-export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables = {
-  pathParams: PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
-
-export const putAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeId = (
-  variables: PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError,
-    undefined,
-    {},
-    {},
-    PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes/{clientScopeId}',
-    method: 'put',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  clientScopeId: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    clientScopeId: string;
+  };
+
+export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables =
+  {
+    pathParams: PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
+
+export const putAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeId =
+  (
+    variables: PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError,
+      undefined,
+      {},
+      {},
+      PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes/{clientScopeId}",
+      method: "put",
+      ...variables,
+      signal,
+    });
+
+export type DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    clientScopeId: string;
+  };
 
 export type DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeId = (
-  variables: DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes/{clientScopeId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeId =
+  (
+    variables: DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdError,
+      undefined,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes/{clientScopeId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams = {
-  audience?: string;
-  scope?: string;
-  userId?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams =
+  {
+    audience?: string;
+    scope?: string;
+    userId?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessToken = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.AccessToken,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-access-token',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessToken =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.AccessToken,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-access-token",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams = {
-  audience?: string;
-  scope?: string;
-  userId?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams =
+  {
+    audience?: string;
+    scope?: string;
+    userId?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdToken = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.IDToken,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-id-token',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdToken =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.IDToken,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-id-token",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams = {
-  scope?: string;
-  userId?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams =
+  {
+    scope?: string;
+    userId?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfo = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Record<string, any>,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-userinfo',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfo =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Record<string, any>,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/generate-example-userinfo",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams = {
-  scope?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams =
+  {
+    scope?: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersResponse =
   Schemas.ProtocolMapperEvaluationRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * This means protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.
  */
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappers = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersResponse,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/protocol-mappers',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappers =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersResponse,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesProtocolMappersPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/protocol-mappers",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * either realm name OR client UUID
-   */
-  roleContainerId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * either realm name OR client UUID
+     */
+    roleContainerId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams = {
-  scope?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams =
+  {
+    scope?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedError =
   Fetcher.ErrorWrapper<undefined>;
@@ -5723,50 +6498,54 @@ export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleC
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * This contains scope mappings, which this client has directly, as well as scope mappings, which are granted to all client scopes, which are linked with this client.
  */
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGranted = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedResponse,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGranted =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedResponse,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdGrantedPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * either realm name OR client UUID
-   */
-  roleContainerId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * either realm name OR client UUID
+     */
+    roleContainerId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams = {
-  scope?: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams =
+  {
+    scope?: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedError =
   Fetcher.ErrorWrapper<undefined>;
@@ -5774,88 +6553,97 @@ export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleC
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * Defacto all the other roles of particular role container, which are not in {@link #getGrantedScopeMappings()}
  */
-export const getAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGranted = (
-  variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedResponse,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams,
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGranted =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedResponse,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedQueryParams,
+      GetAdminRealmsRealmClientsClientUuidEvaluateScopesScopeMappingsRoleContainerIdNotGrantedPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  providerId: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    providerId: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidInstallationProvidersProviderId = (
-  variables: GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/installation/providers/{providerId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidInstallationProvidersProviderId =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidInstallationProvidersProviderIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/installation/providers/{providerId}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidManagementPermissionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidManagementPermissions = (
   variables: GetAdminRealmsRealmClientsClientUuidManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -5864,29 +6652,37 @@ export const getAdminRealmsRealmClientsClientUuidManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/management/permissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsVariables = {
-  body?: Schemas.ManagementPermissionReference;
-  pathParams: PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsVariables =
+  {
+    body?: Schemas.ManagementPermissionReference;
+    pathParams: PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmClientsClientUuidManagementPermissions = (
   variables: PutAdminRealmsRealmClientsClientUuidManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -5895,7 +6691,12 @@ export const putAdminRealmsRealmClientsClientUuidManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/management/permissions",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidNodesPathParams = {
   /**
@@ -5908,7 +6709,8 @@ export type PostAdminRealmsRealmClientsClientUuidNodesPathParams = {
   clientUuid: string;
 };
 
-export type PostAdminRealmsRealmClientsClientUuidNodesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidNodesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsClientUuidNodesRequestBody = {
   [key: string]: string;
@@ -5921,7 +6723,7 @@ export type PostAdminRealmsRealmClientsClientUuidNodesVariables = {
 
 export const postAdminRealmsRealmClientsClientUuidNodes = (
   variables: PostAdminRealmsRealmClientsClientUuidNodesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -5930,7 +6732,12 @@ export const postAdminRealmsRealmClientsClientUuidNodes = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidNodesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/nodes', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/nodes",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams = {
   /**
@@ -5944,7 +6751,8 @@ export type DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams = {
   node: string;
 };
 
-export type DeleteAdminRealmsRealmClientsClientUuidNodesNodeError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidNodesNodeError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientsClientUuidNodesNodeVariables = {
   pathParams: DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams;
@@ -5952,7 +6760,7 @@ export type DeleteAdminRealmsRealmClientsClientUuidNodesNodeVariables = {
 
 export const deleteAdminRealmsRealmClientsClientUuidNodesNode = (
   variables: DeleteAdminRealmsRealmClientsClientUuidNodesNodeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -5961,20 +6769,27 @@ export const deleteAdminRealmsRealmClientsClientUuidNodesNode = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/nodes/{node}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/nodes/{node}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountResponse = {
   [key: string]: number;
@@ -5986,7 +6801,7 @@ export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidOfflineSessionCount = (
   variables: GetAdminRealmsRealmClientsClientUuidOfflineSessionCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidOfflineSessionCountResponse,
@@ -5995,7 +6810,12 @@ export const getAdminRealmsRealmClientsClientUuidOfflineSessionCount = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidOfflineSessionCountPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/offline-session-count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/offline-session-count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsPathParams = {
   /**
@@ -6023,9 +6843,11 @@ export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsQueryParams = {
   max?: number;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsResponse = Schemas.UserSessionRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsResponse =
+  Schemas.UserSessionRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidOfflineSessionsPathParams;
@@ -6034,7 +6856,7 @@ export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidOfflineSessions = (
   variables: GetAdminRealmsRealmClientsClientUuidOfflineSessionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidOfflineSessionsResponse,
@@ -6043,30 +6865,39 @@ export const getAdminRealmsRealmClientsClientUuidOfflineSessions = (
     {},
     GetAdminRealmsRealmClientsClientUuidOfflineSessionsQueryParams,
     GetAdminRealmsRealmClientsClientUuidOfflineSessionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/offline-sessions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/offline-sessions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesResponse =
+  Schemas.ClientScopeRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidOptionalClientScopes = (
   variables: GetAdminRealmsRealmClientsClientUuidOptionalClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidOptionalClientScopesResponse,
@@ -6075,106 +6906,120 @@ export const getAdminRealmsRealmClientsClientUuidOptionalClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  clientScopeId: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    clientScopeId: string;
+  };
 
 export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables = {
-  pathParams: PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables =
+  {
+    pathParams: PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeId = (
-  variables: PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError,
-    undefined,
-    {},
-    {},
-    PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes/{clientScopeId}',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeId =
+  (
+    variables: PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError,
+      undefined,
+      {},
+      {},
+      PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes/{clientScopeId}",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  clientScopeId: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    clientScopeId: string;
+  };
 
 export type DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeId = (
-  variables: DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes/{clientScopeId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeId =
+  (
+    variables: DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdError,
+      undefined,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes/{clientScopeId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsRequestBody =
   Schemas.ProtocolMapperRepresentation[];
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsVariables = {
-  body?: PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsRequestBody;
-  pathParams: PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsVariables =
+  {
+    body?: PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsRequestBody;
+    pathParams: PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidProtocolMappersAddModels = (
   variables: PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6184,34 +7029,38 @@ export const postAdminRealmsRealmClientsClientUuidProtocolMappersAddModels = (
     {},
     PostAdminRealmsRealmClientsClientUuidProtocolMappersAddModelsPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/add-models',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/add-models",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsResponse = Schemas.ProtocolMapperRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsResponse =
+  Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidProtocolMappersModels = (
   variables: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsResponse,
@@ -6220,29 +7069,37 @@ export const getAdminRealmsRealmClientsClientUuidProtocolMappersModels = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidProtocolMappersModels = (
   variables: PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6252,36 +7109,39 @@ export const postAdminRealmsRealmClientsClientUuidProtocolMappersModels = (
     {},
     PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
   variables: GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ProtocolMapperRepresentation,
@@ -6291,37 +7151,40 @@ export const getAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
     {},
     GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables = {
-  body?: Schemas.ProtocolMapperRepresentation;
-  pathParams: PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables =
+  {
+    body?: Schemas.ProtocolMapperRepresentation;
+    pathParams: PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
   variables: PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6331,36 +7194,39 @@ export const putAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
     {},
     PutAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}',
-    method: 'put',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables = {
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
   variables: DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6370,50 +7236,54 @@ export const deleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsId = (
     {},
     DeleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsIdPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models/{id}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  protocol: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    protocol: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolResponse =
   Schemas.ProtocolMapperRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocol = (
-  variables: GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolResponse,
-    GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/protocol/{protocol}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocol =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolResponse,
+      GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocolPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/protocol/{protocol}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type PostAdminRealmsRealmClientsClientUuidPushRevocationPathParams = {
   /**
@@ -6426,7 +7296,8 @@ export type PostAdminRealmsRealmClientsClientUuidPushRevocationPathParams = {
   clientUuid: string;
 };
 
-export type PostAdminRealmsRealmClientsClientUuidPushRevocationError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidPushRevocationError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsClientUuidPushRevocationVariables = {
   pathParams: PostAdminRealmsRealmClientsClientUuidPushRevocationPathParams;
@@ -6434,7 +7305,7 @@ export type PostAdminRealmsRealmClientsClientUuidPushRevocationVariables = {
 
 export const postAdminRealmsRealmClientsClientUuidPushRevocation = (
   variables: PostAdminRealmsRealmClientsClientUuidPushRevocationVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GlobalRequestResult,
@@ -6443,28 +7314,36 @@ export const postAdminRealmsRealmClientsClientUuidPushRevocation = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidPushRevocationPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/push-revocation', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/push-revocation",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenVariables = {
-  pathParams: PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenVariables =
+  {
+    pathParams: PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidRegistrationAccessToken = (
   variables: PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ClientRepresentation,
@@ -6474,10 +7353,10 @@ export const postAdminRealmsRealmClientsClientUuidRegistrationAccessToken = (
     {},
     PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/registration-access-token',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/registration-access-token",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesPathParams = {
@@ -6510,9 +7389,11 @@ export type GetAdminRealmsRealmClientsClientUuidRolesQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidRolesVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidRolesPathParams;
@@ -6521,7 +7402,7 @@ export type GetAdminRealmsRealmClientsClientUuidRolesVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidRoles = (
   variables: GetAdminRealmsRealmClientsClientUuidRolesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidRolesResponse,
@@ -6530,7 +7411,12 @@ export const getAdminRealmsRealmClientsClientUuidRoles = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidRolesPathParams = {
   /**
@@ -6543,7 +7429,8 @@ export type PostAdminRealmsRealmClientsClientUuidRolesPathParams = {
   clientUuid: string;
 };
 
-export type PostAdminRealmsRealmClientsClientUuidRolesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidRolesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmClientsClientUuidRolesVariables = {
   body?: Schemas.RoleRepresentation;
@@ -6552,7 +7439,7 @@ export type PostAdminRealmsRealmClientsClientUuidRolesVariables = {
 
 export const postAdminRealmsRealmClientsClientUuidRoles = (
   variables: PostAdminRealmsRealmClientsClientUuidRolesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6561,7 +7448,12 @@ export const postAdminRealmsRealmClientsClientUuidRoles = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidRolesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6578,7 +7470,8 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams;
@@ -6586,7 +7479,7 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidRolesRoleName = (
   variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RoleRepresentation,
@@ -6595,7 +7488,12 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6612,7 +7510,8 @@ export type PutAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
   body?: Schemas.RoleRepresentation;
@@ -6621,7 +7520,7 @@ export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
 
 export const putAdminRealmsRealmClientsClientUuidRolesRoleName = (
   variables: PutAdminRealmsRealmClientsClientUuidRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6630,7 +7529,12 @@ export const putAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6647,7 +7551,8 @@ export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
   pathParams: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams;
@@ -6655,7 +7560,7 @@ export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameVariables = {
 
 export const deleteAdminRealmsRealmClientsClientUuidRolesRoleName = (
   variables: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6664,34 +7569,43 @@ export const deleteAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
   variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesResponse,
@@ -6701,39 +7615,43 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables = {
-  body?: PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody;
-  pathParams: PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables =
+  {
+    body?: PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody;
+    pathParams: PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
   variables: PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6743,39 +7661,43 @@ export const postAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
     {},
     PostAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables = {
-  body?: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
   variables: DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -6785,23 +7707,24 @@ export const deleteAdminRealmsRealmClientsClientUuidRolesRoleNameComposites = (
     {},
     DeleteAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites',
-    method: 'delete',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidError =
   Fetcher.ErrorWrapper<undefined>;
@@ -6809,108 +7732,119 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsCl
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuid = (
-  variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidResponse,
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites/clients/{clientUuid}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuid =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidResponse,
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesClientsClientUuidPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites/clients/{clientUuid}",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealm = (
-  variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmResponse,
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites/realm',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealm =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmResponse,
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesRealmPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/composites/realm",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  /**
-   * the role name.
-   */
-  roleName: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    /**
+     * the role name.
+     */
+    roleName: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsQueryParams = {
-  /**
-   * if false, return a full representation of the {@code GroupRepresentation} objects.
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-  /**
-   * first result to return. Ignored if negative or {@code null}.
-   *
-   * @format int32
-   */
-  first?: number;
-  /**
-   * maximum number of results to return. Ignored if negative or {@code null}.
-   *
-   * @format int32
-   */
-  max?: number;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsQueryParams =
+  {
+    /**
+     * if false, return a full representation of the {@code GroupRepresentation} objects.
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+    /**
+     * first result to return. Ignored if negative or {@code null}.
+     *
+     * @format int32
+     */
+    first?: number;
+    /**
+     * maximum number of results to return. Ignored if negative or {@code null}.
+     *
+     * @format int32
+     */
+    max?: number;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsResponse = Schemas.UserRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsResponse =
+  Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams;
@@ -6919,7 +7853,7 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidRolesRoleNameGroups = (
   variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsResponse,
@@ -6928,82 +7862,93 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleNameGroups = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/groups', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/groups",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  roleName: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    roleName: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissions = (
-  variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ManagementPermissionReference,
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/management/permissions',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissions =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ManagementPermissionReference,
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/management/permissions",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  roleName: string;
-};
+export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    roleName: string;
+  };
 
 export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables = {
-  body?: Schemas.ManagementPermissionReference;
-  pathParams: PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables =
+  {
+    body?: Schemas.ManagementPermissionReference;
+    pathParams: PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissions = (
-  variables: PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ManagementPermissionReference,
-    PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError,
-    Schemas.ManagementPermissionReference,
-    {},
-    {},
-    PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/management/permissions',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissions =
+  (
+    variables: PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ManagementPermissionReference,
+      PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsError,
+      Schemas.ManagementPermissionReference,
+      {},
+      {},
+      PutAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/management/permissions",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersPathParams = {
   /**
@@ -7020,28 +7965,31 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersPathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersQueryParams = {
-  /**
-   * Boolean which defines whether brief representations are returned (default: false)
-   */
-  briefRepresentation?: boolean;
-  /**
-   * first result to return. Ignored if negative or {@code null}.
-   *
-   * @format int32
-   */
-  first?: number;
-  /**
-   * maximum number of results to return. Ignored if negative or {@code null}.
-   *
-   * @format int32
-   */
-  max?: number;
-};
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersQueryParams =
+  {
+    /**
+     * Boolean which defines whether brief representations are returned (default: false)
+     */
+    briefRepresentation?: boolean;
+    /**
+     * first result to return. Ignored if negative or {@code null}.
+     *
+     * @format int32
+     */
+    first?: number;
+    /**
+     * maximum number of results to return. Ignored if negative or {@code null}.
+     *
+     * @format int32
+     */
+    max?: number;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersResponse = Schemas.UserRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersResponse =
+  Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersPathParams;
@@ -7050,7 +7998,7 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidRolesRoleNameUsers = (
   variables: GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersResponse,
@@ -7059,7 +8007,12 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleNameUsers = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/users', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/users",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams = {
   /**
@@ -7072,7 +8025,8 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams;
@@ -7080,7 +8034,7 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidScopeMappings = (
   variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MappingsRepresentation,
@@ -7089,31 +8043,40 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappings = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    client: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient = (
   variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientResponse,
@@ -7123,36 +8086,40 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient = (
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  client: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    client: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables = {
-  body?: PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody;
-  pathParams: PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables =
+  {
+    body?: PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody;
+    pathParams: PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient = (
   variables: PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7162,62 +8129,68 @@ export const postAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient = (
     {},
     PostAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}',
-    method: 'post',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  client: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    client: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables = {
-  body?: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams;
+  } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient = (
-  variables: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError,
-    DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody,
-    {},
-    {},
-    DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClient =
+  (
+    variables: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientError,
+      DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientRequestBody,
+      {},
+      {},
+      DeleteAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    client: string;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableError =
   Fetcher.ErrorWrapper<undefined>;
@@ -7225,48 +8198,52 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvaila
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailable = (
-  variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableResponse,
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailable =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableResponse,
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-  client: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+    client: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeError =
   Fetcher.ErrorWrapper<undefined>;
@@ -7274,28 +8251,30 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompos
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeResponse =
   Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientComposite = (
-  variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeResponse,
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams,
-    GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientComposite =
+  (
+    variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeResponse,
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositeQueryParams,
+      GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/clients/{client}/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
   /**
@@ -7308,9 +8287,11 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams;
@@ -7318,7 +8299,7 @@ export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
   variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmResponse,
@@ -7327,22 +8308,30 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables = {
   body?: PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody;
@@ -7351,7 +8340,7 @@ export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables = {
 
 export const postAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
   variables: PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7360,31 +8349,40 @@ export const postAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables = {
-  body?: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody;
-  pathParams: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables =
+  {
+    body?: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmRequestBody;
+    pathParams: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
   variables: DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7393,30 +8391,39 @@ export const deleteAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailable = (
   variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailableResponse,
@@ -7426,47 +8433,52 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailable = (
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm/available',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm/available",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  /**
-   * id of client (not client-id!)
-   */
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    /**
+     * id of client (not client-id!)
+     */
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeVariables = {
-  pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositePathParams;
-  queryParams?: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositePathParams;
+    queryParams?: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeQueryParams;
+  } & FetcherExtraProps;
 
 /**
  * The method is really to show a comprehensive total view of realm-level roles associated with the client.
  */
 export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealmComposite = (
   variables: GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeResponse,
@@ -7476,10 +8488,10 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealmComposite = (
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositeQueryParams,
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmCompositePathParams
   >({
-    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm/composite',
-    method: 'get',
+    url: "/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm/composite",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserPathParams = {
@@ -7493,7 +8505,8 @@ export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidServiceAccountUserPathParams;
@@ -7501,7 +8514,7 @@ export type GetAdminRealmsRealmClientsClientUuidServiceAccountUserVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidServiceAccountUser = (
   variables: GetAdminRealmsRealmClientsClientUuidServiceAccountUserVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.UserRepresentation,
@@ -7510,7 +8523,12 @@ export const getAdminRealmsRealmClientsClientUuidServiceAccountUser = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidServiceAccountUserPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/service-account-user', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/service-account-user",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidSessionCountPathParams = {
   /**
@@ -7523,7 +8541,8 @@ export type GetAdminRealmsRealmClientsClientUuidSessionCountPathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidSessionCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidSessionCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidSessionCountResponse = {
   [key: string]: number;
@@ -7535,7 +8554,7 @@ export type GetAdminRealmsRealmClientsClientUuidSessionCountVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidSessionCount = (
   variables: GetAdminRealmsRealmClientsClientUuidSessionCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidSessionCountResponse,
@@ -7544,7 +8563,12 @@ export const getAdminRealmsRealmClientsClientUuidSessionCount = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidSessionCountPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/session-count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/session-count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams = {
   /**
@@ -7557,7 +8581,8 @@ export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams = {
   clientUuid: string;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailableVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams;
@@ -7565,7 +8590,7 @@ export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailableVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidTestNodesAvailable = (
   variables: GetAdminRealmsRealmClientsClientUuidTestNodesAvailableVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GlobalRequestResult,
@@ -7574,7 +8599,12 @@ export const getAdminRealmsRealmClientsClientUuidTestNodesAvailable = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/test-nodes-available', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/test-nodes-available",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidUserSessionsPathParams = {
   /**
@@ -7602,9 +8632,11 @@ export type GetAdminRealmsRealmClientsClientUuidUserSessionsQueryParams = {
   max?: number;
 };
 
-export type GetAdminRealmsRealmClientsClientUuidUserSessionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmClientsClientUuidUserSessionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidUserSessionsResponse = Schemas.UserSessionRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidUserSessionsResponse =
+  Schemas.UserSessionRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidUserSessionsVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidUserSessionsPathParams;
@@ -7613,7 +8645,7 @@ export type GetAdminRealmsRealmClientsClientUuidUserSessionsVariables = {
 
 export const getAdminRealmsRealmClientsClientUuidUserSessions = (
   variables: GetAdminRealmsRealmClientsClientUuidUserSessionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmClientsClientUuidUserSessionsResponse,
@@ -7622,7 +8654,12 @@ export const getAdminRealmsRealmClientsClientUuidUserSessions = (
     {},
     GetAdminRealmsRealmClientsClientUuidUserSessionsQueryParams,
     GetAdminRealmsRealmClientsClientUuidUserSessionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/user-sessions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/clients/{clientUuid}/user-sessions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmComponentsPathParams = {
   /**
@@ -7637,9 +8674,11 @@ export type GetAdminRealmsRealmComponentsQueryParams = {
   type?: string;
 };
 
-export type GetAdminRealmsRealmComponentsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmComponentsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmComponentsResponse = Schemas.ComponentRepresentation[];
+export type GetAdminRealmsRealmComponentsResponse =
+  Schemas.ComponentRepresentation[];
 
 export type GetAdminRealmsRealmComponentsVariables = {
   pathParams: GetAdminRealmsRealmComponentsPathParams;
@@ -7648,7 +8687,7 @@ export type GetAdminRealmsRealmComponentsVariables = {
 
 export const getAdminRealmsRealmComponents = (
   variables: GetAdminRealmsRealmComponentsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmComponentsResponse,
@@ -7657,7 +8696,12 @@ export const getAdminRealmsRealmComponents = (
     {},
     GetAdminRealmsRealmComponentsQueryParams,
     GetAdminRealmsRealmComponentsPathParams
-  >({ url: '/admin/realms/{realm}/components', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmComponentsPathParams = {
   /**
@@ -7666,7 +8710,8 @@ export type PostAdminRealmsRealmComponentsPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmComponentsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmComponentsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmComponentsVariables = {
   body?: Schemas.ComponentRepresentation;
@@ -7675,7 +8720,7 @@ export type PostAdminRealmsRealmComponentsVariables = {
 
 export const postAdminRealmsRealmComponents = (
   variables: PostAdminRealmsRealmComponentsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7684,7 +8729,12 @@ export const postAdminRealmsRealmComponents = (
     {},
     {},
     PostAdminRealmsRealmComponentsPathParams
-  >({ url: '/admin/realms/{realm}/components', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7694,7 +8744,8 @@ export type GetAdminRealmsRealmComponentsIdPathParams = {
   id: string;
 };
 
-export type GetAdminRealmsRealmComponentsIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmComponentsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmComponentsIdVariables = {
   pathParams: GetAdminRealmsRealmComponentsIdPathParams;
@@ -7702,7 +8753,7 @@ export type GetAdminRealmsRealmComponentsIdVariables = {
 
 export const getAdminRealmsRealmComponentsId = (
   variables: GetAdminRealmsRealmComponentsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ComponentRepresentation,
@@ -7711,7 +8762,12 @@ export const getAdminRealmsRealmComponentsId = (
     {},
     {},
     GetAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components/{id}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7721,7 +8777,8 @@ export type PutAdminRealmsRealmComponentsIdPathParams = {
   id: string;
 };
 
-export type PutAdminRealmsRealmComponentsIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmComponentsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmComponentsIdVariables = {
   body?: Schemas.ComponentRepresentation;
@@ -7730,7 +8787,7 @@ export type PutAdminRealmsRealmComponentsIdVariables = {
 
 export const putAdminRealmsRealmComponentsId = (
   variables: PutAdminRealmsRealmComponentsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7739,7 +8796,12 @@ export const putAdminRealmsRealmComponentsId = (
     {},
     {},
     PutAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components/{id}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7749,7 +8811,8 @@ export type DeleteAdminRealmsRealmComponentsIdPathParams = {
   id: string;
 };
 
-export type DeleteAdminRealmsRealmComponentsIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmComponentsIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmComponentsIdVariables = {
   pathParams: DeleteAdminRealmsRealmComponentsIdPathParams;
@@ -7757,7 +8820,7 @@ export type DeleteAdminRealmsRealmComponentsIdVariables = {
 
 export const deleteAdminRealmsRealmComponentsId = (
   variables: DeleteAdminRealmsRealmComponentsIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7766,7 +8829,12 @@ export const deleteAdminRealmsRealmComponentsId = (
     {},
     {},
     DeleteAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components/{id}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmComponentsIdSubComponentTypesPathParams = {
   /**
@@ -7780,9 +8848,11 @@ export type GetAdminRealmsRealmComponentsIdSubComponentTypesQueryParams = {
   type?: string;
 };
 
-export type GetAdminRealmsRealmComponentsIdSubComponentTypesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmComponentsIdSubComponentTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmComponentsIdSubComponentTypesResponse = Schemas.ComponentTypeRepresentation[];
+export type GetAdminRealmsRealmComponentsIdSubComponentTypesResponse =
+  Schemas.ComponentTypeRepresentation[];
 
 export type GetAdminRealmsRealmComponentsIdSubComponentTypesVariables = {
   pathParams: GetAdminRealmsRealmComponentsIdSubComponentTypesPathParams;
@@ -7791,7 +8861,7 @@ export type GetAdminRealmsRealmComponentsIdSubComponentTypesVariables = {
 
 export const getAdminRealmsRealmComponentsIdSubComponentTypes = (
   variables: GetAdminRealmsRealmComponentsIdSubComponentTypesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmComponentsIdSubComponentTypesResponse,
@@ -7800,7 +8870,12 @@ export const getAdminRealmsRealmComponentsIdSubComponentTypes = (
     {},
     GetAdminRealmsRealmComponentsIdSubComponentTypesQueryParams,
     GetAdminRealmsRealmComponentsIdSubComponentTypesPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}/sub-component-types', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/components/{id}/sub-component-types",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmCredentialRegistratorsPathParams = {
   /**
@@ -7809,7 +8884,8 @@ export type GetAdminRealmsRealmCredentialRegistratorsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmCredentialRegistratorsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmCredentialRegistratorsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmCredentialRegistratorsResponse = string[];
 
@@ -7819,7 +8895,7 @@ export type GetAdminRealmsRealmCredentialRegistratorsVariables = {
 
 export const getAdminRealmsRealmCredentialRegistrators = (
   variables: GetAdminRealmsRealmCredentialRegistratorsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmCredentialRegistratorsResponse,
@@ -7828,7 +8904,12 @@ export const getAdminRealmsRealmCredentialRegistrators = (
     {},
     {},
     GetAdminRealmsRealmCredentialRegistratorsPathParams
-  >({ url: '/admin/realms/{realm}/credential-registrators', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/credential-registrators",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmDefaultDefaultClientScopesPathParams = {
   /**
@@ -7837,9 +8918,11 @@ export type GetAdminRealmsRealmDefaultDefaultClientScopesPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmDefaultDefaultClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmDefaultDefaultClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmDefaultDefaultClientScopesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmDefaultDefaultClientScopesResponse =
+  Schemas.ClientScopeRepresentation[];
 
 export type GetAdminRealmsRealmDefaultDefaultClientScopesVariables = {
   pathParams: GetAdminRealmsRealmDefaultDefaultClientScopesPathParams;
@@ -7847,7 +8930,7 @@ export type GetAdminRealmsRealmDefaultDefaultClientScopesVariables = {
 
 export const getAdminRealmsRealmDefaultDefaultClientScopes = (
   variables: GetAdminRealmsRealmDefaultDefaultClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmDefaultDefaultClientScopesResponse,
@@ -7856,25 +8939,33 @@ export const getAdminRealmsRealmDefaultDefaultClientScopes = (
     {},
     {},
     GetAdminRealmsRealmDefaultDefaultClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/default-default-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/default-default-client-scopes",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables = {
-  pathParams: PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables =
+  {
+    pathParams: PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmDefaultDefaultClientScopesClientScopeId = (
   variables: PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7884,29 +8975,32 @@ export const putAdminRealmsRealmDefaultDefaultClientScopesClientScopeId = (
     {},
     PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams
   >({
-    url: '/admin/realms/{realm}/default-default-client-scopes/{clientScopeId}',
-    method: 'put',
+    url: "/admin/realms/{realm}/default-default-client-scopes/{clientScopeId}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables = {
-  pathParams: DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeId = (
   variables: DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7916,10 +9010,10 @@ export const deleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeId = (
     {},
     DeleteAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams
   >({
-    url: '/admin/realms/{realm}/default-default-client-scopes/{clientScopeId}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/default-default-client-scopes/{clientScopeId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmDefaultGroupsPathParams = {
@@ -7929,9 +9023,11 @@ export type GetAdminRealmsRealmDefaultGroupsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmDefaultGroupsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmDefaultGroupsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmDefaultGroupsResponse = Schemas.GroupRepresentation[];
+export type GetAdminRealmsRealmDefaultGroupsResponse =
+  Schemas.GroupRepresentation[];
 
 export type GetAdminRealmsRealmDefaultGroupsVariables = {
   pathParams: GetAdminRealmsRealmDefaultGroupsPathParams;
@@ -7939,7 +9035,7 @@ export type GetAdminRealmsRealmDefaultGroupsVariables = {
 
 export const getAdminRealmsRealmDefaultGroups = (
   variables: GetAdminRealmsRealmDefaultGroupsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmDefaultGroupsResponse,
@@ -7948,7 +9044,12 @@ export const getAdminRealmsRealmDefaultGroups = (
     {},
     {},
     GetAdminRealmsRealmDefaultGroupsPathParams
-  >({ url: '/admin/realms/{realm}/default-groups', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/default-groups",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   /**
@@ -7958,7 +9059,8 @@ export type PutAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type PutAdminRealmsRealmDefaultGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmDefaultGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmDefaultGroupsGroupIdVariables = {
   pathParams: PutAdminRealmsRealmDefaultGroupsGroupIdPathParams;
@@ -7966,7 +9068,7 @@ export type PutAdminRealmsRealmDefaultGroupsGroupIdVariables = {
 
 export const putAdminRealmsRealmDefaultGroupsGroupId = (
   variables: PutAdminRealmsRealmDefaultGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -7975,7 +9077,12 @@ export const putAdminRealmsRealmDefaultGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmDefaultGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/default-groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/default-groups/{groupId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   /**
@@ -7985,7 +9092,8 @@ export type DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type DeleteAdminRealmsRealmDefaultGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmDefaultGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmDefaultGroupsGroupIdVariables = {
   pathParams: DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams;
@@ -7993,7 +9101,7 @@ export type DeleteAdminRealmsRealmDefaultGroupsGroupIdVariables = {
 
 export const deleteAdminRealmsRealmDefaultGroupsGroupId = (
   variables: DeleteAdminRealmsRealmDefaultGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8002,7 +9110,12 @@ export const deleteAdminRealmsRealmDefaultGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/default-groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/default-groups/{groupId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmDefaultOptionalClientScopesPathParams = {
   /**
@@ -8011,9 +9124,11 @@ export type GetAdminRealmsRealmDefaultOptionalClientScopesPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmDefaultOptionalClientScopesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmDefaultOptionalClientScopesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmDefaultOptionalClientScopesResponse = Schemas.ClientScopeRepresentation[];
+export type GetAdminRealmsRealmDefaultOptionalClientScopesResponse =
+  Schemas.ClientScopeRepresentation[];
 
 export type GetAdminRealmsRealmDefaultOptionalClientScopesVariables = {
   pathParams: GetAdminRealmsRealmDefaultOptionalClientScopesPathParams;
@@ -8021,7 +9136,7 @@ export type GetAdminRealmsRealmDefaultOptionalClientScopesVariables = {
 
 export const getAdminRealmsRealmDefaultOptionalClientScopes = (
   variables: GetAdminRealmsRealmDefaultOptionalClientScopesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmDefaultOptionalClientScopesResponse,
@@ -8030,25 +9145,33 @@ export const getAdminRealmsRealmDefaultOptionalClientScopes = (
     {},
     {},
     GetAdminRealmsRealmDefaultOptionalClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/default-optional-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/default-optional-client-scopes",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables = {
-  pathParams: PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables =
+  {
+    pathParams: PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmDefaultOptionalClientScopesClientScopeId = (
   variables: PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8058,29 +9181,32 @@ export const putAdminRealmsRealmDefaultOptionalClientScopesClientScopeId = (
     {},
     PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams
   >({
-    url: '/admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}',
-    method: 'put',
+    url: "/admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientScopeId: string;
-};
+export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientScopeId: string;
+  };
 
-export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables = {
-  pathParams: DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeId = (
   variables: DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8090,10 +9216,10 @@ export const deleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeId = (
     {},
     DeleteAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams
   >({
-    url: '/admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmEventsPathParams = {
@@ -8155,7 +9281,10 @@ export type GetAdminRealmsRealmEventsVariables = {
   queryParams?: GetAdminRealmsRealmEventsQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmEvents = (variables: GetAdminRealmsRealmEventsVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmEvents = (
+  variables: GetAdminRealmsRealmEventsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAdminRealmsRealmEventsResponse,
     GetAdminRealmsRealmEventsError,
@@ -8163,7 +9292,12 @@ export const getAdminRealmsRealmEvents = (variables: GetAdminRealmsRealmEventsVa
     {},
     GetAdminRealmsRealmEventsQueryParams,
     GetAdminRealmsRealmEventsPathParams
-  >({ url: '/admin/realms/{realm}/events', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/events",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmEventsPathParams = {
   /**
@@ -8178,12 +9312,22 @@ export type DeleteAdminRealmsRealmEventsVariables = {
   pathParams: DeleteAdminRealmsRealmEventsPathParams;
 } & FetcherExtraProps;
 
-export const deleteAdminRealmsRealmEvents = (variables: DeleteAdminRealmsRealmEventsVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteAdminRealmsRealmEventsError, undefined, {}, {}, DeleteAdminRealmsRealmEventsPathParams>({
-    url: '/admin/realms/{realm}/events',
-    method: 'delete',
+export const deleteAdminRealmsRealmEvents = (
+  variables: DeleteAdminRealmsRealmEventsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteAdminRealmsRealmEventsError,
+    undefined,
+    {},
+    {},
+    DeleteAdminRealmsRealmEventsPathParams
+  >({
+    url: "/admin/realms/{realm}/events",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmEventsConfigPathParams = {
@@ -8193,7 +9337,8 @@ export type GetAdminRealmsRealmEventsConfigPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmEventsConfigError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmEventsConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmEventsConfigVariables = {
   pathParams: GetAdminRealmsRealmEventsConfigPathParams;
@@ -8201,7 +9346,7 @@ export type GetAdminRealmsRealmEventsConfigVariables = {
 
 export const getAdminRealmsRealmEventsConfig = (
   variables: GetAdminRealmsRealmEventsConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RealmEventsConfigRepresentation,
@@ -8210,7 +9355,12 @@ export const getAdminRealmsRealmEventsConfig = (
     {},
     {},
     GetAdminRealmsRealmEventsConfigPathParams
-  >({ url: '/admin/realms/{realm}/events/config', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/events/config",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmEventsConfigPathParams = {
   /**
@@ -8219,7 +9369,8 @@ export type PutAdminRealmsRealmEventsConfigPathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmEventsConfigError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmEventsConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmEventsConfigVariables = {
   body?: Schemas.RealmEventsConfigRepresentation;
@@ -8231,7 +9382,7 @@ export type PutAdminRealmsRealmEventsConfigVariables = {
  */
 export const putAdminRealmsRealmEventsConfig = (
   variables: PutAdminRealmsRealmEventsConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8240,7 +9391,12 @@ export const putAdminRealmsRealmEventsConfig = (
     {},
     {},
     PutAdminRealmsRealmEventsConfigPathParams
-  >({ url: '/admin/realms/{realm}/events/config', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/events/config",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupByPathPathPathParams = {
   /**
@@ -8253,7 +9409,8 @@ export type GetAdminRealmsRealmGroupByPathPathPathParams = {
   path: string;
 };
 
-export type GetAdminRealmsRealmGroupByPathPathError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupByPathPathError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmGroupByPathPathVariables = {
   pathParams: GetAdminRealmsRealmGroupByPathPathPathParams;
@@ -8261,7 +9418,7 @@ export type GetAdminRealmsRealmGroupByPathPathVariables = {
 
 export const getAdminRealmsRealmGroupByPathPath = (
   variables: GetAdminRealmsRealmGroupByPathPathVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GroupRepresentation,
@@ -8270,7 +9427,12 @@ export const getAdminRealmsRealmGroupByPathPath = (
     {},
     {},
     GetAdminRealmsRealmGroupByPathPathPathParams
-  >({ url: '/admin/realms/{realm}/group-by-path/{path}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/group-by-path/{path}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsPathParams = {
   /**
@@ -8319,7 +9481,10 @@ export type GetAdminRealmsRealmGroupsVariables = {
   queryParams?: GetAdminRealmsRealmGroupsQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmGroups = (variables: GetAdminRealmsRealmGroupsVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmGroups = (
+  variables: GetAdminRealmsRealmGroupsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAdminRealmsRealmGroupsResponse,
     GetAdminRealmsRealmGroupsError,
@@ -8327,7 +9492,12 @@ export const getAdminRealmsRealmGroups = (variables: GetAdminRealmsRealmGroupsVa
     {},
     GetAdminRealmsRealmGroupsQueryParams,
     GetAdminRealmsRealmGroupsPathParams
-  >({ url: '/admin/realms/{realm}/groups', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmGroupsPathParams = {
   /**
@@ -8346,7 +9516,10 @@ export type PostAdminRealmsRealmGroupsVariables = {
 /**
  * This will update the group and set the parent if it exists. Create it and set the parent if the group doesn’t exist.
  */
-export const postAdminRealmsRealmGroups = (variables: PostAdminRealmsRealmGroupsVariables, signal?: AbortSignal) =>
+export const postAdminRealmsRealmGroups = (
+  variables: PostAdminRealmsRealmGroupsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     PostAdminRealmsRealmGroupsError,
@@ -8354,7 +9527,12 @@ export const postAdminRealmsRealmGroups = (variables: PostAdminRealmsRealmGroups
     {},
     {},
     PostAdminRealmsRealmGroupsPathParams
-  >({ url: '/admin/realms/{realm}/groups', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsCountPathParams = {
   /**
@@ -8371,7 +9549,8 @@ export type GetAdminRealmsRealmGroupsCountQueryParams = {
   top?: boolean;
 };
 
-export type GetAdminRealmsRealmGroupsCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmGroupsCountResponse = {
   [key: string]: number;
@@ -8384,7 +9563,7 @@ export type GetAdminRealmsRealmGroupsCountVariables = {
 
 export const getAdminRealmsRealmGroupsCount = (
   variables: GetAdminRealmsRealmGroupsCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsCountResponse,
@@ -8393,7 +9572,12 @@ export const getAdminRealmsRealmGroupsCount = (
     {},
     GetAdminRealmsRealmGroupsCountQueryParams,
     GetAdminRealmsRealmGroupsCountPathParams
-  >({ url: '/admin/realms/{realm}/groups/count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8403,7 +9587,8 @@ export type GetAdminRealmsRealmGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmGroupsGroupIdVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdPathParams;
@@ -8411,7 +9596,7 @@ export type GetAdminRealmsRealmGroupsGroupIdVariables = {
 
 export const getAdminRealmsRealmGroupsGroupId = (
   variables: GetAdminRealmsRealmGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GroupRepresentation,
@@ -8420,7 +9605,12 @@ export const getAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8430,7 +9620,8 @@ export type PutAdminRealmsRealmGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type PutAdminRealmsRealmGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmGroupsGroupIdVariables = {
   body?: Schemas.GroupRepresentation;
@@ -8439,7 +9630,7 @@ export type PutAdminRealmsRealmGroupsGroupIdVariables = {
 
 export const putAdminRealmsRealmGroupsGroupId = (
   variables: PutAdminRealmsRealmGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8448,7 +9639,12 @@ export const putAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8458,7 +9654,8 @@ export type DeleteAdminRealmsRealmGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type DeleteAdminRealmsRealmGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmGroupsGroupIdVariables = {
   pathParams: DeleteAdminRealmsRealmGroupsGroupIdPathParams;
@@ -8466,7 +9663,7 @@ export type DeleteAdminRealmsRealmGroupsGroupIdVariables = {
 
 export const deleteAdminRealmsRealmGroupsGroupId = (
   variables: DeleteAdminRealmsRealmGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8475,7 +9672,12 @@ export const deleteAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdChildrenPathParams = {
   /**
@@ -8522,9 +9724,11 @@ export type GetAdminRealmsRealmGroupsGroupIdChildrenQueryParams = {
   subGroupsCount?: boolean;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdChildrenError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdChildrenError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdChildrenResponse = Schemas.GroupRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdChildrenResponse =
+  Schemas.GroupRepresentation[];
 
 export type GetAdminRealmsRealmGroupsGroupIdChildrenVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdChildrenPathParams;
@@ -8533,7 +9737,7 @@ export type GetAdminRealmsRealmGroupsGroupIdChildrenVariables = {
 
 export const getAdminRealmsRealmGroupsGroupIdChildren = (
   variables: GetAdminRealmsRealmGroupsGroupIdChildrenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdChildrenResponse,
@@ -8542,7 +9746,12 @@ export const getAdminRealmsRealmGroupsGroupIdChildren = (
     {},
     GetAdminRealmsRealmGroupsGroupIdChildrenQueryParams,
     GetAdminRealmsRealmGroupsGroupIdChildrenPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/children', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/children",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmGroupsGroupIdChildrenPathParams = {
   /**
@@ -8552,7 +9761,8 @@ export type PostAdminRealmsRealmGroupsGroupIdChildrenPathParams = {
   groupId: string;
 };
 
-export type PostAdminRealmsRealmGroupsGroupIdChildrenError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmGroupsGroupIdChildrenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmGroupsGroupIdChildrenVariables = {
   body?: Schemas.GroupRepresentation;
@@ -8564,7 +9774,7 @@ export type PostAdminRealmsRealmGroupsGroupIdChildrenVariables = {
  */
 export const postAdminRealmsRealmGroupsGroupIdChildren = (
   variables: PostAdminRealmsRealmGroupsGroupIdChildrenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8573,7 +9783,12 @@ export const postAdminRealmsRealmGroupsGroupIdChildren = (
     {},
     {},
     PostAdminRealmsRealmGroupsGroupIdChildrenPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/children', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/children",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   /**
@@ -8583,7 +9798,8 @@ export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   groupId: string;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams;
@@ -8591,7 +9807,7 @@ export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables = {
 
 export const getAdminRealmsRealmGroupsGroupIdManagementPermissions = (
   variables: GetAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -8600,7 +9816,12 @@ export const getAdminRealmsRealmGroupsGroupIdManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/management/permissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   /**
@@ -8610,7 +9831,8 @@ export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   groupId: string;
 };
 
-export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables = {
   body?: Schemas.ManagementPermissionReference;
@@ -8619,7 +9841,7 @@ export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables = {
 
 export const putAdminRealmsRealmGroupsGroupIdManagementPermissions = (
   variables: PutAdminRealmsRealmGroupsGroupIdManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -8628,7 +9850,12 @@ export const putAdminRealmsRealmGroupsGroupIdManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/management/permissions",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdMembersPathParams = {
   /**
@@ -8657,9 +9884,11 @@ export type GetAdminRealmsRealmGroupsGroupIdMembersQueryParams = {
   max?: number;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdMembersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdMembersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdMembersResponse = Schemas.UserRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdMembersResponse =
+  Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmGroupsGroupIdMembersVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdMembersPathParams;
@@ -8668,7 +9897,7 @@ export type GetAdminRealmsRealmGroupsGroupIdMembersVariables = {
 
 export const getAdminRealmsRealmGroupsGroupIdMembers = (
   variables: GetAdminRealmsRealmGroupsGroupIdMembersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdMembersResponse,
@@ -8677,7 +9906,12 @@ export const getAdminRealmsRealmGroupsGroupIdMembers = (
     {},
     GetAdminRealmsRealmGroupsGroupIdMembersQueryParams,
     GetAdminRealmsRealmGroupsGroupIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/members', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/members",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams = {
   /**
@@ -8687,7 +9921,8 @@ export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams = {
   groupId: string;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams;
@@ -8695,7 +9930,7 @@ export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsVariables = {
 
 export const getAdminRealmsRealmGroupsGroupIdRoleMappings = (
   variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MappingsRepresentation,
@@ -8704,31 +9939,40 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappings = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables = {
-  pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
   variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdResponse,
@@ -8738,36 +9982,40 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}',
-    method: 'get',
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables = {
-  body?: PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody;
-  pathParams: PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables =
+  {
+    body?: PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody;
+    pathParams: PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
   variables: PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8777,36 +10025,40 @@ export const postAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
     {},
     PostAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}',
-    method: 'post',
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables = {
-  body?: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody;
-  pathParams: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables =
+  {
+    body?: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdRequestBody;
+    pathParams: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
   variables: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8816,97 +10068,108 @@ export const deleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId = (
     {},
     DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableVariables = {
-  pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailable = (
-  variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableResponse,
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailable =
+  (
+    variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableResponse,
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeVariables = {
-  pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams;
-  queryParams?: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams;
+    queryParams?: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdComposite = (
-  variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeResponse,
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams,
-    GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdComposite =
+  (
+    variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeResponse,
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositeQueryParams,
+      GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/clients/{clientId}/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   /**
@@ -8916,9 +10179,11 @@ export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   groupId: string;
 };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
   pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams;
@@ -8926,7 +10191,7 @@ export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
 
 export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
   variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmResponse,
@@ -8935,7 +10200,12 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/realm",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   /**
@@ -8945,9 +10215,11 @@ export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   groupId: string;
 };
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
   body?: PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody;
@@ -8956,7 +10228,7 @@ export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
 
 export const postAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
   variables: PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8965,7 +10237,12 @@ export const postAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/realm",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   /**
@@ -8975,9 +10252,11 @@ export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   groupId: string;
 };
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
   body?: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmRequestBody;
@@ -8986,7 +10265,7 @@ export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables = {
 
 export const deleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
   variables: DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8995,27 +10274,36 @@ export const deleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/realm",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableVariables = {
-  pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailable = (
   variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailableResponse,
@@ -9025,41 +10313,46 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailable = (
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams
   >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm/available',
-    method: 'get',
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/realm/available",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  groupId: string;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    groupId: string;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeVariables = {
-  pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositePathParams;
-  queryParams?: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositePathParams;
+    queryParams?: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealmComposite = (
   variables: GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeResponse,
@@ -9069,10 +10362,10 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealmComposite = (
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositeQueryParams,
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmCompositePathParams
   >({
-    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm/composite',
-    method: 'get',
+    url: "/admin/realms/{realm}/groups/{groupId}/role-mappings/realm/composite",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type PostAdminRealmsRealmIdentityProviderImportConfigPathParams = {
@@ -9082,7 +10375,8 @@ export type PostAdminRealmsRealmIdentityProviderImportConfigPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmIdentityProviderImportConfigError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmIdentityProviderImportConfigError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmIdentityProviderImportConfigResponse = {
   [key: string]: string;
@@ -9102,7 +10396,7 @@ export type PostAdminRealmsRealmIdentityProviderImportConfigVariables = {
  */
 export const postAdminRealmsRealmIdentityProviderImportConfig = (
   variables: PostAdminRealmsRealmIdentityProviderImportConfigVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     PostAdminRealmsRealmIdentityProviderImportConfigResponse,
@@ -9111,7 +10405,12 @@ export const postAdminRealmsRealmIdentityProviderImportConfig = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderImportConfigPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/import-config', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/import-config",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesPathParams = {
   /**
@@ -9147,9 +10446,11 @@ export type GetAdminRealmsRealmIdentityProviderInstancesQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmIdentityProviderInstancesResponse = Schemas.IdentityProviderRepresentation[];
+export type GetAdminRealmsRealmIdentityProviderInstancesResponse =
+  Schemas.IdentityProviderRepresentation[];
 
 export type GetAdminRealmsRealmIdentityProviderInstancesVariables = {
   pathParams: GetAdminRealmsRealmIdentityProviderInstancesPathParams;
@@ -9158,7 +10459,7 @@ export type GetAdminRealmsRealmIdentityProviderInstancesVariables = {
 
 export const getAdminRealmsRealmIdentityProviderInstances = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmIdentityProviderInstancesResponse,
@@ -9167,7 +10468,12 @@ export const getAdminRealmsRealmIdentityProviderInstances = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesQueryParams,
     GetAdminRealmsRealmIdentityProviderInstancesPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmIdentityProviderInstancesPathParams = {
   /**
@@ -9176,7 +10482,8 @@ export type PostAdminRealmsRealmIdentityProviderInstancesPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmIdentityProviderInstancesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmIdentityProviderInstancesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmIdentityProviderInstancesVariables = {
   body?: Schemas.IdentityProviderRepresentation;
@@ -9185,7 +10492,7 @@ export type PostAdminRealmsRealmIdentityProviderInstancesVariables = {
 
 export const postAdminRealmsRealmIdentityProviderInstances = (
   variables: PostAdminRealmsRealmIdentityProviderInstancesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9194,7 +10501,12 @@ export const postAdminRealmsRealmIdentityProviderInstances = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderInstancesPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9204,7 +10516,8 @@ export type GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   alias: string;
 };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
   pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams;
@@ -9212,7 +10525,7 @@ export type GetAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
 
 export const getAdminRealmsRealmIdentityProviderInstancesAlias = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.IdentityProviderRepresentation,
@@ -9221,7 +10534,12 @@ export const getAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9231,7 +10549,8 @@ export type PutAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   alias: string;
 };
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
   body?: Schemas.IdentityProviderRepresentation;
@@ -9240,7 +10559,7 @@ export type PutAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
 
 export const putAdminRealmsRealmIdentityProviderInstancesAlias = (
   variables: PutAdminRealmsRealmIdentityProviderInstancesAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9249,7 +10568,12 @@ export const putAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     PutAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9259,7 +10583,8 @@ export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   alias: string;
 };
 
-export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
   pathParams: DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams;
@@ -9267,7 +10592,7 @@ export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasVariables = {
 
 export const deleteAdminRealmsRealmIdentityProviderInstancesAlias = (
   variables: DeleteAdminRealmsRealmIdentityProviderInstancesAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9276,24 +10601,32 @@ export const deleteAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportQueryParams = {
-  /**
-   * Format to use
-   */
-  format?: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportQueryParams =
+  {
+    /**
+     * Format to use
+     */
+    format?: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportVariables = {
   pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams;
@@ -9302,7 +10635,7 @@ export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportVariables = {
 
 export const getAdminRealmsRealmIdentityProviderInstancesAliasExport = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasExportVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9311,96 +10644,111 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasExport = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasExportQueryParams,
     GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/export', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/export",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables = {
-  pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables =
+  {
+    pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissions = (
-  variables: GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ManagementPermissionReference,
-    GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissions =
+  (
+    variables: GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ManagementPermissionReference,
+      GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
 export type PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables = {
-  body?: Schemas.ManagementPermissionReference;
-  pathParams: PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables =
+  {
+    body?: Schemas.ManagementPermissionReference;
+    pathParams: PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams;
+  } & FetcherExtraProps;
 
-export const putAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissions = (
-  variables: PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.ManagementPermissionReference,
-    PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError,
-    Schemas.ManagementPermissionReference,
-    {},
-    {},
-    PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams
-  >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions',
-    method: 'put',
-    ...variables,
-    signal
-  });
+export const putAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissions =
+  (
+    variables: PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      Schemas.ManagementPermissionReference,
+      PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsError,
+      Schemas.ManagementPermissionReference,
+      {},
+      {},
+      PutAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams
+    >({
+      url: "/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions",
+      method: "put",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesResponse = {
-  [key: string]: Schemas.IdentityProviderMapperTypeRepresentation;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesResponse =
+  {
+    [key: string]: Schemas.IdentityProviderMapperTypeRepresentation;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesVariables = {
-  pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesVariables =
+  {
+    pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmIdentityProviderInstancesAliasMapperTypes = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesResponse,
@@ -9410,32 +10758,35 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasMapperTypes = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasMapperTypesPathParams
   >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types',
-    method: 'get',
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersResponse =
   Schemas.IdentityProviderMapperRepresentation[];
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables = {
-  pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables =
+  {
+    pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmIdentityProviderInstancesAliasMappersResponse,
@@ -9444,26 +10795,34 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
-export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables = {
-  body?: Schemas.IdentityProviderMapperRepresentation;
-  pathParams: PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables =
+  {
+    body?: Schemas.IdentityProviderMapperRepresentation;
+    pathParams: PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
   variables: PostAdminRealmsRealmIdentityProviderInstancesAliasMappersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9472,26 +10831,34 @@ export const postAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-  id: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+    id: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables = {
-  pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.IdentityProviderMapperRepresentation,
@@ -9501,34 +10868,37 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams
   >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}',
-    method: 'get',
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables = {
-  body?: Schemas.IdentityProviderMapperRepresentation;
-  pathParams: PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables =
+  {
+    body?: Schemas.IdentityProviderMapperRepresentation;
+    pathParams: PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
   variables: PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9538,33 +10908,36 @@ export const putAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
     {},
     PutAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams
   >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}',
-    method: 'put',
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-  /**
-   * Mapper id
-   */
-  id: string;
-};
+export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+    /**
+     * Mapper id
+     */
+    id: string;
+  };
 
-export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables = {
-  pathParams: DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
   variables: DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9574,29 +10947,32 @@ export const deleteAdminRealmsRealmIdentityProviderInstancesAliasMappersId = (
     {},
     DeleteAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams
   >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysVariables = {
-  pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysVariables =
+  {
+    pathParams: GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmIdentityProviderInstancesAliasReloadKeys = (
   variables: GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     boolean,
@@ -9606,10 +10982,10 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasReloadKeys = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasReloadKeysPathParams
   >({
-    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys',
-    method: 'get',
+    url: "/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdPathParams = {
@@ -9623,7 +10999,8 @@ export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdPathParams = {
   providerId: string;
 };
 
-export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdVariables = {
   pathParams: GetAdminRealmsRealmIdentityProviderProvidersProviderIdPathParams;
@@ -9631,7 +11008,7 @@ export type GetAdminRealmsRealmIdentityProviderProvidersProviderIdVariables = {
 
 export const getAdminRealmsRealmIdentityProviderProvidersProviderId = (
   variables: GetAdminRealmsRealmIdentityProviderProvidersProviderIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Record<string, any>,
@@ -9640,7 +11017,12 @@ export const getAdminRealmsRealmIdentityProviderProvidersProviderId = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderProvidersProviderIdPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/providers/{providerId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/identity-provider/providers/{providerId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmKeysPathParams = {
   /**
@@ -9655,7 +11037,10 @@ export type GetAdminRealmsRealmKeysVariables = {
   pathParams: GetAdminRealmsRealmKeysPathParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmKeys = (variables: GetAdminRealmsRealmKeysVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmKeys = (
+  variables: GetAdminRealmsRealmKeysVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     Schemas.KeysMetadataRepresentation,
     GetAdminRealmsRealmKeysError,
@@ -9663,7 +11048,7 @@ export const getAdminRealmsRealmKeys = (variables: GetAdminRealmsRealmKeysVariab
     {},
     {},
     GetAdminRealmsRealmKeysPathParams
-  >({ url: '/admin/realms/{realm}/keys', method: 'get', ...variables, signal });
+  >({ url: "/admin/realms/{realm}/keys", method: "get", ...variables, signal });
 
 export type GetAdminRealmsRealmLocalizationPathParams = {
   /**
@@ -9672,7 +11057,8 @@ export type GetAdminRealmsRealmLocalizationPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmLocalizationError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmLocalizationError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmLocalizationResponse = string[];
 
@@ -9682,7 +11068,7 @@ export type GetAdminRealmsRealmLocalizationVariables = {
 
 export const getAdminRealmsRealmLocalization = (
   variables: GetAdminRealmsRealmLocalizationVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmLocalizationResponse,
@@ -9691,7 +11077,12 @@ export const getAdminRealmsRealmLocalization = (
     {},
     {},
     GetAdminRealmsRealmLocalizationPathParams
-  >({ url: '/admin/realms/{realm}/localization', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9705,7 +11096,8 @@ export type GetAdminRealmsRealmLocalizationLocaleQueryParams = {
   useRealmDefaultLocaleFallback?: boolean;
 };
 
-export type GetAdminRealmsRealmLocalizationLocaleError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmLocalizationLocaleError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmLocalizationLocaleResponse = {
   [key: string]: string;
@@ -9718,7 +11110,7 @@ export type GetAdminRealmsRealmLocalizationLocaleVariables = {
 
 export const getAdminRealmsRealmLocalizationLocale = (
   variables: GetAdminRealmsRealmLocalizationLocaleVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmLocalizationLocaleResponse,
@@ -9727,7 +11119,12 @@ export const getAdminRealmsRealmLocalizationLocale = (
     {},
     GetAdminRealmsRealmLocalizationLocaleQueryParams,
     GetAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9737,7 +11134,8 @@ export type PostAdminRealmsRealmLocalizationLocalePathParams = {
   locale: string;
 };
 
-export type PostAdminRealmsRealmLocalizationLocaleError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmLocalizationLocaleError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmLocalizationLocaleRequestBody = {
   [key: string]: string;
@@ -9750,7 +11148,7 @@ export type PostAdminRealmsRealmLocalizationLocaleVariables = {
 
 export const postAdminRealmsRealmLocalizationLocale = (
   variables: PostAdminRealmsRealmLocalizationLocaleVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9759,7 +11157,12 @@ export const postAdminRealmsRealmLocalizationLocale = (
     {},
     {},
     PostAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9769,7 +11172,8 @@ export type DeleteAdminRealmsRealmLocalizationLocalePathParams = {
   locale: string;
 };
 
-export type DeleteAdminRealmsRealmLocalizationLocaleError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmLocalizationLocaleError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmLocalizationLocaleVariables = {
   pathParams: DeleteAdminRealmsRealmLocalizationLocalePathParams;
@@ -9777,7 +11181,7 @@ export type DeleteAdminRealmsRealmLocalizationLocaleVariables = {
 
 export const deleteAdminRealmsRealmLocalizationLocale = (
   variables: DeleteAdminRealmsRealmLocalizationLocaleVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9786,7 +11190,12 @@ export const deleteAdminRealmsRealmLocalizationLocale = (
     {},
     {},
     DeleteAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9797,7 +11206,8 @@ export type GetAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   locale: string;
 };
 
-export type GetAdminRealmsRealmLocalizationLocaleKeyError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmLocalizationLocaleKeyError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmLocalizationLocaleKeyVariables = {
   pathParams: GetAdminRealmsRealmLocalizationLocaleKeyPathParams;
@@ -9805,7 +11215,7 @@ export type GetAdminRealmsRealmLocalizationLocaleKeyVariables = {
 
 export const getAdminRealmsRealmLocalizationLocaleKey = (
   variables: GetAdminRealmsRealmLocalizationLocaleKeyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9814,7 +11224,12 @@ export const getAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     GetAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}/{key}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9825,7 +11240,8 @@ export type PutAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   locale: string;
 };
 
-export type PutAdminRealmsRealmLocalizationLocaleKeyError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmLocalizationLocaleKeyError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmLocalizationLocaleKeyVariables = {
   pathParams: PutAdminRealmsRealmLocalizationLocaleKeyPathParams;
@@ -9833,7 +11249,7 @@ export type PutAdminRealmsRealmLocalizationLocaleKeyVariables = {
 
 export const putAdminRealmsRealmLocalizationLocaleKey = (
   variables: PutAdminRealmsRealmLocalizationLocaleKeyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9842,7 +11258,12 @@ export const putAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     PutAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}/{key}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9853,7 +11274,8 @@ export type DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   locale: string;
 };
 
-export type DeleteAdminRealmsRealmLocalizationLocaleKeyError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmLocalizationLocaleKeyError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmLocalizationLocaleKeyVariables = {
   pathParams: DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams;
@@ -9861,7 +11283,7 @@ export type DeleteAdminRealmsRealmLocalizationLocaleKeyVariables = {
 
 export const deleteAdminRealmsRealmLocalizationLocaleKey = (
   variables: DeleteAdminRealmsRealmLocalizationLocaleKeyVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9870,7 +11292,12 @@ export const deleteAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/localization/{locale}/{key}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmLogoutAllPathParams = {
   /**
@@ -9879,7 +11306,8 @@ export type PostAdminRealmsRealmLogoutAllPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmLogoutAllError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmLogoutAllError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmLogoutAllVariables = {
   pathParams: PostAdminRealmsRealmLogoutAllPathParams;
@@ -9890,7 +11318,7 @@ export type PostAdminRealmsRealmLogoutAllVariables = {
  */
 export const postAdminRealmsRealmLogoutAll = (
   variables: PostAdminRealmsRealmLogoutAllVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GlobalRequestResult,
@@ -9899,7 +11327,12 @@ export const postAdminRealmsRealmLogoutAll = (
     {},
     {},
     PostAdminRealmsRealmLogoutAllPathParams
-  >({ url: '/admin/realms/{realm}/logout-all', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/logout-all",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmOrganizationsPathParams = {
   /**
@@ -9943,9 +11376,11 @@ export type GetAdminRealmsRealmOrganizationsQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsResponse = Schemas.OrganizationRepresentation[];
+export type GetAdminRealmsRealmOrganizationsResponse =
+  Schemas.OrganizationRepresentation[];
 
 export type GetAdminRealmsRealmOrganizationsVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsPathParams;
@@ -9954,7 +11389,7 @@ export type GetAdminRealmsRealmOrganizationsVariables = {
 
 export const getAdminRealmsRealmOrganizations = (
   variables: GetAdminRealmsRealmOrganizationsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmOrganizationsResponse,
@@ -9963,7 +11398,12 @@ export const getAdminRealmsRealmOrganizations = (
     {},
     GetAdminRealmsRealmOrganizationsQueryParams,
     GetAdminRealmsRealmOrganizationsPathParams
-  >({ url: '/admin/realms/{realm}/organizations', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmOrganizationsPathParams = {
   /**
@@ -9972,7 +11412,8 @@ export type PostAdminRealmsRealmOrganizationsPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmOrganizationsVariables = {
   body?: Schemas.OrganizationRepresentation;
@@ -9981,7 +11422,7 @@ export type PostAdminRealmsRealmOrganizationsVariables = {
 
 export const postAdminRealmsRealmOrganizations = (
   variables: PostAdminRealmsRealmOrganizationsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -9990,7 +11431,12 @@ export const postAdminRealmsRealmOrganizations = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsPathParams
-  >({ url: '/admin/realms/{realm}/organizations', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmOrganizationsCountPathParams = {
   /**
@@ -10014,7 +11460,8 @@ export type GetAdminRealmsRealmOrganizationsCountQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsCountVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsCountPathParams;
@@ -10023,7 +11470,7 @@ export type GetAdminRealmsRealmOrganizationsCountVariables = {
 
 export const getAdminRealmsRealmOrganizationsCount = (
   variables: GetAdminRealmsRealmOrganizationsCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     number,
@@ -10032,37 +11479,47 @@ export const getAdminRealmsRealmOrganizationsCount = (
     {},
     GetAdminRealmsRealmOrganizationsCountQueryParams,
     GetAdminRealmsRealmOrganizationsCountPathParams
-  >({ url: '/admin/realms/{realm}/organizations/count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  memberId: string;
-};
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    memberId: string;
+  };
 
-export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams = {
-  /**
-   * if false, return the full representation. Otherwise, only the basic fields are returned.
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams =
+  {
+    /**
+     * if false, return the full representation. Otherwise, only the basic fields are returned.
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse = Schemas.OrganizationRepresentation[];
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse =
+  Schemas.OrganizationRepresentation[];
 
-export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams;
-  queryParams?: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables =
+  {
+    pathParams: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams;
+    queryParams?: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations = (
   variables: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse,
@@ -10072,10 +11529,10 @@ export const getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations = (
     GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams,
     GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/members/{memberId}/organizations',
-    method: 'get',
+    url: "/admin/realms/{realm}/organizations/members/{memberId}/organizations",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdPathParams = {
@@ -10086,7 +11543,8 @@ export type GetAdminRealmsRealmOrganizationsOrgIdPathParams = {
   orgId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsOrgIdVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdPathParams;
@@ -10094,7 +11552,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdVariables = {
 
 export const getAdminRealmsRealmOrganizationsOrgId = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.OrganizationRepresentation,
@@ -10103,7 +11561,12 @@ export const getAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmOrganizationsOrgIdPathParams = {
   /**
@@ -10113,7 +11576,8 @@ export type PutAdminRealmsRealmOrganizationsOrgIdPathParams = {
   orgId: string;
 };
 
-export type PutAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmOrganizationsOrgIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmOrganizationsOrgIdVariables = {
   body?: Schemas.OrganizationRepresentation;
@@ -10122,7 +11586,7 @@ export type PutAdminRealmsRealmOrganizationsOrgIdVariables = {
 
 export const putAdminRealmsRealmOrganizationsOrgId = (
   variables: PutAdminRealmsRealmOrganizationsOrgIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10131,7 +11595,12 @@ export const putAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     PutAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmOrganizationsOrgIdPathParams = {
   /**
@@ -10141,7 +11610,8 @@ export type DeleteAdminRealmsRealmOrganizationsOrgIdPathParams = {
   orgId: string;
 };
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmOrganizationsOrgIdVariables = {
   pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdPathParams;
@@ -10149,7 +11619,7 @@ export type DeleteAdminRealmsRealmOrganizationsOrgIdVariables = {
 
 export const deleteAdminRealmsRealmOrganizationsOrgId = (
   variables: DeleteAdminRealmsRealmOrganizationsOrgIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10158,7 +11628,12 @@ export const deleteAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     DeleteAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
   /**
@@ -10168,9 +11643,11 @@ export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
   orgId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersResponse = Schemas.IdentityProviderRepresentation[];
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersResponse =
+  Schemas.IdentityProviderRepresentation[];
 
 export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams;
@@ -10178,7 +11655,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
 
 export const getAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersResponse,
@@ -10187,17 +11664,24 @@ export const getAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/identity-providers",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-};
+export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+  };
 
-export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
   body?: string;
@@ -10209,7 +11693,7 @@ export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
  */
 export const postAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
   variables: PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10218,29 +11702,37 @@ export const postAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/identity-providers",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-  alias: string;
-};
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+    alias: string;
+  };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables =
+  {
+    pathParams: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
+  } & FetcherExtraProps;
 
 /**
  * Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
  */
 export const getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.IdentityProviderRepresentation,
@@ -10250,33 +11742,36 @@ export const getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
     {},
     GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}',
-    method: 'get',
+    url: "/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-  alias: string;
-};
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+    alias: string;
+  };
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables = {
-  pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
+  } & FetcherExtraProps;
 
 /**
  * Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned
  */
 export const deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
   variables: DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10286,10 +11781,10 @@ export const deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
     {},
     DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
@@ -10329,9 +11824,11 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersResponse = Schemas.MemberRepresentation[];
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersResponse =
+  Schemas.MemberRepresentation[];
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams;
@@ -10340,7 +11837,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
 
 export const getAdminRealmsRealmOrganizationsOrgIdMembers = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdMembersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmOrganizationsOrgIdMembersResponse,
@@ -10349,7 +11846,12 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembers = (
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams,
     GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
   /**
@@ -10359,7 +11861,8 @@ export type PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
   orgId: string;
 };
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
   body?: string;
@@ -10371,7 +11874,7 @@ export type PostAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
  */
 export const postAdminRealmsRealmOrganizationsOrgIdMembers = (
   variables: PostAdminRealmsRealmOrganizationsOrgIdMembersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10380,7 +11883,12 @@ export const postAdminRealmsRealmOrganizationsOrgIdMembers = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams = {
   /**
@@ -10390,7 +11898,8 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams = {
   orgId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams;
@@ -10398,7 +11907,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountVariables = {
 
 export const getAdminRealmsRealmOrganizationsOrgIdMembersCount = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdMembersCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     number,
@@ -10407,25 +11916,33 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembersCount = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members/count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-};
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+  };
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserVariables = {
-  pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserVariables =
+  {
+    pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser = (
   variables: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10435,21 +11952,23 @@ export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser = (
     {},
     PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-existing-user',
-    method: 'post',
+    url: "/admin/realms/{realm}/organizations/{orgId}/members/invite-existing-user",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-};
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+  };
 
-export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserVariables = {
   pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams;
@@ -10460,7 +11979,7 @@ export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserVariables = {
  */
 export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser = (
   variables: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10469,7 +11988,12 @@ export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-user', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members/invite-user",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   /**
@@ -10480,7 +12004,8 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   memberId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams;
@@ -10491,7 +12016,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
  */
 export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
   variables: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MemberRepresentation,
@@ -10500,18 +12025,25 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members/{memberId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-  memberId: string;
-};
+export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+    memberId: string;
+  };
 
-export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
   pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams;
@@ -10522,7 +12054,7 @@ export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
  */
 export const deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
   variables: DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10531,53 +12063,63 @@ export const deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
     {},
     {},
     DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/organizations/{orgId}/members/{memberId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  orgId: string;
-  memberId: string;
-};
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    orgId: string;
+    memberId: string;
+  };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams = {
-  /**
-   * if false, return the full representation. Otherwise, only the basic fields are returned.
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams =
+  {
+    /**
+     * if false, return the full representation. Otherwise, only the basic fields are returned.
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse =
   Schemas.OrganizationRepresentation[];
 
-export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams;
-  queryParams?: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables =
+  {
+    pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams;
+    queryParams?: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations = (
-  variables: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse,
-    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError,
-    undefined,
-    {},
-    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams,
-    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams
-  >({
-    url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations =
+  (
+    variables: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse,
+      GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError,
+      undefined,
+      {},
+      GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams,
+      GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams
+    >({
+      url: "/admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type PostAdminRealmsRealmPartialExportPathParams = {
   /**
@@ -10591,7 +12133,8 @@ export type PostAdminRealmsRealmPartialExportQueryParams = {
   exportGroupsAndRoles?: boolean;
 };
 
-export type PostAdminRealmsRealmPartialExportError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmPartialExportError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmPartialExportVariables = {
   pathParams: PostAdminRealmsRealmPartialExportPathParams;
@@ -10600,7 +12143,7 @@ export type PostAdminRealmsRealmPartialExportVariables = {
 
 export const postAdminRealmsRealmPartialExport = (
   variables: PostAdminRealmsRealmPartialExportVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RealmRepresentation,
@@ -10609,7 +12152,12 @@ export const postAdminRealmsRealmPartialExport = (
     {},
     PostAdminRealmsRealmPartialExportQueryParams,
     PostAdminRealmsRealmPartialExportPathParams
-  >({ url: '/admin/realms/{realm}/partial-export', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/partial-export",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmPartialImportPathParams = {
   /**
@@ -10618,7 +12166,8 @@ export type PostAdminRealmsRealmPartialImportPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmPartialImportError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmPartialImportError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmPartialImportVariables = {
   body?: Blob;
@@ -10627,7 +12176,7 @@ export type PostAdminRealmsRealmPartialImportVariables = {
 
 export const postAdminRealmsRealmPartialImport = (
   variables: PostAdminRealmsRealmPartialImportVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Record<string, any>,
@@ -10636,7 +12185,12 @@ export const postAdminRealmsRealmPartialImport = (
     {},
     {},
     PostAdminRealmsRealmPartialImportPathParams
-  >({ url: '/admin/realms/{realm}/partialImport', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/partialImport",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmPushRevocationPathParams = {
   /**
@@ -10645,7 +12199,8 @@ export type PostAdminRealmsRealmPushRevocationPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmPushRevocationError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmPushRevocationError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmPushRevocationVariables = {
   pathParams: PostAdminRealmsRealmPushRevocationPathParams;
@@ -10653,7 +12208,7 @@ export type PostAdminRealmsRealmPushRevocationVariables = {
 
 export const postAdminRealmsRealmPushRevocation = (
   variables: PostAdminRealmsRealmPushRevocationVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.GlobalRequestResult,
@@ -10662,7 +12217,12 @@ export const postAdminRealmsRealmPushRevocation = (
     {},
     {},
     PostAdminRealmsRealmPushRevocationPathParams
-  >({ url: '/admin/realms/{realm}/push-revocation', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/push-revocation",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesPathParams = {
   /**
@@ -10699,7 +12259,10 @@ export type GetAdminRealmsRealmRolesVariables = {
   queryParams?: GetAdminRealmsRealmRolesQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmRoles = (variables: GetAdminRealmsRealmRolesVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmRoles = (
+  variables: GetAdminRealmsRealmRolesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAdminRealmsRealmRolesResponse,
     GetAdminRealmsRealmRolesError,
@@ -10707,7 +12270,12 @@ export const getAdminRealmsRealmRoles = (variables: GetAdminRealmsRealmRolesVari
     {},
     GetAdminRealmsRealmRolesQueryParams,
     GetAdminRealmsRealmRolesPathParams
-  >({ url: '/admin/realms/{realm}/roles', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmRolesPathParams = {
   /**
@@ -10723,7 +12291,10 @@ export type PostAdminRealmsRealmRolesVariables = {
   pathParams: PostAdminRealmsRealmRolesPathParams;
 } & FetcherExtraProps;
 
-export const postAdminRealmsRealmRoles = (variables: PostAdminRealmsRealmRolesVariables, signal?: AbortSignal) =>
+export const postAdminRealmsRealmRoles = (
+  variables: PostAdminRealmsRealmRolesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     PostAdminRealmsRealmRolesError,
@@ -10731,7 +12302,12 @@ export const postAdminRealmsRealmRoles = (variables: PostAdminRealmsRealmRolesVa
     {},
     {},
     PostAdminRealmsRealmRolesPathParams
-  >({ url: '/admin/realms/{realm}/roles', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10744,7 +12320,8 @@ export type GetAdminRealmsRealmRolesByIdRoleIdPathParams = {
   roleId: string;
 };
 
-export type GetAdminRealmsRealmRolesByIdRoleIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesByIdRoleIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmRolesByIdRoleIdVariables = {
   pathParams: GetAdminRealmsRealmRolesByIdRoleIdPathParams;
@@ -10752,7 +12329,7 @@ export type GetAdminRealmsRealmRolesByIdRoleIdVariables = {
 
 export const getAdminRealmsRealmRolesByIdRoleId = (
   variables: GetAdminRealmsRealmRolesByIdRoleIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RoleRepresentation,
@@ -10761,7 +12338,12 @@ export const getAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10774,7 +12356,8 @@ export type PutAdminRealmsRealmRolesByIdRoleIdPathParams = {
   roleId: string;
 };
 
-export type PutAdminRealmsRealmRolesByIdRoleIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmRolesByIdRoleIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmRolesByIdRoleIdVariables = {
   body?: Schemas.RoleRepresentation;
@@ -10783,7 +12366,7 @@ export type PutAdminRealmsRealmRolesByIdRoleIdVariables = {
 
 export const putAdminRealmsRealmRolesByIdRoleId = (
   variables: PutAdminRealmsRealmRolesByIdRoleIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10792,7 +12375,12 @@ export const putAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     PutAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10805,7 +12393,8 @@ export type DeleteAdminRealmsRealmRolesByIdRoleIdPathParams = {
   roleId: string;
 };
 
-export type DeleteAdminRealmsRealmRolesByIdRoleIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmRolesByIdRoleIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdVariables = {
   pathParams: DeleteAdminRealmsRealmRolesByIdRoleIdPathParams;
@@ -10813,7 +12402,7 @@ export type DeleteAdminRealmsRealmRolesByIdRoleIdVariables = {
 
 export const deleteAdminRealmsRealmRolesByIdRoleId = (
   variables: DeleteAdminRealmsRealmRolesByIdRoleIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10822,7 +12411,12 @@ export const deleteAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     DeleteAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10844,9 +12438,11 @@ export type GetAdminRealmsRealmRolesByIdRoleIdCompositesQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
   pathParams: GetAdminRealmsRealmRolesByIdRoleIdCompositesPathParams;
@@ -10855,7 +12451,7 @@ export type GetAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
 
 export const getAdminRealmsRealmRolesByIdRoleIdComposites = (
   variables: GetAdminRealmsRealmRolesByIdRoleIdCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesByIdRoleIdCompositesResponse,
@@ -10864,7 +12460,12 @@ export const getAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     GetAdminRealmsRealmRolesByIdRoleIdCompositesQueryParams,
     GetAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/composites",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10874,9 +12475,11 @@ export type PostAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   roleId: string;
 };
 
-export type PostAdminRealmsRealmRolesByIdRoleIdCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmRolesByIdRoleIdCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type PostAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
   body?: PostAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody;
@@ -10885,7 +12488,7 @@ export type PostAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
 
 export const postAdminRealmsRealmRolesByIdRoleIdComposites = (
   variables: PostAdminRealmsRealmRolesByIdRoleIdCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10894,7 +12497,12 @@ export const postAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     {},
     PostAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/composites",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10907,9 +12515,11 @@ export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   roleId: string;
 };
 
-export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
   body?: DeleteAdminRealmsRealmRolesByIdRoleIdCompositesRequestBody;
@@ -10918,7 +12528,7 @@ export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesVariables = {
 
 export const deleteAdminRealmsRealmRolesByIdRoleIdComposites = (
   variables: DeleteAdminRealmsRealmRolesByIdRoleIdCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -10927,28 +12537,37 @@ export const deleteAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     {},
     DeleteAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/composites",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientUuid: string;
-  roleId: string;
-};
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientUuid: string;
+    roleId: string;
+  };
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidVariables = {
-  pathParams: GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidVariables =
+  {
+    pathParams: GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuid = (
   variables: GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidResponse,
@@ -10958,10 +12577,10 @@ export const getAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuid = (
     {},
     GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams
   >({
-    url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites/clients/{clientUuid}',
-    method: 'get',
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/composites/clients/{clientUuid}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmPathParams = {
@@ -10972,9 +12591,11 @@ export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmPathParams = {
   roleId: string;
 };
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmVariables = {
   pathParams: GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmPathParams;
@@ -10982,7 +12603,7 @@ export type GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmVariables = {
 
 export const getAdminRealmsRealmRolesByIdRoleIdCompositesRealm = (
   variables: GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmResponse,
@@ -10991,17 +12612,24 @@ export const getAdminRealmsRealmRolesByIdRoleIdCompositesRealm = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites/realm', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/composites/realm",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  roleId: string;
-};
+export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    roleId: string;
+  };
 
-export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables = {
   pathParams: GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams;
@@ -11009,7 +12637,7 @@ export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables = {
 
 export const getAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
   variables: GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11018,17 +12646,24 @@ export const getAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  roleId: string;
-};
+export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    roleId: string;
+  };
 
-export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables = {
   body?: Schemas.ManagementPermissionReference;
@@ -11037,7 +12672,7 @@ export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables = {
 
 export const putAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
   variables: PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11046,7 +12681,12 @@ export const putAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11059,7 +12699,8 @@ export type GetAdminRealmsRealmRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmRolesRoleNameVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNamePathParams;
@@ -11067,7 +12708,7 @@ export type GetAdminRealmsRealmRolesRoleNameVariables = {
 
 export const getAdminRealmsRealmRolesRoleName = (
   variables: GetAdminRealmsRealmRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.RoleRepresentation,
@@ -11076,7 +12717,12 @@ export const getAdminRealmsRealmRolesRoleName = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11089,7 +12735,8 @@ export type PutAdminRealmsRealmRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type PutAdminRealmsRealmRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmRolesRoleNameVariables = {
   body?: Schemas.RoleRepresentation;
@@ -11098,7 +12745,7 @@ export type PutAdminRealmsRealmRolesRoleNameVariables = {
 
 export const putAdminRealmsRealmRolesRoleName = (
   variables: PutAdminRealmsRealmRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11107,7 +12754,12 @@ export const putAdminRealmsRealmRolesRoleName = (
     {},
     {},
     PutAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11120,7 +12772,8 @@ export type DeleteAdminRealmsRealmRolesRoleNamePathParams = {
   roleName: string;
 };
 
-export type DeleteAdminRealmsRealmRolesRoleNameError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmRolesRoleNameError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmRolesRoleNameVariables = {
   pathParams: DeleteAdminRealmsRealmRolesRoleNamePathParams;
@@ -11128,7 +12781,7 @@ export type DeleteAdminRealmsRealmRolesRoleNameVariables = {
 
 export const deleteAdminRealmsRealmRolesRoleName = (
   variables: DeleteAdminRealmsRealmRolesRoleNameVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11137,7 +12790,12 @@ export const deleteAdminRealmsRealmRolesRoleName = (
     {},
     {},
     DeleteAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11150,9 +12808,11 @@ export type GetAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameCompositesResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameCompositesPathParams;
@@ -11160,7 +12820,7 @@ export type GetAdminRealmsRealmRolesRoleNameCompositesVariables = {
 
 export const getAdminRealmsRealmRolesRoleNameComposites = (
   variables: GetAdminRealmsRealmRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesRoleNameCompositesResponse,
@@ -11169,7 +12829,12 @@ export const getAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/composites",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11182,9 +12847,11 @@ export type PostAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   roleName: string;
 };
 
-export type PostAdminRealmsRealmRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmRolesRoleNameCompositesRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmRolesRoleNameCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type PostAdminRealmsRealmRolesRoleNameCompositesVariables = {
   body?: PostAdminRealmsRealmRolesRoleNameCompositesRequestBody;
@@ -11193,7 +12860,7 @@ export type PostAdminRealmsRealmRolesRoleNameCompositesVariables = {
 
 export const postAdminRealmsRealmRolesRoleNameComposites = (
   variables: PostAdminRealmsRealmRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11202,7 +12869,12 @@ export const postAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     PostAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/composites",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11215,9 +12887,11 @@ export type DeleteAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   roleName: string;
 };
 
-export type DeleteAdminRealmsRealmRolesRoleNameCompositesError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmRolesRoleNameCompositesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmRolesRoleNameCompositesRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmRolesRoleNameCompositesRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type DeleteAdminRealmsRealmRolesRoleNameCompositesVariables = {
   body?: DeleteAdminRealmsRealmRolesRoleNameCompositesRequestBody;
@@ -11226,7 +12900,7 @@ export type DeleteAdminRealmsRealmRolesRoleNameCompositesVariables = {
 
 export const deleteAdminRealmsRealmRolesRoleNameComposites = (
   variables: DeleteAdminRealmsRealmRolesRoleNameCompositesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11235,31 +12909,40 @@ export const deleteAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     DeleteAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/composites",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  clientUuid: string;
-  /**
-   * role's name (not id!)
-   */
-  roleName: string;
-};
+export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    clientUuid: string;
+    /**
+     * role's name (not id!)
+     */
+    roleName: string;
+  };
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidVariables = {
-  pathParams: GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidVariables =
+  {
+    pathParams: GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmRolesRoleNameCompositesClientsClientUuid = (
   variables: GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidResponse,
@@ -11269,10 +12952,10 @@ export const getAdminRealmsRealmRolesRoleNameCompositesClientsClientUuid = (
     {},
     GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams
   >({
-    url: '/admin/realms/{realm}/roles/{roleName}/composites/clients/{clientUuid}',
-    method: 'get',
+    url: "/admin/realms/{realm}/roles/{roleName}/composites/clients/{clientUuid}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesRealmPathParams = {
@@ -11286,9 +12969,11 @@ export type GetAdminRealmsRealmRolesRoleNameCompositesRealmPathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameCompositesRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameCompositesRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameCompositesRealmResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesRealmVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameCompositesRealmPathParams;
@@ -11296,7 +12981,7 @@ export type GetAdminRealmsRealmRolesRoleNameCompositesRealmVariables = {
 
 export const getAdminRealmsRealmRolesRoleNameCompositesRealm = (
   variables: GetAdminRealmsRealmRolesRoleNameCompositesRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesRoleNameCompositesRealmResponse,
@@ -11305,7 +12990,12 @@ export const getAdminRealmsRealmRolesRoleNameCompositesRealm = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameCompositesRealmPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites/realm', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/composites/realm",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameGroupsPathParams = {
   /**
@@ -11339,9 +13029,11 @@ export type GetAdminRealmsRealmRolesRoleNameGroupsQueryParams = {
   max?: number;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameGroupsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameGroupsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameGroupsResponse = Schemas.UserRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameGroupsResponse =
+  Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmRolesRoleNameGroupsVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameGroupsPathParams;
@@ -11350,7 +13042,7 @@ export type GetAdminRealmsRealmRolesRoleNameGroupsVariables = {
 
 export const getAdminRealmsRealmRolesRoleNameGroups = (
   variables: GetAdminRealmsRealmRolesRoleNameGroupsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesRoleNameGroupsResponse,
@@ -11359,7 +13051,12 @@ export const getAdminRealmsRealmRolesRoleNameGroups = (
     {},
     GetAdminRealmsRealmRolesRoleNameGroupsQueryParams,
     GetAdminRealmsRealmRolesRoleNameGroupsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/groups', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/groups",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   /**
@@ -11369,7 +13066,8 @@ export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   roleName: string;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams;
@@ -11377,7 +13075,7 @@ export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsVariables = {
 
 export const getAdminRealmsRealmRolesRoleNameManagementPermissions = (
   variables: GetAdminRealmsRealmRolesRoleNameManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11386,7 +13084,12 @@ export const getAdminRealmsRealmRolesRoleNameManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/management/permissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   /**
@@ -11396,7 +13099,8 @@ export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   roleName: string;
 };
 
-export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsVariables = {
   body?: Schemas.ManagementPermissionReference;
@@ -11405,7 +13109,7 @@ export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsVariables = {
 
 export const putAdminRealmsRealmRolesRoleNameManagementPermissions = (
   variables: PutAdminRealmsRealmRolesRoleNameManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11414,7 +13118,12 @@ export const putAdminRealmsRealmRolesRoleNameManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/management/permissions",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameUsersPathParams = {
   /**
@@ -11446,9 +13155,11 @@ export type GetAdminRealmsRealmRolesRoleNameUsersQueryParams = {
   max?: number;
 };
 
-export type GetAdminRealmsRealmRolesRoleNameUsersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmRolesRoleNameUsersError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameUsersResponse = Schemas.UserRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameUsersResponse =
+  Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmRolesRoleNameUsersVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameUsersPathParams;
@@ -11457,7 +13168,7 @@ export type GetAdminRealmsRealmRolesRoleNameUsersVariables = {
 
 export const getAdminRealmsRealmRolesRoleNameUsers = (
   variables: GetAdminRealmsRealmRolesRoleNameUsersVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmRolesRoleNameUsersResponse,
@@ -11466,7 +13177,12 @@ export const getAdminRealmsRealmRolesRoleNameUsers = (
     {},
     GetAdminRealmsRealmRolesRoleNameUsersQueryParams,
     GetAdminRealmsRealmRolesRoleNameUsersPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/users', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/roles/{roleName}/users",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmSessionsSessionPathParams = {
   /**
@@ -11483,7 +13199,8 @@ export type DeleteAdminRealmsRealmSessionsSessionQueryParams = {
   isOffline?: boolean;
 };
 
-export type DeleteAdminRealmsRealmSessionsSessionError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmSessionsSessionError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmSessionsSessionVariables = {
   pathParams: DeleteAdminRealmsRealmSessionsSessionPathParams;
@@ -11495,7 +13212,7 @@ export type DeleteAdminRealmsRealmSessionsSessionVariables = {
  */
 export const deleteAdminRealmsRealmSessionsSession = (
   variables: DeleteAdminRealmsRealmSessionsSessionVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11504,7 +13221,12 @@ export const deleteAdminRealmsRealmSessionsSession = (
     {},
     DeleteAdminRealmsRealmSessionsSessionQueryParams,
     DeleteAdminRealmsRealmSessionsSessionPathParams
-  >({ url: '/admin/realms/{realm}/sessions/{session}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/sessions/{session}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmTestSMTPConnectionPathParams = {
   /**
@@ -11513,7 +13235,8 @@ export type PostAdminRealmsRealmTestSMTPConnectionPathParams = {
   realm: string;
 };
 
-export type PostAdminRealmsRealmTestSMTPConnectionError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmTestSMTPConnectionError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmTestSMTPConnectionRequestBody = {
   [key: string]: string;
@@ -11526,7 +13249,7 @@ export type PostAdminRealmsRealmTestSMTPConnectionVariables = {
 
 export const postAdminRealmsRealmTestSMTPConnection = (
   variables: PostAdminRealmsRealmTestSMTPConnectionVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11535,7 +13258,12 @@ export const postAdminRealmsRealmTestSMTPConnection = (
     {},
     {},
     PostAdminRealmsRealmTestSMTPConnectionPathParams
-  >({ url: '/admin/realms/{realm}/testSMTPConnection', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/testSMTPConnection",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersPathParams = {
   /**
@@ -11616,7 +13344,10 @@ export type GetAdminRealmsRealmUsersVariables = {
   queryParams?: GetAdminRealmsRealmUsersQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmUsers = (variables: GetAdminRealmsRealmUsersVariables, signal?: AbortSignal) =>
+export const getAdminRealmsRealmUsers = (
+  variables: GetAdminRealmsRealmUsersVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetAdminRealmsRealmUsersResponse,
     GetAdminRealmsRealmUsersError,
@@ -11624,7 +13355,12 @@ export const getAdminRealmsRealmUsers = (variables: GetAdminRealmsRealmUsersVari
     {},
     GetAdminRealmsRealmUsersQueryParams,
     GetAdminRealmsRealmUsersPathParams
-  >({ url: '/admin/realms/{realm}/users', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmUsersPathParams = {
   /**
@@ -11640,7 +13376,10 @@ export type PostAdminRealmsRealmUsersVariables = {
   pathParams: PostAdminRealmsRealmUsersPathParams;
 } & FetcherExtraProps;
 
-export const postAdminRealmsRealmUsers = (variables: PostAdminRealmsRealmUsersVariables, signal?: AbortSignal) =>
+export const postAdminRealmsRealmUsers = (
+  variables: PostAdminRealmsRealmUsersVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     PostAdminRealmsRealmUsersError,
@@ -11648,7 +13387,12 @@ export const postAdminRealmsRealmUsers = (variables: PostAdminRealmsRealmUsersVa
     {},
     {},
     PostAdminRealmsRealmUsersPathParams
-  >({ url: '/admin/realms/{realm}/users', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersManagementPermissionsPathParams = {
   /**
@@ -11657,7 +13401,8 @@ export type GetAdminRealmsRealmUsersManagementPermissionsPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmUsersManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersManagementPermissionsVariables = {
   pathParams: GetAdminRealmsRealmUsersManagementPermissionsPathParams;
@@ -11665,7 +13410,7 @@ export type GetAdminRealmsRealmUsersManagementPermissionsVariables = {
 
 export const getAdminRealmsRealmUsersManagementPermissions = (
   variables: GetAdminRealmsRealmUsersManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11674,7 +13419,12 @@ export const getAdminRealmsRealmUsersManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmUsersManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/users-management-permissions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users-management-permissions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersManagementPermissionsPathParams = {
   /**
@@ -11683,7 +13433,8 @@ export type PutAdminRealmsRealmUsersManagementPermissionsPathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmUsersManagementPermissionsError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersManagementPermissionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersManagementPermissionsVariables = {
   body?: Schemas.ManagementPermissionReference;
@@ -11692,7 +13443,7 @@ export type PutAdminRealmsRealmUsersManagementPermissionsVariables = {
 
 export const putAdminRealmsRealmUsersManagementPermissions = (
   variables: PutAdminRealmsRealmUsersManagementPermissionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.ManagementPermissionReference,
@@ -11701,7 +13452,12 @@ export const putAdminRealmsRealmUsersManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmUsersManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/users-management-permissions', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users-management-permissions",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersCountPathParams = {
   /**
@@ -11739,7 +13495,8 @@ export type GetAdminRealmsRealmUsersCountQueryParams = {
   username?: string;
 };
 
-export type GetAdminRealmsRealmUsersCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersCountVariables = {
   pathParams: GetAdminRealmsRealmUsersCountPathParams;
@@ -11751,7 +13508,7 @@ export type GetAdminRealmsRealmUsersCountVariables = {
  */
 export const getAdminRealmsRealmUsersCount = (
   variables: GetAdminRealmsRealmUsersCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     number,
@@ -11760,7 +13517,12 @@ export const getAdminRealmsRealmUsersCount = (
     {},
     GetAdminRealmsRealmUsersCountQueryParams,
     GetAdminRealmsRealmUsersCountPathParams
-  >({ url: '/admin/realms/{realm}/users/count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersProfilePathParams = {
   /**
@@ -11769,7 +13531,8 @@ export type GetAdminRealmsRealmUsersProfilePathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmUsersProfileError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersProfileError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersProfileVariables = {
   pathParams: GetAdminRealmsRealmUsersProfilePathParams;
@@ -11780,7 +13543,7 @@ export type GetAdminRealmsRealmUsersProfileVariables = {
  */
 export const getAdminRealmsRealmUsersProfile = (
   variables: GetAdminRealmsRealmUsersProfileVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.UPConfig,
@@ -11789,7 +13552,12 @@ export const getAdminRealmsRealmUsersProfile = (
     {},
     {},
     GetAdminRealmsRealmUsersProfilePathParams
-  >({ url: '/admin/realms/{realm}/users/profile', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/profile",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersProfilePathParams = {
   /**
@@ -11798,7 +13566,8 @@ export type PutAdminRealmsRealmUsersProfilePathParams = {
   realm: string;
 };
 
-export type PutAdminRealmsRealmUsersProfileError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersProfileError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersProfileVariables = {
   body?: Schemas.UPConfig;
@@ -11810,7 +13579,7 @@ export type PutAdminRealmsRealmUsersProfileVariables = {
  */
 export const putAdminRealmsRealmUsersProfile = (
   variables: PutAdminRealmsRealmUsersProfileVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.UPConfig,
@@ -11819,7 +13588,12 @@ export const putAdminRealmsRealmUsersProfile = (
     {},
     {},
     PutAdminRealmsRealmUsersProfilePathParams
-  >({ url: '/admin/realms/{realm}/users/profile', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/profile",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersProfileMetadataPathParams = {
   /**
@@ -11828,7 +13602,8 @@ export type GetAdminRealmsRealmUsersProfileMetadataPathParams = {
   realm: string;
 };
 
-export type GetAdminRealmsRealmUsersProfileMetadataError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersProfileMetadataError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersProfileMetadataVariables = {
   pathParams: GetAdminRealmsRealmUsersProfileMetadataPathParams;
@@ -11839,7 +13614,7 @@ export type GetAdminRealmsRealmUsersProfileMetadataVariables = {
  */
 export const getAdminRealmsRealmUsersProfileMetadata = (
   variables: GetAdminRealmsRealmUsersProfileMetadataVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.UserProfileMetadata,
@@ -11848,7 +13623,12 @@ export const getAdminRealmsRealmUsersProfileMetadata = (
     {},
     {},
     GetAdminRealmsRealmUsersProfileMetadataPathParams
-  >({ url: '/admin/realms/{realm}/users/profile/metadata', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/profile/metadata",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11865,7 +13645,8 @@ export type GetAdminRealmsRealmUsersUserIdQueryParams = {
   userProfileMetadata?: boolean;
 };
 
-export type GetAdminRealmsRealmUsersUserIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersUserIdVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdPathParams;
@@ -11874,7 +13655,7 @@ export type GetAdminRealmsRealmUsersUserIdVariables = {
 
 export const getAdminRealmsRealmUsersUserId = (
   variables: GetAdminRealmsRealmUsersUserIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.UserRepresentation,
@@ -11883,7 +13664,12 @@ export const getAdminRealmsRealmUsersUserId = (
     {},
     GetAdminRealmsRealmUsersUserIdQueryParams,
     GetAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11893,7 +13679,8 @@ export type PutAdminRealmsRealmUsersUserIdPathParams = {
   userId: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersUserIdVariables = {
   body?: Schemas.UserRepresentation;
@@ -11902,7 +13689,7 @@ export type PutAdminRealmsRealmUsersUserIdVariables = {
 
 export const putAdminRealmsRealmUsersUserId = (
   variables: PutAdminRealmsRealmUsersUserIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11911,7 +13698,12 @@ export const putAdminRealmsRealmUsersUserId = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11921,7 +13713,8 @@ export type DeleteAdminRealmsRealmUsersUserIdPathParams = {
   userId: string;
 };
 
-export type DeleteAdminRealmsRealmUsersUserIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmUsersUserIdVariables = {
   pathParams: DeleteAdminRealmsRealmUsersUserIdPathParams;
@@ -11929,7 +13722,7 @@ export type DeleteAdminRealmsRealmUsersUserIdVariables = {
 
 export const deleteAdminRealmsRealmUsersUserId = (
   variables: DeleteAdminRealmsRealmUsersUserIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11938,44 +13731,54 @@ export const deleteAdminRealmsRealmUsersUserId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesResponse = string[];
+export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesResponse =
+  string[];
 
-export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams;
+  } & FetcherExtraProps;
 
 /**
  * Returned values can contain for example "password", "otp" etc. This will always return empty list for "local" users, which are not backed by any user storage
  */
-export const getAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypes = (
-  variables: GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesResponse,
-    GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams
-  >({
-    url: '/admin/realms/{realm}/users/{userId}/configured-user-storage-credential-types',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypes =
+  (
+    variables: GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesResponse,
+      GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams
+    >({
+      url: "/admin/realms/{realm}/users/{userId}/configured-user-storage-credential-types",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmUsersUserIdConsentsPathParams = {
   /**
@@ -11985,7 +13788,8 @@ export type GetAdminRealmsRealmUsersUserIdConsentsPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdConsentsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdConsentsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersUserIdConsentsResponse = {
   [key: string]: any;
@@ -11997,7 +13801,7 @@ export type GetAdminRealmsRealmUsersUserIdConsentsVariables = {
 
 export const getAdminRealmsRealmUsersUserIdConsents = (
   variables: GetAdminRealmsRealmUsersUserIdConsentsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdConsentsResponse,
@@ -12006,7 +13810,12 @@ export const getAdminRealmsRealmUsersUserIdConsents = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdConsentsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/consents', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/consents",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams = {
   /**
@@ -12020,7 +13829,8 @@ export type DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams = {
   client: string;
 };
 
-export type DeleteAdminRealmsRealmUsersUserIdConsentsClientError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdConsentsClientError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmUsersUserIdConsentsClientVariables = {
   pathParams: DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams;
@@ -12028,7 +13838,7 @@ export type DeleteAdminRealmsRealmUsersUserIdConsentsClientVariables = {
 
 export const deleteAdminRealmsRealmUsersUserIdConsentsClient = (
   variables: DeleteAdminRealmsRealmUsersUserIdConsentsClientVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12037,7 +13847,12 @@ export const deleteAdminRealmsRealmUsersUserIdConsentsClient = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/consents/{client}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/consents/{client}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdCredentialsPathParams = {
   /**
@@ -12047,9 +13862,11 @@ export type GetAdminRealmsRealmUsersUserIdCredentialsPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdCredentialsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdCredentialsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdCredentialsResponse = Schemas.CredentialRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdCredentialsResponse =
+  Schemas.CredentialRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdCredentialsVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdCredentialsPathParams;
@@ -12057,7 +13874,7 @@ export type GetAdminRealmsRealmUsersUserIdCredentialsVariables = {
 
 export const getAdminRealmsRealmUsersUserIdCredentials = (
   variables: GetAdminRealmsRealmUsersUserIdCredentialsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdCredentialsResponse,
@@ -12066,26 +13883,34 @@ export const getAdminRealmsRealmUsersUserIdCredentials = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdCredentialsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/credentials', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/credentials",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  credentialId: string;
-};
+export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    credentialId: string;
+  };
 
-export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdVariables = {
-  pathParams: DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmUsersUserIdCredentialsCredentialId = (
   variables: DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12094,103 +13919,118 @@ export const deleteAdminRealmsRealmUsersUserIdCredentialsCredentialId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/credentials/{credentialId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * The credential to move
-   */
-  credentialId: string;
-  /**
-   * The credential that will be the previous element in the list. If set to null, the moved credential will be the first element in the list.
-   */
-  newPreviousCredentialId: string;
-};
+export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * The credential to move
+     */
+    credentialId: string;
+    /**
+     * The credential that will be the previous element in the list. If set to null, the moved credential will be the first element in the list.
+     */
+    newPreviousCredentialId: string;
+  };
 
 export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdVariables = {
-  pathParams: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdVariables =
+  {
+    pathParams: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialId = (
-  variables: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams
-  >({
-    url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialId =
+  (
+    variables: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams
+    >({
+      url: "/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * The credential to move
-   */
-  credentialId: string;
-};
+export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * The credential to move
+     */
+    credentialId: string;
+  };
 
-export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstVariables = {
-  pathParams: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstVariables =
+  {
+    pathParams: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams;
+  } & FetcherExtraProps;
 
-export const postAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirst = (
-  variables: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstError,
-    undefined,
-    {},
-    {},
-    PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams
-  >({
-    url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/moveToFirst',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const postAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirst =
+  (
+    variables: PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      undefined,
+      PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstError,
+      undefined,
+      {},
+      {},
+      PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveToFirstPathParams
+    >({
+      url: "/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/moveToFirst",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
-export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  credentialId: string;
-};
+export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    credentialId: string;
+  };
 
-export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelVariables = {
-  pathParams: PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelPathParams;
-} & FetcherExtraProps;
+export type PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelVariables =
+  {
+    pathParams: PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelPathParams;
+  } & FetcherExtraProps;
 
 export const putAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabel = (
   variables: PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12200,10 +14040,10 @@ export const putAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabel = (
     {},
     PutAdminRealmsRealmUsersUserIdCredentialsCredentialIdUserLabelPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/userLabel',
-    method: 'put',
+    url: "/admin/realms/{realm}/users/{userId}/credentials/{credentialId}/userLabel",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesPathParams = {
@@ -12214,9 +14054,11 @@ export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesPathParams = {
   userId: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesRequestBody = string[];
+export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesRequestBody =
+  string[];
 
 export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesVariables = {
   body?: PutAdminRealmsRealmUsersUserIdDisableCredentialTypesRequestBody;
@@ -12225,7 +14067,7 @@ export type PutAdminRealmsRealmUsersUserIdDisableCredentialTypesVariables = {
 
 export const putAdminRealmsRealmUsersUserIdDisableCredentialTypes = (
   variables: PutAdminRealmsRealmUsersUserIdDisableCredentialTypesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12234,7 +14076,12 @@ export const putAdminRealmsRealmUsersUserIdDisableCredentialTypes = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdDisableCredentialTypesPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/disable-credential-types', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/disable-credential-types",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailPathParams = {
   /**
@@ -12261,9 +14108,11 @@ export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailQueryParams = {
   redirect_uri?: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailRequestBody = string[];
+export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailRequestBody =
+  string[];
 
 export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailVariables = {
   body?: PutAdminRealmsRealmUsersUserIdExecuteActionsEmailRequestBody;
@@ -12276,7 +14125,7 @@ export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailVariables = {
  */
 export const putAdminRealmsRealmUsersUserIdExecuteActionsEmail = (
   variables: PutAdminRealmsRealmUsersUserIdExecuteActionsEmailVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12285,7 +14134,12 @@ export const putAdminRealmsRealmUsersUserIdExecuteActionsEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdExecuteActionsEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdExecuteActionsEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/execute-actions-email', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/execute-actions-email",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams = {
   /**
@@ -12295,9 +14149,11 @@ export type GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdFederatedIdentityError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdFederatedIdentityError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdFederatedIdentityResponse = Schemas.FederatedIdentityRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdFederatedIdentityResponse =
+  Schemas.FederatedIdentityRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdFederatedIdentityVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams;
@@ -12305,7 +14161,7 @@ export type GetAdminRealmsRealmUsersUserIdFederatedIdentityVariables = {
 
 export const getAdminRealmsRealmUsersUserIdFederatedIdentity = (
   variables: GetAdminRealmsRealmUsersUserIdFederatedIdentityVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdFederatedIdentityResponse,
@@ -12314,29 +14170,37 @@ export const getAdminRealmsRealmUsersUserIdFederatedIdentity = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/federated-identity', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/federated-identity",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * Social login provider id
-   */
-  provider: string;
-};
+export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * Social login provider id
+     */
+    provider: string;
+  };
 
-export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables = {
-  pathParams: PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables =
+  {
+    pathParams: PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmUsersUserIdFederatedIdentityProvider = (
   variables: PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12346,33 +14210,36 @@ export const postAdminRealmsRealmUsersUserIdFederatedIdentityProvider = (
     {},
     PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
-    method: 'post',
+    url: "/admin/realms/{realm}/users/{userId}/federated-identity/{provider}",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * Social login provider id
-   */
-  provider: string;
-};
+export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * Social login provider id
+     */
+    provider: string;
+  };
 
-export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables = {
-  pathParams: DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables =
+  {
+    pathParams: DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmUsersUserIdFederatedIdentityProvider = (
   variables: DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12382,10 +14249,10 @@ export const deleteAdminRealmsRealmUsersUserIdFederatedIdentityProvider = (
     {},
     DeleteAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/users/{userId}/federated-identity/{provider}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetAdminRealmsRealmUsersUserIdGroupsPathParams = {
@@ -12412,9 +14279,11 @@ export type GetAdminRealmsRealmUsersUserIdGroupsQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdGroupsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdGroupsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdGroupsResponse = Schemas.GroupRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdGroupsResponse =
+  Schemas.GroupRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdGroupsVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdGroupsPathParams;
@@ -12423,7 +14292,7 @@ export type GetAdminRealmsRealmUsersUserIdGroupsVariables = {
 
 export const getAdminRealmsRealmUsersUserIdGroups = (
   variables: GetAdminRealmsRealmUsersUserIdGroupsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdGroupsResponse,
@@ -12432,7 +14301,12 @@ export const getAdminRealmsRealmUsersUserIdGroups = (
     {},
     GetAdminRealmsRealmUsersUserIdGroupsQueryParams,
     GetAdminRealmsRealmUsersUserIdGroupsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/groups",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdGroupsCountPathParams = {
   /**
@@ -12446,7 +14320,8 @@ export type GetAdminRealmsRealmUsersUserIdGroupsCountQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdGroupsCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdGroupsCountError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersUserIdGroupsCountResponse = {
   [key: string]: number;
@@ -12459,7 +14334,7 @@ export type GetAdminRealmsRealmUsersUserIdGroupsCountVariables = {
 
 export const getAdminRealmsRealmUsersUserIdGroupsCount = (
   variables: GetAdminRealmsRealmUsersUserIdGroupsCountVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdGroupsCountResponse,
@@ -12468,7 +14343,12 @@ export const getAdminRealmsRealmUsersUserIdGroupsCount = (
     {},
     GetAdminRealmsRealmUsersUserIdGroupsCountQueryParams,
     GetAdminRealmsRealmUsersUserIdGroupsCountPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/count', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/groups/count",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   /**
@@ -12479,7 +14359,8 @@ export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdVariables = {
   pathParams: PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams;
@@ -12487,7 +14368,7 @@ export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdVariables = {
 
 export const putAdminRealmsRealmUsersUserIdGroupsGroupId = (
   variables: PutAdminRealmsRealmUsersUserIdGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12496,7 +14377,12 @@ export const putAdminRealmsRealmUsersUserIdGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/groups/{groupId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   /**
@@ -12507,7 +14393,8 @@ export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   groupId: string;
 };
 
-export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdVariables = {
   pathParams: DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams;
@@ -12515,7 +14402,7 @@ export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdVariables = {
 
 export const deleteAdminRealmsRealmUsersUserIdGroupsGroupId = (
   variables: DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12524,7 +14411,12 @@ export const deleteAdminRealmsRealmUsersUserIdGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/groups/{groupId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmUsersUserIdImpersonationPathParams = {
   /**
@@ -12534,10 +14426,11 @@ export type PostAdminRealmsRealmUsersUserIdImpersonationPathParams = {
   userId: string;
 };
 
-export type PostAdminRealmsRealmUsersUserIdImpersonationError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.ErrorRepresentation;
-}>;
+export type PostAdminRealmsRealmUsersUserIdImpersonationError =
+  Fetcher.ErrorWrapper<{
+    status: 400;
+    payload: Schemas.ErrorRepresentation;
+  }>;
 
 export type PostAdminRealmsRealmUsersUserIdImpersonationResponse = {
   [key: string]: any;
@@ -12549,7 +14442,7 @@ export type PostAdminRealmsRealmUsersUserIdImpersonationVariables = {
 
 export const postAdminRealmsRealmUsersUserIdImpersonation = (
   variables: PostAdminRealmsRealmUsersUserIdImpersonationVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     PostAdminRealmsRealmUsersUserIdImpersonationResponse,
@@ -12558,7 +14451,12 @@ export const postAdminRealmsRealmUsersUserIdImpersonation = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdImpersonationPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/impersonation', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/impersonation",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmUsersUserIdLogoutPathParams = {
   /**
@@ -12568,7 +14466,8 @@ export type PostAdminRealmsRealmUsersUserIdLogoutPathParams = {
   userId: string;
 };
 
-export type PostAdminRealmsRealmUsersUserIdLogoutError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdLogoutError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PostAdminRealmsRealmUsersUserIdLogoutVariables = {
   pathParams: PostAdminRealmsRealmUsersUserIdLogoutPathParams;
@@ -12576,7 +14475,7 @@ export type PostAdminRealmsRealmUsersUserIdLogoutVariables = {
 
 export const postAdminRealmsRealmUsersUserIdLogout = (
   variables: PostAdminRealmsRealmUsersUserIdLogoutVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12585,20 +14484,28 @@ export const postAdminRealmsRealmUsersUserIdLogout = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdLogoutPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/logout', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/logout",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  clientUuid: string;
-};
+export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    clientUuid: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidResponse = Schemas.UserSessionRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidResponse =
+  Schemas.UserSessionRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams;
@@ -12606,7 +14513,7 @@ export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidVariables = {
 
 export const getAdminRealmsRealmUsersUserIdOfflineSessionsClientUuid = (
   variables: GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidResponse,
@@ -12615,7 +14522,12 @@ export const getAdminRealmsRealmUsersUserIdOfflineSessionsClientUuid = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/offline-sessions/{clientUuid}', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/offline-sessions/{clientUuid}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordPathParams = {
   /**
@@ -12625,7 +14537,8 @@ export type PutAdminRealmsRealmUsersUserIdResetPasswordPathParams = {
   userId: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdResetPasswordError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdResetPasswordError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordVariables = {
   body?: Schemas.CredentialRepresentation;
@@ -12634,7 +14547,7 @@ export type PutAdminRealmsRealmUsersUserIdResetPasswordVariables = {
 
 export const putAdminRealmsRealmUsersUserIdResetPassword = (
   variables: PutAdminRealmsRealmUsersUserIdResetPasswordVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12643,7 +14556,12 @@ export const putAdminRealmsRealmUsersUserIdResetPassword = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdResetPasswordPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/reset-password', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/reset-password",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailPathParams = {
   /**
@@ -12664,7 +14582,8 @@ export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailQueryParams = {
   redirect_uri?: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailVariables = {
   pathParams: PutAdminRealmsRealmUsersUserIdResetPasswordEmailPathParams;
@@ -12676,7 +14595,7 @@ export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailVariables = {
  */
 export const putAdminRealmsRealmUsersUserIdResetPasswordEmail = (
   variables: PutAdminRealmsRealmUsersUserIdResetPasswordEmailVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12685,7 +14604,12 @@ export const putAdminRealmsRealmUsersUserIdResetPasswordEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdResetPasswordEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdResetPasswordEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/reset-password-email', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/reset-password-email",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams = {
   /**
@@ -12695,7 +14619,8 @@ export type GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams;
@@ -12703,7 +14628,7 @@ export type GetAdminRealmsRealmUsersUserIdRoleMappingsVariables = {
 
 export const getAdminRealmsRealmUsersUserIdRoleMappings = (
   variables: GetAdminRealmsRealmUsersUserIdRoleMappingsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     Schemas.MappingsRepresentation,
@@ -12712,31 +14637,40 @@ export const getAdminRealmsRealmUsersUserIdRoleMappings = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
   variables: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdResponse,
@@ -12746,36 +14680,40 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}',
-    method: 'get',
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables = {
-  body?: PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody;
-  pathParams: PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables =
+  {
+    body?: PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody;
+    pathParams: PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const postAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
   variables: PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12785,36 +14723,40 @@ export const postAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
     {},
     PostAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}',
-    method: 'post',
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody =
+  Schemas.RoleRepresentation[];
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables = {
-  body?: DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody;
-  pathParams: DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
-} & FetcherExtraProps;
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables =
+  {
+    body?: DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdRequestBody;
+    pathParams: DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams;
+  } & FetcherExtraProps;
 
 export const deleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
   variables: DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12824,97 +14766,108 @@ export const deleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId = (
     {},
     DeleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams
   >({
-    url: '/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}',
-    method: 'delete',
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailable = (
-  variables: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableResponse,
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams
-  >({
-    url: '/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}/available',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailable =
+  (
+    variables: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableResponse,
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailableError,
+      undefined,
+      {},
+      {},
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailablePathParams
+    >({
+      url: "/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}/available",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-  /**
-   * client id (not clientId!)
-   */
-  clientId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+    /**
+     * client id (not clientId!)
+     */
+    clientId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams;
-  queryParams?: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams;
+    queryParams?: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams;
+  } & FetcherExtraProps;
 
-export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdComposite = (
-  variables: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeResponse,
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeError,
-    undefined,
-    {},
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams,
-    GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams
-  >({
-    url: '/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}/composite',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdComposite =
+  (
+    variables: GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeVariables,
+    signal?: AbortSignal,
+  ) =>
+    fetch<
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeResponse,
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeError,
+      undefined,
+      {},
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositeQueryParams,
+      GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdCompositePathParams
+    >({
+      url: "/admin/realms/{realm}/users/{userId}/role-mappings/clients/{clientId}/composite",
+      method: "get",
+      ...variables,
+      signal,
+    });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   /**
@@ -12924,9 +14877,11 @@ export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmResponse =
+  Schemas.RoleRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams;
@@ -12934,7 +14889,7 @@ export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
 
 export const getAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
   variables: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmResponse,
@@ -12943,7 +14898,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/realm",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   /**
@@ -12953,9 +14913,11 @@ export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   userId: string;
 };
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
   body?: PostAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody;
@@ -12964,7 +14926,7 @@ export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
 
 export const postAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
   variables: PostAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -12973,7 +14935,12 @@ export const postAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/realm",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   /**
@@ -12983,9 +14950,11 @@ export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   userId: string;
 };
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody = Schemas.RoleRepresentation[];
+export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody =
+  Schemas.RoleRepresentation[];
 
 export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
   body?: DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmRequestBody;
@@ -12994,7 +14963,7 @@ export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables = {
 
 export const deleteAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
   variables: DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -13003,27 +14972,36 @@ export const deleteAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/realm",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailable = (
   variables: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailableResponse,
@@ -13032,37 +15010,47 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailable = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/available', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/realm/available",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  userId: string;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams =
+  {
+    /**
+     * realm name (not id!)
+     */
+    realm: string;
+    userId: string;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams = {
-  /**
-   * if false, return roles with their attributes
-   *
-   * @default true
-   */
-  briefRepresentation?: boolean;
-};
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams =
+  {
+    /**
+     * if false, return roles with their attributes
+     *
+     * @default true
+     */
+    briefRepresentation?: boolean;
+  };
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeResponse = Schemas.RoleRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeResponse =
+  Schemas.RoleRepresentation[];
 
-export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeVariables = {
-  pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams;
-  queryParams?: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams;
-} & FetcherExtraProps;
+export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeVariables =
+  {
+    pathParams: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams;
+    queryParams?: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams;
+  } & FetcherExtraProps;
 
 export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmComposite = (
   variables: GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeResponse,
@@ -13071,7 +15059,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmComposite = (
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams,
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/composite', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/role-mappings/realm/composite",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailPathParams = {
   /**
@@ -13098,7 +15091,8 @@ export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailQueryParams = {
   redirect_uri?: string;
 };
 
-export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailError = Fetcher.ErrorWrapper<undefined>;
+export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailVariables = {
   pathParams: PutAdminRealmsRealmUsersUserIdSendVerifyEmailPathParams;
@@ -13110,7 +15104,7 @@ export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailVariables = {
  */
 export const putAdminRealmsRealmUsersUserIdSendVerifyEmail = (
   variables: PutAdminRealmsRealmUsersUserIdSendVerifyEmailVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -13119,7 +15113,12 @@ export const putAdminRealmsRealmUsersUserIdSendVerifyEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdSendVerifyEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdSendVerifyEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/send-verify-email', method: 'put', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/send-verify-email",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdSessionsPathParams = {
   /**
@@ -13129,9 +15128,11 @@ export type GetAdminRealmsRealmUsersUserIdSessionsPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdSessionsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdSessionsError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmUsersUserIdSessionsResponse = Schemas.UserSessionRepresentation[];
+export type GetAdminRealmsRealmUsersUserIdSessionsResponse =
+  Schemas.UserSessionRepresentation[];
 
 export type GetAdminRealmsRealmUsersUserIdSessionsVariables = {
   pathParams: GetAdminRealmsRealmUsersUserIdSessionsPathParams;
@@ -13139,7 +15140,7 @@ export type GetAdminRealmsRealmUsersUserIdSessionsVariables = {
 
 export const getAdminRealmsRealmUsersUserIdSessions = (
   variables: GetAdminRealmsRealmUsersUserIdSessionsVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdSessionsResponse,
@@ -13148,7 +15149,12 @@ export const getAdminRealmsRealmUsersUserIdSessions = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdSessionsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/sessions', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/sessions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesPathParams = {
   /**
@@ -13158,7 +15164,8 @@ export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesPathParams = {
   userId: string;
 };
 
-export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesResponse = {
   [key: string]: string[];
@@ -13170,7 +15177,7 @@ export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesVariables = {
 
 export const getAdminRealmsRealmUsersUserIdUnmanagedAttributes = (
   variables: GetAdminRealmsRealmUsersUserIdUnmanagedAttributesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetAdminRealmsRealmUsersUserIdUnmanagedAttributesResponse,
@@ -13179,7 +15186,12 @@ export const getAdminRealmsRealmUsersUserIdUnmanagedAttributes = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdUnmanagedAttributesPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/unmanagedAttributes', method: 'get', ...variables, signal });
+  >({
+    url: "/admin/realms/{realm}/users/{userId}/unmanagedAttributes",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export const operationsByTag = {
   realmsAdmin: {
@@ -13227,12 +15239,12 @@ export const operationsByTag = {
     deleteAdminRealmsRealmSessionsSession,
     postAdminRealmsRealmTestSMTPConnection,
     getAdminRealmsRealmUsersManagementPermissions,
-    putAdminRealmsRealmUsersManagementPermissions
+    putAdminRealmsRealmUsersManagementPermissions,
   },
   attackDetection: {
     deleteAdminRealmsRealmAttackDetectionBruteForceUsers,
     getAdminRealmsRealmAttackDetectionBruteForceUsersUserId,
-    deleteAdminRealmsRealmAttackDetectionBruteForceUsersUserId
+    deleteAdminRealmsRealmAttackDetectionBruteForceUsersUserId,
   },
   authenticationManagement: {
     getAdminRealmsRealmAuthenticationAuthenticatorProviders,
@@ -13273,9 +15285,11 @@ export const operationsByTag = {
     getAdminRealmsRealmAuthenticationRequiredActionsAliasConfigDescription,
     postAdminRealmsRealmAuthenticationRequiredActionsAliasLowerPriority,
     postAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriority,
-    getAdminRealmsRealmAuthenticationUnregisteredRequiredActions
+    getAdminRealmsRealmAuthenticationUnregisteredRequiredActions,
   },
-  clientRegistrationPolicy: { getAdminRealmsRealmClientRegistrationPolicyProviders },
+  clientRegistrationPolicy: {
+    getAdminRealmsRealmClientRegistrationPolicyProviders,
+  },
   clientScopes: {
     getAdminRealmsRealmClientScopes,
     postAdminRealmsRealmClientScopes,
@@ -13286,7 +15300,7 @@ export const operationsByTag = {
     postAdminRealmsRealmClientTemplates,
     getAdminRealmsRealmClientTemplatesClientScopeId,
     putAdminRealmsRealmClientTemplatesClientScopeId,
-    deleteAdminRealmsRealmClientTemplatesClientScopeId
+    deleteAdminRealmsRealmClientTemplatesClientScopeId,
   },
   protocolMappers: {
     postAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModels,
@@ -13309,7 +15323,7 @@ export const operationsByTag = {
     getAdminRealmsRealmClientsClientUuidProtocolMappersModelsId,
     putAdminRealmsRealmClientsClientUuidProtocolMappersModelsId,
     deleteAdminRealmsRealmClientsClientUuidProtocolMappersModelsId,
-    getAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocol
+    getAdminRealmsRealmClientsClientUuidProtocolMappersProtocolProtocol,
   },
   scopeMappings: {
     getAdminRealmsRealmClientScopesClientScopeIdScopeMappings,
@@ -13344,7 +15358,7 @@ export const operationsByTag = {
     postAdminRealmsRealmClientsClientUuidScopeMappingsRealm,
     deleteAdminRealmsRealmClientsClientUuidScopeMappingsRealm,
     getAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailable,
-    getAdminRealmsRealmClientsClientUuidScopeMappingsRealmComposite
+    getAdminRealmsRealmClientsClientUuidScopeMappingsRealmComposite,
   },
   clients: {
     getAdminRealmsRealmClients,
@@ -13380,12 +15394,12 @@ export const operationsByTag = {
     getAdminRealmsRealmClientsClientUuidServiceAccountUser,
     getAdminRealmsRealmClientsClientUuidSessionCount,
     getAdminRealmsRealmClientsClientUuidTestNodesAvailable,
-    getAdminRealmsRealmClientsClientUuidUserSessions
+    getAdminRealmsRealmClientsClientUuidUserSessions,
   },
   clientInitialAccess: {
     getAdminRealmsRealmClientsInitialAccess,
     postAdminRealmsRealmClientsInitialAccess,
-    deleteAdminRealmsRealmClientsInitialAccessId
+    deleteAdminRealmsRealmClientsInitialAccessId,
   },
   clientAttributeCertificate: {
     getAdminRealmsRealmClientsClientUuidCertificatesAttr,
@@ -13393,7 +15407,7 @@ export const operationsByTag = {
     postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerate,
     postAdminRealmsRealmClientsClientUuidCertificatesAttrGenerateAndDownload,
     postAdminRealmsRealmClientsClientUuidCertificatesAttrUpload,
-    postAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificate
+    postAdminRealmsRealmClientsClientUuidCertificatesAttrUploadCertificate,
   },
   roles: {
     getAdminRealmsRealmClientsClientUuidRoles,
@@ -13423,7 +15437,7 @@ export const operationsByTag = {
     getAdminRealmsRealmRolesRoleNameGroups,
     getAdminRealmsRealmRolesRoleNameManagementPermissions,
     putAdminRealmsRealmRolesRoleNameManagementPermissions,
-    getAdminRealmsRealmRolesRoleNameUsers
+    getAdminRealmsRealmRolesRoleNameUsers,
   },
   component: {
     getAdminRealmsRealmComponents,
@@ -13431,7 +15445,7 @@ export const operationsByTag = {
     getAdminRealmsRealmComponentsId,
     putAdminRealmsRealmComponentsId,
     deleteAdminRealmsRealmComponentsId,
-    getAdminRealmsRealmComponentsIdSubComponentTypes
+    getAdminRealmsRealmComponentsIdSubComponentTypes,
   },
   groups: {
     getAdminRealmsRealmGroups,
@@ -13444,7 +15458,7 @@ export const operationsByTag = {
     postAdminRealmsRealmGroupsGroupIdChildren,
     getAdminRealmsRealmGroupsGroupIdManagementPermissions,
     putAdminRealmsRealmGroupsGroupIdManagementPermissions,
-    getAdminRealmsRealmGroupsGroupIdMembers
+    getAdminRealmsRealmGroupsGroupIdMembers,
   },
   roleMapper: {
     getAdminRealmsRealmGroupsGroupIdRoleMappings,
@@ -13458,7 +15472,7 @@ export const operationsByTag = {
     postAdminRealmsRealmUsersUserIdRoleMappingsRealm,
     deleteAdminRealmsRealmUsersUserIdRoleMappingsRealm,
     getAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailable,
-    getAdminRealmsRealmUsersUserIdRoleMappingsRealmComposite
+    getAdminRealmsRealmUsersUserIdRoleMappingsRealmComposite,
   },
   clientRoleMappings: {
     getAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientId,
@@ -13470,7 +15484,7 @@ export const operationsByTag = {
     postAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId,
     deleteAdminRealmsRealmUsersUserIdRoleMappingsClientsClientId,
     getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdAvailable,
-    getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdComposite
+    getAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdComposite,
   },
   identityProviders: {
     postAdminRealmsRealmIdentityProviderImportConfig,
@@ -13489,7 +15503,7 @@ export const operationsByTag = {
     putAdminRealmsRealmIdentityProviderInstancesAliasMappersId,
     deleteAdminRealmsRealmIdentityProviderInstancesAliasMappersId,
     getAdminRealmsRealmIdentityProviderInstancesAliasReloadKeys,
-    getAdminRealmsRealmIdentityProviderProvidersProviderId
+    getAdminRealmsRealmIdentityProviderProvidersProviderId,
   },
   key: { getAdminRealmsRealmKeys },
   organizations: {
@@ -13511,7 +15525,7 @@ export const operationsByTag = {
     postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser,
     getAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
     deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
-    getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations
+    getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations,
   },
   rolesByID: {
     getAdminRealmsRealmRolesByIdRoleId,
@@ -13523,7 +15537,7 @@ export const operationsByTag = {
     getAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuid,
     getAdminRealmsRealmRolesByIdRoleIdCompositesRealm,
     getAdminRealmsRealmRolesByIdRoleIdManagementPermissions,
-    putAdminRealmsRealmRolesByIdRoleIdManagementPermissions
+    putAdminRealmsRealmRolesByIdRoleIdManagementPermissions,
   },
   users: {
     getAdminRealmsRealmUsers,
@@ -13559,6 +15573,6 @@ export const operationsByTag = {
     putAdminRealmsRealmUsersUserIdResetPasswordEmail,
     putAdminRealmsRealmUsersUserIdSendVerifyEmail,
     getAdminRealmsRealmUsersUserIdSessions,
-    getAdminRealmsRealmUsersUserIdUnmanagedAttributes
-  }
+    getAdminRealmsRealmUsersUserIdUnmanagedAttributes,
+  },
 };

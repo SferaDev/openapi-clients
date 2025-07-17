@@ -1,30 +1,30 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Check, Copy } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Check, Copy } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface CodeBlockProps {
-  code: string
-  language?: string
-  className?: string
+  code: string;
+  language?: string;
+  className?: string;
 }
 
 export function CodeBlock({ code, language, className }: CodeBlockProps) {
-  const [hasCopied, setHasCopied] = useState(false)
+  const [hasCopied, setHasCopied] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code).then(() => {
-      setHasCopied(true)
+      setHasCopied(true);
       setTimeout(() => {
-        setHasCopied(false)
-      }, 2000)
-    })
-  }
+        setHasCopied(false);
+      }, 2000);
+    });
+  };
 
   return (
-    <div className={cn("relative group", className)}>
+    <div className={cn('relative group', className)}>
       <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
         <code className={`language-${language}`}>{code}</code>
       </pre>
@@ -38,5 +38,5 @@ export function CodeBlock({ code, language, className }: CodeBlockProps) {
         <span className="sr-only">Copy to clipboard</span>
       </Button>
     </div>
-  )
+  );
 }

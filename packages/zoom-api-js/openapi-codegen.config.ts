@@ -1,16 +1,16 @@
 import { defineConfig } from '@openapi-codegen/cli';
-import { Context } from '@openapi-codegen/cli/lib/types';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
-import { ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
+import Case from 'case';
+import type { PathItemObject } from 'openapi3-ts/oas30';
+import { type ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
-import { PathItemObject } from "openapi3-ts/oas30";
-import Case from "case";
 
 export default defineConfig({
   meeting: {
     from: {
       source: 'url',
-      url: "https://developers.zoom.us/api-hub/meetings/methods/endpoints.json"
+      url: 'https://developers.zoom.us/api-hub/meetings/methods/endpoints.json'
     },
     outputDir: 'src/meeting',
     to: async (context) => {
@@ -26,22 +26,17 @@ export default defineConfig({
   }
 });
 
-function cleanOperationIds({
-  openAPIDocument,
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-}) {
+function cleanOperationIds({ openAPIDocument }: { openAPIDocument: Context['openAPIDocument'] }) {
   for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
-    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+    for (const method of ['get', 'put', 'post', 'patch', 'delete'] as const) {
       if (path[method]) {
         const operationId = path[method].operationId ?? `${method} ${key}`;
         openAPIDocument.paths[key][method] = {
           ...openAPIDocument.paths[key][method],
           operationId: Case.camel(operationId)
-        }
+        };
       }
     }
-
   }
 
   return openAPIDocument;
@@ -50,7 +45,7 @@ function cleanOperationIds({
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget['ES2020'] }
+    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
@@ -80,8 +75,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-            .map(([path, operation]) => `"${path}": ${operation}`)
-            .join(',\n')}
+              .map(([path, operation]) => `"${path}": ${operation}`)
+              .join(',\n')}
         }`
       }
     ]

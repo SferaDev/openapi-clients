@@ -1,4 +1,4 @@
-import { FetchImpl } from './fetch';
+import type { FetchImpl } from './fetch';
 import { compactObject } from './lang';
 
 export type FetcherConfig = {
@@ -20,14 +20,7 @@ export type FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   signal?: AbortSignal | undefined;
 } & FetcherConfig;
 
-export async function client<
-  TData,
-  TError,
-  TBody,
-  THeaders,
-  TQueryParams,
-  TPathParams
->({
+export async function client<TData, TError, TBody, THeaders, TQueryParams, TPathParams>({
   url,
   method,
   body,

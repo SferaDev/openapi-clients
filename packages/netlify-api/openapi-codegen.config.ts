@@ -1,5 +1,5 @@
 import { defineConfig } from '@openapi-codegen/cli';
-import { Context } from '@openapi-codegen/cli/lib/types';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
@@ -24,7 +24,7 @@ export default defineConfig({
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget['ES2020'] }
+    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
@@ -50,8 +50,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-            .map(([path, operation]) => `"${path}": ${operation}`)
-            .join(',\n')}
+              .map(([path, operation]) => `"${path}": ${operation}`)
+              .join(',\n')}
         }`
       }
     ]

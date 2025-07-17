@@ -3,8 +3,8 @@
  *
  * @version 2
  */
-import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import type * as Fetcher from "./fetcher";
+import { fetch, FetcherExtraProps } from "./fetcher";
 
 export type ListArchivedFilesQueryParams = {
   /**
@@ -45,7 +45,7 @@ export type ListArchivedFilesQueryParams = {
    * @example meeting_start_time
    * @default meeting_start_time
    */
-  query_date_type?: 'meeting_start_time' | 'archive_complete_time';
+  query_date_type?: "meeting_start_time" | "archive_complete_time";
   /**
    * Deprecated. Please use 'group_ids' for querying.
    *
@@ -130,7 +130,14 @@ export type ListArchivedFilesResponse = {
        *
        * @example CHAT
        */
-      file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT' | 'SUB_GROUP_MEMBER_LOG';
+      file_type:
+        | "MP4"
+        | "M4A"
+        | "CHAT"
+        | "CC"
+        | "CHAT_MESSAGE"
+        | "TRANSCRIPT"
+        | "SUB_GROUP_MEMBER_LOG";
       /**
        * The archive file's unique ID.
        *
@@ -180,12 +187,12 @@ export type ListArchivedFilesResponse = {
        * @example chat_message
        */
       recording_type:
-        | 'shared_screen_with_speaker_view'
-        | 'audio_only'
-        | 'chat_file'
-        | 'closed_caption'
-        | 'chat_message'
-        | 'audio_transcript';
+        | "shared_screen_with_speaker_view"
+        | "audio_only"
+        | "chat_file"
+        | "closed_caption"
+        | "chat_message"
+        | "audio_transcript";
       /**
        * The archived file's processing status.
        * * `completed` - The processing of the file is complete.
@@ -194,7 +201,7 @@ export type ListArchivedFilesResponse = {
        *
        * @example completed
        */
-      status: 'completed' | 'processing' | 'failed';
+      status: "completed" | "processing" | "failed";
       /**
        * The archived file's encryption fingerprint, using the SHA256 hash algorithm.
        *
@@ -212,7 +219,16 @@ export type ListArchivedFilesResponse = {
        *
        * @example US
        */
-      storage_location?: 'US' | 'AU' | 'BR' | 'CA' | 'EU' | 'IN' | 'JP' | 'SG' | 'CH';
+      storage_location?:
+        | "US"
+        | "AU"
+        | "BR"
+        | "CA"
+        | "EU"
+        | "IN"
+        | "JP"
+        | "SG"
+        | "CH";
       /**
        * Whether to auto delete the archived file.
        *
@@ -230,7 +246,7 @@ export type ListArchivedFilesResponse = {
      * @format date-time
      * @example 2021-03-12T02:57:27Z
      */
-    complete_time: Record<string, any> | '';
+    complete_time: Record<string, any> | "";
     /**
      * The meeting or webinar's scheduled duration.
      *
@@ -271,7 +287,7 @@ export type ListArchivedFilesResponse = {
      *
      * @example internal
      */
-    meeting_type: 'internal' | 'external';
+    meeting_type: "internal" | "external";
     /**
      * The parent meeting's universally unique ID (UUID). Each meeting or webinar instance generates a UUID. If the `is_breakout_room` value is `true`, the API returns this value.
      *
@@ -345,7 +361,7 @@ export type ListArchivedFilesResponse = {
      *
      * @example completed
      */
-    status: 'completed' | 'processing';
+    status: "completed" | "processing";
     /**
      * Primary group IDs of participants who belong to your account. Each group ID is separated by a comma.
      *
@@ -437,13 +453,18 @@ export type ListArchivedFilesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listArchivedFiles = (variables: ListArchivedFilesVariables, signal?: AbortSignal) =>
-  fetch<ListArchivedFilesResponse, ListArchivedFilesError, undefined, {}, ListArchivedFilesQueryParams, {}>({
-    url: '/archive_files',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listArchivedFiles = (
+  variables: ListArchivedFilesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListArchivedFilesResponse,
+    ListArchivedFilesError,
+    undefined,
+    {},
+    ListArchivedFilesQueryParams,
+    {}
+  >({ url: "/archive_files", method: "get", ...variables, signal });
 
 export type GetArchivedFileStatisticsQueryParams = {
   /**
@@ -563,7 +584,10 @@ export type GetArchivedFileStatisticsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const getArchivedFileStatistics = (variables: GetArchivedFileStatisticsVariables, signal?: AbortSignal) =>
+export const getArchivedFileStatistics = (
+  variables: GetArchivedFileStatisticsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetArchivedFileStatisticsResponse,
     GetArchivedFileStatisticsError,
@@ -571,7 +595,7 @@ export const getArchivedFileStatistics = (variables: GetArchivedFileStatisticsVa
     {},
     GetArchivedFileStatisticsQueryParams,
     {}
-  >({ url: '/archive_files/statistics', method: 'get', ...variables, signal });
+  >({ url: "/archive_files/statistics", method: "get", ...variables, signal });
 
 export type UpdateArchivedFilePathParams = {
   /**
@@ -611,13 +635,18 @@ export type UpdateArchivedFileVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const updateArchivedFile = (variables: UpdateArchivedFileVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateArchivedFileError, UpdateArchivedFileRequestBody, {}, {}, UpdateArchivedFilePathParams>({
-    url: '/archive_files/{fileId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
+export const updateArchivedFile = (
+  variables: UpdateArchivedFileVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateArchivedFileError,
+    UpdateArchivedFileRequestBody,
+    {},
+    {},
+    UpdateArchivedFilePathParams
+  >({ url: "/archive_files/{fileId}", method: "patch", ...variables, signal });
 
 export type GetArchivedFilesPathParams = {
   /**
@@ -689,7 +718,14 @@ export type GetArchivedFilesResponse = {
      *
      * @example CHAT
      */
-    file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT' | 'SUB_GROUP_MEMBER_LOG';
+    file_type:
+      | "MP4"
+      | "M4A"
+      | "CHAT"
+      | "CC"
+      | "CHAT_MESSAGE"
+      | "TRANSCRIPT"
+      | "SUB_GROUP_MEMBER_LOG";
     /**
      * The archive file's unique ID.
      *
@@ -739,12 +775,12 @@ export type GetArchivedFilesResponse = {
      * @example chat_message
      */
     recording_type:
-      | 'shared_screen_with_speaker_view'
-      | 'audio_only'
-      | 'chat_file'
-      | 'closed_caption'
-      | 'chat_message'
-      | 'audio_transcript';
+      | "shared_screen_with_speaker_view"
+      | "audio_only"
+      | "chat_file"
+      | "closed_caption"
+      | "chat_message"
+      | "audio_transcript";
     /**
      * The archived file's processing status.
      * * `completed` - The processing of the file is complete.
@@ -753,7 +789,7 @@ export type GetArchivedFilesResponse = {
      *
      * @example completed
      */
-    status: 'completed' | 'processing' | 'failed';
+    status: "completed" | "processing" | "failed";
     /**
      * The archived file's encryption fingerprint, using the SHA256 hash algorithm.
      *
@@ -771,7 +807,16 @@ export type GetArchivedFilesResponse = {
      *
      * @example US
      */
-    storage_location?: 'US' | 'AU' | 'BR' | 'CA' | 'EU' | 'IN' | 'JP' | 'SG' | 'CH';
+    storage_location?:
+      | "US"
+      | "AU"
+      | "BR"
+      | "CA"
+      | "EU"
+      | "IN"
+      | "JP"
+      | "SG"
+      | "CH";
     /**
      * Whether to auto delete the archived file.
      *
@@ -789,7 +834,7 @@ export type GetArchivedFilesResponse = {
    * @format date-time
    * @example 2021-03-12T02:57:27Z
    */
-  complete_time: Record<string, any> | '';
+  complete_time: Record<string, any> | "";
   /**
    * The meeting or webinar's scheduled duration.
    *
@@ -830,7 +875,7 @@ export type GetArchivedFilesResponse = {
    *
    * @example internal
    */
-  meeting_type: 'internal' | 'external';
+  meeting_type: "internal" | "external";
   /**
    * The parent meeting's universally unique ID (UUID). Each meeting or webinar instance generates a UUID. If the `is_breakout_room` value is `true`, the API returns this value.
    *
@@ -904,7 +949,7 @@ export type GetArchivedFilesResponse = {
    *
    * @example completed
    */
-  status: 'completed' | 'processing';
+  status: "completed" | "processing";
   /**
    * Primary group IDs of participants who belong to your account. Each group ID is separated by a comma.
    *
@@ -964,12 +1009,22 @@ export type GetArchivedFilesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const getArchivedFiles = (variables: GetArchivedFilesVariables, signal?: AbortSignal) =>
-  fetch<GetArchivedFilesResponse, GetArchivedFilesError, undefined, {}, {}, GetArchivedFilesPathParams>({
-    url: '/past_meetings/{meetingUUID}/archive_files',
-    method: 'get',
+export const getArchivedFiles = (
+  variables: GetArchivedFilesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetArchivedFilesResponse,
+    GetArchivedFilesError,
+    undefined,
+    {},
+    {},
+    GetArchivedFilesPathParams
+  >({
+    url: "/past_meetings/{meetingUUID}/archive_files",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeleteArchivedFilesPathParams = {
@@ -1001,12 +1056,22 @@ export type DeleteArchivedFilesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteArchivedFiles = (variables: DeleteArchivedFilesVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteArchivedFilesError, undefined, {}, {}, DeleteArchivedFilesPathParams>({
-    url: '/past_meetings/{meetingUUID}/archive_files',
-    method: 'delete',
+export const deleteArchivedFiles = (
+  variables: DeleteArchivedFilesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteArchivedFilesError,
+    undefined,
+    {},
+    {},
+    DeleteArchivedFilesPathParams
+  >({
+    url: "/past_meetings/{meetingUUID}/archive_files",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type RecordingGetPathParams = {
@@ -1100,13 +1165,22 @@ export type RecordingGetResponse = {
      *
      * @example MP4
      */
-    file_type?: 'MP4' | 'M4A' | 'CHAT' | 'TRANSCRIPT' | 'CSV' | 'TB' | 'CC' | 'CHAT_MESSAGE' | 'SUMMARY';
+    file_type?:
+      | "MP4"
+      | "M4A"
+      | "CHAT"
+      | "TRANSCRIPT"
+      | "CSV"
+      | "TB"
+      | "CC"
+      | "CHAT_MESSAGE"
+      | "SUMMARY";
     /**
      * The file extension type of the recording file.
      *
      * @example M4A
      */
-    file_extension?: 'MP4' | 'M4A' | 'TXT' | 'VTT' | 'CSV' | 'JSON' | 'JPG';
+    file_extension?: "MP4" | "M4A" | "TXT" | "VTT" | "CSV" | "JSON" | "JPG";
     /**
      * The recording file ID. It's included in the response of the general query.
      *
@@ -1143,32 +1217,32 @@ export type RecordingGetResponse = {
      * @example shared_screen_with_speaker_view
      */
     recording_type?:
-      | 'shared_screen_with_speaker_view(CC)'
-      | 'shared_screen_with_speaker_view'
-      | 'shared_screen_with_gallery_view'
-      | 'active_speaker'
-      | 'gallery_view'
-      | 'shared_screen'
-      | 'audio_only'
-      | 'audio_transcript'
-      | 'chat_file'
-      | 'poll'
-      | 'host_video'
-      | 'closed_caption'
-      | 'timeline'
-      | 'thumbnail'
-      | 'audio_interpretation'
-      | 'summary'
-      | 'summary_next_steps'
-      | 'summary_smart_chapters'
-      | 'sign_interpretation'
-      | 'production_studio';
+      | "shared_screen_with_speaker_view(CC)"
+      | "shared_screen_with_speaker_view"
+      | "shared_screen_with_gallery_view"
+      | "active_speaker"
+      | "gallery_view"
+      | "shared_screen"
+      | "audio_only"
+      | "audio_transcript"
+      | "chat_file"
+      | "poll"
+      | "host_video"
+      | "closed_caption"
+      | "timeline"
+      | "thumbnail"
+      | "audio_interpretation"
+      | "summary"
+      | "summary_next_steps"
+      | "summary_smart_chapters"
+      | "sign_interpretation"
+      | "production_studio";
     /**
      * The recording status.
      *
      * @example completed
      */
-    status?: 'completed';
+    status?: "completed";
   }[];
   /**
    * The user account's unique identifier.
@@ -1242,7 +1316,7 @@ export type RecordingGetResponse = {
    *
    * @example 1
    */
-  type?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '99';
+  type?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "99";
   /**
    * The unique meeting identifier. Each instance of the meeting has its own UUID.
    *
@@ -1350,7 +1424,7 @@ export type RecordingGetResponse = {
      *
      * @example completed
      */
-    status?: 'completed';
+    status?: "completed";
   }[];
   /**
    * The JWT token to download the meeting's recording. This response only returns if the `download_access_token` is included in the `include_fields` query parameter.
@@ -1383,12 +1457,22 @@ export type RecordingGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingGet = (variables: RecordingGetVariables, signal?: AbortSignal) =>
-  fetch<RecordingGetResponse, RecordingGetError, undefined, {}, RecordingGetQueryParams, RecordingGetPathParams>({
-    url: '/meetings/{meetingId}/recordings',
-    method: 'get',
+export const recordingGet = (
+  variables: RecordingGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    RecordingGetResponse,
+    RecordingGetError,
+    undefined,
+    {},
+    RecordingGetQueryParams,
+    RecordingGetPathParams
+  >({
+    url: "/meetings/{meetingId}/recordings",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type RecordingDeletePathParams = {
@@ -1413,7 +1497,7 @@ export type RecordingDeleteQueryParams = {
    * @example delete
    * @default trash
    */
-  action?: 'trash' | 'delete';
+  action?: "trash" | "delete";
 };
 
 export type RecordingDeleteError = Fetcher.ErrorWrapper<undefined>;
@@ -1437,12 +1521,22 @@ export type RecordingDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingDelete = (variables: RecordingDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, RecordingDeleteError, undefined, {}, RecordingDeleteQueryParams, RecordingDeletePathParams>({
-    url: '/meetings/{meetingId}/recordings',
-    method: 'delete',
+export const recordingDelete = (
+  variables: RecordingDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    RecordingDeleteError,
+    undefined,
+    {},
+    RecordingDeleteQueryParams,
+    RecordingDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/recordings",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type AnalyticsDetailsPathParams = {
@@ -1494,7 +1588,7 @@ export type AnalyticsDetailsQueryParams = {
    *
    * @example by_view
    */
-  type?: 'by_view' | 'by_download';
+  type?: "by_view" | "by_download";
 };
 
 export type AnalyticsDetailsError = Fetcher.ErrorWrapper<undefined>;
@@ -1575,7 +1669,10 @@ export type AnalyticsDetailsVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:recording_analytics_details`,`cloud_recording:read:recording_analytics_details:master`,`cloud_recording:read:recording_analytics_details:admin`
  */
-export const analyticsDetails = (variables: AnalyticsDetailsVariables, signal?: AbortSignal) =>
+export const analyticsDetails = (
+  variables: AnalyticsDetailsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     AnalyticsDetailsResponse,
     AnalyticsDetailsError,
@@ -1583,7 +1680,12 @@ export const analyticsDetails = (variables: AnalyticsDetailsVariables, signal?: 
     {},
     AnalyticsDetailsQueryParams,
     AnalyticsDetailsPathParams
-  >({ url: '/meetings/{meetingId}/recordings/analytics_details', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/analytics_details",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type AnalyticsSummaryPathParams = {
   /**
@@ -1667,7 +1769,10 @@ export type AnalyticsSummaryVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:recording_analytics_summary`,`cloud_recording:read:recording_analytics_summary:master`,`cloud_recording:read:recording_analytics_summary:admin`
  */
-export const analyticsSummary = (variables: AnalyticsSummaryVariables, signal?: AbortSignal) =>
+export const analyticsSummary = (
+  variables: AnalyticsSummaryVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     AnalyticsSummaryResponse,
     AnalyticsSummaryError,
@@ -1675,7 +1780,12 @@ export const analyticsSummary = (variables: AnalyticsSummaryVariables, signal?: 
     {},
     AnalyticsSummaryQueryParams,
     AnalyticsSummaryPathParams
-  >({ url: '/meetings/{meetingId}/recordings/analytics_summary', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/analytics_summary",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRecordingRegistrantsPathParams = {
   /**
@@ -1699,7 +1809,7 @@ export type MeetingRecordingRegistrantsQueryParams = {
    * @example pending
    * @default approved
    */
-  status?: 'pending' | 'approved' | 'denied';
+  status?: "pending" | "approved" | "denied";
   /**
    * The number of records returned within a single API call.
    *
@@ -1855,16 +1965,16 @@ export type MeetingRecordingRegistrantsResponse = {
      * @example 1-20
      */
     no_of_employees?:
-      | ''
-      | '1-20'
-      | '21-50'
-      | '51-100'
-      | '101-250'
-      | '251-500'
-      | '501-1,000'
-      | '1,001-5,000'
-      | '5,001-10,000'
-      | 'More than 10,000';
+      | ""
+      | "1-20"
+      | "21-50"
+      | "51-100"
+      | "101-250"
+      | "251-500"
+      | "501-1,000"
+      | "1,001-5,000"
+      | "5,001-10,000"
+      | "More than 10,000";
     /**
      * The registrant's organization.
      *
@@ -1887,7 +1997,13 @@ export type MeetingRecordingRegistrantsResponse = {
      *
      * @example 1-3 months
      */
-    purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+    purchasing_time_frame?:
+      | ""
+      | "Within a month"
+      | "1-3 months"
+      | "4-6 months"
+      | "More than 6 months"
+      | "No timeframe";
     /**
      * The registrant's role in the purchase process.
      * * `Decision Maker`
@@ -1897,7 +2013,12 @@ export type MeetingRecordingRegistrantsResponse = {
      *
      * @example Influencer
      */
-    role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+    role_in_purchase_process?:
+      | ""
+      | "Decision Maker"
+      | "Evaluator/Recommender"
+      | "Influencer"
+      | "Not involved";
     /**
      * The registrant's state or province.
      *
@@ -1912,7 +2033,7 @@ export type MeetingRecordingRegistrantsResponse = {
      *
      * @example approved
      */
-    status?: 'approved' | 'denied' | 'pending';
+    status?: "approved" | "denied" | "pending";
     /**
      * The registrant's ZIP or postal code.
      *
@@ -1944,7 +2065,10 @@ export type MeetingRecordingRegistrantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingRecordingRegistrants = (variables: MeetingRecordingRegistrantsVariables, signal?: AbortSignal) =>
+export const meetingRecordingRegistrants = (
+  variables: MeetingRecordingRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingRecordingRegistrantsResponse,
     MeetingRecordingRegistrantsError,
@@ -1952,7 +2076,12 @@ export const meetingRecordingRegistrants = (variables: MeetingRecordingRegistran
     {},
     MeetingRecordingRegistrantsQueryParams,
     MeetingRecordingRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/registrants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRecordingRegistrantCreatePathParams = {
   /**
@@ -1966,7 +2095,8 @@ export type MeetingRecordingRegistrantCreatePathParams = {
   meetingId: number;
 };
 
-export type MeetingRecordingRegistrantCreateError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingRecordingRegistrantCreateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRecordingRegistrantCreateResponse = {
   /**
@@ -2088,16 +2218,16 @@ export type MeetingRecordingRegistrantCreateRequestBody = {
    * @example 1-20
    */
   no_of_employees?:
-    | ''
-    | '1-20'
-    | '21-50'
-    | '51-100'
-    | '101-250'
-    | '251-500'
-    | '501-1,000'
-    | '1,001-5,000'
-    | '5,001-10,000'
-    | 'More than 10,000';
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-250"
+    | "251-500"
+    | "501-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
   /**
    * The registrant's organization.
    *
@@ -2120,7 +2250,13 @@ export type MeetingRecordingRegistrantCreateRequestBody = {
    *
    * @example 1-3 months
    */
-  purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
   /**
    * The registrant's role in the purchase process.
    * * `Decision Maker`
@@ -2130,7 +2266,12 @@ export type MeetingRecordingRegistrantCreateRequestBody = {
    *
    * @example Influencer
    */
-  role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
   /**
    * The registrant's state or province.
    *
@@ -2145,7 +2286,7 @@ export type MeetingRecordingRegistrantCreateRequestBody = {
    *
    * @example approved
    */
-  status?: 'approved' | 'denied' | 'pending';
+  status?: "approved" | "denied" | "pending";
   /**
    * The registrant's ZIP or postal code.
    *
@@ -2174,7 +2315,7 @@ export type MeetingRecordingRegistrantCreateVariables = {
  */
 export const meetingRecordingRegistrantCreate = (
   variables: MeetingRecordingRegistrantCreateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     MeetingRecordingRegistrantCreateResponse,
@@ -2183,7 +2324,12 @@ export const meetingRecordingRegistrantCreate = (
     {},
     {},
     MeetingRecordingRegistrantCreatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type RecordingRegistrantsQuestionsGetPathParams = {
   /**
@@ -2198,7 +2344,8 @@ export type RecordingRegistrantsQuestionsGetPathParams = {
   meetingId: string;
 };
 
-export type RecordingRegistrantsQuestionsGetError = Fetcher.ErrorWrapper<undefined>;
+export type RecordingRegistrantsQuestionsGetError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type RecordingRegistrantsQuestionsGetResponse = {
   /**
@@ -2226,7 +2373,7 @@ export type RecordingRegistrantsQuestionsGetResponse = {
      *
      * @example short
      */
-    type?: 'short' | 'single' | 'multiple';
+    type?: "short" | "single" | "multiple";
   }[];
   /**
    * Array of registrant questions.
@@ -2238,20 +2385,20 @@ export type RecordingRegistrantsQuestionsGetResponse = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * Whether the field is required to be answered by the registrant or not.
      *
@@ -2280,7 +2427,7 @@ export type RecordingRegistrantsQuestionsGetVariables = {
  */
 export const recordingRegistrantsQuestionsGet = (
   variables: RecordingRegistrantsQuestionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     RecordingRegistrantsQuestionsGetResponse,
@@ -2289,7 +2436,12 @@ export const recordingRegistrantsQuestionsGet = (
     {},
     {},
     RecordingRegistrantsQuestionsGetPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/registrants/questions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type RecordingRegistrantQuestionUpdatePathParams = {
   /**
@@ -2304,7 +2456,8 @@ export type RecordingRegistrantQuestionUpdatePathParams = {
   meetingId: string;
 };
 
-export type RecordingRegistrantQuestionUpdateError = Fetcher.ErrorWrapper<undefined>;
+export type RecordingRegistrantQuestionUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type RecordingRegistrantQuestionUpdateRequestBody = {
   /**
@@ -2332,7 +2485,7 @@ export type RecordingRegistrantQuestionUpdateRequestBody = {
      *
      * @example short
      */
-    type?: 'short' | 'single' | 'multiple';
+    type?: "short" | "single" | "multiple";
   }[];
   /**
    * Array of registrant questions.
@@ -2344,20 +2497,20 @@ export type RecordingRegistrantQuestionUpdateRequestBody = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * Whether the field is required to be answered by the registrant or not.
      *
@@ -2387,7 +2540,7 @@ export type RecordingRegistrantQuestionUpdateVariables = {
  */
 export const recordingRegistrantQuestionUpdate = (
   variables: RecordingRegistrantQuestionUpdateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2396,7 +2549,12 @@ export const recordingRegistrantQuestionUpdate = (
     {},
     {},
     RecordingRegistrantQuestionUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/registrants/questions",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRecordingRegistrantStatusPathParams = {
   /**
@@ -2410,13 +2568,14 @@ export type MeetingRecordingRegistrantStatusPathParams = {
   meetingId: number;
 };
 
-export type MeetingRecordingRegistrantStatusError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingRecordingRegistrantStatusError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRecordingRegistrantStatusRequestBody = {
   /**
    * @example approve
    */
-  action: 'approve' | 'deny';
+  action: "approve" | "deny";
   /**
    * List of registrants.
    *
@@ -2449,7 +2608,7 @@ export type MeetingRecordingRegistrantStatusVariables = {
  */
 export const meetingRecordingRegistrantStatus = (
   variables: MeetingRecordingRegistrantStatusVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -2458,7 +2617,12 @@ export const meetingRecordingRegistrantStatus = (
     {},
     {},
     MeetingRecordingRegistrantStatusPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/registrants/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type RecordingSettingUpdatePathParams = {
   /**
@@ -2543,7 +2707,7 @@ export type RecordingSettingUpdateResponse = {
    *
    * @example publicly
    */
-  share_recording?: 'publicly' | 'internally' | 'none';
+  share_recording?: "publicly" | "internally" | "none";
   /**
    * Show social share buttons on the registration page. This applies for On-demand recordings only.
    *
@@ -2594,7 +2758,10 @@ export type RecordingSettingUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingSettingUpdate = (variables: RecordingSettingUpdateVariables, signal?: AbortSignal) =>
+export const recordingSettingUpdate = (
+  variables: RecordingSettingUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     RecordingSettingUpdateResponse,
     RecordingSettingUpdateError,
@@ -2602,7 +2769,12 @@ export const recordingSettingUpdate = (variables: RecordingSettingUpdateVariable
     {},
     {},
     RecordingSettingUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/settings', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/settings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type RecordingSettingsUpdatePathParams = {
   /**
@@ -2682,7 +2854,7 @@ export type RecordingSettingsUpdateRequestBody = {
    *
    * @example publicly
    */
-  share_recording?: 'publicly' | 'internally' | 'none';
+  share_recording?: "publicly" | "internally" | "none";
   /**
    * This field shows social share buttons on registration page. This setting applies for On-demand recordings only.
    *
@@ -2726,7 +2898,10 @@ export type RecordingSettingsUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingSettingsUpdate = (variables: RecordingSettingsUpdateVariables, signal?: AbortSignal) =>
+export const recordingSettingsUpdate = (
+  variables: RecordingSettingsUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     RecordingSettingsUpdateError,
@@ -2734,7 +2909,12 @@ export const recordingSettingsUpdate = (variables: RecordingSettingsUpdateVariab
     {},
     {},
     RecordingSettingsUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/settings', method: 'patch', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/settings",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type RecordingDeleteOnePathParams = {
   /**
@@ -2764,7 +2944,7 @@ export type RecordingDeleteOneQueryParams = {
    * @example delete
    * @default trash
    */
-  action?: 'trash' | 'delete';
+  action?: "trash" | "delete";
 };
 
 export type RecordingDeleteOneError = Fetcher.ErrorWrapper<undefined>;
@@ -2785,10 +2965,23 @@ export type RecordingDeleteOneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingDeleteOne = (variables: RecordingDeleteOneVariables, signal?: AbortSignal) =>
-  fetch<undefined, RecordingDeleteOneError, undefined, {}, RecordingDeleteOneQueryParams, RecordingDeleteOnePathParams>(
-    { url: '/meetings/{meetingId}/recordings/{recordingId}', method: 'delete', ...variables, signal }
-  );
+export const recordingDeleteOne = (
+  variables: RecordingDeleteOneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    RecordingDeleteOneError,
+    undefined,
+    {},
+    RecordingDeleteOneQueryParams,
+    RecordingDeleteOnePathParams
+  >({
+    url: "/meetings/{meetingId}/recordings/{recordingId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type RecordingStatusUpdateOnePathParams = {
   /**
@@ -2815,7 +3008,7 @@ export type RecordingStatusUpdateOneRequestBody = {
   /**
    * @example recover
    */
-  action?: 'recover';
+  action?: "recover";
 };
 
 export type RecordingStatusUpdateOneVariables = {
@@ -2836,7 +3029,10 @@ export type RecordingStatusUpdateOneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingStatusUpdateOne = (variables: RecordingStatusUpdateOneVariables, signal?: AbortSignal) =>
+export const recordingStatusUpdateOne = (
+  variables: RecordingStatusUpdateOneVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     RecordingStatusUpdateOneError,
@@ -2844,7 +3040,12 @@ export const recordingStatusUpdateOne = (variables: RecordingStatusUpdateOneVari
     {},
     {},
     RecordingStatusUpdateOnePathParams
-  >({ url: '/meetings/{meetingId}/recordings/{recordingId}/status', method: 'put', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/recordings/{recordingId}/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type RecordingStatusUpdatePathParams = {
   /**
@@ -2863,7 +3064,7 @@ export type RecordingStatusUpdateRequestBody = {
   /**
    * @example recover
    */
-  action?: 'recover';
+  action?: "recover";
 };
 
 export type RecordingStatusUpdateVariables = {
@@ -2886,7 +3087,10 @@ export type RecordingStatusUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const recordingStatusUpdate = (variables: RecordingStatusUpdateVariables, signal?: AbortSignal) =>
+export const recordingStatusUpdate = (
+  variables: RecordingStatusUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     RecordingStatusUpdateError,
@@ -2894,7 +3098,12 @@ export const recordingStatusUpdate = (variables: RecordingStatusUpdateVariables,
     {},
     {},
     RecordingStatusUpdatePathParams
-  >({ url: '/meetings/{meetingUUID}/recordings/status', method: 'put', ...variables, signal });
+  >({
+    url: "/meetings/{meetingUUID}/recordings/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type RecordingsListPathParams = {
   /**
@@ -3075,13 +3284,22 @@ export type RecordingsListResponse = {
        *
        * @example MP4
        */
-      file_type?: 'MP4' | 'M4A' | 'CHAT' | 'TRANSCRIPT' | 'CSV' | 'TB' | 'CC' | 'CHAT_MESSAGE' | 'SUMMARY';
+      file_type?:
+        | "MP4"
+        | "M4A"
+        | "CHAT"
+        | "TRANSCRIPT"
+        | "CSV"
+        | "TB"
+        | "CC"
+        | "CHAT_MESSAGE"
+        | "SUMMARY";
       /**
        * The file extension type of the recording file.
        *
        * @example M4A
        */
-      file_extension?: 'MP4' | 'M4A' | 'TXT' | 'VTT' | 'CSV' | 'JSON' | 'JPG';
+      file_extension?: "MP4" | "M4A" | "TXT" | "VTT" | "CSV" | "JSON" | "JPG";
       /**
        * The recording file ID. Included in the response of general query.
        *
@@ -3136,32 +3354,32 @@ export type RecordingsListResponse = {
        * @example shared_screen_with_speaker_view
        */
       recording_type?:
-        | 'shared_screen_with_speaker_view(CC)'
-        | 'shared_screen_with_speaker_view'
-        | 'shared_screen_with_gallery_view'
-        | 'active_speaker'
-        | 'gallery_view'
-        | 'shared_screen'
-        | 'audio_only'
-        | 'audio_transcript'
-        | 'chat_file'
-        | 'poll'
-        | 'host_video'
-        | 'closed_caption'
-        | 'timeline'
-        | 'thumbnail'
-        | 'audio_interpretation'
-        | 'summary'
-        | 'summary_next_steps'
-        | 'summary_smart_chapters'
-        | 'sign_interpretation'
-        | 'production_studio';
+        | "shared_screen_with_speaker_view(CC)"
+        | "shared_screen_with_speaker_view"
+        | "shared_screen_with_gallery_view"
+        | "active_speaker"
+        | "gallery_view"
+        | "shared_screen"
+        | "audio_only"
+        | "audio_transcript"
+        | "chat_file"
+        | "poll"
+        | "host_video"
+        | "closed_caption"
+        | "timeline"
+        | "thumbnail"
+        | "audio_interpretation"
+        | "summary"
+        | "summary_next_steps"
+        | "summary_smart_chapters"
+        | "sign_interpretation"
+        | "production_studio";
       /**
        * The recording status.
        *
        * @example completed
        */
-      status?: 'completed';
+      status?: "completed";
     }[];
     /**
      * Unique Identifier of the user account.
@@ -3235,7 +3453,7 @@ export type RecordingsListResponse = {
      *
      * @example 1
      */
-    type?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '99';
+    type?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "99";
     /**
      * Unique Meeting Identifier. Each instance of the meeting will have its own UUID.
      *
@@ -3289,7 +3507,10 @@ export type RecordingsListVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const recordingsList = (variables: RecordingsListVariables, signal?: AbortSignal) =>
+export const recordingsList = (
+  variables: RecordingsListVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     RecordingsListResponse,
     RecordingsListError,
@@ -3297,7 +3518,7 @@ export const recordingsList = (variables: RecordingsListVariables, signal?: Abor
     {},
     RecordingsListQueryParams,
     RecordingsListPathParams
-  >({ url: '/users/{userId}/recordings', method: 'get', ...variables, signal });
+  >({ url: "/users/{userId}/recordings", method: "get", ...variables, signal });
 
 export type ListDevicesQueryParams = {
   /**
@@ -3311,7 +3532,7 @@ export type ListDevicesQueryParams = {
    *
    * @example win
    */
-  platform_os?: 'win' | 'mac' | 'ipad' | 'iphone' | 'android' | 'linux';
+  platform_os?: "win" | "mac" | "ipad" | "iphone" | "android" | "linux";
   /**
    * Filter devices by enrollment of ZDM (Zoom Device Management).
    *
@@ -3527,13 +3748,18 @@ export type ListDevicesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const listDevices = (variables: ListDevicesVariables, signal?: AbortSignal) =>
-  fetch<ListDevicesResponse, ListDevicesError, undefined, {}, ListDevicesQueryParams, {}>({
-    url: '/devices',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listDevices = (
+  variables: ListDevicesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListDevicesResponse,
+    ListDevicesError,
+    undefined,
+    {},
+    ListDevicesQueryParams,
+    {}
+  >({ url: "/devices", method: "get", ...variables, signal });
 
 export type AddDeviceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -3624,12 +3850,15 @@ export type AddDeviceVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const addDevice = (variables: AddDeviceVariables, signal?: AbortSignal) =>
+export const addDevice = (
+  variables: AddDeviceVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, AddDeviceError, AddDeviceRequestBody, {}, {}, {}>({
-    url: '/devices',
-    method: 'post',
+    url: "/devices",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetzdmgroupinfoQueryParams = {
@@ -3704,15 +3933,21 @@ export type GetzdmgroupinfoVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const getzdmgroupinfo = (variables: GetzdmgroupinfoVariables, signal?: AbortSignal) =>
-  fetch<GetzdmgroupinfoResponse, GetzdmgroupinfoError, undefined, {}, GetzdmgroupinfoQueryParams, {}>({
-    url: '/devices/groups',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getzdmgroupinfo = (
+  variables: GetzdmgroupinfoVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetzdmgroupinfoResponse,
+    GetzdmgroupinfoError,
+    undefined,
+    {},
+    GetzdmgroupinfoQueryParams,
+    {}
+  >({ url: "/devices/groups", method: "get", ...variables, signal });
 
-export type AssigndevicetoauserCommonareaError = Fetcher.ErrorWrapper<undefined>;
+export type AssigndevicetoauserCommonareaError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type AssigndevicetoauserCommonareaRequestBody = {
   /**
@@ -3753,14 +3988,16 @@ export type AssigndevicetoauserCommonareaVariables = {
  */
 export const assigndevicetoauserCommonarea = (
   variables: AssigndevicetoauserCommonareaVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
-  fetch<undefined, AssigndevicetoauserCommonareaError, AssigndevicetoauserCommonareaRequestBody, {}, {}, {}>({
-    url: '/devices/zpa/assignment',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    undefined,
+    AssigndevicetoauserCommonareaError,
+    AssigndevicetoauserCommonareaRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/devices/zpa/assignment", method: "post", ...variables, signal });
 
 export type GetZpaDeviceListProfileSettingOfaUserQueryParams = {
   /**
@@ -3771,7 +4008,8 @@ export type GetZpaDeviceListProfileSettingOfaUserQueryParams = {
   user_id?: string;
 };
 
-export type GetZpaDeviceListProfileSettingOfaUserError = Fetcher.ErrorWrapper<undefined>;
+export type GetZpaDeviceListProfileSettingOfaUserError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetZpaDeviceListProfileSettingOfaUserResponse = {
   /**
@@ -3820,7 +4058,7 @@ export type GetZpaDeviceListProfileSettingOfaUserResponse = {
     /**
      * The device's status, either `online` or `offline`.
      */
-    status?: 'online' | 'offline';
+    status?: "online" | "offline";
     /**
      * The device policy.
      */
@@ -3831,7 +4069,7 @@ export type GetZpaDeviceListProfileSettingOfaUserResponse = {
          *
          * @example online
          */
-        status?: 'online' | 'offline';
+        status?: "online" | "offline";
       };
       call_control?: {
         /**
@@ -3842,7 +4080,7 @@ export type GetZpaDeviceListProfileSettingOfaUserResponse = {
          *
          * @example off
          */
-        status?: 'unsupported' | 'on' | 'off';
+        status?: "unsupported" | "on" | "off";
       };
     };
   }[];
@@ -3863,7 +4101,7 @@ export type GetZpaDeviceListProfileSettingOfaUserVariables = {
  */
 export const getZpaDeviceListProfileSettingOfaUser = (
   variables: GetZpaDeviceListProfileSettingOfaUserVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetZpaDeviceListProfileSettingOfaUserResponse,
@@ -3872,7 +4110,7 @@ export const getZpaDeviceListProfileSettingOfaUser = (
     {},
     GetZpaDeviceListProfileSettingOfaUserQueryParams,
     {}
-  >({ url: '/devices/zpa/settings', method: 'get', ...variables, signal });
+  >({ url: "/devices/zpa/settings", method: "get", ...variables, signal });
 
 export type UpgradeZpasAppError = Fetcher.ErrorWrapper<undefined>;
 
@@ -3911,7 +4149,7 @@ export type UpgradeZpasAppRequestBody = {
          * @example UPGRADE_FIRMWARE
          * @default UPGRADE_FIRMWARE
          */
-        upgrade_type: 'UPGRADE_FIRMWARE';
+        upgrade_type: "UPGRADE_FIRMWARE";
       }
     | {
         /**
@@ -3925,7 +4163,7 @@ export type UpgradeZpasAppRequestBody = {
          *
          * @example UPGRADE_APP
          */
-        upgrade_type: 'UPGRADE_APP';
+        upgrade_type: "UPGRADE_APP";
       };
 };
 
@@ -3946,12 +4184,15 @@ export type UpgradeZpasAppVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const upgradeZpasApp = (variables: UpgradeZpasAppVariables, signal?: AbortSignal) =>
+export const upgradeZpasApp = (
+  variables: UpgradeZpasAppVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, UpgradeZpasAppError, UpgradeZpasAppRequestBody, {}, {}, {}>({
-    url: '/devices/zpa/upgrade',
-    method: 'post',
+    url: "/devices/zpa/upgrade",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeleteZpaDeviceByVendorAndMacAddressPathParams = {
@@ -3969,7 +4210,8 @@ export type DeleteZpaDeviceByVendorAndMacAddressPathParams = {
   macAddress: string;
 };
 
-export type DeleteZpaDeviceByVendorAndMacAddressError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteZpaDeviceByVendorAndMacAddressError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteZpaDeviceByVendorAndMacAddressVariables = {
   pathParams: DeleteZpaDeviceByVendorAndMacAddressPathParams;
@@ -3986,7 +4228,7 @@ export type DeleteZpaDeviceByVendorAndMacAddressVariables = {
  */
 export const deleteZpaDeviceByVendorAndMacAddress = (
   variables: DeleteZpaDeviceByVendorAndMacAddressVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -3995,7 +4237,12 @@ export const deleteZpaDeviceByVendorAndMacAddress = (
     {},
     {},
     DeleteZpaDeviceByVendorAndMacAddressPathParams
-  >({ url: '/devices/zpa/vendors/{vendor}/mac_addresses/{macAddress}', method: 'delete', ...variables, signal });
+  >({
+    url: "/devices/zpa/vendors/{vendor}/mac_addresses/{macAddress}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetZpaVersioninfoPathParams = {
   /**
@@ -4061,12 +4308,22 @@ export type GetZpaVersioninfoVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const getZpaVersioninfo = (variables: GetZpaVersioninfoVariables, signal?: AbortSignal) =>
-  fetch<GetZpaVersioninfoResponse, GetZpaVersioninfoError, undefined, {}, {}, GetZpaVersioninfoPathParams>({
-    url: '/devices/zpa/zdm_groups/{zdmGroupId}/versions',
-    method: 'get',
+export const getZpaVersioninfo = (
+  variables: GetZpaVersioninfoVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetZpaVersioninfoResponse,
+    GetZpaVersioninfoError,
+    undefined,
+    {},
+    {},
+    GetZpaVersioninfoPathParams
+  >({
+    url: "/devices/zpa/zdm_groups/{zdmGroupId}/versions",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetDevicePathParams = {
@@ -4215,13 +4472,18 @@ export type GetDeviceVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const getDevice = (variables: GetDeviceVariables, signal?: AbortSignal) =>
-  fetch<GetDeviceResponse, GetDeviceError, undefined, {}, {}, GetDevicePathParams>({
-    url: '/devices/{deviceId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getDevice = (
+  variables: GetDeviceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetDeviceResponse,
+    GetDeviceError,
+    undefined,
+    {},
+    {},
+    GetDevicePathParams
+  >({ url: "/devices/{deviceId}", method: "get", ...variables, signal });
 
 export type DeleteDevicePathParams = {
   /**
@@ -4248,13 +4510,18 @@ export type DeleteDeviceVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const deleteDevice = (variables: DeleteDeviceVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteDeviceError, undefined, {}, {}, DeleteDevicePathParams>({
-    url: '/devices/{deviceId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteDevice = (
+  variables: DeleteDeviceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteDeviceError,
+    undefined,
+    {},
+    {},
+    DeleteDevicePathParams
+  >({ url: "/devices/{deviceId}", method: "delete", ...variables, signal });
 
 export type UpdateDevicePathParams = {
   /**
@@ -4312,13 +4579,18 @@ export type UpdateDeviceVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const updateDevice = (variables: UpdateDeviceVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateDeviceError, UpdateDeviceRequestBody, {}, {}, UpdateDevicePathParams>({
-    url: '/devices/{deviceId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
+export const updateDevice = (
+  variables: UpdateDeviceVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateDeviceError,
+    UpdateDeviceRequestBody,
+    {},
+    {},
+    UpdateDevicePathParams
+  >({ url: "/devices/{deviceId}", method: "patch", ...variables, signal });
 
 export type AssginGroupPathParams = {
   /**
@@ -4354,12 +4626,22 @@ export type AssginGroupVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const assginGroup = (variables: AssginGroupVariables, signal?: AbortSignal) =>
-  fetch<undefined, AssginGroupError, undefined, {}, AssginGroupQueryParams, AssginGroupPathParams>({
-    url: '/devices/{deviceId}/assign_group',
-    method: 'patch',
+export const assginGroup = (
+  variables: AssginGroupVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    AssginGroupError,
+    undefined,
+    {},
+    AssginGroupQueryParams,
+    AssginGroupPathParams
+  >({
+    url: "/devices/{deviceId}/assign_group",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type ChangeDeviceAssociationPathParams = {
@@ -4394,7 +4676,7 @@ export type ChangeDeviceAssociationRequestBody = {
    * @example ZR
    * @default ZR
    */
-  app_type?: 'ZR' | 'ZRC' | 'ZRP' | 'ZRW';
+  app_type?: "ZR" | "ZRC" | "ZRP" | "ZRW";
 };
 
 export type ChangeDeviceAssociationVariables = {
@@ -4411,7 +4693,10 @@ export type ChangeDeviceAssociationVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const changeDeviceAssociation = (variables: ChangeDeviceAssociationVariables, signal?: AbortSignal) =>
+export const changeDeviceAssociation = (
+  variables: ChangeDeviceAssociationVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     ChangeDeviceAssociationError,
@@ -4419,7 +4704,12 @@ export const changeDeviceAssociation = (variables: ChangeDeviceAssociationVariab
     {},
     {},
     ChangeDeviceAssociationPathParams
-  >({ url: '/devices/{deviceId}/assignment', method: 'patch', ...variables, signal });
+  >({
+    url: "/devices/{deviceId}/assignment",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type DeviceListQueryParams = {
   /**
@@ -4500,7 +4790,7 @@ export type DeviceListResponse = {
      *
      * @example auto
      */
-    encryption: 'auto' | 'yes' | 'no';
+    encryption: "auto" | "yes" | "no";
     /**
      * Device IP.
      *
@@ -4521,7 +4811,7 @@ export type DeviceListResponse = {
      *
      * @example H.323
      */
-    protocol: 'H.323' | 'SIP';
+    protocol: "H.323" | "SIP";
   }[];
 };
 
@@ -4541,13 +4831,18 @@ export type DeviceListVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const deviceList = (variables: DeviceListVariables, signal?: AbortSignal) =>
-  fetch<DeviceListResponse, DeviceListError, undefined, {}, DeviceListQueryParams, {}>({
-    url: '/h323/devices',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const deviceList = (
+  variables: DeviceListVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    DeviceListResponse,
+    DeviceListError,
+    undefined,
+    {},
+    DeviceListQueryParams,
+    {}
+  >({ url: "/h323/devices", method: "get", ...variables, signal });
 
 export type DeviceCreateError = Fetcher.ErrorWrapper<undefined>;
 
@@ -4566,7 +4861,7 @@ export type DeviceCreateResponse = {
    *
    * @example auto
    */
-  encryption: 'auto' | 'yes' | 'no';
+  encryption: "auto" | "yes" | "no";
   /**
    * Device IP.
    *
@@ -4587,7 +4882,7 @@ export type DeviceCreateResponse = {
    *
    * @example H.323
    */
-  protocol: 'H.323' | 'SIP';
+  protocol: "H.323" | "SIP";
 };
 
 export type DeviceCreateRequestBody = {
@@ -4599,7 +4894,7 @@ export type DeviceCreateRequestBody = {
    *
    * @example auto
    */
-  encryption: 'auto' | 'yes' | 'no';
+  encryption: "auto" | "yes" | "no";
   /**
    * Device IP.
    *
@@ -4620,7 +4915,7 @@ export type DeviceCreateRequestBody = {
    *
    * @example H.323
    */
-  protocol: 'H.323' | 'SIP';
+  protocol: "H.323" | "SIP";
 };
 
 export type DeviceCreateVariables = {
@@ -4639,13 +4934,18 @@ export type DeviceCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deviceCreate = (variables: DeviceCreateVariables, signal?: AbortSignal) =>
-  fetch<DeviceCreateResponse, DeviceCreateError, DeviceCreateRequestBody, {}, {}, {}>({
-    url: '/h323/devices',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const deviceCreate = (
+  variables: DeviceCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    DeviceCreateResponse,
+    DeviceCreateError,
+    DeviceCreateRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/h323/devices", method: "post", ...variables, signal });
 
 export type DeviceDeletePathParams = {
   /**
@@ -4674,12 +4974,22 @@ export type DeviceDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deviceDelete = (variables: DeviceDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeviceDeleteError, undefined, {}, {}, DeviceDeletePathParams>({
-    url: '/h323/devices/{deviceId}',
-    method: 'delete',
+export const deviceDelete = (
+  variables: DeviceDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeviceDeleteError,
+    undefined,
+    {},
+    {},
+    DeviceDeletePathParams
+  >({
+    url: "/h323/devices/{deviceId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeviceUpdatePathParams = {
@@ -4702,7 +5012,7 @@ export type DeviceUpdateRequestBody = {
    *
    * @example auto
    */
-  encryption: 'auto' | 'yes' | 'no';
+  encryption: "auto" | "yes" | "no";
   /**
    * Device IP.
    *
@@ -4723,7 +5033,7 @@ export type DeviceUpdateRequestBody = {
    *
    * @example H.323
    */
-  protocol: 'H.323' | 'SIP';
+  protocol: "H.323" | "SIP";
 };
 
 export type DeviceUpdateVariables = {
@@ -4744,13 +5054,18 @@ export type DeviceUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deviceUpdate = (variables: DeviceUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeviceUpdateError, DeviceUpdateRequestBody, {}, {}, DeviceUpdatePathParams>({
-    url: '/h323/devices/{deviceId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
+export const deviceUpdate = (
+  variables: DeviceUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeviceUpdateError,
+    DeviceUpdateRequestBody,
+    {},
+    {},
+    DeviceUpdatePathParams
+  >({ url: "/h323/devices/{deviceId}", method: "patch", ...variables, signal });
 
 export type DeleteMeetingChatMessageByIdPathParams = {
   /**
@@ -4798,7 +5113,10 @@ export type DeleteMeetingChatMessageByIdVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const deleteMeetingChatMessageById = (variables: DeleteMeetingChatMessageByIdVariables, signal?: AbortSignal) =>
+export const deleteMeetingChatMessageById = (
+  variables: DeleteMeetingChatMessageByIdVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteMeetingChatMessageByIdError,
@@ -4806,7 +5124,12 @@ export const deleteMeetingChatMessageById = (variables: DeleteMeetingChatMessage
     {},
     DeleteMeetingChatMessageByIdQueryParams,
     DeleteMeetingChatMessageByIdPathParams
-  >({ url: '/live_meetings/{meetingId}/chat/messages/{messageId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/live_meetings/{meetingId}/chat/messages/{messageId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type UpdateMeetingChatMessageByIdPathParams = {
   /**
@@ -4851,7 +5174,10 @@ export type UpdateMeetingChatMessageByIdVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const updateMeetingChatMessageById = (variables: UpdateMeetingChatMessageByIdVariables, signal?: AbortSignal) =>
+export const updateMeetingChatMessageById = (
+  variables: UpdateMeetingChatMessageByIdVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateMeetingChatMessageByIdError,
@@ -4859,7 +5185,12 @@ export const updateMeetingChatMessageById = (variables: UpdateMeetingChatMessage
     {},
     {},
     UpdateMeetingChatMessageByIdPathParams
-  >({ url: '/live_meetings/{meetingId}/chat/messages/{messageId}', method: 'patch', ...variables, signal });
+  >({
+    url: "/live_meetings/{meetingId}/chat/messages/{messageId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type InMeetingControlPathParams = {
   /**
@@ -4887,14 +5218,14 @@ export type InMeetingControlRequestBody = {
    * @example recording.start
    */
   method?:
-    | 'recording.start'
-    | 'recording.stop'
-    | 'recording.pause'
-    | 'recording.resume'
-    | 'participant.invite'
-    | 'participant.invite.callout'
-    | 'participant.invite.room_system_callout'
-    | 'waiting_room.update';
+    | "recording.start"
+    | "recording.stop"
+    | "recording.pause"
+    | "recording.resume"
+    | "participant.invite"
+    | "participant.invite.callout"
+    | "participant.invite.room_system_callout"
+    | "waiting_room.update";
   /**
    * The in-meeting parameters.
    */
@@ -5067,12 +5398,22 @@ export type InMeetingControlVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const inMeetingControl = (variables: InMeetingControlVariables, signal?: AbortSignal) =>
-  fetch<undefined, InMeetingControlError, InMeetingControlRequestBody, {}, {}, InMeetingControlPathParams>({
-    url: '/live_meetings/{meetingId}/events',
-    method: 'patch',
+export const inMeetingControl = (
+  variables: InMeetingControlVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    InMeetingControlError,
+    InMeetingControlRequestBody,
+    {},
+    {},
+    InMeetingControlPathParams
+  >({
+    url: "/live_meetings/{meetingId}/events",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingRTMSStatusUpdatePathParams = {
@@ -5099,7 +5440,7 @@ export type MeetingRTMSStatusUpdateRequestBody = {
    *
    * @example start
    */
-  action?: 'start' | 'stop' | 'pause' | 'resume';
+  action?: "start" | "stop" | "pause" | "resume";
   /**
    * The participant's RTMS app settings.
    */
@@ -5138,7 +5479,10 @@ export type MeetingRTMSStatusUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingRTMSStatusUpdate = (variables: MeetingRTMSStatusUpdateVariables, signal?: AbortSignal) =>
+export const meetingRTMSStatusUpdate = (
+  variables: MeetingRTMSStatusUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     MeetingRTMSStatusUpdateError,
@@ -5146,7 +5490,12 @@ export const meetingRTMSStatusUpdate = (variables: MeetingRTMSStatusUpdateVariab
     {},
     {},
     MeetingRTMSStatusUpdatePathParams
-  >({ url: '/live_meetings/{meetingId}/rtms_app/status', method: 'patch', ...variables, signal });
+  >({
+    url: "/live_meetings/{meetingId}/rtms_app/status",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type ListmeetingsummariesQueryParams = {
   /**
@@ -5310,12 +5659,22 @@ export type ListmeetingsummariesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listmeetingsummaries = (variables: ListmeetingsummariesVariables, signal?: AbortSignal) =>
-  fetch<ListmeetingsummariesResponse, ListmeetingsummariesError, undefined, {}, ListmeetingsummariesQueryParams, {}>({
-    url: '/meetings/meeting_summaries',
-    method: 'get',
+export const listmeetingsummaries = (
+  variables: ListmeetingsummariesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListmeetingsummariesResponse,
+    ListmeetingsummariesError,
+    undefined,
+    {},
+    ListmeetingsummariesQueryParams,
+    {}
+  >({
+    url: "/meetings/meeting_summaries",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingPathParams = {
@@ -5460,7 +5819,7 @@ export type MeetingResponse = {
      *
      * @example available
      */
-    status?: 'available' | 'deleted';
+    status?: "available" | "deleted";
   }[];
   /**
    * Meeting passcode.
@@ -5574,7 +5933,7 @@ export type MeetingResponse = {
      * @example 1
      * @default 1
      */
-    weekly_days?: '1' | '2' | '3' | '4' | '5' | '6' | '7';
+    weekly_days?: "1" | "2" | "3" | "4" | "5" | "6" | "7";
   };
   /**
    * Meeting settings.
@@ -5650,7 +6009,7 @@ export type MeetingResponse = {
        *
        * @example approve
        */
-      method?: 'approve' | 'deny';
+      method?: "approve" | "deny";
     };
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -5662,7 +6021,7 @@ export type MeetingResponse = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference information.
      *
@@ -5721,7 +6080,7 @@ export type MeetingResponse = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -5823,7 +6182,7 @@ export type MeetingResponse = {
      *
      * @example enhanced_encryption
      */
-    encryption_type?: 'enhanced_encryption' | 'e2ee';
+    encryption_type?: "enhanced_encryption" | "e2ee";
     /**
      * Only signed in users can join this meeting.
      *
@@ -5889,7 +6248,7 @@ export type MeetingResponse = {
        *
        * @example toll
        */
-      type?: 'toll' | 'tollfree';
+      type?: "toll" | "tollfree";
     }[];
     /**
      * Start video when the host joins the meeting.
@@ -5960,7 +6319,7 @@ export type MeetingResponse = {
        *
        * @example all
        */
-      question_visibility?: 'answered' | 'all';
+      question_visibility?: "answered" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -6209,7 +6568,10 @@ export type MeetingResponse = {
        *
        * @example all_users
        */
-      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
+      who_is_added?:
+        | "all_users"
+        | "org_invitees_and_participants"
+        | "org_invitees";
       /**
        * The channel's ID.
        *
@@ -6244,7 +6606,7 @@ export type MeetingResponse = {
        *
        * @example whiteboard
        */
-      resource_type?: 'whiteboard';
+      resource_type?: "whiteboard";
       /**
        * The resource ID.
        *
@@ -6260,7 +6622,7 @@ export type MeetingResponse = {
        * @example editor
        * @default editor
        */
-      permission_level?: 'editor' | 'commenter' | 'viewer';
+      permission_level?: "editor" | "commenter" | "viewer";
     }[];
     /**
      * Whether to automatically start a meeting summary.
@@ -6356,7 +6718,7 @@ export type MeetingResponse = {
    *
    * @example waiting
    */
-  status?: 'waiting' | 'started';
+  status?: "waiting" | "started";
   /**
    * The timezone to format the meeting start time.
    *
@@ -6424,7 +6786,7 @@ export type MeetingResponse = {
    *
    * @example open_api
    */
-  creation_source?: 'other' | 'open_api' | 'web_portal';
+  creation_source?: "other" | "open_api" | "web_portal";
 };
 
 export type MeetingVariables = {
@@ -6445,12 +6807,14 @@ export type MeetingVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meeting = (variables: MeetingVariables, signal?: AbortSignal) =>
-  fetch<MeetingResponse, MeetingError, undefined, {}, MeetingQueryParams, MeetingPathParams>({
-    url: '/meetings/{meetingId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    MeetingResponse,
+    MeetingError,
+    undefined,
+    {},
+    MeetingQueryParams,
+    MeetingPathParams
+  >({ url: "/meetings/{meetingId}", method: "get", ...variables, signal });
 
 export type MeetingDeletePathParams = {
   /**
@@ -6509,13 +6873,18 @@ export type MeetingDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingDelete = (variables: MeetingDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingDeleteError, undefined, {}, MeetingDeleteQueryParams, MeetingDeletePathParams>({
-    url: '/meetings/{meetingId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const meetingDelete = (
+  variables: MeetingDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingDeleteError,
+    undefined,
+    {},
+    MeetingDeleteQueryParams,
+    MeetingDeletePathParams
+  >({ url: "/meetings/{meetingId}", method: "delete", ...variables, signal });
 
 export type MeetingUpdatePathParams = {
   /**
@@ -6673,7 +7042,7 @@ export type MeetingUpdateRequestBody = {
      * @example 1
      * @default 1
      */
-    weekly_days?: '1' | '2' | '3' | '4' | '5' | '6' | '7';
+    weekly_days?: "1" | "2" | "3" | "4" | "5" | "6" | "7";
   };
   /**
    * Meeting settings.
@@ -6749,7 +7118,7 @@ export type MeetingUpdateRequestBody = {
        *
        * @example approve
        */
-      method?: 'approve' | 'deny';
+      method?: "approve" | "deny";
     };
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -6761,7 +7130,7 @@ export type MeetingUpdateRequestBody = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -6820,7 +7189,7 @@ export type MeetingUpdateRequestBody = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -6922,7 +7291,7 @@ export type MeetingUpdateRequestBody = {
      *
      * @example enhanced_encryption
      */
-    encryption_type?: 'enhanced_encryption' | 'e2ee';
+    encryption_type?: "enhanced_encryption" | "e2ee";
     /**
      * Only signed in users can join this meeting.
      *
@@ -6988,7 +7357,7 @@ export type MeetingUpdateRequestBody = {
        *
        * @example toll
        */
-      type?: 'toll' | 'tollfree';
+      type?: "toll" | "tollfree";
     }[];
     /**
      * Start video when the host joins the meeting.
@@ -7059,7 +7428,7 @@ export type MeetingUpdateRequestBody = {
        *
        * @example all
        */
-      question_visibility?: 'answered' | 'all';
+      question_visibility?: "answered" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -7301,7 +7670,10 @@ export type MeetingUpdateRequestBody = {
        *
        * @example all_users
        */
-      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
+      who_is_added?:
+        | "all_users"
+        | "org_invitees_and_participants"
+        | "org_invitees";
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -7319,7 +7691,7 @@ export type MeetingUpdateRequestBody = {
        *
        * @example whiteboard
        */
-      resource_type?: 'whiteboard';
+      resource_type?: "whiteboard";
       /**
        * The resource ID.
        *
@@ -7335,7 +7707,7 @@ export type MeetingUpdateRequestBody = {
        * @example editor
        * @default editor
        */
-      permission_level?: 'editor' | 'commenter' | 'viewer';
+      permission_level?: "editor" | "commenter" | "viewer";
     }[];
     /**
      * Whether to automatically start meeting summary.
@@ -7487,10 +7859,18 @@ export type MeetingUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingUpdate = (variables: MeetingUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingUpdateError, MeetingUpdateRequestBody, {}, MeetingUpdateQueryParams, MeetingUpdatePathParams>(
-    { url: '/meetings/{meetingId}', method: 'patch', ...variables, signal }
-  );
+export const meetingUpdate = (
+  variables: MeetingUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingUpdateError,
+    MeetingUpdateRequestBody,
+    {},
+    MeetingUpdateQueryParams,
+    MeetingUpdatePathParams
+  >({ url: "/meetings/{meetingId}", method: "patch", ...variables, signal });
 
 export type CreateBatchPollsPathParams = {
   /**
@@ -7635,14 +8015,14 @@ export type CreateBatchPollsResponse = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
     }[];
     /**
      * The status of the meeting poll:
@@ -7653,7 +8033,7 @@ export type CreateBatchPollsResponse = {
      *
      * @example notstart
      */
-    status?: 'notstart' | 'started' | 'ended' | 'sharing';
+    status?: "notstart" | "started" | "ended" | "sharing";
     /**
      * The title for the poll.
      *
@@ -7842,14 +8222,14 @@ export type CreateBatchPollsRequestBody = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
     }[];
     /**
      * The poll's title, up to 64 characters.
@@ -7883,7 +8263,10 @@ export type CreateBatchPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const createBatchPolls = (variables: CreateBatchPollsVariables, signal?: AbortSignal) =>
+export const createBatchPolls = (
+  variables: CreateBatchPollsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateBatchPollsResponse,
     CreateBatchPollsError,
@@ -7891,7 +8274,12 @@ export const createBatchPolls = (variables: CreateBatchPollsVariables, signal?: 
     {},
     {},
     CreateBatchPollsPathParams
-  >({ url: '/meetings/{meetingId}/batch_polls', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/batch_polls",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type AddBatchRegistrantsPathParams = {
   /**
@@ -7995,7 +8383,10 @@ export type AddBatchRegistrantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const addBatchRegistrants = (variables: AddBatchRegistrantsVariables, signal?: AbortSignal) =>
+export const addBatchRegistrants = (
+  variables: AddBatchRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     AddBatchRegistrantsResponse,
     AddBatchRegistrantsError,
@@ -8003,7 +8394,12 @@ export const addBatchRegistrants = (variables: AddBatchRegistrantsVariables, sig
     {},
     {},
     AddBatchRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/batch_registrants', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/batch_registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingInvitationPathParams = {
   /**
@@ -8074,12 +8470,22 @@ export type MeetingInvitationVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingInvitation = (variables: MeetingInvitationVariables, signal?: AbortSignal) =>
-  fetch<MeetingInvitationResponse, MeetingInvitationError, undefined, {}, {}, MeetingInvitationPathParams>({
-    url: '/meetings/{meetingId}/invitation',
-    method: 'get',
+export const meetingInvitation = (
+  variables: MeetingInvitationVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingInvitationResponse,
+    MeetingInvitationError,
+    undefined,
+    {},
+    {},
+    MeetingInvitationPathParams
+  >({
+    url: "/meetings/{meetingId}/invitation",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingInviteLinksCreatePathParams = {
@@ -8180,7 +8586,10 @@ export type MeetingInviteLinksCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingInviteLinksCreate = (variables: MeetingInviteLinksCreateVariables, signal?: AbortSignal) =>
+export const meetingInviteLinksCreate = (
+  variables: MeetingInviteLinksCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingInviteLinksCreateResponse,
     MeetingInviteLinksCreateError,
@@ -8188,7 +8597,12 @@ export const meetingInviteLinksCreate = (variables: MeetingInviteLinksCreateVari
     {},
     {},
     MeetingInviteLinksCreatePathParams
-  >({ url: '/meetings/{meetingId}/invite_links', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/invite_links",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingLiveStreamingJoinTokenPathParams = {
   /**
@@ -8202,7 +8616,8 @@ export type MeetingLiveStreamingJoinTokenPathParams = {
   meetingId: number;
 };
 
-export type MeetingLiveStreamingJoinTokenError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingLiveStreamingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingLiveStreamingJoinTokenResponse = {
   /**
@@ -8239,7 +8654,7 @@ export type MeetingLiveStreamingJoinTokenVariables = {
  */
 export const meetingLiveStreamingJoinToken = (
   variables: MeetingLiveStreamingJoinTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     MeetingLiveStreamingJoinTokenResponse,
@@ -8248,7 +8663,12 @@ export const meetingLiveStreamingJoinToken = (
     {},
     {},
     MeetingLiveStreamingJoinTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/live_streaming', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/jointoken/live_streaming",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingLocalArchivingArchiveTokenPathParams = {
   /**
@@ -8262,7 +8682,8 @@ export type MeetingLocalArchivingArchiveTokenPathParams = {
   meetingId: number;
 };
 
-export type MeetingLocalArchivingArchiveTokenError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingLocalArchivingArchiveTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingLocalArchivingArchiveTokenResponse = {
   /**
@@ -8299,7 +8720,7 @@ export type MeetingLocalArchivingArchiveTokenVariables = {
  */
 export const meetingLocalArchivingArchiveToken = (
   variables: MeetingLocalArchivingArchiveTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     MeetingLocalArchivingArchiveTokenResponse,
@@ -8308,7 +8729,12 @@ export const meetingLocalArchivingArchiveToken = (
     {},
     {},
     MeetingLocalArchivingArchiveTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/local_archiving', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/jointoken/local_archiving",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingLocalRecordingJoinTokenPathParams = {
   /**
@@ -8331,7 +8757,8 @@ export type MeetingLocalRecordingJoinTokenQueryParams = {
   bypass_waiting_room?: boolean;
 };
 
-export type MeetingLocalRecordingJoinTokenError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingLocalRecordingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingLocalRecordingJoinTokenResponse = {
   /**
@@ -8368,7 +8795,7 @@ export type MeetingLocalRecordingJoinTokenVariables = {
  */
 export const meetingLocalRecordingJoinToken = (
   variables: MeetingLocalRecordingJoinTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     MeetingLocalRecordingJoinTokenResponse,
@@ -8377,7 +8804,12 @@ export const meetingLocalRecordingJoinToken = (
     {},
     MeetingLocalRecordingJoinTokenQueryParams,
     MeetingLocalRecordingJoinTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/local_recording', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/jointoken/local_recording",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetMeetingLiveStreamDetailsPathParams = {
   /**
@@ -8440,7 +8872,10 @@ export type GetMeetingLiveStreamDetailsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const getMeetingLiveStreamDetails = (variables: GetMeetingLiveStreamDetailsVariables, signal?: AbortSignal) =>
+export const getMeetingLiveStreamDetails = (
+  variables: GetMeetingLiveStreamDetailsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetMeetingLiveStreamDetailsResponse,
     GetMeetingLiveStreamDetailsError,
@@ -8448,7 +8883,12 @@ export const getMeetingLiveStreamDetails = (variables: GetMeetingLiveStreamDetai
     {},
     {},
     GetMeetingLiveStreamDetailsPathParams
-  >({ url: '/meetings/{meetingId}/livestream', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/livestream",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingLiveStreamUpdatePathParams = {
   /**
@@ -8512,7 +8952,10 @@ export type MeetingLiveStreamUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingLiveStreamUpdate = (variables: MeetingLiveStreamUpdateVariables, signal?: AbortSignal) =>
+export const meetingLiveStreamUpdate = (
+  variables: MeetingLiveStreamUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     MeetingLiveStreamUpdateError,
@@ -8520,7 +8963,12 @@ export const meetingLiveStreamUpdate = (variables: MeetingLiveStreamUpdateVariab
     {},
     {},
     MeetingLiveStreamUpdatePathParams
-  >({ url: '/meetings/{meetingId}/livestream', method: 'patch', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/livestream",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type MeetingLiveStreamStatusUpdatePathParams = {
   /**
@@ -8534,7 +8982,8 @@ export type MeetingLiveStreamStatusUpdatePathParams = {
   meetingId: number;
 };
 
-export type MeetingLiveStreamStatusUpdateError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingLiveStreamStatusUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingLiveStreamStatusUpdateRequestBody = {
   /**
@@ -8545,7 +8994,7 @@ export type MeetingLiveStreamStatusUpdateRequestBody = {
    *
    * @example start
    */
-  action?: 'start' | 'stop' | 'mode';
+  action?: "start" | "stop" | "mode";
   /**
    * The meeting's livestreaming settings.
    */
@@ -8573,7 +9022,7 @@ export type MeetingLiveStreamStatusUpdateRequestBody = {
      * @example follow_host
      * @default follow_host
      */
-    layout?: 'follow_host' | 'gallery_view' | 'speaker_view';
+    layout?: "follow_host" | "gallery_view" | "speaker_view";
     /**
      * The livestream's closed caption type for this session. Use this field if you pass the `start` or `mode` value for the `action` field.
      * * `burnt-in` - Burnt in captions.
@@ -8583,7 +9032,7 @@ export type MeetingLiveStreamStatusUpdateRequestBody = {
      * @example burnt-in
      * @default burnt-in
      */
-    close_caption?: 'burnt-in' | 'embedded' | 'off';
+    close_caption?: "burnt-in" | "embedded" | "off";
   };
 };
 
@@ -8606,7 +9055,7 @@ export type MeetingLiveStreamStatusUpdateVariables = {
  */
 export const meetingLiveStreamStatusUpdate = (
   variables: MeetingLiveStreamStatusUpdateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -8615,7 +9064,12 @@ export const meetingLiveStreamStatusUpdate = (
     {},
     {},
     MeetingLiveStreamStatusUpdatePathParams
-  >({ url: '/meetings/{meetingId}/livestream/status', method: 'patch', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/livestream/status",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type GetameetingsummaryPathParams = {
   /**
@@ -8860,12 +9314,22 @@ export type GetameetingsummaryVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const getameetingsummary = (variables: GetameetingsummaryVariables, signal?: AbortSignal) =>
-  fetch<GetameetingsummaryResponse, GetameetingsummaryError, undefined, {}, {}, GetameetingsummaryPathParams>({
-    url: '/meetings/{meetingId}/meeting_summary',
-    method: 'get',
+export const getameetingsummary = (
+  variables: GetameetingsummaryVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetameetingsummaryResponse,
+    GetameetingsummaryError,
+    undefined,
+    {},
+    {},
+    GetameetingsummaryPathParams
+  >({
+    url: "/meetings/{meetingId}/meeting_summary",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeletemeetingorwebinarsummaryPathParams = {
@@ -8877,7 +9341,8 @@ export type DeletemeetingorwebinarsummaryPathParams = {
   meetingId: string;
 };
 
-export type DeletemeetingorwebinarsummaryError = Fetcher.ErrorWrapper<undefined>;
+export type DeletemeetingorwebinarsummaryError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeletemeetingorwebinarsummaryVariables = {
   pathParams: DeletemeetingorwebinarsummaryPathParams;
@@ -8900,13 +9365,20 @@ export type DeletemeetingorwebinarsummaryVariables = {
  */
 export const deletemeetingorwebinarsummary = (
   variables: DeletemeetingorwebinarsummaryVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
-  fetch<undefined, DeletemeetingorwebinarsummaryError, undefined, {}, {}, DeletemeetingorwebinarsummaryPathParams>({
-    url: '/meetings/{meetingId}/meeting_summary',
-    method: 'delete',
+  fetch<
+    undefined,
+    DeletemeetingorwebinarsummaryError,
+    undefined,
+    {},
+    {},
+    DeletemeetingorwebinarsummaryPathParams
+  >({
+    url: "/meetings/{meetingId}/meeting_summary",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingAppAddPathParams = {
@@ -8963,12 +9435,22 @@ export type MeetingAppAddVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingAppAdd = (variables: MeetingAppAddVariables, signal?: AbortSignal) =>
-  fetch<MeetingAppAddResponse, MeetingAppAddError, undefined, {}, {}, MeetingAppAddPathParams>({
-    url: '/meetings/{meetingId}/open_apps',
-    method: 'post',
+export const meetingAppAdd = (
+  variables: MeetingAppAddVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingAppAddResponse,
+    MeetingAppAddError,
+    undefined,
+    {},
+    {},
+    MeetingAppAddPathParams
+  >({
+    url: "/meetings/{meetingId}/open_apps",
+    method: "post",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingAppDeletePathParams = {
@@ -9002,12 +9484,22 @@ export type MeetingAppDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingAppDelete = (variables: MeetingAppDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingAppDeleteError, undefined, {}, {}, MeetingAppDeletePathParams>({
-    url: '/meetings/{meetingId}/open_apps',
-    method: 'delete',
+export const meetingAppDelete = (
+  variables: MeetingAppDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingAppDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingAppDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/open_apps",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingPollsPathParams = {
@@ -9056,7 +9548,7 @@ export type MeetingPollsResponse = {
      *
      * @example notstart
      */
-    status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
+    status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
     /**
      * Whether meeting participants can answer poll questions anonymously.
      *
@@ -9223,14 +9715,14 @@ export type MeetingPollsResponse = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
     }[];
     /**
      * The poll's title, up to 64 characters.
@@ -9269,12 +9761,22 @@ export type MeetingPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingPolls = (variables: MeetingPollsVariables, signal?: AbortSignal) =>
-  fetch<MeetingPollsResponse, MeetingPollsError, undefined, {}, MeetingPollsQueryParams, MeetingPollsPathParams>({
-    url: '/meetings/{meetingId}/polls',
-    method: 'get',
+export const meetingPolls = (
+  variables: MeetingPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingPollsResponse,
+    MeetingPollsError,
+    undefined,
+    {},
+    MeetingPollsQueryParams,
+    MeetingPollsPathParams
+  >({
+    url: "/meetings/{meetingId}/polls",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingPollCreatePathParams = {
@@ -9307,7 +9809,7 @@ export type MeetingPollCreateResponse = {
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing';
+  status?: "notstart" | "started" | "ended" | "sharing";
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -9474,14 +9976,14 @@ export type MeetingPollCreateResponse = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -9659,14 +10161,14 @@ export type MeetingPollCreateRequestBody = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -9699,7 +10201,10 @@ export type MeetingPollCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingPollCreate = (variables: MeetingPollCreateVariables, signal?: AbortSignal) =>
+export const meetingPollCreate = (
+  variables: MeetingPollCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingPollCreateResponse,
     MeetingPollCreateError,
@@ -9707,7 +10212,12 @@ export const meetingPollCreate = (variables: MeetingPollCreateVariables, signal?
     {},
     {},
     MeetingPollCreatePathParams
-  >({ url: '/meetings/{meetingId}/polls', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/polls",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingPollGetPathParams = {
   /**
@@ -9746,7 +10256,7 @@ export type MeetingPollGetResponse = {
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
+  status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -9913,14 +10423,14 @@ export type MeetingPollGetResponse = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -9948,12 +10458,22 @@ export type MeetingPollGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingPollGet = (variables: MeetingPollGetVariables, signal?: AbortSignal) =>
-  fetch<MeetingPollGetResponse, MeetingPollGetError, undefined, {}, {}, MeetingPollGetPathParams>({
-    url: '/meetings/{meetingId}/polls/{pollId}',
-    method: 'get',
+export const meetingPollGet = (
+  variables: MeetingPollGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingPollGetResponse,
+    MeetingPollGetError,
+    undefined,
+    {},
+    {},
+    MeetingPollGetPathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingPollUpdatePathParams = {
@@ -10143,14 +10663,14 @@ export type MeetingPollUpdateRequestBody = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -10180,12 +10700,22 @@ export type MeetingPollUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingPollUpdate = (variables: MeetingPollUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingPollUpdateError, MeetingPollUpdateRequestBody, {}, {}, MeetingPollUpdatePathParams>({
-    url: '/meetings/{meetingId}/polls/{pollId}',
-    method: 'put',
+export const meetingPollUpdate = (
+  variables: MeetingPollUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingPollUpdateError,
+    MeetingPollUpdateRequestBody,
+    {},
+    {},
+    MeetingPollUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingPollDeletePathParams = {
@@ -10227,12 +10757,22 @@ export type MeetingPollDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingPollDelete = (variables: MeetingPollDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingPollDeleteError, undefined, {}, {}, MeetingPollDeletePathParams>({
-    url: '/meetings/{meetingId}/polls/{pollId}',
-    method: 'delete',
+export const meetingPollDelete = (
+  variables: MeetingPollDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingPollDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingPollDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingRegistrantsPathParams = {
@@ -10263,7 +10803,7 @@ export type MeetingRegistrantsQueryParams = {
    * @example pending
    * @default approved
    */
-  status?: 'pending' | 'approved' | 'denied';
+  status?: "pending" | "approved" | "denied";
   /**
    * The number of records returned within a single API call.
    *
@@ -10419,16 +10959,16 @@ export type MeetingRegistrantsResponse = {
      * @example 1-20
      */
     no_of_employees?:
-      | ''
-      | '1-20'
-      | '21-50'
-      | '51-100'
-      | '101-250'
-      | '251-500'
-      | '501-1,000'
-      | '1,001-5,000'
-      | '5,001-10,000'
-      | 'More than 10,000';
+      | ""
+      | "1-20"
+      | "21-50"
+      | "51-100"
+      | "101-250"
+      | "251-500"
+      | "501-1,000"
+      | "1,001-5,000"
+      | "5,001-10,000"
+      | "More than 10,000";
     /**
      * The registrant's organization.
      *
@@ -10451,7 +10991,13 @@ export type MeetingRegistrantsResponse = {
      *
      * @example 1-3 months
      */
-    purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+    purchasing_time_frame?:
+      | ""
+      | "Within a month"
+      | "1-3 months"
+      | "4-6 months"
+      | "More than 6 months"
+      | "No timeframe";
     /**
      * The registrant's role in the purchase process.
      * * `Decision Maker`
@@ -10461,7 +11007,12 @@ export type MeetingRegistrantsResponse = {
      *
      * @example Influencer
      */
-    role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+    role_in_purchase_process?:
+      | ""
+      | "Decision Maker"
+      | "Evaluator/Recommender"
+      | "Influencer"
+      | "Not involved";
     /**
      * The registrant's state or province.
      *
@@ -10476,7 +11027,7 @@ export type MeetingRegistrantsResponse = {
      *
      * @example approved
      */
-    status?: 'approved' | 'denied' | 'pending';
+    status?: "approved" | "denied" | "pending";
     /**
      * The registrant's ZIP or postal code.
      *
@@ -10531,7 +11082,10 @@ export type MeetingRegistrantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingRegistrants = (variables: MeetingRegistrantsVariables, signal?: AbortSignal) =>
+export const meetingRegistrants = (
+  variables: MeetingRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingRegistrantsResponse,
     MeetingRegistrantsError,
@@ -10539,7 +11093,12 @@ export const meetingRegistrants = (variables: MeetingRegistrantsVariables, signa
     {},
     MeetingRegistrantsQueryParams,
     MeetingRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/registrants', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRegistrantCreatePathParams = {
   /**
@@ -10748,15 +11307,15 @@ export type MeetingRegistrantCreateRequestBody = {
    * @example 1-20
    */
   no_of_employees?:
-    | ''
-    | '1-20'
-    | '21-50'
-    | '51-100'
-    | '101-500'
-    | '500-1,000'
-    | '1,001-5,000'
-    | '5,001-10,000'
-    | 'More than 10,000';
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-500"
+    | "500-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
   /**
    * The registrant's organization.
    *
@@ -10773,7 +11332,13 @@ export type MeetingRegistrantCreateRequestBody = {
    *
    * @example 1-3 months
    */
-  purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
   /**
    * The registrant's role in the purchase process:
    * * `Decision Maker`
@@ -10783,7 +11348,12 @@ export type MeetingRegistrantCreateRequestBody = {
    *
    * @example Influencer
    */
-  role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
   /**
    * The registrant's language preference for confirmation emails:
    * * `en-US` &mdash; English (US)
@@ -10804,20 +11374,20 @@ export type MeetingRegistrantCreateRequestBody = {
    * @example en-US
    */
   language?:
-    | 'en-US'
-    | 'de-DE'
-    | 'es-ES'
-    | 'fr-FR'
-    | 'jp-JP'
-    | 'pt-PT'
-    | 'ru-RU'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'ko-KO'
-    | 'it-IT'
-    | 'vi-VN'
-    | 'pl-PL'
-    | 'Tr-TR';
+    | "en-US"
+    | "de-DE"
+    | "es-ES"
+    | "fr-FR"
+    | "jp-JP"
+    | "pt-PT"
+    | "ru-RU"
+    | "zh-CN"
+    | "zh-TW"
+    | "ko-KO"
+    | "it-IT"
+    | "vi-VN"
+    | "pl-PL"
+    | "Tr-TR";
   /**
    * If a meeting was scheduled with the `approval_type` field value of `1` (manual approval) but you want to automatically approve meeting registrants, set the value of this field to `true`.
    *
@@ -10846,7 +11416,10 @@ export type MeetingRegistrantCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingRegistrantCreate = (variables: MeetingRegistrantCreateVariables, signal?: AbortSignal) =>
+export const meetingRegistrantCreate = (
+  variables: MeetingRegistrantCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingRegistrantCreateResponse,
     MeetingRegistrantCreateError,
@@ -10854,7 +11427,12 @@ export const meetingRegistrantCreate = (variables: MeetingRegistrantCreateVariab
     {},
     MeetingRegistrantCreateQueryParams,
     MeetingRegistrantCreatePathParams
-  >({ url: '/meetings/{meetingId}/registrants', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRegistrantsQuestionsGetPathParams = {
   /**
@@ -10868,7 +11446,8 @@ export type MeetingRegistrantsQuestionsGetPathParams = {
   meetingId: number;
 };
 
-export type MeetingRegistrantsQuestionsGetError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingRegistrantsQuestionsGetError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRegistrantsQuestionsGetResponse = {
   /**
@@ -10896,7 +11475,7 @@ export type MeetingRegistrantsQuestionsGetResponse = {
      *
      * @example short
      */
-    type?: 'short' | 'single';
+    type?: "short" | "single";
   }[];
   /**
    * Array of registrant questions.
@@ -10908,20 +11487,20 @@ export type MeetingRegistrantsQuestionsGetResponse = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * Whether or not the displayed fields are required to be filled out by registrants.
      *
@@ -10950,7 +11529,7 @@ export type MeetingRegistrantsQuestionsGetVariables = {
  */
 export const meetingRegistrantsQuestionsGet = (
   variables: MeetingRegistrantsQuestionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     MeetingRegistrantsQuestionsGetResponse,
@@ -10959,7 +11538,12 @@ export const meetingRegistrantsQuestionsGet = (
     {},
     {},
     MeetingRegistrantsQuestionsGetPathParams
-  >({ url: '/meetings/{meetingId}/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants/questions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRegistrantQuestionUpdatePathParams = {
   /**
@@ -10973,7 +11557,8 @@ export type MeetingRegistrantQuestionUpdatePathParams = {
   meetingId: number;
 };
 
-export type MeetingRegistrantQuestionUpdateError = Fetcher.ErrorWrapper<undefined>;
+export type MeetingRegistrantQuestionUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRegistrantQuestionUpdateRequestBody = {
   /**
@@ -11001,7 +11586,7 @@ export type MeetingRegistrantQuestionUpdateRequestBody = {
      *
      * @example short
      */
-    type?: 'short' | 'single';
+    type?: "short" | "single";
   }[];
   /**
    * Array of registrant questions.
@@ -11013,20 +11598,20 @@ export type MeetingRegistrantQuestionUpdateRequestBody = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * Indicates whether or not the displayed fields are required to be filled out by registrants.
      *
@@ -11056,7 +11641,7 @@ export type MeetingRegistrantQuestionUpdateVariables = {
  */
 export const meetingRegistrantQuestionUpdate = (
   variables: MeetingRegistrantQuestionUpdateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -11065,7 +11650,12 @@ export const meetingRegistrantQuestionUpdate = (
     {},
     {},
     MeetingRegistrantQuestionUpdatePathParams
-  >({ url: '/meetings/{meetingId}/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants/questions",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRegistrantStatusPathParams = {
   /**
@@ -11099,7 +11689,7 @@ export type MeetingRegistrantStatusRequestBody = {
    *
    * @example approve
    */
-  action: 'approve' | 'cancel' | 'deny';
+  action: "approve" | "cancel" | "deny";
   /**
    * List of registrants.
    *
@@ -11136,7 +11726,10 @@ export type MeetingRegistrantStatusVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingRegistrantStatus = (variables: MeetingRegistrantStatusVariables, signal?: AbortSignal) =>
+export const meetingRegistrantStatus = (
+  variables: MeetingRegistrantStatusVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     MeetingRegistrantStatusError,
@@ -11144,7 +11737,12 @@ export const meetingRegistrantStatus = (variables: MeetingRegistrantStatusVariab
     {},
     MeetingRegistrantStatusQueryParams,
     MeetingRegistrantStatusPathParams
-  >({ url: '/meetings/{meetingId}/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type MeetingRegistrantGetPathParams = {
   /**
@@ -11258,16 +11856,16 @@ export type MeetingRegistrantGetResponse = {
    * @example 1-20
    */
   no_of_employees?:
-    | ''
-    | '1-20'
-    | '21-50'
-    | '51-100'
-    | '101-250'
-    | '251-500'
-    | '501-1,000'
-    | '1,001-5,000'
-    | '5,001-10,000'
-    | 'More than 10,000';
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-250"
+    | "251-500"
+    | "501-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
   /**
    * The registrant's organization.
    *
@@ -11290,7 +11888,13 @@ export type MeetingRegistrantGetResponse = {
    *
    * @example 1-3 months
    */
-  purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
   /**
    * The registrant's role in the purchase process.
    * * `Decision Maker`
@@ -11300,7 +11904,12 @@ export type MeetingRegistrantGetResponse = {
    *
    * @example Influencer
    */
-  role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
   /**
    * The registrant's state or province.
    *
@@ -11315,7 +11924,7 @@ export type MeetingRegistrantGetResponse = {
    *
    * @example approved
    */
-  status?: 'approved' | 'pending' | 'denied';
+  status?: "approved" | "pending" | "denied";
   /**
    * The registrant's ZIP or postal code.
    *
@@ -11365,12 +11974,22 @@ export type MeetingRegistrantGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingRegistrantGet = (variables: MeetingRegistrantGetVariables, signal?: AbortSignal) =>
-  fetch<MeetingRegistrantGetResponse, MeetingRegistrantGetError, undefined, {}, {}, MeetingRegistrantGetPathParams>({
-    url: '/meetings/{meetingId}/registrants/{registrantId}',
-    method: 'get',
+export const meetingRegistrantGet = (
+  variables: MeetingRegistrantGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingRegistrantGetResponse,
+    MeetingRegistrantGetError,
+    undefined,
+    {},
+    {},
+    MeetingRegistrantGetPathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/{registrantId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingregistrantdeletePathParams = {
@@ -11420,7 +12039,10 @@ export type MeetingregistrantdeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingregistrantdelete = (variables: MeetingregistrantdeleteVariables, signal?: AbortSignal) =>
+export const meetingregistrantdelete = (
+  variables: MeetingregistrantdeleteVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     MeetingregistrantdeleteError,
@@ -11428,7 +12050,12 @@ export const meetingregistrantdelete = (variables: MeetingregistrantdeleteVariab
     {},
     MeetingregistrantdeleteQueryParams,
     MeetingregistrantdeletePathParams
-  >({ url: '/meetings/{meetingId}/registrants/{registrantId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/registrants/{registrantId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetSipDialingWithPasscodePathParams = {
   /**
@@ -11498,7 +12125,10 @@ export type GetSipDialingWithPasscodeVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const getSipDialingWithPasscode = (variables: GetSipDialingWithPasscodeVariables, signal?: AbortSignal) =>
+export const getSipDialingWithPasscode = (
+  variables: GetSipDialingWithPasscodeVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetSipDialingWithPasscodeResponse,
     GetSipDialingWithPasscodeError,
@@ -11506,7 +12136,12 @@ export const getSipDialingWithPasscode = (variables: GetSipDialingWithPasscodeVa
     {},
     {},
     GetSipDialingWithPasscodePathParams
-  >({ url: '/meetings/{meetingId}/sip_dialing', method: 'post', ...variables, signal });
+  >({
+    url: "/meetings/{meetingId}/sip_dialing",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingStatusPathParams = {
   /**
@@ -11530,7 +12165,7 @@ export type MeetingStatusRequestBody = {
    *
    * @example recover
    */
-  action?: 'end' | 'recover';
+  action?: "end" | "recover";
 };
 
 export type MeetingStatusVariables = {
@@ -11550,12 +12185,22 @@ export type MeetingStatusVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingStatus = (variables: MeetingStatusVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingStatusError, MeetingStatusRequestBody, {}, {}, MeetingStatusPathParams>({
-    url: '/meetings/{meetingId}/status',
-    method: 'put',
+export const meetingStatus = (
+  variables: MeetingStatusVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingStatusError,
+    MeetingStatusRequestBody,
+    {},
+    {},
+    MeetingStatusPathParams
+  >({
+    url: "/meetings/{meetingId}/status",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingSurveyGetPathParams = {
@@ -11647,14 +12292,14 @@ export type MeetingSurveyGetResponse = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
       /**
        * Whether participants must answer the question.
        * * `true` - The participant must answer the question.
@@ -11788,12 +12433,22 @@ export type MeetingSurveyGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingSurveyGet = (variables: MeetingSurveyGetVariables, signal?: AbortSignal) =>
-  fetch<MeetingSurveyGetResponse, MeetingSurveyGetError, undefined, {}, {}, MeetingSurveyGetPathParams>({
-    url: '/meetings/{meetingId}/survey',
-    method: 'get',
+export const meetingSurveyGet = (
+  variables: MeetingSurveyGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingSurveyGetResponse,
+    MeetingSurveyGetError,
+    undefined,
+    {},
+    {},
+    MeetingSurveyGetPathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingSurveyDeletePathParams = {
@@ -11828,12 +12483,22 @@ export type MeetingSurveyDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingSurveyDelete = (variables: MeetingSurveyDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingSurveyDeleteError, undefined, {}, {}, MeetingSurveyDeletePathParams>({
-    url: '/meetings/{meetingId}/survey',
-    method: 'delete',
+export const meetingSurveyDelete = (
+  variables: MeetingSurveyDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingSurveyDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingSurveyDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingSurveyUpdatePathParams = {
@@ -11925,14 +12590,14 @@ export type MeetingSurveyUpdateRequestBody = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
       /**
        * Whether participants must answer the question.
        * * `true` - The participant must answer the question.
@@ -12067,12 +12732,22 @@ export type MeetingSurveyUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingSurveyUpdate = (variables: MeetingSurveyUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, MeetingSurveyUpdateError, MeetingSurveyUpdateRequestBody, {}, {}, MeetingSurveyUpdatePathParams>({
-    url: '/meetings/{meetingId}/survey',
-    method: 'patch',
+export const meetingSurveyUpdate = (
+  variables: MeetingSurveyUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingSurveyUpdateError,
+    MeetingSurveyUpdateRequestBody,
+    {},
+    {},
+    MeetingSurveyUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingTokenPathParams = {
@@ -12097,7 +12772,7 @@ export type MeetingTokenQueryParams = {
    * @example closed_caption_token
    * @default closed_caption_token
    */
-  type?: 'closed_caption_token';
+  type?: "closed_caption_token";
 };
 
 export type MeetingTokenError = Fetcher.ErrorWrapper<undefined>;
@@ -12129,12 +12804,22 @@ export type MeetingTokenVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const meetingToken = (variables: MeetingTokenVariables, signal?: AbortSignal) =>
-  fetch<MeetingTokenResponse, MeetingTokenError, undefined, {}, MeetingTokenQueryParams, MeetingTokenPathParams>({
-    url: '/meetings/{meetingId}/token',
-    method: 'get',
+export const meetingToken = (
+  variables: MeetingTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingTokenResponse,
+    MeetingTokenError,
+    undefined,
+    {},
+    MeetingTokenQueryParams,
+    MeetingTokenPathParams
+  >({
+    url: "/meetings/{meetingId}/token",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type PastMeetingDetailsPathParams = {
@@ -12265,13 +12950,18 @@ export type PastMeetingDetailsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const pastMeetingDetails = (variables: PastMeetingDetailsVariables, signal?: AbortSignal) =>
-  fetch<PastMeetingDetailsResponse, PastMeetingDetailsError, undefined, {}, {}, PastMeetingDetailsPathParams>({
-    url: '/past_meetings/{meetingId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const pastMeetingDetails = (
+  variables: PastMeetingDetailsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    PastMeetingDetailsResponse,
+    PastMeetingDetailsError,
+    undefined,
+    {},
+    {},
+    PastMeetingDetailsPathParams
+  >({ url: "/past_meetings/{meetingId}", method: "get", ...variables, signal });
 
 export type PastMeetingsPathParams = {
   /**
@@ -12323,12 +13013,22 @@ export type PastMeetingsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const pastMeetings = (variables: PastMeetingsVariables, signal?: AbortSignal) =>
-  fetch<PastMeetingsResponse, PastMeetingsError, undefined, {}, {}, PastMeetingsPathParams>({
-    url: '/past_meetings/{meetingId}/instances',
-    method: 'get',
+export const pastMeetings = (
+  variables: PastMeetingsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    PastMeetingsResponse,
+    PastMeetingsError,
+    undefined,
+    {},
+    {},
+    PastMeetingsPathParams
+  >({
+    url: "/past_meetings/{meetingId}/instances",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type PastMeetingParticipantsPathParams = {
@@ -12457,7 +13157,7 @@ export type PastMeetingParticipantsResponse = {
      *
      * @example in_meeting
      */
-    status?: 'in_meeting' | 'in_waiting_room';
+    status?: "in_meeting" | "in_waiting_room";
     /**
      * Whether the meeting participant is an internal user.
      *
@@ -12493,7 +13193,10 @@ export type PastMeetingParticipantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const pastMeetingParticipants = (variables: PastMeetingParticipantsVariables, signal?: AbortSignal) =>
+export const pastMeetingParticipants = (
+  variables: PastMeetingParticipantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     PastMeetingParticipantsResponse,
     PastMeetingParticipantsError,
@@ -12501,7 +13204,12 @@ export const pastMeetingParticipants = (variables: PastMeetingParticipantsVariab
     {},
     PastMeetingParticipantsQueryParams,
     PastMeetingParticipantsPathParams
-  >({ url: '/past_meetings/{meetingId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: "/past_meetings/{meetingId}/participants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListPastMeetingPollsPathParams = {
   /**
@@ -12598,12 +13306,22 @@ export type ListPastMeetingPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listPastMeetingPolls = (variables: ListPastMeetingPollsVariables, signal?: AbortSignal) =>
-  fetch<ListPastMeetingPollsResponse, ListPastMeetingPollsError, undefined, {}, {}, ListPastMeetingPollsPathParams>({
-    url: '/past_meetings/{meetingId}/polls',
-    method: 'get',
+export const listPastMeetingPolls = (
+  variables: ListPastMeetingPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListPastMeetingPollsResponse,
+    ListPastMeetingPollsError,
+    undefined,
+    {},
+    {},
+    ListPastMeetingPollsPathParams
+  >({
+    url: "/past_meetings/{meetingId}/polls",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListPastMeetingQAPathParams = {
@@ -12688,12 +13406,22 @@ export type ListPastMeetingQAVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listPastMeetingQA = (variables: ListPastMeetingQAVariables, signal?: AbortSignal) =>
-  fetch<ListPastMeetingQAResponse, ListPastMeetingQAError, undefined, {}, {}, ListPastMeetingQAPathParams>({
-    url: '/past_meetings/{meetingId}/qa',
-    method: 'get',
+export const listPastMeetingQA = (
+  variables: ListPastMeetingQAVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListPastMeetingQAResponse,
+    ListPastMeetingQAError,
+    undefined,
+    {},
+    {},
+    ListPastMeetingQAPathParams
+  >({
+    url: "/past_meetings/{meetingId}/qa",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListMeetingTemplatesPathParams = {
@@ -12756,12 +13484,22 @@ export type ListMeetingTemplatesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listMeetingTemplates = (variables: ListMeetingTemplatesVariables, signal?: AbortSignal) =>
-  fetch<ListMeetingTemplatesResponse, ListMeetingTemplatesError, undefined, {}, {}, ListMeetingTemplatesPathParams>({
-    url: '/users/{userId}/meeting_templates',
-    method: 'get',
+export const listMeetingTemplates = (
+  variables: ListMeetingTemplatesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListMeetingTemplatesResponse,
+    ListMeetingTemplatesError,
+    undefined,
+    {},
+    {},
+    ListMeetingTemplatesPathParams
+  >({
+    url: "/users/{userId}/meeting_templates",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type MeetingTemplateCreatePathParams = {
@@ -12838,7 +13576,10 @@ export type MeetingTemplateCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingTemplateCreate = (variables: MeetingTemplateCreateVariables, signal?: AbortSignal) =>
+export const meetingTemplateCreate = (
+  variables: MeetingTemplateCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     MeetingTemplateCreateResponse,
     MeetingTemplateCreateError,
@@ -12846,7 +13587,12 @@ export const meetingTemplateCreate = (variables: MeetingTemplateCreateVariables,
     {},
     {},
     MeetingTemplateCreatePathParams
-  >({ url: '/users/{userId}/meeting_templates', method: 'post', ...variables, signal });
+  >({
+    url: "/users/{userId}/meeting_templates",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type MeetingsPathParams = {
   /**
@@ -12867,7 +13613,12 @@ export type MeetingsQueryParams = {
    * @example scheduled
    * @default scheduled
    */
-  type?: 'scheduled' | 'live' | 'upcoming' | 'upcoming_meetings' | 'previous_meetings';
+  type?:
+    | "scheduled"
+    | "live"
+    | "upcoming"
+    | "upcoming_meetings"
+    | "previous_meetings";
   /**
    * The number of records returned within a single API call.
    *
@@ -13052,12 +13803,14 @@ export type MeetingsVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const meetings = (variables: MeetingsVariables, signal?: AbortSignal) =>
-  fetch<MeetingsResponse, MeetingsError, undefined, {}, MeetingsQueryParams, MeetingsPathParams>({
-    url: '/users/{userId}/meetings',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    MeetingsResponse,
+    MeetingsError,
+    undefined,
+    {},
+    MeetingsQueryParams,
+    MeetingsPathParams
+  >({ url: "/users/{userId}/meetings", method: "get", ...variables, signal });
 
 export type MeetingCreatePathParams = {
   /**
@@ -13176,7 +13929,7 @@ export type MeetingCreateResponse = {
      *
      * @example available
      */
-    status?: 'available' | 'deleted';
+    status?: "available" | "deleted";
   }[];
   /**
    * The meeting passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters such as !, @, #, etc.
@@ -13289,7 +14042,7 @@ export type MeetingCreateResponse = {
      * @example 1
      * @default 1
      */
-    weekly_days?: '1' | '2' | '3' | '4' | '5' | '6' | '7';
+    weekly_days?: "1" | "2" | "3" | "4" | "5" | "6" | "7";
   };
   /**
    * Meeting settings.
@@ -13365,7 +14118,7 @@ export type MeetingCreateResponse = {
        *
        * @example approve
        */
-      method?: 'approve' | 'deny';
+      method?: "approve" | "deny";
     };
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -13377,7 +14130,7 @@ export type MeetingCreateResponse = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -13436,7 +14189,7 @@ export type MeetingCreateResponse = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -13538,7 +14291,7 @@ export type MeetingCreateResponse = {
      *
      * @example enhanced_encryption
      */
-    encryption_type?: 'enhanced_encryption' | 'e2ee';
+    encryption_type?: "enhanced_encryption" | "e2ee";
     /**
      * Only signed in users can join this meeting.
      *
@@ -13604,7 +14357,7 @@ export type MeetingCreateResponse = {
        *
        * @example toll
        */
-      type?: 'toll' | 'tollfree';
+      type?: "toll" | "tollfree";
     }[];
     /**
      * Start video when the host joins the meeting.
@@ -13675,7 +14428,7 @@ export type MeetingCreateResponse = {
        *
        * @example all
        */
-      question_visibility?: 'answered' | 'all';
+      question_visibility?: "answered" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -13916,7 +14669,10 @@ export type MeetingCreateResponse = {
        *
        * @example all_users
        */
-      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
+      who_is_added?:
+        | "all_users"
+        | "org_invitees_and_participants"
+        | "org_invitees";
       /**
        * The channel's ID.
        *
@@ -13951,7 +14707,7 @@ export type MeetingCreateResponse = {
        *
        * @example whiteboard
        */
-      resource_type?: 'whiteboard';
+      resource_type?: "whiteboard";
       /**
        * The resource ID.
        *
@@ -13967,7 +14723,7 @@ export type MeetingCreateResponse = {
        * @example editor
        * @default editor
        */
-      permission_level?: 'editor' | 'commenter' | 'viewer';
+      permission_level?: "editor" | "commenter" | "viewer";
     }[];
     /**
      * Whether to automatically start a meeting summary. If not provided, the default value will be based on the user's setting.
@@ -14115,7 +14871,7 @@ export type MeetingCreateResponse = {
    *
    * @example open_api
    */
-  creation_source?: 'other' | 'open_api' | 'web_portal';
+  creation_source?: "other" | "open_api" | "web_portal";
 };
 
 export type MeetingCreateRequestBody = {
@@ -14253,7 +15009,7 @@ export type MeetingCreateRequestBody = {
      * @example 1
      * @default 1
      */
-    weekly_days?: '1' | '2' | '3' | '4' | '5' | '6' | '7';
+    weekly_days?: "1" | "2" | "3" | "4" | "5" | "6" | "7";
   };
   /**
    * The email address or user ID of the user to schedule a meeting for.
@@ -14329,7 +15085,7 @@ export type MeetingCreateRequestBody = {
        *
        * @example approve
        */
-      method?: 'approve' | 'deny';
+      method?: "approve" | "deny";
     };
     /**
      * How participants join the audio portion of the meeting.
@@ -14341,7 +15097,7 @@ export type MeetingCreateRequestBody = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference information.
      *
@@ -14392,7 +15148,7 @@ export type MeetingCreateRequestBody = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * The [pre-assigned breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms) settings.
      */
@@ -14470,7 +15226,7 @@ export type MeetingCreateRequestBody = {
      *
      * @example enhanced_encryption
      */
-    encryption_type?: 'enhanced_encryption' | 'e2ee';
+    encryption_type?: "enhanced_encryption" | "e2ee";
     /**
      * Whether to enable the [**Focus Mode** feature](https://support.zoom.us/hc/en-us/articles/360061113751-Using-focus-mode) when the meeting starts.
      *
@@ -14552,7 +15308,7 @@ export type MeetingCreateRequestBody = {
        *
        * @example all
        */
-      question_visibility?: 'answered' | 'all';
+      question_visibility?: "answered" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -14799,7 +15555,10 @@ export type MeetingCreateRequestBody = {
        *
        * @example all_users
        */
-      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
+      who_is_added?:
+        | "all_users"
+        | "org_invitees_and_participants"
+        | "org_invitees";
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -14828,7 +15587,7 @@ export type MeetingCreateRequestBody = {
        *
        * @example whiteboard
        */
-      resource_type?: 'whiteboard';
+      resource_type?: "whiteboard";
       /**
        * The resource ID.
        *
@@ -14844,7 +15603,7 @@ export type MeetingCreateRequestBody = {
        * @example editor
        * @default editor
        */
-      permission_level?: 'editor' | 'commenter' | 'viewer';
+      permission_level?: "editor" | "commenter" | "viewer";
     }[];
     /**
      * Whether to automatically start a meeting summary. If not provided, the default value will be based on the user's setting.
@@ -15005,13 +15764,18 @@ export type MeetingCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const meetingCreate = (variables: MeetingCreateVariables, signal?: AbortSignal) =>
-  fetch<MeetingCreateResponse, MeetingCreateError, MeetingCreateRequestBody, {}, {}, MeetingCreatePathParams>({
-    url: '/users/{userId}/meetings',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const meetingCreate = (
+  variables: MeetingCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingCreateResponse,
+    MeetingCreateError,
+    MeetingCreateRequestBody,
+    {},
+    {},
+    MeetingCreatePathParams
+  >({ url: "/users/{userId}/meetings", method: "post", ...variables, signal });
 
 export type ListUpcomingMeetingPathParams = {
   /**
@@ -15131,12 +15895,22 @@ export type ListUpcomingMeetingVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listUpcomingMeeting = (variables: ListUpcomingMeetingVariables, signal?: AbortSignal) =>
-  fetch<ListUpcomingMeetingResponse, ListUpcomingMeetingError, undefined, {}, {}, ListUpcomingMeetingPathParams>({
-    url: '/users/{userId}/upcoming_meetings',
-    method: 'get',
+export const listUpcomingMeeting = (
+  variables: ListUpcomingMeetingVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListUpcomingMeetingResponse,
+    ListUpcomingMeetingError,
+    undefined,
+    {},
+    {},
+    ListUpcomingMeetingPathParams
+  >({
+    url: "/users/{userId}/upcoming_meetings",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UserPACsPathParams = {
@@ -15233,12 +16007,9 @@ export type UserPACsVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const userPACs = (variables: UserPACsVariables, signal?: AbortSignal) =>
-  fetch<UserPACsResponse, UserPACsError, undefined, {}, {}, UserPACsPathParams>({
-    url: '/users/{userId}/pac',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<UserPACsResponse, UserPACsError, undefined, {}, {}, UserPACsPathParams>(
+    { url: "/users/{userId}/pac", method: "get", ...variables, signal },
+  );
 
 export type ReportSignInSignOutActivitiesQueryParams = {
   /**
@@ -15269,7 +16040,8 @@ export type ReportSignInSignOutActivitiesQueryParams = {
   next_page_token?: string;
 };
 
-export type ReportSignInSignOutActivitiesError = Fetcher.ErrorWrapper<undefined>;
+export type ReportSignInSignOutActivitiesError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type ReportSignInSignOutActivitiesResponse = {
   /**
@@ -15309,7 +16081,7 @@ export type ReportSignInSignOutActivitiesResponse = {
      *
      * @example Sign out
      */
-    type?: 'Sign in' | 'Sign out';
+    type?: "Sign in" | "Sign out";
     /**
      * Zoom client version of the user.
      *
@@ -15364,7 +16136,7 @@ export type ReportSignInSignOutActivitiesVariables = {
  */
 export const reportSignInSignOutActivities = (
   variables: ReportSignInSignOutActivitiesVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     ReportSignInSignOutActivitiesResponse,
@@ -15373,7 +16145,7 @@ export const reportSignInSignOutActivities = (
     {},
     ReportSignInSignOutActivitiesQueryParams,
     {}
-  >({ url: '/report/activities', method: 'get', ...variables, signal });
+  >({ url: "/report/activities", method: "get", ...variables, signal });
 
 export type GetBillingReportError = Fetcher.ErrorWrapper<undefined>;
 
@@ -15448,13 +16220,13 @@ export type GetBillingReportVariables = FetcherExtraProps;
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const getBillingReport = (variables: GetBillingReportVariables, signal?: AbortSignal) =>
-  fetch<GetBillingReportResponse, GetBillingReportError, undefined, {}, {}, {}>({
-    url: '/report/billing',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const getBillingReport = (
+  variables: GetBillingReportVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<GetBillingReportResponse, GetBillingReportError, undefined, {}, {}, {}>(
+    { url: "/report/billing", method: "get", ...variables, signal },
+  );
 
 export type GetBillingInvoicesReportsQueryParams = {
   /**
@@ -15541,7 +16313,10 @@ export type GetBillingInvoicesReportsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const getBillingInvoicesReports = (variables: GetBillingInvoicesReportsVariables, signal?: AbortSignal) =>
+export const getBillingInvoicesReports = (
+  variables: GetBillingInvoicesReportsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetBillingInvoicesReportsResponse,
     GetBillingInvoicesReportsError,
@@ -15549,7 +16324,7 @@ export const getBillingInvoicesReports = (variables: GetBillingInvoicesReportsVa
     {},
     GetBillingInvoicesReportsQueryParams,
     {}
-  >({ url: '/report/billing/invoices', method: 'get', ...variables, signal });
+  >({ url: "/report/billing/invoices", method: "get", ...variables, signal });
 
 export type ReportCloudRecordingQueryParams = {
   /**
@@ -15642,13 +16417,18 @@ export type ReportCloudRecordingVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportCloudRecording = (variables: ReportCloudRecordingVariables, signal?: AbortSignal) =>
-  fetch<ReportCloudRecordingResponse, ReportCloudRecordingError, undefined, {}, ReportCloudRecordingQueryParams, {}>({
-    url: '/report/cloud_recording',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportCloudRecording = (
+  variables: ReportCloudRecordingVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportCloudRecordingResponse,
+    ReportCloudRecordingError,
+    undefined,
+    {},
+    ReportCloudRecordingQueryParams,
+    {}
+  >({ url: "/report/cloud_recording", method: "get", ...variables, signal });
 
 export type ReportDailyQueryParams = {
   /**
@@ -15743,13 +16523,18 @@ export type ReportDailyVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportDaily = (variables: ReportDailyVariables, signal?: AbortSignal) =>
-  fetch<ReportDailyResponse, ReportDailyError, undefined, {}, ReportDailyQueryParams, {}>({
-    url: '/report/daily',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportDaily = (
+  variables: ReportDailyVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportDailyResponse,
+    ReportDailyError,
+    undefined,
+    {},
+    ReportDailyQueryParams,
+    {}
+  >({ url: "/report/daily", method: "get", ...variables, signal });
 
 export type GethistorymeetingandwebinarlistQueryParams = {
   /**
@@ -15773,7 +16558,7 @@ export type GethistorymeetingandwebinarlistQueryParams = {
    *
    * @example end_time
    */
-  date_type?: 'start_time' | 'end_time';
+  date_type?: "start_time" | "end_time";
   /**
    * The meeting type to query.
    * - `all` - rerturn meetings and webinars
@@ -15782,7 +16567,7 @@ export type GethistorymeetingandwebinarlistQueryParams = {
    *
    * @example meeting
    */
-  meeting_type?: 'meeting' | 'webinar' | 'all';
+  meeting_type?: "meeting" | "webinar" | "all";
   /**
    * Query meetings that have this type of report.
    * - `all` - all meetings
@@ -15794,7 +16579,7 @@ export type GethistorymeetingandwebinarlistQueryParams = {
    *
    * @example poll
    */
-  report_type?: 'all' | 'poll' | 'survey' | 'qa' | 'resource' | 'reaction';
+  report_type?: "all" | "poll" | "survey" | "qa" | "resource" | "reaction";
   /**
    * The keywords of meeting topic or meeting ID.
    *
@@ -15823,7 +16608,8 @@ export type GethistorymeetingandwebinarlistQueryParams = {
   group_id?: string;
 };
 
-export type GethistorymeetingandwebinarlistError = Fetcher.ErrorWrapper<undefined>;
+export type GethistorymeetingandwebinarlistError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GethistorymeetingandwebinarlistResponse = {
   /**
@@ -15862,7 +16648,7 @@ export type GethistorymeetingandwebinarlistResponse = {
      *
      * @example Meeting
      */
-    type?: 'Meeting' | 'Webinar';
+    type?: "Meeting" | "Webinar";
     /**
      * The host's display name.
      *
@@ -16185,7 +16971,7 @@ export type GethistorymeetingandwebinarlistVariables = {
  */
 export const gethistorymeetingandwebinarlist = (
   variables: GethistorymeetingandwebinarlistVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GethistorymeetingandwebinarlistResponse,
@@ -16194,7 +16980,7 @@ export const gethistorymeetingandwebinarlist = (
     {},
     GethistorymeetingandwebinarlistQueryParams,
     {}
-  >({ url: '/report/history_meetings', method: 'get', ...variables, signal });
+  >({ url: "/report/history_meetings", method: "get", ...variables, signal });
 
 export type ReportMeetingactivitylogsQueryParams = {
   /**
@@ -16252,14 +17038,14 @@ export type ReportMeetingactivitylogsQueryParams = {
    * @default All Activities
    */
   activity_type:
-    | 'All Activities'
-    | 'Meeting Created'
-    | 'Meeting Started'
-    | 'User Join'
-    | 'User Left'
-    | 'Remote Control'
-    | 'In-Meeting Chat'
-    | 'Meeting Ended';
+    | "All Activities"
+    | "Meeting Created"
+    | "Meeting Started"
+    | "User Join"
+    | "User Left"
+    | "Remote Control"
+    | "In-Meeting Chat"
+    | "Meeting Ended";
 };
 
 export type ReportMeetingactivitylogsError = Fetcher.ErrorWrapper<undefined>;
@@ -16344,7 +17130,10 @@ export type ReportMeetingactivitylogsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportMeetingactivitylogs = (variables: ReportMeetingactivitylogsVariables, signal?: AbortSignal) =>
+export const reportMeetingactivitylogs = (
+  variables: ReportMeetingactivitylogsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ReportMeetingactivitylogsResponse,
     ReportMeetingactivitylogsError,
@@ -16352,7 +17141,7 @@ export const reportMeetingactivitylogs = (variables: ReportMeetingactivitylogsVa
     {},
     ReportMeetingactivitylogsQueryParams,
     {}
-  >({ url: '/report/meeting_activities', method: 'get', ...variables, signal });
+  >({ url: "/report/meeting_activities", method: "get", ...variables, signal });
 
 export type ReportMeetingDetailsPathParams = {
   /**
@@ -16502,12 +17291,22 @@ export type ReportMeetingDetailsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportMeetingDetails = (variables: ReportMeetingDetailsVariables, signal?: AbortSignal) =>
-  fetch<ReportMeetingDetailsResponse, ReportMeetingDetailsError, undefined, {}, {}, ReportMeetingDetailsPathParams>({
-    url: '/report/meetings/{meetingId}',
-    method: 'get',
+export const reportMeetingDetails = (
+  variables: ReportMeetingDetailsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportMeetingDetailsResponse,
+    ReportMeetingDetailsError,
+    undefined,
+    {},
+    {},
+    ReportMeetingDetailsPathParams
+  >({
+    url: "/report/meetings/{meetingId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportMeetingParticipantsPathParams = {
@@ -16541,7 +17340,7 @@ export type ReportMeetingParticipantsQueryParams = {
    *
    * @example registrant_id
    */
-  include_fields?: 'registrant_id';
+  include_fields?: "registrant_id";
 };
 
 export type ReportMeetingParticipantsError = Fetcher.ErrorWrapper<undefined>;
@@ -16641,7 +17440,7 @@ export type ReportMeetingParticipantsResponse = {
      *
      * @example in_meeting
      */
-    status?: 'in_meeting' | 'in_waiting_room';
+    status?: "in_meeting" | "in_waiting_room";
     /**
      * Participant email.
      *
@@ -16695,7 +17494,10 @@ export type ReportMeetingParticipantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportMeetingParticipants = (variables: ReportMeetingParticipantsVariables, signal?: AbortSignal) =>
+export const reportMeetingParticipants = (
+  variables: ReportMeetingParticipantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ReportMeetingParticipantsResponse,
     ReportMeetingParticipantsError,
@@ -16703,7 +17505,12 @@ export const reportMeetingParticipants = (variables: ReportMeetingParticipantsVa
     {},
     ReportMeetingParticipantsQueryParams,
     ReportMeetingParticipantsPathParams
-  >({ url: '/report/meetings/{meetingId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: "/report/meetings/{meetingId}/participants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ReportMeetingPollsPathParams = {
   /**
@@ -16814,12 +17621,22 @@ export type ReportMeetingPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportMeetingPolls = (variables: ReportMeetingPollsVariables, signal?: AbortSignal) =>
-  fetch<ReportMeetingPollsResponse, ReportMeetingPollsError, undefined, {}, {}, ReportMeetingPollsPathParams>({
-    url: '/report/meetings/{meetingId}/polls',
-    method: 'get',
+export const reportMeetingPolls = (
+  variables: ReportMeetingPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportMeetingPollsResponse,
+    ReportMeetingPollsError,
+    undefined,
+    {},
+    {},
+    ReportMeetingPollsPathParams
+  >({
+    url: "/report/meetings/{meetingId}/polls",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportMeetingQAPathParams = {
@@ -16902,7 +17719,12 @@ export type ReportMeetingQAResponse = {
        *
        * @example open
        */
-      question_status?: 'default' | 'open' | 'dismissed' | 'answered' | 'deleted';
+      question_status?:
+        | "default"
+        | "open"
+        | "dismissed"
+        | "answered"
+        | "deleted";
       /**
        * Array of answers from the user.
        */
@@ -16945,11 +17767,11 @@ export type ReportMeetingQAResponse = {
          * @default default
          */
         type?:
-          | 'default'
-          | 'host_answered_publicly'
-          | 'host_answered_privately'
-          | 'participant_commented'
-          | 'host_answered';
+          | "default"
+          | "host_answered_publicly"
+          | "host_answered_privately"
+          | "participant_commented"
+          | "host_answered";
       }[];
     }[];
   }[];
@@ -16988,12 +17810,22 @@ export type ReportMeetingQAVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportMeetingQA = (variables: ReportMeetingQAVariables, signal?: AbortSignal) =>
-  fetch<ReportMeetingQAResponse, ReportMeetingQAError, undefined, {}, {}, ReportMeetingQAPathParams>({
-    url: '/report/meetings/{meetingId}/qa',
-    method: 'get',
+export const reportMeetingQA = (
+  variables: ReportMeetingQAVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportMeetingQAResponse,
+    ReportMeetingQAError,
+    undefined,
+    {},
+    {},
+    ReportMeetingQAPathParams
+  >({
+    url: "/report/meetings/{meetingId}/qa",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportMeetingSurveyPathParams = {
@@ -17119,12 +17951,22 @@ export type ReportMeetingSurveyVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportMeetingSurvey = (variables: ReportMeetingSurveyVariables, signal?: AbortSignal) =>
-  fetch<ReportMeetingSurveyResponse, ReportMeetingSurveyError, undefined, {}, {}, ReportMeetingSurveyPathParams>({
-    url: '/report/meetings/{meetingId}/survey',
-    method: 'get',
+export const reportMeetingSurvey = (
+  variables: ReportMeetingSurveyVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportMeetingSurveyResponse,
+    ReportMeetingSurveyError,
+    undefined,
+    {},
+    {},
+    ReportMeetingSurveyPathParams
+  >({
+    url: "/report/meetings/{meetingId}/survey",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportOperationLogsQueryParams = {
@@ -17177,18 +18019,18 @@ export type ReportOperationLogsQueryParams = {
    * @example user
    */
   category_type?:
-    | 'all'
-    | 'user'
-    | 'user_settings'
-    | 'account'
-    | 'billing'
-    | 'im'
-    | 'recording'
-    | 'phone_contacts'
-    | 'webinar'
-    | 'sub_account'
-    | 'role'
-    | 'zoom_rooms';
+    | "all"
+    | "user"
+    | "user_settings"
+    | "account"
+    | "billing"
+    | "im"
+    | "recording"
+    | "phone_contacts"
+    | "webinar"
+    | "sub_account"
+    | "role"
+    | "zoom_rooms";
 };
 
 export type ReportOperationLogsError = Fetcher.ErrorWrapper<undefined>;
@@ -17265,13 +18107,18 @@ export type ReportOperationLogsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportOperationLogs = (variables: ReportOperationLogsVariables, signal?: AbortSignal) =>
-  fetch<ReportOperationLogsResponse, ReportOperationLogsError, undefined, {}, ReportOperationLogsQueryParams, {}>({
-    url: '/report/operationlogs',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportOperationLogs = (
+  variables: ReportOperationLogsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportOperationLogsResponse,
+    ReportOperationLogsError,
+    undefined,
+    {},
+    ReportOperationLogsQueryParams,
+    {}
+  >({ url: "/report/operationlogs", method: "get", ...variables, signal });
 
 export type ReportTelephoneQueryParams = {
   /**
@@ -17284,7 +18131,7 @@ export type ReportTelephoneQueryParams = {
    * @example 3
    * @default 1
    */
-  type?: '1' | '2' | '3';
+  type?: "1" | "2" | "3";
   /**
    * The type of date to query.
    * * `start_time` &mdash; Query by call start time.
@@ -17297,7 +18144,11 @@ export type ReportTelephoneQueryParams = {
    * @example start_time
    * @default start_time
    */
-  query_date_type?: 'start_time' | 'end_time' | 'meeting_start_time' | 'meeting_end_time';
+  query_date_type?:
+    | "start_time"
+    | "end_time"
+    | "meeting_start_time"
+    | "meeting_end_time";
   /**
    * Start date in 'yyyy-mm-dd' format. The date range defined by the &quot;from&quot; and &quot;to&quot; parameters should only be one month as the report includes only one month worth of data at once.
    *
@@ -17483,14 +18334,14 @@ export type ReportTelephoneResponse = {
      * @example call-out
      */
     type?:
-      | 'toll-free'
-      | 'call-out'
-      | 'call-in'
-      | 'US toll-number'
-      | 'global toll-number'
-      | 'premium'
-      | 'premium call-in'
-      | 'Toll';
+      | "toll-free"
+      | "call-out"
+      | "call-in"
+      | "US toll-number"
+      | "global toll-number"
+      | "premium"
+      | "premium call-in"
+      | "Toll";
     /**
      * Meeting UUID.
      *
@@ -17517,13 +18368,18 @@ export type ReportTelephoneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportTelephone = (variables: ReportTelephoneVariables, signal?: AbortSignal) =>
-  fetch<ReportTelephoneResponse, ReportTelephoneError, undefined, {}, ReportTelephoneQueryParams, {}>({
-    url: '/report/telephone',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportTelephone = (
+  variables: ReportTelephoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportTelephoneResponse,
+    ReportTelephoneError,
+    undefined,
+    {},
+    ReportTelephoneQueryParams,
+    {}
+  >({ url: "/report/telephone", method: "get", ...variables, signal });
 
 export type ReportUpcomingEventsQueryParams = {
   /**
@@ -17565,7 +18421,7 @@ export type ReportUpcomingEventsQueryParams = {
    * @example meeting
    * @default all
    */
-  type?: 'meeting' | 'webinar' | 'all';
+  type?: "meeting" | "webinar" | "all";
   /**
    * The group ID. To get a group ID, use the [**List groups**](/api-reference/zoom-api/methods#operation/groups) API.
    *
@@ -17666,13 +18522,18 @@ export type ReportUpcomingEventsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportUpcomingEvents = (variables: ReportUpcomingEventsVariables, signal?: AbortSignal) =>
-  fetch<ReportUpcomingEventsResponse, ReportUpcomingEventsError, undefined, {}, ReportUpcomingEventsQueryParams, {}>({
-    url: '/report/upcoming_events',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportUpcomingEvents = (
+  variables: ReportUpcomingEventsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportUpcomingEventsResponse,
+    ReportUpcomingEventsError,
+    undefined,
+    {},
+    ReportUpcomingEventsQueryParams,
+    {}
+  >({ url: "/report/upcoming_events", method: "get", ...variables, signal });
 
 export type ReportUsersQueryParams = {
   /**
@@ -17682,7 +18543,7 @@ export type ReportUsersQueryParams = {
    *
    * @example active
    */
-  type?: 'active' | 'inactive';
+  type?: "active" | "inactive";
   /**
    * Start date in 'yyyy-mm-dd' format. The date range defined by the `from` and `to` parameters should only be one month as the report includes only one month worth of data at once.
    *
@@ -17908,19 +18769,24 @@ export type ReportUsersVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportUsers = (variables: ReportUsersVariables, signal?: AbortSignal) =>
-  fetch<ReportUsersResponse, ReportUsersError, undefined, {}, ReportUsersQueryParams, {}>({
-    url: '/report/users',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const reportUsers = (
+  variables: ReportUsersVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportUsersResponse,
+    ReportUsersError,
+    undefined,
+    {},
+    ReportUsersQueryParams,
+    {}
+  >({ url: "/report/users", method: "get", ...variables, signal });
 
 export type ReportMeetingsPathParams = {
   /**
    * The user ID or email address of the user. For user-level apps, pass the `me` value.
    */
-  userId: string | string | 'me';
+  userId: string | string | "me";
 };
 
 export type ReportMeetingsQueryParams = {
@@ -17961,7 +18827,7 @@ export type ReportMeetingsQueryParams = {
    * @example past
    * @default past
    */
-  type?: 'past' | 'pastOne' | 'pastJoined';
+  type?: "past" | "pastOne" | "pastJoined";
 };
 
 export type ReportMeetingsError = Fetcher.ErrorWrapper<undefined>;
@@ -18228,7 +19094,10 @@ export type ReportMeetingsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportMeetings = (variables: ReportMeetingsVariables, signal?: AbortSignal) =>
+export const reportMeetings = (
+  variables: ReportMeetingsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ReportMeetingsResponse,
     ReportMeetingsError,
@@ -18236,7 +19105,12 @@ export const reportMeetings = (variables: ReportMeetingsVariables, signal?: Abor
     {},
     ReportMeetingsQueryParams,
     ReportMeetingsPathParams
-  >({ url: '/report/users/{userId}/meetings', method: 'get', ...variables, signal });
+  >({
+    url: "/report/users/{userId}/meetings",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ReportWebinarDetailsPathParams = {
   /**
@@ -18387,12 +19261,22 @@ export type ReportWebinarDetailsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportWebinarDetails = (variables: ReportWebinarDetailsVariables, signal?: AbortSignal) =>
-  fetch<ReportWebinarDetailsResponse, ReportWebinarDetailsError, undefined, {}, {}, ReportWebinarDetailsPathParams>({
-    url: '/report/webinars/{webinarId}',
-    method: 'get',
+export const reportWebinarDetails = (
+  variables: ReportWebinarDetailsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportWebinarDetailsResponse,
+    ReportWebinarDetailsError,
+    undefined,
+    {},
+    {},
+    ReportWebinarDetailsPathParams
+  >({
+    url: "/report/webinars/{webinarId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportWebinarParticipantsPathParams = {
@@ -18427,7 +19311,7 @@ export type ReportWebinarParticipantsQueryParams = {
    *
    * @example registrant_id
    */
-  include_fields?: 'registrant_id';
+  include_fields?: "registrant_id";
 };
 
 export type ReportWebinarParticipantsError = Fetcher.ErrorWrapper<undefined>;
@@ -18525,7 +19409,7 @@ export type ReportWebinarParticipantsResponse = {
      *
      * @example in_meeting
      */
-    status?: 'in_meeting' | 'in_waiting_room';
+    status?: "in_meeting" | "in_waiting_room";
     /**
      * The participant's email address. If the participant is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](/docs/api-reference/using-zoom-apis#email-address) for details. This returns an empty string value if the account calling the API is a BAA account.
      *
@@ -18573,7 +19457,10 @@ export type ReportWebinarParticipantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportWebinarParticipants = (variables: ReportWebinarParticipantsVariables, signal?: AbortSignal) =>
+export const reportWebinarParticipants = (
+  variables: ReportWebinarParticipantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ReportWebinarParticipantsResponse,
     ReportWebinarParticipantsError,
@@ -18581,7 +19468,12 @@ export const reportWebinarParticipants = (variables: ReportWebinarParticipantsVa
     {},
     ReportWebinarParticipantsQueryParams,
     ReportWebinarParticipantsPathParams
-  >({ url: '/report/webinars/{webinarId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: "/report/webinars/{webinarId}/participants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ReportWebinarPollsPathParams = {
   /**
@@ -18696,12 +19588,22 @@ export type ReportWebinarPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
-export const reportWebinarPolls = (variables: ReportWebinarPollsVariables, signal?: AbortSignal) =>
-  fetch<ReportWebinarPollsResponse, ReportWebinarPollsError, undefined, {}, {}, ReportWebinarPollsPathParams>({
-    url: '/report/webinars/{webinarId}/polls',
-    method: 'get',
+export const reportWebinarPolls = (
+  variables: ReportWebinarPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportWebinarPollsResponse,
+    ReportWebinarPollsError,
+    undefined,
+    {},
+    {},
+    ReportWebinarPollsPathParams
+  >({
+    url: "/report/webinars/{webinarId}/polls",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportWebinarQAPathParams = {
@@ -18786,7 +19688,12 @@ export type ReportWebinarQAResponse = {
        *
        * @example open
        */
-      question_status?: 'default' | 'open' | 'dismissed' | 'answered' | 'deleted';
+      question_status?:
+        | "default"
+        | "open"
+        | "dismissed"
+        | "answered"
+        | "deleted";
       /**
        * Array of answers from user.
        */
@@ -18829,11 +19736,11 @@ export type ReportWebinarQAResponse = {
          * @default default
          */
         type?:
-          | 'default'
-          | 'host_answered_publicly'
-          | 'host_answered_privately'
-          | 'participant_commented'
-          | 'host_answered';
+          | "default"
+          | "host_answered_publicly"
+          | "host_answered_privately"
+          | "participant_commented"
+          | "host_answered";
       }[];
     }[];
   }[];
@@ -18872,12 +19779,22 @@ export type ReportWebinarQAVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportWebinarQA = (variables: ReportWebinarQAVariables, signal?: AbortSignal) =>
-  fetch<ReportWebinarQAResponse, ReportWebinarQAError, undefined, {}, {}, ReportWebinarQAPathParams>({
-    url: '/report/webinars/{webinarId}/qa',
-    method: 'get',
+export const reportWebinarQA = (
+  variables: ReportWebinarQAVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportWebinarQAResponse,
+    ReportWebinarQAError,
+    undefined,
+    {},
+    {},
+    ReportWebinarQAPathParams
+  >({
+    url: "/report/webinars/{webinarId}/qa",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ReportWebinarSurveyPathParams = {
@@ -19005,12 +19922,22 @@ export type ReportWebinarSurveyVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const reportWebinarSurvey = (variables: ReportWebinarSurveyVariables, signal?: AbortSignal) =>
-  fetch<ReportWebinarSurveyResponse, ReportWebinarSurveyError, undefined, {}, {}, ReportWebinarSurveyPathParams>({
-    url: '/report/webinars/{webinarId}/survey',
-    method: 'get',
+export const reportWebinarSurvey = (
+  variables: ReportWebinarSurveyVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ReportWebinarSurveyResponse,
+    ReportWebinarSurveyError,
+    undefined,
+    {},
+    {},
+    ReportWebinarSurveyPathParams
+  >({
+    url: "/report/webinars/{webinarId}/survey",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListSipPhonesQueryParams = {
@@ -19142,21 +20069,21 @@ export type ListSipPhonesResponse = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
     /**
      * Protocols supported by the SIP provider.
      *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      *
      * @example UDP
      */
-    transport_protocol2?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
     /**
      * Protocols supported by the SIP provider.
      *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      *
      * @example UDP
      */
-    transport_protocol3?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
     /**
      * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
      *
@@ -19205,13 +20132,18 @@ export type ListSipPhonesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listSipPhones = (variables: ListSipPhonesVariables, signal?: AbortSignal) =>
-  fetch<ListSipPhonesResponse, ListSipPhonesError, undefined, {}, ListSipPhonesQueryParams, {}>({
-    url: '/sip_phones',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSipPhones = (
+  variables: ListSipPhonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSipPhonesResponse,
+    ListSipPhonesError,
+    undefined,
+    {},
+    ListSipPhonesQueryParams,
+    {}
+  >({ url: "/sip_phones", method: "get", ...variables, signal });
 
 export type CreateSIPPhoneError = Fetcher.ErrorWrapper<undefined>;
 
@@ -19293,21 +20225,21 @@ export type CreateSIPPhoneResponse = {
    *
    * @example UDP
    */
-  transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol2?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol3?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
    *
@@ -19404,21 +20336,21 @@ export type CreateSIPPhoneRequestBody = {
    *
    * @example UDP
    */
-  transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol2?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol3?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
    *
@@ -19464,13 +20396,18 @@ export type CreateSIPPhoneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const createSIPPhone = (variables: CreateSIPPhoneVariables, signal?: AbortSignal) =>
-  fetch<CreateSIPPhoneResponse, CreateSIPPhoneError, CreateSIPPhoneRequestBody, {}, {}, {}>({
-    url: '/sip_phones',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const createSIPPhone = (
+  variables: CreateSIPPhoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateSIPPhoneResponse,
+    CreateSIPPhoneError,
+    CreateSIPPhoneRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/sip_phones", method: "post", ...variables, signal });
 
 export type ListSIPPhonePhonesQueryParams = {
   /**
@@ -19594,7 +20531,7 @@ export type ListSIPPhonePhonesResponse = {
        *
        * @example UDP
        */
-      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+      transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
     };
     /**
      * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19618,7 +20555,7 @@ export type ListSIPPhonePhonesResponse = {
        *
        * @example UDP
        */
-      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+      transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
     };
     /**
      * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19642,7 +20579,7 @@ export type ListSIPPhonePhonesResponse = {
        *
        * @example UDP
        */
-      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+      transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
     };
   }[];
 };
@@ -19667,13 +20604,18 @@ export type ListSIPPhonePhonesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listSIPPhonePhones = (variables: ListSIPPhonePhonesVariables, signal?: AbortSignal) =>
-  fetch<ListSIPPhonePhonesResponse, ListSIPPhonePhonesError, undefined, {}, ListSIPPhonePhonesQueryParams, {}>({
-    url: '/sip_phones/phones',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const listSIPPhonePhones = (
+  variables: ListSIPPhonePhonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListSIPPhonePhonesResponse,
+    ListSIPPhonePhonesError,
+    undefined,
+    {},
+    ListSIPPhonePhonesQueryParams,
+    {}
+  >({ url: "/sip_phones/phones", method: "get", ...variables, signal });
 
 export type EnableSIPPhonePhonesError = Fetcher.ErrorWrapper<undefined>;
 
@@ -19764,7 +20706,7 @@ export type EnableSIPPhonePhonesResponse = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19788,7 +20730,7 @@ export type EnableSIPPhonePhonesResponse = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19812,7 +20754,7 @@ export type EnableSIPPhonePhonesResponse = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
 };
 
@@ -19897,7 +20839,7 @@ export type EnableSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19921,7 +20863,7 @@ export type EnableSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -19945,7 +20887,7 @@ export type EnableSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
 };
 
@@ -19970,13 +20912,18 @@ export type EnableSIPPhonePhonesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const enableSIPPhonePhones = (variables: EnableSIPPhonePhonesVariables, signal?: AbortSignal) =>
-  fetch<EnableSIPPhonePhonesResponse, EnableSIPPhonePhonesError, EnableSIPPhonePhonesRequestBody, {}, {}, {}>({
-    url: '/sip_phones/phones',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const enableSIPPhonePhones = (
+  variables: EnableSIPPhonePhonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    EnableSIPPhonePhonesResponse,
+    EnableSIPPhonePhonesError,
+    EnableSIPPhonePhonesRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/sip_phones/phones", method: "post", ...variables, signal });
 
 export type DeleteSIPPhonePhonesPathParams = {
   /**
@@ -20006,12 +20953,22 @@ export type DeleteSIPPhonePhonesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteSIPPhonePhones = (variables: DeleteSIPPhonePhonesVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSIPPhonePhonesError, undefined, {}, {}, DeleteSIPPhonePhonesPathParams>({
-    url: '/sip_phones/phones/{phoneId}',
-    method: 'delete',
+export const deleteSIPPhonePhones = (
+  variables: DeleteSIPPhonePhonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSIPPhonePhonesError,
+    undefined,
+    {},
+    {},
+    DeleteSIPPhonePhonesPathParams
+  >({
+    url: "/sip_phones/phones/{phoneId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type UpdateSIPPhonePhonesPathParams = {
@@ -20098,7 +21055,7 @@ export type UpdateSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -20122,7 +21079,7 @@ export type UpdateSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
@@ -20146,7 +21103,7 @@ export type UpdateSIPPhonePhonesRequestBody = {
      *
      * @example UDP
      */
-    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   };
 };
 
@@ -20172,12 +21129,22 @@ export type UpdateSIPPhonePhonesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const updateSIPPhonePhones = (variables: UpdateSIPPhonePhonesVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateSIPPhonePhonesError, UpdateSIPPhonePhonesRequestBody, {}, {}, UpdateSIPPhonePhonesPathParams>({
-    url: '/sip_phones/phones/{phoneId}',
-    method: 'patch',
+export const updateSIPPhonePhones = (
+  variables: UpdateSIPPhonePhonesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateSIPPhonePhonesError,
+    UpdateSIPPhonePhonesRequestBody,
+    {},
+    {},
+    UpdateSIPPhonePhonesPathParams
+  >({
+    url: "/sip_phones/phones/{phoneId}",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeleteSIPPhonePathParams = {
@@ -20208,13 +21175,18 @@ export type DeleteSIPPhoneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteSIPPhone = (variables: DeleteSIPPhoneVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteSIPPhoneError, undefined, {}, {}, DeleteSIPPhonePathParams>({
-    url: '/sip_phones/{phoneId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const deleteSIPPhone = (
+  variables: DeleteSIPPhoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteSIPPhoneError,
+    undefined,
+    {},
+    {},
+    DeleteSIPPhonePathParams
+  >({ url: "/sip_phones/{phoneId}", method: "delete", ...variables, signal });
 
 export type UpdateSIPPhonePathParams = {
   /**
@@ -20299,21 +21271,21 @@ export type UpdateSIPPhoneRequestBody = {
    *
    * @example UDP
    */
-  transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol2?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * Protocols supported by the SIP provider.
    *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
    *
    * @example UDP
    */
-  transport_protocol3?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
   /**
    * The phone number associated with the user in the SIP account.
    *
@@ -20344,13 +21316,18 @@ export type UpdateSIPPhoneVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const updateSIPPhone = (variables: UpdateSIPPhoneVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateSIPPhoneError, UpdateSIPPhoneRequestBody, {}, {}, UpdateSIPPhonePathParams>({
-    url: '/sip_phones/{phoneId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
+export const updateSIPPhone = (
+  variables: UpdateSIPPhoneVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UpdateSIPPhoneError,
+    UpdateSIPPhoneRequestBody,
+    {},
+    {},
+    UpdateSIPPhonePathParams
+  >({ url: "/sip_phones/{phoneId}", method: "patch", ...variables, signal });
 
 export type TspError = Fetcher.ErrorWrapper<undefined>;
 
@@ -20408,7 +21385,7 @@ export type TspResponse = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
   /**
    * Enable TSP feature for account. This has to be enabled to use any other tsp settings/features.
    *
@@ -20439,7 +21416,12 @@ export type TspVariables = FetcherExtraProps;
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const tsp = (variables: TspVariables, signal?: AbortSignal) =>
-  fetch<TspResponse, TspError, undefined, {}, {}, {}>({ url: '/tsp', method: 'get', ...variables, signal });
+  fetch<TspResponse, TspError, undefined, {}, {}, {}>({
+    url: "/tsp",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type TspUpdateError = Fetcher.ErrorWrapper<undefined>;
 
@@ -20473,7 +21455,7 @@ export type TspUpdateRequestBody = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
   /**
    * Enable TSP feature for account. This has to be enabled to use any other tsp settings/features.
    *
@@ -20505,12 +21487,15 @@ export type TspUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const tspUpdate = (variables: TspUpdateVariables, signal?: AbortSignal) =>
+export const tspUpdate = (
+  variables: TspUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<undefined, TspUpdateError, TspUpdateRequestBody, {}, {}, {}>({
-    url: '/tsp',
-    method: 'patch',
+    url: "/tsp",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type UserTSPsPathParams = {
@@ -20572,14 +21557,14 @@ export type UserTSPsResponse = {
        *
        * @example toll
        */
-      type?: 'toll' | 'tollfree' | 'media_link';
+      type?: "toll" | "tollfree" | "media_link";
     }[];
     /**
      * The TSP account's ID.
      *
      * @example 1
      */
-    id?: '1' | '2';
+    id?: "1" | "2";
     /**
      * Leader PIN. Mumeric value, length is less than 16.
      *
@@ -20593,7 +21578,7 @@ export type UserTSPsResponse = {
      *
      * @example US_TSP_TB
      */
-    tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+    tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
   }[];
 };
 
@@ -20615,12 +21600,9 @@ export type UserTSPsVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const userTSPs = (variables: UserTSPsVariables, signal?: AbortSignal) =>
-  fetch<UserTSPsResponse, UserTSPsError, undefined, {}, {}, UserTSPsPathParams>({
-    url: '/users/{userId}/tsp',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<UserTSPsResponse, UserTSPsError, undefined, {}, {}, UserTSPsPathParams>(
+    { url: "/users/{userId}/tsp", method: "get", ...variables, signal },
+  );
 
 export type UserTSPCreatePathParams = {
   /**
@@ -20683,7 +21665,7 @@ export type UserTSPCreateResponse = {
      *
      * @example toll
      */
-    type?: 'toll' | 'tollfree' | 'media_link';
+    type?: "toll" | "tollfree" | "media_link";
   }[];
   /**
    * Leader PIN: numeric value, length is less than 16.
@@ -20698,7 +21680,7 @@ export type UserTSPCreateResponse = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
 };
 
 export type UserTSPCreateRequestBody = {
@@ -20745,7 +21727,7 @@ export type UserTSPCreateRequestBody = {
      *
      * @example toll
      */
-    type?: 'toll' | 'tollfree' | 'media_link';
+    type?: "toll" | "tollfree" | "media_link";
   }[];
   /**
    * Leader PIN: numeric value, length is less than 16.
@@ -20760,7 +21742,7 @@ export type UserTSPCreateRequestBody = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
 };
 
 export type UserTSPCreateVariables = {
@@ -20781,13 +21763,18 @@ export type UserTSPCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const userTSPCreate = (variables: UserTSPCreateVariables, signal?: AbortSignal) =>
-  fetch<UserTSPCreateResponse, UserTSPCreateError, UserTSPCreateRequestBody, {}, {}, UserTSPCreatePathParams>({
-    url: '/users/{userId}/tsp',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const userTSPCreate = (
+  variables: UserTSPCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    UserTSPCreateResponse,
+    UserTSPCreateError,
+    UserTSPCreateRequestBody,
+    {},
+    {},
+    UserTSPCreatePathParams
+  >({ url: "/users/{userId}/tsp", method: "post", ...variables, signal });
 
 export type TspUrlUpdatePathParams = {
   /**
@@ -20828,12 +21815,22 @@ export type TspUrlUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const tspUrlUpdate = (variables: TspUrlUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, TspUrlUpdateError, TspUrlUpdateRequestBody, {}, {}, TspUrlUpdatePathParams>({
-    url: '/users/{userId}/tsp/settings',
-    method: 'patch',
+export const tspUrlUpdate = (
+  variables: TspUrlUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    TspUrlUpdateError,
+    TspUrlUpdateRequestBody,
+    {},
+    {},
+    TspUrlUpdatePathParams
+  >({
+    url: "/users/{userId}/tsp/settings",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type UserTSPPathParams = {
@@ -20848,7 +21845,7 @@ export type UserTSPPathParams = {
    *
    * @example 1
    */
-  tspId: '1' | '2';
+  tspId: "1" | "2";
 };
 
 export type UserTSPError = Fetcher.ErrorWrapper<undefined>;
@@ -20896,7 +21893,7 @@ export type UserTSPResponse = {
      *
      * @example toll
      */
-    type?: 'toll' | 'tollfree' | 'media_link';
+    type?: "toll" | "tollfree" | "media_link";
   }[];
   /**
    * The TSP account's ID.
@@ -20917,7 +21914,7 @@ export type UserTSPResponse = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
 };
 
 export type UserTSPVariables = {
@@ -20939,10 +21936,10 @@ export type UserTSPVariables = {
  */
 export const userTSP = (variables: UserTSPVariables, signal?: AbortSignal) =>
   fetch<UserTSPResponse, UserTSPError, undefined, {}, {}, UserTSPPathParams>({
-    url: '/users/{userId}/tsp/{tspId}',
-    method: 'get',
+    url: "/users/{userId}/tsp/{tspId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type UserTSPDeletePathParams = {
@@ -20957,7 +21954,7 @@ export type UserTSPDeletePathParams = {
    *
    * @example 1
    */
-  tspId: '1' | '2';
+  tspId: "1" | "2";
 };
 
 export type UserTSPDeleteError = Fetcher.ErrorWrapper<undefined>;
@@ -20979,12 +21976,22 @@ export type UserTSPDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const userTSPDelete = (variables: UserTSPDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, UserTSPDeleteError, undefined, {}, {}, UserTSPDeletePathParams>({
-    url: '/users/{userId}/tsp/{tspId}',
-    method: 'delete',
+export const userTSPDelete = (
+  variables: UserTSPDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UserTSPDeleteError,
+    undefined,
+    {},
+    {},
+    UserTSPDeletePathParams
+  >({
+    url: "/users/{userId}/tsp/{tspId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type UserTSPUpdatePathParams = {
@@ -20999,7 +22006,7 @@ export type UserTSPUpdatePathParams = {
    *
    * @example 1
    */
-  tspId: '1' | '2';
+  tspId: "1" | "2";
 };
 
 export type UserTSPUpdateError = Fetcher.ErrorWrapper<undefined>;
@@ -21047,7 +22054,7 @@ export type UserTSPUpdateRequestBody = {
      *
      * @example toll
      */
-    type?: 'toll' | 'tollfree' | 'media_link';
+    type?: "toll" | "tollfree" | "media_link";
   }[];
   /**
    * Leader PIN. Numeric value. Length is less than 16.
@@ -21062,7 +22069,7 @@ export type UserTSPUpdateRequestBody = {
    *
    * @example US_TSP_TB
    */
-  tsp_bridge?: 'US_TSP_TB' | 'EU_TSP_TB';
+  tsp_bridge?: "US_TSP_TB" | "EU_TSP_TB";
 };
 
 export type UserTSPUpdateVariables = {
@@ -21083,12 +22090,22 @@ export type UserTSPUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const userTSPUpdate = (variables: UserTSPUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, UserTSPUpdateError, UserTSPUpdateRequestBody, {}, {}, UserTSPUpdatePathParams>({
-    url: '/users/{userId}/tsp/{tspId}',
-    method: 'patch',
+export const userTSPUpdate = (
+  variables: UserTSPUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    UserTSPUpdateError,
+    UserTSPUpdateRequestBody,
+    {},
+    {},
+    UserTSPUpdatePathParams
+  >({
+    url: "/users/{userId}/tsp/{tspId}",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type TrackingfieldListError = Fetcher.ErrorWrapper<undefined>;
@@ -21149,13 +22166,18 @@ export type TrackingfieldListVariables = FetcherExtraProps;
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const trackingfieldList = (variables: TrackingfieldListVariables, signal?: AbortSignal) =>
-  fetch<TrackingfieldListResponse, TrackingfieldListError, undefined, {}, {}, {}>({
-    url: '/tracking_fields',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const trackingfieldList = (
+  variables: TrackingfieldListVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    TrackingfieldListResponse,
+    TrackingfieldListError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tracking_fields", method: "get", ...variables, signal });
 
 export type TrackingfieldCreateError = Fetcher.ErrorWrapper<undefined>;
 
@@ -21231,13 +22253,18 @@ export type TrackingfieldCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const trackingfieldCreate = (variables: TrackingfieldCreateVariables, signal?: AbortSignal) =>
-  fetch<TrackingfieldCreateResponse, TrackingfieldCreateError, TrackingfieldCreateRequestBody, {}, {}, {}>({
-    url: '/tracking_fields',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const trackingfieldCreate = (
+  variables: TrackingfieldCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    TrackingfieldCreateResponse,
+    TrackingfieldCreateError,
+    TrackingfieldCreateRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/tracking_fields", method: "post", ...variables, signal });
 
 export type TrackingfieldGetPathParams = {
   /**
@@ -21297,13 +22324,18 @@ export type TrackingfieldGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const trackingfieldGet = (variables: TrackingfieldGetVariables, signal?: AbortSignal) =>
-  fetch<TrackingfieldGetResponse, TrackingfieldGetError, undefined, {}, {}, TrackingfieldGetPathParams>({
-    url: '/tracking_fields/{fieldId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+export const trackingfieldGet = (
+  variables: TrackingfieldGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    TrackingfieldGetResponse,
+    TrackingfieldGetError,
+    undefined,
+    {},
+    {},
+    TrackingfieldGetPathParams
+  >({ url: "/tracking_fields/{fieldId}", method: "get", ...variables, signal });
 
 export type TrackingfieldDeletePathParams = {
   /**
@@ -21332,12 +22364,22 @@ export type TrackingfieldDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const trackingfieldDelete = (variables: TrackingfieldDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, TrackingfieldDeleteError, undefined, {}, {}, TrackingfieldDeletePathParams>({
-    url: '/tracking_fields/{fieldId}',
-    method: 'delete',
+export const trackingfieldDelete = (
+  variables: TrackingfieldDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    TrackingfieldDeleteError,
+    undefined,
+    {},
+    {},
+    TrackingfieldDeletePathParams
+  >({
+    url: "/tracking_fields/{fieldId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type TrackingfieldUpdatePathParams = {
@@ -21393,12 +22435,22 @@ export type TrackingfieldUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const trackingfieldUpdate = (variables: TrackingfieldUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, TrackingfieldUpdateError, TrackingfieldUpdateRequestBody, {}, {}, TrackingfieldUpdatePathParams>({
-    url: '/tracking_fields/{fieldId}',
-    method: 'patch',
+export const trackingfieldUpdate = (
+  variables: TrackingfieldUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    TrackingfieldUpdateError,
+    TrackingfieldUpdateRequestBody,
+    {},
+    {},
+    TrackingfieldUpdatePathParams
+  >({
+    url: "/tracking_fields/{fieldId}",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type DeleteWebinarChatMessageByIdPathParams = {
@@ -21445,7 +22497,10 @@ export type DeleteWebinarChatMessageByIdVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const deleteWebinarChatMessageById = (variables: DeleteWebinarChatMessageByIdVariables, signal?: AbortSignal) =>
+export const deleteWebinarChatMessageById = (
+  variables: DeleteWebinarChatMessageByIdVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteWebinarChatMessageByIdError,
@@ -21453,7 +22508,12 @@ export const deleteWebinarChatMessageById = (variables: DeleteWebinarChatMessage
     {},
     DeleteWebinarChatMessageByIdQueryParams,
     DeleteWebinarChatMessageByIdPathParams
-  >({ url: '/live_webinars/{webinarId}/chat/messages/{messageId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/live_webinars/{webinarId}/chat/messages/{messageId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type WebinarAbsenteesPathParams = {
   /**
@@ -21621,16 +22681,16 @@ export type WebinarAbsenteesResponse = {
      * @example 1-20
      */
     no_of_employees?:
-      | ''
-      | '1-20'
-      | '21-50'
-      | '51-100'
-      | '101-250'
-      | '251-500'
-      | '501-1,000'
-      | '1,001-5,000'
-      | '5,001-10,000'
-      | 'More than 10,000';
+      | ""
+      | "1-20"
+      | "21-50"
+      | "51-100"
+      | "101-250"
+      | "251-500"
+      | "501-1,000"
+      | "1,001-5,000"
+      | "5,001-10,000"
+      | "More than 10,000";
     /**
      * The registrant's organization.
      *
@@ -21653,7 +22713,13 @@ export type WebinarAbsenteesResponse = {
      *
      * @example 1-3 months
      */
-    purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+    purchasing_time_frame?:
+      | ""
+      | "Within a month"
+      | "1-3 months"
+      | "4-6 months"
+      | "More than 6 months"
+      | "No timeframe";
     /**
      * The registrant's role in the purchase process.
      * * `Decision Maker`
@@ -21663,7 +22729,12 @@ export type WebinarAbsenteesResponse = {
      *
      * @example Influencer
      */
-    role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+    role_in_purchase_process?:
+      | ""
+      | "Decision Maker"
+      | "Evaluator/Recommender"
+      | "Influencer"
+      | "Not involved";
     /**
      * The registrant's state or province.
      *
@@ -21678,7 +22749,7 @@ export type WebinarAbsenteesResponse = {
      *
      * @example approved
      */
-    status?: 'approved' | 'denied' | 'pending';
+    status?: "approved" | "denied" | "pending";
     /**
      * The registrant's ZIP or postal code.
      *
@@ -21725,7 +22796,10 @@ export type WebinarAbsenteesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const webinarAbsentees = (variables: WebinarAbsenteesVariables, signal?: AbortSignal) =>
+export const webinarAbsentees = (
+  variables: WebinarAbsenteesVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarAbsenteesResponse,
     WebinarAbsenteesError,
@@ -21733,7 +22807,12 @@ export const webinarAbsentees = (variables: WebinarAbsenteesVariables, signal?: 
     {},
     WebinarAbsenteesQueryParams,
     WebinarAbsenteesPathParams
-  >({ url: '/past_webinars/{webinarId}/absentees', method: 'get', ...variables, signal });
+  >({
+    url: "/past_webinars/{webinarId}/absentees",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type PastWebinarsPathParams = {
   /**
@@ -21784,12 +22863,22 @@ export type PastWebinarsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const pastWebinars = (variables: PastWebinarsVariables, signal?: AbortSignal) =>
-  fetch<PastWebinarsResponse, PastWebinarsError, undefined, {}, {}, PastWebinarsPathParams>({
-    url: '/past_webinars/{webinarId}/instances',
-    method: 'get',
+export const pastWebinars = (
+  variables: PastWebinarsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    PastWebinarsResponse,
+    PastWebinarsError,
+    undefined,
+    {},
+    {},
+    PastWebinarsPathParams
+  >({
+    url: "/past_webinars/{webinarId}/instances",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListWebinarParticipantsPathParams = {
@@ -21913,7 +23002,7 @@ export type ListWebinarParticipantsResponse = {
      *
      * @example in_meeting
      */
-    status?: 'in_meeting' | 'in_waiting_room';
+    status?: "in_meeting" | "in_waiting_room";
     /**
      * Whether the webinar participant is an internal user.
      *
@@ -21949,7 +23038,10 @@ export type ListWebinarParticipantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listWebinarParticipants = (variables: ListWebinarParticipantsVariables, signal?: AbortSignal) =>
+export const listWebinarParticipants = (
+  variables: ListWebinarParticipantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListWebinarParticipantsResponse,
     ListWebinarParticipantsError,
@@ -21957,7 +23049,12 @@ export const listWebinarParticipants = (variables: ListWebinarParticipantsVariab
     {},
     ListWebinarParticipantsQueryParams,
     ListWebinarParticipantsPathParams
-  >({ url: '/past_webinars/{webinarId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: "/past_webinars/{webinarId}/participants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListPastWebinarPollResultsPathParams = {
   /**
@@ -22055,7 +23152,10 @@ export type ListPastWebinarPollResultsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listPastWebinarPollResults = (variables: ListPastWebinarPollResultsVariables, signal?: AbortSignal) =>
+export const listPastWebinarPollResults = (
+  variables: ListPastWebinarPollResultsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     ListPastWebinarPollResultsResponse,
     ListPastWebinarPollResultsError,
@@ -22063,7 +23163,12 @@ export const listPastWebinarPollResults = (variables: ListPastWebinarPollResults
     {},
     {},
     ListPastWebinarPollResultsPathParams
-  >({ url: '/past_webinars/{webinarId}/polls', method: 'get', ...variables, signal });
+  >({
+    url: "/past_webinars/{webinarId}/polls",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ListPastWebinarQAPathParams = {
   /**
@@ -22150,12 +23255,22 @@ export type ListPastWebinarQAVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const listPastWebinarQA = (variables: ListPastWebinarQAVariables, signal?: AbortSignal) =>
-  fetch<ListPastWebinarQAResponse, ListPastWebinarQAError, undefined, {}, {}, ListPastWebinarQAPathParams>({
-    url: '/past_webinars/{webinarId}/qa',
-    method: 'get',
+export const listPastWebinarQA = (
+  variables: ListPastWebinarQAVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListPastWebinarQAResponse,
+    ListPastWebinarQAError,
+    undefined,
+    {},
+    {},
+    ListPastWebinarQAPathParams
+  >({
+    url: "/past_webinars/{webinarId}/qa",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type ListWebinarTemplatesPathParams = {
@@ -22212,12 +23327,22 @@ export type ListWebinarTemplatesVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_templates`,`webinar:read:list_templates:admin`
  */
-export const listWebinarTemplates = (variables: ListWebinarTemplatesVariables, signal?: AbortSignal) =>
-  fetch<ListWebinarTemplatesResponse, ListWebinarTemplatesError, undefined, {}, {}, ListWebinarTemplatesPathParams>({
-    url: '/users/{userId}/webinar_templates',
-    method: 'get',
+export const listWebinarTemplates = (
+  variables: ListWebinarTemplatesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListWebinarTemplatesResponse,
+    ListWebinarTemplatesError,
+    undefined,
+    {},
+    {},
+    ListWebinarTemplatesPathParams
+  >({
+    url: "/users/{userId}/webinar_templates",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarTemplateCreatePathParams = {
@@ -22292,7 +23417,10 @@ export type WebinarTemplateCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const webinarTemplateCreate = (variables: WebinarTemplateCreateVariables, signal?: AbortSignal) =>
+export const webinarTemplateCreate = (
+  variables: WebinarTemplateCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarTemplateCreateResponse,
     WebinarTemplateCreateError,
@@ -22300,7 +23428,12 @@ export const webinarTemplateCreate = (variables: WebinarTemplateCreateVariables,
     {},
     {},
     WebinarTemplateCreatePathParams
-  >({ url: '/users/{userId}/webinar_templates', method: 'post', ...variables, signal });
+  >({
+    url: "/users/{userId}/webinar_templates",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarsPathParams = {
   /**
@@ -22318,7 +23451,7 @@ export type WebinarsQueryParams = {
    * @example scheduled
    * @default scheduled
    */
-  type?: 'scheduled' | 'upcoming';
+  type?: "scheduled" | "upcoming";
   /**
    * The number of records returned within a single API call.
    *
@@ -22481,12 +23614,14 @@ export type WebinarsVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const webinars = (variables: WebinarsVariables, signal?: AbortSignal) =>
-  fetch<WebinarsResponse, WebinarsError, undefined, {}, WebinarsQueryParams, WebinarsPathParams>({
-    url: '/users/{userId}/webinars',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    WebinarsResponse,
+    WebinarsError,
+    undefined,
+    {},
+    WebinarsQueryParams,
+    WebinarsPathParams
+  >({ url: "/users/{userId}/webinars", method: "get", ...variables, signal });
 
 export type WebinarCreatePathParams = {
   /**
@@ -22592,7 +23727,7 @@ export type WebinarCreateResponse = {
      *
      * @example available
      */
-    status?: 'available' | 'deleted';
+    status?: "available" | "deleted";
   }[];
   /**
    * The webinar passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters such as !, @, #, etc.
@@ -22763,7 +23898,7 @@ export type WebinarCreateResponse = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -22798,7 +23933,7 @@ export type WebinarCreateResponse = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Close registration after event date.
      *
@@ -23099,7 +24234,7 @@ export type WebinarCreateResponse = {
        *
        * @example all
        */
-      answer_questions?: 'only' | 'all';
+      answer_questions?: "only" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -23295,7 +24430,7 @@ export type WebinarCreateResponse = {
    *
    * @example open_api
    */
-  creation_source?: 'other' | 'open_api' | 'web_portal';
+  creation_source?: "other" | "open_api" | "web_portal";
 };
 
 export type WebinarCreateRequestBody = {
@@ -23489,7 +24624,7 @@ export type WebinarCreateRequestBody = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -23518,7 +24653,7 @@ export type WebinarCreateRequestBody = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Close registration after event date.
      *
@@ -23813,7 +24948,7 @@ export type WebinarCreateRequestBody = {
        *
        * @example all
        */
-      answer_questions?: 'only' | 'all';
+      answer_questions?: "only" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -24021,13 +25156,18 @@ export type WebinarCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarCreate = (variables: WebinarCreateVariables, signal?: AbortSignal) =>
-  fetch<WebinarCreateResponse, WebinarCreateError, WebinarCreateRequestBody, {}, {}, WebinarCreatePathParams>({
-    url: '/users/{userId}/webinars',
-    method: 'post',
-    ...variables,
-    signal
-  });
+export const webinarCreate = (
+  variables: WebinarCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarCreateResponse,
+    WebinarCreateError,
+    WebinarCreateRequestBody,
+    {},
+    {},
+    WebinarCreatePathParams
+  >({ url: "/users/{userId}/webinars", method: "post", ...variables, signal });
 
 export type WebinarPathParams = {
   /**
@@ -24137,7 +25277,7 @@ export type WebinarResponse = {
      *
      * @example available
      */
-    status?: 'available' | 'deleted';
+    status?: "available" | "deleted";
   }[];
   /**
    * Webinar passcode. Passcode may only contain the characters [a-z A-Z 0-9 @ - _ * !]. Maximum of 10 characters.
@@ -24314,7 +25454,7 @@ export type WebinarResponse = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -24349,7 +25489,7 @@ export type WebinarResponse = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Close registration after event date.
      *
@@ -24650,7 +25790,7 @@ export type WebinarResponse = {
        *
        * @example all
        */
-      answer_questions?: 'only' | 'all';
+      answer_questions?: "only" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -24847,7 +25987,7 @@ export type WebinarResponse = {
    *
    * @example open_api
    */
-  creation_source?: 'other' | 'open_api' | 'web_portal';
+  creation_source?: "other" | "open_api" | "web_portal";
 };
 
 export type WebinarVariables = {
@@ -24870,12 +26010,14 @@ export type WebinarVariables = {
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const webinar = (variables: WebinarVariables, signal?: AbortSignal) =>
-  fetch<WebinarResponse, WebinarError, undefined, {}, WebinarQueryParams, WebinarPathParams>({
-    url: '/webinars/{webinarId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    WebinarResponse,
+    WebinarError,
+    undefined,
+    {},
+    WebinarQueryParams,
+    WebinarPathParams
+  >({ url: "/webinars/{webinarId}", method: "get", ...variables, signal });
 
 export type WebinarDeletePathParams = {
   /**
@@ -24927,13 +26069,18 @@ export type WebinarDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarDelete = (variables: WebinarDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarDeleteError, undefined, {}, WebinarDeleteQueryParams, WebinarDeletePathParams>({
-    url: '/webinars/{webinarId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+export const webinarDelete = (
+  variables: WebinarDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarDeleteError,
+    undefined,
+    {},
+    WebinarDeleteQueryParams,
+    WebinarDeletePathParams
+  >({ url: "/webinars/{webinarId}", method: "delete", ...variables, signal });
 
 export type WebinarUpdatePathParams = {
   /**
@@ -25078,7 +26225,7 @@ export type WebinarUpdateRequestBody = {
      * @example 1
      * @default 1
      */
-    weekly_days?: '1' | '2' | '3' | '4' | '5' | '6' | '7';
+    weekly_days?: "1" | "2" | "3" | "4" | "5" | "6" | "7";
   };
   /**
    * Webinar settings.
@@ -25143,7 +26290,7 @@ export type WebinarUpdateRequestBody = {
      * @example telephony
      * @default both
      */
-    audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
+    audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
      * Third party audio conference info.
      *
@@ -25178,7 +26325,7 @@ export type WebinarUpdateRequestBody = {
      * @example cloud
      * @default none
      */
-    auto_recording?: 'local' | 'cloud' | 'none';
+    auto_recording?: "local" | "cloud" | "none";
     /**
      * Close registration after event date.
      *
@@ -25479,7 +26626,7 @@ export type WebinarUpdateRequestBody = {
        *
        * @example all
        */
-      answer_questions?: 'only' | 'all';
+      answer_questions?: "only" | "all";
       /**
        * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
@@ -25679,10 +26826,18 @@ export type WebinarUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarUpdate = (variables: WebinarUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarUpdateError, WebinarUpdateRequestBody, {}, WebinarUpdateQueryParams, WebinarUpdatePathParams>(
-    { url: '/webinars/{webinarId}', method: 'patch', ...variables, signal }
-  );
+export const webinarUpdate = (
+  variables: WebinarUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarUpdateError,
+    WebinarUpdateRequestBody,
+    {},
+    WebinarUpdateQueryParams,
+    WebinarUpdatePathParams
+  >({ url: "/webinars/{webinarId}", method: "patch", ...variables, signal });
 
 export type AddBatchWebinarRegistrantsPathParams = {
   /**
@@ -25773,7 +26928,10 @@ export type AddBatchWebinarRegistrantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
-export const addBatchWebinarRegistrants = (variables: AddBatchWebinarRegistrantsVariables, signal?: AbortSignal) =>
+export const addBatchWebinarRegistrants = (
+  variables: AddBatchWebinarRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     AddBatchWebinarRegistrantsResponse,
     AddBatchWebinarRegistrantsError,
@@ -25781,7 +26939,12 @@ export const addBatchWebinarRegistrants = (variables: AddBatchWebinarRegistrants
     {},
     {},
     AddBatchWebinarRegistrantsPathParams
-  >({ url: '/webinars/{webinarId}/batch_registrants', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/batch_registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type GetWebinarBrandingPathParams = {
   /**
@@ -25886,12 +27049,22 @@ export type GetWebinarBrandingVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const getWebinarBranding = (variables: GetWebinarBrandingVariables, signal?: AbortSignal) =>
-  fetch<GetWebinarBrandingResponse, GetWebinarBrandingError, undefined, {}, {}, GetWebinarBrandingPathParams>({
-    url: '/webinars/{webinarId}/branding',
-    method: 'get',
+export const getWebinarBranding = (
+  variables: GetWebinarBrandingVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetWebinarBrandingResponse,
+    GetWebinarBrandingError,
+    undefined,
+    {},
+    {},
+    GetWebinarBrandingPathParams
+  >({
+    url: "/webinars/{webinarId}/branding",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type CreateWebinarBrandingNameTagPathParams = {
@@ -26006,7 +27179,10 @@ export type CreateWebinarBrandingNameTagVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const createWebinarBrandingNameTag = (variables: CreateWebinarBrandingNameTagVariables, signal?: AbortSignal) =>
+export const createWebinarBrandingNameTag = (
+  variables: CreateWebinarBrandingNameTagVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     CreateWebinarBrandingNameTagResponse,
     CreateWebinarBrandingNameTagError,
@@ -26014,7 +27190,12 @@ export const createWebinarBrandingNameTag = (variables: CreateWebinarBrandingNam
     {},
     {},
     CreateWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/name_tags",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteWebinarBrandingNameTagPathParams = {
   /**
@@ -26054,7 +27235,10 @@ export type DeleteWebinarBrandingNameTagVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteWebinarBrandingNameTag = (variables: DeleteWebinarBrandingNameTagVariables, signal?: AbortSignal) =>
+export const deleteWebinarBrandingNameTag = (
+  variables: DeleteWebinarBrandingNameTagVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteWebinarBrandingNameTagError,
@@ -26062,7 +27246,12 @@ export const deleteWebinarBrandingNameTag = (variables: DeleteWebinarBrandingNam
     {},
     DeleteWebinarBrandingNameTagQueryParams,
     DeleteWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags', method: 'delete', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/name_tags",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type UpdateWebinarBrandingNameTagPathParams = {
   /**
@@ -26143,7 +27332,10 @@ export type UpdateWebinarBrandingNameTagVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const updateWebinarBrandingNameTag = (variables: UpdateWebinarBrandingNameTagVariables, signal?: AbortSignal) =>
+export const updateWebinarBrandingNameTag = (
+  variables: UpdateWebinarBrandingNameTagVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     UpdateWebinarBrandingNameTagError,
@@ -26151,7 +27343,12 @@ export const updateWebinarBrandingNameTag = (variables: UpdateWebinarBrandingNam
     {},
     {},
     UpdateWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags/{nameTagId}', method: 'patch', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/name_tags/{nameTagId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type UploadWebinarBrandingVBPathParams = {
   /**
@@ -26196,7 +27393,7 @@ export type UploadWebinarBrandingVBResponse = {
    *
    * @example image
    */
-  type?: 'image';
+  type?: "image";
 };
 
 export type UploadWebinarBrandingVBRequestBody = {
@@ -26213,7 +27410,7 @@ export type UploadWebinarBrandingVBRequestBody = {
    * @example true
    * @default false
    */
-  ['default']?: boolean;
+  ["default"]?: boolean;
   /**
    * Whether to set the virtual background file as the new default for all panelists. This includes panelists not currently assigned a default virtual background.
    *
@@ -26243,7 +27440,10 @@ export type UploadWebinarBrandingVBVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const uploadWebinarBrandingVB = (variables: UploadWebinarBrandingVBVariables, signal?: AbortSignal) =>
+export const uploadWebinarBrandingVB = (
+  variables: UploadWebinarBrandingVBVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     UploadWebinarBrandingVBResponse,
     UploadWebinarBrandingVBError,
@@ -26251,7 +27451,12 @@ export const uploadWebinarBrandingVB = (variables: UploadWebinarBrandingVBVariab
     {},
     {},
     UploadWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/virtual_backgrounds",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteWebinarBrandingVBPathParams = {
   /**
@@ -26291,7 +27496,10 @@ export type DeleteWebinarBrandingVBVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteWebinarBrandingVB = (variables: DeleteWebinarBrandingVBVariables, signal?: AbortSignal) =>
+export const deleteWebinarBrandingVB = (
+  variables: DeleteWebinarBrandingVBVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteWebinarBrandingVBError,
@@ -26299,7 +27507,12 @@ export const deleteWebinarBrandingVB = (variables: DeleteWebinarBrandingVBVariab
     {},
     DeleteWebinarBrandingVBQueryParams,
     DeleteWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'delete', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/virtual_backgrounds",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type SetWebinarBrandingVBPathParams = {
   /**
@@ -26345,7 +27558,10 @@ export type SetWebinarBrandingVBVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const setWebinarBrandingVB = (variables: SetWebinarBrandingVBVariables, signal?: AbortSignal) =>
+export const setWebinarBrandingVB = (
+  variables: SetWebinarBrandingVBVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     SetWebinarBrandingVBError,
@@ -26353,7 +27569,12 @@ export const setWebinarBrandingVB = (variables: SetWebinarBrandingVBVariables, s
     {},
     SetWebinarBrandingVBQueryParams,
     SetWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'patch', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/virtual_backgrounds",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type UploadWebinarBrandingWallpaperPathParams = {
   /**
@@ -26365,7 +27586,8 @@ export type UploadWebinarBrandingWallpaperPathParams = {
   webinarId: number;
 };
 
-export type UploadWebinarBrandingWallpaperError = Fetcher.ErrorWrapper<undefined>;
+export type UploadWebinarBrandingWallpaperError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type UploadWebinarBrandingWallpaperResponse = {
   /**
@@ -26392,7 +27614,7 @@ export type UploadWebinarBrandingWallpaperResponse = {
    *
    * @example image
    */
-  type?: 'image';
+  type?: "image";
 };
 
 export type UploadWebinarBrandingWallpaperRequestBody = {
@@ -26427,7 +27649,7 @@ export type UploadWebinarBrandingWallpaperVariables = {
  */
 export const uploadWebinarBrandingWallpaper = (
   variables: UploadWebinarBrandingWallpaperVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     UploadWebinarBrandingWallpaperResponse,
@@ -26436,7 +27658,12 @@ export const uploadWebinarBrandingWallpaper = (
     {},
     {},
     UploadWebinarBrandingWallpaperPathParams
-  >({ url: '/webinars/{webinarId}/branding/wallpaper', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/branding/wallpaper",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type DeleteWebinarBrandingWallpaperPathParams = {
   /**
@@ -26448,7 +27675,8 @@ export type DeleteWebinarBrandingWallpaperPathParams = {
   webinarId: number;
 };
 
-export type DeleteWebinarBrandingWallpaperError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteWebinarBrandingWallpaperError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteWebinarBrandingWallpaperVariables = {
   pathParams: DeleteWebinarBrandingWallpaperPathParams;
@@ -26468,13 +27696,20 @@ export type DeleteWebinarBrandingWallpaperVariables = {
  */
 export const deleteWebinarBrandingWallpaper = (
   variables: DeleteWebinarBrandingWallpaperVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
-  fetch<undefined, DeleteWebinarBrandingWallpaperError, undefined, {}, {}, DeleteWebinarBrandingWallpaperPathParams>({
-    url: '/webinars/{webinarId}/branding/wallpaper',
-    method: 'delete',
+  fetch<
+    undefined,
+    DeleteWebinarBrandingWallpaperError,
+    undefined,
+    {},
+    {},
+    DeleteWebinarBrandingWallpaperPathParams
+  >({
+    url: "/webinars/{webinarId}/branding/wallpaper",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarInviteLinksCreatePathParams = {
@@ -26574,7 +27809,10 @@ export type WebinarInviteLinksCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarInviteLinksCreate = (variables: WebinarInviteLinksCreateVariables, signal?: AbortSignal) =>
+export const webinarInviteLinksCreate = (
+  variables: WebinarInviteLinksCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarInviteLinksCreateResponse,
     WebinarInviteLinksCreateError,
@@ -26582,7 +27820,12 @@ export const webinarInviteLinksCreate = (variables: WebinarInviteLinksCreateVari
     {},
     {},
     WebinarInviteLinksCreatePathParams
-  >({ url: '/webinars/{webinarId}/invite_links', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/invite_links",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarLiveStreamingJoinTokenPathParams = {
   /**
@@ -26594,7 +27837,8 @@ export type WebinarLiveStreamingJoinTokenPathParams = {
   webinarId: number;
 };
 
-export type WebinarLiveStreamingJoinTokenError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarLiveStreamingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarLiveStreamingJoinTokenResponse = {
   /**
@@ -26631,7 +27875,7 @@ export type WebinarLiveStreamingJoinTokenVariables = {
  */
 export const webinarLiveStreamingJoinToken = (
   variables: WebinarLiveStreamingJoinTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     WebinarLiveStreamingJoinTokenResponse,
@@ -26640,7 +27884,12 @@ export const webinarLiveStreamingJoinToken = (
     {},
     {},
     WebinarLiveStreamingJoinTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/live_streaming', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/jointoken/live_streaming",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type WebinarLocalArchivingArchiveTokenPathParams = {
   /**
@@ -26652,7 +27901,8 @@ export type WebinarLocalArchivingArchiveTokenPathParams = {
   webinarId: number;
 };
 
-export type WebinarLocalArchivingArchiveTokenError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarLocalArchivingArchiveTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarLocalArchivingArchiveTokenResponse = {
   /**
@@ -26689,7 +27939,7 @@ export type WebinarLocalArchivingArchiveTokenVariables = {
  */
 export const webinarLocalArchivingArchiveToken = (
   variables: WebinarLocalArchivingArchiveTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     WebinarLocalArchivingArchiveTokenResponse,
@@ -26698,7 +27948,12 @@ export const webinarLocalArchivingArchiveToken = (
     {},
     {},
     WebinarLocalArchivingArchiveTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/local_archiving', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/jointoken/local_archiving",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type WebinarLocalRecordingJoinTokenPathParams = {
   /**
@@ -26710,7 +27965,8 @@ export type WebinarLocalRecordingJoinTokenPathParams = {
   webinarId: number;
 };
 
-export type WebinarLocalRecordingJoinTokenError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarLocalRecordingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarLocalRecordingJoinTokenResponse = {
   /**
@@ -26747,7 +28003,7 @@ export type WebinarLocalRecordingJoinTokenVariables = {
  */
 export const webinarLocalRecordingJoinToken = (
   variables: WebinarLocalRecordingJoinTokenVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     WebinarLocalRecordingJoinTokenResponse,
@@ -26756,7 +28012,12 @@ export const webinarLocalRecordingJoinToken = (
     {},
     {},
     WebinarLocalRecordingJoinTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/local_recording', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/jointoken/local_recording",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type GetWebinarLiveStreamDetailsPathParams = {
   /**
@@ -26821,7 +28082,10 @@ export type GetWebinarLiveStreamDetailsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const getWebinarLiveStreamDetails = (variables: GetWebinarLiveStreamDetailsVariables, signal?: AbortSignal) =>
+export const getWebinarLiveStreamDetails = (
+  variables: GetWebinarLiveStreamDetailsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     GetWebinarLiveStreamDetailsResponse,
     GetWebinarLiveStreamDetailsError,
@@ -26829,7 +28093,12 @@ export const getWebinarLiveStreamDetails = (variables: GetWebinarLiveStreamDetai
     {},
     {},
     GetWebinarLiveStreamDetailsPathParams
-  >({ url: '/webinars/{webinarId}/livestream', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/livestream",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type WebinarLiveStreamUpdatePathParams = {
   /**
@@ -26898,7 +28167,10 @@ export type WebinarLiveStreamUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarLiveStreamUpdate = (variables: WebinarLiveStreamUpdateVariables, signal?: AbortSignal) =>
+export const webinarLiveStreamUpdate = (
+  variables: WebinarLiveStreamUpdateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     WebinarLiveStreamUpdateError,
@@ -26906,7 +28178,12 @@ export const webinarLiveStreamUpdate = (variables: WebinarLiveStreamUpdateVariab
     {},
     {},
     WebinarLiveStreamUpdatePathParams
-  >({ url: '/webinars/{webinarId}/livestream', method: 'patch', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/livestream",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type WebinarLiveStreamStatusUpdatePathParams = {
   /**
@@ -26918,7 +28195,8 @@ export type WebinarLiveStreamStatusUpdatePathParams = {
   webinarId: number;
 };
 
-export type WebinarLiveStreamStatusUpdateError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarLiveStreamStatusUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarLiveStreamStatusUpdateRequestBody = {
   /**
@@ -26930,7 +28208,7 @@ export type WebinarLiveStreamStatusUpdateRequestBody = {
    *
    * @example start
    */
-  action?: 'start' | 'stop';
+  action?: "start" | "stop";
   /**
    * Update the live stream session's settings.  **Only** settings for a stopped live stream can be updated.
    */
@@ -26978,7 +28256,7 @@ export type WebinarLiveStreamStatusUpdateVariables = {
  */
 export const webinarLiveStreamStatusUpdate = (
   variables: WebinarLiveStreamStatusUpdateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -26987,7 +28265,12 @@ export const webinarLiveStreamStatusUpdate = (
     {},
     {},
     WebinarLiveStreamStatusUpdatePathParams
-  >({ url: '/webinars/{webinarId}/livestream/status', method: 'patch', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/livestream/status",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type WebinarPanelistsPathParams = {
   /**
@@ -27093,12 +28376,22 @@ export type WebinarPanelistsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const webinarPanelists = (variables: WebinarPanelistsVariables, signal?: AbortSignal) =>
-  fetch<WebinarPanelistsResponse, WebinarPanelistsError, undefined, {}, {}, WebinarPanelistsPathParams>({
-    url: '/webinars/{webinarId}/panelists',
-    method: 'get',
+export const webinarPanelists = (
+  variables: WebinarPanelistsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarPanelistsResponse,
+    WebinarPanelistsError,
+    undefined,
+    {},
+    {},
+    WebinarPanelistsPathParams
+  >({
+    url: "/webinars/{webinarId}/panelists",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPanelistCreatePathParams = {
@@ -27204,7 +28497,10 @@ export type WebinarPanelistCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const webinarPanelistCreate = (variables: WebinarPanelistCreateVariables, signal?: AbortSignal) =>
+export const webinarPanelistCreate = (
+  variables: WebinarPanelistCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarPanelistCreateResponse,
     WebinarPanelistCreateError,
@@ -27212,7 +28508,12 @@ export const webinarPanelistCreate = (variables: WebinarPanelistCreateVariables,
     {},
     {},
     WebinarPanelistCreatePathParams
-  >({ url: '/webinars/{webinarId}/panelists', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/panelists",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarPanelistsDeletePathParams = {
   /**
@@ -27244,12 +28545,22 @@ export type WebinarPanelistsDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPanelistsDelete = (variables: WebinarPanelistsDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarPanelistsDeleteError, undefined, {}, {}, WebinarPanelistsDeletePathParams>({
-    url: '/webinars/{webinarId}/panelists',
-    method: 'delete',
+export const webinarPanelistsDelete = (
+  variables: WebinarPanelistsDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarPanelistsDeleteError,
+    undefined,
+    {},
+    {},
+    WebinarPanelistsDeletePathParams
+  >({
+    url: "/webinars/{webinarId}/panelists",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPanelistDeletePathParams = {
@@ -27290,12 +28601,22 @@ export type WebinarPanelistDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPanelistDelete = (variables: WebinarPanelistDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarPanelistDeleteError, undefined, {}, {}, WebinarPanelistDeletePathParams>({
-    url: '/webinars/{webinarId}/panelists/{panelistId}',
-    method: 'delete',
+export const webinarPanelistDelete = (
+  variables: WebinarPanelistDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarPanelistDeleteError,
+    undefined,
+    {},
+    {},
+    WebinarPanelistDeletePathParams
+  >({
+    url: "/webinars/{webinarId}/panelists/{panelistId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPollsPathParams = {
@@ -27342,7 +28663,7 @@ export type WebinarPollsResponse = {
      *
      * @example notstart
      */
-    status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
+    status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
     /**
      * Whether meeting participants answer poll questions anonymously.
      *
@@ -27509,14 +28830,14 @@ export type WebinarPollsResponse = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
     }[];
     /**
      * The poll's title, up to 64 characters.
@@ -27551,12 +28872,22 @@ export type WebinarPollsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPolls = (variables: WebinarPollsVariables, signal?: AbortSignal) =>
-  fetch<WebinarPollsResponse, WebinarPollsError, undefined, {}, WebinarPollsQueryParams, WebinarPollsPathParams>({
-    url: '/webinars/{webinarId}/polls',
-    method: 'get',
+export const webinarPolls = (
+  variables: WebinarPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarPollsResponse,
+    WebinarPollsError,
+    undefined,
+    {},
+    WebinarPollsQueryParams,
+    WebinarPollsPathParams
+  >({
+    url: "/webinars/{webinarId}/polls",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPollCreatePathParams = {
@@ -27587,7 +28918,7 @@ export type WebinarPollCreateResponse = {
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing';
+  status?: "notstart" | "started" | "ended" | "sharing";
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -27754,14 +29085,14 @@ export type WebinarPollCreateResponse = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -27939,14 +29270,14 @@ export type WebinarPollCreateRequestBody = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -27974,7 +29305,10 @@ export type WebinarPollCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPollCreate = (variables: WebinarPollCreateVariables, signal?: AbortSignal) =>
+export const webinarPollCreate = (
+  variables: WebinarPollCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarPollCreateResponse,
     WebinarPollCreateError,
@@ -27982,7 +29316,12 @@ export const webinarPollCreate = (variables: WebinarPollCreateVariables, signal?
     {},
     {},
     WebinarPollCreatePathParams
-  >({ url: '/webinars/{webinarId}/polls', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/polls",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarPollGetPathParams = {
   /**
@@ -28019,7 +29358,7 @@ export type WebinarPollGetResponse = {
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
+  status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -28186,14 +29525,14 @@ export type WebinarPollGetResponse = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -28220,12 +29559,22 @@ export type WebinarPollGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPollGet = (variables: WebinarPollGetVariables, signal?: AbortSignal) =>
-  fetch<WebinarPollGetResponse, WebinarPollGetError, undefined, {}, {}, WebinarPollGetPathParams>({
-    url: '/webinars/{webinarId}/polls/{pollId}',
-    method: 'get',
+export const webinarPollGet = (
+  variables: WebinarPollGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarPollGetResponse,
+    WebinarPollGetError,
+    undefined,
+    {},
+    {},
+    WebinarPollGetPathParams
+  >({
+    url: "/webinars/{webinarId}/polls/{pollId}",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPollUpdatePathParams = {
@@ -28413,14 +29762,14 @@ export type WebinarPollUpdateRequestBody = {
      * @example single
      */
     type?:
-      | 'single'
-      | 'multiple'
-      | 'matching'
-      | 'rank_order'
-      | 'short_answer'
-      | 'long_answer'
-      | 'fill_in_the_blank'
-      | 'rating_scale';
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
   }[];
   /**
    * The poll's title, up to 64 characters.
@@ -28448,12 +29797,22 @@ export type WebinarPollUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPollUpdate = (variables: WebinarPollUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarPollUpdateError, WebinarPollUpdateRequestBody, {}, {}, WebinarPollUpdatePathParams>({
-    url: '/webinars/{webinarId}/polls/{pollId}',
-    method: 'put',
+export const webinarPollUpdate = (
+  variables: WebinarPollUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarPollUpdateError,
+    WebinarPollUpdateRequestBody,
+    {},
+    {},
+    WebinarPollUpdatePathParams
+  >({
+    url: "/webinars/{webinarId}/polls/{pollId}",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarPollDeletePathParams = {
@@ -28490,12 +29849,22 @@ export type WebinarPollDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarPollDelete = (variables: WebinarPollDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarPollDeleteError, undefined, {}, {}, WebinarPollDeletePathParams>({
-    url: '/webinars/{webinarId}/polls/{pollId}',
-    method: 'delete',
+export const webinarPollDelete = (
+  variables: WebinarPollDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarPollDeleteError,
+    undefined,
+    {},
+    {},
+    WebinarPollDeletePathParams
+  >({
+    url: "/webinars/{webinarId}/polls/{pollId}",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarRegistrantsPathParams = {
@@ -28524,7 +29893,7 @@ export type WebinarRegistrantsQueryParams = {
    * @example pending
    * @default approved
    */
-  status?: 'pending' | 'approved' | 'denied';
+  status?: "pending" | "approved" | "denied";
   /**
    * The tracking source ID for the registrants. Useful if you share the webinar registration page in multiple locations. See [Creating source tracking links for webinar registration](https://support.zoom.us/hc/en-us/articles/360000315683-Creating-source-tracking-links-for-webinar-registration) for details.
    *
@@ -28686,16 +30055,16 @@ export type WebinarRegistrantsResponse = {
      * @example 1-20
      */
     no_of_employees?:
-      | ''
-      | '1-20'
-      | '21-50'
-      | '51-100'
-      | '101-250'
-      | '251-500'
-      | '501-1,000'
-      | '1,001-5,000'
-      | '5,001-10,000'
-      | 'More than 10,000';
+      | ""
+      | "1-20"
+      | "21-50"
+      | "51-100"
+      | "101-250"
+      | "251-500"
+      | "501-1,000"
+      | "1,001-5,000"
+      | "5,001-10,000"
+      | "More than 10,000";
     /**
      * The registrant's organization.
      *
@@ -28718,7 +30087,13 @@ export type WebinarRegistrantsResponse = {
      *
      * @example 1-3 months
      */
-    purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+    purchasing_time_frame?:
+      | ""
+      | "Within a month"
+      | "1-3 months"
+      | "4-6 months"
+      | "More than 6 months"
+      | "No timeframe";
     /**
      * The registrant's role in the purchase process.
      * * `Decision maker`
@@ -28728,7 +30103,12 @@ export type WebinarRegistrantsResponse = {
      *
      * @example Influencer
      */
-    role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+    role_in_purchase_process?:
+      | ""
+      | "Decision Maker"
+      | "Evaluator/Recommender"
+      | "Influencer"
+      | "Not involved";
     /**
      * The registrant's state or province.
      *
@@ -28743,7 +30123,7 @@ export type WebinarRegistrantsResponse = {
      *
      * @example approved
      */
-    status?: 'approved' | 'denied' | 'pending';
+    status?: "approved" | "denied" | "pending";
     /**
      * The registrant's ZIP or postal code.
      *
@@ -28793,7 +30173,10 @@ export type WebinarRegistrantsVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const webinarRegistrants = (variables: WebinarRegistrantsVariables, signal?: AbortSignal) =>
+export const webinarRegistrants = (
+  variables: WebinarRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarRegistrantsResponse,
     WebinarRegistrantsError,
@@ -28801,7 +30184,12 @@ export const webinarRegistrants = (variables: WebinarRegistrantsVariables, signa
     {},
     WebinarRegistrantsQueryParams,
     WebinarRegistrantsPathParams
-  >({ url: '/webinars/{webinarId}/registrants', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type WebinarRegistrantCreatePathParams = {
   /**
@@ -28999,15 +30387,15 @@ export type WebinarRegistrantCreateRequestBody = {
    * @example 1-20
    */
   no_of_employees?:
-    | ''
-    | '1-20'
-    | '21-50'
-    | '51-100'
-    | '101-500'
-    | '500-1,000'
-    | '1,001-5,000'
-    | '5,001-10,000'
-    | 'More than 10,000';
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-500"
+    | "500-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
   /**
    * The registrant's organization.
    *
@@ -29024,7 +30412,13 @@ export type WebinarRegistrantCreateRequestBody = {
    *
    * @example 1-3 months
    */
-  purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
   /**
    * The registrant's role in the purchase process:
    * * `Decision Maker`
@@ -29034,7 +30428,12 @@ export type WebinarRegistrantCreateRequestBody = {
    *
    * @example Influencer
    */
-  role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
   /**
    * The registrant's language preference for confirmation emails:
    * * `en-US` - English (US)
@@ -29055,20 +30454,20 @@ export type WebinarRegistrantCreateRequestBody = {
    * @example en-US
    */
   language?:
-    | 'en-US'
-    | 'de-DE'
-    | 'es-ES'
-    | 'fr-FR'
-    | 'jp-JP'
-    | 'pt-PT'
-    | 'ru-RU'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'ko-KO'
-    | 'it-IT'
-    | 'vi-VN'
-    | 'pl-PL'
-    | 'Tr-TR';
+    | "en-US"
+    | "de-DE"
+    | "es-ES"
+    | "fr-FR"
+    | "jp-JP"
+    | "pt-PT"
+    | "ru-RU"
+    | "zh-CN"
+    | "zh-TW"
+    | "ko-KO"
+    | "it-IT"
+    | "vi-VN"
+    | "pl-PL"
+    | "Tr-TR";
   /**
    * The tracking source's unique identifier.
    *
@@ -29095,7 +30494,10 @@ export type WebinarRegistrantCreateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarRegistrantCreate = (variables: WebinarRegistrantCreateVariables, signal?: AbortSignal) =>
+export const webinarRegistrantCreate = (
+  variables: WebinarRegistrantCreateVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarRegistrantCreateResponse,
     WebinarRegistrantCreateError,
@@ -29103,7 +30505,12 @@ export const webinarRegistrantCreate = (variables: WebinarRegistrantCreateVariab
     {},
     WebinarRegistrantCreateQueryParams,
     WebinarRegistrantCreatePathParams
-  >({ url: '/webinars/{webinarId}/registrants', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarRegistrantsQuestionsGetPathParams = {
   /**
@@ -29115,7 +30522,8 @@ export type WebinarRegistrantsQuestionsGetPathParams = {
   webinarId: number;
 };
 
-export type WebinarRegistrantsQuestionsGetError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarRegistrantsQuestionsGetError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarRegistrantsQuestionsGetResponse = {
   /**
@@ -29143,7 +30551,7 @@ export type WebinarRegistrantsQuestionsGetResponse = {
      *
      * @example short
      */
-    type?: 'short' | 'single_radio' | 'single_dropdown' | 'multiple';
+    type?: "short" | "single_radio" | "single_dropdown" | "multiple";
   }[];
   /**
    * Array of registration fields whose values should be provided by registrants during registration.
@@ -29155,20 +30563,20 @@ export type WebinarRegistrantsQuestionsGetResponse = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * State whether the selected fields are required or optional.
      *
@@ -29200,7 +30608,7 @@ export type WebinarRegistrantsQuestionsGetVariables = {
  */
 export const webinarRegistrantsQuestionsGet = (
   variables: WebinarRegistrantsQuestionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     WebinarRegistrantsQuestionsGetResponse,
@@ -29209,7 +30617,12 @@ export const webinarRegistrantsQuestionsGet = (
     {},
     {},
     WebinarRegistrantsQuestionsGetPathParams
-  >({ url: '/webinars/{webinarId}/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants/questions",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type WebinarRegistrantQuestionUpdatePathParams = {
   /**
@@ -29221,7 +30634,8 @@ export type WebinarRegistrantQuestionUpdatePathParams = {
   webinarId: number;
 };
 
-export type WebinarRegistrantQuestionUpdateError = Fetcher.ErrorWrapper<undefined>;
+export type WebinarRegistrantQuestionUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarRegistrantQuestionUpdateRequestBody = {
   /**
@@ -29249,7 +30663,7 @@ export type WebinarRegistrantQuestionUpdateRequestBody = {
      *
      * @example short
      */
-    type?: 'short' | 'single_radio' | 'single_dropdown' | 'multiple';
+    type?: "short" | "single_radio" | "single_dropdown" | "multiple";
   }[];
   /**
    * Array of registration fields whose values should be provided by registrants.
@@ -29261,20 +30675,20 @@ export type WebinarRegistrantQuestionUpdateRequestBody = {
      * @example last_name
      */
     field_name?:
-      | 'last_name'
-      | 'address'
-      | 'city'
-      | 'country'
-      | 'zip'
-      | 'state'
-      | 'phone'
-      | 'industry'
-      | 'org'
-      | 'job_title'
-      | 'purchasing_time_frame'
-      | 'role_in_purchase_process'
-      | 'no_of_employees'
-      | 'comments';
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
     /**
      * State whether the selected fields are required or optional.
      *
@@ -29307,7 +30721,7 @@ export type WebinarRegistrantQuestionUpdateVariables = {
  */
 export const webinarRegistrantQuestionUpdate = (
   variables: WebinarRegistrantQuestionUpdateVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     undefined,
@@ -29316,7 +30730,12 @@ export const webinarRegistrantQuestionUpdate = (
     {},
     {},
     WebinarRegistrantQuestionUpdatePathParams
-  >({ url: '/webinars/{webinarId}/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants/questions",
+    method: "patch",
+    ...variables,
+    signal,
+  });
 
 export type WebinarRegistrantStatusPathParams = {
   /**
@@ -29348,7 +30767,7 @@ export type WebinarRegistrantStatusRequestBody = {
    *
    * @example approve
    */
-  action: 'approve' | 'deny' | 'cancel';
+  action: "approve" | "deny" | "cancel";
   /**
    * The registrant information.
    *
@@ -29386,7 +30805,10 @@ export type WebinarRegistrantStatusVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const webinarRegistrantStatus = (variables: WebinarRegistrantStatusVariables, signal?: AbortSignal) =>
+export const webinarRegistrantStatus = (
+  variables: WebinarRegistrantStatusVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     WebinarRegistrantStatusError,
@@ -29394,7 +30816,12 @@ export const webinarRegistrantStatus = (variables: WebinarRegistrantStatusVariab
     {},
     WebinarRegistrantStatusQueryParams,
     WebinarRegistrantStatusPathParams
-  >({ url: '/webinars/{webinarId}/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
 
 export type WebinarRegistrantGetPathParams = {
   /**
@@ -29515,16 +30942,16 @@ export type WebinarRegistrantGetResponse = {
    * @example 1-20
    */
   no_of_employees?:
-    | ''
-    | '1-20'
-    | '21-50'
-    | '51-100'
-    | '101-250'
-    | '251-500'
-    | '501-1,000'
-    | '1,001-5,000'
-    | '5,001-10,000'
-    | 'More than 10,000';
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-250"
+    | "251-500"
+    | "501-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
   /**
    * The registrant's organization.
    *
@@ -29547,7 +30974,13 @@ export type WebinarRegistrantGetResponse = {
    *
    * @example 1-3 months
    */
-  purchasing_time_frame?: '' | 'Within a month' | '1-3 months' | '4-6 months' | 'More than 6 months' | 'No timeframe';
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
   /**
    * The registrant's role in the purchase process:
    * * `Decision Maker`
@@ -29557,7 +30990,12 @@ export type WebinarRegistrantGetResponse = {
    *
    * @example Influencer
    */
-  role_in_purchase_process?: '' | 'Decision Maker' | 'Evaluator/Recommender' | 'Influencer' | 'Not involved';
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
   /**
    * The registrant's state or province.
    *
@@ -29572,7 +31010,7 @@ export type WebinarRegistrantGetResponse = {
    *
    * @example approved
    */
-  status?: 'approved' | 'denied' | 'pending';
+  status?: "approved" | "denied" | "pending";
   /**
    * The registrant's ZIP or postal code.
    *
@@ -29599,20 +31037,20 @@ export type WebinarRegistrantGetResponse = {
    * @example en-US
    */
   language?:
-    | 'en-US'
-    | 'de-DE'
-    | 'es-ES'
-    | 'fr-FR'
-    | 'jp-JP'
-    | 'pt-PT'
-    | 'ru-RU'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'ko-KO'
-    | 'it-IT'
-    | 'vi-VN'
-    | 'pl-PL'
-    | 'Tr-TR';
+    | "en-US"
+    | "de-DE"
+    | "es-ES"
+    | "fr-FR"
+    | "jp-JP"
+    | "pt-PT"
+    | "ru-RU"
+    | "zh-CN"
+    | "zh-TW"
+    | "ko-KO"
+    | "it-IT"
+    | "vi-VN"
+    | "pl-PL"
+    | "Tr-TR";
   /**
    * @example 95204914252
    */
@@ -29649,7 +31087,10 @@ export type WebinarRegistrantGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarRegistrantGet = (variables: WebinarRegistrantGetVariables, signal?: AbortSignal) =>
+export const webinarRegistrantGet = (
+  variables: WebinarRegistrantGetVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     WebinarRegistrantGetResponse,
     WebinarRegistrantGetError,
@@ -29657,7 +31098,12 @@ export const webinarRegistrantGet = (variables: WebinarRegistrantGetVariables, s
     {},
     WebinarRegistrantGetQueryParams,
     WebinarRegistrantGetPathParams
-  >({ url: '/webinars/{webinarId}/registrants/{registrantId}', method: 'get', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants/{registrantId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type DeleteWebinarRegistrantPathParams = {
   /**
@@ -29702,7 +31148,10 @@ export type DeleteWebinarRegistrantVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const deleteWebinarRegistrant = (variables: DeleteWebinarRegistrantVariables, signal?: AbortSignal) =>
+export const deleteWebinarRegistrant = (
+  variables: DeleteWebinarRegistrantVariables,
+  signal?: AbortSignal,
+) =>
   fetch<
     undefined,
     DeleteWebinarRegistrantError,
@@ -29710,7 +31159,12 @@ export const deleteWebinarRegistrant = (variables: DeleteWebinarRegistrantVariab
     {},
     DeleteWebinarRegistrantQueryParams,
     DeleteWebinarRegistrantPathParams
-  >({ url: '/webinars/{webinarId}/registrants/{registrantId}', method: 'delete', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/registrants/{registrantId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
 
 export type GetWebinarSipDialingWithPasscodePathParams = {
   /**
@@ -29724,7 +31178,8 @@ export type GetWebinarSipDialingWithPasscodePathParams = {
   webinarId: number;
 };
 
-export type GetWebinarSipDialingWithPasscodeError = Fetcher.ErrorWrapper<undefined>;
+export type GetWebinarSipDialingWithPasscodeError =
+  Fetcher.ErrorWrapper<undefined>;
 
 export type GetWebinarSipDialingWithPasscodeResponse = {
   /**
@@ -29779,7 +31234,7 @@ export type GetWebinarSipDialingWithPasscodeVariables = {
  */
 export const getWebinarSipDialingWithPasscode = (
   variables: GetWebinarSipDialingWithPasscodeVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   fetch<
     GetWebinarSipDialingWithPasscodeResponse,
@@ -29788,7 +31243,12 @@ export const getWebinarSipDialingWithPasscode = (
     {},
     {},
     GetWebinarSipDialingWithPasscodePathParams
-  >({ url: '/webinars/{webinarId}/sip_dialing', method: 'post', ...variables, signal });
+  >({
+    url: "/webinars/{webinarId}/sip_dialing",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 export type WebinarStatusPathParams = {
   /**
@@ -29806,7 +31266,7 @@ export type WebinarStatusRequestBody = {
   /**
    * @example end
    */
-  action?: 'end';
+  action?: "end";
 };
 
 export type WebinarStatusVariables = {
@@ -29828,12 +31288,22 @@ export type WebinarStatusVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarStatus = (variables: WebinarStatusVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarStatusError, WebinarStatusRequestBody, {}, {}, WebinarStatusPathParams>({
-    url: '/webinars/{webinarId}/status',
-    method: 'put',
+export const webinarStatus = (
+  variables: WebinarStatusVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarStatusError,
+    WebinarStatusRequestBody,
+    {},
+    {},
+    WebinarStatusPathParams
+  >({
+    url: "/webinars/{webinarId}/status",
+    method: "put",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarSurveyGetPathParams = {
@@ -29925,14 +31395,14 @@ export type WebinarSurveyGetResponse = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
       /**
        * Whether participants must answer the question.
        * * `true` - The participant must answer the question.
@@ -30081,12 +31551,22 @@ export type WebinarSurveyGetVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarSurveyGet = (variables: WebinarSurveyGetVariables, signal?: AbortSignal) =>
-  fetch<WebinarSurveyGetResponse, WebinarSurveyGetError, undefined, {}, {}, WebinarSurveyGetPathParams>({
-    url: '/webinars/{webinarId}/survey',
-    method: 'get',
+export const webinarSurveyGet = (
+  variables: WebinarSurveyGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarSurveyGetResponse,
+    WebinarSurveyGetError,
+    undefined,
+    {},
+    {},
+    WebinarSurveyGetPathParams
+  >({
+    url: "/webinars/{webinarId}/survey",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarSurveyDeletePathParams = {
@@ -30118,12 +31598,22 @@ export type WebinarSurveyDeleteVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarSurveyDelete = (variables: WebinarSurveyDeleteVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarSurveyDeleteError, undefined, {}, {}, WebinarSurveyDeletePathParams>({
-    url: '/webinars/{webinarId}/survey',
-    method: 'delete',
+export const webinarSurveyDelete = (
+  variables: WebinarSurveyDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarSurveyDeleteError,
+    undefined,
+    {},
+    {},
+    WebinarSurveyDeletePathParams
+  >({
+    url: "/webinars/{webinarId}/survey",
+    method: "delete",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarSurveyUpdatePathParams = {
@@ -30215,14 +31705,14 @@ export type WebinarSurveyUpdateRequestBody = {
        * @example single
        */
       type?:
-        | 'single'
-        | 'multiple'
-        | 'matching'
-        | 'rank_order'
-        | 'short_answer'
-        | 'long_answer'
-        | 'fill_in_the_blank'
-        | 'rating_scale';
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
       /**
        * Whether participants must answer the question.
        * * `true` - The participant must answer the question.
@@ -30368,12 +31858,22 @@ export type WebinarSurveyUpdateVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarSurveyUpdate = (variables: WebinarSurveyUpdateVariables, signal?: AbortSignal) =>
-  fetch<undefined, WebinarSurveyUpdateError, WebinarSurveyUpdateRequestBody, {}, {}, WebinarSurveyUpdatePathParams>({
-    url: '/webinars/{webinarId}/survey',
-    method: 'patch',
+export const webinarSurveyUpdate = (
+  variables: WebinarSurveyUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    WebinarSurveyUpdateError,
+    WebinarSurveyUpdateRequestBody,
+    {},
+    {},
+    WebinarSurveyUpdatePathParams
+  >({
+    url: "/webinars/{webinarId}/survey",
+    method: "patch",
     ...variables,
-    signal
+    signal,
   });
 
 export type WebinarTokenPathParams = {
@@ -30396,7 +31896,7 @@ export type WebinarTokenQueryParams = {
    * @example closed_caption_token
    * @default closed_caption_token
    */
-  type?: 'closed_caption_token';
+  type?: "closed_caption_token";
 };
 
 export type WebinarTokenError = Fetcher.ErrorWrapper<undefined>;
@@ -30430,12 +31930,22 @@ export type WebinarTokenVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
-export const webinarToken = (variables: WebinarTokenVariables, signal?: AbortSignal) =>
-  fetch<WebinarTokenResponse, WebinarTokenError, undefined, {}, WebinarTokenQueryParams, WebinarTokenPathParams>({
-    url: '/webinars/{webinarId}/token',
-    method: 'get',
+export const webinarToken = (
+  variables: WebinarTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    WebinarTokenResponse,
+    WebinarTokenError,
+    undefined,
+    {},
+    WebinarTokenQueryParams,
+    WebinarTokenPathParams
+  >({
+    url: "/webinars/{webinarId}/token",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export type GetTrackingSourcesPathParams = {
@@ -30514,12 +32024,22 @@ export type GetTrackingSourcesVariables = {
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
-export const getTrackingSources = (variables: GetTrackingSourcesVariables, signal?: AbortSignal) =>
-  fetch<GetTrackingSourcesResponse, GetTrackingSourcesError, undefined, {}, {}, GetTrackingSourcesPathParams>({
-    url: '/webinars/{webinarId}/tracking_sources',
-    method: 'get',
+export const getTrackingSources = (
+  variables: GetTrackingSourcesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetTrackingSourcesResponse,
+    GetTrackingSourcesError,
+    undefined,
+    {},
+    {},
+    GetTrackingSourcesPathParams
+  >({
+    url: "/webinars/{webinarId}/tracking_sources",
+    method: "get",
     ...variables,
-    signal
+    signal,
   });
 
 export const operationsByTag = {
@@ -30528,7 +32048,7 @@ export const operationsByTag = {
     getArchivedFileStatistics,
     updateArchivedFile,
     getArchivedFiles,
-    deleteArchivedFiles
+    deleteArchivedFiles,
   },
   cloudRecording: {
     recordingGet,
@@ -30545,7 +32065,7 @@ export const operationsByTag = {
     recordingDeleteOne,
     recordingStatusUpdateOne,
     recordingStatusUpdate,
-    recordingsList
+    recordingsList,
   },
   devices: {
     listDevices,
@@ -30560,7 +32080,7 @@ export const operationsByTag = {
     deleteDevice,
     updateDevice,
     assginGroup,
-    changeDeviceAssociation
+    changeDeviceAssociation,
   },
   h323Devices: { deviceList, deviceCreate, deviceDelete, deviceUpdate },
   meetings: {
@@ -30613,7 +32133,7 @@ export const operationsByTag = {
     meetingTemplateCreate,
     meetings,
     meetingCreate,
-    listUpcomingMeeting
+    listUpcomingMeeting,
   },
   pac: { userPACs },
   reports: {
@@ -30638,7 +32158,7 @@ export const operationsByTag = {
     reportWebinarParticipants,
     reportWebinarPolls,
     reportWebinarQA,
-    reportWebinarSurvey
+    reportWebinarSurvey,
   },
   sIPPhone: {
     listSipPhones,
@@ -30648,10 +32168,25 @@ export const operationsByTag = {
     deleteSIPPhonePhones,
     updateSIPPhonePhones,
     deleteSIPPhone,
-    updateSIPPhone
+    updateSIPPhone,
   },
-  tsp: { tsp, tspUpdate, userTSPs, userTSPCreate, tspUrlUpdate, userTSP, userTSPDelete, userTSPUpdate },
-  trackingField: { trackingfieldList, trackingfieldCreate, trackingfieldGet, trackingfieldDelete, trackingfieldUpdate },
+  tsp: {
+    tsp,
+    tspUpdate,
+    userTSPs,
+    userTSPCreate,
+    tspUrlUpdate,
+    userTSP,
+    userTSPDelete,
+    userTSPUpdate,
+  },
+  trackingField: {
+    trackingfieldList,
+    trackingfieldCreate,
+    trackingfieldGet,
+    trackingfieldDelete,
+    trackingfieldUpdate,
+  },
   webinars: {
     deleteWebinarChatMessageById,
     webinarAbsentees,
@@ -30705,6 +32240,6 @@ export const operationsByTag = {
     webinarSurveyDelete,
     webinarSurveyUpdate,
     webinarToken,
-    getTrackingSources
-  }
+    getTrackingSources,
+  },
 };

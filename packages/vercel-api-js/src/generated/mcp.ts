@@ -1492,7 +1492,7 @@ export async function readAccessGroup({
   config = {},
 }: {
   pathParams: ReadAccessGroupPathParams
-  queryParams?: ReadAccessGroupQueryParams
+  queryParams?: ReadAccessGroupQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1523,7 +1523,7 @@ export async function updateAccessGroup({
   config = {},
 }: {
   pathParams: UpdateAccessGroupPathParams
-  queryParams?: UpdateAccessGroupQueryParams
+  queryParams?: UpdateAccessGroupQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1560,7 +1560,7 @@ export async function deleteAccessGroup({
   config = {},
 }: {
   pathParams: DeleteAccessGroupPathParams
-  queryParams?: DeleteAccessGroupQueryParams
+  queryParams?: DeleteAccessGroupQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1591,7 +1591,7 @@ export async function listAccessGroupMembers({
   config = {},
 }: {
   pathParams: ListAccessGroupMembersPathParams
-  queryParams?: ListAccessGroupMembersQueryParams
+  queryParams?: ListAccessGroupMembersQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1620,7 +1620,7 @@ export async function listAccessGroups({
   queryParams,
   config = {},
 }: {
-  queryParams?: ListAccessGroupsQueryParams
+  queryParams?: ListAccessGroupsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1645,7 +1645,7 @@ export async function createAccessGroup({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateAccessGroupQueryParams
+  queryParams?: CreateAccessGroupQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1672,7 +1672,7 @@ export async function listAccessGroupProjects({
   config = {},
 }: {
   pathParams: ListAccessGroupProjectsPathParams
-  queryParams?: ListAccessGroupProjectsQueryParams
+  queryParams?: ListAccessGroupProjectsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1703,7 +1703,7 @@ export async function createAccessGroupProject({
   config = {},
 }: {
   pathParams: CreateAccessGroupProjectPathParams
-  queryParams?: CreateAccessGroupProjectQueryParams
+  queryParams?: CreateAccessGroupProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1740,7 +1740,7 @@ export async function readAccessGroupProject({
   config = {},
 }: {
   pathParams: ReadAccessGroupProjectPathParams
-  queryParams?: ReadAccessGroupProjectQueryParams
+  queryParams?: ReadAccessGroupProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1775,7 +1775,7 @@ export async function updateAccessGroupProject({
   config = {},
 }: {
   pathParams: UpdateAccessGroupProjectPathParams
-  queryParams?: UpdateAccessGroupProjectQueryParams
+  queryParams?: UpdateAccessGroupProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1816,7 +1816,7 @@ export async function deleteAccessGroupProject({
   config = {},
 }: {
   pathParams: DeleteAccessGroupProjectPathParams
-  queryParams?: DeleteAccessGroupProjectQueryParams
+  queryParams?: DeleteAccessGroupProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1850,8 +1850,8 @@ export async function recordEvents({
   headers,
   config = {},
 }: {
-  queryParams?: RecordEventsQueryParams
-  headers?: RecordEventsHeaderParams
+  queryParams?: RecordEventsQueryParams | undefined
+  headers?: RecordEventsHeaderParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1882,7 +1882,7 @@ export async function status({
   queryParams,
   config = {},
 }: {
-  queryParams?: StatusQueryParams
+  queryParams?: StatusQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1911,7 +1911,7 @@ export async function uploadArtifact({
 }: {
   pathParams: UploadArtifactPathParams
   headers: UploadArtifactHeaderParams
-  queryParams?: UploadArtifactQueryParams
+  queryParams?: UploadArtifactQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1949,8 +1949,8 @@ export async function downloadArtifact({
   config = {},
 }: {
   pathParams: DownloadArtifactPathParams
-  queryParams?: DownloadArtifactQueryParams
-  headers?: DownloadArtifactHeaderParams
+  queryParams?: DownloadArtifactQueryParams | undefined
+  headers?: DownloadArtifactHeaderParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -1979,7 +1979,7 @@ export async function artifactQuery({
   queryParams,
   config = {},
 }: {
-  queryParams?: ArtifactQueryQueryParams
+  queryParams?: ArtifactQueryQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2006,7 +2006,7 @@ export async function createCheck({
   config = {},
 }: {
   pathParams: CreateCheckPathParams
-  queryParams?: CreateCheckQueryParams
+  queryParams?: CreateCheckQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2043,7 +2043,7 @@ export async function getAllChecks({
   config = {},
 }: {
   pathParams: GetAllChecksPathParams
-  queryParams?: GetAllChecksQueryParams
+  queryParams?: GetAllChecksQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2074,7 +2074,7 @@ export async function getCheck({
   config = {},
 }: {
   pathParams: GetCheckPathParams
-  queryParams?: GetCheckQueryParams
+  queryParams?: GetCheckQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2109,7 +2109,7 @@ export async function updateCheck({
   config = {},
 }: {
   pathParams: UpdateCheckPathParams
-  queryParams?: UpdateCheckQueryParams
+  queryParams?: UpdateCheckQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2150,7 +2150,7 @@ export async function rerequestCheck({
   config = {},
 }: {
   pathParams: RerequestCheckPathParams
-  queryParams?: RerequestCheckQueryParams
+  queryParams?: RerequestCheckQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2229,7 +2229,7 @@ export async function updateProjectDataCache({
   config = {},
 }: {
   pathParams: UpdateProjectDataCachePathParams
-  queryParams?: UpdateProjectDataCacheQueryParams
+  queryParams?: UpdateProjectDataCacheQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2266,7 +2266,7 @@ export async function getDeploymentEvents({
   config = {},
 }: {
   pathParams: GetDeploymentEventsPathParams
-  queryParams?: GetDeploymentEventsQueryParams
+  queryParams?: GetDeploymentEventsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2343,7 +2343,7 @@ export async function getDeployment({
   config = {},
 }: {
   pathParams: GetDeploymentPathParams
-  queryParams?: GetDeploymentQueryParams
+  queryParams?: GetDeploymentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2372,7 +2372,7 @@ export async function createDeployment({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateDeploymentQueryParams
+  queryParams?: CreateDeploymentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2401,7 +2401,7 @@ export async function cancelDeployment({
   config = {},
 }: {
   pathParams: CancelDeploymentPathParams
-  queryParams?: CancelDeploymentQueryParams
+  queryParams?: CancelDeploymentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2430,7 +2430,7 @@ export async function buyDomain({
   queryParams,
   config = {},
 }: {
-  queryParams?: BuyDomainQueryParams
+  queryParams?: BuyDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2507,7 +2507,7 @@ export async function getRecords({
   config = {},
 }: {
   pathParams: GetRecordsPathParams
-  queryParams?: GetRecordsQueryParams
+  queryParams?: GetRecordsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2538,7 +2538,7 @@ export async function createRecord({
   config = {},
 }: {
   pathParams: CreateRecordPathParams
-  queryParams?: CreateRecordQueryParams
+  queryParams?: CreateRecordQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2575,7 +2575,7 @@ export async function updateRecord({
   config = {},
 }: {
   pathParams: UpdateRecordPathParams
-  queryParams?: UpdateRecordQueryParams
+  queryParams?: UpdateRecordQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2612,7 +2612,7 @@ export async function removeRecord({
   config = {},
 }: {
   pathParams: RemoveRecordPathParams
-  queryParams?: RemoveRecordQueryParams
+  queryParams?: RemoveRecordQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2647,7 +2647,7 @@ export async function getDomainTransfer({
   config = {},
 }: {
   pathParams: GetDomainTransferPathParams
-  queryParams?: GetDomainTransferQueryParams
+  queryParams?: GetDomainTransferQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2678,7 +2678,7 @@ export async function getDomainConfig({
   config = {},
 }: {
   pathParams: GetDomainConfigPathParams
-  queryParams?: GetDomainConfigQueryParams
+  queryParams?: GetDomainConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2709,7 +2709,7 @@ export async function getDomain({
   config = {},
 }: {
   pathParams: GetDomainPathParams
-  queryParams?: GetDomainQueryParams
+  queryParams?: GetDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2738,7 +2738,7 @@ export async function getDomains({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetDomainsQueryParams
+  queryParams?: GetDomainsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2763,7 +2763,7 @@ export async function createOrTransferDomain({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateOrTransferDomainQueryParams
+  queryParams?: CreateOrTransferDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2798,7 +2798,7 @@ export async function patchDomain({
   config = {},
 }: {
   pathParams: PatchDomainPathParams
-  queryParams?: PatchDomainQueryParams
+  queryParams?: PatchDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2829,7 +2829,7 @@ export async function deleteDomain({
   config = {},
 }: {
   pathParams: DeleteDomainPathParams
-  queryParams?: DeleteDomainQueryParams
+  queryParams?: DeleteDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2858,7 +2858,7 @@ export async function getEdgeConfigs({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetEdgeConfigsQueryParams
+  queryParams?: GetEdgeConfigsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2883,7 +2883,7 @@ export async function createEdgeConfig({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateEdgeConfigQueryParams
+  queryParams?: CreateEdgeConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2910,7 +2910,7 @@ export async function getEdgeConfig({
   config = {},
 }: {
   pathParams: GetEdgeConfigPathParams
-  queryParams?: GetEdgeConfigQueryParams
+  queryParams?: GetEdgeConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2941,7 +2941,7 @@ export async function updateEdgeConfig({
   config = {},
 }: {
   pathParams: UpdateEdgeConfigPathParams
-  queryParams?: UpdateEdgeConfigQueryParams
+  queryParams?: UpdateEdgeConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -2978,7 +2978,7 @@ export async function deleteEdgeConfig({
   config = {},
 }: {
   pathParams: DeleteEdgeConfigPathParams
-  queryParams?: DeleteEdgeConfigQueryParams
+  queryParams?: DeleteEdgeConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3009,7 +3009,7 @@ export async function getEdgeConfigItems({
   config = {},
 }: {
   pathParams: GetEdgeConfigItemsPathParams
-  queryParams?: GetEdgeConfigItemsQueryParams
+  queryParams?: GetEdgeConfigItemsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3040,7 +3040,7 @@ export async function patchEdgeConfigItems({
   config = {},
 }: {
   pathParams: PatchEdgeConfigItemsPathParams
-  queryParams?: PatchEdgeConfigItemsQueryParams
+  queryParams?: PatchEdgeConfigItemsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3079,7 +3079,7 @@ export async function getEdgeConfigSchema({
   config = {},
 }: {
   pathParams: GetEdgeConfigSchemaPathParams
-  queryParams?: GetEdgeConfigSchemaQueryParams
+  queryParams?: GetEdgeConfigSchemaQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3110,7 +3110,7 @@ export async function patchEdgeConfigSchema({
   config = {},
 }: {
   pathParams: PatchEdgeConfigSchemaPathParams
-  queryParams?: PatchEdgeConfigSchemaQueryParams
+  queryParams?: PatchEdgeConfigSchemaQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3147,7 +3147,7 @@ export async function deleteEdgeConfigSchema({
   config = {},
 }: {
   pathParams: DeleteEdgeConfigSchemaPathParams
-  queryParams?: DeleteEdgeConfigSchemaQueryParams
+  queryParams?: DeleteEdgeConfigSchemaQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3178,7 +3178,7 @@ export async function getEdgeConfigItem({
   config = {},
 }: {
   pathParams: GetEdgeConfigItemPathParams
-  queryParams?: GetEdgeConfigItemQueryParams
+  queryParams?: GetEdgeConfigItemQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3213,7 +3213,7 @@ export async function getEdgeConfigTokens({
   config = {},
 }: {
   pathParams: GetEdgeConfigTokensPathParams
-  queryParams?: GetEdgeConfigTokensQueryParams
+  queryParams?: GetEdgeConfigTokensQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3244,7 +3244,7 @@ export async function deleteEdgeConfigTokens({
   config = {},
 }: {
   pathParams: DeleteEdgeConfigTokensPathParams
-  queryParams?: DeleteEdgeConfigTokensQueryParams
+  queryParams?: DeleteEdgeConfigTokensQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3281,7 +3281,7 @@ export async function getEdgeConfigToken({
   config = {},
 }: {
   pathParams: GetEdgeConfigTokenPathParams
-  queryParams?: GetEdgeConfigTokenQueryParams
+  queryParams?: GetEdgeConfigTokenQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3316,7 +3316,7 @@ export async function createEdgeConfigToken({
   config = {},
 }: {
   pathParams: CreateEdgeConfigTokenPathParams
-  queryParams?: CreateEdgeConfigTokenQueryParams
+  queryParams?: CreateEdgeConfigTokenQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3353,7 +3353,7 @@ export async function getEdgeConfigBackup({
   config = {},
 }: {
   pathParams: GetEdgeConfigBackupPathParams
-  queryParams?: GetEdgeConfigBackupQueryParams
+  queryParams?: GetEdgeConfigBackupQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3388,7 +3388,7 @@ export async function getEdgeConfigBackups({
   config = {},
 }: {
   pathParams: GetEdgeConfigBackupsPathParams
-  queryParams?: GetEdgeConfigBackupsQueryParams
+  queryParams?: GetEdgeConfigBackupsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3417,7 +3417,7 @@ export async function listUserEvents({
   queryParams,
   config = {},
 }: {
-  queryParams?: ListUserEventsQueryParams
+  queryParams?: ListUserEventsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3953,7 +3953,7 @@ export async function getConfiguration({
   config = {},
 }: {
   pathParams: GetConfigurationPathParams
-  queryParams?: GetConfigurationQueryParams
+  queryParams?: GetConfigurationQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -3984,7 +3984,7 @@ export async function deleteConfiguration({
   config = {},
 }: {
   pathParams: DeleteConfigurationPathParams
-  queryParams?: DeleteConfigurationQueryParams
+  queryParams?: DeleteConfigurationQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4032,7 +4032,7 @@ export async function getIntegrationLogDrains({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetIntegrationLogDrainsQueryParams
+  queryParams?: GetIntegrationLogDrainsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4057,7 +4057,7 @@ export async function createLogDrain({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateLogDrainQueryParams
+  queryParams?: CreateLogDrainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4090,7 +4090,7 @@ export async function deleteIntegrationLogDrain({
   config = {},
 }: {
   pathParams: DeleteIntegrationLogDrainPathParams
-  queryParams?: DeleteIntegrationLogDrainQueryParams
+  queryParams?: DeleteIntegrationLogDrainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4121,7 +4121,7 @@ export async function getRuntimeLogs({
   config = {},
 }: {
   pathParams: GetRuntimeLogsPathParams
-  queryParams?: GetRuntimeLogsQueryParams
+  queryParams?: GetRuntimeLogsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4317,7 +4317,7 @@ export async function getProjectMembers({
   config = {},
 }: {
   pathParams: GetProjectMembersPathParams
-  queryParams?: GetProjectMembersQueryParams
+  queryParams?: GetProjectMembersQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4348,7 +4348,7 @@ export async function addProjectMember({
   config = {},
 }: {
   pathParams: AddProjectMemberPathParams
-  queryParams?: AddProjectMemberQueryParams
+  queryParams?: AddProjectMemberQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4385,7 +4385,7 @@ export async function removeProjectMember({
   config = {},
 }: {
   pathParams: RemoveProjectMemberPathParams
-  queryParams?: RemoveProjectMemberQueryParams
+  queryParams?: RemoveProjectMemberQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4418,7 +4418,7 @@ export async function getProjects({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetProjectsQueryParams
+  queryParams?: GetProjectsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4443,7 +4443,7 @@ export async function createProject({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateProjectQueryParams
+  queryParams?: CreateProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4470,7 +4470,7 @@ export async function getProject({
   config = {},
 }: {
   pathParams: GetProjectPathParams
-  queryParams?: GetProjectQueryParams
+  queryParams?: GetProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4501,7 +4501,7 @@ export async function updateProject({
   config = {},
 }: {
   pathParams: UpdateProjectPathParams
-  queryParams?: UpdateProjectQueryParams
+  queryParams?: UpdateProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4538,7 +4538,7 @@ export async function deleteProject({
   config = {},
 }: {
   pathParams: DeleteProjectPathParams
-  queryParams?: DeleteProjectQueryParams
+  queryParams?: DeleteProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4569,7 +4569,7 @@ export async function createCustomEnvironment({
   config = {},
 }: {
   pathParams: CreateCustomEnvironmentPathParams
-  queryParams?: CreateCustomEnvironmentQueryParams
+  queryParams?: CreateCustomEnvironmentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4608,7 +4608,7 @@ export async function listCustomEnvironments({
   config = {},
 }: {
   pathParams: ListCustomEnvironmentsPathParams
-  queryParams?: ListCustomEnvironmentsQueryParams
+  queryParams?: ListCustomEnvironmentsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4639,7 +4639,7 @@ export async function getCustomEnvironment({
   config = {},
 }: {
   pathParams: GetCustomEnvironmentPathParams
-  queryParams?: GetCustomEnvironmentQueryParams
+  queryParams?: GetCustomEnvironmentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4674,7 +4674,7 @@ export async function updateCustomEnvironment({
   config = {},
 }: {
   pathParams: UpdateCustomEnvironmentPathParams
-  queryParams?: UpdateCustomEnvironmentQueryParams
+  queryParams?: UpdateCustomEnvironmentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4717,7 +4717,7 @@ export async function removeCustomEnvironment({
   config = {},
 }: {
   pathParams: RemoveCustomEnvironmentPathParams
-  queryParams?: RemoveCustomEnvironmentQueryParams
+  queryParams?: RemoveCustomEnvironmentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4758,7 +4758,7 @@ export async function getProjectDomains({
   config = {},
 }: {
   pathParams: GetProjectDomainsPathParams
-  queryParams?: GetProjectDomainsQueryParams
+  queryParams?: GetProjectDomainsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4789,7 +4789,7 @@ export async function getProjectDomain({
   config = {},
 }: {
   pathParams: GetProjectDomainPathParams
-  queryParams?: GetProjectDomainQueryParams
+  queryParams?: GetProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4824,7 +4824,7 @@ export async function updateProjectDomain({
   config = {},
 }: {
   pathParams: UpdateProjectDomainPathParams
-  queryParams?: UpdateProjectDomainQueryParams
+  queryParams?: UpdateProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4865,7 +4865,7 @@ export async function removeProjectDomain({
   config = {},
 }: {
   pathParams: RemoveProjectDomainPathParams
-  queryParams?: RemoveProjectDomainQueryParams
+  queryParams?: RemoveProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4906,7 +4906,7 @@ export async function addProjectDomain({
   config = {},
 }: {
   pathParams: AddProjectDomainPathParams
-  queryParams?: AddProjectDomainQueryParams
+  queryParams?: AddProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4943,7 +4943,7 @@ export async function moveProjectDomain({
   config = {},
 }: {
   pathParams: MoveProjectDomainPathParams
-  queryParams?: MoveProjectDomainQueryParams
+  queryParams?: MoveProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4984,7 +4984,7 @@ export async function verifyProjectDomain({
   config = {},
 }: {
   pathParams: VerifyProjectDomainPathParams
-  queryParams?: VerifyProjectDomainQueryParams
+  queryParams?: VerifyProjectDomainQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5019,7 +5019,7 @@ export async function filterProjectEnvs({
   config = {},
 }: {
   pathParams: FilterProjectEnvsPathParams
-  queryParams?: FilterProjectEnvsQueryParams
+  queryParams?: FilterProjectEnvsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5050,7 +5050,7 @@ export async function createProjectEnv({
   config = {},
 }: {
   pathParams: CreateProjectEnvPathParams
-  queryParams?: CreateProjectEnvQueryParams
+  queryParams?: CreateProjectEnvQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5087,7 +5087,7 @@ export async function getProjectEnv({
   config = {},
 }: {
   pathParams: GetProjectEnvPathParams
-  queryParams?: GetProjectEnvQueryParams
+  queryParams?: GetProjectEnvQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5122,7 +5122,7 @@ export async function removeProjectEnv({
   config = {},
 }: {
   pathParams: RemoveProjectEnvPathParams
-  queryParams?: RemoveProjectEnvQueryParams
+  queryParams?: RemoveProjectEnvQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5157,7 +5157,7 @@ export async function editProjectEnv({
   config = {},
 }: {
   pathParams: EditProjectEnvPathParams
-  queryParams?: EditProjectEnvQueryParams
+  queryParams?: EditProjectEnvQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5198,7 +5198,7 @@ export async function getRollingReleaseBillingStatus({
   config = {},
 }: {
   pathParams: GetRollingReleaseBillingStatusPathParams
-  queryParams?: GetRollingReleaseBillingStatusQueryParams
+  queryParams?: GetRollingReleaseBillingStatusQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5229,7 +5229,7 @@ export async function getRollingReleaseConfig({
   config = {},
 }: {
   pathParams: GetRollingReleaseConfigPathParams
-  queryParams?: GetRollingReleaseConfigQueryParams
+  queryParams?: GetRollingReleaseConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5260,7 +5260,7 @@ export async function deleteRollingReleaseConfig({
   config = {},
 }: {
   pathParams: DeleteRollingReleaseConfigPathParams
-  queryParams?: DeleteRollingReleaseConfigQueryParams
+  queryParams?: DeleteRollingReleaseConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5291,7 +5291,7 @@ export async function updateRollingReleaseConfig({
   config = {},
 }: {
   pathParams: UpdateRollingReleaseConfigPathParams
-  queryParams?: UpdateRollingReleaseConfigQueryParams
+  queryParams?: UpdateRollingReleaseConfigQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5322,7 +5322,7 @@ export async function getRollingRelease({
   config = {},
 }: {
   pathParams: GetRollingReleasePathParams
-  queryParams?: GetRollingReleaseQueryParams
+  queryParams?: GetRollingReleaseQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5353,7 +5353,7 @@ export async function approveRollingReleaseStage({
   config = {},
 }: {
   pathParams: ApproveRollingReleaseStagePathParams
-  queryParams?: ApproveRollingReleaseStageQueryParams
+  queryParams?: ApproveRollingReleaseStageQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5396,7 +5396,7 @@ export async function completeRollingRelease({
   config = {},
 }: {
   pathParams: CompleteRollingReleasePathParams
-  queryParams?: CompleteRollingReleaseQueryParams
+  queryParams?: CompleteRollingReleaseQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5433,7 +5433,7 @@ export async function createProjectTransferRequest({
   config = {},
 }: {
   pathParams: CreateProjectTransferRequestPathParams
-  queryParams?: CreateProjectTransferRequestQueryParams
+  queryParams?: CreateProjectTransferRequestQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5470,7 +5470,7 @@ export async function acceptProjectTransferRequest({
   config = {},
 }: {
   pathParams: AcceptProjectTransferRequestPathParams
-  queryParams?: AcceptProjectTransferRequestQueryParams
+  queryParams?: AcceptProjectTransferRequestQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5513,7 +5513,7 @@ export async function updateProjectProtectionBypass({
   config = {},
 }: {
   pathParams: UpdateProjectProtectionBypassPathParams
-  queryParams?: UpdateProjectProtectionBypassQueryParams
+  queryParams?: UpdateProjectProtectionBypassQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5556,7 +5556,7 @@ export async function requestPromote({
   config = {},
 }: {
   pathParams: RequestPromotePathParams
-  queryParams?: RequestPromoteQueryParams
+  queryParams?: RequestPromoteQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5591,7 +5591,7 @@ export async function listPromoteAliases({
   config = {},
 }: {
   pathParams: ListPromoteAliasesPathParams
-  queryParams?: ListPromoteAliasesQueryParams
+  queryParams?: ListPromoteAliasesQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5622,7 +5622,7 @@ export async function pauseProject({
   config = {},
 }: {
   pathParams: PauseProjectPathParams
-  queryParams?: PauseProjectQueryParams
+  queryParams?: PauseProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5653,7 +5653,7 @@ export async function unpauseProject({
   config = {},
 }: {
   pathParams: UnpauseProjectPathParams
-  queryParams?: UnpauseProjectQueryParams
+  queryParams?: UnpauseProjectQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5682,7 +5682,7 @@ export async function updateAttackChallengeMode({
   queryParams,
   config = {},
 }: {
-  queryParams?: UpdateAttackChallengeModeQueryParams
+  queryParams?: UpdateAttackChallengeModeQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -5922,7 +5922,7 @@ export async function getTeamMembers({
   config = {},
 }: {
   pathParams: GetTeamMembersPathParams
-  queryParams?: GetTeamMembersQueryParams
+  queryParams?: GetTeamMembersQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6111,7 +6111,7 @@ export async function removeTeamMember({
   config = {},
 }: {
   pathParams: RemoveTeamMemberPathParams
-  queryParams?: RemoveTeamMemberQueryParams
+  queryParams?: RemoveTeamMemberQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6146,7 +6146,7 @@ export async function getTeam({
   config = {},
 }: {
   pathParams: GetTeamPathParams
-  queryParams?: GetTeamQueryParams
+  queryParams?: GetTeamQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6177,7 +6177,7 @@ export async function patchTeam({
   config = {},
 }: {
   pathParams: PatchTeamPathParams
-  queryParams?: PatchTeamQueryParams
+  queryParams?: PatchTeamQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6206,7 +6206,7 @@ export async function getTeams({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetTeamsQueryParams
+  queryParams?: GetTeamsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6252,7 +6252,7 @@ export async function deleteTeam({
   config = {},
 }: {
   pathParams: DeleteTeamPathParams
-  queryParams?: DeleteTeamQueryParams
+  queryParams?: DeleteTeamQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6315,8 +6315,8 @@ export async function uploadFile({
   headers,
   config = {},
 }: {
-  queryParams?: UploadFileQueryParams
-  headers?: UploadFileHeaderParams
+  queryParams?: UploadFileQueryParams | undefined
+  headers?: UploadFileHeaderParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6366,7 +6366,7 @@ export async function createAuthToken({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateAuthTokenQueryParams
+  queryParams?: CreateAuthTokenQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6487,7 +6487,7 @@ export async function createWebhook({
   queryParams,
   config = {},
 }: {
-  queryParams?: CreateWebhookQueryParams
+  queryParams?: CreateWebhookQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6512,7 +6512,7 @@ export async function getWebhooks({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetWebhooksQueryParams
+  queryParams?: GetWebhooksQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6539,7 +6539,7 @@ export async function getWebhook({
   config = {},
 }: {
   pathParams: GetWebhookPathParams
-  queryParams?: GetWebhookQueryParams
+  queryParams?: GetWebhookQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6570,7 +6570,7 @@ export async function deleteWebhook({
   config = {},
 }: {
   pathParams: DeleteWebhookPathParams
-  queryParams?: DeleteWebhookQueryParams
+  queryParams?: DeleteWebhookQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6601,7 +6601,7 @@ export async function listDeploymentAliases({
   config = {},
 }: {
   pathParams: ListDeploymentAliasesPathParams
-  queryParams?: ListDeploymentAliasesQueryParams
+  queryParams?: ListDeploymentAliasesQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6632,7 +6632,7 @@ export async function assignAlias({
   config = {},
 }: {
   pathParams: AssignAliasPathParams
-  queryParams?: AssignAliasQueryParams
+  queryParams?: AssignAliasQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6667,7 +6667,7 @@ export async function listAliases({
   queryParams,
   config = {},
 }: {
-  queryParams?: ListAliasesQueryParams
+  queryParams?: ListAliasesQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6694,7 +6694,7 @@ export async function getAlias({
   config = {},
 }: {
   pathParams: GetAliasPathParams
-  queryParams?: GetAliasQueryParams
+  queryParams?: GetAliasQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6725,7 +6725,7 @@ export async function deleteAlias({
   config = {},
 }: {
   pathParams: DeleteAliasPathParams
-  queryParams?: DeleteAliasQueryParams
+  queryParams?: DeleteAliasQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6756,7 +6756,7 @@ export async function patchUrlProtectionBypass({
   config = {},
 }: {
   pathParams: PatchUrlProtectionBypassPathParams
-  queryParams?: PatchUrlProtectionBypassQueryParams
+  queryParams?: PatchUrlProtectionBypassQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6818,7 +6818,7 @@ export async function getCertById({
   config = {},
 }: {
   pathParams: GetCertByIdPathParams
-  queryParams?: GetCertByIdQueryParams
+  queryParams?: GetCertByIdQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6849,7 +6849,7 @@ export async function removeCert({
   config = {},
 }: {
   pathParams: RemoveCertPathParams
-  queryParams?: RemoveCertQueryParams
+  queryParams?: RemoveCertQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6878,7 +6878,7 @@ export async function issueCert({
   queryParams,
   config = {},
 }: {
-  queryParams?: IssueCertQueryParams
+  queryParams?: IssueCertQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6903,7 +6903,7 @@ export async function uploadCert({
   queryParams,
   config = {},
 }: {
-  queryParams?: UploadCertQueryParams
+  queryParams?: UploadCertQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6930,7 +6930,7 @@ export async function listDeploymentFiles({
   config = {},
 }: {
   pathParams: ListDeploymentFilesPathParams
-  queryParams?: ListDeploymentFilesQueryParams
+  queryParams?: ListDeploymentFilesQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6961,7 +6961,7 @@ export async function getDeploymentFileContents({
   config = {},
 }: {
   pathParams: GetDeploymentFileContentsPathParams
-  queryParams?: GetDeploymentFileContentsQueryParams
+  queryParams?: GetDeploymentFileContentsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6996,7 +6996,7 @@ export async function getDeployments({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetDeploymentsQueryParams
+  queryParams?: GetDeploymentsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7023,7 +7023,7 @@ export async function deleteDeployment({
   config = {},
 }: {
   pathParams: DeleteDeploymentPathParams
-  queryParams?: DeleteDeploymentQueryParams
+  queryParams?: DeleteDeploymentQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7052,7 +7052,7 @@ export async function getSecrets({
   queryParams,
   config = {},
 }: {
-  queryParams?: GetSecretsQueryParams
+  queryParams?: GetSecretsQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7079,7 +7079,7 @@ export async function createSecret({
   config = {},
 }: {
   pathParams: CreateSecretPathParams
-  queryParams?: CreateSecretQueryParams
+  queryParams?: CreateSecretQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7110,7 +7110,7 @@ export async function renameSecret({
   config = {},
 }: {
   pathParams: RenameSecretPathParams
-  queryParams?: RenameSecretQueryParams
+  queryParams?: RenameSecretQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7141,7 +7141,7 @@ export async function getSecret({
   config = {},
 }: {
   pathParams: GetSecretPathParams
-  queryParams?: GetSecretQueryParams
+  queryParams?: GetSecretQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -7172,7 +7172,7 @@ export async function deleteSecret({
   config = {},
 }: {
   pathParams: DeleteSecretPathParams
-  queryParams?: DeleteSecretQueryParams
+  queryParams?: DeleteSecretQueryParams | undefined
   config?: Partial<FetcherConfig> & { client?: typeof client }
 }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config

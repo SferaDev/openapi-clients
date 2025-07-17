@@ -1,9 +1,9 @@
 import { URLPath } from '@kubb/core/utils';
-import { type Operation, isOptional } from '@kubb/oas';
-import { PluginClient } from '@kubb/plugin-client';
+import { isOptional, type Operation } from '@kubb/oas';
+import type { PluginClient } from '@kubb/plugin-client';
 import type { OperationSchemas } from '@kubb/plugin-oas';
 import { getComments, getPathParams } from '@kubb/plugin-oas/utils';
-import { File, Function, FunctionParams } from '@kubb/react';
+import { File, Function as FunctionDeclaration, FunctionParams } from '@kubb/react';
 
 export function getParams({
   paramsCasing,
@@ -32,13 +32,17 @@ export function getParams({
           : undefined,
         queryParams: typeSchemas.queryParams?.name
           ? {
-              type: typeSchemas.queryParams?.name,
+              type: isOptional(typeSchemas.queryParams?.schema)
+                ? `${typeSchemas.queryParams?.name} | undefined`
+                : typeSchemas.queryParams?.name,
               optional: isOptional(typeSchemas.queryParams?.schema)
             }
           : undefined,
         headers: typeSchemas.headerParams?.name
           ? {
-              type: typeSchemas.headerParams?.name,
+              type: isOptional(typeSchemas.headerParams?.schema)
+                ? `${typeSchemas.headerParams?.name} | undefined`
+                : typeSchemas.headerParams?.name,
               optional: isOptional(typeSchemas.headerParams?.schema)
             }
           : undefined,
@@ -53,7 +57,7 @@ export function getParams({
   });
 }
 
-export const ClientOperation: any = function({
+export const ClientOperation: any = ({
   name,
   isExportable = true,
   isIndexable = true,
@@ -84,7 +88,7 @@ export const ClientOperation: any = function({
   zodSchemas: OperationSchemas | undefined;
   operation: Operation;
   children?: any;
-}) {
+}) => {
   const path = new URLPath(operation.path, { casing: paramsCasing });
   const contentType = operation.getContentType();
   const isFormData = contentType === 'multipart/form-data';
@@ -170,7 +174,7 @@ export const ClientOperation: any = function({
   return (
     // @ts-ignore - JSX runtime module resolution issue
     <File.Source name={name} isExportable={isExportable} isIndexable={isIndexable}>
-      <Function
+      <FunctionDeclaration
         name={name}
         async
         export={isExportable}
@@ -197,9 +201,9 @@ export const ClientOperation: any = function({
         {`const data = await request<${generics.join(', ')}>(${clientParams.toCall()})`}
         <br />
         {childrenElement}
-      </Function>
+      </FunctionDeclaration>
     </File.Source>
   );
-}
+};
 
 ClientOperation.getParams = getParams;

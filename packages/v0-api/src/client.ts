@@ -1,7 +1,7 @@
-import { operationsByPath, operationsByTag, tagDictionary } from './generated/components';
-import { FetchImpl } from './utils/fetch';
-import fetchFn, { FetcherConfig } from './utils/fetcher';
-import { RequiredKeys } from './utils/types';
+import { type operationsByPath, operationsByTag, type tagDictionary } from './generated/components';
+import type { FetchImpl } from './utils/fetch';
+import fetchFn, { type FetcherConfig } from './utils/fetcher';
+import type { RequiredKeys } from './utils/types';
 
 export interface VercelApiOptions {
   token: string | null;
@@ -11,13 +11,13 @@ export interface VercelApiOptions {
 export type ApiClient = {
   [Tag in keyof typeof operationsByTag]: {
     [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends
-    (...args: any) => any
-    ? Omit<Parameters<Operation>[0], keyof FetcherConfig> extends infer Params
-    ? RequiredKeys<Params> extends never
-    ? (params?: Params) => ReturnType<Operation>
-    : (params: Params) => ReturnType<Operation>
-    : never
-    : never;
+      (...args: any) => any
+      ? Omit<Parameters<Operation>[0], keyof FetcherConfig> extends infer Params
+        ? RequiredKeys<Params> extends never
+          ? (params?: Params) => ReturnType<Operation>
+          : (params: Params) => ReturnType<Operation>
+        : never
+      : never;
   };
 };
 
@@ -25,38 +25,38 @@ type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export type ApiOperation = {
   [Tag in keyof typeof operationsByTag]: keyof (typeof operationsByTag)[Tag] extends string
-  ? `${Tag}.${keyof (typeof operationsByTag)[Tag]}`
-  : never;
+    ? `${Tag}.${keyof (typeof operationsByTag)[Tag]}`
+    : never;
 }[keyof typeof operationsByTag];
 
 export type ApiOperationByMethod<Method extends HttpMethod> = {
   [Tag in keyof typeof tagDictionary]: {
     [TagMethod in keyof (typeof tagDictionary)[Tag]]: TagMethod extends Method
-    ? (typeof tagDictionary)[Tag][TagMethod] extends readonly any[]
-    ? `${Tag}.${(typeof tagDictionary)[Tag][TagMethod][number]}`
-    : never
-    : never;
+      ? (typeof tagDictionary)[Tag][TagMethod] extends readonly any[]
+        ? `${Tag}.${(typeof tagDictionary)[Tag][TagMethod][number]}`
+        : never
+      : never;
   }[keyof (typeof tagDictionary)[Tag]];
 }[keyof typeof tagDictionary];
 
 export type ApiOperationParams<T extends ApiOperation> = T extends `${infer Tag}.${infer Operation}`
   ? Tag extends keyof typeof operationsByTag
-  ? Operation extends keyof (typeof operationsByTag)[Tag]
-  ? (typeof operationsByTag)[Tag][Operation] extends infer Operation extends (...args: any) => any
-  ? Omit<Parameters<Operation>[0], keyof FetcherConfig>
-  : never
-  : never
-  : never
+    ? Operation extends keyof (typeof operationsByTag)[Tag]
+      ? (typeof operationsByTag)[Tag][Operation] extends infer Operation extends (...args: any) => any
+        ? Omit<Parameters<Operation>[0], keyof FetcherConfig>
+        : never
+      : never
+    : never
   : never;
 
 export type ApiOperationResult<T extends ApiOperation> = T extends `${infer Tag}.${infer Operation}`
   ? Tag extends keyof typeof operationsByTag
-  ? Operation extends keyof (typeof operationsByTag)[Tag]
-  ? (typeof operationsByTag)[Tag][Operation] extends (...args: any) => any
-  ? Awaited<ReturnType<(typeof operationsByTag)[Tag][Operation]>>
-  : never
-  : never
-  : never
+    ? Operation extends keyof (typeof operationsByTag)[Tag]
+      ? (typeof operationsByTag)[Tag][Operation] extends (...args: any) => any
+        ? Awaited<ReturnType<(typeof operationsByTag)[Tag][Operation]>>
+        : never
+      : never
+    : never
   : never;
 
 type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
