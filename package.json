@@ -5,7 +5,8 @@
   "scripts": {
     "generate": "turbo run generate",
     "build": "turbo run build",
-    "tsc": "turbo run tsc"
+    "tsc": "turbo run tsc",
+    "dev": "turbo run dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.5",

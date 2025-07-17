@@ -1,12 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "generate": {
       "dependsOn": [
         "^generate"
       ],
       "inputs": [
-        "openapi-codegen.config.ts"
+        "openapi-codegen.config.ts",
+        "kubb.config.ts"
       ],
       "outputs": []
     },
