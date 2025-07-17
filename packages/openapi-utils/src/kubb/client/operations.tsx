@@ -12,7 +12,7 @@ export const clientGenerator = createReactGenerator<PluginClient>({
   Operation({ options, operation }) {
     const {
       plugin: {
-        options: { output, urlType }
+        options: { output }
       },
       pluginManager
     } = useApp<PluginClient>();

@@ -8,7 +8,6 @@ import { extraGenerator } from './client/extra';
 import { clientGenerator } from './client/operations';
 import { serverGenerator } from './mcp/server';
 import { toolsGenerator } from './mcp/tools';
-import React from 'react';
 
 export const baseConfig = {
     root: '.',

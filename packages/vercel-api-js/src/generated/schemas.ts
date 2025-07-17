@@ -23,7 +23,6 @@ import type {
   ReadAccessGroup400,
   ReadAccessGroup401,
   ReadAccessGroup403,
-  ReadAccessGroup404,
   ReadAccessGroupQueryResponse,
   UpdateAccessGroupPathParams,
   UpdateAccessGroupQueryParams,
@@ -31,7 +30,6 @@ import type {
   UpdateAccessGroup400,
   UpdateAccessGroup401,
   UpdateAccessGroup403,
-  UpdateAccessGroup404,
   UpdateAccessGroupMutationRequest,
   UpdateAccessGroupMutationResponse,
   DeleteAccessGroupPathParams,
@@ -40,7 +38,6 @@ import type {
   DeleteAccessGroup400,
   DeleteAccessGroup401,
   DeleteAccessGroup403,
-  DeleteAccessGroup404,
   DeleteAccessGroupMutationResponse,
   ListAccessGroupMembersPathParams,
   ListAccessGroupMembersQueryParams,
@@ -48,21 +45,18 @@ import type {
   ListAccessGroupMembers400,
   ListAccessGroupMembers401,
   ListAccessGroupMembers403,
-  ListAccessGroupMembers404,
   ListAccessGroupMembersQueryResponse,
   ListAccessGroupsQueryParams,
   ListAccessGroups200,
   ListAccessGroups400,
   ListAccessGroups401,
   ListAccessGroups403,
-  ListAccessGroups404,
   ListAccessGroupsQueryResponse,
   CreateAccessGroupQueryParams,
   CreateAccessGroup200,
   CreateAccessGroup400,
   CreateAccessGroup401,
   CreateAccessGroup403,
-  CreateAccessGroup404,
   CreateAccessGroupMutationRequest,
   CreateAccessGroupMutationResponse,
   ListAccessGroupProjectsPathParams,
@@ -71,7 +65,6 @@ import type {
   ListAccessGroupProjects400,
   ListAccessGroupProjects401,
   ListAccessGroupProjects403,
-  ListAccessGroupProjects404,
   ListAccessGroupProjectsQueryResponse,
   CreateAccessGroupProjectPathParams,
   CreateAccessGroupProjectQueryParams,
@@ -79,7 +72,6 @@ import type {
   CreateAccessGroupProject400,
   CreateAccessGroupProject401,
   CreateAccessGroupProject403,
-  CreateAccessGroupProject404,
   CreateAccessGroupProjectMutationRequest,
   CreateAccessGroupProjectMutationResponse,
   ReadAccessGroupProjectPathParams,
@@ -88,7 +80,6 @@ import type {
   ReadAccessGroupProject400,
   ReadAccessGroupProject401,
   ReadAccessGroupProject403,
-  ReadAccessGroupProject404,
   ReadAccessGroupProjectQueryResponse,
   UpdateAccessGroupProjectPathParams,
   UpdateAccessGroupProjectQueryParams,
@@ -96,7 +87,6 @@ import type {
   UpdateAccessGroupProject400,
   UpdateAccessGroupProject401,
   UpdateAccessGroupProject403,
-  UpdateAccessGroupProject404,
   UpdateAccessGroupProjectMutationRequest,
   UpdateAccessGroupProjectMutationResponse,
   DeleteAccessGroupProjectPathParams,
@@ -105,7 +95,6 @@ import type {
   DeleteAccessGroupProject400,
   DeleteAccessGroupProject401,
   DeleteAccessGroupProject403,
-  DeleteAccessGroupProject404,
   DeleteAccessGroupProjectMutationResponse,
   RecordEventsQueryParams,
   RecordEventsHeaderParams,
@@ -131,7 +120,6 @@ import type {
   UploadArtifact401,
   UploadArtifact402,
   UploadArtifact403,
-  UploadArtifactMutationRequest,
   UploadArtifactMutationResponse,
   DownloadArtifactPathParams,
   DownloadArtifactQueryParams,
@@ -256,6 +244,7 @@ import type {
   CreateDeployment403,
   CreateDeployment404,
   CreateDeployment409,
+  CreateDeployment500,
   CreateDeploymentMutationRequest,
   CreateDeploymentMutationResponse,
   CancelDeploymentPathParams,
@@ -287,6 +276,7 @@ import type {
   CheckDomainStatus400,
   CheckDomainStatus401,
   CheckDomainStatus403,
+  CheckDomainStatus408,
   CheckDomainStatus500,
   CheckDomainStatusQueryResponse,
   GetRecordsPathParams,
@@ -386,14 +376,6 @@ import type {
   DeleteDomain404,
   DeleteDomain409,
   DeleteDomainMutationResponse,
-  DeleteConfigurableLogDrainPathParams,
-  DeleteConfigurableLogDrainQueryParams,
-  DeleteConfigurableLogDrain204,
-  DeleteConfigurableLogDrain400,
-  DeleteConfigurableLogDrain401,
-  DeleteConfigurableLogDrain403,
-  DeleteConfigurableLogDrain404,
-  DeleteConfigurableLogDrainMutationResponse,
   GetEdgeConfigsQueryParams,
   GetEdgeConfigs200,
   GetEdgeConfigs400,
@@ -551,6 +533,7 @@ import type {
   GetAccountInfo400,
   GetAccountInfo401,
   GetAccountInfo403,
+  GetAccountInfo404,
   GetAccountInfoQueryResponse,
   GetMemberPathParams,
   GetMember200,
@@ -564,13 +547,44 @@ import type {
   CreateEvent400,
   CreateEvent401,
   CreateEvent403,
+  CreateEvent404,
   CreateEventMutationRequest,
   CreateEventMutationResponse,
+  GetIntegrationResourcesPathParams,
+  GetIntegrationResources200,
+  GetIntegrationResources400,
+  GetIntegrationResources401,
+  GetIntegrationResources403,
+  GetIntegrationResources404,
+  GetIntegrationResourcesQueryResponse,
+  GetIntegrationResourcePathParams,
+  GetIntegrationResource200,
+  GetIntegrationResource400,
+  GetIntegrationResource401,
+  GetIntegrationResource403,
+  GetIntegrationResource404,
+  GetIntegrationResourceQueryResponse,
+  DeleteIntegrationResourcePathParams,
+  DeleteIntegrationResource204,
+  DeleteIntegrationResource400,
+  DeleteIntegrationResource401,
+  DeleteIntegrationResource403,
+  DeleteIntegrationResource404,
+  DeleteIntegrationResourceMutationResponse,
+  ImportResourcePathParams,
+  ImportResource200,
+  ImportResource400,
+  ImportResource401,
+  ImportResource403,
+  ImportResource404,
+  ImportResourceMutationRequest,
+  ImportResourceMutationResponse,
   SubmitBillingDataPathParams,
   SubmitBillingData201,
   SubmitBillingData400,
   SubmitBillingData401,
   SubmitBillingData403,
+  SubmitBillingData404,
   SubmitBillingDataMutationRequest,
   SubmitBillingDataMutationResponse,
   SubmitInvoicePathParams,
@@ -578,6 +592,7 @@ import type {
   SubmitInvoice400,
   SubmitInvoice401,
   SubmitInvoice403,
+  SubmitInvoice404,
   SubmitInvoiceMutationRequest,
   SubmitInvoiceMutationResponse,
   GetInvoicePathParams,
@@ -600,6 +615,7 @@ import type {
   SubmitPrepaymentBalances400,
   SubmitPrepaymentBalances401,
   SubmitPrepaymentBalances403,
+  SubmitPrepaymentBalances404,
   SubmitPrepaymentBalancesMutationRequest,
   SubmitPrepaymentBalancesMutationResponse,
   UpdateResourceSecretsPathParams,
@@ -619,14 +635,6 @@ import type {
   UpdateResourceSecretsById422,
   UpdateResourceSecretsByIdMutationRequest,
   UpdateResourceSecretsByIdMutationResponse,
-  ImportResourcePathParams,
-  ImportResource200,
-  ImportResource400,
-  ImportResource401,
-  ImportResource403,
-  ImportResource404,
-  ImportResourceMutationRequest,
-  ImportResourceMutationResponse,
   GetConfigurationsQueryParams,
   GetConfigurations200,
   GetConfigurations400,
@@ -676,33 +684,6 @@ import type {
   DeleteIntegrationLogDrain403,
   DeleteIntegrationLogDrain404,
   DeleteIntegrationLogDrainMutationResponse,
-  GetprojectsprojectIdlogsPresetsPathParams,
-  GetprojectsprojectIdlogsPresets200,
-  GetprojectsprojectIdlogsPresets400,
-  GetprojectsprojectIdlogsPresets401,
-  GetprojectsprojectIdlogsPresets403,
-  GetprojectsprojectIdlogsPresetsQueryResponse,
-  PostprojectsprojectIdlogsPresetsPathParams,
-  PostprojectsprojectIdlogsPresets200,
-  PostprojectsprojectIdlogsPresets400,
-  PostprojectsprojectIdlogsPresets401,
-  PostprojectsprojectIdlogsPresets403,
-  PostprojectsprojectIdlogsPresetsMutationRequest,
-  PostprojectsprojectIdlogsPresetsMutationResponse,
-  DeleteprojectsprojectIdlogsPresetsidPathParams,
-  DeleteprojectsprojectIdlogsPresetsid204,
-  DeleteprojectsprojectIdlogsPresetsid400,
-  DeleteprojectsprojectIdlogsPresetsid401,
-  DeleteprojectsprojectIdlogsPresetsid403,
-  DeleteprojectsprojectIdlogsPresetsidMutationResponse,
-  PatchprojectsprojectIdlogsPresetsidPathParams,
-  PatchprojectsprojectIdlogsPresetsid200,
-  PatchprojectsprojectIdlogsPresetsid400,
-  PatchprojectsprojectIdlogsPresetsid401,
-  PatchprojectsprojectIdlogsPresetsid403,
-  PatchprojectsprojectIdlogsPresetsid404,
-  PatchprojectsprojectIdlogsPresetsidMutationRequest,
-  PatchprojectsprojectIdlogsPresetsidMutationResponse,
   GetRuntimeLogsPathParams,
   GetRuntimeLogsQueryParams,
   GetRuntimeLogs200,
@@ -889,6 +870,7 @@ import type {
   RemoveProjectDomain403,
   RemoveProjectDomain404,
   RemoveProjectDomain409,
+  RemoveProjectDomainMutationRequest,
   RemoveProjectDomainMutationResponse,
   AddProjectDomainPathParams,
   AddProjectDomainQueryParams,
@@ -958,6 +940,65 @@ import type {
   EditProjectEnv409,
   EditProjectEnvMutationRequest,
   EditProjectEnvMutationResponse,
+  GetRollingReleaseBillingStatusPathParams,
+  GetRollingReleaseBillingStatusQueryParams,
+  GetRollingReleaseBillingStatus200,
+  GetRollingReleaseBillingStatus400,
+  GetRollingReleaseBillingStatus401,
+  GetRollingReleaseBillingStatus403,
+  GetRollingReleaseBillingStatus404,
+  GetRollingReleaseBillingStatusQueryResponse,
+  GetRollingReleaseConfigPathParams,
+  GetRollingReleaseConfigQueryParams,
+  GetRollingReleaseConfig200,
+  GetRollingReleaseConfig400,
+  GetRollingReleaseConfig401,
+  GetRollingReleaseConfig403,
+  GetRollingReleaseConfig404,
+  GetRollingReleaseConfigQueryResponse,
+  DeleteRollingReleaseConfigPathParams,
+  DeleteRollingReleaseConfigQueryParams,
+  DeleteRollingReleaseConfig200,
+  DeleteRollingReleaseConfig400,
+  DeleteRollingReleaseConfig401,
+  DeleteRollingReleaseConfig403,
+  DeleteRollingReleaseConfig404,
+  DeleteRollingReleaseConfigMutationResponse,
+  UpdateRollingReleaseConfigPathParams,
+  UpdateRollingReleaseConfigQueryParams,
+  UpdateRollingReleaseConfig200,
+  UpdateRollingReleaseConfig400,
+  UpdateRollingReleaseConfig401,
+  UpdateRollingReleaseConfig403,
+  UpdateRollingReleaseConfig404,
+  UpdateRollingReleaseConfigMutationResponse,
+  GetRollingReleasePathParams,
+  GetRollingReleaseQueryParams,
+  GetRollingRelease200,
+  GetRollingRelease400,
+  GetRollingRelease401,
+  GetRollingRelease403,
+  GetRollingRelease404,
+  GetRollingReleaseQueryResponse,
+  ApproveRollingReleaseStagePathParams,
+  ApproveRollingReleaseStageQueryParams,
+  ApproveRollingReleaseStage200,
+  ApproveRollingReleaseStage400,
+  ApproveRollingReleaseStage401,
+  ApproveRollingReleaseStage403,
+  ApproveRollingReleaseStage404,
+  ApproveRollingReleaseStage500,
+  ApproveRollingReleaseStageMutationRequest,
+  ApproveRollingReleaseStageMutationResponse,
+  CompleteRollingReleasePathParams,
+  CompleteRollingReleaseQueryParams,
+  CompleteRollingRelease200,
+  CompleteRollingRelease400,
+  CompleteRollingRelease401,
+  CompleteRollingRelease403,
+  CompleteRollingRelease404,
+  CompleteRollingReleaseMutationRequest,
+  CompleteRollingReleaseMutationResponse,
   CreateProjectTransferRequestPathParams,
   CreateProjectTransferRequestQueryParams,
   CreateProjectTransferRequest200,
@@ -973,6 +1014,7 @@ import type {
   AcceptProjectTransferRequest401,
   AcceptProjectTransferRequest403,
   AcceptProjectTransferRequest404,
+  AcceptProjectTransferRequest422,
   AcceptProjectTransferRequestMutationRequest,
   AcceptProjectTransferRequestMutationResponse,
   UpdateProjectProtectionBypassPathParams,
@@ -988,6 +1030,7 @@ import type {
   RequestPromotePathParams,
   RequestPromoteQueryParams,
   RequestPromote201,
+  RequestPromote202,
   RequestPromote400,
   RequestPromote401,
   RequestPromote403,
@@ -1097,7 +1140,6 @@ import type {
   InviteUserToTeam400,
   InviteUserToTeam401,
   InviteUserToTeam403,
-  InviteUserToTeam404,
   InviteUserToTeam503,
   InviteUserToTeamMutationRequest,
   InviteUserToTeamMutationResponse,
@@ -1158,7 +1200,7 @@ import type {
   PatchTeam401,
   PatchTeam402,
   PatchTeam403,
-  PatchTeam404,
+  PatchTeam428,
   PatchTeamMutationRequest,
   PatchTeamMutationResponse,
   GetTeamsQueryParams,
@@ -1180,7 +1222,6 @@ import type {
   DeleteTeam401,
   DeleteTeam402,
   DeleteTeam403,
-  DeleteTeam404,
   DeleteTeam409,
   DeleteTeamMutationRequest,
   DeleteTeamMutationResponse,
@@ -1197,7 +1238,6 @@ import type {
   UploadFile400,
   UploadFile401,
   UploadFile403,
-  UploadFileMutationRequest,
   UploadFileMutationResponse,
   ListAuthTokens200,
   ListAuthTokens400,
@@ -2128,6 +2168,22 @@ export const userEventSchema = z
           source: z.string(),
         }),
         z.object({
+          projectId: z.string(),
+          rulesetName: z.string(),
+          active: z.boolean(),
+          action: z.enum(['log', 'challenge', 'deny']).optional(),
+        }),
+        z.object({
+          projectId: z.string(),
+          rulesetName: z.string(),
+          ruleGroups: z.object({}).catchall(
+            z.object({
+              active: z.boolean(),
+              action: z.enum(['log', 'challenge', 'deny']).optional(),
+            }),
+          ),
+        }),
+        z.object({
           integrationId: z.string(),
           integrationSlug: z.string(),
           integrationName: z.string(),
@@ -2288,6 +2344,7 @@ export const userEventSchema = z
                 .object({
                   nodeType: z.string().optional(),
                   concurrentBuilds: z.number().optional(),
+                  elasticConcurrencyEnabled: z.boolean().optional(),
                   buildEntitlements: z
                     .object({
                       enhancedBuilds: z.boolean().optional(),
@@ -2315,7 +2372,7 @@ export const userEventSchema = z
                   customEnvironmentsPerProject: z.number().optional(),
                   buildMachine: z
                     .object({
-                      purchaseType: z.enum(['enhanced', 'ultra']).optional(),
+                      purchaseType: z.enum(['enhanced', 'turbo']).optional(),
                       isDefaultBuildMachine: z.boolean().optional(),
                       cores: z.number().optional(),
                       memory: z.number().optional(),
@@ -2404,6 +2461,7 @@ export const userEventSchema = z
                       'blobTotalAvgSizeInBytes',
                       'blobTotalGetResponseObjectSizeInBytes',
                       'blobTotalSimpleRequests',
+                      'connectDataTransfer',
                       'dataCacheRead',
                       'dataCacheWrite',
                       'edgeConfigRead',
@@ -2415,6 +2473,8 @@ export const userEventSchema = z
                       'elasticConcurrencyBuildSlots',
                       'fastDataTransfer',
                       'fastOriginTransfer',
+                      'fluidCpuDuration',
+                      'fluidDuration',
                       'functionDuration',
                       'functionInvocation',
                       'imageOptimizationCacheRead',
@@ -2424,17 +2484,11 @@ export const userEventSchema = z
                       'monitoringMetric',
                       'blobDataTransfer',
                       'observabilityEvent',
-                      'postgresComputeTime',
-                      'postgresDataStorage',
-                      'postgresDataTransfer',
-                      'postgresDatabase',
-                      'postgresWrittenData',
+                      'onDemandConcurrencyMinutes',
+                      'runtimeCacheRead',
+                      'runtimeCacheWrite',
                       'serverlessFunctionExecution',
                       'sourceImages',
-                      'storageRedisTotalBandwidthInBytes',
-                      'storageRedisTotalCommands',
-                      'storageRedisTotalDailyAvgStorageInBytes',
-                      'storageRedisTotalDatabases',
                       'wafOwaspExcessBytes',
                       'wafOwaspRequests',
                       'wafRateLimitRequest',
@@ -2462,7 +2516,7 @@ export const userEventSchema = z
                       .optional(),
                     joinedFrom: z
                       .object({
-                        origin: z.enum(['teams', 'saml', 'github', 'gitlab', 'bitbucket', 'mail', 'link', 'import', 'dsync', 'feedback', 'organization-teams']),
+                        origin: z.enum(['teams', 'saml', 'link', 'github', 'gitlab', 'bitbucket', 'mail', 'import', 'dsync', 'feedback', 'organization-teams']),
                         commitId: z.string().optional(),
                         repoId: z.string().optional(),
                         repoPath: z.string().optional(),
@@ -2557,6 +2611,13 @@ export const userEventSchema = z
                       blockedAt: z.number().nullable().nullish(),
                     })
                     .optional(),
+                  connectDataTransfer: z
+                    .object({
+                      currentThreshold: z.number(),
+                      warningAt: z.number().nullable().nullish(),
+                      blockedAt: z.number().nullable().nullish(),
+                    })
+                    .optional(),
                   dataCacheRead: z
                     .object({
                       currentThreshold: z.number(),
@@ -2634,6 +2695,20 @@ export const userEventSchema = z
                       blockedAt: z.number().nullable().nullish(),
                     })
                     .optional(),
+                  fluidCpuDuration: z
+                    .object({
+                      currentThreshold: z.number(),
+                      warningAt: z.number().nullable().nullish(),
+                      blockedAt: z.number().nullable().nullish(),
+                    })
+                    .optional(),
+                  fluidDuration: z
+                    .object({
+                      currentThreshold: z.number(),
+                      warningAt: z.number().nullable().nullish(),
+                      blockedAt: z.number().nullable().nullish(),
+                    })
+                    .optional(),
                   functionDuration: z
                     .object({
                       currentThreshold: z.number(),
@@ -2697,35 +2772,21 @@ export const userEventSchema = z
                       blockedAt: z.number().nullable().nullish(),
                     })
                     .optional(),
-                  postgresComputeTime: z
+                  onDemandConcurrencyMinutes: z
                     .object({
                       currentThreshold: z.number(),
                       warningAt: z.number().nullable().nullish(),
                       blockedAt: z.number().nullable().nullish(),
                     })
                     .optional(),
-                  postgresDataStorage: z
+                  runtimeCacheRead: z
                     .object({
                       currentThreshold: z.number(),
                       warningAt: z.number().nullable().nullish(),
                       blockedAt: z.number().nullable().nullish(),
                     })
                     .optional(),
-                  postgresDataTransfer: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  postgresDatabase: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  postgresWrittenData: z
+                  runtimeCacheWrite: z
                     .object({
                       currentThreshold: z.number(),
                       warningAt: z.number().nullable().nullish(),
@@ -2740,34 +2801,6 @@ export const userEventSchema = z
                     })
                     .optional(),
                   sourceImages: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  storageRedisTotalBandwidthInBytes: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  storageRedisTotalCommands: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  storageRedisTotalDailyAvgStorageInBytes: z
-                    .object({
-                      currentThreshold: z.number(),
-                      warningAt: z.number().nullable().nullish(),
-                      blockedAt: z.number().nullable().nullish(),
-                    })
-                    .optional(),
-                  storageRedisTotalDatabases: z
                     .object({
                       currentThreshold: z.number(),
                       warningAt: z.number().nullable().nullish(),
@@ -2807,7 +2840,19 @@ export const userEventSchema = z
               overageMetadata: z
                 .object({
                   firstTimeOnDemandNotificationSentAt: z.number().describe('Tracks if the first time on-demand overage email has been sent.').optional(),
-                  overageSummaryEmailSentAt: z.number().describe('Tracks the last time we sent a summary email.').optional(),
+                  dailyOverageSummaryEmailSentAt: z.number().describe('Tracks the last time we sent a daily summary email.').optional(),
+                  weeklyOverageSummaryEmailSentAt: z.number().describe('Tracks the last time we sent a weekly summary email.').optional(),
+                  overageSummaryExpiresAt: z
+                    .number()
+                    .describe(
+                      'Tracks when the overage summary email will stop auto-sending. We currently lock the user into email for a month after the last on-demand usage.',
+                    )
+                    .optional(),
+                  increasedOnDemandEmailSentAt: z.number().describe('Tracks the last time we sent a increased on-demand email.').optional(),
+                  increasedOnDemandEmailAttemptedAt: z
+                    .number()
+                    .describe('Tracks the last time we attempted to send an increased on-demand email. This check is to limit the number of attempts per day.')
+                    .optional(),
                 })
                 .describe('Contains the timestamps for usage summary emails.')
                 .optional(),
@@ -2887,6 +2932,7 @@ export const userEventSchema = z
                         'blobTotalAvgSizeInBytes',
                         'blobTotalGetResponseObjectSizeInBytes',
                         'blobTotalSimpleRequests',
+                        'connectDataTransfer',
                         'dataCacheRead',
                         'dataCacheWrite',
                         'edgeConfigRead',
@@ -2898,6 +2944,8 @@ export const userEventSchema = z
                         'elasticConcurrencyBuildSlots',
                         'fastDataTransfer',
                         'fastOriginTransfer',
+                        'fluidCpuDuration',
+                        'fluidDuration',
                         'functionDuration',
                         'functionInvocation',
                         'imageOptimizationCacheRead',
@@ -2907,17 +2955,11 @@ export const userEventSchema = z
                         'monitoringMetric',
                         'blobDataTransfer',
                         'observabilityEvent',
-                        'postgresComputeTime',
-                        'postgresDataStorage',
-                        'postgresDataTransfer',
-                        'postgresDatabase',
-                        'postgresWrittenData',
+                        'onDemandConcurrencyMinutes',
+                        'runtimeCacheRead',
+                        'runtimeCacheWrite',
                         'serverlessFunctionExecution',
                         'sourceImages',
-                        'storageRedisTotalBandwidthInBytes',
-                        'storageRedisTotalCommands',
-                        'storageRedisTotalDailyAvgStorageInBytes',
-                        'storageRedisTotalDatabases',
                         'wafOwaspExcessBytes',
                         'wafOwaspRequests',
                         'wafRateLimitRequest',
@@ -2939,6 +2981,7 @@ export const userEventSchema = z
                         'blobTotalAvgSizeInBytes',
                         'blobTotalGetResponseObjectSizeInBytes',
                         'blobTotalSimpleRequests',
+                        'connectDataTransfer',
                         'dataCacheRead',
                         'dataCacheWrite',
                         'edgeConfigRead',
@@ -2950,6 +2993,8 @@ export const userEventSchema = z
                         'elasticConcurrencyBuildSlots',
                         'fastDataTransfer',
                         'fastOriginTransfer',
+                        'fluidCpuDuration',
+                        'fluidDuration',
                         'functionDuration',
                         'functionInvocation',
                         'imageOptimizationCacheRead',
@@ -2959,17 +3004,11 @@ export const userEventSchema = z
                         'monitoringMetric',
                         'blobDataTransfer',
                         'observabilityEvent',
-                        'postgresComputeTime',
-                        'postgresDataStorage',
-                        'postgresDataTransfer',
-                        'postgresDatabase',
-                        'postgresWrittenData',
+                        'onDemandConcurrencyMinutes',
+                        'runtimeCacheRead',
+                        'runtimeCacheWrite',
                         'serverlessFunctionExecution',
                         'sourceImages',
-                        'storageRedisTotalBandwidthInBytes',
-                        'storageRedisTotalCommands',
-                        'storageRedisTotalDailyAvgStorageInBytes',
-                        'storageRedisTotalDatabases',
                         'wafOwaspExcessBytes',
                         'wafOwaspRequests',
                         'wafRateLimitRequest',
@@ -2991,6 +3030,7 @@ export const userEventSchema = z
                         'blobTotalAvgSizeInBytes',
                         'blobTotalGetResponseObjectSizeInBytes',
                         'blobTotalSimpleRequests',
+                        'connectDataTransfer',
                         'dataCacheRead',
                         'dataCacheWrite',
                         'edgeConfigRead',
@@ -3002,6 +3042,8 @@ export const userEventSchema = z
                         'elasticConcurrencyBuildSlots',
                         'fastDataTransfer',
                         'fastOriginTransfer',
+                        'fluidCpuDuration',
+                        'fluidDuration',
                         'functionDuration',
                         'functionInvocation',
                         'imageOptimizationCacheRead',
@@ -3011,17 +3053,11 @@ export const userEventSchema = z
                         'monitoringMetric',
                         'blobDataTransfer',
                         'observabilityEvent',
-                        'postgresComputeTime',
-                        'postgresDataStorage',
-                        'postgresDataTransfer',
-                        'postgresDatabase',
-                        'postgresWrittenData',
+                        'onDemandConcurrencyMinutes',
+                        'runtimeCacheRead',
+                        'runtimeCacheWrite',
                         'serverlessFunctionExecution',
                         'sourceImages',
-                        'storageRedisTotalBandwidthInBytes',
-                        'storageRedisTotalCommands',
-                        'storageRedisTotalDailyAvgStorageInBytes',
-                        'storageRedisTotalDatabases',
                         'wafOwaspExcessBytes',
                         'wafOwaspRequests',
                         'wafRateLimitRequest',
@@ -3182,6 +3218,9 @@ export const userEventSchema = z
           projectName: z.string(),
         }),
         z.object({
+          projectName: z.string(),
+        }),
+        z.object({
           plan: z.string(),
           removedUsers: z
             .object({})
@@ -3192,7 +3231,7 @@ export const userEventSchema = z
                 confirmedAt: z.number().optional(),
                 joinedFrom: z
                   .object({
-                    origin: z.enum(['teams', 'saml', 'github', 'gitlab', 'bitbucket', 'mail', 'link', 'import', 'dsync', 'feedback', 'organization-teams']),
+                    origin: z.enum(['teams', 'saml', 'link', 'github', 'gitlab', 'bitbucket', 'mail', 'import', 'dsync', 'feedback', 'organization-teams']),
                     commitId: z.string().optional(),
                     repoId: z.string().optional(),
                     repoPath: z.string().optional(),
@@ -3255,17 +3294,17 @@ export const userEventSchema = z
           ssoProtection: z
             .union([
               z.object({
-                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
               }),
-              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
             ])
             .nullable(),
           oldSsoProtection: z
             .union([
               z.object({
-                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
               }),
-              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
             ])
             .nullable(),
         }),
@@ -3274,24 +3313,24 @@ export const userEventSchema = z
           passwordProtection: z
             .union([
               z.object({
-                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
               }),
-              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
             ])
             .nullable(),
           oldPasswordProtection: z
             .union([
               z.object({
-                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+                deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
               }),
-              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+              z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
             ])
             .nullable(),
         }),
         z.object({
           projectName: z.string(),
-          trustedIps: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'production']).nullable().nullish(),
-          oldTrustedIps: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'production']).nullable().nullish(),
+          trustedIps: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']).nullable().nullish(),
+          oldTrustedIps: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']).nullable().nullish(),
           addedAddresses: z.array(z.string()).nullable().nullish(),
           removedAddresses: z.array(z.string()).nullable().nullish(),
         }),
@@ -3341,6 +3380,12 @@ export const userEventSchema = z
                   connectConfigurationId: z.string(),
                   passive: z.boolean(),
                   buildsEnabled: z.boolean(),
+                  aws: z
+                    .object({
+                      subnetIds: z.array(z.string()),
+                      securityGroupId: z.string(),
+                    })
+                    .optional(),
                   createdAt: z.number(),
                   updatedAt: z.number(),
                 }),
@@ -3353,6 +3398,12 @@ export const userEventSchema = z
                   connectConfigurationId: z.string(),
                   passive: z.boolean(),
                   buildsEnabled: z.boolean(),
+                  aws: z
+                    .object({
+                      subnetIds: z.array(z.string()),
+                      securityGroupId: z.string(),
+                    })
+                    .optional(),
                   createdAt: z.number(),
                   updatedAt: z.number(),
                 }),
@@ -3747,17 +3798,22 @@ export const userEventSchema = z
           edgeConfigTokenIds: z.array(z.string()).describe('ids of deleted tokens'),
         }),
         z.object({
+          action: z.enum(['enable', 'disable']),
+        }),
+        z.object({
           id: z.string(),
           slug: z.string(),
           name: z.string(),
         }),
         z.object({
           id: z.string(),
-          slug: z.string(),
-          name: z.string(),
+          slug: z.string().optional(),
+          name: z.string().optional(),
+          fallbackEnvironment: z.string().optional(),
           prev: z.object({
             name: z.string(),
             slug: z.string(),
+            fallbackEnvironment: z.string().optional(),
           }),
         }),
         z.object({
@@ -3968,16 +4024,160 @@ export const userEventSchema = z
  */
 export const teamSchema = z
   .object({
-    id: z.string().describe("The Preset's unique identifier."),
-    data: z.object({
-      query: z.string(),
-      creatorId: z.string(),
-      title: z.string(),
-      groupId: z.string(),
-      ownerId: z.string(),
-      projectId: z.string(),
-      createdAt: z.number(),
-    }),
+    connect: z
+      .object({
+        enabled: z.boolean().optional(),
+      })
+      .optional(),
+    creatorId: z.string().describe('The ID of the user who created the Team.'),
+    updatedAt: z.number().describe('Timestamp (in milliseconds) of when the Team was last updated.'),
+    emailDomain: z.string().describe("Hostname that'll be matched with emails on sign-up to automatically join the Team.").nullable().nullish(),
+    saml: z
+      .object({
+        connection: z
+          .object({
+            type: z.string().describe('The Identity Provider "type", for example Okta.'),
+            status: z.string().describe('Current status of the connection.'),
+            state: z.string().describe('Current state of the connection.'),
+            connectedAt: z.number().describe('Timestamp (in milliseconds) of when the configuration was connected.'),
+            lastReceivedWebhookEvent: z.number().describe('Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.').optional(),
+          })
+          .describe('Information for the SAML Single Sign-On configuration.')
+          .optional(),
+        directory: z
+          .object({
+            type: z.string().describe('The Identity Provider "type", for example Okta.'),
+            state: z.string().describe('Current state of the connection.'),
+            connectedAt: z.number().describe('Timestamp (in milliseconds) of when the configuration was connected.'),
+            lastReceivedWebhookEvent: z.number().describe('Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.').optional(),
+          })
+          .describe('Information for the Directory Sync configuration.')
+          .optional(),
+        enforced: z
+          .boolean()
+          .describe(
+            "When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team's SAML Single Sign-On provider.",
+          ),
+        roles: z
+          .object({})
+          .catchall(
+            z.union([
+              z.object({
+                accessGroupId: z.string(),
+              }),
+              z.enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR']),
+            ]),
+          )
+          .describe(
+            'When "Directory Sync" is configured, this object contains a mapping of which Directory Group (by ID) should be assigned to which Vercel Team "role".',
+          )
+          .optional(),
+      })
+      .describe('When "Single Sign-On (SAML)" is configured, this object contains information regarding the configuration of the Identity Provider (IdP).')
+      .optional(),
+    inviteCode: z.string().describe('Code that can be used to join this Team. Only visible to Team owners.').optional(),
+    description: z.string().describe('A short description of the Team.').nullable(),
+    stagingPrefix: z.string().describe('The prefix that is prepended to automatic aliases.'),
+    resourceConfig: z
+      .object({
+        concurrentBuilds: z.number().describe('The total amount of concurrent builds that can be used.').optional(),
+        elasticConcurrencyEnabled: z.boolean().describe('Whether every build for this team / user has elastic concurrency enabled automatically.').optional(),
+        edgeConfigSize: z.number().describe('The maximum size in kilobytes of an Edge Config. Only specified if a custom limit is set.').optional(),
+        edgeConfigs: z.number().describe('The maximum number of edge configs an account can create.').optional(),
+        kvDatabases: z.number().describe('The maximum number of kv databases an account can create.').optional(),
+        blobStores: z.number().describe('The maximum number of blob stores an account can create.').optional(),
+        postgresDatabases: z.number().describe('The maximum number of postgres databases an account can create.').optional(),
+        buildEntitlements: z
+          .object({
+            enhancedBuilds: z.boolean().optional(),
+          })
+          .optional(),
+      })
+      .optional(),
+    previewDeploymentSuffix: z.string().describe('The hostname that is current set as preview deployment suffix.').nullable().nullish(),
+    remoteCaching: z
+      .object({
+        enabled: z.boolean().optional(),
+      })
+      .describe('Is remote caching enabled for this team')
+      .optional(),
+    defaultDeploymentProtection: z
+      .object({
+        passwordProtection: z
+          .object({
+            deploymentType: z.string(),
+          })
+          .optional(),
+        ssoProtection: z
+          .object({
+            deploymentType: z.string(),
+          })
+          .optional(),
+      })
+      .describe('Default deployment protection for this team')
+      .optional(),
+    enablePreviewFeedback: z
+      .enum(['default', 'default-force', 'off', 'off-force', 'on', 'on-force'])
+      .describe('Whether toolbar is enabled on preview deployments')
+      .nullable()
+      .nullish(),
+    enableProductionFeedback: z
+      .enum(['default', 'default-force', 'off', 'off-force', 'on', 'on-force'])
+      .describe('Whether toolbar is enabled on production deployments')
+      .nullable()
+      .nullish(),
+    sensitiveEnvironmentVariablePolicy: z.enum(['default', 'off', 'on']).describe('Sensitive environment variable policy for this team').nullable().nullish(),
+    hideIpAddresses: z.boolean().describe('Indicates if IP addresses should be accessible in observability (o11y) tooling').nullable().nullish(),
+    hideIpAddressesInLogDrains: z.boolean().describe('Indicates if IP addresses should be accessible in log drains').nullable().nullish(),
+    ipBuckets: z
+      .array(
+        z.object({
+          bucket: z.string(),
+          supportUntil: z.number().optional(),
+        }),
+      )
+      .optional(),
+    id: z.string().describe("The Team's unique identifier."),
+    slug: z.string().describe("The Team's slug, which is unique across the Vercel platform."),
+    name: z.string().describe('Name associated with the Team account, or `null` if none has been provided.').nullable(),
+    avatar: z.string().describe('The ID of the file used as avatar for this Team.').nullable(),
+    membership: z
+      .object({
+        uid: z.string().optional(),
+        entitlements: z
+          .array(
+            z.object({
+              entitlement: z.string(),
+            }),
+          )
+          .optional(),
+        teamId: z.string().optional(),
+        confirmed: z.boolean(),
+        confirmedAt: z.number(),
+        accessRequestedAt: z.number().optional(),
+        role: z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER']),
+        teamRoles: z.array(z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER'])).optional(),
+        teamPermissions: z.array(z.enum(['CreateProject', 'EnvVariableManager', 'EnvironmentManager', 'FullProductionDeployment', 'UsageViewer'])).optional(),
+        createdAt: z.number(),
+        created: z.number(),
+        joinedFrom: z
+          .object({
+            origin: z.enum(['bitbucket', 'dsync', 'feedback', 'github', 'gitlab', 'import', 'link', 'mail', 'organization-teams', 'saml', 'teams']),
+            commitId: z.string().optional(),
+            repoId: z.string().optional(),
+            repoPath: z.string().optional(),
+            gitUserId: z.union([z.string(), z.number()]).optional(),
+            gitUserLogin: z.string().optional(),
+            ssoUserId: z.string().optional(),
+            ssoConnectedAt: z.number().optional(),
+            idpUserId: z.string().optional(),
+            dsyncUserId: z.string().optional(),
+            dsyncConnectedAt: z.number().optional(),
+          })
+          .optional(),
+      })
+      .describe('The membership of the authenticated User in relation to the Team.'),
+    createdAt: z.number().describe('UNIX timestamp (in milliseconds) when the Team was created.'),
   })
   .describe('Data representing a Team.') as unknown as ToZod<Team>
 
@@ -4023,7 +4223,6 @@ export const teamLimitedSchema = z
         'When "Single Sign-On (SAML)" is configured, this object contains information that allows the client-side to identify whether or not this Team has SAML enforced.',
       )
       .optional(),
-    mfaEnforced: z.boolean().optional(),
     id: z.string().describe("The Team's unique identifier."),
     slug: z.string().describe("The Team's slug, which is unique across the Vercel platform."),
     name: z.string().describe('Name associated with the Team account, or `null` if none has been provided.').nullable(),
@@ -4064,7 +4263,6 @@ export const teamLimitedSchema = z
           .optional(),
       })
       .describe('The membership of the authenticated User in relation to the Team.'),
-    created: z.string().describe('Will remain undocumented. Remove in v3 API.'),
     createdAt: z.number().describe('UNIX timestamp (in milliseconds) when the Team was created.'),
   })
   .describe(
@@ -4139,6 +4337,7 @@ export const authUserSchema = z
             'blobTotalAvgSizeInBytes',
             'blobTotalGetResponseObjectSizeInBytes',
             'blobTotalSimpleRequests',
+            'connectDataTransfer',
             'dataCacheRead',
             'dataCacheWrite',
             'edgeConfigRead',
@@ -4150,6 +4349,8 @@ export const authUserSchema = z
             'elasticConcurrencyBuildSlots',
             'fastDataTransfer',
             'fastOriginTransfer',
+            'fluidCpuDuration',
+            'fluidDuration',
             'functionDuration',
             'functionInvocation',
             'imageOptimizationCacheRead',
@@ -4158,17 +4359,11 @@ export const authUserSchema = z
             'logDrainsVolume',
             'monitoringMetric',
             'observabilityEvent',
-            'postgresComputeTime',
-            'postgresDataStorage',
-            'postgresDataTransfer',
-            'postgresDatabase',
-            'postgresWrittenData',
+            'onDemandConcurrencyMinutes',
+            'runtimeCacheRead',
+            'runtimeCacheWrite',
             'serverlessFunctionExecution',
             'sourceImages',
-            'storageRedisTotalBandwidthInBytes',
-            'storageRedisTotalCommands',
-            'storageRedisTotalDailyAvgStorageInBytes',
-            'storageRedisTotalDatabases',
             'wafOwaspExcessBytes',
             'wafOwaspRequests',
             'wafRateLimitRequest',
@@ -4189,6 +4384,10 @@ export const authUserSchema = z
           .optional(),
         concurrentBuilds: z
           .number()
+          .describe('An object containing infomation related to the amount of platform resources may be allocated to the User account.')
+          .optional(),
+        elasticConcurrencyEnabled: z
+          .boolean()
           .describe('An object containing infomation related to the amount of platform resources may be allocated to the User account.')
           .optional(),
         buildEntitlements: z
@@ -4283,7 +4482,7 @@ export const authUserSchema = z
         buildMachine: z
           .object({
             purchaseType: z
-              .enum(['enhanced', 'ultra'])
+              .enum(['enhanced', 'turbo'])
               .describe('An object containing infomation related to the amount of platform resources may be allocated to the User account.')
               .optional(),
             isDefaultBuildMachine: z
@@ -4380,17 +4579,6 @@ export const authUserSchema = z
       })
       .describe('Feature blocks for the user')
       .optional(),
-    northstarMigration: z
-      .object({
-        teamId: z.string().describe('The ID of the team we created for this user.'),
-        projects: z.number().describe('The number of projects migrated for this user.'),
-        stores: z.number().describe('The number of stores migrated for this user.'),
-        integrationConfigurations: z.number().describe('The number of integration configurations migrated for this user.'),
-        integrationClients: z.number().describe('The number of integration clients migrated for this user.'),
-        startTime: z.number().describe('The migration start time timestamp for this user.'),
-        endTime: z.number().describe('The migration end time timestamp for this user.'),
-      })
-      .optional(),
     id: z.string().describe("The User's unique identifier."),
     email: z.string().describe('Email address associated with the User account.'),
     name: z.string().describe('Name associated with the User account, or `null` if none has been provided.').nullable(),
@@ -4400,7 +4588,6 @@ export const authUserSchema = z
       .describe('SHA1 hash of the avatar for the User account. Can be used in conjuction with the ... endpoint to retrieve the avatar image.')
       .nullable(),
     defaultTeamId: z.string().describe("The user's default team.").nullable(),
-    version: z.enum(['northstar']).describe("The user's version. Will always be `northstar`."),
   })
   .describe('Data for the currently authenticated User.') as unknown as ToZod<AuthUser>
 
@@ -4423,7 +4610,6 @@ export const authUserLimitedSchema = z
       .describe('SHA1 hash of the avatar for the User account. Can be used in conjuction with the ... endpoint to retrieve the avatar image.')
       .nullable(),
     defaultTeamId: z.string().describe("The user's default team.").nullable(),
-    version: z.enum(['northstar']).describe("The user's version. Will always be `northstar`."),
   })
   .describe(
     'A limited form of data for the currently authenticated User, due to the authentication token missing privileges to read the full User data.',
@@ -4484,8 +4670,6 @@ export const readAccessGroup401Schema = z.unknown() as unknown as ToZod<ReadAcce
  */
 export const readAccessGroup403Schema = z.unknown() as unknown as ToZod<ReadAccessGroup403>
 
-export const readAccessGroup404Schema = z.unknown() as unknown as ToZod<ReadAccessGroup404>
-
 export const readAccessGroupQueryResponseSchema = z.lazy(() => readAccessGroup200Schema) as unknown as ToZod<ReadAccessGroupQueryResponse>
 
 export const updateAccessGroupPathParamsSchema = z.object({
@@ -4523,8 +4707,6 @@ export const updateAccessGroup401Schema = z.unknown() as unknown as ToZod<Update
  * @description You do not have permission to access this resource.
  */
 export const updateAccessGroup403Schema = z.unknown() as unknown as ToZod<UpdateAccessGroup403>
-
-export const updateAccessGroup404Schema = z.unknown() as unknown as ToZod<UpdateAccessGroup404>
 
 export const updateAccessGroupMutationRequestSchema = z.object({
   name: z
@@ -4575,8 +4757,6 @@ export const deleteAccessGroup401Schema = z.unknown() as unknown as ToZod<Delete
  */
 export const deleteAccessGroup403Schema = z.unknown() as unknown as ToZod<DeleteAccessGroup403>
 
-export const deleteAccessGroup404Schema = z.unknown() as unknown as ToZod<DeleteAccessGroup404>
-
 export const deleteAccessGroupMutationResponseSchema = z.lazy(() => deleteAccessGroup200Schema) as unknown as ToZod<DeleteAccessGroupMutationResponse>
 
 export const listAccessGroupMembersPathParamsSchema = z.object({
@@ -4622,8 +4802,6 @@ export const listAccessGroupMembers401Schema = z.unknown() as unknown as ToZod<L
  * @description You do not have permission to access this resource.
  */
 export const listAccessGroupMembers403Schema = z.unknown() as unknown as ToZod<ListAccessGroupMembers403>
-
-export const listAccessGroupMembers404Schema = z.unknown() as unknown as ToZod<ListAccessGroupMembers404>
 
 export const listAccessGroupMembersQueryResponseSchema = z.lazy(() => listAccessGroupMembers200Schema) as unknown as ToZod<ListAccessGroupMembersQueryResponse>
 
@@ -4679,8 +4857,6 @@ export const listAccessGroups401Schema = z.unknown() as unknown as ToZod<ListAcc
  */
 export const listAccessGroups403Schema = z.unknown() as unknown as ToZod<ListAccessGroups403>
 
-export const listAccessGroups404Schema = z.unknown() as unknown as ToZod<ListAccessGroups404>
-
 export const listAccessGroupsQueryResponseSchema = z.lazy(() => listAccessGroups200Schema) as unknown as ToZod<ListAccessGroupsQueryResponse>
 
 export const createAccessGroupQueryParamsSchema = z
@@ -4713,8 +4889,6 @@ export const createAccessGroup401Schema = z.unknown() as unknown as ToZod<Create
  * @description You do not have permission to access this resource.
  */
 export const createAccessGroup403Schema = z.unknown() as unknown as ToZod<CreateAccessGroup403>
-
-export const createAccessGroup404Schema = z.unknown() as unknown as ToZod<CreateAccessGroup404>
 
 export const createAccessGroupMutationRequestSchema = z.object({
   name: z
@@ -4783,8 +4957,6 @@ export const listAccessGroupProjects401Schema = z.unknown() as unknown as ToZod<
  */
 export const listAccessGroupProjects403Schema = z.unknown() as unknown as ToZod<ListAccessGroupProjects403>
 
-export const listAccessGroupProjects404Schema = z.unknown() as unknown as ToZod<ListAccessGroupProjects404>
-
 export const listAccessGroupProjectsQueryResponseSchema = z.lazy(
   () => listAccessGroupProjects200Schema,
 ) as unknown as ToZod<ListAccessGroupProjectsQueryResponse>
@@ -4820,8 +4992,6 @@ export const createAccessGroupProject401Schema = z.unknown() as unknown as ToZod
  * @description You do not have permission to access this resource.
  */
 export const createAccessGroupProject403Schema = z.unknown() as unknown as ToZod<CreateAccessGroupProject403>
-
-export const createAccessGroupProject404Schema = z.unknown() as unknown as ToZod<CreateAccessGroupProject404>
 
 export const createAccessGroupProjectMutationRequestSchema = z.object({
   projectId: z.string().max(256).describe('The ID of the project.'),
@@ -4865,8 +5035,6 @@ export const readAccessGroupProject401Schema = z.unknown() as unknown as ToZod<R
  */
 export const readAccessGroupProject403Schema = z.unknown() as unknown as ToZod<ReadAccessGroupProject403>
 
-export const readAccessGroupProject404Schema = z.unknown() as unknown as ToZod<ReadAccessGroupProject404>
-
 export const readAccessGroupProjectQueryResponseSchema = z.lazy(() => readAccessGroupProject200Schema) as unknown as ToZod<ReadAccessGroupProjectQueryResponse>
 
 export const updateAccessGroupProjectPathParamsSchema = z.object({
@@ -4902,8 +5070,6 @@ export const updateAccessGroupProject401Schema = z.unknown() as unknown as ToZod
  */
 export const updateAccessGroupProject403Schema = z.unknown() as unknown as ToZod<UpdateAccessGroupProject403>
 
-export const updateAccessGroupProject404Schema = z.unknown() as unknown as ToZod<UpdateAccessGroupProject404>
-
 export const updateAccessGroupProjectMutationRequestSchema = z.object({
   role: z.enum(['ADMIN', 'PROJECT_DEVELOPER', 'PROJECT_VIEWER']).describe('The project role that will be added to this Access Group.'),
 }) as unknown as ToZod<UpdateAccessGroupProjectMutationRequest>
@@ -4937,8 +5103,6 @@ export const deleteAccessGroupProject401Schema = z.unknown() as unknown as ToZod
  * @description You do not have permission to access this resource.
  */
 export const deleteAccessGroupProject403Schema = z.unknown() as unknown as ToZod<DeleteAccessGroupProject403>
-
-export const deleteAccessGroupProject404Schema = z.unknown() as unknown as ToZod<DeleteAccessGroupProject404>
 
 export const deleteAccessGroupProjectMutationResponseSchema = z.lazy(
   () => deleteAccessGroupProject200Schema,
@@ -5073,8 +5237,6 @@ export const uploadArtifact402Schema = z.unknown() as unknown as ToZod<UploadArt
  * @description The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.\nThe Remote Caching usage limit has been reached for this account for this billing cycle.\nRemote Caching has been disabled for this team or user. An owner can enable it in the billing settings.\nYou do not have permission to access this resource.
  */
 export const uploadArtifact403Schema = z.unknown() as unknown as ToZod<UploadArtifact403>
-
-export const uploadArtifactMutationRequestSchema = z.instanceof(File) as unknown as ToZod<UploadArtifactMutationRequest>
 
 export const uploadArtifactMutationResponseSchema = z.lazy(() => uploadArtifact202Schema) as unknown as ToZod<UploadArtifactMutationResponse>
 
@@ -5737,8 +5899,28 @@ export const updateProjectDataCache200Schema = z.object({
   autoAssignCustomDomainsUpdatedBy: z.string().optional(),
   buildCommand: z.string().nullable().nullish(),
   commandForIgnoringBuildStep: z.string().nullable().nullish(),
+  connectConfigurations: z
+    .array(
+      z.object({
+        envId: z.union([z.string(), z.enum(['production', 'preview'])]),
+        connectConfigurationId: z.string(),
+        passive: z.boolean(),
+        buildsEnabled: z.boolean(),
+        aws: z
+          .object({
+            subnetIds: z.array(z.string()),
+            securityGroupId: z.string(),
+          })
+          .optional(),
+        createdAt: z.number(),
+        updatedAt: z.number(),
+      }),
+    )
+    .nullable()
+    .nullish(),
   connectConfigurationId: z.string().nullable().nullish(),
   connectBuildsEnabled: z.boolean().optional(),
+  passiveConnectConfigurationId: z.string().nullable().nullish(),
   createdAt: z.number().optional(),
   customerSupportCodeVisibility: z.boolean().optional(),
   crons: z
@@ -5968,6 +6150,7 @@ export const updateProjectDataCache200Schema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -6247,7 +6430,6 @@ export const updateProjectDataCache200Schema = z.object({
     .nullable()
     .nullish(),
   outputDirectory: z.string().nullable().nullish(),
-  passiveConnectConfigurationId: z.string().nullable().nullish(),
   passwordProtection: z.object({}).nullable().nullish(),
   productionDeploymentsFastLane: z.boolean().optional(),
   publicSource: z.boolean().nullable().nullish(),
@@ -6258,8 +6440,17 @@ export const updateProjectDataCache200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
+  rollbackDescription: z
+    .object({
+      userId: z.string().describe('The user who rolled back the project.'),
+      username: z.string().describe('The username of the user who rolled back the project.'),
+      description: z.string().describe('User-supplied explanation of why they rolled back the project. Limited to 250 characters.'),
+      createdAt: z.number().describe('Timestamp of when the rollback was requested.'),
+    })
+    .describe('Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.')
+    .optional(),
   rollingRelease: z
     .object({
       target: z
@@ -6267,32 +6458,29 @@ export const updateProjectDataCache200Schema = z.object({
         .describe(
           'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
         ),
-      minutesToRelease: z
-        .number()
-        .describe(
-          'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.',
-        )
-        .optional(),
       stages: z
         .array(
           z
             .object({
-              targetPercentage: z.number().describe('The percentage of traffic to serve to the new deployment'),
-              minutesToRelease: z
-                .number()
-                .describe(
-                  'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.',
-                )
-                .optional(),
-              requireApproval: z.boolean().describe('Whether or not this stage requires approval to proceed.').optional(),
-              duration: z.number().describe('duration is the total time to serve a stage, at the given targetPercentage.').optional(),
+              targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+              requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+              duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
             })
-            .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.'),
+            .describe(
+              'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+            ),
         )
-        .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.')
+        .describe(
+          'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+        )
         .nullable()
         .nullish(),
+      canaryResponseHeader: z
+        .boolean()
+        .describe('Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.')
+        .optional(),
     })
+    .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
     .nullable()
     .nullish(),
   defaultResourceConfig: z.object({
@@ -6302,10 +6490,9 @@ export const updateProjectDataCache200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
   rootDirectory: z.string().nullable().nullish(),
-  serverlessFunctionRegion: z.string().nullable().nullish(),
   serverlessFunctionZeroConfigFailover: z.boolean().optional(),
   skewProtectionBoundaryAt: z.number().optional(),
   skewProtectionMaxAge: z.number().optional(),
@@ -6314,7 +6501,7 @@ export const updateProjectDataCache200Schema = z.object({
   enableAffectedProjectsDeployments: z.boolean().optional(),
   ssoProtection: z
     .object({
-      deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+      deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
     })
     .nullable()
     .nullish(),
@@ -6490,6 +6677,9 @@ export const updateProjectDataCache200Schema = z.object({
       connectConfiguration: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      defaultDeploymentProtection: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       domain: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -6649,6 +6839,9 @@ export const updateProjectDataCache200Schema = z.object({
       notificationUsageAlert: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      notificationPreferences: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       notificationCustomerBudget: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -6659,6 +6852,9 @@ export const updateProjectDataCache200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       observabilityNotebook: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      observabilityFunnel: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       openTelemetryEndpoint: z
@@ -6823,10 +7019,19 @@ export const updateProjectDataCache200Schema = z.object({
       vercelRunExec: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      apiKey: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      apiKeyOwnedBySelf: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       aliasProject: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       aliasProtectionBypass: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      buildMachine: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       productionAliasProtectionBypass: z
@@ -6868,6 +7073,9 @@ export const updateProjectDataCache200Schema = z.object({
       deploymentRollback: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      edgeCacheNamespace: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       environments: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -6889,6 +7097,12 @@ export const updateProjectDataCache200Schema = z.object({
       observabilityData: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      onDemandBuild: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      onDemandConcurrency: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       project: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -6899,6 +7113,12 @@ export const updateProjectDataCache200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectAnalyticsSampling: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheck: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheckRun: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectDeploymentHook: z
@@ -7039,7 +7259,7 @@ export const updateProjectDataCache200Schema = z.object({
   trustedIps: z
     .union([
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
         addresses: z.array(
           z.object({
             value: z.string(),
@@ -7049,7 +7269,7 @@ export const updateProjectDataCache200Schema = z.object({
         protectionMode: z.enum(['additional', 'exclusive']),
       }),
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
       }),
     ])
     .nullable()
@@ -7213,24 +7433,37 @@ export const updateProjectDataCache200Schema = z.object({
       ja4Enabled: z.boolean().optional(),
       firewallBypassIps: z.array(z.string()).optional(),
       managedRules: z
-        .object({})
-        .catchall(
-          z.object({
+        .object({
+          bot_filter: z.object({
             active: z.boolean(),
             action: z.enum(['challenge', 'deny', 'log']).optional(),
           }),
-        )
+          ai_bots: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+          owasp: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+        })
         .nullable()
         .nullish(),
+      botIdEnabled: z.boolean().optional(),
     })
     .optional(),
   oidcTokenConfig: z
     .object({
-      enabled: z.boolean(),
+      enabled: z.boolean().describe('Whether or not to generate OpenID Connect JSON Web Tokens.').optional(),
       issuerMode: z.enum(['global', 'team']).describe('- team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`').optional(),
     })
     .optional(),
   tier: z.enum(['advanced', 'critical', 'standard']).optional(),
+  features: z
+    .object({
+      webAnalytics: z.boolean().optional(),
+    })
+    .optional(),
 }) as unknown as ToZod<UpdateProjectDataCache200>
 
 /**
@@ -7259,24 +7492,22 @@ export const getDeploymentEventsPathParamsSchema = z.object({
   idOrUrl: z.string().describe('The unique identifier or hostname of the deployment.'),
 }) as unknown as ToZod<GetDeploymentEventsPathParams>
 
-export const getDeploymentEventsQueryParamsSchema = z
-  .object({
-    direction: z.enum(['backward', 'forward']).default('forward').describe('Order of the returned events based on the timestamp.'),
-    follow: z
-      .union([z.literal(0), z.literal(1)])
-      .describe('When enabled, this endpoint will return live events as they happen.')
-      .optional(),
-    limit: z.coerce.number().describe('Maximum number of events to return. Provide `-1` to return all available logs.').optional(),
-    name: z.string().describe('Deployment build ID.').optional(),
-    since: z.coerce.number().describe('Timestamp for when build logs should be pulled from.').optional(),
-    until: z.coerce.number().describe('Timestamp for when the build logs should be pulled up until.').optional(),
-    statusCode: z.union([z.string(), z.coerce.number()]).describe('HTTP status code range to filter events by.').optional(),
-    delimiter: z.union([z.literal(0), z.literal(1)]).optional(),
-    builds: z.union([z.literal(0), z.literal(1)]).optional(),
-    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
-    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
-  })
-  .optional() as unknown as ToZod<GetDeploymentEventsQueryParams>
+export const getDeploymentEventsQueryParamsSchema = z.object({
+  direction: z.enum(['backward', 'forward']).default('forward').describe('Order of the returned events based on the timestamp.'),
+  follow: z
+    .union([z.literal(0), z.literal(1)])
+    .describe('When enabled, this endpoint will return live events as they happen.')
+    .optional(),
+  limit: z.coerce.number().describe('Maximum number of events to return. Provide `-1` to return all available logs.').optional(),
+  name: z.string().describe('Deployment build ID.').optional(),
+  since: z.coerce.number().describe('Timestamp for when build logs should be pulled from.').optional(),
+  until: z.coerce.number().describe('Timestamp for when the build logs should be pulled up until.').optional(),
+  statusCode: z.union([z.string(), z.coerce.number()]).describe('HTTP status code range to filter events by.').optional(),
+  delimiter: z.union([z.literal(0), z.literal(1)]).optional(),
+  builds: z.union([z.literal(0), z.literal(1)]).optional(),
+  teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+  slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+}) as unknown as ToZod<GetDeploymentEventsQueryParams>
 
 export const getDeploymentEvents200Schema = z
   .array(
@@ -7418,6 +7649,7 @@ export const updateIntegrationDeploymentAction403Schema = z.unknown() as unknown
 export const updateIntegrationDeploymentActionMutationRequestSchema = z.object({
   status: z.enum(['failed', 'running', 'succeeded']).optional(),
   statusText: z.string().optional(),
+  statusUrl: z.string().url().optional(),
   outcomes: z
     .array(
       z.object({
@@ -7524,6 +7756,7 @@ export const getDeployment200Schema = z.union([
           'sanity-v3',
           'sanity',
           'storybook',
+          'nitro',
         ])
         .nullable()
         .nullish(),
@@ -7553,7 +7786,7 @@ export const getDeployment200Schema = z.union([
     readyStateReason: z.string().optional(),
     integrations: z
       .object({
-        status: z.enum(['error', 'skipped', 'pending', 'ready', 'timeout']),
+        status: z.enum(['skipped', 'pending', 'ready', 'error', 'timeout']),
         startedAt: z.number(),
         completedAt: z.number().optional(),
         skippedAt: z.number().optional(),
@@ -7652,7 +7885,7 @@ export const getDeployment200Schema = z.union([
           description: z.string().describe("Optional description of the environment's purpose").optional(),
           branchMatcher: z
             .object({
-              type: z.enum(['startsWith', 'equals', 'endsWith']).describe('The type of matching to perform'),
+              type: z.enum(['endsWith', 'startsWith', 'equals']).describe('The type of matching to perform'),
               pattern: z.string().describe('The pattern to match against branch names'),
             })
             .describe('Configuration for matching git branches to this environment')
@@ -7709,6 +7942,7 @@ export const getDeployment200Schema = z.union([
         }),
       ])
       .optional(),
+    oomReport: z.enum(['out-of-memory']).optional(),
     aliasWarning: z
       .object({
         code: z.string(),
@@ -7898,11 +8132,41 @@ export const getDeployment200Schema = z.union([
       .object({})
       .catchall(
         z.object({
+          architecture: z.enum(['x86_64', 'arm64']).optional(),
           memory: z.number().optional(),
           maxDuration: z.number().optional(),
           runtime: z.string().optional(),
           includeFiles: z.string().optional(),
           excludeFiles: z.string().optional(),
+          experimentalTriggers: z
+            .array(
+              z
+                .object({
+                  type: z.enum(['queue/v1beta']).describe('Event type - must be "queue/v1beta" (REQUIRED)'),
+                  topic: z.string().describe('Name of the queue topic to consume from (REQUIRED)'),
+                  consumer: z.string().describe('Name of the consumer group for this trigger (REQUIRED)'),
+                  maxDeliveries: z
+                    .number()
+                    .describe(
+                      "Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  retryAfterSeconds: z
+                    .number()
+                    .describe(
+                      "Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  initialDelaySeconds: z
+                    .number()
+                    .describe(
+                      "Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                })
+                .describe('Queue trigger event for Vercel\'s queue system. Handles "queue/v1beta" events with queue-specific configuration.'),
+            )
+            .optional(),
         }),
       )
       .nullable()
@@ -7932,12 +8196,44 @@ export const getDeployment200Schema = z.union([
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
               )
@@ -7947,14 +8243,77 @@ export const getDeployment200Schema = z.union([
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
+              )
+              .optional(),
+            mitigate: z
+              .object({
+                action: z.enum(['challenge', 'deny']),
+              })
+              .optional(),
+            transforms: z
+              .array(
+                z.object({
+                  type: z.enum(['request.headers', 'request.query', 'response.headers']),
+                  op: z.enum(['append', 'set', 'delete']),
+                  target: z.object({
+                    key: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
+                  }),
+                  args: z.union([z.array(z.string()), z.string()]).optional(),
+                }),
               )
               .optional(),
             locale: z
@@ -8056,6 +8415,7 @@ export const getDeployment200Schema = z.union([
               'Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.',
             )
             .optional(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
           defaultRoute: z
             .string()
             .describe(
@@ -8069,6 +8429,18 @@ export const getDeployment200Schema = z.union([
             .describe(
               'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
             ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
         }),
         z.object({
           applications: z
@@ -8076,6 +8448,7 @@ export const getDeployment200Schema = z.union([
             .catchall(
               z
                 .object({
+                  isDefaultApp: z.boolean().optional(),
                   productionHost: z.string().describe('This is the production alias, it will always show the most up to date of each application.'),
                   deploymentAlias: z
                     .string()
@@ -8094,6 +8467,7 @@ export const getDeployment200Schema = z.union([
             )
             .optional(),
           isDefaultApp: z.boolean(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
           defaultRoute: z
             .string()
             .describe(
@@ -8107,6 +8481,18 @@ export const getDeployment200Schema = z.union([
             .describe(
               'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
             ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
         }),
       ])
       .optional(),
@@ -8118,10 +8504,22 @@ export const getDeployment200Schema = z.union([
         functionTimeout: z.number().nullable(),
         secureComputePrimaryRegion: z.string().nullable(),
         secureComputeFallbackRegion: z.string().nullable(),
+        isUsingActiveCPU: z.boolean().optional(),
       })
       .describe(
         'Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured',
       )
+      .optional(),
+    checks: z
+      .object({
+        'deployment-alias': z
+          .object({
+            state: z.enum(['succeeded', 'failed', 'pending']),
+            startedAt: z.number(),
+            completedAt: z.number().optional(),
+          })
+          .describe('Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.'),
+      })
       .optional(),
   }),
   z.object({
@@ -8180,7 +8578,7 @@ export const getDeployment200Schema = z.union([
           description: z.string().describe("Optional description of the environment's purpose").optional(),
           branchMatcher: z
             .object({
-              type: z.enum(['startsWith', 'equals', 'endsWith']).describe('The type of matching to perform'),
+              type: z.enum(['endsWith', 'startsWith', 'equals']).describe('The type of matching to perform'),
               pattern: z.string().describe('The pattern to match against branch names'),
             })
             .describe('Configuration for matching git branches to this environment')
@@ -8237,6 +8635,7 @@ export const getDeployment200Schema = z.union([
         }),
       ])
       .optional(),
+    oomReport: z.enum(['out-of-memory']).optional(),
     aliasWarning: z
       .object({
         code: z.string(),
@@ -8492,6 +8891,7 @@ export const createDeployment200Schema = z
           'jekyll',
           'middleman',
           'nextjs',
+          'nitro',
           'nuxtjs',
           'parcel',
           'polymer',
@@ -8626,8 +9026,8 @@ export const createDeployment200Schema = z
     status: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
     team: z
       .object({
-        name: z.string(),
         id: z.string(),
+        name: z.string(),
         slug: z.string(),
         avatar: z.string().optional(),
       })
@@ -8644,7 +9044,7 @@ export const createDeployment200Schema = z
           description: z.string().describe("Optional description of the environment's purpose").optional(),
           branchMatcher: z
             .object({
-              type: z.enum(['startsWith', 'equals', 'endsWith']).describe('The type of matching to perform'),
+              type: z.enum(['endsWith', 'startsWith', 'equals']).describe('The type of matching to perform'),
               pattern: z.string().describe('The pattern to match against branch names'),
             })
             .describe('Configuration for matching git branches to this environment')
@@ -8701,11 +9101,12 @@ export const createDeployment200Schema = z
         }),
       ])
       .optional(),
-    type: z.enum(['LAMBDAS']),
+    oomReport: z.enum(['out-of-memory']).optional(),
+    id: z.string(),
     name: z.string(),
     createdAt: z.number(),
+    type: z.enum(['LAMBDAS']),
     deletedAt: z.number().nullable().nullish(),
-    id: z.string(),
     version: z.literal(2),
     autoAssignCustomDomains: z.boolean().describe('applies to custom domains only, defaults to `true`').optional(),
     gitSource: z
@@ -8816,6 +9217,7 @@ export const createDeployment200Schema = z
     readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
     source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
     target: z.enum(['production', 'staging']).nullable().nullish(),
+    errorMessage: z.string().nullable().nullish(),
     passiveRegions: z
       .array(z.string())
       .describe(
@@ -8823,7 +9225,6 @@ export const createDeployment200Schema = z
       )
       .optional(),
     regions: z.array(z.string()),
-    errorMessage: z.string().nullable().nullish(),
     aliasWarning: z
       .object({
         code: z.string(),
@@ -8873,73 +9274,10 @@ export const createDeployment200Schema = z
         environment: z.string(),
       })
       .optional(),
-    plan: z.enum(['enterprise', 'hobby', 'pro']),
     projectId: z.string(),
     ownerId: z.string(),
-    microfrontends: z
-      .union([
-        z.object({
-          isDefaultApp: z
-            .boolean()
-            .describe(
-              'Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.',
-            )
-            .optional(),
-          defaultRoute: z
-            .string()
-            .describe(
-              'A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.',
-            )
-            .optional(),
-          groupIds: z
-            .array(z.union([z.string(), z.string()]))
-            .min(2)
-            .max(2)
-            .describe(
-              'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
-            ),
-        }),
-        z.object({
-          applications: z
-            .object({})
-            .catchall(
-              z
-                .object({
-                  productionHost: z.string().describe('This is the production alias, it will always show the most up to date of each application.'),
-                  deploymentAlias: z
-                    .string()
-                    .describe(
-                      'Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.',
-                    )
-                    .optional(),
-                  deploymentHost: z.string().optional(),
-                })
-                .describe(
-                  'A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.',
-                ),
-            )
-            .describe(
-              'A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.',
-            )
-            .optional(),
-          isDefaultApp: z.boolean(),
-          defaultRoute: z
-            .string()
-            .describe(
-              'A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.',
-            )
-            .optional(),
-          groupIds: z
-            .array(z.union([z.string(), z.string()]))
-            .min(2)
-            .max(2)
-            .describe(
-              'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
-            ),
-        }),
-      ])
-      .optional(),
     monorepoManager: z.string().nullable().nullish(),
+    plan: z.enum(['enterprise', 'hobby', 'pro']),
     config: z
       .object({
         version: z.number().optional(),
@@ -8948,6 +9286,7 @@ export const createDeployment200Schema = z
         functionTimeout: z.number().nullable(),
         secureComputePrimaryRegion: z.string().nullable(),
         secureComputeFallbackRegion: z.string().nullable(),
+        isUsingActiveCPU: z.boolean().optional(),
       })
       .describe(
         'Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured',
@@ -8957,11 +9296,41 @@ export const createDeployment200Schema = z
       .object({})
       .catchall(
         z.object({
+          architecture: z.enum(['arm64', 'x86_64']).optional(),
           memory: z.number().optional(),
           maxDuration: z.number().optional(),
           runtime: z.string().optional(),
           includeFiles: z.string().optional(),
           excludeFiles: z.string().optional(),
+          experimentalTriggers: z
+            .array(
+              z
+                .object({
+                  type: z.enum(['queue/v1beta']).describe('Event type - must be "queue/v1beta" (REQUIRED)'),
+                  topic: z.string().describe('Name of the queue topic to consume from (REQUIRED)'),
+                  consumer: z.string().describe('Name of the consumer group for this trigger (REQUIRED)'),
+                  maxDeliveries: z
+                    .number()
+                    .describe(
+                      "Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  retryAfterSeconds: z
+                    .number()
+                    .describe(
+                      "Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  initialDelaySeconds: z
+                    .number()
+                    .describe(
+                      "Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                })
+                .describe('Queue trigger event for Vercel\'s queue system. Handles "queue/v1beta" events with queue-specific configuration.'),
+            )
+            .optional(),
         }),
       )
       .nullable()
@@ -8985,12 +9354,44 @@ export const createDeployment200Schema = z
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
               )
@@ -9000,14 +9401,77 @@ export const createDeployment200Schema = z
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
+              )
+              .optional(),
+            mitigate: z
+              .object({
+                action: z.enum(['challenge', 'deny']),
+              })
+              .optional(),
+            transforms: z
+              .array(
+                z.object({
+                  type: z.enum(['request.headers', 'request.query', 'response.headers']),
+                  op: z.enum(['append', 'set', 'delete']),
+                  target: z.object({
+                    key: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
+                  }),
+                  args: z.union([z.array(z.string()), z.string()]).optional(),
+                }),
               )
               .optional(),
             locale: z
@@ -9044,6 +9508,107 @@ export const createDeployment200Schema = z
           path: z.string(),
         }),
       )
+      .optional(),
+    checks: z
+      .object({
+        'deployment-alias': z
+          .object({
+            state: z.enum(['failed', 'pending', 'succeeded']),
+            startedAt: z.number(),
+            completedAt: z.number().optional(),
+          })
+          .describe('Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.'),
+      })
+      .optional(),
+    microfrontends: z
+      .union([
+        z.object({
+          isDefaultApp: z
+            .boolean()
+            .describe(
+              'Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.',
+            )
+            .optional(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
+          defaultRoute: z
+            .string()
+            .describe(
+              'A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.',
+            )
+            .optional(),
+          groupIds: z
+            .array(z.union([z.string(), z.string()]))
+            .min(2)
+            .max(2)
+            .describe(
+              'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
+            ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
+        }),
+        z.object({
+          applications: z
+            .object({})
+            .catchall(
+              z
+                .object({
+                  isDefaultApp: z.boolean().optional(),
+                  productionHost: z.string().describe('This is the production alias, it will always show the most up to date of each application.'),
+                  deploymentAlias: z
+                    .string()
+                    .describe(
+                      'Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.',
+                    )
+                    .optional(),
+                  deploymentHost: z.string().optional(),
+                })
+                .describe(
+                  'A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.',
+                ),
+            )
+            .describe(
+              'A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.',
+            )
+            .optional(),
+          isDefaultApp: z.boolean(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
+          defaultRoute: z
+            .string()
+            .describe(
+              'A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.',
+            )
+            .optional(),
+          groupIds: z
+            .array(z.union([z.string(), z.string()]))
+            .min(2)
+            .max(2)
+            .describe(
+              'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
+            ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
+        }),
+      ])
       .optional(),
     connectBuildsEnabled: z.boolean().optional(),
     connectConfigurationId: z.string().optional(),
@@ -9126,7 +9691,7 @@ export const createDeployment400Schema = z.unknown() as unknown as ToZod<CreateD
 export const createDeployment401Schema = z.unknown() as unknown as ToZod<CreateDeployment401>
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export const createDeployment402Schema = z.unknown() as unknown as ToZod<CreateDeployment402>
 
@@ -9141,6 +9706,8 @@ export const createDeployment404Schema = z.unknown() as unknown as ToZod<CreateD
  * @description The deployment project is being transferred
  */
 export const createDeployment409Schema = z.unknown() as unknown as ToZod<CreateDeployment409>
+
+export const createDeployment500Schema = z.unknown() as unknown as ToZod<CreateDeployment500>
 
 export const createDeploymentMutationRequestSchema = z.object({
   customEnvironmentSlugOrId: z.string().describe('Deploy to a custom environment, which will override the default environment').optional(),
@@ -9171,6 +9738,7 @@ export const createDeploymentMutationRequestSchema = z.object({
     .object({
       remoteUrl: z.string().describe("The git repository's remote origin url").optional(),
       commitAuthorName: z.string().describe('The name of the author of the commit').optional(),
+      commitAuthorEmail: z.string().describe('The email of the author of the commit').optional(),
       commitMessage: z.string().describe('The commit message').optional(),
       commitRef: z.string().describe('The branch on which the commit was made').optional(),
       commitSha: z.string().describe('The hash of the commit').optional(),
@@ -9180,59 +9748,39 @@ export const createDeploymentMutationRequestSchema = z.object({
     .optional(),
   gitSource: z
     .union([
-      z
-        .object({
-          ref: z.string(),
-          repoId: z.union([z.string(), z.number()]),
-          sha: z.string().optional(),
-          type: z.enum(['github']),
-        })
-        .strict(),
-      z
-        .object({
-          org: z.string(),
-          ref: z.string(),
-          repo: z.string(),
-          sha: z.string().optional(),
-          type: z.enum(['github']),
-        })
-        .strict(),
-      z
-        .object({
-          org: z.string(),
-          ref: z.string(),
-          repo: z.string(),
-          sha: z.string().optional(),
-          host: z.string(),
-          type: z.enum(['github-custom-host']),
-        })
-        .strict(),
-      z
-        .object({
-          projectId: z.union([z.string(), z.number()]),
-          ref: z.string(),
-          sha: z.string().optional(),
-          type: z.enum(['gitlab']),
-        })
-        .strict(),
-      z
-        .object({
-          ref: z.string(),
-          repoUuid: z.string(),
-          sha: z.string().optional(),
-          type: z.enum(['bitbucket']),
-          workspaceUuid: z.string().optional(),
-        })
-        .strict(),
-      z
-        .object({
-          owner: z.string(),
-          ref: z.string(),
-          sha: z.string().optional(),
-          slug: z.string(),
-          type: z.enum(['bitbucket']),
-        })
-        .strict(),
+      z.object({
+        ref: z.string(),
+        repoId: z.union([z.string(), z.number()]),
+        sha: z.string().optional(),
+        type: z.enum(['github']),
+      }),
+      z.object({
+        org: z.string(),
+        ref: z.string(),
+        repo: z.string(),
+        sha: z.string().optional(),
+        type: z.enum(['github']),
+      }),
+      z.object({
+        projectId: z.union([z.string(), z.number()]),
+        ref: z.string(),
+        sha: z.string().optional(),
+        type: z.enum(['gitlab']),
+      }),
+      z.object({
+        ref: z.string(),
+        repoUuid: z.string(),
+        sha: z.string().optional(),
+        type: z.enum(['bitbucket']),
+        workspaceUuid: z.string().optional(),
+      }),
+      z.object({
+        owner: z.string(),
+        ref: z.string(),
+        sha: z.string().optional(),
+        slug: z.string(),
+        type: z.enum(['bitbucket']),
+      }),
     ])
     .describe('Defines the Git Repository source to be deployed. This property can not be used in combination with `files`.')
     .optional(),
@@ -9286,6 +9834,7 @@ export const createDeploymentMutationRequestSchema = z.object({
           'jekyll',
           'middleman',
           'nextjs',
+          'nitro',
           'nuxtjs',
           'parcel',
           'polymer',
@@ -9422,6 +9971,7 @@ export const cancelDeployment200Schema = z
           'jekyll',
           'middleman',
           'nextjs',
+          'nitro',
           'nuxtjs',
           'parcel',
           'polymer',
@@ -9575,7 +10125,7 @@ export const cancelDeployment200Schema = z
           description: z.string().describe("Optional description of the environment's purpose").optional(),
           branchMatcher: z
             .object({
-              type: z.enum(['startsWith', 'equals', 'endsWith']).describe('The type of matching to perform'),
+              type: z.enum(['endsWith', 'startsWith', 'equals']).describe('The type of matching to perform'),
               pattern: z.string().describe('The pattern to match against branch names'),
             })
             .describe('Configuration for matching git branches to this environment')
@@ -9632,6 +10182,7 @@ export const cancelDeployment200Schema = z
         }),
       ])
       .optional(),
+    oomReport: z.enum(['out-of-memory']).optional(),
     id: z.string(),
     aliasError: z
       .object({
@@ -9819,11 +10370,41 @@ export const cancelDeployment200Schema = z
       .object({})
       .catchall(
         z.object({
+          architecture: z.enum(['arm64', 'x86_64']).optional(),
           memory: z.number().optional(),
           maxDuration: z.number().optional(),
           runtime: z.string().optional(),
           includeFiles: z.string().optional(),
           excludeFiles: z.string().optional(),
+          experimentalTriggers: z
+            .array(
+              z
+                .object({
+                  type: z.enum(['queue/v1beta']).describe('Event type - must be "queue/v1beta" (REQUIRED)'),
+                  topic: z.string().describe('Name of the queue topic to consume from (REQUIRED)'),
+                  consumer: z.string().describe('Name of the consumer group for this trigger (REQUIRED)'),
+                  maxDeliveries: z
+                    .number()
+                    .describe(
+                      "Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  retryAfterSeconds: z
+                    .number()
+                    .describe(
+                      "Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                  initialDelaySeconds: z
+                    .number()
+                    .describe(
+                      "Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.",
+                    )
+                    .optional(),
+                })
+                .describe('Queue trigger event for Vercel\'s queue system. Handles "queue/v1beta" events with queue-specific configuration.'),
+            )
+            .optional(),
         }),
       )
       .nullable()
@@ -9855,12 +10436,44 @@ export const cancelDeployment200Schema = z
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
               )
@@ -9870,14 +10483,77 @@ export const cancelDeployment200Schema = z
                 z.union([
                   z.object({
                     type: z.enum(['host']),
-                    value: z.string(),
+                    value: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        re: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
                   }),
                   z.object({
                     type: z.enum(['header', 'cookie', 'query']),
                     key: z.string(),
-                    value: z.string().optional(),
+                    value: z
+                      .union([
+                        z.string(),
+                        z.object({
+                          eq: z.union([z.string(), z.number()]).optional(),
+                          neq: z.string().optional(),
+                          inc: z.array(z.string()).optional(),
+                          ninc: z.array(z.string()).optional(),
+                          pre: z.string().optional(),
+                          suf: z.string().optional(),
+                          re: z.string().optional(),
+                          gt: z.number().optional(),
+                          gte: z.number().optional(),
+                          lt: z.number().optional(),
+                          lte: z.number().optional(),
+                        }),
+                      ])
+                      .optional(),
                   }),
                 ]),
+              )
+              .optional(),
+            mitigate: z
+              .object({
+                action: z.enum(['challenge', 'deny']),
+              })
+              .optional(),
+            transforms: z
+              .array(
+                z.object({
+                  type: z.enum(['request.headers', 'request.query', 'response.headers']),
+                  op: z.enum(['append', 'set', 'delete']),
+                  target: z.object({
+                    key: z.union([
+                      z.string(),
+                      z.object({
+                        eq: z.union([z.string(), z.number()]).optional(),
+                        neq: z.string().optional(),
+                        inc: z.array(z.string()).optional(),
+                        ninc: z.array(z.string()).optional(),
+                        pre: z.string().optional(),
+                        suf: z.string().optional(),
+                        gt: z.number().optional(),
+                        gte: z.number().optional(),
+                        lt: z.number().optional(),
+                        lte: z.number().optional(),
+                      }),
+                    ]),
+                  }),
+                  args: z.union([z.array(z.string()), z.string()]).optional(),
+                }),
               )
               .optional(),
             locale: z
@@ -9979,6 +10655,7 @@ export const cancelDeployment200Schema = z
               'Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.',
             )
             .optional(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
           defaultRoute: z
             .string()
             .describe(
@@ -9992,6 +10669,18 @@ export const cancelDeployment200Schema = z
             .describe(
               'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
             ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
         }),
         z.object({
           applications: z
@@ -9999,6 +10688,7 @@ export const cancelDeployment200Schema = z
             .catchall(
               z
                 .object({
+                  isDefaultApp: z.boolean().optional(),
                   productionHost: z.string().describe('This is the production alias, it will always show the most up to date of each application.'),
                   deploymentAlias: z
                     .string()
@@ -10017,6 +10707,7 @@ export const cancelDeployment200Schema = z
             )
             .optional(),
           isDefaultApp: z.boolean(),
+          defaultAppProjectName: z.string().describe("The project name of the default app of this deployment's microfrontends group."),
           defaultRoute: z
             .string()
             .describe(
@@ -10030,6 +10721,18 @@ export const cancelDeployment200Schema = z
             .describe(
               'The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.',
             ),
+          microfrontendsAliasEnabled: z
+            .boolean()
+            .describe(
+              "Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.",
+            )
+            .optional(),
+          previewEnvAliasEnabled: z
+            .boolean()
+            .describe(
+              'Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.',
+            )
+            .optional(),
         }),
       ])
       .optional(),
@@ -10041,10 +10744,22 @@ export const cancelDeployment200Schema = z
         functionTimeout: z.number().nullable(),
         secureComputePrimaryRegion: z.string().nullable(),
         secureComputeFallbackRegion: z.string().nullable(),
+        isUsingActiveCPU: z.boolean().optional(),
       })
       .describe(
         'Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured',
       )
+      .optional(),
+    checks: z
+      .object({
+        'deployment-alias': z
+          .object({
+            state: z.enum(['failed', 'pending', 'succeeded']),
+            startedAt: z.number(),
+            completedAt: z.number().optional(),
+          })
+          .describe('Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.'),
+      })
       .optional(),
   })
   .describe('The private deployment representation of a Deployment.') as unknown as ToZod<CancelDeployment200>
@@ -10142,7 +10857,7 @@ export const checkDomainPriceQueryParamsSchema = z.object({
 export const checkDomainPrice200Schema = z
   .object({
     price: z.number().describe('The domain price in USD.'),
-    period: z.number().describe('The number of years the domain could be held before paying again.'),
+    period: z.union([z.literal(1), z.literal(10), z.literal(2)]).describe('The number of years the domain could be held before paying again.'),
   })
   .describe('Successful response which returns the price of the domain and the period.') as unknown as ToZod<CheckDomainPrice200>
 
@@ -10184,6 +10899,8 @@ export const checkDomainStatus401Schema = z.unknown() as unknown as ToZod<CheckD
  * @description You do not have permission to access this resource.
  */
 export const checkDomainStatus403Schema = z.unknown() as unknown as ToZod<CheckDomainStatus403>
+
+export const checkDomainStatus408Schema = z.unknown() as unknown as ToZod<CheckDomainStatus408>
 
 export const checkDomainStatus500Schema = z.unknown() as unknown as ToZod<CheckDomainStatus500>
 
@@ -10321,7 +11038,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().url().describe('The record value must be a valid IPv4 address.'),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10337,7 +11053,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().url().describe('An AAAA record pointing to an IPv6 address.'),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10353,7 +11068,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().describe('An ALIAS virtual record pointing to a hostname resolved to an A record on server side.'),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10369,7 +11083,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().describe('A CAA record to specify which Certificate Authorities (CAs) are allowed to issue certificates for the domain.'),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10385,7 +11098,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().describe('A CNAME record mapping to another domain name.').optional(),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10402,7 +11114,6 @@ export const createRecordMutationRequestSchema = z.union([
       mxPriority: z.number().min(0).max(65535),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10423,7 +11134,6 @@ export const createRecordMutationRequestSchema = z.union([
       }),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10439,7 +11149,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().describe('A TXT record containing arbitrary text.'),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10455,7 +11164,6 @@ export const createRecordMutationRequestSchema = z.union([
       value: z.string().describe('An NS domain value.').optional(),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10475,7 +11183,6 @@ export const createRecordMutationRequestSchema = z.union([
       }),
       comment: z.string().max(500).describe('A comment to add context on what this DNS record is for').optional(),
     })
-    .strict()
     .and(
       z.object({
         type: z
@@ -10898,6 +11605,9 @@ export const createOrTransferDomain403Schema = z.unknown() as unknown as ToZod<C
 
 export const createOrTransferDomain404Schema = z.unknown() as unknown as ToZod<CreateOrTransferDomain404>
 
+/**
+ * @description The domain is not allowed to be used
+ */
 export const createOrTransferDomain409Schema = z.unknown() as unknown as ToZod<CreateOrTransferDomain409>
 
 export const createOrTransferDomain500Schema = z.unknown() as unknown as ToZod<CreateOrTransferDomain500>
@@ -11044,37 +11754,6 @@ export const deleteDomain404Schema = z.unknown() as unknown as ToZod<DeleteDomai
 export const deleteDomain409Schema = z.unknown() as unknown as ToZod<DeleteDomain409>
 
 export const deleteDomainMutationResponseSchema = z.lazy(() => deleteDomain200Schema) as unknown as ToZod<DeleteDomainMutationResponse>
-
-export const deleteConfigurableLogDrainPathParamsSchema = z.object({
-  id: z.string(),
-}) as unknown as ToZod<DeleteConfigurableLogDrainPathParams>
-
-export const deleteConfigurableLogDrainQueryParamsSchema = z
-  .object({
-    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
-    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
-  })
-  .optional() as unknown as ToZod<DeleteConfigurableLogDrainQueryParams>
-
-export const deleteConfigurableLogDrain204Schema = z.unknown() as unknown as ToZod<DeleteConfigurableLogDrain204>
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export const deleteConfigurableLogDrain400Schema = z.unknown() as unknown as ToZod<DeleteConfigurableLogDrain400>
-
-export const deleteConfigurableLogDrain401Schema = z.unknown() as unknown as ToZod<DeleteConfigurableLogDrain401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const deleteConfigurableLogDrain403Schema = z.unknown() as unknown as ToZod<DeleteConfigurableLogDrain403>
-
-export const deleteConfigurableLogDrain404Schema = z.unknown() as unknown as ToZod<DeleteConfigurableLogDrain404>
-
-export const deleteConfigurableLogDrainMutationResponseSchema = z.lazy(
-  () => deleteConfigurableLogDrain204Schema,
-) as unknown as ToZod<DeleteConfigurableLogDrainMutationResponse>
 
 export const getEdgeConfigsQueryParamsSchema = z
   .object({
@@ -11400,9 +12079,9 @@ export const getEdgeConfigItemsQueryParamsSchema = z
   .optional() as unknown as ToZod<GetEdgeConfigItemsQueryParams>
 
 /**
- * @description The EdgeConfig.
+ * @description List of all Edge Config items.
  */
-export const getEdgeConfigItems200Schema = z.lazy(() => edgeConfigItemSchema).describe('The EdgeConfig.') as unknown as ToZod<GetEdgeConfigItems200>
+export const getEdgeConfigItems200Schema = z.array(z.lazy(() => edgeConfigItemSchema).describe('The EdgeConfig.')) as unknown as ToZod<GetEdgeConfigItems200>
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -11464,7 +12143,6 @@ export const patchEdgeConfigItemsMutationRequestSchema = z.object({
         .object({
           operation: z.unknown(),
         })
-        .strict()
         .and(
           z.object({
             operation: z.enum(['create', 'update', 'upsert', 'delete']).optional(),
@@ -11481,7 +12159,6 @@ export const patchEdgeConfigItemsMutationRequestSchema = z.object({
         .object({
           operation: z.enum(['update', 'upsert']),
         })
-        .strict()
         .and(
           z.object({
             operation: z.enum(['create', 'update', 'upsert', 'delete']).optional(),
@@ -11498,7 +12175,6 @@ export const patchEdgeConfigItemsMutationRequestSchema = z.object({
         .object({
           operation: z.enum(['update', 'upsert']),
         })
-        .strict()
         .and(
           z.object({
             operation: z.enum(['create', 'update', 'upsert', 'delete']).optional(),
@@ -11515,7 +12191,6 @@ export const patchEdgeConfigItemsMutationRequestSchema = z.object({
         .object({
           operation: z.unknown(),
         })
-        .strict()
         .and(
           z.object({
             operation: z.enum(['create', 'update', 'upsert', 'delete']).optional(),
@@ -12049,6 +12724,8 @@ export const getAccountInfo401Schema = z.unknown() as unknown as ToZod<GetAccoun
  */
 export const getAccountInfo403Schema = z.unknown() as unknown as ToZod<GetAccountInfo403>
 
+export const getAccountInfo404Schema = z.unknown() as unknown as ToZod<GetAccountInfo404>
+
 export const getAccountInfoQueryResponseSchema = z.lazy(() => getAccountInfo200Schema) as unknown as ToZod<GetAccountInfoQueryResponse>
 
 export const getMemberPathParamsSchema = z.object({
@@ -12058,7 +12735,11 @@ export const getMemberPathParamsSchema = z.object({
 
 export const getMember200Schema = z.object({
   id: z.string(),
-  role: z.enum(['ADMIN', 'USER']),
+  role: z
+    .enum(['ADMIN', 'USER'])
+    .describe(
+      'The `ADMIN` role, by default, is provided to users capable of installing integrations, while the `USER` role can be granted to Vercel users with the Vercel `Billing` or Vercel `Viewer` role, which are considered to be Read-Only roles.',
+    ),
 }) as unknown as ToZod<GetMember200>
 
 /**
@@ -12095,6 +12776,8 @@ export const createEvent401Schema = z.unknown() as unknown as ToZod<CreateEvent4
  */
 export const createEvent403Schema = z.unknown() as unknown as ToZod<CreateEvent403>
 
+export const createEvent404Schema = z.unknown() as unknown as ToZod<CreateEvent404>
+
 export const createEventMutationRequestSchema = z.object({
   event: z.union([
     z.object({
@@ -12110,6 +12793,235 @@ export const createEventMutationRequestSchema = z.object({
 }) as unknown as ToZod<CreateEventMutationRequest>
 
 export const createEventMutationResponseSchema = z.lazy(() => createEvent201Schema) as unknown as ToZod<CreateEventMutationResponse>
+
+export const getIntegrationResourcesPathParamsSchema = z.object({
+  integrationConfigurationId: z.string(),
+}) as unknown as ToZod<GetIntegrationResourcesPathParams>
+
+export const getIntegrationResources200Schema = z.object({
+  resources: z.array(
+    z.object({
+      partnerId: z.string().describe('The ID provided by the partner for the given resource'),
+      internalId: z.string().describe('The ID assigned by Vercel for the given resource'),
+      name: z.string().describe('The name of the resource as it is recorded in Vercel'),
+      status: z.enum(['error', 'pending', 'ready', 'resumed', 'suspended', 'uninstalled']).describe('The current status of the resource').optional(),
+      productId: z.string().describe('The ID of the product the resource is derived from'),
+      protocolSettings: z
+        .object({
+          experimentation: z
+            .object({
+              edgeConfigSyncingEnabled: z.boolean().optional(),
+              edgeConfigId: z.string().optional(),
+              edgeConfigTokenId: z.string().optional(),
+            })
+            .optional(),
+        })
+        .describe("Any settings provided for the resource to support its product's protocols")
+        .optional(),
+      notification: z
+        .object({
+          level: z.enum(['error', 'info', 'warn']),
+          title: z.string(),
+          message: z.string().optional(),
+          href: z.string().optional(),
+        })
+        .describe('The notification, if set, displayed to the user when viewing the resource in Vercel')
+        .optional(),
+      billingPlanId: z.string().describe('The ID of the billing plan the resource is subscribed to, if applicable').optional(),
+      metadata: z
+        .object({})
+        .catchall(z.union([z.boolean(), z.array(z.string()), z.array(z.number()), z.string(), z.number()]))
+        .describe("The configured metadata for the resource as defined by its product's Metadata Schema")
+        .optional(),
+    }),
+  ),
+}) as unknown as ToZod<GetIntegrationResources200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getIntegrationResources400Schema = z.unknown() as unknown as ToZod<GetIntegrationResources400>
+
+export const getIntegrationResources401Schema = z.unknown() as unknown as ToZod<GetIntegrationResources401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getIntegrationResources403Schema = z.unknown() as unknown as ToZod<GetIntegrationResources403>
+
+export const getIntegrationResources404Schema = z.unknown() as unknown as ToZod<GetIntegrationResources404>
+
+export const getIntegrationResourcesQueryResponseSchema = z.lazy(
+  () => getIntegrationResources200Schema,
+) as unknown as ToZod<GetIntegrationResourcesQueryResponse>
+
+export const getIntegrationResourcePathParamsSchema = z.object({
+  integrationConfigurationId: z.string().describe('The ID of the integration configuration (installation) the resource belongs to'),
+  resourceId: z.string().describe('The ID provided by the 3rd party provider for the given resource'),
+}) as unknown as ToZod<GetIntegrationResourcePathParams>
+
+export const getIntegrationResource200Schema = z.object({
+  id: z.string().describe('The ID provided by the 3rd party provider for the given resource'),
+  internalId: z.string().describe('The ID assigned by Vercel for the given resource'),
+  name: z.string().describe('The name of the resource as it is recorded in Vercel'),
+  status: z.enum(['error', 'pending', 'ready', 'resumed', 'suspended', 'uninstalled']).describe('The current status of the resource').optional(),
+  productId: z.string().describe('The ID of the product the resource is derived from'),
+  protocolSettings: z
+    .object({
+      experimentation: z
+        .object({
+          edgeConfigSyncingEnabled: z.boolean().optional(),
+          edgeConfigId: z.string().optional(),
+          edgeConfigTokenId: z.string().optional(),
+        })
+        .optional(),
+    })
+    .describe("Any settings provided for the resource to support its product's protocols")
+    .optional(),
+  notification: z
+    .object({
+      level: z.enum(['error', 'info', 'warn']),
+      title: z.string(),
+      message: z.string().optional(),
+      href: z.string().optional(),
+    })
+    .describe('The notification, if set, displayed to the user when viewing the resource in Vercel')
+    .optional(),
+  billingPlanId: z.string().describe('The ID of the billing plan the resource is subscribed to, if applicable').optional(),
+  metadata: z
+    .object({})
+    .catchall(z.union([z.boolean(), z.array(z.string()), z.array(z.number()), z.string(), z.number()]))
+    .describe("The configured metadata for the resource as defined by its product's Metadata Schema")
+    .optional(),
+}) as unknown as ToZod<GetIntegrationResource200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getIntegrationResource400Schema = z.unknown() as unknown as ToZod<GetIntegrationResource400>
+
+export const getIntegrationResource401Schema = z.unknown() as unknown as ToZod<GetIntegrationResource401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getIntegrationResource403Schema = z.unknown() as unknown as ToZod<GetIntegrationResource403>
+
+export const getIntegrationResource404Schema = z.unknown() as unknown as ToZod<GetIntegrationResource404>
+
+export const getIntegrationResourceQueryResponseSchema = z.lazy(() => getIntegrationResource200Schema) as unknown as ToZod<GetIntegrationResourceQueryResponse>
+
+export const deleteIntegrationResourcePathParamsSchema = z.object({
+  integrationConfigurationId: z.string(),
+  resourceId: z.string(),
+}) as unknown as ToZod<DeleteIntegrationResourcePathParams>
+
+export const deleteIntegrationResource204Schema = z.unknown() as unknown as ToZod<DeleteIntegrationResource204>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const deleteIntegrationResource400Schema = z.unknown() as unknown as ToZod<DeleteIntegrationResource400>
+
+export const deleteIntegrationResource401Schema = z.unknown() as unknown as ToZod<DeleteIntegrationResource401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const deleteIntegrationResource403Schema = z.unknown() as unknown as ToZod<DeleteIntegrationResource403>
+
+export const deleteIntegrationResource404Schema = z.unknown() as unknown as ToZod<DeleteIntegrationResource404>
+
+export const deleteIntegrationResourceMutationResponseSchema = z.lazy(
+  () => deleteIntegrationResource204Schema,
+) as unknown as ToZod<DeleteIntegrationResourceMutationResponse>
+
+export const importResourcePathParamsSchema = z.object({
+  integrationConfigurationId: z.string(),
+  resourceId: z.string(),
+}) as unknown as ToZod<ImportResourcePathParams>
+
+export const importResource200Schema = z.object({
+  name: z.string(),
+}) as unknown as ToZod<ImportResource200>
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export const importResource400Schema = z.unknown() as unknown as ToZod<ImportResource400>
+
+export const importResource401Schema = z.unknown() as unknown as ToZod<ImportResource401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const importResource403Schema = z.unknown() as unknown as ToZod<ImportResource403>
+
+export const importResource404Schema = z.unknown() as unknown as ToZod<ImportResource404>
+
+export const importResourceMutationRequestSchema = z.object({
+  productId: z.string(),
+  name: z.string(),
+  status: z.enum(['error', 'pending', 'ready', 'resumed', 'suspended', 'uninstalled']),
+  metadata: z.object({}).catchall(z.unknown()).optional(),
+  billingPlan: z
+    .object({
+      id: z.string(),
+      type: z.enum(['prepayment', 'subscription']),
+      name: z.string(),
+      description: z.string().optional(),
+      paymentMethodRequired: z.boolean().optional(),
+      cost: z.string().optional(),
+      details: z
+        .array(
+          z.object({
+            label: z.string(),
+            value: z.string().optional(),
+          }),
+        )
+        .optional(),
+      heightlightedDetails: z
+        .array(
+          z.object({
+            label: z.string(),
+            value: z.string().optional(),
+          }),
+        )
+        .optional(),
+      effectiveDate: z.string().optional(),
+    })
+    .catchall(z.unknown())
+    .optional(),
+  notification: z
+    .object({
+      level: z.enum(['error', 'info', 'warn']),
+      title: z.string(),
+      message: z.string().optional(),
+      href: z.string().url().optional(),
+    })
+    .optional(),
+  secrets: z
+    .array(
+      z.object({
+        name: z.string(),
+        value: z.string(),
+        prefix: z.string().optional(),
+        environmentOverrides: z
+          .object({
+            development: z.string().describe('Value used for development environment.').optional(),
+            preview: z.string().describe('Value used for preview environment.').optional(),
+            production: z.string().describe('Value used for production environment.').optional(),
+          })
+          .describe(
+            'A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.',
+          )
+          .optional(),
+      }),
+    )
+    .optional(),
+}) as unknown as ToZod<ImportResourceMutationRequest>
+
+export const importResourceMutationResponseSchema = z.lazy(() => importResource200Schema) as unknown as ToZod<ImportResourceMutationResponse>
 
 export const submitBillingDataPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -12128,6 +13040,8 @@ export const submitBillingData401Schema = z.unknown() as unknown as ToZod<Submit
  * @description You do not have permission to access this resource.
  */
 export const submitBillingData403Schema = z.unknown() as unknown as ToZod<SubmitBillingData403>
+
+export const submitBillingData404Schema = z.unknown() as unknown as ToZod<SubmitBillingData404>
 
 export const submitBillingDataMutationRequestSchema = z.object({
   timestamp: z
@@ -12248,6 +13162,8 @@ export const submitInvoice401Schema = z.unknown() as unknown as ToZod<SubmitInvo
  * @description You do not have permission to access this resource.
  */
 export const submitInvoice403Schema = z.unknown() as unknown as ToZod<SubmitInvoice403>
+
+export const submitInvoice404Schema = z.unknown() as unknown as ToZod<SubmitInvoice404>
 
 export const submitInvoiceMutationRequestSchema = z.object({
   externalId: z.string().optional(),
@@ -12432,6 +13348,8 @@ export const submitPrepaymentBalances401Schema = z.unknown() as unknown as ToZod
  */
 export const submitPrepaymentBalances403Schema = z.unknown() as unknown as ToZod<SubmitPrepaymentBalances403>
 
+export const submitPrepaymentBalances404Schema = z.unknown() as unknown as ToZod<SubmitPrepaymentBalances404>
+
 export const submitPrepaymentBalancesMutationRequestSchema = z.object({
   timestamp: z
     .date()
@@ -12484,6 +13402,16 @@ export const updateResourceSecretsMutationRequestSchema = z.object({
       name: z.string(),
       value: z.string(),
       prefix: z.string().optional(),
+      environmentOverrides: z
+        .object({
+          development: z.string().describe('Value used for development environment.').optional(),
+          preview: z.string().describe('Value used for preview environment.').optional(),
+          production: z.string().describe('Value used for production environment.').optional(),
+        })
+        .describe(
+          'A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.',
+        )
+        .optional(),
     }),
   ),
   partial: z.boolean().describe('If true, will only update the provided secrets').optional(),
@@ -12522,91 +13450,24 @@ export const updateResourceSecretsByIdMutationRequestSchema = z.object({
       name: z.string(),
       value: z.string(),
       prefix: z.string().optional(),
+      environmentOverrides: z
+        .object({
+          development: z.string().describe('Value used for development environment.').optional(),
+          preview: z.string().describe('Value used for preview environment.').optional(),
+          production: z.string().describe('Value used for production environment.').optional(),
+        })
+        .describe(
+          'A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.',
+        )
+        .optional(),
     }),
   ),
-  partial: z.boolean().describe('If true, will only update the provided secrets').optional(),
+  partial: z.boolean().describe('If true, will only overwrite the provided secrets instead of replacing all secrets.').optional(),
 }) as unknown as ToZod<UpdateResourceSecretsByIdMutationRequest>
 
 export const updateResourceSecretsByIdMutationResponseSchema = z.lazy(
   () => updateResourceSecretsById201Schema,
 ) as unknown as ToZod<UpdateResourceSecretsByIdMutationResponse>
-
-export const importResourcePathParamsSchema = z.object({
-  integrationConfigurationId: z.string(),
-  resourceId: z.string(),
-}) as unknown as ToZod<ImportResourcePathParams>
-
-export const importResource200Schema = z.object({
-  name: z.string(),
-}) as unknown as ToZod<ImportResource200>
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export const importResource400Schema = z.unknown() as unknown as ToZod<ImportResource400>
-
-export const importResource401Schema = z.unknown() as unknown as ToZod<ImportResource401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const importResource403Schema = z.unknown() as unknown as ToZod<ImportResource403>
-
-export const importResource404Schema = z.unknown() as unknown as ToZod<ImportResource404>
-
-export const importResourceMutationRequestSchema = z.object({
-  productId: z.string(),
-  name: z.string(),
-  status: z.enum(['error', 'pending', 'ready', 'resumed', 'suspended', 'uninstalled']),
-  metadata: z.object({}).catchall(z.unknown()).optional(),
-  billingPlan: z
-    .object({
-      id: z.string(),
-      type: z.enum(['prepayment', 'subscription']),
-      name: z.string(),
-      description: z.string().optional(),
-      paymentMethodRequired: z.boolean().optional(),
-      cost: z.string().optional(),
-      details: z
-        .array(
-          z.object({
-            label: z.string(),
-            value: z.string().optional(),
-          }),
-        )
-        .optional(),
-      heightlightedDetails: z
-        .array(
-          z.object({
-            label: z.string(),
-            value: z.string().optional(),
-          }),
-        )
-        .optional(),
-      effectiveDate: z.string().optional(),
-    })
-    .catchall(z.unknown())
-    .optional(),
-  notification: z
-    .object({
-      level: z.enum(['error', 'info', 'warn']),
-      title: z.string(),
-      message: z.string().optional(),
-      href: z.string().url().optional(),
-    })
-    .optional(),
-  secrets: z
-    .array(
-      z.object({
-        name: z.string(),
-        value: z.string(),
-        prefix: z.string().optional(),
-      }),
-    )
-    .optional(),
-}) as unknown as ToZod<ImportResourceMutationRequest>
-
-export const importResourceMutationResponseSchema = z.lazy(() => importResource200Schema) as unknown as ToZod<ImportResourceMutationResponse>
 
 export const getConfigurationsQueryParamsSchema = z.object({
   view: z.enum(['account', 'project']),
@@ -12858,6 +13719,12 @@ export const getConfiguration200Schema = z.union([
   }),
   z.object({
     projectSelection: z.enum(['selected', 'all']).describe('A string representing the permission for projects. Possible values are `all` or `selected`.'),
+    notification: z.object({
+      level: z.enum(['info', 'warn', 'error']),
+      title: z.string(),
+      message: z.string().optional(),
+      href: z.string().optional(),
+    }),
     transferRequest: z.union([
       z.object({
         kind: z.enum(['transfer-to-marketplace']),
@@ -13216,114 +14083,6 @@ export const deleteIntegrationLogDrainMutationResponseSchema = z.lazy(
   () => deleteIntegrationLogDrain204Schema,
 ) as unknown as ToZod<DeleteIntegrationLogDrainMutationResponse>
 
-export const getprojectsprojectIdlogsPresetsPathParamsSchema = z.object({
-  projectId: z.string(),
-}) as unknown as ToZod<GetprojectsprojectIdlogsPresetsPathParams>
-
-export const getprojectsprojectIdlogsPresets200Schema = z.array(
-  z.lazy(() => teamSchema).describe('Data representing a Team.'),
-) as unknown as ToZod<GetprojectsprojectIdlogsPresets200>
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export const getprojectsprojectIdlogsPresets400Schema = z.unknown() as unknown as ToZod<GetprojectsprojectIdlogsPresets400>
-
-export const getprojectsprojectIdlogsPresets401Schema = z.unknown() as unknown as ToZod<GetprojectsprojectIdlogsPresets401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const getprojectsprojectIdlogsPresets403Schema = z.unknown() as unknown as ToZod<GetprojectsprojectIdlogsPresets403>
-
-export const getprojectsprojectIdlogsPresetsQueryResponseSchema = z.lazy(
-  () => getprojectsprojectIdlogsPresets200Schema,
-) as unknown as ToZod<GetprojectsprojectIdlogsPresetsQueryResponse>
-
-export const postprojectsprojectIdlogsPresetsPathParamsSchema = z.object({
-  projectId: z.string().describe('projectId of the preset'),
-}) as unknown as ToZod<PostprojectsprojectIdlogsPresetsPathParams>
-
-export const postprojectsprojectIdlogsPresets200Schema = z
-  .lazy(() => teamSchema)
-  .describe('Data representing a Team.') as unknown as ToZod<PostprojectsprojectIdlogsPresets200>
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export const postprojectsprojectIdlogsPresets400Schema = z.unknown() as unknown as ToZod<PostprojectsprojectIdlogsPresets400>
-
-export const postprojectsprojectIdlogsPresets401Schema = z.unknown() as unknown as ToZod<PostprojectsprojectIdlogsPresets401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const postprojectsprojectIdlogsPresets403Schema = z.unknown() as unknown as ToZod<PostprojectsprojectIdlogsPresets403>
-
-export const postprojectsprojectIdlogsPresetsMutationRequestSchema = z.object({
-  query: z.string().max(1000).describe('query parameter for saved filter preset'),
-  title: z.string().max(70).describe('The title of the preset'),
-  group: z.enum(['personal', 'team']),
-}) as unknown as ToZod<PostprojectsprojectIdlogsPresetsMutationRequest>
-
-export const postprojectsprojectIdlogsPresetsMutationResponseSchema = z.lazy(
-  () => postprojectsprojectIdlogsPresets200Schema,
-) as unknown as ToZod<PostprojectsprojectIdlogsPresetsMutationResponse>
-
-export const deleteprojectsprojectIdlogsPresetsidPathParamsSchema = z.object({
-  projectId: z.string().describe('projectId of the preset'),
-  id: z.string().describe('id of the preset'),
-}) as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsidPathParams>
-
-export const deleteprojectsprojectIdlogsPresetsid204Schema = z.unknown() as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsid204>
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export const deleteprojectsprojectIdlogsPresetsid400Schema = z.unknown() as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsid400>
-
-export const deleteprojectsprojectIdlogsPresetsid401Schema = z.unknown() as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsid401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const deleteprojectsprojectIdlogsPresetsid403Schema = z.unknown() as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsid403>
-
-export const deleteprojectsprojectIdlogsPresetsidMutationResponseSchema = z.lazy(
-  () => deleteprojectsprojectIdlogsPresetsid204Schema,
-) as unknown as ToZod<DeleteprojectsprojectIdlogsPresetsidMutationResponse>
-
-export const patchprojectsprojectIdlogsPresetsidPathParamsSchema = z.object({
-  projectId: z.string().describe('projectId of the preset'),
-  id: z.string().describe('Id of the preset'),
-}) as unknown as ToZod<PatchprojectsprojectIdlogsPresetsidPathParams>
-
-export const patchprojectsprojectIdlogsPresetsid200Schema = z
-  .lazy(() => teamSchema)
-  .describe('Data representing a Team.') as unknown as ToZod<PatchprojectsprojectIdlogsPresetsid200>
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export const patchprojectsprojectIdlogsPresetsid400Schema = z.unknown() as unknown as ToZod<PatchprojectsprojectIdlogsPresetsid400>
-
-export const patchprojectsprojectIdlogsPresetsid401Schema = z.unknown() as unknown as ToZod<PatchprojectsprojectIdlogsPresetsid401>
-
-/**
- * @description You do not have permission to access this resource.
- */
-export const patchprojectsprojectIdlogsPresetsid403Schema = z.unknown() as unknown as ToZod<PatchprojectsprojectIdlogsPresetsid403>
-
-export const patchprojectsprojectIdlogsPresetsid404Schema = z.unknown() as unknown as ToZod<PatchprojectsprojectIdlogsPresetsid404>
-
-export const patchprojectsprojectIdlogsPresetsidMutationRequestSchema = z.object({
-  title: z.string().max(70).describe('The title of the preset'),
-}) as unknown as ToZod<PatchprojectsprojectIdlogsPresetsidMutationRequest>
-
-export const patchprojectsprojectIdlogsPresetsidMutationResponseSchema = z.lazy(
-  () => patchprojectsprojectIdlogsPresetsid200Schema,
-) as unknown as ToZod<PatchprojectsprojectIdlogsPresetsidMutationResponse>
-
 export const getRuntimeLogsPathParamsSchema = z.object({
   projectId: z.string(),
   deploymentId: z.string(),
@@ -13336,18 +14095,7 @@ export const getRuntimeLogsQueryParamsSchema = z
   })
   .optional() as unknown as ToZod<GetRuntimeLogsQueryParams>
 
-export const getRuntimeLogs200Schema = z.object({
-  level: z.enum(['error', 'info', 'warning']),
-  message: z.string(),
-  rowId: z.string(),
-  source: z.enum(['delimiter', 'edge-function', 'edge-middleware', 'request', 'serverless']),
-  timestampInMs: z.number(),
-  domain: z.string(),
-  messageTruncated: z.boolean(),
-  requestMethod: z.string(),
-  requestPath: z.string(),
-  responseStatusCode: z.number(),
-}) as unknown as ToZod<GetRuntimeLogs200>
+export const getRuntimeLogs200Schema = z.unknown() as unknown as ToZod<GetRuntimeLogs200>
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -13666,7 +14414,7 @@ export const addProjectMember403Schema = z.unknown() as unknown as ToZod<AddProj
 
 export const addProjectMember500Schema = z.unknown() as unknown as ToZod<AddProjectMember500>
 
-export const addProjectMemberMutationRequestSchema = z.undefined() as unknown as ToZod<AddProjectMemberMutationRequest>
+export const addProjectMemberMutationRequestSchema = z.unknown() as unknown as ToZod<AddProjectMemberMutationRequest>
 
 export const addProjectMemberMutationResponseSchema = z.lazy(() => addProjectMember200Schema) as unknown as ToZod<AddProjectMemberMutationResponse>
 
@@ -13755,8 +14503,28 @@ export const getProjects200Schema = z
         autoAssignCustomDomainsUpdatedBy: z.string().optional(),
         buildCommand: z.string().nullable().nullish(),
         commandForIgnoringBuildStep: z.string().nullable().nullish(),
+        connectConfigurations: z
+          .array(
+            z.object({
+              envId: z.union([z.string(), z.enum(['production', 'preview'])]),
+              connectConfigurationId: z.string(),
+              passive: z.boolean(),
+              buildsEnabled: z.boolean(),
+              aws: z
+                .object({
+                  subnetIds: z.array(z.string()),
+                  securityGroupId: z.string(),
+                })
+                .optional(),
+              createdAt: z.number(),
+              updatedAt: z.number(),
+            }),
+          )
+          .nullable()
+          .nullish(),
         connectConfigurationId: z.string().nullable().nullish(),
         connectBuildsEnabled: z.boolean().optional(),
+        passiveConnectConfigurationId: z.string().nullable().nullish(),
         createdAt: z.number().optional(),
         customerSupportCodeVisibility: z.boolean().optional(),
         crons: z
@@ -13986,6 +14754,7 @@ export const getProjects200Schema = z
             'jekyll',
             'middleman',
             'nextjs',
+            'nitro',
             'nuxtjs',
             'parcel',
             'polymer',
@@ -14265,7 +15034,6 @@ export const getProjects200Schema = z
           .nullable()
           .nullish(),
         outputDirectory: z.string().nullable().nullish(),
-        passiveConnectConfigurationId: z.string().nullable().nullish(),
         passwordProtection: z.object({}).nullable().nullish(),
         productionDeploymentsFastLane: z.boolean().optional(),
         publicSource: z.boolean().nullable().nullish(),
@@ -14276,8 +15044,17 @@ export const getProjects200Schema = z
           functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
           functionZeroConfigFailover: z.boolean().optional(),
           elasticConcurrencyEnabled: z.boolean().optional(),
-          buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+          buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
         }),
+        rollbackDescription: z
+          .object({
+            userId: z.string().describe('The user who rolled back the project.'),
+            username: z.string().describe('The username of the user who rolled back the project.'),
+            description: z.string().describe('User-supplied explanation of why they rolled back the project. Limited to 250 characters.'),
+            createdAt: z.number().describe('Timestamp of when the rollback was requested.'),
+          })
+          .describe('Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.')
+          .optional(),
         rollingRelease: z
           .object({
             target: z
@@ -14285,34 +15062,31 @@ export const getProjects200Schema = z
               .describe(
                 'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
               ),
-            minutesToRelease: z
-              .number()
-              .describe(
-                'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.',
-              )
-              .optional(),
             stages: z
               .array(
                 z
                   .object({
-                    targetPercentage: z.number().describe('The percentage of traffic to serve to the new deployment'),
-                    minutesToRelease: z
-                      .number()
-                      .describe(
-                        'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.',
-                      )
-                      .optional(),
-                    requireApproval: z.boolean().describe('Whether or not this stage requires approval to proceed.').optional(),
-                    duration: z.number().describe('duration is the total time to serve a stage, at the given targetPercentage.').optional(),
+                    targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+                    requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+                    duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
                   })
                   .describe(
-                    'An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.',
+                    'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
                   ),
               )
-              .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.')
+              .describe(
+                'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+              )
               .nullable()
               .nullish(),
+            canaryResponseHeader: z
+              .boolean()
+              .describe(
+                'Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.',
+              )
+              .optional(),
           })
+          .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
           .nullable()
           .nullish(),
         defaultResourceConfig: z.object({
@@ -14322,10 +15096,9 @@ export const getProjects200Schema = z
           functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
           functionZeroConfigFailover: z.boolean().optional(),
           elasticConcurrencyEnabled: z.boolean().optional(),
-          buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+          buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
         }),
         rootDirectory: z.string().nullable().nullish(),
-        serverlessFunctionRegion: z.string().nullable().nullish(),
         serverlessFunctionZeroConfigFailover: z.boolean().optional(),
         skewProtectionBoundaryAt: z.number().optional(),
         skewProtectionMaxAge: z.number().optional(),
@@ -14334,7 +15107,7 @@ export const getProjects200Schema = z
         enableAffectedProjectsDeployments: z.boolean().optional(),
         ssoProtection: z
           .object({
-            deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+            deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
           })
           .nullable()
           .nullish(),
@@ -14432,6 +15205,326 @@ export const getProjects200Schema = z
         enableProductionFeedback: z.boolean().nullable().nullish(),
         permissions: z
           .object({
+            aliasProject: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            aliasProtectionBypass: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            buildMachine: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            productionAliasProtectionBypass: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            connectConfigurationLink: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            dataCacheNamespace: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deployment: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentCheck: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentCheckPreview: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentCheckReRunFromProductionBranch: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentProductionGit: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentV0: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentPreview: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentPrivate: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentPromote: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            deploymentRollback: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            edgeCacheNamespace: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            environments: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            logs: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            logsPreset: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            passwordProtection: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            optionsAllowlist: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            job: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            observabilityData: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            onDemandBuild: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            onDemandConcurrency: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            project: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectFromV0: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectAccessGroup: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectAnalyticsSampling: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectCheck: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectCheckRun: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectDeploymentHook: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectDomain: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectDomainMove: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectDomainCheckConfig: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectEnvVars: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectEnvVarsProduction: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectEnvVarsUnownedByIntegration: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectFlags: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectId: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectIntegrationConfiguration: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectLink: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectMember: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectMonitoring: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectPermissions: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectProductionBranch: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectTransfer: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectTransferOut: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectProtectionBypass: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectUsage: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectAnalyticsUsage: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectSupportCase: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectSupportCaseComment: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectDeploymentExpiration: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectRollingRelease: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            projectTier: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            seawallConfig: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            skewProtection: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            analytics: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            trustedIps: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            webAnalytics: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            sharedEnvVarConnection: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            sonar: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
             user: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
@@ -14558,6 +15651,11 @@ export const getProjects200Schema = z
               )
               .optional(),
             connectConfiguration: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            defaultDeploymentProtection: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
@@ -14827,6 +15925,11 @@ export const getProjects200Schema = z
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
               .optional(),
+            notificationPreferences: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
             notificationCustomerBudget: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
@@ -14843,6 +15946,11 @@ export const getProjects200Schema = z
               )
               .optional(),
             observabilityNotebook: z
+              .array(
+                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
+              )
+              .optional(),
+            observabilityFunnel: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
@@ -15117,292 +16225,12 @@ export const getProjects200Schema = z
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
               .optional(),
-            aliasProject: z
+            apiKey: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
               .optional(),
-            aliasProtectionBypass: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            productionAliasProtectionBypass: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            connectConfigurationLink: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            dataCacheNamespace: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deployment: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentCheck: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentCheckPreview: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentCheckReRunFromProductionBranch: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentProductionGit: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentV0: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentPreview: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentPrivate: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentPromote: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            deploymentRollback: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            environments: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            logs: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            logsPreset: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            passwordProtection: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            optionsAllowlist: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            job: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            observabilityData: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            project: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectFromV0: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectAccessGroup: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectAnalyticsSampling: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectDeploymentHook: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectDomain: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectDomainMove: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectDomainCheckConfig: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectEnvVars: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectEnvVarsProduction: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectEnvVarsUnownedByIntegration: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectFlags: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectId: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectIntegrationConfiguration: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectLink: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectMember: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectMonitoring: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectPermissions: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectProductionBranch: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectTransfer: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectTransferOut: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectProtectionBypass: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectUsage: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectAnalyticsUsage: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectSupportCase: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectSupportCaseComment: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectDeploymentExpiration: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectRollingRelease: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            projectTier: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            seawallConfig: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            skewProtection: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            analytics: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            trustedIps: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            webAnalytics: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            sharedEnvVarConnection: z
-              .array(
-                z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
-              )
-              .optional(),
-            sonar: z
+            apiKeyOwnedBySelf: z
               .array(
                 z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'),
               )
@@ -15449,7 +16277,7 @@ export const getProjects200Schema = z
         trustedIps: z
           .union([
             z.object({
-              deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+              deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
               addresses: z.array(
                 z.object({
                   value: z.string(),
@@ -15459,7 +16287,7 @@ export const getProjects200Schema = z
               protectionMode: z.enum(['additional', 'exclusive']),
             }),
             z.object({
-              deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+              deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains']),
             }),
           ])
           .nullable()
@@ -15623,24 +16451,37 @@ export const getProjects200Schema = z
             ja4Enabled: z.boolean().optional(),
             firewallBypassIps: z.array(z.string()).optional(),
             managedRules: z
-              .object({})
-              .catchall(
-                z.object({
+              .object({
+                bot_filter: z.object({
                   active: z.boolean(),
                   action: z.enum(['challenge', 'deny', 'log']).optional(),
                 }),
-              )
+                ai_bots: z.object({
+                  active: z.boolean(),
+                  action: z.enum(['challenge', 'deny', 'log']).optional(),
+                }),
+                owasp: z.object({
+                  active: z.boolean(),
+                  action: z.enum(['challenge', 'deny', 'log']).optional(),
+                }),
+              })
               .nullable()
               .nullish(),
+            botIdEnabled: z.boolean().optional(),
           })
           .optional(),
         oidcTokenConfig: z
           .object({
-            enabled: z.boolean(),
+            enabled: z.boolean().describe('Whether or not to generate OpenID Connect JSON Web Tokens.').optional(),
             issuerMode: z.enum(['global', 'team']).describe('- team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`').optional(),
           })
           .optional(),
         tier: z.enum(['advanced', 'critical', 'standard']).optional(),
+        features: z
+          .object({
+            webAnalytics: z.boolean().optional(),
+          })
+          .optional(),
       }),
     ),
     pagination: z
@@ -15703,8 +16544,28 @@ export const createProject200Schema = z.object({
   autoAssignCustomDomainsUpdatedBy: z.string().optional(),
   buildCommand: z.string().nullable().nullish(),
   commandForIgnoringBuildStep: z.string().nullable().nullish(),
+  connectConfigurations: z
+    .array(
+      z.object({
+        envId: z.union([z.string(), z.enum(['preview', 'production'])]),
+        connectConfigurationId: z.string(),
+        passive: z.boolean(),
+        buildsEnabled: z.boolean(),
+        aws: z
+          .object({
+            subnetIds: z.array(z.string()),
+            securityGroupId: z.string(),
+          })
+          .optional(),
+        createdAt: z.number(),
+        updatedAt: z.number(),
+      }),
+    )
+    .nullable()
+    .nullish(),
   connectConfigurationId: z.string().nullable().nullish(),
   connectBuildsEnabled: z.boolean().optional(),
+  passiveConnectConfigurationId: z.string().nullable().nullish(),
   createdAt: z.number().optional(),
   customerSupportCodeVisibility: z.boolean().optional(),
   crons: z
@@ -15934,6 +16795,7 @@ export const createProject200Schema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -16213,7 +17075,6 @@ export const createProject200Schema = z.object({
     .nullable()
     .nullish(),
   outputDirectory: z.string().nullable().nullish(),
-  passiveConnectConfigurationId: z.string().nullable().nullish(),
   passwordProtection: z.object({}).nullable().nullish(),
   productionDeploymentsFastLane: z.boolean().optional(),
   publicSource: z.boolean().nullable().nullish(),
@@ -16224,8 +17085,17 @@ export const createProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
+  rollbackDescription: z
+    .object({
+      userId: z.string().describe('The user who rolled back the project.'),
+      username: z.string().describe('The username of the user who rolled back the project.'),
+      description: z.string().describe('User-supplied explanation of why they rolled back the project. Limited to 250 characters.'),
+      createdAt: z.number().describe('Timestamp of when the rollback was requested.'),
+    })
+    .describe('Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.')
+    .optional(),
   rollingRelease: z
     .object({
       target: z
@@ -16233,32 +17103,29 @@ export const createProject200Schema = z.object({
         .describe(
           'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
         ),
-      minutesToRelease: z
-        .number()
-        .describe(
-          'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.',
-        )
-        .optional(),
       stages: z
         .array(
           z
             .object({
-              targetPercentage: z.number().describe('The percentage of traffic to serve to the new deployment'),
-              minutesToRelease: z
-                .number()
-                .describe(
-                  'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.',
-                )
-                .optional(),
-              requireApproval: z.boolean().describe('Whether or not this stage requires approval to proceed.').optional(),
-              duration: z.number().describe('duration is the total time to serve a stage, at the given targetPercentage.').optional(),
+              targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+              requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+              duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
             })
-            .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.'),
+            .describe(
+              'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+            ),
         )
-        .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.')
+        .describe(
+          'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+        )
         .nullable()
         .nullish(),
+      canaryResponseHeader: z
+        .boolean()
+        .describe('Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.')
+        .optional(),
     })
+    .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
     .nullable()
     .nullish(),
   defaultResourceConfig: z.object({
@@ -16268,10 +17135,9 @@ export const createProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
   rootDirectory: z.string().nullable().nullish(),
-  serverlessFunctionRegion: z.string().nullable().nullish(),
   serverlessFunctionZeroConfigFailover: z.boolean().optional(),
   skewProtectionBoundaryAt: z.number().optional(),
   skewProtectionMaxAge: z.number().optional(),
@@ -16280,7 +17146,7 @@ export const createProject200Schema = z.object({
   enableAffectedProjectsDeployments: z.boolean().optional(),
   ssoProtection: z
     .object({
-      deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+      deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
     })
     .nullable()
     .nullish(),
@@ -16456,6 +17322,9 @@ export const createProject200Schema = z.object({
       connectConfiguration: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      defaultDeploymentProtection: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       domain: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -16615,6 +17484,9 @@ export const createProject200Schema = z.object({
       notificationUsageAlert: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      notificationPreferences: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       notificationCustomerBudget: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -16625,6 +17497,9 @@ export const createProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       observabilityNotebook: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      observabilityFunnel: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       openTelemetryEndpoint: z
@@ -16789,10 +17664,19 @@ export const createProject200Schema = z.object({
       vercelRunExec: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      apiKey: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      apiKeyOwnedBySelf: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       aliasProject: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       aliasProtectionBypass: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      buildMachine: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       productionAliasProtectionBypass: z
@@ -16834,6 +17718,9 @@ export const createProject200Schema = z.object({
       deploymentRollback: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      edgeCacheNamespace: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       environments: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -16855,6 +17742,12 @@ export const createProject200Schema = z.object({
       observabilityData: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      onDemandBuild: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      onDemandConcurrency: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       project: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -16865,6 +17758,12 @@ export const createProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectAnalyticsSampling: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheck: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheckRun: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectDeploymentHook: z
@@ -17005,7 +17904,7 @@ export const createProject200Schema = z.object({
   trustedIps: z
     .union([
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
         addresses: z.array(
           z.object({
             value: z.string(),
@@ -17015,7 +17914,7 @@ export const createProject200Schema = z.object({
         protectionMode: z.enum(['additional', 'exclusive']),
       }),
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
       }),
     ])
     .nullable()
@@ -17179,24 +18078,37 @@ export const createProject200Schema = z.object({
       ja4Enabled: z.boolean().optional(),
       firewallBypassIps: z.array(z.string()).optional(),
       managedRules: z
-        .object({})
-        .catchall(
-          z.object({
+        .object({
+          bot_filter: z.object({
             active: z.boolean(),
             action: z.enum(['challenge', 'deny', 'log']).optional(),
           }),
-        )
+          ai_bots: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+          owasp: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+        })
         .nullable()
         .nullish(),
+      botIdEnabled: z.boolean().optional(),
     })
     .optional(),
   oidcTokenConfig: z
     .object({
-      enabled: z.boolean(),
+      enabled: z.boolean().describe('Whether or not to generate OpenID Connect JSON Web Tokens.').optional(),
       issuerMode: z.enum(['global', 'team']).describe('- team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`').optional(),
     })
     .optional(),
   tier: z.enum(['advanced', 'critical', 'standard']).optional(),
+  features: z
+    .object({
+      webAnalytics: z.boolean().optional(),
+    })
+    .optional(),
 }) as unknown as ToZod<CreateProject200>
 
 /**
@@ -17207,7 +18119,7 @@ export const createProject400Schema = z.unknown() as unknown as ToZod<CreateProj
 export const createProject401Schema = z.unknown() as unknown as ToZod<CreateProject401>
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export const createProject402Schema = z.unknown() as unknown as ToZod<CreateProject402>
 
@@ -17274,6 +18186,7 @@ export const createProjectMutationRequestSchema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -17320,6 +18233,13 @@ export const createProjectMutationRequestSchema = z.object({
     .nullish(),
   name: z.string().max(100).describe('The desired name for the project'),
   skipGitConnectDuringLink: z.boolean().describe('Opts-out of the message prompting a CLI user to connect a Git repository in `vercel link`.').optional(),
+  ssoProtection: z
+    .object({
+      deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
+    })
+    .describe('The Vercel Auth setting for the project (historically named \\"SSO Protection\\")')
+    .nullable()
+    .nullish(),
   outputDirectory: z
     .string()
     .max(256)
@@ -17363,7 +18283,7 @@ export const createProjectMutationRequestSchema = z.object({
       functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
       functionZeroConfigFailover: z.boolean().describe('Specifies whether Zero Config Failover is enabled for this project.').optional(),
       elasticConcurrencyEnabled: z.boolean().optional(),
-      buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+      buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
     })
     .describe('Specifies resource override configuration for the project')
     .optional(),
@@ -17386,6 +18306,25 @@ export const getProjectQueryParamsSchema = z
  * @description The project information
  */
 export const getProject200Schema = z.object({
+  integrations: z
+    .array(
+      z
+        .object({
+          installationId: z.string().describe('The integration installation ID.'),
+          resources: z
+            .array(
+              z
+                .object({
+                  externalResourceId: z.string(),
+                })
+                .describe('The list of the installation resources connected to the project.'),
+            )
+            .describe('The list of the installation resources connected to the project.')
+            .optional(),
+        })
+        .describe('Integration installation enabled on the project.'),
+    )
+    .optional(),
   accountId: z.string(),
   analytics: z
     .object({
@@ -17413,8 +18352,28 @@ export const getProject200Schema = z.object({
   autoAssignCustomDomainsUpdatedBy: z.string().optional(),
   buildCommand: z.string().nullable().nullish(),
   commandForIgnoringBuildStep: z.string().nullable().nullish(),
+  connectConfigurations: z
+    .array(
+      z.object({
+        envId: z.union([z.string(), z.enum(['preview', 'production'])]),
+        connectConfigurationId: z.string(),
+        passive: z.boolean(),
+        buildsEnabled: z.boolean(),
+        aws: z
+          .object({
+            subnetIds: z.array(z.string()),
+            securityGroupId: z.string(),
+          })
+          .optional(),
+        createdAt: z.number(),
+        updatedAt: z.number(),
+      }),
+    )
+    .nullable()
+    .nullish(),
   connectConfigurationId: z.string().nullable().nullish(),
   connectBuildsEnabled: z.boolean().optional(),
+  passiveConnectConfigurationId: z.string().nullable().nullish(),
   createdAt: z.number().optional(),
   customerSupportCodeVisibility: z.boolean().optional(),
   crons: z
@@ -17644,6 +18603,7 @@ export const getProject200Schema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -17923,7 +18883,6 @@ export const getProject200Schema = z.object({
     .nullable()
     .nullish(),
   outputDirectory: z.string().nullable().nullish(),
-  passiveConnectConfigurationId: z.string().nullable().nullish(),
   passwordProtection: z.object({}).nullable().nullish(),
   productionDeploymentsFastLane: z.boolean().optional(),
   publicSource: z.boolean().nullable().nullish(),
@@ -17934,8 +18893,17 @@ export const getProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
+  rollbackDescription: z
+    .object({
+      userId: z.string().describe('The user who rolled back the project.'),
+      username: z.string().describe('The username of the user who rolled back the project.'),
+      description: z.string().describe('User-supplied explanation of why they rolled back the project. Limited to 250 characters.'),
+      createdAt: z.number().describe('Timestamp of when the rollback was requested.'),
+    })
+    .describe('Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.')
+    .optional(),
   rollingRelease: z
     .object({
       target: z
@@ -17943,32 +18911,29 @@ export const getProject200Schema = z.object({
         .describe(
           'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
         ),
-      minutesToRelease: z
-        .number()
-        .describe(
-          'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.',
-        )
-        .optional(),
       stages: z
         .array(
           z
             .object({
-              targetPercentage: z.number().describe('The percentage of traffic to serve to the new deployment'),
-              minutesToRelease: z
-                .number()
-                .describe(
-                  'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.',
-                )
-                .optional(),
-              requireApproval: z.boolean().describe('Whether or not this stage requires approval to proceed.').optional(),
-              duration: z.number().describe('duration is the total time to serve a stage, at the given targetPercentage.').optional(),
+              targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+              requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+              duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
             })
-            .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.'),
+            .describe(
+              'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+            ),
         )
-        .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.')
+        .describe(
+          'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+        )
         .nullable()
         .nullish(),
+      canaryResponseHeader: z
+        .boolean()
+        .describe('Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.')
+        .optional(),
     })
+    .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
     .nullable()
     .nullish(),
   defaultResourceConfig: z.object({
@@ -17978,10 +18943,9 @@ export const getProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
   rootDirectory: z.string().nullable().nullish(),
-  serverlessFunctionRegion: z.string().nullable().nullish(),
   serverlessFunctionZeroConfigFailover: z.boolean().optional(),
   skewProtectionBoundaryAt: z.number().optional(),
   skewProtectionMaxAge: z.number().optional(),
@@ -17990,7 +18954,7 @@ export const getProject200Schema = z.object({
   enableAffectedProjectsDeployments: z.boolean().optional(),
   ssoProtection: z
     .object({
-      deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+      deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
     })
     .nullable()
     .nullish(),
@@ -18166,6 +19130,9 @@ export const getProject200Schema = z.object({
       connectConfiguration: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      defaultDeploymentProtection: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       domain: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -18325,6 +19292,9 @@ export const getProject200Schema = z.object({
       notificationUsageAlert: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      notificationPreferences: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       notificationCustomerBudget: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -18335,6 +19305,9 @@ export const getProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       observabilityNotebook: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      observabilityFunnel: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       openTelemetryEndpoint: z
@@ -18499,10 +19472,19 @@ export const getProject200Schema = z.object({
       vercelRunExec: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      apiKey: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      apiKeyOwnedBySelf: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       aliasProject: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       aliasProtectionBypass: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      buildMachine: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       productionAliasProtectionBypass: z
@@ -18544,6 +19526,9 @@ export const getProject200Schema = z.object({
       deploymentRollback: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      edgeCacheNamespace: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       environments: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -18565,6 +19550,12 @@ export const getProject200Schema = z.object({
       observabilityData: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      onDemandBuild: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      onDemandConcurrency: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       project: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -18575,6 +19566,12 @@ export const getProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectAnalyticsSampling: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheck: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheckRun: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectDeploymentHook: z
@@ -18715,7 +19712,7 @@ export const getProject200Schema = z.object({
   trustedIps: z
     .union([
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
         addresses: z.array(
           z.object({
             value: z.string(),
@@ -18725,7 +19722,7 @@ export const getProject200Schema = z.object({
         protectionMode: z.enum(['additional', 'exclusive']),
       }),
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
       }),
     ])
     .nullable()
@@ -18889,24 +19886,37 @@ export const getProject200Schema = z.object({
       ja4Enabled: z.boolean().optional(),
       firewallBypassIps: z.array(z.string()).optional(),
       managedRules: z
-        .object({})
-        .catchall(
-          z.object({
+        .object({
+          bot_filter: z.object({
             active: z.boolean(),
             action: z.enum(['challenge', 'deny', 'log']).optional(),
           }),
-        )
+          ai_bots: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+          owasp: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+        })
         .nullable()
         .nullish(),
+      botIdEnabled: z.boolean().optional(),
     })
     .optional(),
   oidcTokenConfig: z
     .object({
-      enabled: z.boolean(),
+      enabled: z.boolean().describe('Whether or not to generate OpenID Connect JSON Web Tokens.').optional(),
       issuerMode: z.enum(['global', 'team']).describe('- team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`').optional(),
     })
     .optional(),
   tier: z.enum(['advanced', 'critical', 'standard']).optional(),
+  features: z
+    .object({
+      webAnalytics: z.boolean().optional(),
+    })
+    .optional(),
 }) as unknown as ToZod<GetProject200>
 
 /**
@@ -18965,8 +19975,28 @@ export const updateProject200Schema = z.object({
   autoAssignCustomDomainsUpdatedBy: z.string().optional(),
   buildCommand: z.string().nullable().nullish(),
   commandForIgnoringBuildStep: z.string().nullable().nullish(),
+  connectConfigurations: z
+    .array(
+      z.object({
+        envId: z.union([z.string(), z.enum(['preview', 'production'])]),
+        connectConfigurationId: z.string(),
+        passive: z.boolean(),
+        buildsEnabled: z.boolean(),
+        aws: z
+          .object({
+            subnetIds: z.array(z.string()),
+            securityGroupId: z.string(),
+          })
+          .optional(),
+        createdAt: z.number(),
+        updatedAt: z.number(),
+      }),
+    )
+    .nullable()
+    .nullish(),
   connectConfigurationId: z.string().nullable().nullish(),
   connectBuildsEnabled: z.boolean().optional(),
+  passiveConnectConfigurationId: z.string().nullable().nullish(),
   createdAt: z.number().optional(),
   customerSupportCodeVisibility: z.boolean().optional(),
   crons: z
@@ -19196,6 +20226,7 @@ export const updateProject200Schema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -19475,7 +20506,6 @@ export const updateProject200Schema = z.object({
     .nullable()
     .nullish(),
   outputDirectory: z.string().nullable().nullish(),
-  passiveConnectConfigurationId: z.string().nullable().nullish(),
   passwordProtection: z.object({}).nullable().nullish(),
   productionDeploymentsFastLane: z.boolean().optional(),
   publicSource: z.boolean().nullable().nullish(),
@@ -19486,8 +20516,17 @@ export const updateProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
+  rollbackDescription: z
+    .object({
+      userId: z.string().describe('The user who rolled back the project.'),
+      username: z.string().describe('The username of the user who rolled back the project.'),
+      description: z.string().describe('User-supplied explanation of why they rolled back the project. Limited to 250 characters.'),
+      createdAt: z.number().describe('Timestamp of when the rollback was requested.'),
+    })
+    .describe('Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.')
+    .optional(),
   rollingRelease: z
     .object({
       target: z
@@ -19495,32 +20534,29 @@ export const updateProject200Schema = z.object({
         .describe(
           'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
         ),
-      minutesToRelease: z
-        .number()
-        .describe(
-          'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.',
-        )
-        .optional(),
       stages: z
         .array(
           z
             .object({
-              targetPercentage: z.number().describe('The percentage of traffic to serve to the new deployment'),
-              minutesToRelease: z
-                .number()
-                .describe(
-                  'minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.',
-                )
-                .optional(),
-              requireApproval: z.boolean().describe('Whether or not this stage requires approval to proceed.').optional(),
-              duration: z.number().describe('duration is the total time to serve a stage, at the given targetPercentage.').optional(),
+              targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+              requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+              duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
             })
-            .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.'),
+            .describe(
+              'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+            ),
         )
-        .describe('An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.')
+        .describe(
+          'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+        )
         .nullable()
         .nullish(),
+      canaryResponseHeader: z
+        .boolean()
+        .describe('Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.')
+        .optional(),
     })
+    .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
     .nullable()
     .nullish(),
   defaultResourceConfig: z.object({
@@ -19530,10 +20566,9 @@ export const updateProject200Schema = z.object({
     functionDefaultMemoryType: z.enum(['performance', 'standard', 'standard_legacy']).optional(),
     functionZeroConfigFailover: z.boolean().optional(),
     elasticConcurrencyEnabled: z.boolean().optional(),
-    buildMachineType: z.enum(['enhanced', 'ultra']).optional(),
+    buildMachineType: z.enum(['enhanced', 'turbo']).optional(),
   }),
   rootDirectory: z.string().nullable().nullish(),
-  serverlessFunctionRegion: z.string().nullable().nullish(),
   serverlessFunctionZeroConfigFailover: z.boolean().optional(),
   skewProtectionBoundaryAt: z.number().optional(),
   skewProtectionMaxAge: z.number().optional(),
@@ -19542,7 +20577,7 @@ export const updateProject200Schema = z.object({
   enableAffectedProjectsDeployments: z.boolean().optional(),
   ssoProtection: z
     .object({
-      deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews']),
+      deploymentType: z.enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews']),
     })
     .nullable()
     .nullish(),
@@ -19718,6 +20753,9 @@ export const updateProject200Schema = z.object({
       connectConfiguration: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      defaultDeploymentProtection: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       domain: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -19877,6 +20915,9 @@ export const updateProject200Schema = z.object({
       notificationUsageAlert: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      notificationPreferences: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       notificationCustomerBudget: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -19887,6 +20928,9 @@ export const updateProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       observabilityNotebook: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      observabilityFunnel: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       openTelemetryEndpoint: z
@@ -20051,10 +21095,19 @@ export const updateProject200Schema = z.object({
       vercelRunExec: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      apiKey: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      apiKeyOwnedBySelf: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       aliasProject: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       aliasProtectionBypass: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      buildMachine: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       productionAliasProtectionBypass: z
@@ -20096,6 +21149,9 @@ export const updateProject200Schema = z.object({
       deploymentRollback: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      edgeCacheNamespace: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       environments: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -20117,6 +21173,12 @@ export const updateProject200Schema = z.object({
       observabilityData: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
+      onDemandBuild: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      onDemandConcurrency: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
       project: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
@@ -20127,6 +21189,12 @@ export const updateProject200Schema = z.object({
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectAnalyticsSampling: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheck: z
+        .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
+        .optional(),
+      projectCheckRun: z
         .array(z.lazy(() => ACLActionSchema).describe('Enum containing the actions that can be performed against a resource. Group operations are included.'))
         .optional(),
       projectDeploymentHook: z
@@ -20267,7 +21335,7 @@ export const updateProject200Schema = z.object({
   trustedIps: z
     .union([
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
         addresses: z.array(
           z.object({
             value: z.string(),
@@ -20277,7 +21345,7 @@ export const updateProject200Schema = z.object({
         protectionMode: z.enum(['additional', 'exclusive']),
       }),
       z.object({
-        deploymentType: z.enum(['production', 'preview', 'all', 'prod_deployment_urls_and_all_previews']),
+        deploymentType: z.enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'all_except_custom_domains', 'production']),
       }),
     ])
     .nullable()
@@ -20441,24 +21509,37 @@ export const updateProject200Schema = z.object({
       ja4Enabled: z.boolean().optional(),
       firewallBypassIps: z.array(z.string()).optional(),
       managedRules: z
-        .object({})
-        .catchall(
-          z.object({
+        .object({
+          bot_filter: z.object({
             active: z.boolean(),
             action: z.enum(['challenge', 'deny', 'log']).optional(),
           }),
-        )
+          ai_bots: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+          owasp: z.object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+          }),
+        })
         .nullable()
         .nullish(),
+      botIdEnabled: z.boolean().optional(),
     })
     .optional(),
   oidcTokenConfig: z
     .object({
-      enabled: z.boolean(),
+      enabled: z.boolean().describe('Whether or not to generate OpenID Connect JSON Web Tokens.').optional(),
       issuerMode: z.enum(['global', 'team']).describe('- team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`').optional(),
     })
     .optional(),
   tier: z.enum(['advanced', 'critical', 'standard']).optional(),
+  features: z
+    .object({
+      webAnalytics: z.boolean().optional(),
+    })
+    .optional(),
 }) as unknown as ToZod<UpdateProject200>
 
 /**
@@ -20469,7 +21550,7 @@ export const updateProject400Schema = z.unknown() as unknown as ToZod<UpdateProj
 export const updateProject401Schema = z.unknown() as unknown as ToZod<UpdateProject401>
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export const updateProject402Schema = z.unknown() as unknown as ToZod<UpdateProject402>
 
@@ -20532,6 +21613,7 @@ export const updateProjectMutationRequestSchema = z.object({
       'jekyll',
       'middleman',
       'nextjs',
+      'nitro',
       'nuxtjs',
       'parcel',
       'polymer',
@@ -20588,7 +21670,7 @@ export const updateProjectMutationRequestSchema = z.object({
     .nullish(),
   resourceConfig: z
     .object({
-      buildMachineType: z.enum(['enhanced', 'ultra']).optional().nullable(),
+      buildMachineType: z.enum(['enhanced', 'turbo']).optional().nullable(),
       fluid: z.boolean().optional(),
       functionDefaultRegions: z
         .array(z.string().max(4))
@@ -20643,7 +21725,7 @@ export const updateProjectMutationRequestSchema = z.object({
   passwordProtection: z
     .object({
       deploymentType: z
-        .enum(['all', 'preview', 'prod_deployment_urls_and_all_previews'])
+        .enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews'])
         .describe('Specify if the password will apply to every Deployment Target or just Preview'),
       password: z.string().max(72).describe('The password that will be used to protect Project Deployments').nullable().nullish(),
     })
@@ -20653,7 +21735,7 @@ export const updateProjectMutationRequestSchema = z.object({
   ssoProtection: z
     .object({
       deploymentType: z
-        .enum(['all', 'preview', 'prod_deployment_urls_and_all_previews'])
+        .enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews'])
         .default('preview')
         .describe('Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview'),
     })
@@ -20663,7 +21745,7 @@ export const updateProjectMutationRequestSchema = z.object({
   trustedIps: z
     .object({
       deploymentType: z
-        .enum(['all', 'preview', 'prod_deployment_urls_and_all_previews', 'production'])
+        .enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews', 'production'])
         .describe('Specify if the Trusted IPs will apply to every Deployment Target or just Preview'),
       addresses: z
         .array(
@@ -21253,26 +22335,24 @@ export const getProjectDomainsPathParamsSchema = z.object({
   idOrName: z.union([z.coerce.number().int(), z.string()]).describe('The unique project identifier or the project name'),
 }) as unknown as ToZod<GetProjectDomainsPathParams>
 
-export const getProjectDomainsQueryParamsSchema = z
-  .object({
-    production: z.enum(['true', 'false']).default('false').describe('Filters only production domains when set to `true`.'),
-    target: z.enum(['production', 'preview']).describe('Filters on the target of the domain. Can be either \\"production\\", \\"preview\\"').optional(),
-    customEnvironmentId: z.string().describe('The unique custom environment identifier within the project').optional(),
-    gitBranch: z.string().describe('Filters domains based on specific branch.').optional(),
-    redirects: z
-      .enum(['true', 'false'])
-      .default('true')
-      .describe('Excludes redirect project domains when \\"false\\". Includes redirect project domains when \\"true\\" (default).'),
-    redirect: z.string().describe('Filters domains based on their redirect target.').optional(),
-    verified: z.enum(['true', 'false']).describe('Filters domains based on their verification status.').optional(),
-    limit: z.coerce.number().describe('Maximum number of domains to list from a request (max 100).').optional(),
-    since: z.coerce.number().describe('Get domains created after this JavaScript timestamp.').optional(),
-    until: z.coerce.number().describe('Get domains created before this JavaScript timestamp.').optional(),
-    order: z.enum(['ASC', 'DESC']).default('DESC').describe('Domains sort order by createdAt'),
-    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
-    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
-  })
-  .optional() as unknown as ToZod<GetProjectDomainsQueryParams>
+export const getProjectDomainsQueryParamsSchema = z.object({
+  production: z.enum(['true', 'false']).default('false').describe('Filters only production domains when set to `true`.'),
+  target: z.enum(['production', 'preview']).describe('Filters on the target of the domain. Can be either \\"production\\", \\"preview\\"').optional(),
+  customEnvironmentId: z.string().describe('The unique custom environment identifier within the project').optional(),
+  gitBranch: z.string().describe('Filters domains based on specific branch.').optional(),
+  redirects: z
+    .enum(['true', 'false'])
+    .default('true')
+    .describe('Excludes redirect project domains when \\"false\\". Includes redirect project domains when \\"true\\" (default).'),
+  redirect: z.string().describe('Filters domains based on their redirect target.').optional(),
+  verified: z.enum(['true', 'false']).describe('Filters domains based on their verification status.').optional(),
+  limit: z.coerce.number().describe('Maximum number of domains to list from a request (max 100).').optional(),
+  since: z.coerce.number().describe('Get domains created after this JavaScript timestamp.').optional(),
+  until: z.coerce.number().describe('Get domains created before this JavaScript timestamp.').optional(),
+  order: z.enum(['ASC', 'DESC']).default('DESC').describe('Domains sort order by createdAt'),
+  teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+  slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+}) as unknown as ToZod<GetProjectDomainsQueryParams>
 
 /**
  * @description Successful response retrieving a list of domains
@@ -21546,7 +22626,7 @@ export const removeProjectDomainQueryParamsSchema = z
 export const removeProjectDomain200Schema = z.object({}) as unknown as ToZod<RemoveProjectDomain200>
 
 /**
- * @description One of the provided values in the request query is invalid.
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
 export const removeProjectDomain400Schema = z.unknown() as unknown as ToZod<RemoveProjectDomain400>
 
@@ -21563,6 +22643,10 @@ export const removeProjectDomain404Schema = z.unknown() as unknown as ToZod<Remo
  * @description The project is currently being transferred
  */
 export const removeProjectDomain409Schema = z.unknown() as unknown as ToZod<RemoveProjectDomain409>
+
+export const removeProjectDomainMutationRequestSchema = z.object({
+  removeRedirects: z.boolean().describe('Whether to remove all domains from this project that redirect to the domain being removed.').optional(),
+}) as unknown as ToZod<RemoveProjectDomainMutationRequest>
 
 export const removeProjectDomainMutationResponseSchema = z.lazy(() => removeProjectDomain200Schema) as unknown as ToZod<RemoveProjectDomainMutationResponse>
 
@@ -22147,7 +23231,7 @@ export const createProjectEnv201Schema = z.object({
     z.array(
       z.object({
         target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-        type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']).optional(),
+        type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']).optional(),
         sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
         decrypted: z.boolean().optional(),
         value: z.string().optional(),
@@ -22247,7 +23331,7 @@ export const createProjectEnv201Schema = z.object({
     ),
     z.object({
       target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-      type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']).optional(),
+      type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']).optional(),
       sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
       decrypted: z.boolean().optional(),
       value: z.string().optional(),
@@ -22730,7 +23814,7 @@ export const removeProjectEnv200Schema = z.union([
   z.array(
     z.object({
       target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-      type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']),
+      type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']),
       sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
       decrypted: z.boolean().optional(),
       value: z.string(),
@@ -22830,7 +23914,7 @@ export const removeProjectEnv200Schema = z.union([
   z.object({
     system: z.boolean().optional(),
     target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-    type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']),
+    type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']),
     sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
     decrypted: z.boolean().optional(),
     value: z.string(),
@@ -22928,7 +24012,7 @@ export const removeProjectEnv200Schema = z.union([
   }),
   z.object({
     target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-    type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']),
+    type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']),
     sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
     decrypted: z.boolean().optional(),
     value: z.string(),
@@ -23065,7 +24149,7 @@ export const editProjectEnvQueryParamsSchema = z
 export const editProjectEnv200Schema = z.union([
   z.object({
     target: z.union([z.array(z.enum(['production', 'preview', 'development'])), z.enum(['production', 'preview', 'development'])]).optional(),
-    type: z.enum(['system', 'encrypted', 'plain', 'sensitive', 'secret']),
+    type: z.enum(['system', 'secret', 'encrypted', 'plain', 'sensitive']),
     sunsetSecretId: z.string().describe('This is used to identiy variables that have been migrated from type secret to sensitive.').optional(),
     decrypted: z.boolean().optional(),
     value: z.string(),
@@ -23195,6 +24279,529 @@ export const editProjectEnvMutationRequestSchema = z.object({
 
 export const editProjectEnvMutationResponseSchema = z.lazy(() => editProjectEnv200Schema) as unknown as ToZod<EditProjectEnvMutationResponse>
 
+export const getRollingReleaseBillingStatusPathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<GetRollingReleaseBillingStatusPathParams>
+
+export const getRollingReleaseBillingStatusQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<GetRollingReleaseBillingStatusQueryParams>
+
+export const getRollingReleaseBillingStatus200Schema = z.union([
+  z.object({
+    availableSlots: z.literal(0),
+    reason: z.enum(['plan_not_supported']),
+    message: z.string(),
+  }),
+  z.object({
+    availableSlots: z.enum(['unlimited']),
+    reason: z.enum(['unlimited_slots']),
+    message: z.string(),
+  }),
+  z.object({
+    availableSlots: z.literal(0),
+    reason: z.enum(['no_available_slots']),
+    message: z.string(),
+    enabledProjects: z.array(z.string()),
+  }),
+  z.object({
+    availableSlots: z.number(),
+    reason: z.enum(['available_slots']),
+    message: z.string(),
+  }),
+]) as unknown as ToZod<GetRollingReleaseBillingStatus200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getRollingReleaseBillingStatus400Schema = z.unknown() as unknown as ToZod<GetRollingReleaseBillingStatus400>
+
+export const getRollingReleaseBillingStatus401Schema = z.unknown() as unknown as ToZod<GetRollingReleaseBillingStatus401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getRollingReleaseBillingStatus403Schema = z.unknown() as unknown as ToZod<GetRollingReleaseBillingStatus403>
+
+export const getRollingReleaseBillingStatus404Schema = z.unknown() as unknown as ToZod<GetRollingReleaseBillingStatus404>
+
+export const getRollingReleaseBillingStatusQueryResponseSchema = z.lazy(
+  () => getRollingReleaseBillingStatus200Schema,
+) as unknown as ToZod<GetRollingReleaseBillingStatusQueryResponse>
+
+export const getRollingReleaseConfigPathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<GetRollingReleaseConfigPathParams>
+
+export const getRollingReleaseConfigQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<GetRollingReleaseConfigQueryParams>
+
+export const getRollingReleaseConfig200Schema = z.object({
+  rollingRelease: z
+    .object({
+      target: z
+        .string()
+        .describe(
+          'The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.',
+        ),
+      stages: z
+        .array(
+          z
+            .object({
+              targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+              requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+              duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
+            })
+            .describe(
+              'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+            ),
+        )
+        .describe(
+          'An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.',
+        )
+        .nullable()
+        .nullish(),
+      canaryResponseHeader: z
+        .boolean()
+        .describe('Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.')
+        .optional(),
+    })
+    .describe('Project-level rolling release configuration that defines how deployments should be gradually rolled out')
+    .nullable(),
+}) as unknown as ToZod<GetRollingReleaseConfig200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getRollingReleaseConfig400Schema = z.unknown() as unknown as ToZod<GetRollingReleaseConfig400>
+
+export const getRollingReleaseConfig401Schema = z.unknown() as unknown as ToZod<GetRollingReleaseConfig401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getRollingReleaseConfig403Schema = z.unknown() as unknown as ToZod<GetRollingReleaseConfig403>
+
+export const getRollingReleaseConfig404Schema = z.unknown() as unknown as ToZod<GetRollingReleaseConfig404>
+
+export const getRollingReleaseConfigQueryResponseSchema = z.lazy(
+  () => getRollingReleaseConfig200Schema,
+) as unknown as ToZod<GetRollingReleaseConfigQueryResponse>
+
+export const deleteRollingReleaseConfigPathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<DeleteRollingReleaseConfigPathParams>
+
+export const deleteRollingReleaseConfigQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<DeleteRollingReleaseConfigQueryParams>
+
+export const deleteRollingReleaseConfig200Schema = z.object({
+  rollingRelease: z.unknown(),
+}) as unknown as ToZod<DeleteRollingReleaseConfig200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const deleteRollingReleaseConfig400Schema = z.unknown() as unknown as ToZod<DeleteRollingReleaseConfig400>
+
+export const deleteRollingReleaseConfig401Schema = z.unknown() as unknown as ToZod<DeleteRollingReleaseConfig401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const deleteRollingReleaseConfig403Schema = z.unknown() as unknown as ToZod<DeleteRollingReleaseConfig403>
+
+export const deleteRollingReleaseConfig404Schema = z.unknown() as unknown as ToZod<DeleteRollingReleaseConfig404>
+
+export const deleteRollingReleaseConfigMutationResponseSchema = z.lazy(
+  () => deleteRollingReleaseConfig200Schema,
+) as unknown as ToZod<DeleteRollingReleaseConfigMutationResponse>
+
+export const updateRollingReleaseConfigPathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<UpdateRollingReleaseConfigPathParams>
+
+export const updateRollingReleaseConfigQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<UpdateRollingReleaseConfigQueryParams>
+
+export const updateRollingReleaseConfig200Schema = z.union([
+  z.object({
+    rollingRelease: z.unknown(),
+  }),
+  z.object({
+    rollingRelease: z
+      .object({
+        stages: z
+          .array(
+            z
+              .object({
+                targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+                requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed').optional(),
+                duration: z.number().describe('Duration in minutes for automatic advancement to the next stage').optional(),
+              })
+              .describe(
+                'A stage object configured for a rolling release once a new deployment is triggered the first stage will be read in the proxy for first time visitors, and if a RNG < targetPercentage then it will serve the new deployment. Upon approval the next stage will be read, etc.',
+              ),
+          )
+          .nullable()
+          .nullish(),
+      })
+      .nullable(),
+  }),
+]) as unknown as ToZod<UpdateRollingReleaseConfig200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const updateRollingReleaseConfig400Schema = z.unknown() as unknown as ToZod<UpdateRollingReleaseConfig400>
+
+export const updateRollingReleaseConfig401Schema = z.unknown() as unknown as ToZod<UpdateRollingReleaseConfig401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const updateRollingReleaseConfig403Schema = z.unknown() as unknown as ToZod<UpdateRollingReleaseConfig403>
+
+export const updateRollingReleaseConfig404Schema = z.unknown() as unknown as ToZod<UpdateRollingReleaseConfig404>
+
+export const updateRollingReleaseConfigMutationResponseSchema = z.lazy(
+  () => updateRollingReleaseConfig200Schema,
+) as unknown as ToZod<UpdateRollingReleaseConfigMutationResponse>
+
+export const getRollingReleasePathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<GetRollingReleasePathParams>
+
+export const getRollingReleaseQueryParamsSchema = z
+  .object({
+    state: z.enum(['ACTIVE', 'COMPLETE', 'ABORTED']).describe('Filter by rolling release state').optional(),
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<GetRollingReleaseQueryParams>
+
+export const getRollingRelease200Schema = z
+  .object({
+    rollingRelease: z
+      .object({
+        state: z.enum(['ABORTED', 'ACTIVE', 'COMPLETE']).describe('The current state of the rolling release'),
+        currentDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The current deployment receiving production traffic')
+          .nullable(),
+        canaryDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The canary deployment being rolled out')
+          .nullable(),
+        queuedDeploymentId: z.string().describe('The ID of a deployment queued for the next rolling release').nullable(),
+        advancementType: z.enum(['automatic', 'manual-approval']).describe('The advancement type of the rolling release'),
+        stages: z
+          .array(
+            z
+              .object({
+                index: z.number().describe('The zero-based index of the stage'),
+                isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+                targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+                requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+                duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+              })
+              .describe('All stages configured for this rolling release'),
+          )
+          .describe('All stages configured for this rolling release'),
+        activeStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The currently active stage, null if the rollout is aborted')
+          .nullable(),
+        nextStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The next stage to be activated, null if not in ACTIVE state')
+          .nullable(),
+        startedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release started'),
+        updatedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release was last updated'),
+      })
+      .describe('Rolling release information including configuration and document details, or null if no rolling release exists')
+      .nullable(),
+  })
+  .describe('The response format for rolling release endpoints that return rolling release information') as unknown as ToZod<GetRollingRelease200>
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getRollingRelease400Schema = z.unknown() as unknown as ToZod<GetRollingRelease400>
+
+export const getRollingRelease401Schema = z.unknown() as unknown as ToZod<GetRollingRelease401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getRollingRelease403Schema = z.unknown() as unknown as ToZod<GetRollingRelease403>
+
+export const getRollingRelease404Schema = z.unknown() as unknown as ToZod<GetRollingRelease404>
+
+export const getRollingReleaseQueryResponseSchema = z.lazy(() => getRollingRelease200Schema) as unknown as ToZod<GetRollingReleaseQueryResponse>
+
+export const approveRollingReleaseStagePathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<ApproveRollingReleaseStagePathParams>
+
+export const approveRollingReleaseStageQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<ApproveRollingReleaseStageQueryParams>
+
+export const approveRollingReleaseStage200Schema = z
+  .object({
+    rollingRelease: z
+      .object({
+        state: z.enum(['ABORTED', 'ACTIVE', 'COMPLETE']).describe('The current state of the rolling release'),
+        currentDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The current deployment receiving production traffic')
+          .nullable(),
+        canaryDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The canary deployment being rolled out')
+          .nullable(),
+        queuedDeploymentId: z.string().describe('The ID of a deployment queued for the next rolling release').nullable(),
+        advancementType: z.enum(['automatic', 'manual-approval']).describe('The advancement type of the rolling release'),
+        stages: z
+          .array(
+            z
+              .object({
+                index: z.number().describe('The zero-based index of the stage'),
+                isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+                targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+                requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+                duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+              })
+              .describe('All stages configured for this rolling release'),
+          )
+          .describe('All stages configured for this rolling release'),
+        activeStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The currently active stage, null if the rollout is aborted')
+          .nullable(),
+        nextStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The next stage to be activated, null if not in ACTIVE state')
+          .nullable(),
+        startedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release started'),
+        updatedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release was last updated'),
+      })
+      .describe('Rolling release information including configuration and document details, or null if no rolling release exists')
+      .nullable(),
+  })
+  .describe('The response format for rolling release endpoints that return rolling release information') as unknown as ToZod<ApproveRollingReleaseStage200>
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export const approveRollingReleaseStage400Schema = z.unknown() as unknown as ToZod<ApproveRollingReleaseStage400>
+
+export const approveRollingReleaseStage401Schema = z.unknown() as unknown as ToZod<ApproveRollingReleaseStage401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const approveRollingReleaseStage403Schema = z.unknown() as unknown as ToZod<ApproveRollingReleaseStage403>
+
+export const approveRollingReleaseStage404Schema = z.unknown() as unknown as ToZod<ApproveRollingReleaseStage404>
+
+export const approveRollingReleaseStage500Schema = z.unknown() as unknown as ToZod<ApproveRollingReleaseStage500>
+
+export const approveRollingReleaseStageMutationRequestSchema = z.object({
+  nextStageIndex: z.number().describe('The index of the stage to transition to'),
+  canaryDeploymentId: z.string().describe('The id of the canary deployment to approve for the next stage'),
+}) as unknown as ToZod<ApproveRollingReleaseStageMutationRequest>
+
+export const approveRollingReleaseStageMutationResponseSchema = z.lazy(
+  () => approveRollingReleaseStage200Schema,
+) as unknown as ToZod<ApproveRollingReleaseStageMutationResponse>
+
+export const completeRollingReleasePathParamsSchema = z.object({
+  idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
+}) as unknown as ToZod<CompleteRollingReleasePathParams>
+
+export const completeRollingReleaseQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional(),
+  })
+  .optional() as unknown as ToZod<CompleteRollingReleaseQueryParams>
+
+export const completeRollingRelease200Schema = z
+  .object({
+    rollingRelease: z
+      .object({
+        state: z.enum(['ABORTED', 'ACTIVE', 'COMPLETE']).describe('The current state of the rolling release'),
+        currentDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The current deployment receiving production traffic')
+          .nullable(),
+        canaryDeployment: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            url: z.string(),
+            target: z.enum(['production', 'staging']).nullable().nullish(),
+            source: z.enum(['api-trigger-git-deploy', 'cli', 'clone/repo', 'git', 'import', 'import/repo', 'redeploy', 'v0-web']).optional(),
+            createdAt: z.number(),
+            readyState: z.enum(['BUILDING', 'CANCELED', 'ERROR', 'INITIALIZING', 'QUEUED', 'READY']),
+            readyStateAt: z.number().optional(),
+          })
+          .describe('The canary deployment being rolled out')
+          .nullable(),
+        queuedDeploymentId: z.string().describe('The ID of a deployment queued for the next rolling release').nullable(),
+        advancementType: z.enum(['automatic', 'manual-approval']).describe('The advancement type of the rolling release'),
+        stages: z
+          .array(
+            z
+              .object({
+                index: z.number().describe('The zero-based index of the stage'),
+                isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+                targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+                requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+                duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+              })
+              .describe('All stages configured for this rolling release'),
+          )
+          .describe('All stages configured for this rolling release'),
+        activeStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The currently active stage, null if the rollout is aborted')
+          .nullable(),
+        nextStage: z
+          .object({
+            index: z.number().describe('The zero-based index of the stage'),
+            isFinalStage: z.boolean().describe('Whether or not this stage is the final stage (targetPercentage === 100)'),
+            targetPercentage: z.number().describe('The percentage of traffic to serve to the canary deployment (0-100)'),
+            requireApproval: z.boolean().describe('Whether or not this stage requires manual approval to proceed'),
+            duration: z.number().describe('Duration in seconds for automatic advancement, null for manual stages or the final stage').nullable(),
+          })
+          .describe('The next stage to be activated, null if not in ACTIVE state')
+          .nullable(),
+        startedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release started'),
+        updatedAt: z.number().describe('Unix timestamp in milliseconds when the rolling release was last updated'),
+      })
+      .describe('Rolling release information including configuration and document details, or null if no rolling release exists')
+      .nullable(),
+  })
+  .describe('The response format for rolling release endpoints that return rolling release information') as unknown as ToZod<CompleteRollingRelease200>
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export const completeRollingRelease400Schema = z.unknown() as unknown as ToZod<CompleteRollingRelease400>
+
+export const completeRollingRelease401Schema = z.unknown() as unknown as ToZod<CompleteRollingRelease401>
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const completeRollingRelease403Schema = z.unknown() as unknown as ToZod<CompleteRollingRelease403>
+
+export const completeRollingRelease404Schema = z.unknown() as unknown as ToZod<CompleteRollingRelease404>
+
+export const completeRollingReleaseMutationRequestSchema = z.object({
+  canaryDeploymentId: z.string().describe('The ID of the canary deployment to complete'),
+}) as unknown as ToZod<CompleteRollingReleaseMutationRequest>
+
+export const completeRollingReleaseMutationResponseSchema = z.lazy(
+  () => completeRollingRelease200Schema,
+) as unknown as ToZod<CompleteRollingReleaseMutationResponse>
+
 export const createProjectTransferRequestPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the project to transfer.'),
 }) as unknown as ToZod<CreateProjectTransferRequestPathParams>
@@ -23248,7 +24855,23 @@ export const acceptProjectTransferRequestQueryParamsSchema = z
 /**
  * @description The project has been transferred successfully.
  */
-export const acceptProjectTransferRequest202Schema = z.object({}) as unknown as ToZod<AcceptProjectTransferRequest202>
+export const acceptProjectTransferRequest202Schema = z.union([
+  z.object({
+    partnerCalls: z.array(
+      z.object({
+        installationId: z.string(),
+        resourceIds: z.array(z.string()),
+        result: z.object({
+          status: z.enum(['fulfilled', 'errored']),
+          error: z.object({}).optional(),
+          code: z.string().optional(),
+        }),
+      }),
+    ),
+    resourceTransferErrors: z.array(z.object({})),
+  }),
+  z.object({}),
+]) as unknown as ToZod<AcceptProjectTransferRequest202>
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
@@ -23263,6 +24886,8 @@ export const acceptProjectTransferRequest401Schema = z.unknown() as unknown as T
 export const acceptProjectTransferRequest403Schema = z.unknown() as unknown as ToZod<AcceptProjectTransferRequest403>
 
 export const acceptProjectTransferRequest404Schema = z.unknown() as unknown as ToZod<AcceptProjectTransferRequest404>
+
+export const acceptProjectTransferRequest422Schema = z.unknown() as unknown as ToZod<AcceptProjectTransferRequest422>
 
 export const acceptProjectTransferRequestMutationRequestSchema = z.object({
   newProjectName: z.string().max(100).describe('The desired name for the project').optional(),
@@ -23366,6 +24991,8 @@ export const requestPromoteQueryParamsSchema = z
 
 export const requestPromote201Schema = z.unknown() as unknown as ToZod<RequestPromote201>
 
+export const requestPromote202Schema = z.unknown() as unknown as ToZod<RequestPromote202>
+
 /**
  * @description One of the provided values in the request query is invalid.
  */
@@ -23380,7 +25007,10 @@ export const requestPromote403Schema = z.unknown() as unknown as ToZod<RequestPr
 
 export const requestPromote409Schema = z.unknown() as unknown as ToZod<RequestPromote409>
 
-export const requestPromoteMutationResponseSchema = z.lazy(() => requestPromote201Schema) as unknown as ToZod<RequestPromoteMutationResponse>
+export const requestPromoteMutationResponseSchema = z.union([
+  z.lazy(() => requestPromote201Schema),
+  z.lazy(() => requestPromote202Schema),
+]) as unknown as ToZod<RequestPromoteMutationResponse>
 
 export const listPromoteAliasesPathParamsSchema = z.object({
   projectId: z.string(),
@@ -23671,17 +25301,37 @@ export const putFirewallConfig200Schema = z.object({
     ),
     changes: z.array(z.object({})),
     managedRules: z
-      .object({})
-      .catchall(
-        z.object({
-          active: z.boolean(),
-          action: z.enum(['challenge', 'deny', 'log']).optional(),
-          updatedAt: z.string().optional(),
-          userId: z.string().optional(),
-          username: z.string().optional(),
-        }),
-      )
+      .object({
+        bot_protection: z
+          .object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+            updatedAt: z.string().optional(),
+            userId: z.string().optional(),
+            username: z.string().optional(),
+          })
+          .optional(),
+        ai_bots: z
+          .object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+            updatedAt: z.string().optional(),
+            userId: z.string().optional(),
+            username: z.string().optional(),
+          })
+          .optional(),
+        owasp: z
+          .object({
+            active: z.boolean(),
+            action: z.enum(['challenge', 'deny', 'log']).optional(),
+            updatedAt: z.string().optional(),
+            userId: z.string().optional(),
+            username: z.string().optional(),
+          })
+          .optional(),
+      })
       .optional(),
+    botIdEnabled: z.boolean().optional(),
   }),
 }) as unknown as ToZod<PutFirewallConfig200>
 
@@ -23708,21 +25358,19 @@ export const putFirewallConfigMutationRequestSchema = z.object({
   managedRules: z
     .object({})
     .catchall(
-      z
-        .object({
-          active: z.boolean(),
-          action: z.enum(['log', 'challenge', 'deny']).optional(),
-          ruleGroups: z
-            .object({})
-            .catchall(
-              z.object({
-                active: z.boolean().optional(),
-                action: z.enum(['log', 'challenge', 'deny']).optional(),
-              }),
-            )
-            .optional(),
-        })
-        .strict(),
+      z.object({
+        active: z.boolean(),
+        action: z.enum(['log', 'challenge', 'deny']).optional(),
+        ruleGroups: z
+          .object({})
+          .catchall(
+            z.object({
+              active: z.boolean().optional(),
+              action: z.enum(['log', 'challenge', 'deny']).optional(),
+            }),
+          )
+          .optional(),
+      }),
     )
     .optional(),
   crs: z
@@ -23848,26 +25496,22 @@ export const putFirewallConfigMutationRequestSchema = z.object({
               action: z.enum(['bypass', 'challenge', 'deny', 'log', 'rate_limit', 'redirect']),
               rateLimit: z
                 .union([
-                  z
-                    .object({
-                      algo: z.enum(['fixed_window', 'token_bucket']),
-                      window: z.number(),
-                      limit: z.number(),
-                      keys: z.array(z.string()),
-                      action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
-                    })
-                    .strict(),
+                  z.object({
+                    algo: z.enum(['fixed_window', 'token_bucket']),
+                    window: z.number(),
+                    limit: z.number(),
+                    keys: z.array(z.string()),
+                    action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
+                  }),
                   z.null(),
                 ])
                 .optional(),
               redirect: z
                 .union([
-                  z
-                    .object({
-                      location: z.string(),
-                      permanent: z.boolean(),
-                    })
-                    .strict(),
+                  z.object({
+                    location: z.string(),
+                    permanent: z.boolean(),
+                  }),
                   z.null(),
                 ])
                 .optional(),
@@ -23890,6 +25534,7 @@ export const putFirewallConfigMutationRequestSchema = z.object({
       }),
     )
     .optional(),
+  botIdEnabled: z.boolean().optional(),
 }) as unknown as ToZod<PutFirewallConfigMutationRequest>
 
 export const putFirewallConfigMutationResponseSchema = z.lazy(() => putFirewallConfig200Schema) as unknown as ToZod<PutFirewallConfigMutationResponse>
@@ -23979,26 +25624,22 @@ export const updateFirewallConfigMutationRequestSchema = z.union([
             action: z.enum(['log', 'challenge', 'deny', 'bypass', 'rate_limit', 'redirect']),
             rateLimit: z
               .union([
-                z
-                  .object({
-                    algo: z.enum(['fixed_window', 'token_bucket']),
-                    window: z.number(),
-                    limit: z.number(),
-                    keys: z.array(z.string()),
-                    action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
-                  })
-                  .strict(),
+                z.object({
+                  algo: z.enum(['fixed_window', 'token_bucket']),
+                  window: z.number(),
+                  limit: z.number(),
+                  keys: z.array(z.string()),
+                  action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
+                }),
                 z.null(),
               ])
               .optional(),
             redirect: z
               .union([
-                z
-                  .object({
-                    location: z.string(),
-                    permanent: z.boolean(),
-                  })
-                  .strict(),
+                z.object({
+                  location: z.string(),
+                  permanent: z.boolean(),
+                }),
                 z.null(),
               ])
               .optional(),
@@ -24062,26 +25703,22 @@ export const updateFirewallConfigMutationRequestSchema = z.union([
             action: z.enum(['log', 'challenge', 'deny', 'bypass', 'rate_limit', 'redirect']),
             rateLimit: z
               .union([
-                z
-                  .object({
-                    algo: z.enum(['fixed_window', 'token_bucket']),
-                    window: z.number(),
-                    limit: z.number(),
-                    keys: z.array(z.string()),
-                    action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
-                  })
-                  .strict(),
+                z.object({
+                  algo: z.enum(['fixed_window', 'token_bucket']),
+                  window: z.number(),
+                  limit: z.number(),
+                  keys: z.array(z.string()),
+                  action: z.union([z.enum(['log', 'challenge', 'deny', 'rate_limit']), z.null()]).optional(),
+                }),
                 z.null(),
               ])
               .optional(),
             redirect: z
               .union([
-                z
-                  .object({
-                    location: z.string(),
-                    permanent: z.boolean(),
-                  })
-                  .strict(),
+                z.object({
+                  location: z.string(),
+                  permanent: z.boolean(),
+                }),
                 z.null(),
               ])
               .optional(),
@@ -24157,6 +25794,11 @@ export const updateFirewallConfigMutationRequestSchema = z.union([
         action: z.enum(['log', 'challenge', 'deny']).optional(),
       }),
     ),
+  }),
+  z.object({
+    action: z.string(),
+    id: z.null().optional(),
+    value: z.boolean(),
   }),
 ]) as unknown as ToZod<UpdateFirewallConfigMutationRequest>
 
@@ -24305,17 +25947,37 @@ export const getFirewallConfig200Schema = z.object({
   ),
   changes: z.array(z.object({})),
   managedRules: z
-    .object({})
-    .catchall(
-      z.object({
-        active: z.boolean(),
-        action: z.enum(['challenge', 'deny', 'log']).optional(),
-        updatedAt: z.string().optional(),
-        userId: z.string().optional(),
-        username: z.string().optional(),
-      }),
-    )
+    .object({
+      bot_protection: z
+        .object({
+          active: z.boolean(),
+          action: z.enum(['challenge', 'deny', 'log']).optional(),
+          updatedAt: z.string().optional(),
+          userId: z.string().optional(),
+          username: z.string().optional(),
+        })
+        .optional(),
+      ai_bots: z
+        .object({
+          active: z.boolean(),
+          action: z.enum(['challenge', 'deny', 'log']).optional(),
+          updatedAt: z.string().optional(),
+          userId: z.string().optional(),
+          username: z.string().optional(),
+        })
+        .optional(),
+      owasp: z
+        .object({
+          active: z.boolean(),
+          action: z.enum(['challenge', 'deny', 'log']).optional(),
+          updatedAt: z.string().optional(),
+          userId: z.string().optional(),
+          username: z.string().optional(),
+        })
+        .optional(),
+    })
     .optional(),
+  botIdEnabled: z.boolean().optional(),
 }) as unknown as ToZod<GetFirewallConfig200>
 
 /**
@@ -24546,7 +26208,7 @@ export const addBypassIp404Schema = z.unknown() as unknown as ToZod<AddBypassIp4
 
 export const addBypassIp500Schema = z.unknown() as unknown as ToZod<AddBypassIp500>
 
-export const addBypassIpMutationRequestSchema = z.undefined() as unknown as ToZod<AddBypassIpMutationRequest>
+export const addBypassIpMutationRequestSchema = z.unknown() as unknown as ToZod<AddBypassIpMutationRequest>
 
 export const addBypassIpMutationResponseSchema = z.lazy(() => addBypassIp200Schema) as unknown as ToZod<AddBypassIpMutationResponse>
 
@@ -24576,7 +26238,7 @@ export const removeBypassIp404Schema = z.unknown() as unknown as ToZod<RemoveByp
 
 export const removeBypassIp500Schema = z.unknown() as unknown as ToZod<RemoveBypassIp500>
 
-export const removeBypassIpMutationRequestSchema = z.undefined() as unknown as ToZod<RemoveBypassIpMutationRequest>
+export const removeBypassIpMutationRequestSchema = z.unknown() as unknown as ToZod<RemoveBypassIpMutationRequest>
 
 export const removeBypassIpMutationResponseSchema = z.lazy(() => removeBypassIp200Schema) as unknown as ToZod<RemoveBypassIpMutationResponse>
 
@@ -24690,9 +26352,6 @@ export const getTeamMembers401Schema = z.unknown() as unknown as ToZod<GetTeamMe
  */
 export const getTeamMembers403Schema = z.unknown() as unknown as ToZod<GetTeamMembers403>
 
-/**
- * @description No team was found.
- */
 export const getTeamMembers404Schema = z.unknown() as unknown as ToZod<GetTeamMembers404>
 
 export const getTeamMembersQueryResponseSchema = z.lazy(() => getTeamMembers200Schema) as unknown as ToZod<GetTeamMembersQueryResponse>
@@ -24739,11 +26398,6 @@ export const inviteUserToTeam401Schema = z.unknown() as unknown as ToZod<InviteU
  * @description The authenticated user must be a team owner to perform the action\nYou do not have permission to access this resource.
  */
 export const inviteUserToTeam403Schema = z.unknown() as unknown as ToZod<InviteUserToTeam403>
-
-/**
- * @description The team was not found
- */
-export const inviteUserToTeam404Schema = z.unknown() as unknown as ToZod<InviteUserToTeam404>
 
 export const inviteUserToTeam503Schema = z.unknown() as unknown as ToZod<InviteUserToTeam503>
 
@@ -24966,7 +26620,7 @@ export const updateTeamMember402Schema = z.unknown() as unknown as ToZod<UpdateT
 export const updateTeamMember403Schema = z.unknown() as unknown as ToZod<UpdateTeamMember403>
 
 /**
- * @description The provided user is not part of this team.\nA user with the specified ID does not exist.\nTeam not found.
+ * @description The provided user is not part of this team.\nA user with the specified ID does not exist.
  */
 export const updateTeamMember404Schema = z.unknown() as unknown as ToZod<UpdateTeamMember404>
 
@@ -25024,9 +26678,6 @@ export const removeTeamMember401Schema = z.unknown() as unknown as ToZod<RemoveT
  */
 export const removeTeamMember403Schema = z.unknown() as unknown as ToZod<RemoveTeamMember403>
 
-/**
- * @description A user with the specified ID does not exist.\nNo team found.
- */
 export const removeTeamMember404Schema = z.unknown() as unknown as ToZod<RemoveTeamMember404>
 
 export const removeTeamMember503Schema = z.unknown() as unknown as ToZod<RemoveTeamMember503>
@@ -25048,11 +26699,7 @@ export const getTeamQueryParamsSchema = z
 /**
  * @description The requested team
  */
-export const getTeam200Schema = z
-  .lazy(() => teamLimitedSchema)
-  .describe(
-    'A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.',
-  ) as unknown as ToZod<GetTeam200>
+export const getTeam200Schema = z.lazy(() => teamSchema).describe('Data representing a Team.') as unknown as ToZod<GetTeam200>
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -25083,11 +26730,7 @@ export const patchTeamQueryParamsSchema = z
   })
   .optional() as unknown as ToZod<PatchTeamQueryParams>
 
-export const patchTeam200Schema = z
-  .lazy(() => teamLimitedSchema)
-  .describe(
-    'A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.',
-  ) as unknown as ToZod<PatchTeam200>
+export const patchTeam200Schema = z.lazy(() => teamSchema).describe('Data representing a Team.') as unknown as ToZod<PatchTeam200>
 
 /**
  * @description One of the provided values in the request body is invalid.
@@ -25096,6 +26739,9 @@ export const patchTeam400Schema = z.unknown() as unknown as ToZod<PatchTeam400>
 
 export const patchTeam401Schema = z.unknown() as unknown as ToZod<PatchTeam401>
 
+/**
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
+ */
 export const patchTeam402Schema = z.unknown() as unknown as ToZod<PatchTeam402>
 
 /**
@@ -25104,9 +26750,9 @@ export const patchTeam402Schema = z.unknown() as unknown as ToZod<PatchTeam402>
 export const patchTeam403Schema = z.unknown() as unknown as ToZod<PatchTeam403>
 
 /**
- * @description Team was not found.
+ * @description Owner does not have protection add-on\nAdvanced Deployment Protection is not available for the user plan
  */
-export const patchTeam404Schema = z.unknown() as unknown as ToZod<PatchTeam404>
+export const patchTeam428Schema = z.unknown() as unknown as ToZod<PatchTeam428>
 
 export const patchTeamMutationRequestSchema = z.object({
   avatar: z.string().describe('The hash value of an uploaded image.').optional(),
@@ -25122,11 +26768,9 @@ export const patchTeamMutationRequestSchema = z.object({
         .object({})
         .catchall(
           z.union([
-            z
-              .object({
-                accessGroupId: z.string().regex(/^ag_[A-z0-9_ -]+$/),
-              })
-              .strict(),
+            z.object({
+              accessGroupId: z.string().regex(/^ag_[A-z0-9_ -]+$/),
+            }),
             z.enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR']),
           ]),
         )
@@ -25146,6 +26790,31 @@ export const patchTeamMutationRequestSchema = z.object({
     .optional(),
   hideIpAddresses: z.boolean().describe('Display or hide IP addresses in Monitoring queries.').optional(),
   hideIpAddressesInLogDrains: z.boolean().describe('Display or hide IP addresses in Log Drains.').optional(),
+  defaultDeploymentProtection: z
+    .object({
+      passwordProtection: z
+        .object({
+          deploymentType: z
+            .enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews'])
+            .describe('Specify if the password will apply to every Deployment Target or just Preview'),
+          password: z.string().max(72).describe('The password that will be used to protect Project Deployments').nullable().nullish(),
+        })
+        .describe('Allows to protect project deployments with a password')
+        .nullable()
+        .nullish(),
+      ssoProtection: z
+        .object({
+          deploymentType: z
+            .enum(['all', 'all_except_custom_domains', 'preview', 'prod_deployment_urls_and_all_previews'])
+            .default('preview')
+            .describe('Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview'),
+        })
+        .describe('Ensures visitors to your Preview Deployments are logged into Vercel and have a minimum of Viewer access on your team')
+        .nullable()
+        .nullish(),
+    })
+    .describe('Default deployment protection settings for new projects.')
+    .optional(),
 }) as unknown as ToZod<PatchTeamMutationRequest>
 
 export const patchTeamMutationResponseSchema = z.lazy(() => patchTeam200Schema) as unknown as ToZod<PatchTeamMutationResponse>
@@ -25193,11 +26862,6 @@ export const createTeam200Schema = z
   .object({
     id: z.string().describe('Id of the created team'),
     slug: z.string(),
-    billing: z
-      .object({})
-      .describe(
-        'IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.',
-      ),
   })
   .describe('The team was created successfully') as unknown as ToZod<CreateTeam200>
 
@@ -25274,11 +26938,6 @@ export const deleteTeam402Schema = z.unknown() as unknown as ToZod<DeleteTeam402
  */
 export const deleteTeam403Schema = z.unknown() as unknown as ToZod<DeleteTeam403>
 
-/**
- * @description The team was not found
- */
-export const deleteTeam404Schema = z.unknown() as unknown as ToZod<DeleteTeam404>
-
 export const deleteTeam409Schema = z.unknown() as unknown as ToZod<DeleteTeam409>
 
 export const deleteTeamMutationRequestSchema = z.object({
@@ -25321,7 +26980,7 @@ export const deleteTeamInviteCode401Schema = z.unknown() as unknown as ToZod<Del
 export const deleteTeamInviteCode403Schema = z.unknown() as unknown as ToZod<DeleteTeamInviteCode403>
 
 /**
- * @description Team invite code not found.\nNo team found.
+ * @description Team invite code not found.
  */
 export const deleteTeamInviteCode404Schema = z.unknown() as unknown as ToZod<DeleteTeamInviteCode404>
 
@@ -25369,16 +27028,10 @@ export const uploadFile401Schema = z.unknown() as unknown as ToZod<UploadFile401
  */
 export const uploadFile403Schema = z.unknown() as unknown as ToZod<UploadFile403>
 
-export const uploadFileMutationRequestSchema = z.instanceof(File) as unknown as ToZod<UploadFileMutationRequest>
-
 export const uploadFileMutationResponseSchema = z.lazy(() => uploadFile200Schema) as unknown as ToZod<UploadFileMutationResponse>
 
 export const listAuthTokens200Schema = z.object({
   tokens: z.array(z.lazy(() => authTokenSchema).describe('Authentication token metadata.')),
-  testingToken: z
-    .lazy(() => authTokenSchema)
-    .describe('Authentication token metadata.')
-    .optional(),
   pagination: z
     .lazy(() => paginationSchema)
     .describe(
@@ -25594,6 +27247,10 @@ export const createWebhook200Schema = z.object({
           'deployment-ready',
           'deployment.canceled',
           'deployment.check-rerequested',
+          'deployment.checkrun.cancel',
+          'deployment.checkrun.start',
+          'deployment.checks.failed',
+          'deployment.checks.succeeded',
           'deployment.created',
           'deployment.error',
           'deployment.integration.action.cancel',
@@ -25603,7 +27260,19 @@ export const createWebhook200Schema = z.object({
           'deployment.ready',
           'deployment.succeeded',
           'domain-created',
+          'domain.auto-renew.changed',
+          'domain.certificate.add',
+          'domain.certificate.add.failed',
+          'domain.certificate.deleted',
+          'domain.certificate.renew',
+          'domain.certificate.renew.failed',
           'domain.created',
+          'domain.dns.records.changed',
+          'domain.renewal',
+          'domain.renewal.failed',
+          'domain.transfer-in.completed',
+          'domain.transfer-in.failed',
+          'domain.transfer-in.started',
           'edge-config.created',
           'edge-config.deleted',
           'edge-config.items.updated',
@@ -25624,6 +27293,12 @@ export const createWebhook200Schema = z.object({
           'project-created',
           'project-removed',
           'project.created',
+          'project.domain.created',
+          'project.domain.deleted',
+          'project.domain.moved',
+          'project.domain.unverified',
+          'project.domain.updated',
+          'project.domain.verified',
           'project.removed',
           'project.rolling-release.aborted',
           'project.rolling-release.approved',
@@ -25670,6 +27345,10 @@ export const createWebhookMutationRequestSchema = z.object({
         'deployment-ready',
         'deployment.canceled',
         'deployment.check-rerequested',
+        'deployment.checkrun.cancel',
+        'deployment.checkrun.start',
+        'deployment.checks.failed',
+        'deployment.checks.succeeded',
         'deployment.created',
         'deployment.error',
         'deployment.integration.action.cancel',
@@ -25679,7 +27358,19 @@ export const createWebhookMutationRequestSchema = z.object({
         'deployment.ready',
         'deployment.succeeded',
         'domain-created',
+        'domain.auto-renew.changed',
+        'domain.certificate.add',
+        'domain.certificate.add.failed',
+        'domain.certificate.deleted',
+        'domain.certificate.renew',
+        'domain.certificate.renew.failed',
         'domain.created',
+        'domain.dns.records.changed',
+        'domain.renewal',
+        'domain.renewal.failed',
+        'domain.transfer-in.completed',
+        'domain.transfer-in.failed',
+        'domain.transfer-in.started',
         'edge-config.created',
         'edge-config.deleted',
         'edge-config.items.updated',
@@ -25700,6 +27391,12 @@ export const createWebhookMutationRequestSchema = z.object({
         'project-created',
         'project-removed',
         'project.created',
+        'project.domain.created',
+        'project.domain.deleted',
+        'project.domain.moved',
+        'project.domain.unverified',
+        'project.domain.updated',
+        'project.domain.verified',
         'project.removed',
         'project.rolling-release.aborted',
         'project.rolling-release.approved',
@@ -25785,6 +27482,7 @@ export const getWebhooks200Schema = z.union([
                 'sanity-v3',
                 'sanity',
                 'storybook',
+                'nitro',
               ])
               .nullable()
               .nullish(),
@@ -25799,6 +27497,18 @@ export const getWebhooks200Schema = z.union([
               'budget.reached',
               'budget.reset',
               'domain.created',
+              'domain.dns.records.changed',
+              'domain.transfer-in.started',
+              'domain.transfer-in.completed',
+              'domain.transfer-in.failed',
+              'domain.certificate.add',
+              'domain.certificate.add.failed',
+              'domain.certificate.renew',
+              'domain.certificate.renew.failed',
+              'domain.certificate.deleted',
+              'domain.renewal',
+              'domain.renewal.failed',
+              'domain.auto-renew.changed',
               'deployment.created',
               'deployment.error',
               'deployment.canceled',
@@ -25809,6 +27519,8 @@ export const getWebhooks200Schema = z.union([
               'deployment.integration.action.start',
               'deployment.integration.action.cancel',
               'deployment.integration.action.cleanup',
+              'deployment.checkrun.start',
+              'deployment.checkrun.cancel',
               'edge-config.created',
               'edge-config.deleted',
               'edge-config.items.updated',
@@ -25820,10 +27532,18 @@ export const getWebhooks200Schema = z.union([
               'integration-resource.project-disconnected',
               'project.created',
               'project.removed',
+              'project.domain.created',
+              'project.domain.updated',
+              'project.domain.deleted',
+              'project.domain.verified',
+              'project.domain.unverified',
+              'project.domain.moved',
               'project.rolling-release.started',
               'project.rolling-release.aborted',
               'project.rolling-release.completed',
               'project.rolling-release.approved',
+              'deployment.checks.failed',
+              'deployment.checks.succeeded',
               'deployment-checks-completed',
               'deployment-ready',
               'deployment-prepared',
@@ -25864,6 +27584,18 @@ export const getWebhooks200Schema = z.union([
               'budget.reached',
               'budget.reset',
               'domain.created',
+              'domain.dns.records.changed',
+              'domain.transfer-in.started',
+              'domain.transfer-in.completed',
+              'domain.transfer-in.failed',
+              'domain.certificate.add',
+              'domain.certificate.add.failed',
+              'domain.certificate.renew',
+              'domain.certificate.renew.failed',
+              'domain.certificate.deleted',
+              'domain.renewal',
+              'domain.renewal.failed',
+              'domain.auto-renew.changed',
               'deployment.created',
               'deployment.error',
               'deployment.canceled',
@@ -25874,6 +27606,8 @@ export const getWebhooks200Schema = z.union([
               'deployment.integration.action.start',
               'deployment.integration.action.cancel',
               'deployment.integration.action.cleanup',
+              'deployment.checkrun.start',
+              'deployment.checkrun.cancel',
               'edge-config.created',
               'edge-config.deleted',
               'edge-config.items.updated',
@@ -25885,10 +27619,18 @@ export const getWebhooks200Schema = z.union([
               'integration-resource.project-disconnected',
               'project.created',
               'project.removed',
+              'project.domain.created',
+              'project.domain.updated',
+              'project.domain.deleted',
+              'project.domain.verified',
+              'project.domain.unverified',
+              'project.domain.moved',
               'project.rolling-release.started',
               'project.rolling-release.aborted',
               'project.rolling-release.completed',
               'project.rolling-release.approved',
+              'deployment.checks.failed',
+              'deployment.checks.succeeded',
               'deployment-checks-completed',
               'deployment-ready',
               'deployment-prepared',
@@ -25963,6 +27705,10 @@ export const getWebhook200Schema = z.object({
           'deployment-ready',
           'deployment.canceled',
           'deployment.check-rerequested',
+          'deployment.checkrun.cancel',
+          'deployment.checkrun.start',
+          'deployment.checks.failed',
+          'deployment.checks.succeeded',
           'deployment.created',
           'deployment.error',
           'deployment.integration.action.cancel',
@@ -25972,7 +27718,19 @@ export const getWebhook200Schema = z.object({
           'deployment.ready',
           'deployment.succeeded',
           'domain-created',
+          'domain.auto-renew.changed',
+          'domain.certificate.add',
+          'domain.certificate.add.failed',
+          'domain.certificate.deleted',
+          'domain.certificate.renew',
+          'domain.certificate.renew.failed',
           'domain.created',
+          'domain.dns.records.changed',
+          'domain.renewal',
+          'domain.renewal.failed',
+          'domain.transfer-in.completed',
+          'domain.transfer-in.failed',
+          'domain.transfer-in.started',
           'edge-config.created',
           'edge-config.deleted',
           'edge-config.items.updated',
@@ -25993,6 +27751,12 @@ export const getWebhook200Schema = z.object({
           'project-created',
           'project-removed',
           'project.created',
+          'project.domain.created',
+          'project.domain.deleted',
+          'project.domain.moved',
+          'project.domain.unverified',
+          'project.domain.updated',
+          'project.domain.verified',
           'project.removed',
           'project.rolling-release.aborted',
           'project.rolling-release.approved',
@@ -26281,6 +28045,31 @@ export const listAliases200Schema = z.object({
         )
         .describe('The protection bypass for the alias')
         .optional(),
+      microfrontends: z
+        .object({
+          defaultApp: z.object({
+            projectId: z.string(),
+          }),
+          applications: z
+            .array(
+              z
+                .object({
+                  projectId: z.string().describe('The project ID that should use the below configuration.'),
+                  fallbackHost: z.string().describe('This is always set and is the fallback host to send the request to if there is no deployment ID.'),
+                  deploymentId: z
+                    .string()
+                    .describe(
+                      'This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.',
+                    )
+                    .optional(),
+                  deploymentUrl: z.string().describe('This is used and set in the exact same way as `deploymentId`.').optional(),
+                })
+                .describe('A list of the deployment routing information for each project.'),
+            )
+            .describe('A list of the deployment routing information for each project.'),
+        })
+        .describe('The microfrontends for the alias including the routing configuration')
+        .optional(),
     }),
   ),
   pagination: z
@@ -26385,6 +28174,31 @@ export const getAlias200Schema = z.object({
       ]),
     )
     .describe('The protection bypass for the alias')
+    .optional(),
+  microfrontends: z
+    .object({
+      defaultApp: z.object({
+        projectId: z.string(),
+      }),
+      applications: z
+        .array(
+          z
+            .object({
+              projectId: z.string().describe('The project ID that should use the below configuration.'),
+              fallbackHost: z.string().describe('This is always set and is the fallback host to send the request to if there is no deployment ID.'),
+              deploymentId: z
+                .string()
+                .describe(
+                  'This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.',
+                )
+                .optional(),
+              deploymentUrl: z.string().describe('This is used and set in the exact same way as `deploymentId`.').optional(),
+            })
+            .describe('A list of the deployment routing information for each project.'),
+        )
+        .describe('A list of the deployment routing information for each project.'),
+    })
+    .describe('The microfrontends for the alias including the routing configuration')
     .optional(),
 }) as unknown as ToZod<GetAlias200>
 
@@ -26784,6 +28598,7 @@ export const getDeployments200Schema = z.object({
     z.object({
       uid: z.string().describe('The unique identifier of the deployment.'),
       name: z.string().describe('The name of the deployment.'),
+      projectId: z.string().describe('The project ID of the deployment'),
       url: z.string().describe('The URL of the deployment.'),
       created: z.number().describe('Timestamp of when the deployment got created.'),
       defaultRoute: z.string().describe('The default route that should be used for screenshots and links if configured with microfrontends.').optional(),
@@ -26835,6 +28650,18 @@ export const getDeployments200Schema = z.object({
         .optional(),
       checksState: z.enum(['completed', 'registered', 'running']).describe('State of all registered checks').optional(),
       checksConclusion: z.enum(['canceled', 'failed', 'skipped', 'succeeded']).describe('Conclusion for checks').optional(),
+      checks: z
+        .object({
+          'deployment-alias': z
+            .object({
+              state: z.enum(['failed', 'pending', 'succeeded']),
+              startedAt: z.number(),
+              completedAt: z.number().optional(),
+            })
+            .describe('Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.'),
+        })
+        .describe('Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.')
+        .optional(),
       inspectorUrl: z.string().describe('Vercel URL to inspect the deployment.').nullable(),
       isRollbackCandidate: z.boolean().describe('Deployment can be used for instant rollback').nullable().nullish(),
       projectSettings: z
@@ -26862,6 +28689,7 @@ export const getDeployments200Schema = z.object({
               'jekyll',
               'middleman',
               'nextjs',
+              'nitro',
               'nuxtjs',
               'parcel',
               'polymer',
@@ -26900,7 +28728,6 @@ export const getDeployments200Schema = z.object({
           outputDirectory: z.string().nullable().nullish(),
           publicSource: z.boolean().nullable().nullish(),
           rootDirectory: z.string().nullable().nullish(),
-          serverlessFunctionRegion: z.string().nullable().nullish(),
           sourceFilesOutsideRootDirectory: z.boolean().optional(),
           commandForIgnoringBuildStep: z.string().nullable().nullish(),
           createdAt: z.number().optional(),

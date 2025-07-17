@@ -267,6 +267,22 @@ export const updateDiffNewTargetEnum = {
 
 export type UpdateDiffNewTargetEnum = (typeof updateDiffNewTargetEnum)[keyof typeof updateDiffNewTargetEnum]
 
+export const payloadActionEnum3 = {
+  log: 'log',
+  challenge: 'challenge',
+  deny: 'deny',
+} as const
+
+export type PayloadActionEnum3 = (typeof payloadActionEnum3)[keyof typeof payloadActionEnum3]
+
+export const actionEnum = {
+  log: 'log',
+  challenge: 'challenge',
+  deny: 'deny',
+} as const
+
+export type ActionEnum = (typeof actionEnum)[keyof typeof actionEnum]
+
 export const blockHistoryActionEnum = {
   'hard-blocked': 'hard-blocked',
   'soft-blocked': 'soft-blocked',
@@ -311,7 +327,7 @@ export type NewOwnerImportFlowGitProviderEnum = (typeof newOwnerImportFlowGitPro
 
 export const buildMachinePurchaseTypeEnum = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type BuildMachinePurchaseTypeEnum = (typeof buildMachinePurchaseTypeEnum)[keyof typeof buildMachinePurchaseTypeEnum]
@@ -364,6 +380,7 @@ export const softBlockBlockedDueToOverageTypeEnum = {
   blobTotalAvgSizeInBytes: 'blobTotalAvgSizeInBytes',
   blobTotalGetResponseObjectSizeInBytes: 'blobTotalGetResponseObjectSizeInBytes',
   blobTotalSimpleRequests: 'blobTotalSimpleRequests',
+  connectDataTransfer: 'connectDataTransfer',
   dataCacheRead: 'dataCacheRead',
   dataCacheWrite: 'dataCacheWrite',
   edgeConfigRead: 'edgeConfigRead',
@@ -375,6 +392,8 @@ export const softBlockBlockedDueToOverageTypeEnum = {
   elasticConcurrencyBuildSlots: 'elasticConcurrencyBuildSlots',
   fastDataTransfer: 'fastDataTransfer',
   fastOriginTransfer: 'fastOriginTransfer',
+  fluidCpuDuration: 'fluidCpuDuration',
+  fluidDuration: 'fluidDuration',
   functionDuration: 'functionDuration',
   functionInvocation: 'functionInvocation',
   imageOptimizationCacheRead: 'imageOptimizationCacheRead',
@@ -384,17 +403,11 @@ export const softBlockBlockedDueToOverageTypeEnum = {
   monitoringMetric: 'monitoringMetric',
   blobDataTransfer: 'blobDataTransfer',
   observabilityEvent: 'observabilityEvent',
-  postgresComputeTime: 'postgresComputeTime',
-  postgresDataStorage: 'postgresDataStorage',
-  postgresDataTransfer: 'postgresDataTransfer',
-  postgresDatabase: 'postgresDatabase',
-  postgresWrittenData: 'postgresWrittenData',
+  onDemandConcurrencyMinutes: 'onDemandConcurrencyMinutes',
+  runtimeCacheRead: 'runtimeCacheRead',
+  runtimeCacheWrite: 'runtimeCacheWrite',
   serverlessFunctionExecution: 'serverlessFunctionExecution',
   sourceImages: 'sourceImages',
-  storageRedisTotalBandwidthInBytes: 'storageRedisTotalBandwidthInBytes',
-  storageRedisTotalCommands: 'storageRedisTotalCommands',
-  storageRedisTotalDailyAvgStorageInBytes: 'storageRedisTotalDailyAvgStorageInBytes',
-  storageRedisTotalDatabases: 'storageRedisTotalDatabases',
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
@@ -440,11 +453,11 @@ export type TeamsTeamPermissionsEnum = (typeof teamsTeamPermissionsEnum)[keyof t
 export const joinedFromOriginEnum = {
   teams: 'teams',
   saml: 'saml',
+  link: 'link',
   github: 'github',
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
   mail: 'mail',
-  link: 'link',
   import: 'import',
   dsync: 'dsync',
   feedback: 'feedback',
@@ -542,6 +555,7 @@ export const blobOverageReasonEnum = {
   blobTotalAvgSizeInBytes: 'blobTotalAvgSizeInBytes',
   blobTotalGetResponseObjectSizeInBytes: 'blobTotalGetResponseObjectSizeInBytes',
   blobTotalSimpleRequests: 'blobTotalSimpleRequests',
+  connectDataTransfer: 'connectDataTransfer',
   dataCacheRead: 'dataCacheRead',
   dataCacheWrite: 'dataCacheWrite',
   edgeConfigRead: 'edgeConfigRead',
@@ -553,6 +567,8 @@ export const blobOverageReasonEnum = {
   elasticConcurrencyBuildSlots: 'elasticConcurrencyBuildSlots',
   fastDataTransfer: 'fastDataTransfer',
   fastOriginTransfer: 'fastOriginTransfer',
+  fluidCpuDuration: 'fluidCpuDuration',
+  fluidDuration: 'fluidDuration',
   functionDuration: 'functionDuration',
   functionInvocation: 'functionInvocation',
   imageOptimizationCacheRead: 'imageOptimizationCacheRead',
@@ -562,17 +578,11 @@ export const blobOverageReasonEnum = {
   monitoringMetric: 'monitoringMetric',
   blobDataTransfer: 'blobDataTransfer',
   observabilityEvent: 'observabilityEvent',
-  postgresComputeTime: 'postgresComputeTime',
-  postgresDataStorage: 'postgresDataStorage',
-  postgresDataTransfer: 'postgresDataTransfer',
-  postgresDatabase: 'postgresDatabase',
-  postgresWrittenData: 'postgresWrittenData',
+  onDemandConcurrencyMinutes: 'onDemandConcurrencyMinutes',
+  runtimeCacheRead: 'runtimeCacheRead',
+  runtimeCacheWrite: 'runtimeCacheWrite',
   serverlessFunctionExecution: 'serverlessFunctionExecution',
   sourceImages: 'sourceImages',
-  storageRedisTotalBandwidthInBytes: 'storageRedisTotalBandwidthInBytes',
-  storageRedisTotalCommands: 'storageRedisTotalCommands',
-  storageRedisTotalDailyAvgStorageInBytes: 'storageRedisTotalDailyAvgStorageInBytes',
-  storageRedisTotalDatabases: 'storageRedisTotalDatabases',
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
@@ -596,6 +606,7 @@ export const postgresOverageReasonEnum = {
   blobTotalAvgSizeInBytes: 'blobTotalAvgSizeInBytes',
   blobTotalGetResponseObjectSizeInBytes: 'blobTotalGetResponseObjectSizeInBytes',
   blobTotalSimpleRequests: 'blobTotalSimpleRequests',
+  connectDataTransfer: 'connectDataTransfer',
   dataCacheRead: 'dataCacheRead',
   dataCacheWrite: 'dataCacheWrite',
   edgeConfigRead: 'edgeConfigRead',
@@ -607,6 +618,8 @@ export const postgresOverageReasonEnum = {
   elasticConcurrencyBuildSlots: 'elasticConcurrencyBuildSlots',
   fastDataTransfer: 'fastDataTransfer',
   fastOriginTransfer: 'fastOriginTransfer',
+  fluidCpuDuration: 'fluidCpuDuration',
+  fluidDuration: 'fluidDuration',
   functionDuration: 'functionDuration',
   functionInvocation: 'functionInvocation',
   imageOptimizationCacheRead: 'imageOptimizationCacheRead',
@@ -616,17 +629,11 @@ export const postgresOverageReasonEnum = {
   monitoringMetric: 'monitoringMetric',
   blobDataTransfer: 'blobDataTransfer',
   observabilityEvent: 'observabilityEvent',
-  postgresComputeTime: 'postgresComputeTime',
-  postgresDataStorage: 'postgresDataStorage',
-  postgresDataTransfer: 'postgresDataTransfer',
-  postgresDatabase: 'postgresDatabase',
-  postgresWrittenData: 'postgresWrittenData',
+  onDemandConcurrencyMinutes: 'onDemandConcurrencyMinutes',
+  runtimeCacheRead: 'runtimeCacheRead',
+  runtimeCacheWrite: 'runtimeCacheWrite',
   serverlessFunctionExecution: 'serverlessFunctionExecution',
   sourceImages: 'sourceImages',
-  storageRedisTotalBandwidthInBytes: 'storageRedisTotalBandwidthInBytes',
-  storageRedisTotalCommands: 'storageRedisTotalCommands',
-  storageRedisTotalDailyAvgStorageInBytes: 'storageRedisTotalDailyAvgStorageInBytes',
-  storageRedisTotalDatabases: 'storageRedisTotalDatabases',
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
@@ -650,6 +657,7 @@ export const redisOverageReasonEnum = {
   blobTotalAvgSizeInBytes: 'blobTotalAvgSizeInBytes',
   blobTotalGetResponseObjectSizeInBytes: 'blobTotalGetResponseObjectSizeInBytes',
   blobTotalSimpleRequests: 'blobTotalSimpleRequests',
+  connectDataTransfer: 'connectDataTransfer',
   dataCacheRead: 'dataCacheRead',
   dataCacheWrite: 'dataCacheWrite',
   edgeConfigRead: 'edgeConfigRead',
@@ -661,6 +669,8 @@ export const redisOverageReasonEnum = {
   elasticConcurrencyBuildSlots: 'elasticConcurrencyBuildSlots',
   fastDataTransfer: 'fastDataTransfer',
   fastOriginTransfer: 'fastOriginTransfer',
+  fluidCpuDuration: 'fluidCpuDuration',
+  fluidDuration: 'fluidDuration',
   functionDuration: 'functionDuration',
   functionInvocation: 'functionInvocation',
   imageOptimizationCacheRead: 'imageOptimizationCacheRead',
@@ -670,17 +680,11 @@ export const redisOverageReasonEnum = {
   monitoringMetric: 'monitoringMetric',
   blobDataTransfer: 'blobDataTransfer',
   observabilityEvent: 'observabilityEvent',
-  postgresComputeTime: 'postgresComputeTime',
-  postgresDataStorage: 'postgresDataStorage',
-  postgresDataTransfer: 'postgresDataTransfer',
-  postgresDatabase: 'postgresDatabase',
-  postgresWrittenData: 'postgresWrittenData',
+  onDemandConcurrencyMinutes: 'onDemandConcurrencyMinutes',
+  runtimeCacheRead: 'runtimeCacheRead',
+  runtimeCacheWrite: 'runtimeCacheWrite',
   serverlessFunctionExecution: 'serverlessFunctionExecution',
   sourceImages: 'sourceImages',
-  storageRedisTotalBandwidthInBytes: 'storageRedisTotalBandwidthInBytes',
-  storageRedisTotalCommands: 'storageRedisTotalCommands',
-  storageRedisTotalDailyAvgStorageInBytes: 'storageRedisTotalDailyAvgStorageInBytes',
-  storageRedisTotalDatabases: 'storageRedisTotalDatabases',
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
@@ -740,11 +744,11 @@ export type RoleEnum = (typeof roleEnum)[keyof typeof roleEnum]
 export const joinedFromOriginEnum2 = {
   teams: 'teams',
   saml: 'saml',
+  link: 'link',
   github: 'github',
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
   mail: 'mail',
-  link: 'link',
   import: 'import',
   dsync: 'dsync',
   feedback: 'feedback',
@@ -757,6 +761,7 @@ export const ssoProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type SsoProtectionDeploymentTypeEnum = (typeof ssoProtectionDeploymentTypeEnum)[keyof typeof ssoProtectionDeploymentTypeEnum]
@@ -765,6 +770,7 @@ export const payloadSsoProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type PayloadSsoProtectionEnum = (typeof payloadSsoProtectionEnum)[keyof typeof payloadSsoProtectionEnum]
@@ -773,6 +779,7 @@ export const oldSsoProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type OldSsoProtectionDeploymentTypeEnum = (typeof oldSsoProtectionDeploymentTypeEnum)[keyof typeof oldSsoProtectionDeploymentTypeEnum]
@@ -781,6 +788,7 @@ export const payloadOldSsoProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type PayloadOldSsoProtectionEnum = (typeof payloadOldSsoProtectionEnum)[keyof typeof payloadOldSsoProtectionEnum]
@@ -789,6 +797,7 @@ export const passwordProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type PasswordProtectionDeploymentTypeEnum = (typeof passwordProtectionDeploymentTypeEnum)[keyof typeof passwordProtectionDeploymentTypeEnum]
@@ -797,6 +806,7 @@ export const payloadPasswordProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type PayloadPasswordProtectionEnum = (typeof payloadPasswordProtectionEnum)[keyof typeof payloadPasswordProtectionEnum]
@@ -805,6 +815,7 @@ export const oldPasswordProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type OldPasswordProtectionDeploymentTypeEnum = (typeof oldPasswordProtectionDeploymentTypeEnum)[keyof typeof oldPasswordProtectionDeploymentTypeEnum]
@@ -813,6 +824,7 @@ export const payloadOldPasswordProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type PayloadOldPasswordProtectionEnum = (typeof payloadOldPasswordProtectionEnum)[keyof typeof payloadOldPasswordProtectionEnum]
@@ -821,6 +833,7 @@ export const payloadTrustedIpsEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
   production: 'production',
 } as const
 
@@ -830,18 +843,19 @@ export const payloadOldTrustedIpsEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
   production: 'production',
 } as const
 
 export type PayloadOldTrustedIpsEnum = (typeof payloadOldTrustedIpsEnum)[keyof typeof payloadOldTrustedIpsEnum]
 
-export const payloadActionEnum3 = {
+export const payloadActionEnum4 = {
   enabled: 'enabled',
   disabled: 'disabled',
   regenerated: 'regenerated',
 } as const
 
-export type PayloadActionEnum3 = (typeof payloadActionEnum3)[keyof typeof payloadActionEnum3]
+export type PayloadActionEnum4 = (typeof payloadActionEnum4)[keyof typeof payloadActionEnum4]
 
 export const oldConnectConfigurationsEnvIdEnum = {
   preview: 'preview',
@@ -939,6 +953,13 @@ export const projectRoleEnum = {
 } as const
 
 export type ProjectRoleEnum = (typeof projectRoleEnum)[keyof typeof projectRoleEnum]
+
+export const payloadActionEnum5 = {
+  enable: 'enable',
+  disable: 'disable',
+} as const
+
+export type PayloadActionEnum5 = (typeof payloadActionEnum5)[keyof typeof payloadActionEnum5]
 
 export const payloadTierEnum = {
   pro: 'pro',
@@ -2671,6 +2692,49 @@ export type UserEvent = {
             /**
              * @type string
              */
+            projectId: string
+            /**
+             * @type string
+             */
+            rulesetName: string
+            /**
+             * @type boolean
+             */
+            active: boolean
+            /**
+             * @type string | undefined
+             */
+            action?: PayloadActionEnum3 | undefined
+          }
+        | {
+            /**
+             * @type string
+             */
+            projectId: string
+            /**
+             * @type string
+             */
+            rulesetName: string
+            /**
+             * @type object
+             */
+            ruleGroups: {
+              [key: string]: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: ActionEnum | undefined
+              }
+            }
+          }
+        | {
+            /**
+             * @type string
+             */
             integrationId: string
             /**
              * @type string
@@ -3073,6 +3137,10 @@ export type UserEvent = {
                      * @type number | undefined
                      */
                     concurrentBuilds?: number | undefined
+                    /**
+                     * @type boolean | undefined
+                     */
+                    elasticConcurrencyEnabled?: boolean | undefined
                     /**
                      * @type object | undefined
                      */
@@ -3605,6 +3673,25 @@ export type UserEvent = {
                     /**
                      * @type object | undefined
                      */
+                    connectDataTransfer?:
+                      | {
+                          /**
+                           * @type number
+                           */
+                          currentThreshold: number
+                          /**
+                           * @type number
+                           */
+                          warningAt?: (number | null) | undefined
+                          /**
+                           * @type number
+                           */
+                          blockedAt?: (number | null) | undefined
+                        }
+                      | undefined
+                    /**
+                     * @type object | undefined
+                     */
                     dataCacheRead?:
                       | {
                           /**
@@ -3814,6 +3901,44 @@ export type UserEvent = {
                     /**
                      * @type object | undefined
                      */
+                    fluidCpuDuration?:
+                      | {
+                          /**
+                           * @type number
+                           */
+                          currentThreshold: number
+                          /**
+                           * @type number
+                           */
+                          warningAt?: (number | null) | undefined
+                          /**
+                           * @type number
+                           */
+                          blockedAt?: (number | null) | undefined
+                        }
+                      | undefined
+                    /**
+                     * @type object | undefined
+                     */
+                    fluidDuration?:
+                      | {
+                          /**
+                           * @type number
+                           */
+                          currentThreshold: number
+                          /**
+                           * @type number
+                           */
+                          warningAt?: (number | null) | undefined
+                          /**
+                           * @type number
+                           */
+                          blockedAt?: (number | null) | undefined
+                        }
+                      | undefined
+                    /**
+                     * @type object | undefined
+                     */
                     functionDuration?:
                       | {
                           /**
@@ -3985,7 +4110,7 @@ export type UserEvent = {
                     /**
                      * @type object | undefined
                      */
-                    postgresComputeTime?:
+                    onDemandConcurrencyMinutes?:
                       | {
                           /**
                            * @type number
@@ -4004,7 +4129,7 @@ export type UserEvent = {
                     /**
                      * @type object | undefined
                      */
-                    postgresDataStorage?:
+                    runtimeCacheRead?:
                       | {
                           /**
                            * @type number
@@ -4023,45 +4148,7 @@ export type UserEvent = {
                     /**
                      * @type object | undefined
                      */
-                    postgresDataTransfer?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    postgresDatabase?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    postgresWrittenData?:
+                    runtimeCacheWrite?:
                       | {
                           /**
                            * @type number
@@ -4100,82 +4187,6 @@ export type UserEvent = {
                      * @type object | undefined
                      */
                     sourceImages?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    storageRedisTotalBandwidthInBytes?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    storageRedisTotalCommands?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    storageRedisTotalDailyAvgStorageInBytes?:
-                      | {
-                          /**
-                           * @type number
-                           */
-                          currentThreshold: number
-                          /**
-                           * @type number
-                           */
-                          warningAt?: (number | null) | undefined
-                          /**
-                           * @type number
-                           */
-                          blockedAt?: (number | null) | undefined
-                        }
-                      | undefined
-                    /**
-                     * @type object | undefined
-                     */
-                    storageRedisTotalDatabases?:
                       | {
                           /**
                            * @type number
@@ -4281,10 +4292,30 @@ export type UserEvent = {
                      */
                     firstTimeOnDemandNotificationSentAt?: number | undefined
                     /**
-                     * @description Tracks the last time we sent a summary email.
+                     * @description Tracks the last time we sent a daily summary email.
                      * @type number | undefined
                      */
-                    overageSummaryEmailSentAt?: number | undefined
+                    dailyOverageSummaryEmailSentAt?: number | undefined
+                    /**
+                     * @description Tracks the last time we sent a weekly summary email.
+                     * @type number | undefined
+                     */
+                    weeklyOverageSummaryEmailSentAt?: number | undefined
+                    /**
+                     * @description Tracks when the overage summary email will stop auto-sending. We currently lock the user into email for a month after the last on-demand usage.
+                     * @type number | undefined
+                     */
+                    overageSummaryExpiresAt?: number | undefined
+                    /**
+                     * @description Tracks the last time we sent a increased on-demand email.
+                     * @type number | undefined
+                     */
+                    increasedOnDemandEmailSentAt?: number | undefined
+                    /**
+                     * @description Tracks the last time we attempted to send an increased on-demand email. This check is to limit the number of attempts per day.
+                     * @type number | undefined
+                     */
+                    increasedOnDemandEmailAttemptedAt?: number | undefined
                   }
                 | undefined
               /**
@@ -4948,6 +4979,12 @@ export type UserEvent = {
             /**
              * @type string
              */
+            projectName: string
+          }
+        | {
+            /**
+             * @type string
+             */
             plan: string
             /**
              * @type object | undefined
@@ -5275,7 +5312,7 @@ export type UserEvent = {
             /**
              * @type string
              */
-            action: PayloadActionEnum3
+            action: PayloadActionEnum4
           }
         | {
             /**
@@ -5332,6 +5369,21 @@ export type UserEvent = {
                      */
                     buildsEnabled: boolean
                     /**
+                     * @type object | undefined
+                     */
+                    aws?:
+                      | {
+                          /**
+                           * @type array
+                           */
+                          subnetIds: string[]
+                          /**
+                           * @type string
+                           */
+                          securityGroupId: string
+                        }
+                      | undefined
+                    /**
                      * @type number
                      */
                     createdAt: number
@@ -5359,6 +5411,21 @@ export type UserEvent = {
                      * @type boolean
                      */
                     buildsEnabled: boolean
+                    /**
+                     * @type object | undefined
+                     */
+                    aws?:
+                      | {
+                          /**
+                           * @type array
+                           */
+                          subnetIds: string[]
+                          /**
+                           * @type string
+                           */
+                          securityGroupId: string
+                        }
+                      | undefined
                     /**
                      * @type number
                      */
@@ -6453,6 +6520,12 @@ export type UserEvent = {
             /**
              * @type string
              */
+            action: PayloadActionEnum5
+          }
+        | {
+            /**
+             * @type string
+             */
             id: string
             /**
              * @type string
@@ -6469,13 +6542,17 @@ export type UserEvent = {
              */
             id: string
             /**
-             * @type string
+             * @type string | undefined
              */
-            slug: string
+            slug?: string | undefined
             /**
-             * @type string
+             * @type string | undefined
              */
-            name: string
+            name?: string | undefined
+            /**
+             * @type string | undefined
+             */
+            fallbackEnvironment?: string | undefined
             /**
              * @type object
              */
@@ -6488,6 +6565,10 @@ export type UserEvent = {
                * @type string
                */
               slug: string
+              /**
+               * @type string | undefined
+               */
+              fallbackEnvironment?: string | undefined
             }
           }
         | {
@@ -6937,56 +7018,48 @@ export type UserEvent = {
     | undefined
 }
 
-/**
- * @description Data representing a Team.
- */
-export type Team = {
-  /**
-   * @description The Preset\'s unique identifier.
-   * @type string
-   */
-  id: string
-  /**
-   * @type object
-   */
-  data: {
-    /**
-     * @type string
-     */
-    query: string
-    /**
-     * @type string
-     */
-    creatorId: string
-    /**
-     * @type string
-     */
-    title: string
-    /**
-     * @type string
-     */
-    groupId: string
-    /**
-     * @type string
-     */
-    ownerId: string
-    /**
-     * @type string
-     */
-    projectId: string
-    /**
-     * @type number
-     */
-    createdAt: number
-  }
-}
-
-export const teamLimitedLimitedByEnum = {
-  mfa: 'mfa',
-  scope: 'scope',
+export const rolesEnum = {
+  OWNER: 'OWNER',
+  MEMBER: 'MEMBER',
+  DEVELOPER: 'DEVELOPER',
+  SECURITY: 'SECURITY',
+  BILLING: 'BILLING',
+  VIEWER: 'VIEWER',
+  CONTRIBUTOR: 'CONTRIBUTOR',
 } as const
 
-export type TeamLimitedLimitedByEnum = (typeof teamLimitedLimitedByEnum)[keyof typeof teamLimitedLimitedByEnum]
+export type RolesEnum = (typeof rolesEnum)[keyof typeof rolesEnum]
+
+export const teamEnablePreviewFeedbackEnum = {
+  default: 'default',
+  'default-force': 'default-force',
+  off: 'off',
+  'off-force': 'off-force',
+  on: 'on',
+  'on-force': 'on-force',
+} as const
+
+export type TeamEnablePreviewFeedbackEnum = (typeof teamEnablePreviewFeedbackEnum)[keyof typeof teamEnablePreviewFeedbackEnum]
+
+export const teamEnableProductionFeedbackEnum = {
+  default: 'default',
+  'default-force': 'default-force',
+  off: 'off',
+  'off-force': 'off-force',
+  on: 'on',
+  'on-force': 'on-force',
+} as const
+
+export type TeamEnableProductionFeedbackEnum = (typeof teamEnableProductionFeedbackEnum)[keyof typeof teamEnableProductionFeedbackEnum]
+
+export const teamSensitiveEnvironmentVariablePolicyEnum = {
+  default: 'default',
+  off: 'off',
+  on: 'on',
+} as const
+
+export type TeamSensitiveEnvironmentVariablePolicyEnum =
+  (typeof teamSensitiveEnvironmentVariablePolicyEnum)[keyof typeof teamSensitiveEnvironmentVariablePolicyEnum]
 
 export const membershipRoleEnum = {
   BILLING: 'BILLING',
@@ -7039,20 +7112,37 @@ export const joinedFromOriginEnum3 = {
 export type JoinedFromOriginEnum3 = (typeof joinedFromOriginEnum3)[keyof typeof joinedFromOriginEnum3]
 
 /**
- * @description A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.
+ * @description Data representing a Team.
  */
-export type TeamLimited = {
+export type Team = {
   /**
-   * @description Property indicating that this Team data contains only limited information, due to the authentication token missing privileges to read the full Team data or due to team having MFA enforced and the user not having MFA enabled. Re-login with the Team\'s configured SAML Single Sign-On provider in order to upgrade the authentication token with the necessary privileges.
-   * @type boolean
+   * @type object | undefined
    */
-  limited: boolean
+  connect?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        enabled?: boolean | undefined
+      }
+    | undefined
   /**
-   * @type array
+   * @description The ID of the user who created the Team.
+   * @type string
    */
-  limitedBy: TeamLimitedLimitedByEnum[]
+  creatorId: string
   /**
-   * @description When \"Single Sign-On (SAML)\" is configured, this object contains information that allows the client-side to identify whether or not this Team has SAML enforced.
+   * @description Timestamp (in milliseconds) of when the Team was last updated.
+   * @type number
+   */
+  updatedAt: number
+  /**
+   * @description Hostname that\'ll be matched with emails on sign-up to automatically join the Team.
+   * @type string
+   */
+  emailDomain?: (string | null) | undefined
+  /**
+   * @description When \"Single Sign-On (SAML)\" is configured, this object contains information regarding the configuration of the Identity Provider (IdP).
    * @type object | undefined
    */
   saml?:
@@ -7123,12 +7213,179 @@ export type TeamLimited = {
          * @type boolean
          */
         enforced: boolean
+        /**
+         * @description When \"Directory Sync\" is configured, this object contains a mapping of which Directory Group (by ID) should be assigned to which Vercel Team \"role\".
+         * @type object | undefined
+         */
+        roles?:
+          | {
+              [key: string]:
+                | {
+                    /**
+                     * @type string
+                     */
+                    accessGroupId: string
+                  }
+                | RolesEnum
+            }
+          | undefined
       }
     | undefined
   /**
-   * @type boolean | undefined
+   * @description Code that can be used to join this Team. Only visible to Team owners.
+   * @type string | undefined
    */
-  mfaEnforced?: boolean | undefined
+  inviteCode?: string | undefined
+  /**
+   * @description A short description of the Team.
+   * @type string
+   */
+  description: string | null
+  /**
+   * @description The prefix that is prepended to automatic aliases.
+   * @type string
+   */
+  stagingPrefix: string
+  /**
+   * @type object | undefined
+   */
+  resourceConfig?:
+    | {
+        /**
+         * @description The total amount of concurrent builds that can be used.
+         * @type number | undefined
+         */
+        concurrentBuilds?: number | undefined
+        /**
+         * @description Whether every build for this team / user has elastic concurrency enabled automatically.
+         * @type boolean | undefined
+         */
+        elasticConcurrencyEnabled?: boolean | undefined
+        /**
+         * @description The maximum size in kilobytes of an Edge Config. Only specified if a custom limit is set.
+         * @type number | undefined
+         */
+        edgeConfigSize?: number | undefined
+        /**
+         * @description The maximum number of edge configs an account can create.
+         * @type number | undefined
+         */
+        edgeConfigs?: number | undefined
+        /**
+         * @description The maximum number of kv databases an account can create.
+         * @type number | undefined
+         */
+        kvDatabases?: number | undefined
+        /**
+         * @description The maximum number of blob stores an account can create.
+         * @type number | undefined
+         */
+        blobStores?: number | undefined
+        /**
+         * @description The maximum number of postgres databases an account can create.
+         * @type number | undefined
+         */
+        postgresDatabases?: number | undefined
+        /**
+         * @type object | undefined
+         */
+        buildEntitlements?:
+          | {
+              /**
+               * @type boolean | undefined
+               */
+              enhancedBuilds?: boolean | undefined
+            }
+          | undefined
+      }
+    | undefined
+  /**
+   * @description The hostname that is current set as preview deployment suffix.
+   * @type string
+   */
+  previewDeploymentSuffix?: (string | null) | undefined
+  /**
+   * @description Is remote caching enabled for this team
+   * @type object | undefined
+   */
+  remoteCaching?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        enabled?: boolean | undefined
+      }
+    | undefined
+  /**
+   * @description Default deployment protection for this team
+   * @type object | undefined
+   */
+  defaultDeploymentProtection?:
+    | {
+        /**
+         * @type object | undefined
+         */
+        passwordProtection?:
+          | {
+              /**
+               * @type string
+               */
+              deploymentType: string
+            }
+          | undefined
+        /**
+         * @type object | undefined
+         */
+        ssoProtection?:
+          | {
+              /**
+               * @type string
+               */
+              deploymentType: string
+            }
+          | undefined
+      }
+    | undefined
+  /**
+   * @description Whether toolbar is enabled on preview deployments
+   * @type string
+   */
+  enablePreviewFeedback?: (TeamEnablePreviewFeedbackEnum | null) | undefined
+  /**
+   * @description Whether toolbar is enabled on production deployments
+   * @type string
+   */
+  enableProductionFeedback?: (TeamEnableProductionFeedbackEnum | null) | undefined
+  /**
+   * @description Sensitive environment variable policy for this team
+   * @type string
+   */
+  sensitiveEnvironmentVariablePolicy?: (TeamSensitiveEnvironmentVariablePolicyEnum | null) | undefined
+  /**
+   * @description Indicates if IP addresses should be accessible in observability (o11y) tooling
+   * @type boolean
+   */
+  hideIpAddresses?: (boolean | null) | undefined
+  /**
+   * @description Indicates if IP addresses should be accessible in log drains
+   * @type boolean
+   */
+  hideIpAddressesInLogDrains?: (boolean | null) | undefined
+  /**
+   * @type array | undefined
+   */
+  ipBuckets?:
+    | {
+        /**
+         * @type string
+         */
+        bucket: string
+        /**
+         * @type number | undefined
+         */
+        supportUntil?: number | undefined
+      }[]
+    | undefined
   /**
    * @description The Team\'s unique identifier.
    * @type string
@@ -7255,10 +7512,281 @@ export type TeamLimited = {
       | undefined
   }
   /**
-   * @description Will remain undocumented. Remove in v3 API.
+   * @description UNIX timestamp (in milliseconds) when the Team was created.
+   * @type number
+   */
+  createdAt: number
+}
+
+export const teamLimitedLimitedByEnum = {
+  mfa: 'mfa',
+  scope: 'scope',
+} as const
+
+export type TeamLimitedLimitedByEnum = (typeof teamLimitedLimitedByEnum)[keyof typeof teamLimitedLimitedByEnum]
+
+export const membershipRoleEnum2 = {
+  BILLING: 'BILLING',
+  CONTRIBUTOR: 'CONTRIBUTOR',
+  DEVELOPER: 'DEVELOPER',
+  MEMBER: 'MEMBER',
+  OWNER: 'OWNER',
+  SECURITY: 'SECURITY',
+  VIEWER: 'VIEWER',
+} as const
+
+export type MembershipRoleEnum2 = (typeof membershipRoleEnum2)[keyof typeof membershipRoleEnum2]
+
+export const membershipTeamRolesEnum2 = {
+  BILLING: 'BILLING',
+  CONTRIBUTOR: 'CONTRIBUTOR',
+  DEVELOPER: 'DEVELOPER',
+  MEMBER: 'MEMBER',
+  OWNER: 'OWNER',
+  SECURITY: 'SECURITY',
+  VIEWER: 'VIEWER',
+} as const
+
+export type MembershipTeamRolesEnum2 = (typeof membershipTeamRolesEnum2)[keyof typeof membershipTeamRolesEnum2]
+
+export const membershipTeamPermissionsEnum2 = {
+  CreateProject: 'CreateProject',
+  EnvVariableManager: 'EnvVariableManager',
+  EnvironmentManager: 'EnvironmentManager',
+  FullProductionDeployment: 'FullProductionDeployment',
+  UsageViewer: 'UsageViewer',
+} as const
+
+export type MembershipTeamPermissionsEnum2 = (typeof membershipTeamPermissionsEnum2)[keyof typeof membershipTeamPermissionsEnum2]
+
+export const joinedFromOriginEnum4 = {
+  bitbucket: 'bitbucket',
+  dsync: 'dsync',
+  feedback: 'feedback',
+  github: 'github',
+  gitlab: 'gitlab',
+  import: 'import',
+  link: 'link',
+  mail: 'mail',
+  'organization-teams': 'organization-teams',
+  saml: 'saml',
+  teams: 'teams',
+} as const
+
+export type JoinedFromOriginEnum4 = (typeof joinedFromOriginEnum4)[keyof typeof joinedFromOriginEnum4]
+
+/**
+ * @description A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.
+ */
+export type TeamLimited = {
+  /**
+   * @description Property indicating that this Team data contains only limited information, due to the authentication token missing privileges to read the full Team data or due to team having MFA enforced and the user not having MFA enabled. Re-login with the Team\'s configured SAML Single Sign-On provider in order to upgrade the authentication token with the necessary privileges.
+   * @type boolean
+   */
+  limited: boolean
+  /**
+   * @type array
+   */
+  limitedBy: TeamLimitedLimitedByEnum[]
+  /**
+   * @description When \"Single Sign-On (SAML)\" is configured, this object contains information that allows the client-side to identify whether or not this Team has SAML enforced.
+   * @type object | undefined
+   */
+  saml?:
+    | {
+        /**
+         * @description Information for the SAML Single Sign-On configuration.
+         * @type object | undefined
+         */
+        connection?:
+          | {
+              /**
+               * @description The Identity Provider \"type\", for example Okta.
+               * @type string
+               */
+              type: string
+              /**
+               * @description Current status of the connection.
+               * @type string
+               */
+              status: string
+              /**
+               * @description Current state of the connection.
+               * @type string
+               */
+              state: string
+              /**
+               * @description Timestamp (in milliseconds) of when the configuration was connected.
+               * @type number
+               */
+              connectedAt: number
+              /**
+               * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+               * @type number | undefined
+               */
+              lastReceivedWebhookEvent?: number | undefined
+            }
+          | undefined
+        /**
+         * @description Information for the Directory Sync configuration.
+         * @type object | undefined
+         */
+        directory?:
+          | {
+              /**
+               * @description The Identity Provider \"type\", for example Okta.
+               * @type string
+               */
+              type: string
+              /**
+               * @description Current state of the connection.
+               * @type string
+               */
+              state: string
+              /**
+               * @description Timestamp (in milliseconds) of when the configuration was connected.
+               * @type number
+               */
+              connectedAt: number
+              /**
+               * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+               * @type number | undefined
+               */
+              lastReceivedWebhookEvent?: number | undefined
+            }
+          | undefined
+        /**
+         * @description When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team\'s SAML Single Sign-On provider.
+         * @type boolean
+         */
+        enforced: boolean
+      }
+    | undefined
+  /**
+   * @description The Team\'s unique identifier.
    * @type string
    */
-  created: string
+  id: string
+  /**
+   * @description The Team\'s slug, which is unique across the Vercel platform.
+   * @type string
+   */
+  slug: string
+  /**
+   * @description Name associated with the Team account, or `null` if none has been provided.
+   * @type string
+   */
+  name: string | null
+  /**
+   * @description The ID of the file used as avatar for this Team.
+   * @type string
+   */
+  avatar: string | null
+  /**
+   * @description The membership of the authenticated User in relation to the Team.
+   * @type object
+   */
+  membership: {
+    /**
+     * @type string | undefined
+     */
+    uid?: string | undefined
+    /**
+     * @type array | undefined
+     */
+    entitlements?:
+      | {
+          /**
+           * @type string
+           */
+          entitlement: string
+        }[]
+      | undefined
+    /**
+     * @type string | undefined
+     */
+    teamId?: string | undefined
+    /**
+     * @type boolean
+     */
+    confirmed: boolean
+    /**
+     * @type number
+     */
+    confirmedAt: number
+    /**
+     * @type number | undefined
+     */
+    accessRequestedAt?: number | undefined
+    /**
+     * @type string
+     */
+    role: MembershipRoleEnum2
+    /**
+     * @type array | undefined
+     */
+    teamRoles?: MembershipTeamRolesEnum2[] | undefined
+    /**
+     * @type array | undefined
+     */
+    teamPermissions?: MembershipTeamPermissionsEnum2[] | undefined
+    /**
+     * @type number
+     */
+    createdAt: number
+    /**
+     * @type number
+     */
+    created: number
+    /**
+     * @type object | undefined
+     */
+    joinedFrom?:
+      | {
+          /**
+           * @type string
+           */
+          origin: JoinedFromOriginEnum4
+          /**
+           * @type string | undefined
+           */
+          commitId?: string | undefined
+          /**
+           * @type string | undefined
+           */
+          repoId?: string | undefined
+          /**
+           * @type string | undefined
+           */
+          repoPath?: string | undefined
+          gitUserId?: (string | number) | undefined
+          /**
+           * @type string | undefined
+           */
+          gitUserLogin?: string | undefined
+          /**
+           * @type string | undefined
+           */
+          ssoUserId?: string | undefined
+          /**
+           * @type number | undefined
+           */
+          ssoConnectedAt?: number | undefined
+          /**
+           * @type string | undefined
+           */
+          idpUserId?: string | undefined
+          /**
+           * @type string | undefined
+           */
+          dsyncUserId?: string | undefined
+          /**
+           * @type number | undefined
+           */
+          dsyncConnectedAt?: number | undefined
+        }
+      | undefined
+  }
   /**
    * @description UNIX timestamp (in milliseconds) when the Team was created.
    * @type number
@@ -7443,6 +7971,7 @@ export const softBlockBlockedDueToOverageTypeEnum2 = {
   blobTotalAvgSizeInBytes: 'blobTotalAvgSizeInBytes',
   blobTotalGetResponseObjectSizeInBytes: 'blobTotalGetResponseObjectSizeInBytes',
   blobTotalSimpleRequests: 'blobTotalSimpleRequests',
+  connectDataTransfer: 'connectDataTransfer',
   dataCacheRead: 'dataCacheRead',
   dataCacheWrite: 'dataCacheWrite',
   edgeConfigRead: 'edgeConfigRead',
@@ -7454,6 +7983,8 @@ export const softBlockBlockedDueToOverageTypeEnum2 = {
   elasticConcurrencyBuildSlots: 'elasticConcurrencyBuildSlots',
   fastDataTransfer: 'fastDataTransfer',
   fastOriginTransfer: 'fastOriginTransfer',
+  fluidCpuDuration: 'fluidCpuDuration',
+  fluidDuration: 'fluidDuration',
   functionDuration: 'functionDuration',
   functionInvocation: 'functionInvocation',
   imageOptimizationCacheRead: 'imageOptimizationCacheRead',
@@ -7462,17 +7993,11 @@ export const softBlockBlockedDueToOverageTypeEnum2 = {
   logDrainsVolume: 'logDrainsVolume',
   monitoringMetric: 'monitoringMetric',
   observabilityEvent: 'observabilityEvent',
-  postgresComputeTime: 'postgresComputeTime',
-  postgresDataStorage: 'postgresDataStorage',
-  postgresDataTransfer: 'postgresDataTransfer',
-  postgresDatabase: 'postgresDatabase',
-  postgresWrittenData: 'postgresWrittenData',
+  onDemandConcurrencyMinutes: 'onDemandConcurrencyMinutes',
+  runtimeCacheRead: 'runtimeCacheRead',
+  runtimeCacheWrite: 'runtimeCacheWrite',
   serverlessFunctionExecution: 'serverlessFunctionExecution',
   sourceImages: 'sourceImages',
-  storageRedisTotalBandwidthInBytes: 'storageRedisTotalBandwidthInBytes',
-  storageRedisTotalCommands: 'storageRedisTotalCommands',
-  storageRedisTotalDailyAvgStorageInBytes: 'storageRedisTotalDailyAvgStorageInBytes',
-  storageRedisTotalDatabases: 'storageRedisTotalDatabases',
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
@@ -7483,7 +8008,7 @@ export type SoftBlockBlockedDueToOverageTypeEnum2 = (typeof softBlockBlockedDueT
 
 export const buildMachinePurchaseTypeEnum2 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type BuildMachinePurchaseTypeEnum2 = (typeof buildMachinePurchaseTypeEnum2)[keyof typeof buildMachinePurchaseTypeEnum2]
@@ -7519,12 +8044,6 @@ export const authUserImportFlowGitProviderEnum = {
 } as const
 
 export type AuthUserImportFlowGitProviderEnum = (typeof authUserImportFlowGitProviderEnum)[keyof typeof authUserImportFlowGitProviderEnum]
-
-export const authUserVersionEnum = {
-  northstar: 'northstar',
-} as const
-
-export type AuthUserVersionEnum = (typeof authUserVersionEnum)[keyof typeof authUserVersionEnum]
 
 /**
  * @description Data for the currently authenticated User.
@@ -7573,6 +8092,11 @@ export type AuthUser = {
      * @type number | undefined
      */
     concurrentBuilds?: number | undefined
+    /**
+     * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     * @type boolean | undefined
+     */
+    elasticConcurrencyEnabled?: boolean | undefined
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type object | undefined
@@ -7860,48 +8384,6 @@ export type AuthUser = {
       }
     | undefined
   /**
-   * @type object | undefined
-   */
-  northstarMigration?:
-    | {
-        /**
-         * @description The ID of the team we created for this user.
-         * @type string
-         */
-        teamId: string
-        /**
-         * @description The number of projects migrated for this user.
-         * @type number
-         */
-        projects: number
-        /**
-         * @description The number of stores migrated for this user.
-         * @type number
-         */
-        stores: number
-        /**
-         * @description The number of integration configurations migrated for this user.
-         * @type number
-         */
-        integrationConfigurations: number
-        /**
-         * @description The number of integration clients migrated for this user.
-         * @type number
-         */
-        integrationClients: number
-        /**
-         * @description The migration start time timestamp for this user.
-         * @type number
-         */
-        startTime: number
-        /**
-         * @description The migration end time timestamp for this user.
-         * @type number
-         */
-        endTime: number
-      }
-    | undefined
-  /**
    * @description The User\'s unique identifier.
    * @type string
    */
@@ -7931,18 +8413,7 @@ export type AuthUser = {
    * @type string
    */
   defaultTeamId: string | null
-  /**
-   * @description The user\'s version. Will always be `northstar`.
-   * @type string
-   */
-  version: AuthUserVersionEnum
 }
-
-export const authUserLimitedVersionEnum = {
-  northstar: 'northstar',
-} as const
-
-export type AuthUserLimitedVersionEnum = (typeof authUserLimitedVersionEnum)[keyof typeof authUserLimitedVersionEnum]
 
 /**
  * @description A limited form of data for the currently authenticated User, due to the authentication token missing privileges to read the full User data.
@@ -7983,11 +8454,6 @@ export type AuthUserLimited = {
    * @type string
    */
   defaultTeamId: string | null
-  /**
-   * @description The user\'s version. Will always be `northstar`.
-   * @type string
-   */
-  version: AuthUserLimitedVersionEnum
 }
 
 export const fileTreeTypeEnum = {
@@ -8136,15 +8602,13 @@ export type ReadAccessGroup401 = unknown
  */
 export type ReadAccessGroup403 = unknown
 
-export type ReadAccessGroup404 = unknown
-
 export type ReadAccessGroupQueryResponse = ReadAccessGroup200
 
 export type ReadAccessGroupQuery = {
   Response: ReadAccessGroup200
   PathParams: ReadAccessGroupPathParams
   QueryParams: ReadAccessGroupQueryParams
-  Errors: ReadAccessGroup400 | ReadAccessGroup401 | ReadAccessGroup403 | ReadAccessGroup404
+  Errors: ReadAccessGroup400 | ReadAccessGroup401 | ReadAccessGroup403
 }
 
 export type UpdateAccessGroupPathParams = {
@@ -8237,8 +8701,6 @@ export type UpdateAccessGroup401 = unknown
  */
 export type UpdateAccessGroup403 = unknown
 
-export type UpdateAccessGroup404 = unknown
-
 export const projectsRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
@@ -8292,7 +8754,7 @@ export type UpdateAccessGroupMutation = {
   Request: UpdateAccessGroupMutationRequest
   PathParams: UpdateAccessGroupPathParams
   QueryParams: UpdateAccessGroupQueryParams
-  Errors: UpdateAccessGroup400 | UpdateAccessGroup401 | UpdateAccessGroup403 | UpdateAccessGroup404
+  Errors: UpdateAccessGroup400 | UpdateAccessGroup401 | UpdateAccessGroup403
 }
 
 export type DeleteAccessGroupPathParams = {
@@ -8329,15 +8791,13 @@ export type DeleteAccessGroup401 = unknown
  */
 export type DeleteAccessGroup403 = unknown
 
-export type DeleteAccessGroup404 = unknown
-
 export type DeleteAccessGroupMutationResponse = DeleteAccessGroup200
 
 export type DeleteAccessGroupMutation = {
   Response: DeleteAccessGroup200
   PathParams: DeleteAccessGroupPathParams
   QueryParams: DeleteAccessGroupQueryParams
-  Errors: DeleteAccessGroup400 | DeleteAccessGroup401 | DeleteAccessGroup403 | DeleteAccessGroup404
+  Errors: DeleteAccessGroup400 | DeleteAccessGroup401 | DeleteAccessGroup403
 }
 
 export type ListAccessGroupMembersPathParams = {
@@ -8451,15 +8911,13 @@ export type ListAccessGroupMembers401 = unknown
  */
 export type ListAccessGroupMembers403 = unknown
 
-export type ListAccessGroupMembers404 = unknown
-
 export type ListAccessGroupMembersQueryResponse = ListAccessGroupMembers200
 
 export type ListAccessGroupMembersQuery = {
   Response: ListAccessGroupMembers200
   PathParams: ListAccessGroupMembersPathParams
   QueryParams: ListAccessGroupMembersQueryParams
-  Errors: ListAccessGroupMembers400 | ListAccessGroupMembers401 | ListAccessGroupMembers403 | ListAccessGroupMembers404
+  Errors: ListAccessGroupMembers400 | ListAccessGroupMembers401 | ListAccessGroupMembers403
 }
 
 export type ListAccessGroupsQueryParams = {
@@ -8607,14 +9065,12 @@ export type ListAccessGroups401 = unknown
  */
 export type ListAccessGroups403 = unknown
 
-export type ListAccessGroups404 = unknown
-
 export type ListAccessGroupsQueryResponse = ListAccessGroups200
 
 export type ListAccessGroupsQuery = {
   Response: ListAccessGroups200
   QueryParams: ListAccessGroupsQueryParams
-  Errors: ListAccessGroups400 | ListAccessGroups401 | ListAccessGroups403 | ListAccessGroups404
+  Errors: ListAccessGroups400 | ListAccessGroups401 | ListAccessGroups403
 }
 
 export type CreateAccessGroupQueryParams = {
@@ -8688,8 +9144,6 @@ export type CreateAccessGroup401 = unknown
  */
 export type CreateAccessGroup403 = unknown
 
-export type CreateAccessGroup404 = unknown
-
 export const projectsRoleEnum2 = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
@@ -8737,7 +9191,7 @@ export type CreateAccessGroupMutation = {
   Response: CreateAccessGroup200
   Request: CreateAccessGroupMutationRequest
   QueryParams: CreateAccessGroupQueryParams
-  Errors: CreateAccessGroup400 | CreateAccessGroup401 | CreateAccessGroup403 | CreateAccessGroup404
+  Errors: CreateAccessGroup400 | CreateAccessGroup401 | CreateAccessGroup403
 }
 
 export type ListAccessGroupProjectsPathParams = {
@@ -8847,15 +9301,13 @@ export type ListAccessGroupProjects401 = unknown
  */
 export type ListAccessGroupProjects403 = unknown
 
-export type ListAccessGroupProjects404 = unknown
-
 export type ListAccessGroupProjectsQueryResponse = ListAccessGroupProjects200
 
 export type ListAccessGroupProjectsQuery = {
   Response: ListAccessGroupProjects200
   PathParams: ListAccessGroupProjectsPathParams
   QueryParams: ListAccessGroupProjectsQueryParams
-  Errors: ListAccessGroupProjects400 | ListAccessGroupProjects401 | ListAccessGroupProjects403 | ListAccessGroupProjects404
+  Errors: ListAccessGroupProjects400 | ListAccessGroupProjects401 | ListAccessGroupProjects403
 }
 
 export type CreateAccessGroupProjectPathParams = {
@@ -8925,8 +9377,6 @@ export type CreateAccessGroupProject401 = unknown
  */
 export type CreateAccessGroupProject403 = unknown
 
-export type CreateAccessGroupProject404 = unknown
-
 export const createAccessGroupProjectMutationRequestRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
@@ -8957,7 +9407,7 @@ export type CreateAccessGroupProjectMutation = {
   Request: CreateAccessGroupProjectMutationRequest
   PathParams: CreateAccessGroupProjectPathParams
   QueryParams: CreateAccessGroupProjectQueryParams
-  Errors: CreateAccessGroupProject400 | CreateAccessGroupProject401 | CreateAccessGroupProject403 | CreateAccessGroupProject404
+  Errors: CreateAccessGroupProject400 | CreateAccessGroupProject401 | CreateAccessGroupProject403
 }
 
 export type ReadAccessGroupProjectPathParams = {
@@ -9031,15 +9481,13 @@ export type ReadAccessGroupProject401 = unknown
  */
 export type ReadAccessGroupProject403 = unknown
 
-export type ReadAccessGroupProject404 = unknown
-
 export type ReadAccessGroupProjectQueryResponse = ReadAccessGroupProject200
 
 export type ReadAccessGroupProjectQuery = {
   Response: ReadAccessGroupProject200
   PathParams: ReadAccessGroupProjectPathParams
   QueryParams: ReadAccessGroupProjectQueryParams
-  Errors: ReadAccessGroupProject400 | ReadAccessGroupProject401 | ReadAccessGroupProject403 | ReadAccessGroupProject404
+  Errors: ReadAccessGroupProject400 | ReadAccessGroupProject401 | ReadAccessGroupProject403
 }
 
 export type UpdateAccessGroupProjectPathParams = {
@@ -9113,8 +9561,6 @@ export type UpdateAccessGroupProject401 = unknown
  */
 export type UpdateAccessGroupProject403 = unknown
 
-export type UpdateAccessGroupProject404 = unknown
-
 export const updateAccessGroupProjectMutationRequestRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
@@ -9139,7 +9585,7 @@ export type UpdateAccessGroupProjectMutation = {
   Request: UpdateAccessGroupProjectMutationRequest
   PathParams: UpdateAccessGroupProjectPathParams
   QueryParams: UpdateAccessGroupProjectQueryParams
-  Errors: UpdateAccessGroupProject400 | UpdateAccessGroupProject401 | UpdateAccessGroupProject403 | UpdateAccessGroupProject404
+  Errors: UpdateAccessGroupProject400 | UpdateAccessGroupProject401 | UpdateAccessGroupProject403
 }
 
 export type DeleteAccessGroupProjectPathParams = {
@@ -9180,15 +9626,13 @@ export type DeleteAccessGroupProject401 = unknown
  */
 export type DeleteAccessGroupProject403 = unknown
 
-export type DeleteAccessGroupProject404 = unknown
-
 export type DeleteAccessGroupProjectMutationResponse = DeleteAccessGroupProject200
 
 export type DeleteAccessGroupProjectMutation = {
   Response: DeleteAccessGroupProject200
   PathParams: DeleteAccessGroupProjectPathParams
   QueryParams: DeleteAccessGroupProjectQueryParams
-  Errors: DeleteAccessGroupProject400 | DeleteAccessGroupProject401 | DeleteAccessGroupProject403 | DeleteAccessGroupProject404
+  Errors: DeleteAccessGroupProject400 | DeleteAccessGroupProject401 | DeleteAccessGroupProject403
 }
 
 export type RecordEventsQueryParams = {
@@ -9426,13 +9870,10 @@ export type UploadArtifact402 = unknown
  */
 export type UploadArtifact403 = unknown
 
-export type UploadArtifactMutationRequest = Blob
-
 export type UploadArtifactMutationResponse = UploadArtifact202
 
 export type UploadArtifactMutation = {
   Response: UploadArtifact202
-  Request: UploadArtifactMutationRequest
   PathParams: UploadArtifactPathParams
   QueryParams: UploadArtifactQueryParams
   HeaderParams: UploadArtifactHeaderParams
@@ -11067,6 +11508,13 @@ export type UpdateProjectDataCacheQueryParams = {
   slug?: string | undefined
 }
 
+export const connectConfigurationsEnvIdEnum = {
+  production: 'production',
+  preview: 'preview',
+} as const
+
+export type ConnectConfigurationsEnvIdEnum = (typeof connectConfigurationsEnvIdEnum)[keyof typeof connectConfigurationsEnvIdEnum]
+
 export const envTargetEnum = {
   production: 'production',
   preview: 'preview',
@@ -11236,6 +11684,7 @@ export const updateProjectDataCache200FrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -11371,7 +11820,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum =
 
 export const resourceConfigBuildMachineTypeEnum = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum = (typeof resourceConfigBuildMachineTypeEnum)[keyof typeof resourceConfigBuildMachineTypeEnum]
@@ -11387,7 +11836,7 @@ export type DefaultResourceConfigFunctionDefaultMemoryTypeEnum =
 
 export const defaultResourceConfigBuildMachineTypeEnum = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type DefaultResourceConfigBuildMachineTypeEnum =
@@ -11395,6 +11844,7 @@ export type DefaultResourceConfigBuildMachineTypeEnum =
 
 export const ssoProtectionDeploymentTypeEnum2 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
@@ -11493,6 +11943,7 @@ export const trustedIpsDeploymentTypeEnum = {
   preview: 'preview',
   all: 'all',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum = (typeof trustedIpsDeploymentTypeEnum)[keyof typeof trustedIpsDeploymentTypeEnum]
@@ -11509,6 +11960,7 @@ export const trustedIpsDeploymentTypeEnum2 = {
   preview: 'preview',
   all: 'all',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum2 = (typeof trustedIpsDeploymentTypeEnum2)[keyof typeof trustedIpsDeploymentTypeEnum2]
@@ -11579,13 +12031,29 @@ export const erlAlgoEnum = {
 
 export type ErlAlgoEnum = (typeof erlAlgoEnum)[keyof typeof erlAlgoEnum]
 
-export const actionEnum = {
+export const botFilterActionEnum = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum = (typeof actionEnum)[keyof typeof actionEnum]
+export type BotFilterActionEnum = (typeof botFilterActionEnum)[keyof typeof botFilterActionEnum]
+
+export const aiBotsActionEnum = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum = (typeof aiBotsActionEnum)[keyof typeof aiBotsActionEnum]
+
+export const owaspActionEnum = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum = (typeof owaspActionEnum)[keyof typeof owaspActionEnum]
 
 export const oidcTokenConfigIssuerModeEnum = {
   global: 'global',
@@ -11694,6 +12162,52 @@ export type UpdateProjectDataCache200 = {
    */
   commandForIgnoringBuildStep?: (string | null) | undefined
   /**
+   * @type array
+   */
+  connectConfigurations?:
+    | (
+        | {
+            envId: string | ConnectConfigurationsEnvIdEnum
+            /**
+             * @type string
+             */
+            connectConfigurationId: string
+            /**
+             * @type boolean
+             */
+            passive: boolean
+            /**
+             * @type boolean
+             */
+            buildsEnabled: boolean
+            /**
+             * @type object | undefined
+             */
+            aws?:
+              | {
+                  /**
+                   * @type array
+                   */
+                  subnetIds: string[]
+                  /**
+                   * @type string
+                   */
+                  securityGroupId: string
+                }
+              | undefined
+            /**
+             * @type number
+             */
+            createdAt: number
+            /**
+             * @type number
+             */
+            updatedAt: number
+          }[]
+        | null
+      )
+    | undefined
+  /**
    * @type string
    */
   connectConfigurationId?: (string | null) | undefined
@@ -11701,6 +12215,10 @@ export type UpdateProjectDataCache200 = {
    * @type boolean | undefined
    */
   connectBuildsEnabled?: boolean | undefined
+  /**
+   * @type string
+   */
+  passiveConnectConfigurationId?: (string | null) | undefined
   /**
    * @type number | undefined
    */
@@ -12862,10 +13380,6 @@ export type UpdateProjectDataCache200 = {
    */
   outputDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  passiveConnectConfigurationId?: (string | null) | undefined
-  /**
    * @type object
    */
   passwordProtection?: (object | null) | undefined
@@ -12911,6 +13425,35 @@ export type UpdateProjectDataCache200 = {
     buildMachineType?: ResourceConfigBuildMachineTypeEnum | undefined
   }
   /**
+   * @description Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   * @type object | undefined
+   */
+  rollbackDescription?:
+    | {
+        /**
+         * @description The user who rolled back the project.
+         * @type string
+         */
+        userId: string
+        /**
+         * @description The username of the user who rolled back the project.
+         * @type string
+         */
+        username: string
+        /**
+         * @description User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+         * @type string
+         */
+        description: string
+        /**
+         * @description Timestamp of when the rollback was requested.
+         * @type number
+         */
+        createdAt: number
+      }
+    | undefined
+  /**
+   * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
    * @type object
    */
   rollingRelease?:
@@ -12921,34 +13464,24 @@ export type UpdateProjectDataCache200 = {
          */
         target: string
         /**
-         * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-         * @type number | undefined
-         */
-        minutesToRelease?: number | undefined
-        /**
-         * @description An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+         * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
          * @type array
          */
         stages?:
           | (
               | {
                   /**
-                   * @description The percentage of traffic to serve to the new deployment
+                   * @description The percentage of traffic to serve to the canary deployment (0-100)
                    * @type number
                    */
                   targetPercentage: number
                   /**
-                   * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-                   * @type number | undefined
-                   */
-                  minutesToRelease?: number | undefined
-                  /**
-                   * @description Whether or not this stage requires approval to proceed.
+                   * @description Whether or not this stage requires manual approval to proceed
                    * @type boolean | undefined
                    */
                   requireApproval?: boolean | undefined
                   /**
-                   * @description duration is the total time to serve a stage, at the given targetPercentage.
+                   * @description Duration in minutes for automatic advancement to the next stage
                    * @type number | undefined
                    */
                   duration?: number | undefined
@@ -12956,6 +13489,11 @@ export type UpdateProjectDataCache200 = {
               | null
             )
           | undefined
+        /**
+         * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+         * @type boolean | undefined
+         */
+        canaryResponseHeader?: boolean | undefined
       } | null)
     | undefined
   /**
@@ -12995,10 +13533,6 @@ export type UpdateProjectDataCache200 = {
    * @type string
    */
   rootDirectory?: (string | null) | undefined
-  /**
-   * @type string
-   */
-  serverlessFunctionRegion?: (string | null) | undefined
   /**
    * @type boolean | undefined
    */
@@ -13432,6 +13966,10 @@ export type UpdateProjectDataCache200 = {
         /**
          * @type array | undefined
          */
+        defaultDeploymentProtection?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         domain?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -13644,6 +14182,10 @@ export type UpdateProjectDataCache200 = {
         /**
          * @type array | undefined
          */
+        notificationPreferences?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         notificationCustomerBudget?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -13657,6 +14199,10 @@ export type UpdateProjectDataCache200 = {
          * @type array | undefined
          */
         observabilityNotebook?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        observabilityFunnel?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -13876,11 +14422,23 @@ export type UpdateProjectDataCache200 = {
         /**
          * @type array | undefined
          */
+        apiKey?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        apiKeyOwnedBySelf?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         aliasProject?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
         aliasProtectionBypass?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        buildMachine?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -13936,6 +14494,10 @@ export type UpdateProjectDataCache200 = {
         /**
          * @type array | undefined
          */
+        edgeCacheNamespace?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         environments?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -13964,6 +14526,14 @@ export type UpdateProjectDataCache200 = {
         /**
          * @type array | undefined
          */
+        onDemandBuild?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        onDemandConcurrency?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         project?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -13977,6 +14547,14 @@ export type UpdateProjectDataCache200 = {
          * @type array | undefined
          */
         projectAnalyticsSampling?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheck?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheckRun?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -14585,7 +15163,10 @@ export type UpdateProjectDataCache200 = {
          */
         managedRules?:
           | ({
-              [key: string]: {
+              /**
+               * @type object
+               */
+              bot_filter: {
                 /**
                  * @type boolean
                  */
@@ -14593,10 +15174,40 @@ export type UpdateProjectDataCache200 = {
                 /**
                  * @type string | undefined
                  */
-                action?: ActionEnum | undefined
+                action?: BotFilterActionEnum | undefined
+              }
+              /**
+               * @type object
+               */
+              ai_bots: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: AiBotsActionEnum | undefined
+              }
+              /**
+               * @type object
+               */
+              owasp: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: OwaspActionEnum | undefined
               }
             } | null)
           | undefined
+        /**
+         * @type boolean | undefined
+         */
+        botIdEnabled?: boolean | undefined
       }
     | undefined
   /**
@@ -14605,9 +15216,10 @@ export type UpdateProjectDataCache200 = {
   oidcTokenConfig?:
     | {
         /**
-         * @type boolean
+         * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @type boolean | undefined
          */
-        enabled: boolean
+        enabled?: boolean | undefined
         /**
          * @description - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
          * @type string | undefined
@@ -14619,6 +15231,17 @@ export type UpdateProjectDataCache200 = {
    * @type string | undefined
    */
   tier?: UpdateProjectDataCache200TierEnum | undefined
+  /**
+   * @type object | undefined
+   */
+  features?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        webAnalytics?: boolean | undefined
+      }
+    | undefined
 }
 
 /**
@@ -15113,6 +15736,10 @@ export type UpdateIntegrationDeploymentActionMutationRequest = {
    */
   statusText?: string | undefined
   /**
+   * @type string | undefined, uri
+   */
+  statusUrl?: string | undefined
+  /**
    * @type array | undefined
    */
   outcomes?:
@@ -15220,15 +15847,16 @@ export const projectSettingsFrameworkEnum = {
   'sanity-v3': 'sanity-v3',
   sanity: 'sanity',
   storybook: 'storybook',
+  nitro: 'nitro',
 } as const
 
 export type ProjectSettingsFrameworkEnum = (typeof projectSettingsFrameworkEnum)[keyof typeof projectSettingsFrameworkEnum]
 
 export const integrationsStatusEnum = {
-  error: 'error',
   skipped: 'skipped',
   pending: 'pending',
   ready: 'ready',
+  error: 'error',
   timeout: 'timeout',
 } as const
 
@@ -15284,9 +15912,9 @@ export const customEnvironmentTypeEnum = {
 export type CustomEnvironmentTypeEnum = (typeof customEnvironmentTypeEnum)[keyof typeof customEnvironmentTypeEnum]
 
 export const branchMatcherTypeEnum4 = {
+  endsWith: 'endsWith',
   startsWith: 'startsWith',
   equals: 'equals',
-  endsWith: 'endsWith',
 } as const
 
 export type BranchMatcherTypeEnum4 = (typeof branchMatcherTypeEnum4)[keyof typeof branchMatcherTypeEnum4]
@@ -15299,6 +15927,12 @@ export const domainsRedirectStatusCodeEnum2 = {
 } as const
 
 export type DomainsRedirectStatusCodeEnum2 = (typeof domainsRedirectStatusCodeEnum2)[keyof typeof domainsRedirectStatusCodeEnum2]
+
+export const getDeployment200OomReportEnum = {
+  'out-of-memory': 'out-of-memory',
+} as const
+
+export type GetDeployment200OomReportEnum = (typeof getDeployment200OomReportEnum)[keyof typeof getDeployment200OomReportEnum]
 
 export const getDeployment200TypeEnum = {
   LAMBDAS: 'LAMBDAS',
@@ -15448,6 +16082,19 @@ export const getDeployment200PlanEnum = {
 
 export type GetDeployment200PlanEnum = (typeof getDeployment200PlanEnum)[keyof typeof getDeployment200PlanEnum]
 
+export const architectureEnum = {
+  x86_64: 'x86_64',
+  arm64: 'arm64',
+} as const
+
+export type ArchitectureEnum = (typeof architectureEnum)[keyof typeof architectureEnum]
+
+export const experimentalTriggersTypeEnum = {
+  'queue/v1beta': 'queue/v1beta',
+} as const
+
+export type ExperimentalTriggersTypeEnum = (typeof experimentalTriggersTypeEnum)[keyof typeof experimentalTriggersTypeEnum]
+
 export const hasTypeEnum2 = {
   host: 'host',
 } as const
@@ -15475,6 +16122,29 @@ export const missingTypeEnum3 = {
 } as const
 
 export type MissingTypeEnum3 = (typeof missingTypeEnum3)[keyof typeof missingTypeEnum3]
+
+export const mitigateActionEnum2 = {
+  challenge: 'challenge',
+  deny: 'deny',
+} as const
+
+export type MitigateActionEnum2 = (typeof mitigateActionEnum2)[keyof typeof mitigateActionEnum2]
+
+export const transformsTypeEnum = {
+  'request.headers': 'request.headers',
+  'request.query': 'request.query',
+  'response.headers': 'response.headers',
+} as const
+
+export type TransformsTypeEnum = (typeof transformsTypeEnum)[keyof typeof transformsTypeEnum]
+
+export const transformsOpEnum = {
+  append: 'append',
+  set: 'set',
+  delete: 'delete',
+} as const
+
+export type TransformsOpEnum = (typeof transformsOpEnum)[keyof typeof transformsOpEnum]
 
 export const routesHandleEnum = {
   error: 'error',
@@ -15547,6 +16217,14 @@ export const configFunctionMemoryTypeEnum = {
 
 export type ConfigFunctionMemoryTypeEnum = (typeof configFunctionMemoryTypeEnum)[keyof typeof configFunctionMemoryTypeEnum]
 
+export const deploymentAliasStateEnum = {
+  succeeded: 'succeeded',
+  failed: 'failed',
+  pending: 'pending',
+} as const
+
+export type DeploymentAliasStateEnum = (typeof deploymentAliasStateEnum)[keyof typeof deploymentAliasStateEnum]
+
 export const lambdasReadyStateEnum2 = {
   BUILDING: 'BUILDING',
   ERROR: 'ERROR',
@@ -15576,9 +16254,9 @@ export const customEnvironmentTypeEnum2 = {
 export type CustomEnvironmentTypeEnum2 = (typeof customEnvironmentTypeEnum2)[keyof typeof customEnvironmentTypeEnum2]
 
 export const branchMatcherTypeEnum5 = {
+  endsWith: 'endsWith',
   startsWith: 'startsWith',
   equals: 'equals',
-  endsWith: 'endsWith',
 } as const
 
 export type BranchMatcherTypeEnum5 = (typeof branchMatcherTypeEnum5)[keyof typeof branchMatcherTypeEnum5]
@@ -15591,6 +16269,12 @@ export const domainsRedirectStatusCodeEnum3 = {
 } as const
 
 export type DomainsRedirectStatusCodeEnum3 = (typeof domainsRedirectStatusCodeEnum3)[keyof typeof domainsRedirectStatusCodeEnum3]
+
+export const getDeployment200OomReportEnum2 = {
+  'out-of-memory': 'out-of-memory',
+} as const
+
+export type GetDeployment200OomReportEnum2 = (typeof getDeployment200OomReportEnum2)[keyof typeof getDeployment200OomReportEnum2]
 
 export const getDeployment200TypeEnum2 = {
   LAMBDAS: 'LAMBDAS',
@@ -16276,6 +16960,10 @@ export type GetDeployment200 =
           )
         | undefined
       /**
+       * @type string | undefined
+       */
+      oomReport?: GetDeployment200OomReportEnum | undefined
+      /**
        * @type object
        */
       aliasWarning?:
@@ -16834,6 +17522,10 @@ export type GetDeployment200 =
         | ({
             [key: string]: {
               /**
+               * @type string | undefined
+               */
+              architecture?: ArchitectureEnum | undefined
+              /**
                * @type number | undefined
                */
               memory?: number | undefined
@@ -16853,6 +17545,43 @@ export type GetDeployment200 =
                * @type string | undefined
                */
               excludeFiles?: string | undefined
+              /**
+               * @type array | undefined
+               */
+              experimentalTriggers?:
+                | {
+                    /**
+                     * @description Event type - must be \"queue/v1beta\" (REQUIRED)
+                     * @type string
+                     */
+                    type: ExperimentalTriggersTypeEnum
+                    /**
+                     * @description Name of the queue topic to consume from (REQUIRED)
+                     * @type string
+                     */
+                    topic: string
+                    /**
+                     * @description Name of the consumer group for this trigger (REQUIRED)
+                     * @type string
+                     */
+                    consumer: string
+                    /**
+                     * @description Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server\'s default configuration.
+                     * @type number | undefined
+                     */
+                    maxDeliveries?: number | undefined
+                    /**
+                     * @description Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server\'s default configuration.
+                     * @type number | undefined
+                     */
+                    retryAfterSeconds?: number | undefined
+                    /**
+                     * @description Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server\'s default configuration.
+                     * @type number | undefined
+                     */
+                    initialDelaySeconds?: number | undefined
+                  }[]
+                | undefined
             }
           } | null)
         | undefined
@@ -16929,10 +17658,51 @@ export type GetDeployment200 =
                            * @type string
                            */
                           type: HasTypeEnum2
-                          /**
-                           * @type string
-                           */
-                          value: string
+                          value:
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
                         }
                       | {
                           /**
@@ -16943,10 +17713,54 @@ export type GetDeployment200 =
                            * @type string
                            */
                           key: string
-                          /**
-                           * @type string | undefined
-                           */
-                          value?: string | undefined
+                          value?:
+                            | (
+                                | string
+                                | {
+                                    eq?: (string | number) | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    neq?: string | undefined
+                                    /**
+                                     * @type array | undefined
+                                     */
+                                    inc?: string[] | undefined
+                                    /**
+                                     * @type array | undefined
+                                     */
+                                    ninc?: string[] | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    pre?: string | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    suf?: string | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    re?: string | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    gt?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    gte?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    lt?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    lte?: number | undefined
+                                  }
+                              )
+                            | undefined
                         }
                     )[]
                   | undefined
@@ -16960,10 +17774,51 @@ export type GetDeployment200 =
                            * @type string
                            */
                           type: MissingTypeEnum2
-                          /**
-                           * @type string
-                           */
-                          value: string
+                          value:
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
                         }
                       | {
                           /**
@@ -16974,12 +17829,129 @@ export type GetDeployment200 =
                            * @type string
                            */
                           key: string
-                          /**
-                           * @type string | undefined
-                           */
-                          value?: string | undefined
+                          value?:
+                            | (
+                                | string
+                                | {
+                                    eq?: (string | number) | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    neq?: string | undefined
+                                    /**
+                                     * @type array | undefined
+                                     */
+                                    inc?: string[] | undefined
+                                    /**
+                                     * @type array | undefined
+                                     */
+                                    ninc?: string[] | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    pre?: string | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    suf?: string | undefined
+                                    /**
+                                     * @type string | undefined
+                                     */
+                                    re?: string | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    gt?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    gte?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    lt?: number | undefined
+                                    /**
+                                     * @type number | undefined
+                                     */
+                                    lte?: number | undefined
+                                  }
+                              )
+                            | undefined
                         }
                     )[]
+                  | undefined
+                /**
+                 * @type object | undefined
+                 */
+                mitigate?:
+                  | {
+                      /**
+                       * @type string
+                       */
+                      action: MitigateActionEnum2
+                    }
+                  | undefined
+                /**
+                 * @type array | undefined
+                 */
+                transforms?:
+                  | {
+                      /**
+                       * @type string
+                       */
+                      type: TransformsTypeEnum
+                      /**
+                       * @type string
+                       */
+                      op: TransformsOpEnum
+                      /**
+                       * @type object
+                       */
+                      target: {
+                        key:
+                          | string
+                          | {
+                              eq?: (string | number) | undefined
+                              /**
+                               * @type string | undefined
+                               */
+                              neq?: string | undefined
+                              /**
+                               * @type array | undefined
+                               */
+                              inc?: string[] | undefined
+                              /**
+                               * @type array | undefined
+                               */
+                              ninc?: string[] | undefined
+                              /**
+                               * @type string | undefined
+                               */
+                              pre?: string | undefined
+                              /**
+                               * @type string | undefined
+                               */
+                              suf?: string | undefined
+                              /**
+                               * @type number | undefined
+                               */
+                              gt?: number | undefined
+                              /**
+                               * @type number | undefined
+                               */
+                              gte?: number | undefined
+                              /**
+                               * @type number | undefined
+                               */
+                              lt?: number | undefined
+                              /**
+                               * @type number | undefined
+                               */
+                              lte?: number | undefined
+                            }
+                      }
+                      args?: (string | string[]) | undefined
+                    }[]
                   | undefined
                 /**
                  * @type object | undefined
@@ -17222,6 +18194,11 @@ export type GetDeployment200 =
                  */
                 isDefaultApp?: boolean | undefined
                 /**
+                 * @description The project name of the default app of this deployment\'s microfrontends group.
+                 * @type string
+                 */
+                defaultAppProjectName: string
+                /**
                  * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                  * @type string | undefined
                  */
@@ -17231,6 +18208,16 @@ export type GetDeployment200 =
                  * @type array
                  */
                 groupIds: (string | string)[]
+                /**
+                 * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+                 * @type boolean | undefined
+                 */
+                microfrontendsAliasEnabled?: boolean | undefined
+                /**
+                 * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+                 * @type boolean | undefined
+                 */
+                previewEnvAliasEnabled?: boolean | undefined
               }
             | {
                 /**
@@ -17240,6 +18227,10 @@ export type GetDeployment200 =
                 applications?:
                   | {
                       [key: string]: {
+                        /**
+                         * @type boolean | undefined
+                         */
+                        isDefaultApp?: boolean | undefined
                         /**
                          * @description This is the production alias, it will always show the most up to date of each application.
                          * @type string
@@ -17262,6 +18253,11 @@ export type GetDeployment200 =
                  */
                 isDefaultApp: boolean
                 /**
+                 * @description The project name of the default app of this deployment\'s microfrontends group.
+                 * @type string
+                 */
+                defaultAppProjectName: string
+                /**
                  * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                  * @type string | undefined
                  */
@@ -17271,6 +18267,16 @@ export type GetDeployment200 =
                  * @type array
                  */
                 groupIds: (string | string)[]
+                /**
+                 * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+                 * @type boolean | undefined
+                 */
+                microfrontendsAliasEnabled?: boolean | undefined
+                /**
+                 * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+                 * @type boolean | undefined
+                 */
+                previewEnvAliasEnabled?: boolean | undefined
               }
           )
         | undefined
@@ -17304,6 +18310,35 @@ export type GetDeployment200 =
              * @type string
              */
             secureComputeFallbackRegion: string | null
+            /**
+             * @type boolean | undefined
+             */
+            isUsingActiveCPU?: boolean | undefined
+          }
+        | undefined
+      /**
+       * @type object | undefined
+       */
+      checks?:
+        | {
+            /**
+             * @description Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+             * @type object
+             */
+            'deployment-alias': {
+              /**
+               * @type string
+               */
+              state: DeploymentAliasStateEnum
+              /**
+               * @type number
+               */
+              startedAt: number
+              /**
+               * @type number | undefined
+               */
+              completedAt?: number | undefined
+            }
           }
         | undefined
     }
@@ -17583,6 +18618,10 @@ export type GetDeployment200 =
               }
           )
         | undefined
+      /**
+       * @type string | undefined
+       */
+      oomReport?: GetDeployment200OomReportEnum2 | undefined
       /**
        * @type object
        */
@@ -18184,6 +19223,7 @@ export const projectSettingsFrameworkEnum2 = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -18273,9 +19313,9 @@ export const customEnvironmentTypeEnum3 = {
 export type CustomEnvironmentTypeEnum3 = (typeof customEnvironmentTypeEnum3)[keyof typeof customEnvironmentTypeEnum3]
 
 export const branchMatcherTypeEnum6 = {
+  endsWith: 'endsWith',
   startsWith: 'startsWith',
   equals: 'equals',
-  endsWith: 'endsWith',
 } as const
 
 export type BranchMatcherTypeEnum6 = (typeof branchMatcherTypeEnum6)[keyof typeof branchMatcherTypeEnum6]
@@ -18288,6 +19328,12 @@ export const domainsRedirectStatusCodeEnum4 = {
 } as const
 
 export type DomainsRedirectStatusCodeEnum4 = (typeof domainsRedirectStatusCodeEnum4)[keyof typeof domainsRedirectStatusCodeEnum4]
+
+export const createDeployment200OomReportEnum = {
+  'out-of-memory': 'out-of-memory',
+} as const
+
+export type CreateDeployment200OomReportEnum = (typeof createDeployment200OomReportEnum)[keyof typeof createDeployment200OomReportEnum]
 
 export const createDeployment200TypeEnum = {
   LAMBDAS: 'LAMBDAS',
@@ -18452,6 +19498,19 @@ export const configFunctionMemoryTypeEnum2 = {
 
 export type ConfigFunctionMemoryTypeEnum2 = (typeof configFunctionMemoryTypeEnum2)[keyof typeof configFunctionMemoryTypeEnum2]
 
+export const architectureEnum2 = {
+  arm64: 'arm64',
+  x86_64: 'x86_64',
+} as const
+
+export type ArchitectureEnum2 = (typeof architectureEnum2)[keyof typeof architectureEnum2]
+
+export const experimentalTriggersTypeEnum2 = {
+  'queue/v1beta': 'queue/v1beta',
+} as const
+
+export type ExperimentalTriggersTypeEnum2 = (typeof experimentalTriggersTypeEnum2)[keyof typeof experimentalTriggersTypeEnum2]
+
 export const hasTypeEnum4 = {
   host: 'host',
 } as const
@@ -18480,6 +19539,29 @@ export const missingTypeEnum5 = {
 
 export type MissingTypeEnum5 = (typeof missingTypeEnum5)[keyof typeof missingTypeEnum5]
 
+export const mitigateActionEnum3 = {
+  challenge: 'challenge',
+  deny: 'deny',
+} as const
+
+export type MitigateActionEnum3 = (typeof mitigateActionEnum3)[keyof typeof mitigateActionEnum3]
+
+export const transformsTypeEnum2 = {
+  'request.headers': 'request.headers',
+  'request.query': 'request.query',
+  'response.headers': 'response.headers',
+} as const
+
+export type TransformsTypeEnum2 = (typeof transformsTypeEnum2)[keyof typeof transformsTypeEnum2]
+
+export const transformsOpEnum2 = {
+  append: 'append',
+  set: 'set',
+  delete: 'delete',
+} as const
+
+export type TransformsOpEnum2 = (typeof transformsOpEnum2)[keyof typeof transformsOpEnum2]
+
 export const routesHandleEnum2 = {
   error: 'error',
   filesystem: 'filesystem',
@@ -18496,6 +19578,14 @@ export const routesMiddlewareEnum2 = {
 } as const
 
 export type RoutesMiddlewareEnum2 = (typeof routesMiddlewareEnum2)[keyof typeof routesMiddlewareEnum2]
+
+export const deploymentAliasStateEnum2 = {
+  failed: 'failed',
+  pending: 'pending',
+  succeeded: 'succeeded',
+} as const
+
+export type DeploymentAliasStateEnum2 = (typeof deploymentAliasStateEnum2)[keyof typeof deploymentAliasStateEnum2]
 
 export const gitRepoTypeEnum4 = {
   gitlab: 'gitlab',
@@ -18913,11 +20003,11 @@ export type CreateDeployment200 = {
         /**
          * @type string
          */
-        name: string
+        id: string
         /**
          * @type string
          */
-        id: string
+        name: string
         /**
          * @type string
          */
@@ -19079,9 +20169,13 @@ export type CreateDeployment200 = {
       )
     | undefined
   /**
+   * @type string | undefined
+   */
+  oomReport?: CreateDeployment200OomReportEnum | undefined
+  /**
    * @type string
    */
-  type: CreateDeployment200TypeEnum
+  id: string
   /**
    * @type string
    */
@@ -19091,13 +20185,13 @@ export type CreateDeployment200 = {
    */
   createdAt: number
   /**
+   * @type string
+   */
+  type: CreateDeployment200TypeEnum
+  /**
    * @type number
    */
   deletedAt?: (number | null) | undefined
-  /**
-   * @type string
-   */
-  id: string
   /**
    * @type number
    */
@@ -19440,6 +20534,10 @@ export type CreateDeployment200 = {
    */
   target?: (CreateDeployment200TargetEnum | null) | undefined
   /**
+   * @type string
+   */
+  errorMessage?: (string | null) | undefined
+  /**
    * @description Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
    * @type array | undefined
    */
@@ -19448,10 +20546,6 @@ export type CreateDeployment200 = {
    * @type array
    */
   regions: string[]
-  /**
-   * @type string
-   */
-  errorMessage?: (string | null) | undefined
   /**
    * @type object
    */
@@ -19598,80 +20692,19 @@ export type CreateDeployment200 = {
   /**
    * @type string
    */
-  plan: CreateDeployment200PlanEnum
-  /**
-   * @type string
-   */
   projectId: string
   /**
    * @type string
    */
   ownerId: string
-  microfrontends?:
-    | (
-        | {
-            /**
-             * @description Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-             * @type boolean | undefined
-             */
-            isDefaultApp?: boolean | undefined
-            /**
-             * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-             * @type string | undefined
-             */
-            defaultRoute?: string | undefined
-            /**
-             * @description The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-             * @type array
-             */
-            groupIds: (string | string)[]
-          }
-        | {
-            /**
-             * @description A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
-             * @type object | undefined
-             */
-            applications?:
-              | {
-                  [key: string]: {
-                    /**
-                     * @description This is the production alias, it will always show the most up to date of each application.
-                     * @type string
-                     */
-                    productionHost: string
-                    /**
-                     * @description Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
-                     * @type string | undefined
-                     */
-                    deploymentAlias?: string | undefined
-                    /**
-                     * @type string | undefined
-                     */
-                    deploymentHost?: string | undefined
-                  }
-                }
-              | undefined
-            /**
-             * @type boolean
-             */
-            isDefaultApp: boolean
-            /**
-             * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-             * @type string | undefined
-             */
-            defaultRoute?: string | undefined
-            /**
-             * @description The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-             * @type array
-             */
-            groupIds: (string | string)[]
-          }
-      )
-    | undefined
   /**
    * @type string
    */
   monorepoManager?: (string | null) | undefined
+  /**
+   * @type string
+   */
+  plan: CreateDeployment200PlanEnum
   /**
    * @description Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
    * @type object | undefined
@@ -19702,6 +20735,10 @@ export type CreateDeployment200 = {
          * @type string
          */
         secureComputeFallbackRegion: string | null
+        /**
+         * @type boolean | undefined
+         */
+        isUsingActiveCPU?: boolean | undefined
       }
     | undefined
   /**
@@ -19710,6 +20747,10 @@ export type CreateDeployment200 = {
   functions?:
     | ({
         [key: string]: {
+          /**
+           * @type string | undefined
+           */
+          architecture?: ArchitectureEnum2 | undefined
           /**
            * @type number | undefined
            */
@@ -19730,6 +20771,43 @@ export type CreateDeployment200 = {
            * @type string | undefined
            */
           excludeFiles?: string | undefined
+          /**
+           * @type array | undefined
+           */
+          experimentalTriggers?:
+            | {
+                /**
+                 * @description Event type - must be \"queue/v1beta\" (REQUIRED)
+                 * @type string
+                 */
+                type: ExperimentalTriggersTypeEnum2
+                /**
+                 * @description Name of the queue topic to consume from (REQUIRED)
+                 * @type string
+                 */
+                topic: string
+                /**
+                 * @description Name of the consumer group for this trigger (REQUIRED)
+                 * @type string
+                 */
+                consumer: string
+                /**
+                 * @description Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                maxDeliveries?: number | undefined
+                /**
+                 * @description Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                retryAfterSeconds?: number | undefined
+                /**
+                 * @description Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                initialDelaySeconds?: number | undefined
+              }[]
+            | undefined
         }
       } | null)
     | undefined
@@ -19793,10 +20871,51 @@ export type CreateDeployment200 = {
                        * @type string
                        */
                       type: HasTypeEnum4
-                      /**
-                       * @type string
-                       */
-                      value: string
+                      value:
+                        | string
+                        | {
+                            eq?: (string | number) | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            neq?: string | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            inc?: string[] | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            ninc?: string[] | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            pre?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            suf?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            re?: string | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gte?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lte?: number | undefined
+                          }
                     }
                   | {
                       /**
@@ -19807,10 +20926,54 @@ export type CreateDeployment200 = {
                        * @type string
                        */
                       key: string
-                      /**
-                       * @type string | undefined
-                       */
-                      value?: string | undefined
+                      value?:
+                        | (
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
+                          )
+                        | undefined
                     }
                 )[]
               | undefined
@@ -19824,10 +20987,51 @@ export type CreateDeployment200 = {
                        * @type string
                        */
                       type: MissingTypeEnum4
-                      /**
-                       * @type string
-                       */
-                      value: string
+                      value:
+                        | string
+                        | {
+                            eq?: (string | number) | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            neq?: string | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            inc?: string[] | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            ninc?: string[] | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            pre?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            suf?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            re?: string | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gte?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lte?: number | undefined
+                          }
                     }
                   | {
                       /**
@@ -19838,12 +21042,129 @@ export type CreateDeployment200 = {
                        * @type string
                        */
                       key: string
-                      /**
-                       * @type string | undefined
-                       */
-                      value?: string | undefined
+                      value?:
+                        | (
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
+                          )
+                        | undefined
                     }
                 )[]
+              | undefined
+            /**
+             * @type object | undefined
+             */
+            mitigate?:
+              | {
+                  /**
+                   * @type string
+                   */
+                  action: MitigateActionEnum3
+                }
+              | undefined
+            /**
+             * @type array | undefined
+             */
+            transforms?:
+              | {
+                  /**
+                   * @type string
+                   */
+                  type: TransformsTypeEnum2
+                  /**
+                   * @type string
+                   */
+                  op: TransformsOpEnum2
+                  /**
+                   * @type object
+                   */
+                  target: {
+                    key:
+                      | string
+                      | {
+                          eq?: (string | number) | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          neq?: string | undefined
+                          /**
+                           * @type array | undefined
+                           */
+                          inc?: string[] | undefined
+                          /**
+                           * @type array | undefined
+                           */
+                          ninc?: string[] | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          pre?: string | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          suf?: string | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          gt?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          gte?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          lt?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          lte?: number | undefined
+                        }
+                  }
+                  args?: (string | string[]) | undefined
+                }[]
               | undefined
             /**
              * @type object | undefined
@@ -19928,6 +21249,126 @@ export type CreateDeployment200 = {
          */
         path: string
       }[]
+    | undefined
+  /**
+   * @type object | undefined
+   */
+  checks?:
+    | {
+        /**
+         * @description Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+         * @type object
+         */
+        'deployment-alias': {
+          /**
+           * @type string
+           */
+          state: DeploymentAliasStateEnum2
+          /**
+           * @type number
+           */
+          startedAt: number
+          /**
+           * @type number | undefined
+           */
+          completedAt?: number | undefined
+        }
+      }
+    | undefined
+  microfrontends?:
+    | (
+        | {
+            /**
+             * @description Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+             * @type boolean | undefined
+             */
+            isDefaultApp?: boolean | undefined
+            /**
+             * @description The project name of the default app of this deployment\'s microfrontends group.
+             * @type string
+             */
+            defaultAppProjectName: string
+            /**
+             * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+             * @type string | undefined
+             */
+            defaultRoute?: string | undefined
+            /**
+             * @description The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+             * @type array
+             */
+            groupIds: (string | string)[]
+            /**
+             * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+             * @type boolean | undefined
+             */
+            microfrontendsAliasEnabled?: boolean | undefined
+            /**
+             * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+             * @type boolean | undefined
+             */
+            previewEnvAliasEnabled?: boolean | undefined
+          }
+        | {
+            /**
+             * @description A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+             * @type object | undefined
+             */
+            applications?:
+              | {
+                  [key: string]: {
+                    /**
+                     * @type boolean | undefined
+                     */
+                    isDefaultApp?: boolean | undefined
+                    /**
+                     * @description This is the production alias, it will always show the most up to date of each application.
+                     * @type string
+                     */
+                    productionHost: string
+                    /**
+                     * @description Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+                     * @type string | undefined
+                     */
+                    deploymentAlias?: string | undefined
+                    /**
+                     * @type string | undefined
+                     */
+                    deploymentHost?: string | undefined
+                  }
+                }
+              | undefined
+            /**
+             * @type boolean
+             */
+            isDefaultApp: boolean
+            /**
+             * @description The project name of the default app of this deployment\'s microfrontends group.
+             * @type string
+             */
+            defaultAppProjectName: string
+            /**
+             * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+             * @type string | undefined
+             */
+            defaultRoute?: string | undefined
+            /**
+             * @description The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+             * @type array
+             */
+            groupIds: (string | string)[]
+            /**
+             * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+             * @type boolean | undefined
+             */
+            microfrontendsAliasEnabled?: boolean | undefined
+            /**
+             * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+             * @type boolean | undefined
+             */
+            previewEnvAliasEnabled?: boolean | undefined
+          }
+      )
     | undefined
   /**
    * @type boolean | undefined
@@ -20119,7 +21560,7 @@ export type CreateDeployment400 = unknown
 export type CreateDeployment401 = unknown
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export type CreateDeployment402 = unknown
 
@@ -20134,6 +21575,8 @@ export type CreateDeployment404 = unknown
  * @description The deployment project is being transferred
  */
 export type CreateDeployment409 = unknown
+
+export type CreateDeployment500 = unknown
 
 export const filesEncodingEnum = {
   base64: 'base64',
@@ -20155,13 +21598,13 @@ export const gitSourceTypeEnum38 = {
 export type GitSourceTypeEnum38 = (typeof gitSourceTypeEnum38)[keyof typeof gitSourceTypeEnum38]
 
 export const gitSourceTypeEnum39 = {
-  'github-custom-host': 'github-custom-host',
+  gitlab: 'gitlab',
 } as const
 
 export type GitSourceTypeEnum39 = (typeof gitSourceTypeEnum39)[keyof typeof gitSourceTypeEnum39]
 
 export const gitSourceTypeEnum40 = {
-  gitlab: 'gitlab',
+  bitbucket: 'bitbucket',
 } as const
 
 export type GitSourceTypeEnum40 = (typeof gitSourceTypeEnum40)[keyof typeof gitSourceTypeEnum40]
@@ -20171,12 +21614,6 @@ export const gitSourceTypeEnum41 = {
 } as const
 
 export type GitSourceTypeEnum41 = (typeof gitSourceTypeEnum41)[keyof typeof gitSourceTypeEnum41]
-
-export const gitSourceTypeEnum42 = {
-  bitbucket: 'bitbucket',
-} as const
-
-export type GitSourceTypeEnum42 = (typeof gitSourceTypeEnum42)[keyof typeof gitSourceTypeEnum42]
 
 export const projectSettingsFrameworkEnum3 = {
   angular: 'angular',
@@ -20200,6 +21637,7 @@ export const projectSettingsFrameworkEnum3 = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -20311,6 +21749,11 @@ export type CreateDeploymentMutationRequest = {
          */
         commitAuthorName?: string | undefined
         /**
+         * @description The email of the author of the commit
+         * @type string | undefined
+         */
+        commitAuthorEmail?: string | undefined
+        /**
          * @description The commit message
          * @type string | undefined
          */
@@ -20375,32 +21818,6 @@ export type CreateDeploymentMutationRequest = {
             type: GitSourceTypeEnum38
           }
         | {
-            /**
-             * @type string
-             */
-            org: string
-            /**
-             * @type string
-             */
-            ref: string
-            /**
-             * @type string
-             */
-            repo: string
-            /**
-             * @type string | undefined
-             */
-            sha?: string | undefined
-            /**
-             * @type string
-             */
-            host: string
-            /**
-             * @type string
-             */
-            type: GitSourceTypeEnum39
-          }
-        | {
             projectId: number | string
             /**
              * @type string
@@ -20413,7 +21830,7 @@ export type CreateDeploymentMutationRequest = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum40
+            type: GitSourceTypeEnum39
           }
         | {
             /**
@@ -20431,7 +21848,7 @@ export type CreateDeploymentMutationRequest = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum41
+            type: GitSourceTypeEnum40
             /**
              * @type string | undefined
              */
@@ -20457,7 +21874,7 @@ export type CreateDeploymentMutationRequest = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum42
+            type: GitSourceTypeEnum41
           }
       )
     | undefined
@@ -20573,7 +21990,14 @@ export type CreateDeploymentMutation = {
   Response: CreateDeployment200
   Request: CreateDeploymentMutationRequest
   QueryParams: CreateDeploymentQueryParams
-  Errors: CreateDeployment400 | CreateDeployment401 | CreateDeployment402 | CreateDeployment403 | CreateDeployment404 | CreateDeployment409
+  Errors:
+    | CreateDeployment400
+    | CreateDeployment401
+    | CreateDeployment402
+    | CreateDeployment403
+    | CreateDeployment404
+    | CreateDeployment409
+    | CreateDeployment500
 }
 
 export type CancelDeploymentPathParams = {
@@ -20619,6 +22043,7 @@ export const projectSettingsFrameworkEnum4 = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -20708,9 +22133,9 @@ export const customEnvironmentTypeEnum4 = {
 export type CustomEnvironmentTypeEnum4 = (typeof customEnvironmentTypeEnum4)[keyof typeof customEnvironmentTypeEnum4]
 
 export const branchMatcherTypeEnum7 = {
+  endsWith: 'endsWith',
   startsWith: 'startsWith',
   equals: 'equals',
-  endsWith: 'endsWith',
 } as const
 
 export type BranchMatcherTypeEnum7 = (typeof branchMatcherTypeEnum7)[keyof typeof branchMatcherTypeEnum7]
@@ -20723,6 +22148,12 @@ export const domainsRedirectStatusCodeEnum5 = {
 } as const
 
 export type DomainsRedirectStatusCodeEnum5 = (typeof domainsRedirectStatusCodeEnum5)[keyof typeof domainsRedirectStatusCodeEnum5]
+
+export const cancelDeployment200OomReportEnum = {
+  'out-of-memory': 'out-of-memory',
+} as const
+
+export type CancelDeployment200OomReportEnum = (typeof cancelDeployment200OomReportEnum)[keyof typeof cancelDeployment200OomReportEnum]
 
 export const cancelDeployment200ChecksStateEnum = {
   completed: 'completed',
@@ -20741,6 +22172,12 @@ export const cancelDeployment200ChecksConclusionEnum = {
 
 export type CancelDeployment200ChecksConclusionEnum = (typeof cancelDeployment200ChecksConclusionEnum)[keyof typeof cancelDeployment200ChecksConclusionEnum]
 
+export const gitSourceTypeEnum42 = {
+  github: 'github',
+} as const
+
+export type GitSourceTypeEnum42 = (typeof gitSourceTypeEnum42)[keyof typeof gitSourceTypeEnum42]
+
 export const gitSourceTypeEnum43 = {
   github: 'github',
 } as const
@@ -20748,7 +22185,7 @@ export const gitSourceTypeEnum43 = {
 export type GitSourceTypeEnum43 = (typeof gitSourceTypeEnum43)[keyof typeof gitSourceTypeEnum43]
 
 export const gitSourceTypeEnum44 = {
-  github: 'github',
+  'github-custom-host': 'github-custom-host',
 } as const
 
 export type GitSourceTypeEnum44 = (typeof gitSourceTypeEnum44)[keyof typeof gitSourceTypeEnum44]
@@ -20760,13 +22197,13 @@ export const gitSourceTypeEnum45 = {
 export type GitSourceTypeEnum45 = (typeof gitSourceTypeEnum45)[keyof typeof gitSourceTypeEnum45]
 
 export const gitSourceTypeEnum46 = {
-  'github-custom-host': 'github-custom-host',
+  gitlab: 'gitlab',
 } as const
 
 export type GitSourceTypeEnum46 = (typeof gitSourceTypeEnum46)[keyof typeof gitSourceTypeEnum46]
 
 export const gitSourceTypeEnum47 = {
-  gitlab: 'gitlab',
+  bitbucket: 'bitbucket',
 } as const
 
 export type GitSourceTypeEnum47 = (typeof gitSourceTypeEnum47)[keyof typeof gitSourceTypeEnum47]
@@ -20778,40 +22215,34 @@ export const gitSourceTypeEnum48 = {
 export type GitSourceTypeEnum48 = (typeof gitSourceTypeEnum48)[keyof typeof gitSourceTypeEnum48]
 
 export const gitSourceTypeEnum49 = {
-  bitbucket: 'bitbucket',
+  custom: 'custom',
 } as const
 
 export type GitSourceTypeEnum49 = (typeof gitSourceTypeEnum49)[keyof typeof gitSourceTypeEnum49]
 
 export const gitSourceTypeEnum50 = {
-  custom: 'custom',
+  github: 'github',
 } as const
 
 export type GitSourceTypeEnum50 = (typeof gitSourceTypeEnum50)[keyof typeof gitSourceTypeEnum50]
 
 export const gitSourceTypeEnum51 = {
-  github: 'github',
+  'github-custom-host': 'github-custom-host',
 } as const
 
 export type GitSourceTypeEnum51 = (typeof gitSourceTypeEnum51)[keyof typeof gitSourceTypeEnum51]
 
 export const gitSourceTypeEnum52 = {
-  'github-custom-host': 'github-custom-host',
+  gitlab: 'gitlab',
 } as const
 
 export type GitSourceTypeEnum52 = (typeof gitSourceTypeEnum52)[keyof typeof gitSourceTypeEnum52]
 
 export const gitSourceTypeEnum53 = {
-  gitlab: 'gitlab',
-} as const
-
-export type GitSourceTypeEnum53 = (typeof gitSourceTypeEnum53)[keyof typeof gitSourceTypeEnum53]
-
-export const gitSourceTypeEnum54 = {
   bitbucket: 'bitbucket',
 } as const
 
-export type GitSourceTypeEnum54 = (typeof gitSourceTypeEnum54)[keyof typeof gitSourceTypeEnum54]
+export type GitSourceTypeEnum53 = (typeof gitSourceTypeEnum53)[keyof typeof gitSourceTypeEnum53]
 
 export const cancelDeployment200ReadyStateEnum = {
   BUILDING: 'BUILDING',
@@ -20864,6 +22295,19 @@ export const cancelDeployment200VersionEnum = {
 
 export type CancelDeployment200VersionEnum = (typeof cancelDeployment200VersionEnum)[keyof typeof cancelDeployment200VersionEnum]
 
+export const architectureEnum3 = {
+  arm64: 'arm64',
+  x86_64: 'x86_64',
+} as const
+
+export type ArchitectureEnum3 = (typeof architectureEnum3)[keyof typeof architectureEnum3]
+
+export const experimentalTriggersTypeEnum3 = {
+  'queue/v1beta': 'queue/v1beta',
+} as const
+
+export type ExperimentalTriggersTypeEnum3 = (typeof experimentalTriggersTypeEnum3)[keyof typeof experimentalTriggersTypeEnum3]
+
 export const cancelDeployment200PlanEnum = {
   enterprise: 'enterprise',
   hobby: 'hobby',
@@ -20899,6 +22343,29 @@ export const missingTypeEnum7 = {
 } as const
 
 export type MissingTypeEnum7 = (typeof missingTypeEnum7)[keyof typeof missingTypeEnum7]
+
+export const mitigateActionEnum4 = {
+  challenge: 'challenge',
+  deny: 'deny',
+} as const
+
+export type MitigateActionEnum4 = (typeof mitigateActionEnum4)[keyof typeof mitigateActionEnum4]
+
+export const transformsTypeEnum3 = {
+  'request.headers': 'request.headers',
+  'request.query': 'request.query',
+  'response.headers': 'response.headers',
+} as const
+
+export type TransformsTypeEnum3 = (typeof transformsTypeEnum3)[keyof typeof transformsTypeEnum3]
+
+export const transformsOpEnum3 = {
+  append: 'append',
+  set: 'set',
+  delete: 'delete',
+} as const
+
+export type TransformsOpEnum3 = (typeof transformsOpEnum3)[keyof typeof transformsOpEnum3]
 
 export const routesHandleEnum3 = {
   error: 'error',
@@ -20970,6 +22437,14 @@ export const configFunctionMemoryTypeEnum3 = {
 } as const
 
 export type ConfigFunctionMemoryTypeEnum3 = (typeof configFunctionMemoryTypeEnum3)[keyof typeof configFunctionMemoryTypeEnum3]
+
+export const deploymentAliasStateEnum3 = {
+  failed: 'failed',
+  pending: 'pending',
+  succeeded: 'succeeded',
+} as const
+
+export type DeploymentAliasStateEnum3 = (typeof deploymentAliasStateEnum3)[keyof typeof deploymentAliasStateEnum3]
 
 export type CancelDeployment200 = {
   aliasAssignedAt?: ((number | boolean) | null) | undefined
@@ -21511,6 +22986,10 @@ export type CancelDeployment200 = {
       )
     | undefined
   /**
+   * @type string | undefined
+   */
+  oomReport?: CancelDeployment200OomReportEnum | undefined
+  /**
    * @type string
    */
   id: string
@@ -21621,8 +23100,34 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum43
+            type: GitSourceTypeEnum42
             repoId: string | number
+            /**
+             * @type string
+             */
+            ref?: (string | null) | undefined
+            /**
+             * @type string | undefined
+             */
+            sha?: string | undefined
+            /**
+             * @type number
+             */
+            prId?: (number | null) | undefined
+          }
+        | {
+            /**
+             * @type string
+             */
+            type: GitSourceTypeEnum43
+            /**
+             * @type string
+             */
+            org: string
+            /**
+             * @type string
+             */
+            repo: string
             /**
              * @type string
              */
@@ -21644,11 +23149,8 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            org: string
-            /**
-             * @type string
-             */
-            repo: string
+            host: string
+            repoId: string | number
             /**
              * @type string
              */
@@ -21671,29 +23173,6 @@ export type CancelDeployment200 = {
              * @type string
              */
             host: string
-            repoId: string | number
-            /**
-             * @type string
-             */
-            ref?: (string | null) | undefined
-            /**
-             * @type string | undefined
-             */
-            sha?: string | undefined
-            /**
-             * @type number
-             */
-            prId?: (number | null) | undefined
-          }
-        | {
-            /**
-             * @type string
-             */
-            type: GitSourceTypeEnum46
-            /**
-             * @type string
-             */
-            host: string
             /**
              * @type string
              */
@@ -21719,7 +23198,7 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum47
+            type: GitSourceTypeEnum46
             projectId: string | number
             /**
              * @type string
@@ -21738,7 +23217,7 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum48
+            type: GitSourceTypeEnum47
             /**
              * @type string | undefined
              */
@@ -21764,7 +23243,7 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum49
+            type: GitSourceTypeEnum48
             /**
              * @type string
              */
@@ -21790,7 +23269,7 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum50
+            type: GitSourceTypeEnum49
             /**
              * @type string
              */
@@ -21808,7 +23287,37 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
+            type: GitSourceTypeEnum50
+            /**
+             * @type string
+             */
+            ref: string
+            /**
+             * @type string
+             */
+            sha: string
+            /**
+             * @type number
+             */
+            repoId: number
+            /**
+             * @type string | undefined
+             */
+            org?: string | undefined
+            /**
+             * @type string | undefined
+             */
+            repo?: string | undefined
+          }
+        | {
+            /**
+             * @type string
+             */
             type: GitSourceTypeEnum51
+            /**
+             * @type string
+             */
+            host: string
             /**
              * @type string
              */
@@ -21838,36 +23347,6 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            host: string
-            /**
-             * @type string
-             */
-            ref: string
-            /**
-             * @type string
-             */
-            sha: string
-            /**
-             * @type number
-             */
-            repoId: number
-            /**
-             * @type string | undefined
-             */
-            org?: string | undefined
-            /**
-             * @type string | undefined
-             */
-            repo?: string | undefined
-          }
-        | {
-            /**
-             * @type string
-             */
-            type: GitSourceTypeEnum53
-            /**
-             * @type string
-             */
             ref: string
             /**
              * @type string
@@ -21882,7 +23361,7 @@ export type CancelDeployment200 = {
             /**
              * @type string
              */
-            type: GitSourceTypeEnum54
+            type: GitSourceTypeEnum53
             /**
              * @type string
              */
@@ -22061,6 +23540,10 @@ export type CancelDeployment200 = {
     | ({
         [key: string]: {
           /**
+           * @type string | undefined
+           */
+          architecture?: ArchitectureEnum3 | undefined
+          /**
            * @type number | undefined
            */
           memory?: number | undefined
@@ -22080,6 +23563,43 @@ export type CancelDeployment200 = {
            * @type string | undefined
            */
           excludeFiles?: string | undefined
+          /**
+           * @type array | undefined
+           */
+          experimentalTriggers?:
+            | {
+                /**
+                 * @description Event type - must be \"queue/v1beta\" (REQUIRED)
+                 * @type string
+                 */
+                type: ExperimentalTriggersTypeEnum3
+                /**
+                 * @description Name of the queue topic to consume from (REQUIRED)
+                 * @type string
+                 */
+                topic: string
+                /**
+                 * @description Name of the consumer group for this trigger (REQUIRED)
+                 * @type string
+                 */
+                consumer: string
+                /**
+                 * @description Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                maxDeliveries?: number | undefined
+                /**
+                 * @description Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                retryAfterSeconds?: number | undefined
+                /**
+                 * @description Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server\'s default configuration.
+                 * @type number | undefined
+                 */
+                initialDelaySeconds?: number | undefined
+              }[]
+            | undefined
         }
       } | null)
     | undefined
@@ -22164,10 +23684,51 @@ export type CancelDeployment200 = {
                        * @type string
                        */
                       type: HasTypeEnum6
-                      /**
-                       * @type string
-                       */
-                      value: string
+                      value:
+                        | string
+                        | {
+                            eq?: (string | number) | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            neq?: string | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            inc?: string[] | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            ninc?: string[] | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            pre?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            suf?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            re?: string | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gte?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lte?: number | undefined
+                          }
                     }
                   | {
                       /**
@@ -22178,10 +23739,54 @@ export type CancelDeployment200 = {
                        * @type string
                        */
                       key: string
-                      /**
-                       * @type string | undefined
-                       */
-                      value?: string | undefined
+                      value?:
+                        | (
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
+                          )
+                        | undefined
                     }
                 )[]
               | undefined
@@ -22195,10 +23800,51 @@ export type CancelDeployment200 = {
                        * @type string
                        */
                       type: MissingTypeEnum6
-                      /**
-                       * @type string
-                       */
-                      value: string
+                      value:
+                        | string
+                        | {
+                            eq?: (string | number) | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            neq?: string | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            inc?: string[] | undefined
+                            /**
+                             * @type array | undefined
+                             */
+                            ninc?: string[] | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            pre?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            suf?: string | undefined
+                            /**
+                             * @type string | undefined
+                             */
+                            re?: string | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            gte?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lt?: number | undefined
+                            /**
+                             * @type number | undefined
+                             */
+                            lte?: number | undefined
+                          }
                     }
                   | {
                       /**
@@ -22209,12 +23855,129 @@ export type CancelDeployment200 = {
                        * @type string
                        */
                       key: string
-                      /**
-                       * @type string | undefined
-                       */
-                      value?: string | undefined
+                      value?:
+                        | (
+                            | string
+                            | {
+                                eq?: (string | number) | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                neq?: string | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                inc?: string[] | undefined
+                                /**
+                                 * @type array | undefined
+                                 */
+                                ninc?: string[] | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                pre?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                suf?: string | undefined
+                                /**
+                                 * @type string | undefined
+                                 */
+                                re?: string | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                gte?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lt?: number | undefined
+                                /**
+                                 * @type number | undefined
+                                 */
+                                lte?: number | undefined
+                              }
+                          )
+                        | undefined
                     }
                 )[]
+              | undefined
+            /**
+             * @type object | undefined
+             */
+            mitigate?:
+              | {
+                  /**
+                   * @type string
+                   */
+                  action: MitigateActionEnum4
+                }
+              | undefined
+            /**
+             * @type array | undefined
+             */
+            transforms?:
+              | {
+                  /**
+                   * @type string
+                   */
+                  type: TransformsTypeEnum3
+                  /**
+                   * @type string
+                   */
+                  op: TransformsOpEnum3
+                  /**
+                   * @type object
+                   */
+                  target: {
+                    key:
+                      | string
+                      | {
+                          eq?: (string | number) | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          neq?: string | undefined
+                          /**
+                           * @type array | undefined
+                           */
+                          inc?: string[] | undefined
+                          /**
+                           * @type array | undefined
+                           */
+                          ninc?: string[] | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          pre?: string | undefined
+                          /**
+                           * @type string | undefined
+                           */
+                          suf?: string | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          gt?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          gte?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          lt?: number | undefined
+                          /**
+                           * @type number | undefined
+                           */
+                          lte?: number | undefined
+                        }
+                  }
+                  args?: (string | string[]) | undefined
+                }[]
               | undefined
             /**
              * @type object | undefined
@@ -22457,6 +24220,11 @@ export type CancelDeployment200 = {
              */
             isDefaultApp?: boolean | undefined
             /**
+             * @description The project name of the default app of this deployment\'s microfrontends group.
+             * @type string
+             */
+            defaultAppProjectName: string
+            /**
              * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
              * @type string | undefined
              */
@@ -22466,6 +24234,16 @@ export type CancelDeployment200 = {
              * @type array
              */
             groupIds: (string | string)[]
+            /**
+             * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+             * @type boolean | undefined
+             */
+            microfrontendsAliasEnabled?: boolean | undefined
+            /**
+             * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+             * @type boolean | undefined
+             */
+            previewEnvAliasEnabled?: boolean | undefined
           }
         | {
             /**
@@ -22475,6 +24253,10 @@ export type CancelDeployment200 = {
             applications?:
               | {
                   [key: string]: {
+                    /**
+                     * @type boolean | undefined
+                     */
+                    isDefaultApp?: boolean | undefined
                     /**
                      * @description This is the production alias, it will always show the most up to date of each application.
                      * @type string
@@ -22497,6 +24279,11 @@ export type CancelDeployment200 = {
              */
             isDefaultApp: boolean
             /**
+             * @description The project name of the default app of this deployment\'s microfrontends group.
+             * @type string
+             */
+            defaultAppProjectName: string
+            /**
              * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
              * @type string | undefined
              */
@@ -22506,6 +24293,16 @@ export type CancelDeployment200 = {
              * @type array
              */
             groupIds: (string | string)[]
+            /**
+             * @description Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don\'t accidentally switch an existing branch alias to a microfrontends branch alias.
+             * @type boolean | undefined
+             */
+            microfrontendsAliasEnabled?: boolean | undefined
+            /**
+             * @description Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+             * @type boolean | undefined
+             */
+            previewEnvAliasEnabled?: boolean | undefined
           }
       )
     | undefined
@@ -22539,6 +24336,35 @@ export type CancelDeployment200 = {
          * @type string
          */
         secureComputeFallbackRegion: string | null
+        /**
+         * @type boolean | undefined
+         */
+        isUsingActiveCPU?: boolean | undefined
+      }
+    | undefined
+  /**
+   * @type object | undefined
+   */
+  checks?:
+    | {
+        /**
+         * @description Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+         * @type object
+         */
+        'deployment-alias': {
+          /**
+           * @type string
+           */
+          state: DeploymentAliasStateEnum3
+          /**
+           * @type number
+           */
+          startedAt: number
+          /**
+           * @type number | undefined
+           */
+          completedAt?: number | undefined
+        }
       }
     | undefined
 }
@@ -22760,6 +24586,14 @@ export type CheckDomainPriceQueryParams = {
   slug?: string | undefined
 }
 
+export const checkDomainPrice200PeriodEnum = {
+  '1': 1,
+  '10': 10,
+  '2': 2,
+} as const
+
+export type CheckDomainPrice200PeriodEnum = (typeof checkDomainPrice200PeriodEnum)[keyof typeof checkDomainPrice200PeriodEnum]
+
 /**
  * @description Successful response which returns the price of the domain and the period.
  */
@@ -22773,7 +24607,7 @@ export type CheckDomainPrice200 = {
    * @description The number of years the domain could be held before paying again.
    * @type number
    */
-  period: number
+  period: CheckDomainPrice200PeriodEnum
 }
 
 /**
@@ -22836,6 +24670,8 @@ export type CheckDomainStatus401 = unknown
  */
 export type CheckDomainStatus403 = unknown
 
+export type CheckDomainStatus408 = unknown
+
 export type CheckDomainStatus500 = unknown
 
 export type CheckDomainStatusQueryResponse = CheckDomainStatus200
@@ -22843,7 +24679,7 @@ export type CheckDomainStatusQueryResponse = CheckDomainStatus200
 export type CheckDomainStatusQuery = {
   Response: CheckDomainStatus200
   QueryParams: CheckDomainStatusQueryParams
-  Errors: CheckDomainStatus400 | CheckDomainStatus401 | CheckDomainStatus403 | CheckDomainStatus500
+  Errors: CheckDomainStatus400 | CheckDomainStatus401 | CheckDomainStatus403 | CheckDomainStatus408 | CheckDomainStatus500
 }
 
 export type GetRecordsPathParams = {
@@ -24518,6 +26354,9 @@ export type CreateOrTransferDomain403 = unknown
 
 export type CreateOrTransferDomain404 = unknown
 
+/**
+ * @description The domain is not allowed to be used
+ */
 export type CreateOrTransferDomain409 = unknown
 
 export type CreateOrTransferDomain500 = unknown
@@ -24784,51 +26623,6 @@ export type DeleteDomainMutation = {
   PathParams: DeleteDomainPathParams
   QueryParams: DeleteDomainQueryParams
   Errors: DeleteDomain400 | DeleteDomain401 | DeleteDomain403 | DeleteDomain404 | DeleteDomain409
-}
-
-export type DeleteConfigurableLogDrainPathParams = {
-  /**
-   * @type string
-   */
-  id: string
-}
-
-export type DeleteConfigurableLogDrainQueryParams = {
-  /**
-   * @description The Team identifier to perform the request on behalf of.
-   * @type string | undefined
-   */
-  teamId?: string | undefined
-  /**
-   * @description The Team slug to perform the request on behalf of.
-   * @type string | undefined
-   */
-  slug?: string | undefined
-}
-
-export type DeleteConfigurableLogDrain204 = unknown
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export type DeleteConfigurableLogDrain400 = unknown
-
-export type DeleteConfigurableLogDrain401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type DeleteConfigurableLogDrain403 = unknown
-
-export type DeleteConfigurableLogDrain404 = unknown
-
-export type DeleteConfigurableLogDrainMutationResponse = DeleteConfigurableLogDrain204
-
-export type DeleteConfigurableLogDrainMutation = {
-  Response: DeleteConfigurableLogDrain204
-  PathParams: DeleteConfigurableLogDrainPathParams
-  QueryParams: DeleteConfigurableLogDrainQueryParams
-  Errors: DeleteConfigurableLogDrain400 | DeleteConfigurableLogDrain401 | DeleteConfigurableLogDrain403 | DeleteConfigurableLogDrain404
 }
 
 export type GetEdgeConfigsQueryParams = {
@@ -25478,9 +27272,9 @@ export type GetEdgeConfigItemsQueryParams = {
 }
 
 /**
- * @description The EdgeConfig.
+ * @description List of all Edge Config items.
  */
-export type GetEdgeConfigItems200 = EdgeConfigItem
+export type GetEdgeConfigItems200 = EdgeConfigItem[]
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -25681,7 +27475,7 @@ export type GetEdgeConfigSchemaQueryParams = {
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfigSchema200 = object
+export type GetEdgeConfigSchema200 = object | null
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -25730,7 +27524,7 @@ export type PatchEdgeConfigSchemaQueryParams = {
   slug?: string | undefined
 }
 
-export type PatchEdgeConfigSchema200 = object
+export type PatchEdgeConfigSchema200 = object | null
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
@@ -26572,12 +28366,14 @@ export type GetAccountInfo401 = unknown
  */
 export type GetAccountInfo403 = unknown
 
+export type GetAccountInfo404 = unknown
+
 export type GetAccountInfoQueryResponse = GetAccountInfo200
 
 export type GetAccountInfoQuery = {
   Response: GetAccountInfo200
   PathParams: GetAccountInfoPathParams
-  Errors: GetAccountInfo400 | GetAccountInfo401 | GetAccountInfo403
+  Errors: GetAccountInfo400 | GetAccountInfo401 | GetAccountInfo403 | GetAccountInfo404
 }
 
 export type GetMemberPathParams = {
@@ -26604,6 +28400,7 @@ export type GetMember200 = {
    */
   id: string
   /**
+   * @description \"The `ADMIN` role, by default, is provided to users capable of installing integrations, while the `USER` role can be granted to Vercel users with the Vercel `Billing` or Vercel `Viewer` role, which are considered to be Read-Only roles.\"
    * @type string
    */
   role: GetMember200RoleEnum
@@ -26651,6 +28448,8 @@ export type CreateEvent401 = unknown
  * @description You do not have permission to access this resource.
  */
 export type CreateEvent403 = unknown
+
+export type CreateEvent404 = unknown
 
 export const eventTypeEnum = {
   'installation.updated': 'installation.updated',
@@ -26701,7 +28500,556 @@ export type CreateEventMutation = {
   Response: CreateEvent201
   Request: CreateEventMutationRequest
   PathParams: CreateEventPathParams
-  Errors: CreateEvent400 | CreateEvent401 | CreateEvent403
+  Errors: CreateEvent400 | CreateEvent401 | CreateEvent403 | CreateEvent404
+}
+
+export type GetIntegrationResourcesPathParams = {
+  /**
+   * @type string
+   */
+  integrationConfigurationId: string
+}
+
+export const resourcesStatusEnum = {
+  error: 'error',
+  pending: 'pending',
+  ready: 'ready',
+  resumed: 'resumed',
+  suspended: 'suspended',
+  uninstalled: 'uninstalled',
+} as const
+
+export type ResourcesStatusEnum = (typeof resourcesStatusEnum)[keyof typeof resourcesStatusEnum]
+
+export const notificationLevelEnum = {
+  error: 'error',
+  info: 'info',
+  warn: 'warn',
+} as const
+
+export type NotificationLevelEnum = (typeof notificationLevelEnum)[keyof typeof notificationLevelEnum]
+
+export type GetIntegrationResources200 = {
+  /**
+   * @type array
+   */
+  resources: {
+    /**
+     * @description The ID provided by the partner for the given resource
+     * @type string
+     */
+    partnerId: string
+    /**
+     * @description The ID assigned by Vercel for the given resource
+     * @type string
+     */
+    internalId: string
+    /**
+     * @description The name of the resource as it is recorded in Vercel
+     * @type string
+     */
+    name: string
+    /**
+     * @description The current status of the resource
+     * @type string | undefined
+     */
+    status?: ResourcesStatusEnum | undefined
+    /**
+     * @description The ID of the product the resource is derived from
+     * @type string
+     */
+    productId: string
+    /**
+     * @description Any settings provided for the resource to support its product\'s protocols
+     * @type object | undefined
+     */
+    protocolSettings?:
+      | {
+          /**
+           * @type object | undefined
+           */
+          experimentation?:
+            | {
+                /**
+                 * @type boolean | undefined
+                 */
+                edgeConfigSyncingEnabled?: boolean | undefined
+                /**
+                 * @type string | undefined
+                 */
+                edgeConfigId?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                edgeConfigTokenId?: string | undefined
+              }
+            | undefined
+        }
+      | undefined
+    /**
+     * @description The notification, if set, displayed to the user when viewing the resource in Vercel
+     * @type object | undefined
+     */
+    notification?:
+      | {
+          /**
+           * @type string
+           */
+          level: NotificationLevelEnum
+          /**
+           * @type string
+           */
+          title: string
+          /**
+           * @type string | undefined
+           */
+          message?: string | undefined
+          /**
+           * @type string | undefined
+           */
+          href?: string | undefined
+        }
+      | undefined
+    /**
+     * @description The ID of the billing plan the resource is subscribed to, if applicable
+     * @type string | undefined
+     */
+    billingPlanId?: string | undefined
+    /**
+     * @description The configured metadata for the resource as defined by its product\'s Metadata Schema
+     * @type object | undefined
+     */
+    metadata?:
+      | {
+          [key: string]: string | number | boolean | string[] | number[]
+        }
+      | undefined
+  }[]
+}
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetIntegrationResources400 = unknown
+
+export type GetIntegrationResources401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetIntegrationResources403 = unknown
+
+export type GetIntegrationResources404 = unknown
+
+export type GetIntegrationResourcesQueryResponse = GetIntegrationResources200
+
+export type GetIntegrationResourcesQuery = {
+  Response: GetIntegrationResources200
+  PathParams: GetIntegrationResourcesPathParams
+  Errors: GetIntegrationResources400 | GetIntegrationResources401 | GetIntegrationResources403 | GetIntegrationResources404
+}
+
+export type GetIntegrationResourcePathParams = {
+  /**
+   * @description The ID of the integration configuration (installation) the resource belongs to
+   * @type string
+   */
+  integrationConfigurationId: string
+  /**
+   * @description The ID provided by the 3rd party provider for the given resource
+   * @type string
+   */
+  resourceId: string
+}
+
+export const getIntegrationResource200StatusEnum = {
+  error: 'error',
+  pending: 'pending',
+  ready: 'ready',
+  resumed: 'resumed',
+  suspended: 'suspended',
+  uninstalled: 'uninstalled',
+} as const
+
+export type GetIntegrationResource200StatusEnum = (typeof getIntegrationResource200StatusEnum)[keyof typeof getIntegrationResource200StatusEnum]
+
+export const notificationLevelEnum2 = {
+  error: 'error',
+  info: 'info',
+  warn: 'warn',
+} as const
+
+export type NotificationLevelEnum2 = (typeof notificationLevelEnum2)[keyof typeof notificationLevelEnum2]
+
+export type GetIntegrationResource200 = {
+  /**
+   * @description The ID provided by the 3rd party provider for the given resource
+   * @type string
+   */
+  id: string
+  /**
+   * @description The ID assigned by Vercel for the given resource
+   * @type string
+   */
+  internalId: string
+  /**
+   * @description The name of the resource as it is recorded in Vercel
+   * @type string
+   */
+  name: string
+  /**
+   * @description The current status of the resource
+   * @type string | undefined
+   */
+  status?: GetIntegrationResource200StatusEnum | undefined
+  /**
+   * @description The ID of the product the resource is derived from
+   * @type string
+   */
+  productId: string
+  /**
+   * @description Any settings provided for the resource to support its product\'s protocols
+   * @type object | undefined
+   */
+  protocolSettings?:
+    | {
+        /**
+         * @type object | undefined
+         */
+        experimentation?:
+          | {
+              /**
+               * @type boolean | undefined
+               */
+              edgeConfigSyncingEnabled?: boolean | undefined
+              /**
+               * @type string | undefined
+               */
+              edgeConfigId?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              edgeConfigTokenId?: string | undefined
+            }
+          | undefined
+      }
+    | undefined
+  /**
+   * @description The notification, if set, displayed to the user when viewing the resource in Vercel
+   * @type object | undefined
+   */
+  notification?:
+    | {
+        /**
+         * @type string
+         */
+        level: NotificationLevelEnum2
+        /**
+         * @type string
+         */
+        title: string
+        /**
+         * @type string | undefined
+         */
+        message?: string | undefined
+        /**
+         * @type string | undefined
+         */
+        href?: string | undefined
+      }
+    | undefined
+  /**
+   * @description The ID of the billing plan the resource is subscribed to, if applicable
+   * @type string | undefined
+   */
+  billingPlanId?: string | undefined
+  /**
+   * @description The configured metadata for the resource as defined by its product\'s Metadata Schema
+   * @type object | undefined
+   */
+  metadata?:
+    | {
+        [key: string]: string | number | boolean | string[] | number[]
+      }
+    | undefined
+}
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetIntegrationResource400 = unknown
+
+export type GetIntegrationResource401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetIntegrationResource403 = unknown
+
+export type GetIntegrationResource404 = unknown
+
+export type GetIntegrationResourceQueryResponse = GetIntegrationResource200
+
+export type GetIntegrationResourceQuery = {
+  Response: GetIntegrationResource200
+  PathParams: GetIntegrationResourcePathParams
+  Errors: GetIntegrationResource400 | GetIntegrationResource401 | GetIntegrationResource403 | GetIntegrationResource404
+}
+
+export type DeleteIntegrationResourcePathParams = {
+  /**
+   * @type string
+   */
+  integrationConfigurationId: string
+  /**
+   * @type string
+   */
+  resourceId: string
+}
+
+export type DeleteIntegrationResource204 = unknown
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type DeleteIntegrationResource400 = unknown
+
+export type DeleteIntegrationResource401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type DeleteIntegrationResource403 = unknown
+
+export type DeleteIntegrationResource404 = unknown
+
+export type DeleteIntegrationResourceMutationResponse = DeleteIntegrationResource204
+
+export type DeleteIntegrationResourceMutation = {
+  Response: DeleteIntegrationResource204
+  PathParams: DeleteIntegrationResourcePathParams
+  Errors: DeleteIntegrationResource400 | DeleteIntegrationResource401 | DeleteIntegrationResource403 | DeleteIntegrationResource404
+}
+
+export type ImportResourcePathParams = {
+  /**
+   * @type string
+   */
+  integrationConfigurationId: string
+  /**
+   * @type string
+   */
+  resourceId: string
+}
+
+export type ImportResource200 = {
+  /**
+   * @type string
+   */
+  name: string
+}
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export type ImportResource400 = unknown
+
+export type ImportResource401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type ImportResource403 = unknown
+
+export type ImportResource404 = unknown
+
+export const importResourceMutationRequestStatusEnum = {
+  error: 'error',
+  pending: 'pending',
+  ready: 'ready',
+  resumed: 'resumed',
+  suspended: 'suspended',
+  uninstalled: 'uninstalled',
+} as const
+
+export type ImportResourceMutationRequestStatusEnum = (typeof importResourceMutationRequestStatusEnum)[keyof typeof importResourceMutationRequestStatusEnum]
+
+export const billingPlanTypeEnum = {
+  prepayment: 'prepayment',
+  subscription: 'subscription',
+} as const
+
+export type BillingPlanTypeEnum = (typeof billingPlanTypeEnum)[keyof typeof billingPlanTypeEnum]
+
+export const notificationLevelEnum3 = {
+  error: 'error',
+  info: 'info',
+  warn: 'warn',
+} as const
+
+export type NotificationLevelEnum3 = (typeof notificationLevelEnum3)[keyof typeof notificationLevelEnum3]
+
+export type ImportResourceMutationRequest = {
+  /**
+   * @type string
+   */
+  productId: string
+  /**
+   * @type string
+   */
+  name: string
+  /**
+   * @type string
+   */
+  status: ImportResourceMutationRequestStatusEnum
+  /**
+   * @type object | undefined
+   */
+  metadata?:
+    | {
+        [key: string]: unknown
+      }
+    | undefined
+  /**
+   * @type object | undefined
+   */
+  billingPlan?:
+    | {
+        /**
+         * @type string
+         */
+        id: string
+        /**
+         * @type string
+         */
+        type: BillingPlanTypeEnum
+        /**
+         * @type string
+         */
+        name: string
+        /**
+         * @type string | undefined
+         */
+        description?: string | undefined
+        /**
+         * @type boolean | undefined
+         */
+        paymentMethodRequired?: boolean | undefined
+        /**
+         * @type string | undefined
+         */
+        cost?: string | undefined
+        /**
+         * @type array | undefined
+         */
+        details?:
+          | {
+              /**
+               * @type string
+               */
+              label: string
+              /**
+               * @type string | undefined
+               */
+              value?: string | undefined
+            }[]
+          | undefined
+        /**
+         * @type array | undefined
+         */
+        heightlightedDetails?:
+          | {
+              /**
+               * @type string
+               */
+              label: string
+              /**
+               * @type string | undefined
+               */
+              value?: string | undefined
+            }[]
+          | undefined
+        /**
+         * @type string | undefined
+         */
+        effectiveDate?: string | undefined
+        [key: string]: unknown
+      }
+    | undefined
+  /**
+   * @type object | undefined
+   */
+  notification?:
+    | {
+        /**
+         * @type string
+         */
+        level: NotificationLevelEnum3
+        /**
+         * @type string
+         */
+        title: string
+        /**
+         * @type string | undefined
+         */
+        message?: string | undefined
+        /**
+         * @type string | undefined, uri
+         */
+        href?: string | undefined
+      }
+    | undefined
+  /**
+   * @type array | undefined
+   */
+  secrets?:
+    | {
+        /**
+         * @type string
+         */
+        name: string
+        /**
+         * @type string
+         */
+        value: string
+        /**
+         * @type string | undefined
+         */
+        prefix?: string | undefined
+        /**
+         * @description A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+         * @type object | undefined
+         */
+        environmentOverrides?:
+          | {
+              /**
+               * @description Value used for development environment.
+               * @type string | undefined
+               */
+              development?: string | undefined
+              /**
+               * @description Value used for preview environment.
+               * @type string | undefined
+               */
+              preview?: string | undefined
+              /**
+               * @description Value used for production environment.
+               * @type string | undefined
+               */
+              production?: string | undefined
+            }
+          | undefined
+      }[]
+    | undefined
+}
+
+export type ImportResourceMutationResponse = ImportResource200
+
+export type ImportResourceMutation = {
+  Response: ImportResource200
+  Request: ImportResourceMutationRequest
+  PathParams: ImportResourcePathParams
+  Errors: ImportResource400 | ImportResource401 | ImportResource403 | ImportResource404
 }
 
 export type SubmitBillingDataPathParams = {
@@ -26724,6 +29072,8 @@ export type SubmitBillingData401 = unknown
  * @description You do not have permission to access this resource.
  */
 export type SubmitBillingData403 = unknown
+
+export type SubmitBillingData404 = unknown
 
 export const usageTypeEnum = {
   interval: 'interval',
@@ -26966,7 +29316,7 @@ export type SubmitBillingDataMutation = {
   Response: SubmitBillingData201
   Request: SubmitBillingDataMutationRequest
   PathParams: SubmitBillingDataPathParams
-  Errors: SubmitBillingData400 | SubmitBillingData401 | SubmitBillingData403
+  Errors: SubmitBillingData400 | SubmitBillingData401 | SubmitBillingData403 | SubmitBillingData404
 }
 
 export type SubmitInvoicePathParams = {
@@ -27002,6 +29352,8 @@ export type SubmitInvoice401 = unknown
  * @description You do not have permission to access this resource.
  */
 export type SubmitInvoice403 = unknown
+
+export type SubmitInvoice404 = unknown
 
 export const testResultEnum = {
   notpaid: 'notpaid',
@@ -27157,7 +29509,7 @@ export type SubmitInvoiceMutation = {
   Response: SubmitInvoice200
   Request: SubmitInvoiceMutationRequest
   PathParams: SubmitInvoicePathParams
-  Errors: SubmitInvoice400 | SubmitInvoice401 | SubmitInvoice403
+  Errors: SubmitInvoice400 | SubmitInvoice401 | SubmitInvoice403 | SubmitInvoice404
 }
 
 export type GetInvoicePathParams = {
@@ -27462,6 +29814,8 @@ export type SubmitPrepaymentBalances401 = unknown
  */
 export type SubmitPrepaymentBalances403 = unknown
 
+export type SubmitPrepaymentBalances404 = unknown
+
 export type SubmitPrepaymentBalancesMutationRequest = {
   /**
    * @description Server time of your integration, used to determine the most recent data for race conditions & updates. Only the latest usage data for a given day, week, and month will be kept.
@@ -27501,7 +29855,7 @@ export type SubmitPrepaymentBalancesMutation = {
   Response: SubmitPrepaymentBalances201
   Request: SubmitPrepaymentBalancesMutationRequest
   PathParams: SubmitPrepaymentBalancesPathParams
-  Errors: SubmitPrepaymentBalances400 | SubmitPrepaymentBalances401 | SubmitPrepaymentBalances403
+  Errors: SubmitPrepaymentBalances400 | SubmitPrepaymentBalances401 | SubmitPrepaymentBalances403 | SubmitPrepaymentBalances404
 }
 
 export type UpdateResourceSecretsPathParams = {
@@ -27552,6 +29906,29 @@ export type UpdateResourceSecretsMutationRequest = {
      * @type string | undefined
      */
     prefix?: string | undefined
+    /**
+     * @description A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+     * @type object | undefined
+     */
+    environmentOverrides?:
+      | {
+          /**
+           * @description Value used for development environment.
+           * @type string | undefined
+           */
+          development?: string | undefined
+          /**
+           * @description Value used for preview environment.
+           * @type string | undefined
+           */
+          preview?: string | undefined
+          /**
+           * @description Value used for production environment.
+           * @type string | undefined
+           */
+          production?: string | undefined
+        }
+      | undefined
   }[]
   /**
    * @description If true, will only update the provided secrets
@@ -27615,9 +29992,32 @@ export type UpdateResourceSecretsByIdMutationRequest = {
      * @type string | undefined
      */
     prefix?: string | undefined
+    /**
+     * @description A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+     * @type object | undefined
+     */
+    environmentOverrides?:
+      | {
+          /**
+           * @description Value used for development environment.
+           * @type string | undefined
+           */
+          development?: string | undefined
+          /**
+           * @description Value used for preview environment.
+           * @type string | undefined
+           */
+          preview?: string | undefined
+          /**
+           * @description Value used for production environment.
+           * @type string | undefined
+           */
+          production?: string | undefined
+        }
+      | undefined
   }[]
   /**
-   * @description If true, will only update the provided secrets
+   * @description If true, will only overwrite the provided secrets instead of replacing all secrets.
    * @type boolean | undefined
    */
   partial?: boolean | undefined
@@ -27635,204 +30035,6 @@ export type UpdateResourceSecretsByIdMutation = {
     | UpdateResourceSecretsById403
     | UpdateResourceSecretsById404
     | UpdateResourceSecretsById422
-}
-
-export type ImportResourcePathParams = {
-  /**
-   * @type string
-   */
-  integrationConfigurationId: string
-  /**
-   * @type string
-   */
-  resourceId: string
-}
-
-export type ImportResource200 = {
-  /**
-   * @type string
-   */
-  name: string
-}
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export type ImportResource400 = unknown
-
-export type ImportResource401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type ImportResource403 = unknown
-
-export type ImportResource404 = unknown
-
-export const importResourceMutationRequestStatusEnum = {
-  error: 'error',
-  pending: 'pending',
-  ready: 'ready',
-  resumed: 'resumed',
-  suspended: 'suspended',
-  uninstalled: 'uninstalled',
-} as const
-
-export type ImportResourceMutationRequestStatusEnum = (typeof importResourceMutationRequestStatusEnum)[keyof typeof importResourceMutationRequestStatusEnum]
-
-export const billingPlanTypeEnum = {
-  prepayment: 'prepayment',
-  subscription: 'subscription',
-} as const
-
-export type BillingPlanTypeEnum = (typeof billingPlanTypeEnum)[keyof typeof billingPlanTypeEnum]
-
-export const notificationLevelEnum = {
-  error: 'error',
-  info: 'info',
-  warn: 'warn',
-} as const
-
-export type NotificationLevelEnum = (typeof notificationLevelEnum)[keyof typeof notificationLevelEnum]
-
-export type ImportResourceMutationRequest = {
-  /**
-   * @type string
-   */
-  productId: string
-  /**
-   * @type string
-   */
-  name: string
-  /**
-   * @type string
-   */
-  status: ImportResourceMutationRequestStatusEnum
-  /**
-   * @type object | undefined
-   */
-  metadata?:
-    | {
-        [key: string]: unknown
-      }
-    | undefined
-  /**
-   * @type object | undefined
-   */
-  billingPlan?:
-    | {
-        /**
-         * @type string
-         */
-        id: string
-        /**
-         * @type string
-         */
-        type: BillingPlanTypeEnum
-        /**
-         * @type string
-         */
-        name: string
-        /**
-         * @type string | undefined
-         */
-        description?: string | undefined
-        /**
-         * @type boolean | undefined
-         */
-        paymentMethodRequired?: boolean | undefined
-        /**
-         * @type string | undefined
-         */
-        cost?: string | undefined
-        /**
-         * @type array | undefined
-         */
-        details?:
-          | {
-              /**
-               * @type string
-               */
-              label: string
-              /**
-               * @type string | undefined
-               */
-              value?: string | undefined
-            }[]
-          | undefined
-        /**
-         * @type array | undefined
-         */
-        heightlightedDetails?:
-          | {
-              /**
-               * @type string
-               */
-              label: string
-              /**
-               * @type string | undefined
-               */
-              value?: string | undefined
-            }[]
-          | undefined
-        /**
-         * @type string | undefined
-         */
-        effectiveDate?: string | undefined
-        [key: string]: unknown
-      }
-    | undefined
-  /**
-   * @type object | undefined
-   */
-  notification?:
-    | {
-        /**
-         * @type string
-         */
-        level: NotificationLevelEnum
-        /**
-         * @type string
-         */
-        title: string
-        /**
-         * @type string | undefined
-         */
-        message?: string | undefined
-        /**
-         * @type string | undefined, uri
-         */
-        href?: string | undefined
-      }
-    | undefined
-  /**
-   * @type array | undefined
-   */
-  secrets?:
-    | {
-        /**
-         * @type string
-         */
-        name: string
-        /**
-         * @type string
-         */
-        value: string
-        /**
-         * @type string | undefined
-         */
-        prefix?: string | undefined
-      }[]
-    | undefined
-}
-
-export type ImportResourceMutationResponse = ImportResource200
-
-export type ImportResourceMutation = {
-  Response: ImportResource200
-  Request: ImportResourceMutationRequest
-  PathParams: ImportResourcePathParams
-  Errors: ImportResource400 | ImportResource401 | ImportResource403 | ImportResource404
 }
 
 export const getConfigurationsQueryParamsViewEnum = {
@@ -28264,6 +30466,14 @@ export const getConfiguration200ProjectSelectionEnum = {
 
 export type GetConfiguration200ProjectSelectionEnum = (typeof getConfiguration200ProjectSelectionEnum)[keyof typeof getConfiguration200ProjectSelectionEnum]
 
+export const notificationLevelEnum4 = {
+  info: 'info',
+  warn: 'warn',
+  error: 'error',
+} as const
+
+export type NotificationLevelEnum4 = (typeof notificationLevelEnum4)[keyof typeof notificationLevelEnum4]
+
 export const transferRequestKindEnum = {
   'transfer-to-marketplace': 'transfer-to-marketplace',
 } as const
@@ -28423,6 +30633,27 @@ export type GetConfiguration200 =
        * @type string
        */
       projectSelection: GetConfiguration200ProjectSelectionEnum
+      /**
+       * @type object
+       */
+      notification: {
+        /**
+         * @type string
+         */
+        level: NotificationLevelEnum4
+        /**
+         * @type string
+         */
+        title: string
+        /**
+         * @type string | undefined
+         */
+        message?: string | undefined
+        /**
+         * @type string | undefined
+         */
+        href?: string | undefined
+      }
       transferRequest:
         | {
             /**
@@ -29254,176 +31485,6 @@ export type DeleteIntegrationLogDrainMutation = {
   Errors: DeleteIntegrationLogDrain400 | DeleteIntegrationLogDrain401 | DeleteIntegrationLogDrain403 | DeleteIntegrationLogDrain404
 }
 
-export type GetprojectsprojectIdlogsPresetsPathParams = {
-  /**
-   * @type string
-   */
-  projectId: string
-}
-
-export type GetprojectsprojectIdlogsPresets200 = Team[]
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export type GetprojectsprojectIdlogsPresets400 = unknown
-
-export type GetprojectsprojectIdlogsPresets401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type GetprojectsprojectIdlogsPresets403 = unknown
-
-export type GetprojectsprojectIdlogsPresetsQueryResponse = GetprojectsprojectIdlogsPresets200
-
-export type GetprojectsprojectIdlogsPresetsQuery = {
-  Response: GetprojectsprojectIdlogsPresets200
-  PathParams: GetprojectsprojectIdlogsPresetsPathParams
-  Errors: GetprojectsprojectIdlogsPresets400 | GetprojectsprojectIdlogsPresets401 | GetprojectsprojectIdlogsPresets403
-}
-
-export type PostprojectsprojectIdlogsPresetsPathParams = {
-  /**
-   * @description projectId of the preset
-   * @type string
-   */
-  projectId: string
-}
-
-export type PostprojectsprojectIdlogsPresets200 = Team
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export type PostprojectsprojectIdlogsPresets400 = unknown
-
-export type PostprojectsprojectIdlogsPresets401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type PostprojectsprojectIdlogsPresets403 = unknown
-
-export const postprojectsprojectIdlogsPresetsMutationRequestGroupEnum = {
-  personal: 'personal',
-  team: 'team',
-} as const
-
-export type PostprojectsprojectIdlogsPresetsMutationRequestGroupEnum =
-  (typeof postprojectsprojectIdlogsPresetsMutationRequestGroupEnum)[keyof typeof postprojectsprojectIdlogsPresetsMutationRequestGroupEnum]
-
-export type PostprojectsprojectIdlogsPresetsMutationRequest = {
-  /**
-   * @description query parameter for saved filter preset
-   * @maxLength 1000
-   * @type string
-   */
-  query: string
-  /**
-   * @description The title of the preset
-   * @maxLength 70
-   * @type string
-   */
-  title: string
-  group: PostprojectsprojectIdlogsPresetsMutationRequestGroupEnum
-}
-
-export type PostprojectsprojectIdlogsPresetsMutationResponse = PostprojectsprojectIdlogsPresets200
-
-export type PostprojectsprojectIdlogsPresetsMutation = {
-  Response: PostprojectsprojectIdlogsPresets200
-  Request: PostprojectsprojectIdlogsPresetsMutationRequest
-  PathParams: PostprojectsprojectIdlogsPresetsPathParams
-  Errors: PostprojectsprojectIdlogsPresets400 | PostprojectsprojectIdlogsPresets401 | PostprojectsprojectIdlogsPresets403
-}
-
-export type DeleteprojectsprojectIdlogsPresetsidPathParams = {
-  /**
-   * @description projectId of the preset
-   * @type string
-   */
-  projectId: string
-  /**
-   * @description id of the preset
-   * @type string
-   */
-  id: string
-}
-
-export type DeleteprojectsprojectIdlogsPresetsid204 = unknown
-
-/**
- * @description One of the provided values in the request query is invalid.
- */
-export type DeleteprojectsprojectIdlogsPresetsid400 = unknown
-
-export type DeleteprojectsprojectIdlogsPresetsid401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type DeleteprojectsprojectIdlogsPresetsid403 = unknown
-
-export type DeleteprojectsprojectIdlogsPresetsidMutationResponse = DeleteprojectsprojectIdlogsPresetsid204
-
-export type DeleteprojectsprojectIdlogsPresetsidMutation = {
-  Response: DeleteprojectsprojectIdlogsPresetsid204
-  PathParams: DeleteprojectsprojectIdlogsPresetsidPathParams
-  Errors: DeleteprojectsprojectIdlogsPresetsid400 | DeleteprojectsprojectIdlogsPresetsid401 | DeleteprojectsprojectIdlogsPresetsid403
-}
-
-export type PatchprojectsprojectIdlogsPresetsidPathParams = {
-  /**
-   * @description projectId of the preset
-   * @type string
-   */
-  projectId: string
-  /**
-   * @description Id of the preset
-   * @type string
-   */
-  id: string
-}
-
-export type PatchprojectsprojectIdlogsPresetsid200 = Team
-
-/**
- * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
- */
-export type PatchprojectsprojectIdlogsPresetsid400 = unknown
-
-export type PatchprojectsprojectIdlogsPresetsid401 = unknown
-
-/**
- * @description You do not have permission to access this resource.
- */
-export type PatchprojectsprojectIdlogsPresetsid403 = unknown
-
-export type PatchprojectsprojectIdlogsPresetsid404 = unknown
-
-export type PatchprojectsprojectIdlogsPresetsidMutationRequest = {
-  /**
-   * @description The title of the preset
-   * @maxLength 70
-   * @type string
-   */
-  title: string
-}
-
-export type PatchprojectsprojectIdlogsPresetsidMutationResponse = PatchprojectsprojectIdlogsPresetsid200
-
-export type PatchprojectsprojectIdlogsPresetsidMutation = {
-  Response: PatchprojectsprojectIdlogsPresetsid200
-  Request: PatchprojectsprojectIdlogsPresetsidMutationRequest
-  PathParams: PatchprojectsprojectIdlogsPresetsidPathParams
-  Errors:
-    | PatchprojectsprojectIdlogsPresetsid400
-    | PatchprojectsprojectIdlogsPresetsid401
-    | PatchprojectsprojectIdlogsPresetsid403
-    | PatchprojectsprojectIdlogsPresetsid404
-}
-
 export type GetRuntimeLogsPathParams = {
   /**
    * @type string
@@ -29448,66 +31509,7 @@ export type GetRuntimeLogsQueryParams = {
   slug?: string | undefined
 }
 
-export const getRuntimeLogs200LevelEnum = {
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-} as const
-
-export type GetRuntimeLogs200LevelEnum = (typeof getRuntimeLogs200LevelEnum)[keyof typeof getRuntimeLogs200LevelEnum]
-
-export const getRuntimeLogs200SourceEnum = {
-  delimiter: 'delimiter',
-  'edge-function': 'edge-function',
-  'edge-middleware': 'edge-middleware',
-  request: 'request',
-  serverless: 'serverless',
-} as const
-
-export type GetRuntimeLogs200SourceEnum = (typeof getRuntimeLogs200SourceEnum)[keyof typeof getRuntimeLogs200SourceEnum]
-
-export type GetRuntimeLogs200 = {
-  /**
-   * @type string
-   */
-  level: GetRuntimeLogs200LevelEnum
-  /**
-   * @type string
-   */
-  message: string
-  /**
-   * @type string
-   */
-  rowId: string
-  /**
-   * @type string
-   */
-  source: GetRuntimeLogs200SourceEnum
-  /**
-   * @type number
-   */
-  timestampInMs: number
-  /**
-   * @type string
-   */
-  domain: string
-  /**
-   * @type boolean
-   */
-  messageTruncated: boolean
-  /**
-   * @type string
-   */
-  requestMethod: string
-  /**
-   * @type string
-   */
-  requestPath: string
-  /**
-   * @type number
-   */
-  responseStatusCode: number
-}
+export type GetRuntimeLogs200 = unknown
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -30264,6 +32266,13 @@ export type GetProjectsQueryParams = {
   slug?: string | undefined
 }
 
+export const connectConfigurationsEnvIdEnum2 = {
+  production: 'production',
+  preview: 'preview',
+} as const
+
+export type ConnectConfigurationsEnvIdEnum2 = (typeof connectConfigurationsEnvIdEnum2)[keyof typeof connectConfigurationsEnvIdEnum2]
+
 export const envTargetEnum3 = {
   production: 'production',
   preview: 'preview',
@@ -30433,6 +32442,7 @@ export const projectsFrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -30568,7 +32578,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum2 =
 
 export const resourceConfigBuildMachineTypeEnum2 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum2 = (typeof resourceConfigBuildMachineTypeEnum2)[keyof typeof resourceConfigBuildMachineTypeEnum2]
@@ -30584,7 +32594,7 @@ export type DefaultResourceConfigFunctionDefaultMemoryTypeEnum2 =
 
 export const defaultResourceConfigBuildMachineTypeEnum2 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type DefaultResourceConfigBuildMachineTypeEnum2 =
@@ -30592,6 +32602,7 @@ export type DefaultResourceConfigBuildMachineTypeEnum2 =
 
 export const ssoProtectionDeploymentTypeEnum3 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
@@ -30690,6 +32701,7 @@ export const trustedIpsDeploymentTypeEnum3 = {
   preview: 'preview',
   all: 'all',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum3 = (typeof trustedIpsDeploymentTypeEnum3)[keyof typeof trustedIpsDeploymentTypeEnum3]
@@ -30706,6 +32718,7 @@ export const trustedIpsDeploymentTypeEnum4 = {
   preview: 'preview',
   all: 'all',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum4 = (typeof trustedIpsDeploymentTypeEnum4)[keyof typeof trustedIpsDeploymentTypeEnum4]
@@ -30758,7 +32771,7 @@ export const firewallRoutesHandleEnum2 = {
 
 export type FirewallRoutesHandleEnum2 = (typeof firewallRoutesHandleEnum2)[keyof typeof firewallRoutesHandleEnum2]
 
-export const mitigateActionEnum2 = {
+export const mitigateActionEnum5 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -30767,7 +32780,7 @@ export const mitigateActionEnum2 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum2 = (typeof mitigateActionEnum2)[keyof typeof mitigateActionEnum2]
+export type MitigateActionEnum5 = (typeof mitigateActionEnum5)[keyof typeof mitigateActionEnum5]
 
 export const erlAlgoEnum2 = {
   fixed_window: 'fixed_window',
@@ -30776,13 +32789,29 @@ export const erlAlgoEnum2 = {
 
 export type ErlAlgoEnum2 = (typeof erlAlgoEnum2)[keyof typeof erlAlgoEnum2]
 
-export const actionEnum2 = {
+export const botFilterActionEnum2 = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum2 = (typeof actionEnum2)[keyof typeof actionEnum2]
+export type BotFilterActionEnum2 = (typeof botFilterActionEnum2)[keyof typeof botFilterActionEnum2]
+
+export const aiBotsActionEnum2 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum2 = (typeof aiBotsActionEnum2)[keyof typeof aiBotsActionEnum2]
+
+export const owaspActionEnum2 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum2 = (typeof owaspActionEnum2)[keyof typeof owaspActionEnum2]
 
 export const oidcTokenConfigIssuerModeEnum2 = {
   global: 'global',
@@ -30898,6 +32927,52 @@ export type GetProjects200 = {
      */
     commandForIgnoringBuildStep?: (string | null) | undefined
     /**
+     * @type array
+     */
+    connectConfigurations?:
+      | (
+          | {
+              envId: string | ConnectConfigurationsEnvIdEnum2
+              /**
+               * @type string
+               */
+              connectConfigurationId: string
+              /**
+               * @type boolean
+               */
+              passive: boolean
+              /**
+               * @type boolean
+               */
+              buildsEnabled: boolean
+              /**
+               * @type object | undefined
+               */
+              aws?:
+                | {
+                    /**
+                     * @type array
+                     */
+                    subnetIds: string[]
+                    /**
+                     * @type string
+                     */
+                    securityGroupId: string
+                  }
+                | undefined
+              /**
+               * @type number
+               */
+              createdAt: number
+              /**
+               * @type number
+               */
+              updatedAt: number
+            }[]
+          | null
+        )
+      | undefined
+    /**
      * @type string
      */
     connectConfigurationId?: (string | null) | undefined
@@ -30905,6 +32980,10 @@ export type GetProjects200 = {
      * @type boolean | undefined
      */
     connectBuildsEnabled?: boolean | undefined
+    /**
+     * @type string
+     */
+    passiveConnectConfigurationId?: (string | null) | undefined
     /**
      * @type number | undefined
      */
@@ -32066,10 +34145,6 @@ export type GetProjects200 = {
      */
     outputDirectory?: (string | null) | undefined
     /**
-     * @type string
-     */
-    passiveConnectConfigurationId?: (string | null) | undefined
-    /**
      * @type object
      */
     passwordProtection?: (object | null) | undefined
@@ -32115,6 +34190,35 @@ export type GetProjects200 = {
       buildMachineType?: ResourceConfigBuildMachineTypeEnum2 | undefined
     }
     /**
+     * @description Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+     * @type object | undefined
+     */
+    rollbackDescription?:
+      | {
+          /**
+           * @description The user who rolled back the project.
+           * @type string
+           */
+          userId: string
+          /**
+           * @description The username of the user who rolled back the project.
+           * @type string
+           */
+          username: string
+          /**
+           * @description User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+           * @type string
+           */
+          description: string
+          /**
+           * @description Timestamp of when the rollback was requested.
+           * @type number
+           */
+          createdAt: number
+        }
+      | undefined
+    /**
+     * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
      * @type object
      */
     rollingRelease?:
@@ -32125,34 +34229,24 @@ export type GetProjects200 = {
            */
           target: string
           /**
-           * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-           * @type number | undefined
-           */
-          minutesToRelease?: number | undefined
-          /**
-           * @description An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+           * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
            * @type array
            */
           stages?:
             | (
                 | {
                     /**
-                     * @description The percentage of traffic to serve to the new deployment
+                     * @description The percentage of traffic to serve to the canary deployment (0-100)
                      * @type number
                      */
                     targetPercentage: number
                     /**
-                     * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-                     * @type number | undefined
-                     */
-                    minutesToRelease?: number | undefined
-                    /**
-                     * @description Whether or not this stage requires approval to proceed.
+                     * @description Whether or not this stage requires manual approval to proceed
                      * @type boolean | undefined
                      */
                     requireApproval?: boolean | undefined
                     /**
-                     * @description duration is the total time to serve a stage, at the given targetPercentage.
+                     * @description Duration in minutes for automatic advancement to the next stage
                      * @type number | undefined
                      */
                     duration?: number | undefined
@@ -32160,6 +34254,11 @@ export type GetProjects200 = {
                 | null
               )
             | undefined
+          /**
+           * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+           * @type boolean | undefined
+           */
+          canaryResponseHeader?: boolean | undefined
         } | null)
       | undefined
     /**
@@ -32199,10 +34298,6 @@ export type GetProjects200 = {
      * @type string
      */
     rootDirectory?: (string | null) | undefined
-    /**
-     * @type string
-     */
-    serverlessFunctionRegion?: (string | null) | undefined
     /**
      * @type boolean | undefined
      */
@@ -32532,6 +34627,262 @@ export type GetProjects200 = {
           /**
            * @type array | undefined
            */
+          aliasProject?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          aliasProtectionBypass?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          buildMachine?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          productionAliasProtectionBypass?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          connectConfigurationLink?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          dataCacheNamespace?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deployment?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentCheck?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentCheckPreview?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentCheckReRunFromProductionBranch?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentProductionGit?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentV0?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentPreview?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentPrivate?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentPromote?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          deploymentRollback?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          edgeCacheNamespace?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          environments?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          logs?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          logsPreset?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          passwordProtection?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          optionsAllowlist?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          job?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          observabilityData?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          onDemandBuild?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          onDemandConcurrency?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          project?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectFromV0?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectAccessGroup?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectAnalyticsSampling?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectCheck?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectCheckRun?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectDeploymentHook?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectDomain?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectDomainMove?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectDomainCheckConfig?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectEnvVars?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectEnvVarsProduction?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectEnvVarsUnownedByIntegration?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectFlags?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectId?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectIntegrationConfiguration?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectLink?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectMember?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectMonitoring?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectPermissions?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectProductionBranch?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectTransfer?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectTransferOut?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectProtectionBypass?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectUsage?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectAnalyticsUsage?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectSupportCase?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectSupportCaseComment?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectDeploymentExpiration?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectRollingRelease?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          projectTier?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          seawallConfig?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          skewProtection?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          analytics?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          trustedIps?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          webAnalytics?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          sharedEnvVarConnection?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          sonar?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
           user?: ACLAction[] | undefined
           /**
            * @type array | undefined
@@ -32633,6 +34984,10 @@ export type GetProjects200 = {
            * @type array | undefined
            */
           connectConfiguration?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          defaultDeploymentProtection?: ACLAction[] | undefined
           /**
            * @type array | undefined
            */
@@ -32848,6 +35203,10 @@ export type GetProjects200 = {
           /**
            * @type array | undefined
            */
+          notificationPreferences?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
           notificationCustomerBudget?: ACLAction[] | undefined
           /**
            * @type array | undefined
@@ -32861,6 +35220,10 @@ export type GetProjects200 = {
            * @type array | undefined
            */
           observabilityNotebook?: ACLAction[] | undefined
+          /**
+           * @type array | undefined
+           */
+          observabilityFunnel?: ACLAction[] | undefined
           /**
            * @type array | undefined
            */
@@ -33080,235 +35443,11 @@ export type GetProjects200 = {
           /**
            * @type array | undefined
            */
-          aliasProject?: ACLAction[] | undefined
+          apiKey?: ACLAction[] | undefined
           /**
            * @type array | undefined
            */
-          aliasProtectionBypass?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          productionAliasProtectionBypass?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          connectConfigurationLink?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          dataCacheNamespace?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deployment?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentCheck?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentCheckPreview?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentCheckReRunFromProductionBranch?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentProductionGit?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentV0?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentPreview?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentPrivate?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentPromote?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          deploymentRollback?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          environments?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          logs?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          logsPreset?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          passwordProtection?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          optionsAllowlist?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          job?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          observabilityData?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          project?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectFromV0?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectAccessGroup?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectAnalyticsSampling?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectDeploymentHook?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectDomain?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectDomainMove?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectDomainCheckConfig?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectEnvVars?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectEnvVarsProduction?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectEnvVarsUnownedByIntegration?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectFlags?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectId?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectIntegrationConfiguration?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectLink?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectMember?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectMonitoring?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectPermissions?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectProductionBranch?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectTransfer?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectTransferOut?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectProtectionBypass?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectUsage?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectAnalyticsUsage?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectSupportCase?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectSupportCaseComment?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectDeploymentExpiration?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectRollingRelease?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          projectTier?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          seawallConfig?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          skewProtection?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          analytics?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          trustedIps?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          webAnalytics?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          sharedEnvVarConnection?: ACLAction[] | undefined
-          /**
-           * @type array | undefined
-           */
-          sonar?: ACLAction[] | undefined
+          apiKeyOwnedBySelf?: ACLAction[] | undefined
         }
       | undefined
     /**
@@ -33732,7 +35871,7 @@ export type GetProjects200 = {
                       /**
                        * @type string
                        */
-                      action: MitigateActionEnum2
+                      action: MitigateActionEnum5
                       /**
                        * @type string
                        */
@@ -33789,7 +35928,10 @@ export type GetProjects200 = {
            */
           managedRules?:
             | ({
-                [key: string]: {
+                /**
+                 * @type object
+                 */
+                bot_filter: {
                   /**
                    * @type boolean
                    */
@@ -33797,10 +35939,40 @@ export type GetProjects200 = {
                   /**
                    * @type string | undefined
                    */
-                  action?: ActionEnum2 | undefined
+                  action?: BotFilterActionEnum2 | undefined
+                }
+                /**
+                 * @type object
+                 */
+                ai_bots: {
+                  /**
+                   * @type boolean
+                   */
+                  active: boolean
+                  /**
+                   * @type string | undefined
+                   */
+                  action?: AiBotsActionEnum2 | undefined
+                }
+                /**
+                 * @type object
+                 */
+                owasp: {
+                  /**
+                   * @type boolean
+                   */
+                  active: boolean
+                  /**
+                   * @type string | undefined
+                   */
+                  action?: OwaspActionEnum2 | undefined
                 }
               } | null)
             | undefined
+          /**
+           * @type boolean | undefined
+           */
+          botIdEnabled?: boolean | undefined
         }
       | undefined
     /**
@@ -33809,9 +35981,10 @@ export type GetProjects200 = {
     oidcTokenConfig?:
       | {
           /**
-           * @type boolean
+           * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+           * @type boolean | undefined
            */
-          enabled: boolean
+          enabled?: boolean | undefined
           /**
            * @description - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
            * @type string | undefined
@@ -33823,6 +35996,17 @@ export type GetProjects200 = {
      * @type string | undefined
      */
     tier?: ProjectsTierEnum | undefined
+    /**
+     * @type object | undefined
+     */
+    features?:
+      | {
+          /**
+           * @type boolean | undefined
+           */
+          webAnalytics?: boolean | undefined
+        }
+      | undefined
   }[]
   /**
    * @description This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
@@ -33863,6 +36047,13 @@ export type CreateProjectQueryParams = {
    */
   slug?: string | undefined
 }
+
+export const connectConfigurationsEnvIdEnum3 = {
+  preview: 'preview',
+  production: 'production',
+} as const
+
+export type ConnectConfigurationsEnvIdEnum3 = (typeof connectConfigurationsEnvIdEnum3)[keyof typeof connectConfigurationsEnvIdEnum3]
 
 export const envTargetEnum5 = {
   production: 'production',
@@ -34033,6 +36224,7 @@ export const createProject200FrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -34168,7 +36360,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum3 =
 
 export const resourceConfigBuildMachineTypeEnum3 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum3 = (typeof resourceConfigBuildMachineTypeEnum3)[keyof typeof resourceConfigBuildMachineTypeEnum3]
@@ -34184,7 +36376,7 @@ export type DefaultResourceConfigFunctionDefaultMemoryTypeEnum3 =
 
 export const defaultResourceConfigBuildMachineTypeEnum3 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type DefaultResourceConfigBuildMachineTypeEnum3 =
@@ -34192,6 +36384,7 @@ export type DefaultResourceConfigBuildMachineTypeEnum3 =
 
 export const ssoProtectionDeploymentTypeEnum4 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
@@ -34286,10 +36479,11 @@ export const scopeEnum6 = {
 export type ScopeEnum6 = (typeof scopeEnum6)[keyof typeof scopeEnum6]
 
 export const trustedIpsDeploymentTypeEnum5 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum5 = (typeof trustedIpsDeploymentTypeEnum5)[keyof typeof trustedIpsDeploymentTypeEnum5]
@@ -34302,10 +36496,11 @@ export const trustedIpsProtectionModeEnum3 = {
 export type TrustedIpsProtectionModeEnum3 = (typeof trustedIpsProtectionModeEnum3)[keyof typeof trustedIpsProtectionModeEnum3]
 
 export const trustedIpsDeploymentTypeEnum6 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum6 = (typeof trustedIpsDeploymentTypeEnum6)[keyof typeof trustedIpsDeploymentTypeEnum6]
@@ -34358,7 +36553,7 @@ export const firewallRoutesHandleEnum3 = {
 
 export type FirewallRoutesHandleEnum3 = (typeof firewallRoutesHandleEnum3)[keyof typeof firewallRoutesHandleEnum3]
 
-export const mitigateActionEnum3 = {
+export const mitigateActionEnum6 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -34367,7 +36562,7 @@ export const mitigateActionEnum3 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum3 = (typeof mitigateActionEnum3)[keyof typeof mitigateActionEnum3]
+export type MitigateActionEnum6 = (typeof mitigateActionEnum6)[keyof typeof mitigateActionEnum6]
 
 export const erlAlgoEnum3 = {
   fixed_window: 'fixed_window',
@@ -34376,13 +36571,29 @@ export const erlAlgoEnum3 = {
 
 export type ErlAlgoEnum3 = (typeof erlAlgoEnum3)[keyof typeof erlAlgoEnum3]
 
-export const actionEnum3 = {
+export const botFilterActionEnum3 = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum3 = (typeof actionEnum3)[keyof typeof actionEnum3]
+export type BotFilterActionEnum3 = (typeof botFilterActionEnum3)[keyof typeof botFilterActionEnum3]
+
+export const aiBotsActionEnum3 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum3 = (typeof aiBotsActionEnum3)[keyof typeof aiBotsActionEnum3]
+
+export const owaspActionEnum3 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum3 = (typeof owaspActionEnum3)[keyof typeof owaspActionEnum3]
 
 export const oidcTokenConfigIssuerModeEnum3 = {
   global: 'global',
@@ -34494,6 +36705,52 @@ export type CreateProject200 = {
    */
   commandForIgnoringBuildStep?: (string | null) | undefined
   /**
+   * @type array
+   */
+  connectConfigurations?:
+    | (
+        | {
+            envId: string | ConnectConfigurationsEnvIdEnum3
+            /**
+             * @type string
+             */
+            connectConfigurationId: string
+            /**
+             * @type boolean
+             */
+            passive: boolean
+            /**
+             * @type boolean
+             */
+            buildsEnabled: boolean
+            /**
+             * @type object | undefined
+             */
+            aws?:
+              | {
+                  /**
+                   * @type array
+                   */
+                  subnetIds: string[]
+                  /**
+                   * @type string
+                   */
+                  securityGroupId: string
+                }
+              | undefined
+            /**
+             * @type number
+             */
+            createdAt: number
+            /**
+             * @type number
+             */
+            updatedAt: number
+          }[]
+        | null
+      )
+    | undefined
+  /**
    * @type string
    */
   connectConfigurationId?: (string | null) | undefined
@@ -34501,6 +36758,10 @@ export type CreateProject200 = {
    * @type boolean | undefined
    */
   connectBuildsEnabled?: boolean | undefined
+  /**
+   * @type string
+   */
+  passiveConnectConfigurationId?: (string | null) | undefined
   /**
    * @type number | undefined
    */
@@ -35662,10 +37923,6 @@ export type CreateProject200 = {
    */
   outputDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  passiveConnectConfigurationId?: (string | null) | undefined
-  /**
    * @type object
    */
   passwordProtection?: (object | null) | undefined
@@ -35711,6 +37968,35 @@ export type CreateProject200 = {
     buildMachineType?: ResourceConfigBuildMachineTypeEnum3 | undefined
   }
   /**
+   * @description Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   * @type object | undefined
+   */
+  rollbackDescription?:
+    | {
+        /**
+         * @description The user who rolled back the project.
+         * @type string
+         */
+        userId: string
+        /**
+         * @description The username of the user who rolled back the project.
+         * @type string
+         */
+        username: string
+        /**
+         * @description User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+         * @type string
+         */
+        description: string
+        /**
+         * @description Timestamp of when the rollback was requested.
+         * @type number
+         */
+        createdAt: number
+      }
+    | undefined
+  /**
+   * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
    * @type object
    */
   rollingRelease?:
@@ -35721,34 +38007,24 @@ export type CreateProject200 = {
          */
         target: string
         /**
-         * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-         * @type number | undefined
-         */
-        minutesToRelease?: number | undefined
-        /**
-         * @description An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+         * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
          * @type array
          */
         stages?:
           | (
               | {
                   /**
-                   * @description The percentage of traffic to serve to the new deployment
+                   * @description The percentage of traffic to serve to the canary deployment (0-100)
                    * @type number
                    */
                   targetPercentage: number
                   /**
-                   * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-                   * @type number | undefined
-                   */
-                  minutesToRelease?: number | undefined
-                  /**
-                   * @description Whether or not this stage requires approval to proceed.
+                   * @description Whether or not this stage requires manual approval to proceed
                    * @type boolean | undefined
                    */
                   requireApproval?: boolean | undefined
                   /**
-                   * @description duration is the total time to serve a stage, at the given targetPercentage.
+                   * @description Duration in minutes for automatic advancement to the next stage
                    * @type number | undefined
                    */
                   duration?: number | undefined
@@ -35756,6 +38032,11 @@ export type CreateProject200 = {
               | null
             )
           | undefined
+        /**
+         * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+         * @type boolean | undefined
+         */
+        canaryResponseHeader?: boolean | undefined
       } | null)
     | undefined
   /**
@@ -35795,10 +38076,6 @@ export type CreateProject200 = {
    * @type string
    */
   rootDirectory?: (string | null) | undefined
-  /**
-   * @type string
-   */
-  serverlessFunctionRegion?: (string | null) | undefined
   /**
    * @type boolean | undefined
    */
@@ -36232,6 +38509,10 @@ export type CreateProject200 = {
         /**
          * @type array | undefined
          */
+        defaultDeploymentProtection?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         domain?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -36444,6 +38725,10 @@ export type CreateProject200 = {
         /**
          * @type array | undefined
          */
+        notificationPreferences?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         notificationCustomerBudget?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -36457,6 +38742,10 @@ export type CreateProject200 = {
          * @type array | undefined
          */
         observabilityNotebook?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        observabilityFunnel?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -36676,11 +38965,23 @@ export type CreateProject200 = {
         /**
          * @type array | undefined
          */
+        apiKey?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        apiKeyOwnedBySelf?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         aliasProject?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
         aliasProtectionBypass?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        buildMachine?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -36736,6 +39037,10 @@ export type CreateProject200 = {
         /**
          * @type array | undefined
          */
+        edgeCacheNamespace?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         environments?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -36764,6 +39069,14 @@ export type CreateProject200 = {
         /**
          * @type array | undefined
          */
+        onDemandBuild?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        onDemandConcurrency?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         project?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -36777,6 +39090,14 @@ export type CreateProject200 = {
          * @type array | undefined
          */
         projectAnalyticsSampling?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheck?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheckRun?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -37328,7 +39649,7 @@ export type CreateProject200 = {
                     /**
                      * @type string
                      */
-                    action: MitigateActionEnum3
+                    action: MitigateActionEnum6
                     /**
                      * @type string
                      */
@@ -37385,7 +39706,10 @@ export type CreateProject200 = {
          */
         managedRules?:
           | ({
-              [key: string]: {
+              /**
+               * @type object
+               */
+              bot_filter: {
                 /**
                  * @type boolean
                  */
@@ -37393,10 +39717,40 @@ export type CreateProject200 = {
                 /**
                  * @type string | undefined
                  */
-                action?: ActionEnum3 | undefined
+                action?: BotFilterActionEnum3 | undefined
+              }
+              /**
+               * @type object
+               */
+              ai_bots: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: AiBotsActionEnum3 | undefined
+              }
+              /**
+               * @type object
+               */
+              owasp: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: OwaspActionEnum3 | undefined
               }
             } | null)
           | undefined
+        /**
+         * @type boolean | undefined
+         */
+        botIdEnabled?: boolean | undefined
       }
     | undefined
   /**
@@ -37405,9 +39759,10 @@ export type CreateProject200 = {
   oidcTokenConfig?:
     | {
         /**
-         * @type boolean
+         * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @type boolean | undefined
          */
-        enabled: boolean
+        enabled?: boolean | undefined
         /**
          * @description - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
          * @type string | undefined
@@ -37419,6 +39774,17 @@ export type CreateProject200 = {
    * @type string | undefined
    */
   tier?: CreateProject200TierEnum | undefined
+  /**
+   * @type object | undefined
+   */
+  features?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        webAnalytics?: boolean | undefined
+      }
+    | undefined
 }
 
 /**
@@ -37429,7 +39795,7 @@ export type CreateProject400 = unknown
 export type CreateProject401 = unknown
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export type CreateProject402 = unknown
 
@@ -37491,6 +39857,7 @@ export const createProjectMutationRequestFrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -37529,6 +39896,15 @@ export const gitRepositoryTypeEnum = {
 
 export type GitRepositoryTypeEnum = (typeof gitRepositoryTypeEnum)[keyof typeof gitRepositoryTypeEnum]
 
+export const ssoProtectionDeploymentTypeEnum5 = {
+  all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
+  preview: 'preview',
+  prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+} as const
+
+export type SsoProtectionDeploymentTypeEnum5 = (typeof ssoProtectionDeploymentTypeEnum5)[keyof typeof ssoProtectionDeploymentTypeEnum5]
+
 export const oidcTokenConfigIssuerModeEnum4 = {
   global: 'global',
   team: 'team',
@@ -37547,7 +39923,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum4 =
 
 export const resourceConfigBuildMachineTypeEnum4 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum4 = (typeof resourceConfigBuildMachineTypeEnum4)[keyof typeof resourceConfigBuildMachineTypeEnum4]
@@ -37653,6 +40029,18 @@ export type CreateProjectMutationRequest = {
    */
   skipGitConnectDuringLink?: boolean | undefined
   /**
+   * @description The Vercel Auth setting for the project (historically named \\\"SSO Protection\\\")
+   * @type object
+   */
+  ssoProtection?:
+    | ({
+        /**
+         * @type string
+         */
+        deploymentType: SsoProtectionDeploymentTypeEnum5
+      } | null)
+    | undefined
+  /**
    * @description The output directory of the project. When `null` is used this value will be automatically detected
    * @maxLength 256
    * @type string
@@ -37687,6 +40075,7 @@ export type CreateProjectMutationRequest = {
     | {
         /**
          * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @deprecated
          * @default true
          * @type boolean | undefined
          */
@@ -37767,6 +40156,13 @@ export type GetProjectQueryParams = {
    */
   slug?: string | undefined
 }
+
+export const connectConfigurationsEnvIdEnum4 = {
+  preview: 'preview',
+  production: 'production',
+} as const
+
+export type ConnectConfigurationsEnvIdEnum4 = (typeof connectConfigurationsEnvIdEnum4)[keyof typeof connectConfigurationsEnvIdEnum4]
 
 export const envTargetEnum7 = {
   production: 'production',
@@ -37937,6 +40333,7 @@ export const getProject200FrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -38072,7 +40469,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum5 =
 
 export const resourceConfigBuildMachineTypeEnum5 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum5 = (typeof resourceConfigBuildMachineTypeEnum5)[keyof typeof resourceConfigBuildMachineTypeEnum5]
@@ -38088,19 +40485,20 @@ export type DefaultResourceConfigFunctionDefaultMemoryTypeEnum4 =
 
 export const defaultResourceConfigBuildMachineTypeEnum4 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type DefaultResourceConfigBuildMachineTypeEnum4 =
   (typeof defaultResourceConfigBuildMachineTypeEnum4)[keyof typeof defaultResourceConfigBuildMachineTypeEnum4]
 
-export const ssoProtectionDeploymentTypeEnum5 = {
+export const ssoProtectionDeploymentTypeEnum6 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
 
-export type SsoProtectionDeploymentTypeEnum5 = (typeof ssoProtectionDeploymentTypeEnum5)[keyof typeof ssoProtectionDeploymentTypeEnum5]
+export type SsoProtectionDeploymentTypeEnum6 = (typeof ssoProtectionDeploymentTypeEnum6)[keyof typeof ssoProtectionDeploymentTypeEnum6]
 
 export const branchMatcherTypeEnum16 = {
   endsWith: 'endsWith',
@@ -38190,10 +40588,11 @@ export const scopeEnum8 = {
 export type ScopeEnum8 = (typeof scopeEnum8)[keyof typeof scopeEnum8]
 
 export const trustedIpsDeploymentTypeEnum7 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum7 = (typeof trustedIpsDeploymentTypeEnum7)[keyof typeof trustedIpsDeploymentTypeEnum7]
@@ -38206,10 +40605,11 @@ export const trustedIpsProtectionModeEnum4 = {
 export type TrustedIpsProtectionModeEnum4 = (typeof trustedIpsProtectionModeEnum4)[keyof typeof trustedIpsProtectionModeEnum4]
 
 export const trustedIpsDeploymentTypeEnum8 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum8 = (typeof trustedIpsDeploymentTypeEnum8)[keyof typeof trustedIpsDeploymentTypeEnum8]
@@ -38262,7 +40662,7 @@ export const firewallRoutesHandleEnum4 = {
 
 export type FirewallRoutesHandleEnum4 = (typeof firewallRoutesHandleEnum4)[keyof typeof firewallRoutesHandleEnum4]
 
-export const mitigateActionEnum4 = {
+export const mitigateActionEnum7 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -38271,7 +40671,7 @@ export const mitigateActionEnum4 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum4 = (typeof mitigateActionEnum4)[keyof typeof mitigateActionEnum4]
+export type MitigateActionEnum7 = (typeof mitigateActionEnum7)[keyof typeof mitigateActionEnum7]
 
 export const erlAlgoEnum4 = {
   fixed_window: 'fixed_window',
@@ -38280,13 +40680,29 @@ export const erlAlgoEnum4 = {
 
 export type ErlAlgoEnum4 = (typeof erlAlgoEnum4)[keyof typeof erlAlgoEnum4]
 
-export const actionEnum4 = {
+export const botFilterActionEnum4 = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum4 = (typeof actionEnum4)[keyof typeof actionEnum4]
+export type BotFilterActionEnum4 = (typeof botFilterActionEnum4)[keyof typeof botFilterActionEnum4]
+
+export const aiBotsActionEnum4 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum4 = (typeof aiBotsActionEnum4)[keyof typeof aiBotsActionEnum4]
+
+export const owaspActionEnum4 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum4 = (typeof owaspActionEnum4)[keyof typeof owaspActionEnum4]
 
 export const oidcTokenConfigIssuerModeEnum5 = {
   global: 'global',
@@ -38307,6 +40723,30 @@ export type GetProject200TierEnum = (typeof getProject200TierEnum)[keyof typeof 
  * @description The project information
  */
 export type GetProject200 = {
+  /**
+   * @type array | undefined
+   */
+  integrations?:
+    | {
+        /**
+         * @description The integration installation ID.
+         * @type string
+         */
+        installationId: string
+        /**
+         * @description The list of the installation resources connected to the project.
+         * @type array | undefined
+         */
+        resources?:
+          | {
+              /**
+               * @type string
+               */
+              externalResourceId: string
+            }[]
+          | undefined
+      }[]
+    | undefined
   /**
    * @type string
    */
@@ -38398,6 +40838,52 @@ export type GetProject200 = {
    */
   commandForIgnoringBuildStep?: (string | null) | undefined
   /**
+   * @type array
+   */
+  connectConfigurations?:
+    | (
+        | {
+            envId: string | ConnectConfigurationsEnvIdEnum4
+            /**
+             * @type string
+             */
+            connectConfigurationId: string
+            /**
+             * @type boolean
+             */
+            passive: boolean
+            /**
+             * @type boolean
+             */
+            buildsEnabled: boolean
+            /**
+             * @type object | undefined
+             */
+            aws?:
+              | {
+                  /**
+                   * @type array
+                   */
+                  subnetIds: string[]
+                  /**
+                   * @type string
+                   */
+                  securityGroupId: string
+                }
+              | undefined
+            /**
+             * @type number
+             */
+            createdAt: number
+            /**
+             * @type number
+             */
+            updatedAt: number
+          }[]
+        | null
+      )
+    | undefined
+  /**
    * @type string
    */
   connectConfigurationId?: (string | null) | undefined
@@ -38405,6 +40891,10 @@ export type GetProject200 = {
    * @type boolean | undefined
    */
   connectBuildsEnabled?: boolean | undefined
+  /**
+   * @type string
+   */
+  passiveConnectConfigurationId?: (string | null) | undefined
   /**
    * @type number | undefined
    */
@@ -39566,10 +42056,6 @@ export type GetProject200 = {
    */
   outputDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  passiveConnectConfigurationId?: (string | null) | undefined
-  /**
    * @type object
    */
   passwordProtection?: (object | null) | undefined
@@ -39615,6 +42101,35 @@ export type GetProject200 = {
     buildMachineType?: ResourceConfigBuildMachineTypeEnum5 | undefined
   }
   /**
+   * @description Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   * @type object | undefined
+   */
+  rollbackDescription?:
+    | {
+        /**
+         * @description The user who rolled back the project.
+         * @type string
+         */
+        userId: string
+        /**
+         * @description The username of the user who rolled back the project.
+         * @type string
+         */
+        username: string
+        /**
+         * @description User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+         * @type string
+         */
+        description: string
+        /**
+         * @description Timestamp of when the rollback was requested.
+         * @type number
+         */
+        createdAt: number
+      }
+    | undefined
+  /**
+   * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
    * @type object
    */
   rollingRelease?:
@@ -39625,34 +42140,24 @@ export type GetProject200 = {
          */
         target: string
         /**
-         * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-         * @type number | undefined
-         */
-        minutesToRelease?: number | undefined
-        /**
-         * @description An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+         * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
          * @type array
          */
         stages?:
           | (
               | {
                   /**
-                   * @description The percentage of traffic to serve to the new deployment
+                   * @description The percentage of traffic to serve to the canary deployment (0-100)
                    * @type number
                    */
                   targetPercentage: number
                   /**
-                   * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-                   * @type number | undefined
-                   */
-                  minutesToRelease?: number | undefined
-                  /**
-                   * @description Whether or not this stage requires approval to proceed.
+                   * @description Whether or not this stage requires manual approval to proceed
                    * @type boolean | undefined
                    */
                   requireApproval?: boolean | undefined
                   /**
-                   * @description duration is the total time to serve a stage, at the given targetPercentage.
+                   * @description Duration in minutes for automatic advancement to the next stage
                    * @type number | undefined
                    */
                   duration?: number | undefined
@@ -39660,6 +42165,11 @@ export type GetProject200 = {
               | null
             )
           | undefined
+        /**
+         * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+         * @type boolean | undefined
+         */
+        canaryResponseHeader?: boolean | undefined
       } | null)
     | undefined
   /**
@@ -39700,10 +42210,6 @@ export type GetProject200 = {
    */
   rootDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  serverlessFunctionRegion?: (string | null) | undefined
-  /**
    * @type boolean | undefined
    */
   serverlessFunctionZeroConfigFailover?: boolean | undefined
@@ -39735,7 +42241,7 @@ export type GetProject200 = {
         /**
          * @type string
          */
-        deploymentType: SsoProtectionDeploymentTypeEnum5
+        deploymentType: SsoProtectionDeploymentTypeEnum6
       } | null)
     | undefined
   /**
@@ -40136,6 +42642,10 @@ export type GetProject200 = {
         /**
          * @type array | undefined
          */
+        defaultDeploymentProtection?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         domain?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -40348,6 +42858,10 @@ export type GetProject200 = {
         /**
          * @type array | undefined
          */
+        notificationPreferences?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         notificationCustomerBudget?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -40361,6 +42875,10 @@ export type GetProject200 = {
          * @type array | undefined
          */
         observabilityNotebook?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        observabilityFunnel?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -40580,11 +43098,23 @@ export type GetProject200 = {
         /**
          * @type array | undefined
          */
+        apiKey?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        apiKeyOwnedBySelf?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         aliasProject?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
         aliasProtectionBypass?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        buildMachine?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -40640,6 +43170,10 @@ export type GetProject200 = {
         /**
          * @type array | undefined
          */
+        edgeCacheNamespace?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         environments?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -40668,6 +43202,14 @@ export type GetProject200 = {
         /**
          * @type array | undefined
          */
+        onDemandBuild?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        onDemandConcurrency?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         project?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -40681,6 +43223,14 @@ export type GetProject200 = {
          * @type array | undefined
          */
         projectAnalyticsSampling?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheck?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheckRun?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -41232,7 +43782,7 @@ export type GetProject200 = {
                     /**
                      * @type string
                      */
-                    action: MitigateActionEnum4
+                    action: MitigateActionEnum7
                     /**
                      * @type string
                      */
@@ -41289,7 +43839,10 @@ export type GetProject200 = {
          */
         managedRules?:
           | ({
-              [key: string]: {
+              /**
+               * @type object
+               */
+              bot_filter: {
                 /**
                  * @type boolean
                  */
@@ -41297,10 +43850,40 @@ export type GetProject200 = {
                 /**
                  * @type string | undefined
                  */
-                action?: ActionEnum4 | undefined
+                action?: BotFilterActionEnum4 | undefined
+              }
+              /**
+               * @type object
+               */
+              ai_bots: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: AiBotsActionEnum4 | undefined
+              }
+              /**
+               * @type object
+               */
+              owasp: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: OwaspActionEnum4 | undefined
               }
             } | null)
           | undefined
+        /**
+         * @type boolean | undefined
+         */
+        botIdEnabled?: boolean | undefined
       }
     | undefined
   /**
@@ -41309,9 +43892,10 @@ export type GetProject200 = {
   oidcTokenConfig?:
     | {
         /**
-         * @type boolean
+         * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @type boolean | undefined
          */
-        enabled: boolean
+        enabled?: boolean | undefined
         /**
          * @description - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
          * @type string | undefined
@@ -41323,6 +43907,17 @@ export type GetProject200 = {
    * @type string | undefined
    */
   tier?: GetProject200TierEnum | undefined
+  /**
+   * @type object | undefined
+   */
+  features?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        webAnalytics?: boolean | undefined
+      }
+    | undefined
 }
 
 /**
@@ -41366,6 +43961,13 @@ export type UpdateProjectQueryParams = {
    */
   slug?: string | undefined
 }
+
+export const connectConfigurationsEnvIdEnum5 = {
+  preview: 'preview',
+  production: 'production',
+} as const
+
+export type ConnectConfigurationsEnvIdEnum5 = (typeof connectConfigurationsEnvIdEnum5)[keyof typeof connectConfigurationsEnvIdEnum5]
 
 export const envTargetEnum9 = {
   production: 'production',
@@ -41536,6 +44138,7 @@ export const updateProject200FrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -41671,7 +44274,7 @@ export type ResourceConfigFunctionDefaultMemoryTypeEnum6 =
 
 export const resourceConfigBuildMachineTypeEnum6 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum6 = (typeof resourceConfigBuildMachineTypeEnum6)[keyof typeof resourceConfigBuildMachineTypeEnum6]
@@ -41687,19 +44290,20 @@ export type DefaultResourceConfigFunctionDefaultMemoryTypeEnum5 =
 
 export const defaultResourceConfigBuildMachineTypeEnum5 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type DefaultResourceConfigBuildMachineTypeEnum5 =
   (typeof defaultResourceConfigBuildMachineTypeEnum5)[keyof typeof defaultResourceConfigBuildMachineTypeEnum5]
 
-export const ssoProtectionDeploymentTypeEnum6 = {
+export const ssoProtectionDeploymentTypeEnum7 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
 
-export type SsoProtectionDeploymentTypeEnum6 = (typeof ssoProtectionDeploymentTypeEnum6)[keyof typeof ssoProtectionDeploymentTypeEnum6]
+export type SsoProtectionDeploymentTypeEnum7 = (typeof ssoProtectionDeploymentTypeEnum7)[keyof typeof ssoProtectionDeploymentTypeEnum7]
 
 export const branchMatcherTypeEnum19 = {
   endsWith: 'endsWith',
@@ -41789,10 +44393,11 @@ export const scopeEnum10 = {
 export type ScopeEnum10 = (typeof scopeEnum10)[keyof typeof scopeEnum10]
 
 export const trustedIpsDeploymentTypeEnum9 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum9 = (typeof trustedIpsDeploymentTypeEnum9)[keyof typeof trustedIpsDeploymentTypeEnum9]
@@ -41805,10 +44410,11 @@ export const trustedIpsProtectionModeEnum5 = {
 export type TrustedIpsProtectionModeEnum5 = (typeof trustedIpsProtectionModeEnum5)[keyof typeof trustedIpsProtectionModeEnum5]
 
 export const trustedIpsDeploymentTypeEnum10 = {
-  production: 'production',
-  preview: 'preview',
   all: 'all',
+  preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+  all_except_custom_domains: 'all_except_custom_domains',
+  production: 'production',
 } as const
 
 export type TrustedIpsDeploymentTypeEnum10 = (typeof trustedIpsDeploymentTypeEnum10)[keyof typeof trustedIpsDeploymentTypeEnum10]
@@ -41861,7 +44467,7 @@ export const firewallRoutesHandleEnum5 = {
 
 export type FirewallRoutesHandleEnum5 = (typeof firewallRoutesHandleEnum5)[keyof typeof firewallRoutesHandleEnum5]
 
-export const mitigateActionEnum5 = {
+export const mitigateActionEnum8 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -41870,7 +44476,7 @@ export const mitigateActionEnum5 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum5 = (typeof mitigateActionEnum5)[keyof typeof mitigateActionEnum5]
+export type MitigateActionEnum8 = (typeof mitigateActionEnum8)[keyof typeof mitigateActionEnum8]
 
 export const erlAlgoEnum5 = {
   fixed_window: 'fixed_window',
@@ -41879,13 +44485,29 @@ export const erlAlgoEnum5 = {
 
 export type ErlAlgoEnum5 = (typeof erlAlgoEnum5)[keyof typeof erlAlgoEnum5]
 
-export const actionEnum5 = {
+export const botFilterActionEnum5 = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum5 = (typeof actionEnum5)[keyof typeof actionEnum5]
+export type BotFilterActionEnum5 = (typeof botFilterActionEnum5)[keyof typeof botFilterActionEnum5]
+
+export const aiBotsActionEnum5 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum5 = (typeof aiBotsActionEnum5)[keyof typeof aiBotsActionEnum5]
+
+export const owaspActionEnum5 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum5 = (typeof owaspActionEnum5)[keyof typeof owaspActionEnum5]
 
 export const oidcTokenConfigIssuerModeEnum6 = {
   global: 'global',
@@ -41997,6 +44619,52 @@ export type UpdateProject200 = {
    */
   commandForIgnoringBuildStep?: (string | null) | undefined
   /**
+   * @type array
+   */
+  connectConfigurations?:
+    | (
+        | {
+            envId: string | ConnectConfigurationsEnvIdEnum5
+            /**
+             * @type string
+             */
+            connectConfigurationId: string
+            /**
+             * @type boolean
+             */
+            passive: boolean
+            /**
+             * @type boolean
+             */
+            buildsEnabled: boolean
+            /**
+             * @type object | undefined
+             */
+            aws?:
+              | {
+                  /**
+                   * @type array
+                   */
+                  subnetIds: string[]
+                  /**
+                   * @type string
+                   */
+                  securityGroupId: string
+                }
+              | undefined
+            /**
+             * @type number
+             */
+            createdAt: number
+            /**
+             * @type number
+             */
+            updatedAt: number
+          }[]
+        | null
+      )
+    | undefined
+  /**
    * @type string
    */
   connectConfigurationId?: (string | null) | undefined
@@ -42004,6 +44672,10 @@ export type UpdateProject200 = {
    * @type boolean | undefined
    */
   connectBuildsEnabled?: boolean | undefined
+  /**
+   * @type string
+   */
+  passiveConnectConfigurationId?: (string | null) | undefined
   /**
    * @type number | undefined
    */
@@ -43165,10 +45837,6 @@ export type UpdateProject200 = {
    */
   outputDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  passiveConnectConfigurationId?: (string | null) | undefined
-  /**
    * @type object
    */
   passwordProtection?: (object | null) | undefined
@@ -43214,6 +45882,35 @@ export type UpdateProject200 = {
     buildMachineType?: ResourceConfigBuildMachineTypeEnum6 | undefined
   }
   /**
+   * @description Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   * @type object | undefined
+   */
+  rollbackDescription?:
+    | {
+        /**
+         * @description The user who rolled back the project.
+         * @type string
+         */
+        userId: string
+        /**
+         * @description The username of the user who rolled back the project.
+         * @type string
+         */
+        username: string
+        /**
+         * @description User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+         * @type string
+         */
+        description: string
+        /**
+         * @description Timestamp of when the rollback was requested.
+         * @type number
+         */
+        createdAt: number
+      }
+    | undefined
+  /**
+   * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
    * @type object
    */
   rollingRelease?:
@@ -43224,34 +45921,24 @@ export type UpdateProject200 = {
          */
         target: string
         /**
-         * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-         * @type number | undefined
-         */
-        minutesToRelease?: number | undefined
-        /**
-         * @description An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+         * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
          * @type array
          */
         stages?:
           | (
               | {
                   /**
-                   * @description The percentage of traffic to serve to the new deployment
+                   * @description The percentage of traffic to serve to the canary deployment (0-100)
                    * @type number
                    */
                   targetPercentage: number
                   /**
-                   * @description minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-                   * @type number | undefined
-                   */
-                  minutesToRelease?: number | undefined
-                  /**
-                   * @description Whether or not this stage requires approval to proceed.
+                   * @description Whether or not this stage requires manual approval to proceed
                    * @type boolean | undefined
                    */
                   requireApproval?: boolean | undefined
                   /**
-                   * @description duration is the total time to serve a stage, at the given targetPercentage.
+                   * @description Duration in minutes for automatic advancement to the next stage
                    * @type number | undefined
                    */
                   duration?: number | undefined
@@ -43259,6 +45946,11 @@ export type UpdateProject200 = {
               | null
             )
           | undefined
+        /**
+         * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+         * @type boolean | undefined
+         */
+        canaryResponseHeader?: boolean | undefined
       } | null)
     | undefined
   /**
@@ -43299,10 +45991,6 @@ export type UpdateProject200 = {
    */
   rootDirectory?: (string | null) | undefined
   /**
-   * @type string
-   */
-  serverlessFunctionRegion?: (string | null) | undefined
-  /**
    * @type boolean | undefined
    */
   serverlessFunctionZeroConfigFailover?: boolean | undefined
@@ -43334,7 +46022,7 @@ export type UpdateProject200 = {
         /**
          * @type string
          */
-        deploymentType: SsoProtectionDeploymentTypeEnum6
+        deploymentType: SsoProtectionDeploymentTypeEnum7
       } | null)
     | undefined
   /**
@@ -43735,6 +46423,10 @@ export type UpdateProject200 = {
         /**
          * @type array | undefined
          */
+        defaultDeploymentProtection?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         domain?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -43947,6 +46639,10 @@ export type UpdateProject200 = {
         /**
          * @type array | undefined
          */
+        notificationPreferences?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         notificationCustomerBudget?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -43960,6 +46656,10 @@ export type UpdateProject200 = {
          * @type array | undefined
          */
         observabilityNotebook?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        observabilityFunnel?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -44179,11 +46879,23 @@ export type UpdateProject200 = {
         /**
          * @type array | undefined
          */
+        apiKey?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        apiKeyOwnedBySelf?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         aliasProject?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
         aliasProtectionBypass?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        buildMachine?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -44239,6 +46951,10 @@ export type UpdateProject200 = {
         /**
          * @type array | undefined
          */
+        edgeCacheNamespace?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         environments?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -44267,6 +46983,14 @@ export type UpdateProject200 = {
         /**
          * @type array | undefined
          */
+        onDemandBuild?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        onDemandConcurrency?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
         project?: ACLAction[] | undefined
         /**
          * @type array | undefined
@@ -44280,6 +47004,14 @@ export type UpdateProject200 = {
          * @type array | undefined
          */
         projectAnalyticsSampling?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheck?: ACLAction[] | undefined
+        /**
+         * @type array | undefined
+         */
+        projectCheckRun?: ACLAction[] | undefined
         /**
          * @type array | undefined
          */
@@ -44831,7 +47563,7 @@ export type UpdateProject200 = {
                     /**
                      * @type string
                      */
-                    action: MitigateActionEnum5
+                    action: MitigateActionEnum8
                     /**
                      * @type string
                      */
@@ -44888,7 +47620,10 @@ export type UpdateProject200 = {
          */
         managedRules?:
           | ({
-              [key: string]: {
+              /**
+               * @type object
+               */
+              bot_filter: {
                 /**
                  * @type boolean
                  */
@@ -44896,10 +47631,40 @@ export type UpdateProject200 = {
                 /**
                  * @type string | undefined
                  */
-                action?: ActionEnum5 | undefined
+                action?: BotFilterActionEnum5 | undefined
+              }
+              /**
+               * @type object
+               */
+              ai_bots: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: AiBotsActionEnum5 | undefined
+              }
+              /**
+               * @type object
+               */
+              owasp: {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: OwaspActionEnum5 | undefined
               }
             } | null)
           | undefined
+        /**
+         * @type boolean | undefined
+         */
+        botIdEnabled?: boolean | undefined
       }
     | undefined
   /**
@@ -44908,9 +47673,10 @@ export type UpdateProject200 = {
   oidcTokenConfig?:
     | {
         /**
-         * @type boolean
+         * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @type boolean | undefined
          */
-        enabled: boolean
+        enabled?: boolean | undefined
         /**
          * @description - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
          * @type string | undefined
@@ -44922,6 +47688,17 @@ export type UpdateProject200 = {
    * @type string | undefined
    */
   tier?: UpdateProject200TierEnum | undefined
+  /**
+   * @type object | undefined
+   */
+  features?:
+    | {
+        /**
+         * @type boolean | undefined
+         */
+        webAnalytics?: boolean | undefined
+      }
+    | undefined
 }
 
 /**
@@ -44932,7 +47709,7 @@ export type UpdateProject400 = unknown
 export type UpdateProject401 = unknown
 
 /**
- * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to PRO_CUSTOMERS_MAX_REGIONS regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
 export type UpdateProject402 = unknown
 
@@ -44975,6 +47752,7 @@ export const updateProjectMutationRequestFrameworkEnum = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -45020,7 +47798,7 @@ export type UpdateProjectMutationRequestNodeVersionEnum =
 
 export const resourceConfigBuildMachineTypeEnum7 = {
   enhanced: 'enhanced',
-  ultra: 'ultra',
+  turbo: 'turbo',
 } as const
 
 export type ResourceConfigBuildMachineTypeEnum7 = (typeof resourceConfigBuildMachineTypeEnum7)[keyof typeof resourceConfigBuildMachineTypeEnum7]
@@ -45043,22 +47821,25 @@ export type OidcTokenConfigIssuerModeEnum7 = (typeof oidcTokenConfigIssuerModeEn
 
 export const passwordProtectionDeploymentTypeEnum2 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
 
 export type PasswordProtectionDeploymentTypeEnum2 = (typeof passwordProtectionDeploymentTypeEnum2)[keyof typeof passwordProtectionDeploymentTypeEnum2]
 
-export const ssoProtectionDeploymentTypeEnum7 = {
+export const ssoProtectionDeploymentTypeEnum8 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
 } as const
 
-export type SsoProtectionDeploymentTypeEnum7 = (typeof ssoProtectionDeploymentTypeEnum7)[keyof typeof ssoProtectionDeploymentTypeEnum7]
+export type SsoProtectionDeploymentTypeEnum8 = (typeof ssoProtectionDeploymentTypeEnum8)[keyof typeof ssoProtectionDeploymentTypeEnum8]
 
 export const trustedIpsDeploymentTypeEnum11 = {
   all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
   production: 'production',
@@ -45254,6 +48035,7 @@ export type UpdateProjectMutationRequest = {
     | {
         /**
          * @description Whether or not to generate OpenID Connect JSON Web Tokens.
+         * @deprecated
          * @default true
          * @type boolean | undefined
          */
@@ -45296,7 +48078,7 @@ export type UpdateProjectMutationRequest = {
          * @default "preview"
          * @type string
          */
-        deploymentType: SsoProtectionDeploymentTypeEnum7
+        deploymentType: SsoProtectionDeploymentTypeEnum8
       } | null)
     | undefined
   /**
@@ -47214,7 +49996,7 @@ export type RemoveProjectDomainQueryParams = {
 export type RemoveProjectDomain200 = object
 
 /**
- * @description One of the provided values in the request query is invalid.
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
 export type RemoveProjectDomain400 = unknown
 
@@ -47232,10 +50014,19 @@ export type RemoveProjectDomain404 = unknown
  */
 export type RemoveProjectDomain409 = unknown
 
+export type RemoveProjectDomainMutationRequest = {
+  /**
+   * @description Whether to remove all domains from this project that redirect to the domain being removed.
+   * @type boolean | undefined
+   */
+  removeRedirects?: boolean | undefined
+}
+
 export type RemoveProjectDomainMutationResponse = RemoveProjectDomain200
 
 export type RemoveProjectDomainMutation = {
   Response: RemoveProjectDomain200
+  Request: RemoveProjectDomainMutationRequest
   PathParams: RemoveProjectDomainPathParams
   QueryParams: RemoveProjectDomainQueryParams
   Errors: RemoveProjectDomain400 | RemoveProjectDomain401 | RemoveProjectDomain403 | RemoveProjectDomain404 | RemoveProjectDomain409
@@ -48951,10 +51742,10 @@ export type CreatedTargetEnum2 = (typeof createdTargetEnum2)[keyof typeof create
 
 export const createdTypeEnum = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type CreatedTypeEnum = (typeof createdTypeEnum)[keyof typeof createdTypeEnum]
@@ -49073,10 +51864,10 @@ export type CreatedTargetEnum4 = (typeof createdTargetEnum4)[keyof typeof create
 
 export const createdTypeEnum2 = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type CreatedTypeEnum2 = (typeof createdTypeEnum2)[keyof typeof createdTypeEnum2]
@@ -51040,10 +53831,10 @@ export type RemoveProjectEnv200TargetEnum2 = (typeof removeProjectEnv200TargetEn
 
 export const removeProjectEnv200TypeEnum = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type RemoveProjectEnv200TypeEnum = (typeof removeProjectEnv200TypeEnum)[keyof typeof removeProjectEnv200TypeEnum]
@@ -51162,10 +53953,10 @@ export type RemoveProjectEnv200TargetEnum4 = (typeof removeProjectEnv200TargetEn
 
 export const removeProjectEnv200TypeEnum2 = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type RemoveProjectEnv200TypeEnum2 = (typeof removeProjectEnv200TypeEnum2)[keyof typeof removeProjectEnv200TypeEnum2]
@@ -51284,10 +54075,10 @@ export type RemoveProjectEnv200TargetEnum6 = (typeof removeProjectEnv200TargetEn
 
 export const removeProjectEnv200TypeEnum3 = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type RemoveProjectEnv200TypeEnum3 = (typeof removeProjectEnv200TypeEnum3)[keyof typeof removeProjectEnv200TypeEnum3]
@@ -52243,10 +55034,10 @@ export type EditProjectEnv200TargetEnum2 = (typeof editProjectEnv200TargetEnum2)
 
 export const editProjectEnv200TypeEnum = {
   system: 'system',
+  secret: 'secret',
   encrypted: 'encrypted',
   plain: 'plain',
   sensitive: 'sensitive',
-  secret: 'secret',
 } as const
 
 export type EditProjectEnv200TypeEnum = (typeof editProjectEnv200TypeEnum)[keyof typeof editProjectEnv200TypeEnum]
@@ -52692,6 +55483,1394 @@ export type EditProjectEnvMutation = {
   Errors: EditProjectEnv400 | EditProjectEnv401 | EditProjectEnv403 | EditProjectEnv409
 }
 
+export type GetRollingReleaseBillingStatusPathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type GetRollingReleaseBillingStatusQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export const getRollingReleaseBillingStatus200AvailableSlotsEnum = {
+  '0': 0,
+} as const
+
+export type GetRollingReleaseBillingStatus200AvailableSlotsEnum =
+  (typeof getRollingReleaseBillingStatus200AvailableSlotsEnum)[keyof typeof getRollingReleaseBillingStatus200AvailableSlotsEnum]
+
+export const getRollingReleaseBillingStatus200ReasonEnum = {
+  plan_not_supported: 'plan_not_supported',
+} as const
+
+export type GetRollingReleaseBillingStatus200ReasonEnum =
+  (typeof getRollingReleaseBillingStatus200ReasonEnum)[keyof typeof getRollingReleaseBillingStatus200ReasonEnum]
+
+export const getRollingReleaseBillingStatus200AvailableSlotsEnum2 = {
+  unlimited: 'unlimited',
+} as const
+
+export type GetRollingReleaseBillingStatus200AvailableSlotsEnum2 =
+  (typeof getRollingReleaseBillingStatus200AvailableSlotsEnum2)[keyof typeof getRollingReleaseBillingStatus200AvailableSlotsEnum2]
+
+export const getRollingReleaseBillingStatus200ReasonEnum2 = {
+  unlimited_slots: 'unlimited_slots',
+} as const
+
+export type GetRollingReleaseBillingStatus200ReasonEnum2 =
+  (typeof getRollingReleaseBillingStatus200ReasonEnum2)[keyof typeof getRollingReleaseBillingStatus200ReasonEnum2]
+
+export const getRollingReleaseBillingStatus200AvailableSlotsEnum3 = {
+  '0': 0,
+} as const
+
+export type GetRollingReleaseBillingStatus200AvailableSlotsEnum3 =
+  (typeof getRollingReleaseBillingStatus200AvailableSlotsEnum3)[keyof typeof getRollingReleaseBillingStatus200AvailableSlotsEnum3]
+
+export const getRollingReleaseBillingStatus200ReasonEnum3 = {
+  no_available_slots: 'no_available_slots',
+} as const
+
+export type GetRollingReleaseBillingStatus200ReasonEnum3 =
+  (typeof getRollingReleaseBillingStatus200ReasonEnum3)[keyof typeof getRollingReleaseBillingStatus200ReasonEnum3]
+
+export const getRollingReleaseBillingStatus200ReasonEnum4 = {
+  available_slots: 'available_slots',
+} as const
+
+export type GetRollingReleaseBillingStatus200ReasonEnum4 =
+  (typeof getRollingReleaseBillingStatus200ReasonEnum4)[keyof typeof getRollingReleaseBillingStatus200ReasonEnum4]
+
+export type GetRollingReleaseBillingStatus200 =
+  | {
+      /**
+       * @type number
+       */
+      availableSlots: GetRollingReleaseBillingStatus200AvailableSlotsEnum
+      /**
+       * @type string
+       */
+      reason: GetRollingReleaseBillingStatus200ReasonEnum
+      /**
+       * @type string
+       */
+      message: string
+    }
+  | {
+      /**
+       * @type string
+       */
+      availableSlots: GetRollingReleaseBillingStatus200AvailableSlotsEnum2
+      /**
+       * @type string
+       */
+      reason: GetRollingReleaseBillingStatus200ReasonEnum2
+      /**
+       * @type string
+       */
+      message: string
+    }
+  | {
+      /**
+       * @type number
+       */
+      availableSlots: GetRollingReleaseBillingStatus200AvailableSlotsEnum3
+      /**
+       * @type string
+       */
+      reason: GetRollingReleaseBillingStatus200ReasonEnum3
+      /**
+       * @type string
+       */
+      message: string
+      /**
+       * @type array
+       */
+      enabledProjects: string[]
+    }
+  | {
+      /**
+       * @type number
+       */
+      availableSlots: number
+      /**
+       * @type string
+       */
+      reason: GetRollingReleaseBillingStatus200ReasonEnum4
+      /**
+       * @type string
+       */
+      message: string
+    }
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetRollingReleaseBillingStatus400 = unknown
+
+export type GetRollingReleaseBillingStatus401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetRollingReleaseBillingStatus403 = unknown
+
+export type GetRollingReleaseBillingStatus404 = unknown
+
+export type GetRollingReleaseBillingStatusQueryResponse = GetRollingReleaseBillingStatus200
+
+export type GetRollingReleaseBillingStatusQuery = {
+  Response: GetRollingReleaseBillingStatus200
+  PathParams: GetRollingReleaseBillingStatusPathParams
+  QueryParams: GetRollingReleaseBillingStatusQueryParams
+  Errors: GetRollingReleaseBillingStatus400 | GetRollingReleaseBillingStatus401 | GetRollingReleaseBillingStatus403 | GetRollingReleaseBillingStatus404
+}
+
+export type GetRollingReleaseConfigPathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type GetRollingReleaseConfigQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export type GetRollingReleaseConfig200 = {
+  /**
+   * @description Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   * @type object
+   */
+  rollingRelease: {
+    /**
+     * @description The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     * @type string
+     */
+    target: string
+    /**
+     * @description An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
+     * @type array
+     */
+    stages?:
+      | (
+          | {
+              /**
+               * @description The percentage of traffic to serve to the canary deployment (0-100)
+               * @type number
+               */
+              targetPercentage: number
+              /**
+               * @description Whether or not this stage requires manual approval to proceed
+               * @type boolean | undefined
+               */
+              requireApproval?: boolean | undefined
+              /**
+               * @description Duration in minutes for automatic advancement to the next stage
+               * @type number | undefined
+               */
+              duration?: number | undefined
+            }[]
+          | null
+        )
+      | undefined
+    /**
+     * @description Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     * @type boolean | undefined
+     */
+    canaryResponseHeader?: boolean | undefined
+  } | null
+}
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetRollingReleaseConfig400 = unknown
+
+export type GetRollingReleaseConfig401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetRollingReleaseConfig403 = unknown
+
+export type GetRollingReleaseConfig404 = unknown
+
+export type GetRollingReleaseConfigQueryResponse = GetRollingReleaseConfig200
+
+export type GetRollingReleaseConfigQuery = {
+  Response: GetRollingReleaseConfig200
+  PathParams: GetRollingReleaseConfigPathParams
+  QueryParams: GetRollingReleaseConfigQueryParams
+  Errors: GetRollingReleaseConfig400 | GetRollingReleaseConfig401 | GetRollingReleaseConfig403 | GetRollingReleaseConfig404
+}
+
+export type DeleteRollingReleaseConfigPathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type DeleteRollingReleaseConfigQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export type DeleteRollingReleaseConfig200 = {
+  rollingRelease: unknown
+}
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type DeleteRollingReleaseConfig400 = unknown
+
+export type DeleteRollingReleaseConfig401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type DeleteRollingReleaseConfig403 = unknown
+
+export type DeleteRollingReleaseConfig404 = unknown
+
+export type DeleteRollingReleaseConfigMutationResponse = DeleteRollingReleaseConfig200
+
+export type DeleteRollingReleaseConfigMutation = {
+  Response: DeleteRollingReleaseConfig200
+  PathParams: DeleteRollingReleaseConfigPathParams
+  QueryParams: DeleteRollingReleaseConfigQueryParams
+  Errors: DeleteRollingReleaseConfig400 | DeleteRollingReleaseConfig401 | DeleteRollingReleaseConfig403 | DeleteRollingReleaseConfig404
+}
+
+export type UpdateRollingReleaseConfigPathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type UpdateRollingReleaseConfigQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export type UpdateRollingReleaseConfig200 =
+  | {
+      rollingRelease: unknown
+    }
+  | {
+      /**
+       * @type object
+       */
+      rollingRelease: {
+        /**
+         * @type array
+         */
+        stages?:
+          | (
+              | {
+                  /**
+                   * @description The percentage of traffic to serve to the canary deployment (0-100)
+                   * @type number
+                   */
+                  targetPercentage: number
+                  /**
+                   * @description Whether or not this stage requires manual approval to proceed
+                   * @type boolean | undefined
+                   */
+                  requireApproval?: boolean | undefined
+                  /**
+                   * @description Duration in minutes for automatic advancement to the next stage
+                   * @type number | undefined
+                   */
+                  duration?: number | undefined
+                }[]
+              | null
+            )
+          | undefined
+      } | null
+    }
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type UpdateRollingReleaseConfig400 = unknown
+
+export type UpdateRollingReleaseConfig401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type UpdateRollingReleaseConfig403 = unknown
+
+export type UpdateRollingReleaseConfig404 = unknown
+
+export type UpdateRollingReleaseConfigMutationResponse = UpdateRollingReleaseConfig200
+
+export type UpdateRollingReleaseConfigMutation = {
+  Response: UpdateRollingReleaseConfig200
+  PathParams: UpdateRollingReleaseConfigPathParams
+  QueryParams: UpdateRollingReleaseConfigQueryParams
+  Errors: UpdateRollingReleaseConfig400 | UpdateRollingReleaseConfig401 | UpdateRollingReleaseConfig403 | UpdateRollingReleaseConfig404
+}
+
+export type GetRollingReleasePathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export const getRollingReleaseQueryParamsStateEnum = {
+  ACTIVE: 'ACTIVE',
+  COMPLETE: 'COMPLETE',
+  ABORTED: 'ABORTED',
+} as const
+
+export type GetRollingReleaseQueryParamsStateEnum = (typeof getRollingReleaseQueryParamsStateEnum)[keyof typeof getRollingReleaseQueryParamsStateEnum]
+
+export type GetRollingReleaseQueryParams = {
+  /**
+   * @description Filter by rolling release state
+   * @type string | undefined
+   */
+  state?: GetRollingReleaseQueryParamsStateEnum | undefined
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export const rollingReleaseStateEnum = {
+  ABORTED: 'ABORTED',
+  ACTIVE: 'ACTIVE',
+  COMPLETE: 'COMPLETE',
+} as const
+
+export type RollingReleaseStateEnum = (typeof rollingReleaseStateEnum)[keyof typeof rollingReleaseStateEnum]
+
+export const currentDeploymentTargetEnum = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CurrentDeploymentTargetEnum = (typeof currentDeploymentTargetEnum)[keyof typeof currentDeploymentTargetEnum]
+
+export const currentDeploymentSourceEnum = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CurrentDeploymentSourceEnum = (typeof currentDeploymentSourceEnum)[keyof typeof currentDeploymentSourceEnum]
+
+export const currentDeploymentReadyStateEnum = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CurrentDeploymentReadyStateEnum = (typeof currentDeploymentReadyStateEnum)[keyof typeof currentDeploymentReadyStateEnum]
+
+export const canaryDeploymentTargetEnum = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CanaryDeploymentTargetEnum = (typeof canaryDeploymentTargetEnum)[keyof typeof canaryDeploymentTargetEnum]
+
+export const canaryDeploymentSourceEnum = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CanaryDeploymentSourceEnum = (typeof canaryDeploymentSourceEnum)[keyof typeof canaryDeploymentSourceEnum]
+
+export const canaryDeploymentReadyStateEnum = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CanaryDeploymentReadyStateEnum = (typeof canaryDeploymentReadyStateEnum)[keyof typeof canaryDeploymentReadyStateEnum]
+
+export const rollingReleaseAdvancementTypeEnum = {
+  automatic: 'automatic',
+  'manual-approval': 'manual-approval',
+} as const
+
+export type RollingReleaseAdvancementTypeEnum = (typeof rollingReleaseAdvancementTypeEnum)[keyof typeof rollingReleaseAdvancementTypeEnum]
+
+export type GetRollingRelease200 = {
+  /**
+   * @description Rolling release information including configuration and document details, or null if no rolling release exists
+   * @type object
+   */
+  rollingRelease: {
+    /**
+     * @description The current state of the rolling release
+     * @type string
+     */
+    state: RollingReleaseStateEnum
+    /**
+     * @description The current deployment receiving production traffic
+     * @type object
+     */
+    currentDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CurrentDeploymentTargetEnum | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CurrentDeploymentSourceEnum | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CurrentDeploymentReadyStateEnum
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The canary deployment being rolled out
+     * @type object
+     */
+    canaryDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CanaryDeploymentTargetEnum | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CanaryDeploymentSourceEnum | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CanaryDeploymentReadyStateEnum
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The ID of a deployment queued for the next rolling release
+     * @type string
+     */
+    queuedDeploymentId: string | null
+    /**
+     * @description The advancement type of the rolling release
+     * @type string
+     */
+    advancementType: RollingReleaseAdvancementTypeEnum
+    /**
+     * @description All stages configured for this rolling release
+     * @type array
+     */
+    stages: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    }[]
+    /**
+     * @description The currently active stage, null if the rollout is aborted
+     * @type object
+     */
+    activeStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description The next stage to be activated, null if not in ACTIVE state
+     * @type object
+     */
+    nextStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release started
+     * @type number
+     */
+    startedAt: number
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release was last updated
+     * @type number
+     */
+    updatedAt: number
+  } | null
+}
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetRollingRelease400 = unknown
+
+export type GetRollingRelease401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetRollingRelease403 = unknown
+
+export type GetRollingRelease404 = unknown
+
+export type GetRollingReleaseQueryResponse = GetRollingRelease200
+
+export type GetRollingReleaseQuery = {
+  Response: GetRollingRelease200
+  PathParams: GetRollingReleasePathParams
+  QueryParams: GetRollingReleaseQueryParams
+  Errors: GetRollingRelease400 | GetRollingRelease401 | GetRollingRelease403 | GetRollingRelease404
+}
+
+export type ApproveRollingReleaseStagePathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type ApproveRollingReleaseStageQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export const rollingReleaseStateEnum2 = {
+  ABORTED: 'ABORTED',
+  ACTIVE: 'ACTIVE',
+  COMPLETE: 'COMPLETE',
+} as const
+
+export type RollingReleaseStateEnum2 = (typeof rollingReleaseStateEnum2)[keyof typeof rollingReleaseStateEnum2]
+
+export const currentDeploymentTargetEnum2 = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CurrentDeploymentTargetEnum2 = (typeof currentDeploymentTargetEnum2)[keyof typeof currentDeploymentTargetEnum2]
+
+export const currentDeploymentSourceEnum2 = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CurrentDeploymentSourceEnum2 = (typeof currentDeploymentSourceEnum2)[keyof typeof currentDeploymentSourceEnum2]
+
+export const currentDeploymentReadyStateEnum2 = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CurrentDeploymentReadyStateEnum2 = (typeof currentDeploymentReadyStateEnum2)[keyof typeof currentDeploymentReadyStateEnum2]
+
+export const canaryDeploymentTargetEnum2 = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CanaryDeploymentTargetEnum2 = (typeof canaryDeploymentTargetEnum2)[keyof typeof canaryDeploymentTargetEnum2]
+
+export const canaryDeploymentSourceEnum2 = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CanaryDeploymentSourceEnum2 = (typeof canaryDeploymentSourceEnum2)[keyof typeof canaryDeploymentSourceEnum2]
+
+export const canaryDeploymentReadyStateEnum2 = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CanaryDeploymentReadyStateEnum2 = (typeof canaryDeploymentReadyStateEnum2)[keyof typeof canaryDeploymentReadyStateEnum2]
+
+export const rollingReleaseAdvancementTypeEnum2 = {
+  automatic: 'automatic',
+  'manual-approval': 'manual-approval',
+} as const
+
+export type RollingReleaseAdvancementTypeEnum2 = (typeof rollingReleaseAdvancementTypeEnum2)[keyof typeof rollingReleaseAdvancementTypeEnum2]
+
+export type ApproveRollingReleaseStage200 = {
+  /**
+   * @description Rolling release information including configuration and document details, or null if no rolling release exists
+   * @type object
+   */
+  rollingRelease: {
+    /**
+     * @description The current state of the rolling release
+     * @type string
+     */
+    state: RollingReleaseStateEnum2
+    /**
+     * @description The current deployment receiving production traffic
+     * @type object
+     */
+    currentDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CurrentDeploymentTargetEnum2 | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CurrentDeploymentSourceEnum2 | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CurrentDeploymentReadyStateEnum2
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The canary deployment being rolled out
+     * @type object
+     */
+    canaryDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CanaryDeploymentTargetEnum2 | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CanaryDeploymentSourceEnum2 | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CanaryDeploymentReadyStateEnum2
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The ID of a deployment queued for the next rolling release
+     * @type string
+     */
+    queuedDeploymentId: string | null
+    /**
+     * @description The advancement type of the rolling release
+     * @type string
+     */
+    advancementType: RollingReleaseAdvancementTypeEnum2
+    /**
+     * @description All stages configured for this rolling release
+     * @type array
+     */
+    stages: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    }[]
+    /**
+     * @description The currently active stage, null if the rollout is aborted
+     * @type object
+     */
+    activeStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description The next stage to be activated, null if not in ACTIVE state
+     * @type object
+     */
+    nextStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release started
+     * @type number
+     */
+    startedAt: number
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release was last updated
+     * @type number
+     */
+    updatedAt: number
+  } | null
+}
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export type ApproveRollingReleaseStage400 = unknown
+
+export type ApproveRollingReleaseStage401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type ApproveRollingReleaseStage403 = unknown
+
+export type ApproveRollingReleaseStage404 = unknown
+
+export type ApproveRollingReleaseStage500 = unknown
+
+export type ApproveRollingReleaseStageMutationRequest = {
+  /**
+   * @description The index of the stage to transition to
+   * @type number
+   */
+  nextStageIndex: number
+  /**
+   * @description The id of the canary deployment to approve for the next stage
+   * @type string
+   */
+  canaryDeploymentId: string
+}
+
+export type ApproveRollingReleaseStageMutationResponse = ApproveRollingReleaseStage200
+
+export type ApproveRollingReleaseStageMutation = {
+  Response: ApproveRollingReleaseStage200
+  Request: ApproveRollingReleaseStageMutationRequest
+  PathParams: ApproveRollingReleaseStagePathParams
+  QueryParams: ApproveRollingReleaseStageQueryParams
+  Errors:
+    | ApproveRollingReleaseStage400
+    | ApproveRollingReleaseStage401
+    | ApproveRollingReleaseStage403
+    | ApproveRollingReleaseStage404
+    | ApproveRollingReleaseStage500
+}
+
+export type CompleteRollingReleasePathParams = {
+  /**
+   * @description Project ID or project name (URL-encoded)
+   * @type string
+   */
+  idOrName: string
+}
+
+export type CompleteRollingReleaseQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined
+}
+
+export const rollingReleaseStateEnum3 = {
+  ABORTED: 'ABORTED',
+  ACTIVE: 'ACTIVE',
+  COMPLETE: 'COMPLETE',
+} as const
+
+export type RollingReleaseStateEnum3 = (typeof rollingReleaseStateEnum3)[keyof typeof rollingReleaseStateEnum3]
+
+export const currentDeploymentTargetEnum3 = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CurrentDeploymentTargetEnum3 = (typeof currentDeploymentTargetEnum3)[keyof typeof currentDeploymentTargetEnum3]
+
+export const currentDeploymentSourceEnum3 = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CurrentDeploymentSourceEnum3 = (typeof currentDeploymentSourceEnum3)[keyof typeof currentDeploymentSourceEnum3]
+
+export const currentDeploymentReadyStateEnum3 = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CurrentDeploymentReadyStateEnum3 = (typeof currentDeploymentReadyStateEnum3)[keyof typeof currentDeploymentReadyStateEnum3]
+
+export const canaryDeploymentTargetEnum3 = {
+  production: 'production',
+  staging: 'staging',
+} as const
+
+export type CanaryDeploymentTargetEnum3 = (typeof canaryDeploymentTargetEnum3)[keyof typeof canaryDeploymentTargetEnum3]
+
+export const canaryDeploymentSourceEnum3 = {
+  'api-trigger-git-deploy': 'api-trigger-git-deploy',
+  cli: 'cli',
+  'clone/repo': 'clone/repo',
+  git: 'git',
+  import: 'import',
+  'import/repo': 'import/repo',
+  redeploy: 'redeploy',
+  'v0-web': 'v0-web',
+} as const
+
+export type CanaryDeploymentSourceEnum3 = (typeof canaryDeploymentSourceEnum3)[keyof typeof canaryDeploymentSourceEnum3]
+
+export const canaryDeploymentReadyStateEnum3 = {
+  BUILDING: 'BUILDING',
+  CANCELED: 'CANCELED',
+  ERROR: 'ERROR',
+  INITIALIZING: 'INITIALIZING',
+  QUEUED: 'QUEUED',
+  READY: 'READY',
+} as const
+
+export type CanaryDeploymentReadyStateEnum3 = (typeof canaryDeploymentReadyStateEnum3)[keyof typeof canaryDeploymentReadyStateEnum3]
+
+export const rollingReleaseAdvancementTypeEnum3 = {
+  automatic: 'automatic',
+  'manual-approval': 'manual-approval',
+} as const
+
+export type RollingReleaseAdvancementTypeEnum3 = (typeof rollingReleaseAdvancementTypeEnum3)[keyof typeof rollingReleaseAdvancementTypeEnum3]
+
+export type CompleteRollingRelease200 = {
+  /**
+   * @description Rolling release information including configuration and document details, or null if no rolling release exists
+   * @type object
+   */
+  rollingRelease: {
+    /**
+     * @description The current state of the rolling release
+     * @type string
+     */
+    state: RollingReleaseStateEnum3
+    /**
+     * @description The current deployment receiving production traffic
+     * @type object
+     */
+    currentDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CurrentDeploymentTargetEnum3 | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CurrentDeploymentSourceEnum3 | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CurrentDeploymentReadyStateEnum3
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The canary deployment being rolled out
+     * @type object
+     */
+    canaryDeployment: {
+      /**
+       * @type string
+       */
+      id: string
+      /**
+       * @type string
+       */
+      name: string
+      /**
+       * @type string
+       */
+      url: string
+      /**
+       * @type string
+       */
+      target?: (CanaryDeploymentTargetEnum3 | null) | undefined
+      /**
+       * @type string | undefined
+       */
+      source?: CanaryDeploymentSourceEnum3 | undefined
+      /**
+       * @type number
+       */
+      createdAt: number
+      /**
+       * @type string
+       */
+      readyState: CanaryDeploymentReadyStateEnum3
+      /**
+       * @type number | undefined
+       */
+      readyStateAt?: number | undefined
+    } | null
+    /**
+     * @description The ID of a deployment queued for the next rolling release
+     * @type string
+     */
+    queuedDeploymentId: string | null
+    /**
+     * @description The advancement type of the rolling release
+     * @type string
+     */
+    advancementType: RollingReleaseAdvancementTypeEnum3
+    /**
+     * @description All stages configured for this rolling release
+     * @type array
+     */
+    stages: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    }[]
+    /**
+     * @description The currently active stage, null if the rollout is aborted
+     * @type object
+     */
+    activeStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description The next stage to be activated, null if not in ACTIVE state
+     * @type object
+     */
+    nextStage: {
+      /**
+       * @description The zero-based index of the stage
+       * @type number
+       */
+      index: number
+      /**
+       * @description Whether or not this stage is the final stage (targetPercentage === 100)
+       * @type boolean
+       */
+      isFinalStage: boolean
+      /**
+       * @description The percentage of traffic to serve to the canary deployment (0-100)
+       * @type number
+       */
+      targetPercentage: number
+      /**
+       * @description Whether or not this stage requires manual approval to proceed
+       * @type boolean
+       */
+      requireApproval: boolean
+      /**
+       * @description Duration in seconds for automatic advancement, null for manual stages or the final stage
+       * @type number
+       */
+      duration: number | null
+    } | null
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release started
+     * @type number
+     */
+    startedAt: number
+    /**
+     * @description Unix timestamp in milliseconds when the rolling release was last updated
+     * @type number
+     */
+    updatedAt: number
+  } | null
+}
+
+/**
+ * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
+ */
+export type CompleteRollingRelease400 = unknown
+
+export type CompleteRollingRelease401 = unknown
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type CompleteRollingRelease403 = unknown
+
+export type CompleteRollingRelease404 = unknown
+
+export type CompleteRollingReleaseMutationRequest = {
+  /**
+   * @description The ID of the canary deployment to complete
+   * @type string
+   */
+  canaryDeploymentId: string
+}
+
+export type CompleteRollingReleaseMutationResponse = CompleteRollingRelease200
+
+export type CompleteRollingReleaseMutation = {
+  Response: CompleteRollingRelease200
+  Request: CompleteRollingReleaseMutationRequest
+  PathParams: CompleteRollingReleasePathParams
+  QueryParams: CompleteRollingReleaseQueryParams
+  Errors: CompleteRollingRelease400 | CompleteRollingRelease401 | CompleteRollingRelease403 | CompleteRollingRelease404
+}
+
 export type CreateProjectTransferRequestPathParams = {
   /**
    * @description The ID or name of the project to transfer.
@@ -52780,10 +56959,54 @@ export type AcceptProjectTransferRequestQueryParams = {
   slug?: string | undefined
 }
 
+export const resultStatusEnum = {
+  fulfilled: 'fulfilled',
+  errored: 'errored',
+} as const
+
+export type ResultStatusEnum = (typeof resultStatusEnum)[keyof typeof resultStatusEnum]
+
 /**
  * @description The project has been transferred successfully.
  */
-export type AcceptProjectTransferRequest202 = object
+export type AcceptProjectTransferRequest202 =
+  | {
+      /**
+       * @type array
+       */
+      partnerCalls: {
+        /**
+         * @type string
+         */
+        installationId: string
+        /**
+         * @type array
+         */
+        resourceIds: string[]
+        /**
+         * @type object
+         */
+        result: {
+          /**
+           * @type string
+           */
+          status: ResultStatusEnum
+          /**
+           * @type object | undefined
+           */
+          error?: object | undefined
+          /**
+           * @type string | undefined
+           */
+          code?: string | undefined
+        }
+      }[]
+      /**
+       * @type array
+       */
+      resourceTransferErrors: object[]
+    }
+  | object
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
@@ -52798,6 +57021,8 @@ export type AcceptProjectTransferRequest401 = unknown
 export type AcceptProjectTransferRequest403 = unknown
 
 export type AcceptProjectTransferRequest404 = unknown
+
+export type AcceptProjectTransferRequest422 = unknown
 
 export type AcceptProjectTransferRequestMutationRequest = {
   /**
@@ -52834,7 +57059,12 @@ export type AcceptProjectTransferRequestMutation = {
   Request: AcceptProjectTransferRequestMutationRequest
   PathParams: AcceptProjectTransferRequestPathParams
   QueryParams: AcceptProjectTransferRequestQueryParams
-  Errors: AcceptProjectTransferRequest400 | AcceptProjectTransferRequest401 | AcceptProjectTransferRequest403 | AcceptProjectTransferRequest404
+  Errors:
+    | AcceptProjectTransferRequest400
+    | AcceptProjectTransferRequest401
+    | AcceptProjectTransferRequest403
+    | AcceptProjectTransferRequest404
+    | AcceptProjectTransferRequest422
 }
 
 export type UpdateProjectProtectionBypassPathParams = {
@@ -53009,6 +57239,8 @@ export type RequestPromoteQueryParams = {
 
 export type RequestPromote201 = unknown
 
+export type RequestPromote202 = unknown
+
 /**
  * @description One of the provided values in the request query is invalid.
  */
@@ -53023,10 +57255,10 @@ export type RequestPromote403 = unknown
 
 export type RequestPromote409 = unknown
 
-export type RequestPromoteMutationResponse = RequestPromote201
+export type RequestPromoteMutationResponse = RequestPromote201 | RequestPromote202
 
 export type RequestPromoteMutation = {
-  Response: RequestPromote201
+  Response: RequestPromote201 | RequestPromote202
   PathParams: RequestPromotePathParams
   QueryParams: RequestPromoteQueryParams
   Errors: RequestPromote400 | RequestPromote401 | RequestPromote403 | RequestPromote409
@@ -53422,7 +57654,7 @@ export const conditionsOpEnum = {
 
 export type ConditionsOpEnum = (typeof conditionsOpEnum)[keyof typeof conditionsOpEnum]
 
-export const mitigateActionEnum6 = {
+export const mitigateActionEnum9 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -53431,7 +57663,7 @@ export const mitigateActionEnum6 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum6 = (typeof mitigateActionEnum6)[keyof typeof mitigateActionEnum6]
+export type MitigateActionEnum9 = (typeof mitigateActionEnum9)[keyof typeof mitigateActionEnum9]
 
 export const rateLimitAlgoEnum = {
   fixed_window: 'fixed_window',
@@ -53458,13 +57690,29 @@ export const ipsActionEnum = {
 
 export type IpsActionEnum = (typeof ipsActionEnum)[keyof typeof ipsActionEnum]
 
-export const actionEnum6 = {
+export const botProtectionActionEnum = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum6 = (typeof actionEnum6)[keyof typeof actionEnum6]
+export type BotProtectionActionEnum = (typeof botProtectionActionEnum)[keyof typeof botProtectionActionEnum]
+
+export const aiBotsActionEnum6 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum6 = (typeof aiBotsActionEnum6)[keyof typeof aiBotsActionEnum6]
+
+export const owaspActionEnum6 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum6 = (typeof owaspActionEnum6)[keyof typeof owaspActionEnum6]
 
 export type PutFirewallConfig200 = {
   /**
@@ -53702,7 +57950,7 @@ export type PutFirewallConfig200 = {
               /**
                * @type string
                */
-              action: MitigateActionEnum6
+              action: MitigateActionEnum9
               /**
                * @type object
                */
@@ -53791,30 +58039,93 @@ export type PutFirewallConfig200 = {
      */
     managedRules?:
       | {
-          [key: string]: {
-            /**
-             * @type boolean
-             */
-            active: boolean
-            /**
-             * @type string | undefined
-             */
-            action?: ActionEnum6 | undefined
-            /**
-             * @type string | undefined
-             */
-            updatedAt?: string | undefined
-            /**
-             * @type string | undefined
-             */
-            userId?: string | undefined
-            /**
-             * @type string | undefined
-             */
-            username?: string | undefined
-          }
+          /**
+           * @type object | undefined
+           */
+          bot_protection?:
+            | {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: BotProtectionActionEnum | undefined
+                /**
+                 * @type string | undefined
+                 */
+                updatedAt?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                userId?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                username?: string | undefined
+              }
+            | undefined
+          /**
+           * @type object | undefined
+           */
+          ai_bots?:
+            | {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: AiBotsActionEnum6 | undefined
+                /**
+                 * @type string | undefined
+                 */
+                updatedAt?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                userId?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                username?: string | undefined
+              }
+            | undefined
+          /**
+           * @type object | undefined
+           */
+          owasp?:
+            | {
+                /**
+                 * @type boolean
+                 */
+                active: boolean
+                /**
+                 * @type string | undefined
+                 */
+                action?: OwaspActionEnum6 | undefined
+                /**
+                 * @type string | undefined
+                 */
+                updatedAt?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                userId?: string | undefined
+                /**
+                 * @type string | undefined
+                 */
+                username?: string | undefined
+              }
+            | undefined
         }
       | undefined
+    /**
+     * @type boolean | undefined
+     */
+    botIdEnabled?: boolean | undefined
   }
 }
 
@@ -53836,21 +58147,21 @@ export type PutFirewallConfig404 = unknown
 
 export type PutFirewallConfig500 = unknown
 
-export const actionEnum7 = {
+export const actionEnum2 = {
   log: 'log',
   challenge: 'challenge',
   deny: 'deny',
 } as const
 
-export type ActionEnum7 = (typeof actionEnum7)[keyof typeof actionEnum7]
+export type ActionEnum2 = (typeof actionEnum2)[keyof typeof actionEnum2]
 
-export const actionEnum8 = {
+export const actionEnum3 = {
   log: 'log',
   challenge: 'challenge',
   deny: 'deny',
 } as const
 
-export type ActionEnum8 = (typeof actionEnum8)[keyof typeof actionEnum8]
+export type ActionEnum3 = (typeof actionEnum3)[keyof typeof actionEnum3]
 
 export const sdActionEnum2 = {
   deny: 'deny',
@@ -53975,7 +58286,7 @@ export const conditionsOpEnum2 = {
 
 export type ConditionsOpEnum2 = (typeof conditionsOpEnum2)[keyof typeof conditionsOpEnum2]
 
-export const mitigateActionEnum7 = {
+export const mitigateActionEnum10 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -53984,7 +58295,7 @@ export const mitigateActionEnum7 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum7 = (typeof mitigateActionEnum7)[keyof typeof mitigateActionEnum7]
+export type MitigateActionEnum10 = (typeof mitigateActionEnum10)[keyof typeof mitigateActionEnum10]
 
 export const rateLimitAlgoEnum2 = {
   fixed_window: 'fixed_window',
@@ -54029,7 +58340,7 @@ export type PutFirewallConfigMutationRequest = {
           /**
            * @type string | undefined
            */
-          action?: ActionEnum7 | undefined
+          action?: ActionEnum2 | undefined
           /**
            * @type object | undefined
            */
@@ -54043,7 +58354,7 @@ export type PutFirewallConfigMutationRequest = {
                   /**
                    * @type string | undefined
                    */
-                  action?: ActionEnum8 | undefined
+                  action?: ActionEnum3 | undefined
                 }
               }
             | undefined
@@ -54284,7 +58595,7 @@ export type PutFirewallConfigMutationRequest = {
                 /**
                  * @type string
                  */
-                action: MitigateActionEnum7
+                action: MitigateActionEnum10
                 rateLimit?:
                   | ({
                       /**
@@ -54358,6 +58669,10 @@ export type PutFirewallConfigMutationRequest = {
         action: IpsActionEnum2
       }[]
     | undefined
+  /**
+   * @type boolean | undefined
+   */
+  botIdEnabled?: boolean | undefined
 }
 
 export type PutFirewallConfigMutationResponse = PutFirewallConfig200
@@ -54452,7 +58767,7 @@ export const conditionsOpEnum3 = {
 
 export type ConditionsOpEnum3 = (typeof conditionsOpEnum3)[keyof typeof conditionsOpEnum3]
 
-export const mitigateActionEnum8 = {
+export const mitigateActionEnum11 = {
   log: 'log',
   challenge: 'challenge',
   deny: 'deny',
@@ -54461,7 +58776,7 @@ export const mitigateActionEnum8 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum8 = (typeof mitigateActionEnum8)[keyof typeof mitigateActionEnum8]
+export type MitigateActionEnum11 = (typeof mitigateActionEnum11)[keyof typeof mitigateActionEnum11]
 
 export const rateLimitAlgoEnum3 = {
   fixed_window: 'fixed_window',
@@ -54525,7 +58840,7 @@ export const conditionsOpEnum4 = {
 
 export type ConditionsOpEnum4 = (typeof conditionsOpEnum4)[keyof typeof conditionsOpEnum4]
 
-export const mitigateActionEnum9 = {
+export const mitigateActionEnum12 = {
   log: 'log',
   challenge: 'challenge',
   deny: 'deny',
@@ -54534,7 +58849,7 @@ export const mitigateActionEnum9 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum9 = (typeof mitigateActionEnum9)[keyof typeof mitigateActionEnum9]
+export type MitigateActionEnum12 = (typeof mitigateActionEnum12)[keyof typeof mitigateActionEnum12]
 
 export const rateLimitAlgoEnum4 = {
   fixed_window: 'fixed_window',
@@ -54602,13 +58917,13 @@ export const valueActionEnum4 = {
 
 export type ValueActionEnum4 = (typeof valueActionEnum4)[keyof typeof valueActionEnum4]
 
-export const actionEnum9 = {
+export const actionEnum4 = {
   log: 'log',
   challenge: 'challenge',
   deny: 'deny',
 } as const
 
-export type ActionEnum9 = (typeof actionEnum9)[keyof typeof actionEnum9]
+export type ActionEnum4 = (typeof actionEnum4)[keyof typeof actionEnum4]
 
 export type UpdateFirewallConfigMutationRequest =
   | {
@@ -54691,7 +59006,7 @@ export type UpdateFirewallConfigMutationRequest =
                 /**
                  * @type string
                  */
-                action: MitigateActionEnum8
+                action: MitigateActionEnum11
                 rateLimit?:
                   | ({
                       /**
@@ -54804,7 +59119,7 @@ export type UpdateFirewallConfigMutationRequest =
                 /**
                  * @type string
                  */
-                action: MitigateActionEnum9
+                action: MitigateActionEnum12
                 rateLimit?:
                   | ({
                       /**
@@ -55036,9 +59351,23 @@ export type UpdateFirewallConfigMutationRequest =
           /**
            * @type string | undefined
            */
-          action?: ActionEnum9 | undefined
+          action?: ActionEnum4 | undefined
         }
       }
+    }
+  | {
+      /**
+       * @type string
+       */
+      action: string
+      /**
+       * @type null | undefined
+       */
+      id?: null | undefined
+      /**
+       * @type boolean
+       */
+      value: boolean
     }
 
 export type UpdateFirewallConfigMutationResponse = UpdateFirewallConfig200
@@ -55196,7 +59525,7 @@ export const conditionsOpEnum5 = {
 
 export type ConditionsOpEnum5 = (typeof conditionsOpEnum5)[keyof typeof conditionsOpEnum5]
 
-export const mitigateActionEnum10 = {
+export const mitigateActionEnum13 = {
   bypass: 'bypass',
   challenge: 'challenge',
   deny: 'deny',
@@ -55205,7 +59534,7 @@ export const mitigateActionEnum10 = {
   redirect: 'redirect',
 } as const
 
-export type MitigateActionEnum10 = (typeof mitigateActionEnum10)[keyof typeof mitigateActionEnum10]
+export type MitigateActionEnum13 = (typeof mitigateActionEnum13)[keyof typeof mitigateActionEnum13]
 
 export const rateLimitAlgoEnum5 = {
   fixed_window: 'fixed_window',
@@ -55232,13 +59561,29 @@ export const ipsActionEnum3 = {
 
 export type IpsActionEnum3 = (typeof ipsActionEnum3)[keyof typeof ipsActionEnum3]
 
-export const actionEnum10 = {
+export const botProtectionActionEnum2 = {
   challenge: 'challenge',
   deny: 'deny',
   log: 'log',
 } as const
 
-export type ActionEnum10 = (typeof actionEnum10)[keyof typeof actionEnum10]
+export type BotProtectionActionEnum2 = (typeof botProtectionActionEnum2)[keyof typeof botProtectionActionEnum2]
+
+export const aiBotsActionEnum7 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type AiBotsActionEnum7 = (typeof aiBotsActionEnum7)[keyof typeof aiBotsActionEnum7]
+
+export const owaspActionEnum7 = {
+  challenge: 'challenge',
+  deny: 'deny',
+  log: 'log',
+} as const
+
+export type OwaspActionEnum7 = (typeof owaspActionEnum7)[keyof typeof owaspActionEnum7]
 
 /**
  * @description If the firewall configuration includes a [custom managed ruleset](https://vercel.com/docs/security/vercel-waf/managed-rulesets), it will include a `crs` item that has the following values: sd: Scanner Detection ma: Multipart Attack lfi: Local File Inclusion Attack rfi: Remote File Inclusion Attack rce: Remote Execution Attack php: PHP Attack gen: Generic Attack xss: XSS Attack sqli: SQL Injection Attack sf: Session Fixation Attack java: Java Attack
@@ -55475,7 +59820,7 @@ export type GetFirewallConfig200 = {
             /**
              * @type string
              */
-            action: MitigateActionEnum10
+            action: MitigateActionEnum13
             /**
              * @type object
              */
@@ -55564,30 +59909,93 @@ export type GetFirewallConfig200 = {
    */
   managedRules?:
     | {
-        [key: string]: {
-          /**
-           * @type boolean
-           */
-          active: boolean
-          /**
-           * @type string | undefined
-           */
-          action?: ActionEnum10 | undefined
-          /**
-           * @type string | undefined
-           */
-          updatedAt?: string | undefined
-          /**
-           * @type string | undefined
-           */
-          userId?: string | undefined
-          /**
-           * @type string | undefined
-           */
-          username?: string | undefined
-        }
+        /**
+         * @type object | undefined
+         */
+        bot_protection?:
+          | {
+              /**
+               * @type boolean
+               */
+              active: boolean
+              /**
+               * @type string | undefined
+               */
+              action?: BotProtectionActionEnum2 | undefined
+              /**
+               * @type string | undefined
+               */
+              updatedAt?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              userId?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              username?: string | undefined
+            }
+          | undefined
+        /**
+         * @type object | undefined
+         */
+        ai_bots?:
+          | {
+              /**
+               * @type boolean
+               */
+              active: boolean
+              /**
+               * @type string | undefined
+               */
+              action?: AiBotsActionEnum7 | undefined
+              /**
+               * @type string | undefined
+               */
+              updatedAt?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              userId?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              username?: string | undefined
+            }
+          | undefined
+        /**
+         * @type object | undefined
+         */
+        owasp?:
+          | {
+              /**
+               * @type boolean
+               */
+              active: boolean
+              /**
+               * @type string | undefined
+               */
+              action?: OwaspActionEnum7 | undefined
+              /**
+               * @type string | undefined
+               */
+              updatedAt?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              userId?: string | undefined
+              /**
+               * @type string | undefined
+               */
+              username?: string | undefined
+            }
+          | undefined
       }
     | undefined
+  /**
+   * @type boolean | undefined
+   */
+  botIdEnabled?: boolean | undefined
 }
 
 /**
@@ -56243,7 +60651,7 @@ export const membersRoleEnum2 = {
 
 export type MembersRoleEnum2 = (typeof membersRoleEnum2)[keyof typeof membersRoleEnum2]
 
-export const joinedFromOriginEnum4 = {
+export const joinedFromOriginEnum5 = {
   bitbucket: 'bitbucket',
   dsync: 'dsync',
   feedback: 'feedback',
@@ -56257,7 +60665,7 @@ export const joinedFromOriginEnum4 = {
   teams: 'teams',
 } as const
 
-export type JoinedFromOriginEnum4 = (typeof joinedFromOriginEnum4)[keyof typeof joinedFromOriginEnum4]
+export type JoinedFromOriginEnum5 = (typeof joinedFromOriginEnum5)[keyof typeof joinedFromOriginEnum5]
 
 export const projectsRoleEnum4 = {
   ADMIN: 'ADMIN',
@@ -56382,7 +60790,7 @@ export type GetTeamMembers200 = {
           /**
            * @type string
            */
-          origin: JoinedFromOriginEnum4
+          origin: JoinedFromOriginEnum5
           /**
            * @type string | undefined
            */
@@ -56528,9 +60936,6 @@ export type GetTeamMembers401 = unknown
  */
 export type GetTeamMembers403 = unknown
 
-/**
- * @description No team was found.
- */
 export type GetTeamMembers404 = unknown
 
 export type GetTeamMembersQueryResponse = GetTeamMembers200
@@ -56680,11 +61085,6 @@ export type InviteUserToTeam401 = unknown
  */
 export type InviteUserToTeam403 = unknown
 
-/**
- * @description The team was not found
- */
-export type InviteUserToTeam404 = unknown
-
 export type InviteUserToTeam503 = unknown
 
 export const inviteUserToTeamMutationRequestRoleEnum = {
@@ -56748,10 +61148,10 @@ export type InviteUserToTeamMutationResponse = InviteUserToTeam200
 export type InviteUserToTeamMutation = {
   Response: InviteUserToTeam200
   Request: InviteUserToTeamMutationRequest
-  Errors: InviteUserToTeam400 | InviteUserToTeam401 | InviteUserToTeam403 | InviteUserToTeam404 | InviteUserToTeam503
+  Errors: InviteUserToTeam400 | InviteUserToTeam401 | InviteUserToTeam403 | InviteUserToTeam503
 }
 
-export const joinedFromOriginEnum5 = {
+export const joinedFromOriginEnum6 = {
   bitbucket: 'bitbucket',
   dsync: 'dsync',
   feedback: 'feedback',
@@ -56765,7 +61165,7 @@ export const joinedFromOriginEnum5 = {
   teams: 'teams',
 } as const
 
-export type JoinedFromOriginEnum5 = (typeof joinedFromOriginEnum5)[keyof typeof joinedFromOriginEnum5]
+export type JoinedFromOriginEnum6 = (typeof joinedFromOriginEnum6)[keyof typeof joinedFromOriginEnum6]
 
 /**
  * @description Successfuly requested access to the team.
@@ -56791,7 +61191,7 @@ export type RequestAccessToTeam200 = {
         /**
          * @type string
          */
-        origin: JoinedFromOriginEnum5
+        origin: JoinedFromOriginEnum6
         /**
          * @type string | undefined
          */
@@ -56883,7 +61283,7 @@ export type RequestAccessToTeam404 = unknown
 
 export type RequestAccessToTeam503 = unknown
 
-export const joinedFromOriginEnum6 = {
+export const joinedFromOriginEnum7 = {
   bitbucket: 'bitbucket',
   feedback: 'feedback',
   github: 'github',
@@ -56893,7 +61293,7 @@ export const joinedFromOriginEnum6 = {
   teams: 'teams',
 } as const
 
-export type JoinedFromOriginEnum6 = (typeof joinedFromOriginEnum6)[keyof typeof joinedFromOriginEnum6]
+export type JoinedFromOriginEnum7 = (typeof joinedFromOriginEnum7)[keyof typeof joinedFromOriginEnum7]
 
 export type RequestAccessToTeamMutationRequest = {
   /**
@@ -56904,7 +61304,7 @@ export type RequestAccessToTeamMutationRequest = {
      * @description The origin of the request.
      * @type string
      */
-    origin: JoinedFromOriginEnum6
+    origin: JoinedFromOriginEnum7
     /**
      * @description The commit sha if the origin is a git provider.
      * @type string | undefined
@@ -56947,7 +61347,7 @@ export type GetTeamAccessRequestPathParams = {
   userId?: string | undefined
 }
 
-export const joinedFromOriginEnum7 = {
+export const joinedFromOriginEnum8 = {
   bitbucket: 'bitbucket',
   dsync: 'dsync',
   feedback: 'feedback',
@@ -56961,7 +61361,7 @@ export const joinedFromOriginEnum7 = {
   teams: 'teams',
 } as const
 
-export type JoinedFromOriginEnum7 = (typeof joinedFromOriginEnum7)[keyof typeof joinedFromOriginEnum7]
+export type JoinedFromOriginEnum8 = (typeof joinedFromOriginEnum8)[keyof typeof joinedFromOriginEnum8]
 
 /**
  * @description Successfully
@@ -56990,7 +61390,7 @@ export type GetTeamAccessRequest200 = {
     /**
      * @type string
      */
-    origin: JoinedFromOriginEnum7
+    origin: JoinedFromOriginEnum8
     /**
      * @type string | undefined
      */
@@ -57186,7 +61586,7 @@ export type UpdateTeamMember402 = unknown
 export type UpdateTeamMember403 = unknown
 
 /**
- * @description The provided user is not part of this team.\nA user with the specified ID does not exist.\nTeam not found.
+ * @description The provided user is not part of this team.\nA user with the specified ID does not exist.
  */
 export type UpdateTeamMember404 = unknown
 
@@ -57297,9 +61697,6 @@ export type RemoveTeamMember401 = unknown
  */
 export type RemoveTeamMember403 = unknown
 
-/**
- * @description A user with the specified ID does not exist.\nNo team found.
- */
 export type RemoveTeamMember404 = unknown
 
 export type RemoveTeamMember503 = unknown
@@ -57331,7 +61728,7 @@ export type GetTeamQueryParams = {
 /**
  * @description The requested team
  */
-export type GetTeam200 = TeamLimited
+export type GetTeam200 = Team
 
 /**
  * @description One of the provided values in the request query is invalid.
@@ -57375,7 +61772,7 @@ export type PatchTeamQueryParams = {
   slug?: string | undefined
 }
 
-export type PatchTeam200 = TeamLimited
+export type PatchTeam200 = Team
 
 /**
  * @description One of the provided values in the request body is invalid.
@@ -57384,6 +61781,9 @@ export type PatchTeam400 = unknown
 
 export type PatchTeam401 = unknown
 
+/**
+ * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
+ */
 export type PatchTeam402 = unknown
 
 /**
@@ -57392,11 +61792,11 @@ export type PatchTeam402 = unknown
 export type PatchTeam403 = unknown
 
 /**
- * @description Team was not found.
+ * @description Owner does not have protection add-on\nAdvanced Deployment Protection is not available for the user plan
  */
-export type PatchTeam404 = unknown
+export type PatchTeam428 = unknown
 
-export const rolesEnum = {
+export const rolesEnum2 = {
   OWNER: 'OWNER',
   MEMBER: 'MEMBER',
   DEVELOPER: 'DEVELOPER',
@@ -57406,7 +61806,25 @@ export const rolesEnum = {
   CONTRIBUTOR: 'CONTRIBUTOR',
 } as const
 
-export type RolesEnum = (typeof rolesEnum)[keyof typeof rolesEnum]
+export type RolesEnum2 = (typeof rolesEnum2)[keyof typeof rolesEnum2]
+
+export const passwordProtectionDeploymentTypeEnum3 = {
+  all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
+  preview: 'preview',
+  prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+} as const
+
+export type PasswordProtectionDeploymentTypeEnum3 = (typeof passwordProtectionDeploymentTypeEnum3)[keyof typeof passwordProtectionDeploymentTypeEnum3]
+
+export const ssoProtectionDeploymentTypeEnum9 = {
+  all: 'all',
+  all_except_custom_domains: 'all_except_custom_domains',
+  preview: 'preview',
+  prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
+} as const
+
+export type SsoProtectionDeploymentTypeEnum9 = (typeof ssoProtectionDeploymentTypeEnum9)[keyof typeof ssoProtectionDeploymentTypeEnum9]
 
 export type PatchTeamMutationRequest = {
   /**
@@ -57457,7 +61875,7 @@ export type PatchTeamMutationRequest = {
         roles?:
           | {
               [key: string]:
-                | RolesEnum
+                | RolesEnum2
                 | {
                     /**
                      * @pattern ^ag_[A-z0-9_ -]+$
@@ -57512,6 +61930,47 @@ export type PatchTeamMutationRequest = {
    * @type boolean | undefined
    */
   hideIpAddressesInLogDrains?: boolean | undefined
+  /**
+   * @description Default deployment protection settings for new projects.
+   * @type object | undefined
+   */
+  defaultDeploymentProtection?:
+    | {
+        /**
+         * @description Allows to protect project deployments with a password
+         * @type object
+         */
+        passwordProtection?:
+          | ({
+              /**
+               * @description Specify if the password will apply to every Deployment Target or just Preview
+               * @type string
+               */
+              deploymentType: PasswordProtectionDeploymentTypeEnum3
+              /**
+               * @description The password that will be used to protect Project Deployments
+               * @maxLength 72
+               * @type string
+               */
+              password?: (string | null) | undefined
+            } | null)
+          | undefined
+        /**
+         * @description Ensures visitors to your Preview Deployments are logged into Vercel and have a minimum of Viewer access on your team
+         * @type object
+         */
+        ssoProtection?:
+          | ({
+              /**
+               * @description Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview
+               * @default "preview"
+               * @type string
+               */
+              deploymentType: SsoProtectionDeploymentTypeEnum9
+            } | null)
+          | undefined
+      }
+    | undefined
 }
 
 export type PatchTeamMutationResponse = PatchTeam200
@@ -57521,7 +61980,7 @@ export type PatchTeamMutation = {
   Request: PatchTeamMutationRequest
   PathParams: PatchTeamPathParams
   QueryParams: PatchTeamQueryParams
-  Errors: PatchTeam400 | PatchTeam401 | PatchTeam402 | PatchTeam403 | PatchTeam404
+  Errors: PatchTeam400 | PatchTeam401 | PatchTeam402 | PatchTeam403 | PatchTeam428
 }
 
 export type GetTeamsQueryParams = {
@@ -57590,11 +62049,6 @@ export type CreateTeam200 = {
    * @type string
    */
   slug: string
-  /**
-   * @description IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.
-   * @type object
-   */
-  billing: object
 }
 
 /**
@@ -57733,11 +62187,6 @@ export type DeleteTeam402 = unknown
  */
 export type DeleteTeam403 = unknown
 
-/**
- * @description The team was not found
- */
-export type DeleteTeam404 = unknown
-
 export type DeleteTeam409 = unknown
 
 export type DeleteTeamMutationRequest = {
@@ -57768,7 +62217,7 @@ export type DeleteTeamMutation = {
   Request: DeleteTeamMutationRequest
   PathParams: DeleteTeamPathParams
   QueryParams: DeleteTeamQueryParams
-  Errors: DeleteTeam400 | DeleteTeam401 | DeleteTeam402 | DeleteTeam403 | DeleteTeam404 | DeleteTeam409
+  Errors: DeleteTeam400 | DeleteTeam401 | DeleteTeam402 | DeleteTeam403 | DeleteTeam409
 }
 
 export type DeleteTeamInviteCodePathParams = {
@@ -57803,7 +62252,7 @@ export type DeleteTeamInviteCode401 = unknown
 export type DeleteTeamInviteCode403 = unknown
 
 /**
- * @description Team invite code not found.\nNo team found.
+ * @description Team invite code not found.
  */
 export type DeleteTeamInviteCode404 = unknown
 
@@ -57885,13 +62334,10 @@ export type UploadFile401 = unknown
  */
 export type UploadFile403 = unknown
 
-export type UploadFileMutationRequest = Blob
-
 export type UploadFileMutationResponse = UploadFile200
 
 export type UploadFileMutation = {
   Response: UploadFile200
-  Request: UploadFileMutationRequest
   QueryParams: UploadFileQueryParams
   HeaderParams: UploadFileHeaderParams
   Errors: UploadFile400 | UploadFile401 | UploadFile403
@@ -57902,11 +62348,6 @@ export type ListAuthTokens200 = {
    * @type array
    */
   tokens: AuthToken[]
-  /**
-   * @description Authentication token metadata.
-   * @type object | undefined
-   */
-  testingToken?: AuthToken | undefined
   /**
    * @description This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
    * @type object
@@ -58193,6 +62634,10 @@ export const createWebhook200EventsEnum = {
   'deployment-ready': 'deployment-ready',
   'deployment.canceled': 'deployment.canceled',
   'deployment.check-rerequested': 'deployment.check-rerequested',
+  'deployment.checkrun.cancel': 'deployment.checkrun.cancel',
+  'deployment.checkrun.start': 'deployment.checkrun.start',
+  'deployment.checks.failed': 'deployment.checks.failed',
+  'deployment.checks.succeeded': 'deployment.checks.succeeded',
   'deployment.created': 'deployment.created',
   'deployment.error': 'deployment.error',
   'deployment.integration.action.cancel': 'deployment.integration.action.cancel',
@@ -58202,7 +62647,19 @@ export const createWebhook200EventsEnum = {
   'deployment.ready': 'deployment.ready',
   'deployment.succeeded': 'deployment.succeeded',
   'domain-created': 'domain-created',
+  'domain.auto-renew.changed': 'domain.auto-renew.changed',
+  'domain.certificate.add': 'domain.certificate.add',
+  'domain.certificate.add.failed': 'domain.certificate.add.failed',
+  'domain.certificate.deleted': 'domain.certificate.deleted',
+  'domain.certificate.renew': 'domain.certificate.renew',
+  'domain.certificate.renew.failed': 'domain.certificate.renew.failed',
   'domain.created': 'domain.created',
+  'domain.dns.records.changed': 'domain.dns.records.changed',
+  'domain.renewal': 'domain.renewal',
+  'domain.renewal.failed': 'domain.renewal.failed',
+  'domain.transfer-in.completed': 'domain.transfer-in.completed',
+  'domain.transfer-in.failed': 'domain.transfer-in.failed',
+  'domain.transfer-in.started': 'domain.transfer-in.started',
   'edge-config.created': 'edge-config.created',
   'edge-config.deleted': 'edge-config.deleted',
   'edge-config.items.updated': 'edge-config.items.updated',
@@ -58223,6 +62680,12 @@ export const createWebhook200EventsEnum = {
   'project-created': 'project-created',
   'project-removed': 'project-removed',
   'project.created': 'project.created',
+  'project.domain.created': 'project.domain.created',
+  'project.domain.deleted': 'project.domain.deleted',
+  'project.domain.moved': 'project.domain.moved',
+  'project.domain.unverified': 'project.domain.unverified',
+  'project.domain.updated': 'project.domain.updated',
+  'project.domain.verified': 'project.domain.verified',
   'project.removed': 'project.removed',
   'project.rolling-release.aborted': 'project.rolling-release.aborted',
   'project.rolling-release.approved': 'project.rolling-release.approved',
@@ -58300,6 +62763,10 @@ export const createWebhookMutationRequestEventsEnum = {
   'deployment-ready': 'deployment-ready',
   'deployment.canceled': 'deployment.canceled',
   'deployment.check-rerequested': 'deployment.check-rerequested',
+  'deployment.checkrun.cancel': 'deployment.checkrun.cancel',
+  'deployment.checkrun.start': 'deployment.checkrun.start',
+  'deployment.checks.failed': 'deployment.checks.failed',
+  'deployment.checks.succeeded': 'deployment.checks.succeeded',
   'deployment.created': 'deployment.created',
   'deployment.error': 'deployment.error',
   'deployment.integration.action.cancel': 'deployment.integration.action.cancel',
@@ -58309,7 +62776,19 @@ export const createWebhookMutationRequestEventsEnum = {
   'deployment.ready': 'deployment.ready',
   'deployment.succeeded': 'deployment.succeeded',
   'domain-created': 'domain-created',
+  'domain.auto-renew.changed': 'domain.auto-renew.changed',
+  'domain.certificate.add': 'domain.certificate.add',
+  'domain.certificate.add.failed': 'domain.certificate.add.failed',
+  'domain.certificate.deleted': 'domain.certificate.deleted',
+  'domain.certificate.renew': 'domain.certificate.renew',
+  'domain.certificate.renew.failed': 'domain.certificate.renew.failed',
   'domain.created': 'domain.created',
+  'domain.dns.records.changed': 'domain.dns.records.changed',
+  'domain.renewal': 'domain.renewal',
+  'domain.renewal.failed': 'domain.renewal.failed',
+  'domain.transfer-in.completed': 'domain.transfer-in.completed',
+  'domain.transfer-in.failed': 'domain.transfer-in.failed',
+  'domain.transfer-in.started': 'domain.transfer-in.started',
   'edge-config.created': 'edge-config.created',
   'edge-config.deleted': 'edge-config.deleted',
   'edge-config.items.updated': 'edge-config.items.updated',
@@ -58330,6 +62809,12 @@ export const createWebhookMutationRequestEventsEnum = {
   'project-created': 'project-created',
   'project-removed': 'project-removed',
   'project.created': 'project.created',
+  'project.domain.created': 'project.domain.created',
+  'project.domain.deleted': 'project.domain.deleted',
+  'project.domain.moved': 'project.domain.moved',
+  'project.domain.unverified': 'project.domain.unverified',
+  'project.domain.updated': 'project.domain.updated',
+  'project.domain.verified': 'project.domain.verified',
   'project.removed': 'project.removed',
   'project.rolling-release.aborted': 'project.rolling-release.aborted',
   'project.rolling-release.approved': 'project.rolling-release.approved',
@@ -58429,6 +62914,7 @@ export const projectsMetadataFrameworkEnum = {
   'sanity-v3': 'sanity-v3',
   sanity: 'sanity',
   storybook: 'storybook',
+  nitro: 'nitro',
 } as const
 
 export type ProjectsMetadataFrameworkEnum = (typeof projectsMetadataFrameworkEnum)[keyof typeof projectsMetadataFrameworkEnum]
@@ -58437,6 +62923,18 @@ export const getWebhooks200EventsEnum = {
   'budget.reached': 'budget.reached',
   'budget.reset': 'budget.reset',
   'domain.created': 'domain.created',
+  'domain.dns.records.changed': 'domain.dns.records.changed',
+  'domain.transfer-in.started': 'domain.transfer-in.started',
+  'domain.transfer-in.completed': 'domain.transfer-in.completed',
+  'domain.transfer-in.failed': 'domain.transfer-in.failed',
+  'domain.certificate.add': 'domain.certificate.add',
+  'domain.certificate.add.failed': 'domain.certificate.add.failed',
+  'domain.certificate.renew': 'domain.certificate.renew',
+  'domain.certificate.renew.failed': 'domain.certificate.renew.failed',
+  'domain.certificate.deleted': 'domain.certificate.deleted',
+  'domain.renewal': 'domain.renewal',
+  'domain.renewal.failed': 'domain.renewal.failed',
+  'domain.auto-renew.changed': 'domain.auto-renew.changed',
   'deployment.created': 'deployment.created',
   'deployment.error': 'deployment.error',
   'deployment.canceled': 'deployment.canceled',
@@ -58447,6 +62945,8 @@ export const getWebhooks200EventsEnum = {
   'deployment.integration.action.start': 'deployment.integration.action.start',
   'deployment.integration.action.cancel': 'deployment.integration.action.cancel',
   'deployment.integration.action.cleanup': 'deployment.integration.action.cleanup',
+  'deployment.checkrun.start': 'deployment.checkrun.start',
+  'deployment.checkrun.cancel': 'deployment.checkrun.cancel',
   'edge-config.created': 'edge-config.created',
   'edge-config.deleted': 'edge-config.deleted',
   'edge-config.items.updated': 'edge-config.items.updated',
@@ -58458,10 +62958,18 @@ export const getWebhooks200EventsEnum = {
   'integration-resource.project-disconnected': 'integration-resource.project-disconnected',
   'project.created': 'project.created',
   'project.removed': 'project.removed',
+  'project.domain.created': 'project.domain.created',
+  'project.domain.updated': 'project.domain.updated',
+  'project.domain.deleted': 'project.domain.deleted',
+  'project.domain.verified': 'project.domain.verified',
+  'project.domain.unverified': 'project.domain.unverified',
+  'project.domain.moved': 'project.domain.moved',
   'project.rolling-release.started': 'project.rolling-release.started',
   'project.rolling-release.aborted': 'project.rolling-release.aborted',
   'project.rolling-release.completed': 'project.rolling-release.completed',
   'project.rolling-release.approved': 'project.rolling-release.approved',
+  'deployment.checks.failed': 'deployment.checks.failed',
+  'deployment.checks.succeeded': 'deployment.checks.succeeded',
   'deployment-checks-completed': 'deployment-checks-completed',
   'deployment-ready': 'deployment-ready',
   'deployment-prepared': 'deployment-prepared',
@@ -58489,6 +62997,18 @@ export const getWebhooks200EventsEnum2 = {
   'budget.reached': 'budget.reached',
   'budget.reset': 'budget.reset',
   'domain.created': 'domain.created',
+  'domain.dns.records.changed': 'domain.dns.records.changed',
+  'domain.transfer-in.started': 'domain.transfer-in.started',
+  'domain.transfer-in.completed': 'domain.transfer-in.completed',
+  'domain.transfer-in.failed': 'domain.transfer-in.failed',
+  'domain.certificate.add': 'domain.certificate.add',
+  'domain.certificate.add.failed': 'domain.certificate.add.failed',
+  'domain.certificate.renew': 'domain.certificate.renew',
+  'domain.certificate.renew.failed': 'domain.certificate.renew.failed',
+  'domain.certificate.deleted': 'domain.certificate.deleted',
+  'domain.renewal': 'domain.renewal',
+  'domain.renewal.failed': 'domain.renewal.failed',
+  'domain.auto-renew.changed': 'domain.auto-renew.changed',
   'deployment.created': 'deployment.created',
   'deployment.error': 'deployment.error',
   'deployment.canceled': 'deployment.canceled',
@@ -58499,6 +63019,8 @@ export const getWebhooks200EventsEnum2 = {
   'deployment.integration.action.start': 'deployment.integration.action.start',
   'deployment.integration.action.cancel': 'deployment.integration.action.cancel',
   'deployment.integration.action.cleanup': 'deployment.integration.action.cleanup',
+  'deployment.checkrun.start': 'deployment.checkrun.start',
+  'deployment.checkrun.cancel': 'deployment.checkrun.cancel',
   'edge-config.created': 'edge-config.created',
   'edge-config.deleted': 'edge-config.deleted',
   'edge-config.items.updated': 'edge-config.items.updated',
@@ -58510,10 +63032,18 @@ export const getWebhooks200EventsEnum2 = {
   'integration-resource.project-disconnected': 'integration-resource.project-disconnected',
   'project.created': 'project.created',
   'project.removed': 'project.removed',
+  'project.domain.created': 'project.domain.created',
+  'project.domain.updated': 'project.domain.updated',
+  'project.domain.deleted': 'project.domain.deleted',
+  'project.domain.verified': 'project.domain.verified',
+  'project.domain.unverified': 'project.domain.unverified',
+  'project.domain.moved': 'project.domain.moved',
   'project.rolling-release.started': 'project.rolling-release.started',
   'project.rolling-release.aborted': 'project.rolling-release.aborted',
   'project.rolling-release.completed': 'project.rolling-release.completed',
   'project.rolling-release.approved': 'project.rolling-release.approved',
+  'deployment.checks.failed': 'deployment.checks.failed',
+  'deployment.checks.succeeded': 'deployment.checks.succeeded',
   'deployment-checks-completed': 'deployment-checks-completed',
   'deployment-ready': 'deployment-ready',
   'deployment-prepared': 'deployment-prepared',
@@ -58688,6 +63218,10 @@ export const getWebhook200EventsEnum = {
   'deployment-ready': 'deployment-ready',
   'deployment.canceled': 'deployment.canceled',
   'deployment.check-rerequested': 'deployment.check-rerequested',
+  'deployment.checkrun.cancel': 'deployment.checkrun.cancel',
+  'deployment.checkrun.start': 'deployment.checkrun.start',
+  'deployment.checks.failed': 'deployment.checks.failed',
+  'deployment.checks.succeeded': 'deployment.checks.succeeded',
   'deployment.created': 'deployment.created',
   'deployment.error': 'deployment.error',
   'deployment.integration.action.cancel': 'deployment.integration.action.cancel',
@@ -58697,7 +63231,19 @@ export const getWebhook200EventsEnum = {
   'deployment.ready': 'deployment.ready',
   'deployment.succeeded': 'deployment.succeeded',
   'domain-created': 'domain-created',
+  'domain.auto-renew.changed': 'domain.auto-renew.changed',
+  'domain.certificate.add': 'domain.certificate.add',
+  'domain.certificate.add.failed': 'domain.certificate.add.failed',
+  'domain.certificate.deleted': 'domain.certificate.deleted',
+  'domain.certificate.renew': 'domain.certificate.renew',
+  'domain.certificate.renew.failed': 'domain.certificate.renew.failed',
   'domain.created': 'domain.created',
+  'domain.dns.records.changed': 'domain.dns.records.changed',
+  'domain.renewal': 'domain.renewal',
+  'domain.renewal.failed': 'domain.renewal.failed',
+  'domain.transfer-in.completed': 'domain.transfer-in.completed',
+  'domain.transfer-in.failed': 'domain.transfer-in.failed',
+  'domain.transfer-in.started': 'domain.transfer-in.started',
   'edge-config.created': 'edge-config.created',
   'edge-config.deleted': 'edge-config.deleted',
   'edge-config.items.updated': 'edge-config.items.updated',
@@ -58718,6 +63264,12 @@ export const getWebhook200EventsEnum = {
   'project-created': 'project-created',
   'project-removed': 'project-removed',
   'project.created': 'project.created',
+  'project.domain.created': 'project.domain.created',
+  'project.domain.deleted': 'project.domain.deleted',
+  'project.domain.moved': 'project.domain.moved',
+  'project.domain.unverified': 'project.domain.unverified',
+  'project.domain.updated': 'project.domain.updated',
+  'project.domain.verified': 'project.domain.verified',
   'project.removed': 'project.removed',
   'project.rolling-release.aborted': 'project.rolling-release.aborted',
   'project.rolling-release.approved': 'project.rolling-release.approved',
@@ -59383,6 +63935,49 @@ export type ListAliases200 = {
               }
         }
       | undefined
+    /**
+     * @description The microfrontends for the alias including the routing configuration
+     * @type object | undefined
+     */
+    microfrontends?:
+      | {
+          /**
+           * @type object
+           */
+          defaultApp: {
+            /**
+             * @type string
+             */
+            projectId: string
+          }
+          /**
+           * @description A list of the deployment routing information for each project.
+           * @type array
+           */
+          applications: {
+            /**
+             * @description The project ID that should use the below configuration.
+             * @type string
+             */
+            projectId: string
+            /**
+             * @description This is always set and is the fallback host to send the request to if there is no deployment ID.
+             * @type string
+             */
+            fallbackHost: string
+            /**
+             * @description This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.
+             * @type string | undefined
+             */
+            deploymentId?: string | undefined
+            /**
+             * @description This is used and set in the exact same way as `deploymentId`.
+             * @type string | undefined
+             */
+            deploymentUrl?: string | undefined
+          }[]
+        }
+      | undefined
   }[]
   /**
    * @description This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
@@ -59670,6 +64265,49 @@ export type GetAlias200 = {
                */
               scope: ScopeEnum24
             }
+      }
+    | undefined
+  /**
+   * @description The microfrontends for the alias including the routing configuration
+   * @type object | undefined
+   */
+  microfrontends?:
+    | {
+        /**
+         * @type object
+         */
+        defaultApp: {
+          /**
+           * @type string
+           */
+          projectId: string
+        }
+        /**
+         * @description A list of the deployment routing information for each project.
+         * @type array
+         */
+        applications: {
+          /**
+           * @description The project ID that should use the below configuration.
+           * @type string
+           */
+          projectId: string
+          /**
+           * @description This is always set and is the fallback host to send the request to if there is no deployment ID.
+           * @type string
+           */
+          fallbackHost: string
+          /**
+           * @description This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.
+           * @type string | undefined
+           */
+          deploymentId?: string | undefined
+          /**
+           * @description This is used and set in the exact same way as `deploymentId`.
+           * @type string | undefined
+           */
+          deploymentUrl?: string | undefined
+        }[]
       }
     | undefined
 }
@@ -60320,7 +64958,7 @@ export type GetDeploymentFileContents404 = unknown
  */
 export type GetDeploymentFileContents410 = unknown
 
-export type GetDeploymentFileContentsQueryResponse = unknown
+export type GetDeploymentFileContentsQueryResponse = any
 
 export type GetDeploymentFileContentsQuery = {
   Response: any
@@ -60489,6 +65127,14 @@ export const deploymentsChecksConclusionEnum = {
 
 export type DeploymentsChecksConclusionEnum = (typeof deploymentsChecksConclusionEnum)[keyof typeof deploymentsChecksConclusionEnum]
 
+export const deploymentAliasStateEnum4 = {
+  failed: 'failed',
+  pending: 'pending',
+  succeeded: 'succeeded',
+} as const
+
+export type DeploymentAliasStateEnum4 = (typeof deploymentAliasStateEnum4)[keyof typeof deploymentAliasStateEnum4]
+
 export const projectSettingsFrameworkEnum5 = {
   angular: 'angular',
   astro: 'astro',
@@ -60511,6 +65157,7 @@ export const projectSettingsFrameworkEnum5 = {
   jekyll: 'jekyll',
   middleman: 'middleman',
   nextjs: 'nextjs',
+  nitro: 'nitro',
   nuxtjs: 'nuxtjs',
   parcel: 'parcel',
   polymer: 'polymer',
@@ -60573,6 +65220,11 @@ export type GetDeployments200 = {
      * @type string
      */
     name: string
+    /**
+     * @description The project ID of the deployment
+     * @type string
+     */
+    projectId: string
     /**
      * @description The URL of the deployment.
      * @type string
@@ -60716,6 +65368,32 @@ export type GetDeployments200 = {
      */
     checksConclusion?: DeploymentsChecksConclusionEnum | undefined
     /**
+     * @description Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.
+     * @type object | undefined
+     */
+    checks?:
+      | {
+          /**
+           * @description Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.
+           * @type object
+           */
+          'deployment-alias': {
+            /**
+             * @type string
+             */
+            state: DeploymentAliasStateEnum4
+            /**
+             * @type number
+             */
+            startedAt: number
+            /**
+             * @type number | undefined
+             */
+            completedAt?: number | undefined
+          }
+        }
+      | undefined
+    /**
      * @description Vercel URL to inspect the deployment.
      * @type string
      */
@@ -60775,10 +65453,6 @@ export type GetDeployments200 = {
            * @type string
            */
           rootDirectory?: (string | null) | undefined
-          /**
-           * @type string
-           */
-          serverlessFunctionRegion?: (string | null) | undefined
           /**
            * @type boolean | undefined
            */

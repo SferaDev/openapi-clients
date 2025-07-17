@@ -179,8 +179,18 @@ export function ClientOperation({
         }}
         returnType={returnType}
       >
-        {'const { client:request = client, ...requestConfig } = config'}
+        {'const { client: request = client, ...requestConfig } = config;'}
         <br />
+        <br />
+        {typeSchemas.pathParams?.schema &&
+          `${Object.keys(typeSchemas.pathParams.schema.properties || {})
+            .map((key) => {
+              return `if (!${key}) {
+              throw new Error(\`Missing required path parameter: ${key}\`);
+            }`;
+            })
+            .join('\n\n')}
+        `}
         <br />
         {formData}
         {`const data = await request<${generics.join(', ')}>(${clientParams.toCall()})`}
