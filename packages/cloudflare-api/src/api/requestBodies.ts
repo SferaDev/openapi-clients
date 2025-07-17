@@ -3,9 +3,10 @@
  *
  * @version 4.0.0
  */
-import type * as Schemas from './schemas';
+import type * as Schemas from "./schemas";
 
-export type ApiShieldGlobalSettingsEdit = Schemas.ApiShieldGlobalSettingChangeBase;
+export type ApiShieldGlobalSettingsEdit =
+  Schemas.ApiShieldGlobalSettingChangeBase;
 
 export type ApiShieldGlobalSettingsUpdate = {
   /**
@@ -19,7 +20,7 @@ export type ApiShieldGlobalSettingsUpdate = {
    * @example block
    * @x-auditable true
    */
-  validation_default_mitigation_action: 'none' | 'log' | 'block';
+  validation_default_mitigation_action: "none" | "log" | "block";
   /**
    * When set, this overrides both zone level and operation level mitigation actions.
    *
@@ -28,7 +29,7 @@ export type ApiShieldGlobalSettingsUpdate = {
    *
    * @x-auditable true
    */
-  validation_override_mitigation_action?: 'none' | any | null;
+  validation_override_mitigation_action?: "none" | any | null;
 };
 
 export type ApiShieldPerOperationSettingUpdate = {
@@ -43,7 +44,7 @@ export type ApiShieldPerOperationSettingUpdate = {
    * @example block
    * @x-auditable true
    */
-  mitigation_action: 'log' | 'block' | 'none' | any | null;
+  mitigation_action: "log" | "block" | "none" | any | null;
 };
 
 /**
@@ -57,7 +58,7 @@ export type ApiShieldPerOperationSettingsBulkEdit = {
      *
      * @example block
      */
-    mitigation_action?: 'none' | 'log' | 'block' | any | null;
+    mitigation_action?: "none" | "log" | "block" | any | null;
   };
 };
 
@@ -67,7 +68,7 @@ export type ApiShieldSchemaCreate = {
    *
    * @example openapi_v3
    */
-  kind: 'openapi_v3';
+  kind: "openapi_v3";
   /**
    * A human-readable name for the schema
    *
@@ -167,14 +168,14 @@ export type WorkersVersionPost = {
        * @example Fixed worker code.
        * @maxLength 100
        */
-      'workers/message'?: string;
+      ["workers/message"]?: string;
       /**
        * User-provided identifier for the version.
        *
        * @example any-identifier-from-external-system
        * @maxLength 25
        */
-      'workers/tag'?: string;
+      ["workers/tag"]?: string;
     };
     bindings?: Schemas.WorkersBindings;
     compatibility_date?: Schemas.WorkersCompatibilityDate;
