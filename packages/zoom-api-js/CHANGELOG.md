@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.6.0
+
+### Minor Changes
+
+- 8e307db: Added new actions 'pause' and 'resume' to MeetingRTMSStatusUpdateRequestBody.
+
 ## 0.5.0
 
 ### Minor Changes

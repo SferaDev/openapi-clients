@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.10.1
+
+### Patch Changes
+
+- 33fce81: [BREAKING] Change GetAccountResponse type from array to object
+
 ## 0.10.0
 
 ### Minor Changes

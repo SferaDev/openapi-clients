@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.15.3
+
+### Patch Changes
+
+- 5909a0a: [OpenAPI] Spec updates for cloudflare-api-js
+
 ## 0.15.2
 
 ### Patch Changes

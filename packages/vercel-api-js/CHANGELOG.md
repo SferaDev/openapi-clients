@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 1.0.0
+
+### Major Changes
+
+- 24c9a11: Revamp Vercel API client
+
+### Patch Changes
+
+- 5b28378: Add Nitro support in project configuration.
+
 ## 0.25.3
 
 ### Patch Changes
