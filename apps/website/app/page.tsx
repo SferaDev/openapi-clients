@@ -8,13 +8,13 @@ import type { Provider } from '@/lib/types';
 export const revalidate = 21600;
 
 // This will be replaced by server-side data
-const getProviders = (versions: Record<string, any>) =>
+const getProviders = (versions: Record<string, string>) =>
   [
     {
       id: 'vercel',
       name: 'Vercel',
       packageName: 'vercel-api-js',
-      version: versions['vercel-api-js']?.version,
+      version: versions['vercel-api-js'],
       usage: `import { VercelApi } from 'vercel-api-js';
 
 const vercel = new VercelApi({ token: "token" });
@@ -25,7 +25,7 @@ const { projects } = await vercel.api.projects.getProjects();`,
       id: 'v0',
       name: 'v0',
       packageName: 'v0-api',
-      version: versions['v0-api']?.version,
+      version: versions['v0-api'],
       usage: `import { V0Api } from 'v0-api';
 
 const api = new V0Api({ token: '...' });
@@ -36,7 +36,7 @@ const projects = await api.api.projects.getProjects();`,
       id: 'cloudflare',
       name: 'Cloudflare',
       packageName: 'cloudflare-api-js',
-      version: versions['cloudflare-api-js']?.version,
+      version: versions['cloudflare-api-js'],
       usage: `import { CloudflareApi } from 'cloudflare-api-js';
 
 const api = new CloudflareApi({ apiKey: '...', email: '...' });
@@ -46,7 +46,7 @@ const zones = await api.zones.getZones({});`
       id: 'netlify',
       name: 'Netlify',
       packageName: 'netlify-api',
-      version: versions['netlify-api']?.version,
+      version: versions['netlify-api'],
       usage: `import { NetlifyApi } from 'netlify-api';
 
 const api = new NetlifyApi({ accessToken: '...' });
@@ -56,7 +56,7 @@ const sites = await api.sites.listSites({});`
       id: 'keycloak',
       name: 'Keycloak',
       packageName: 'keycloak-api',
-      version: versions['keycloak-api']?.version,
+      version: versions['keycloak-api'],
       usage: `import { KeycloakApi } from 'keycloak-api';
 
 const api = new KeycloakApi({ basePath: '...' });
@@ -66,7 +66,7 @@ const realms = await api.admin.realms.getRealms({});`
       id: 'zoom',
       name: 'Zoom',
       packageName: 'zoom-api-js',
-      version: versions['zoom-api-js']?.version,
+      version: versions['zoom-api-js'],
       usage: `import { ZoomApi } from 'zoom-api-js';
 
 const api = new ZoomApi({ bearer: '...' });
@@ -76,7 +76,7 @@ const users = await api.meeting.users.getUsers({});`
       id: 'nuki',
       name: 'Nuki',
       packageName: 'nuki-api-js',
-      version: versions['nuki-api-js']?.version,
+      version: versions['nuki-api-js'],
       usage: `import { NukiApi } from 'nuki-api-js';
 
 const api = new NukiApi({ apiKey: '...' });
@@ -86,7 +86,7 @@ const smartLocks = await api.api.smartLocks.getSmartLocks();`
       id: 'litellm',
       name: 'LiteLLM',
       packageName: 'litellm-api',
-      version: versions['litellm-api']?.version,
+      version: versions['litellm-api'],
       usage: `import { LiteLLMApi } from 'litellm-api';
 
 const api = new LiteLLMApi({ baseUrl: '...', apiKey: '...' });

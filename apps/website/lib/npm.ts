@@ -1,9 +1,3 @@
-export interface PackageInfo {
-  name: string;
-  version: string;
-  description: string;
-}
-
 const packages = [
   'vercel-api-js',
   'cloudflare-api-js',
@@ -16,7 +10,7 @@ const packages = [
   'v0-api'
 ];
 
-async function fetchPackageVersion(packageName: string): Promise<PackageInfo> {
+async function fetchPackageVersion(packageName: string): Promise<Record<string, string>> {
   try {
     const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`, {
       next: { revalidate: 3600 } // Cache for 1 hour
@@ -43,12 +37,12 @@ async function fetchPackageVersion(packageName: string): Promise<PackageInfo> {
   }
 }
 
-export async function fetchAllPackageVersions(): Promise<Record<string, PackageInfo>> {
+export async function fetchAllPackageVersions(): Promise<Record<string, string>> {
   const packageInfos = await Promise.all(packages.map((pkg) => fetchPackageVersion(pkg)));
 
-  const versionMap: Record<string, PackageInfo> = {};
+  const versionMap: Record<string, string> = {};
   packageInfos.forEach((info) => {
-    versionMap[info.name] = info;
+    versionMap[info.name] = info.version;
   });
 
   return versionMap;
