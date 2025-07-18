@@ -158,6 +158,12 @@ export type WorkersScriptUpload = Schemas.WorkersMultipartScript;
 
 export type WorkersVersionPost = {
   /**
+   * An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.
+   *
+   * @x-stainless-collection-type set
+   */
+  files?: Blob[];
+  /**
    * JSON encoded metadata about the uploaded parts and Worker configuration.
    */
   metadata: {
@@ -182,16 +188,16 @@ export type WorkersVersionPost = {
     compatibility_flags?: Schemas.WorkersCompatibilityFlags;
     /**
      * List of binding types to keep from previous_upload.
+     *
+     * @x-stainless-collection-type set
      */
     keep_bindings?: string[];
     /**
-     * Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker, which is required for Version Upload.
+     * Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker, which is required for Version Upload.
      *
      * @example worker.js
      */
     main_module: string;
     usage_model?: Schemas.WorkersUsageModel;
   };
-} & {
-  [key: string]: Blob[];
 };
