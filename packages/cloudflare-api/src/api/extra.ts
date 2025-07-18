@@ -258,8 +258,42 @@ import {
   botnetThreatFeedGetFullReport,
   botnetThreatFeedListAsn,
   botnetThreatFeedDeleteAsn,
-  phishingUrlScannerSubmitSuspiciousUrlForScanning,
-  phishingUrlInformationGetResultsForAUrlScan,
+  getAccountsAccountIdBrandProtectionAlerts,
+  patchAccountsAccountIdBrandProtectionAlerts,
+  patchAccountsAccountIdBrandProtectionAlertsClear,
+  patchAccountsAccountIdBrandProtectionAlertsRefute,
+  patchAccountsAccountIdBrandProtectionAlertsVerify,
+  deleteAccountsAccountIdBrandProtectionBrands,
+  getAccountsAccountIdBrandProtectionBrands,
+  postAccountsAccountIdBrandProtectionBrands,
+  deleteAccountsAccountIdBrandProtectionBrandsPatterns,
+  getAccountsAccountIdBrandProtectionBrandsPatterns,
+  postAccountsAccountIdBrandProtectionBrandsPatterns,
+  patchAccountsAccountIdBrandProtectionClear,
+  getAccountsAccountIdBrandProtectionDomainInfo,
+  getAccountsAccountIdBrandProtectionLogoMatches,
+  getAccountsAccountIdBrandProtectionLogoMatchesDownload,
+  getAccountsAccountIdBrandProtectionLogos,
+  postAccountsAccountIdBrandProtectionLogos,
+  deleteAccountsAccountIdBrandProtectionLogosLogoId,
+  getAccountsAccountIdBrandProtectionLogosLogoId,
+  getAccountsAccountIdBrandProtectionMatches,
+  getAccountsAccountIdBrandProtectionMatchesDownload,
+  deleteAccountsAccountIdBrandProtectionQueries,
+  getAccountsAccountIdBrandProtectionQueries,
+  patchAccountsAccountIdBrandProtectionQueries,
+  postAccountsAccountIdBrandProtectionQueries,
+  getAccountsAccountIdBrandProtectionRecentSubmissions,
+  patchAccountsAccountIdBrandProtectionRefute,
+  postAccountsAccountIdBrandProtectionScanLogo,
+  postAccountsAccountIdBrandProtectionScanPage,
+  postAccountsAccountIdBrandProtectionSearch,
+  getAccountsAccountIdBrandProtectionSubmissionInfo,
+  postAccountsAccountIdBrandProtectionSubmit,
+  getAccountsAccountIdBrandProtectionTotalQueries,
+  getAccountsAccountIdBrandProtectionTrackedDomains,
+  getAccountsAccountIdBrandProtectionUrlInfo,
+  patchAccountsAccountIdBrandProtectionVerify,
   brapiPostContent,
   brapiPostJson,
   brapiPostLinks,
@@ -317,6 +351,7 @@ import {
   patchDatasetUpdate,
   postDatasetUpdate,
   getDOHealthCheck,
+  postEventMoveToNewDS,
   deleteEventTagDelete,
   postEventTagCreate,
   getIndicatorTypesList,
@@ -326,7 +361,6 @@ import {
   postTagCreate,
   getTargetIndustryList,
   deleteEventDeleteDO,
-  postEventMoveToNewDS,
   deleteEventDelete,
   getEventRead,
   patchEventUpdate,
@@ -475,6 +509,11 @@ import {
   dexEndpointsTracerouteTestNetworkPath,
   dexEndpointsTracerouteTestPercentiles,
   listWarpChangeEvents,
+  diagnosticsEndpointHealthcheckList,
+  diagnosticsEndpointHealthcheckCreate,
+  diagnosticsEndpointHealthcheckDelete,
+  diagnosticsEndpointHealthcheckGet,
+  diagnosticsEndpointHealthcheckUpdate,
   diagnosticsTraceroute,
   dlpDatasetsReadAll,
   dlpDatasetsCreate,
@@ -485,6 +524,12 @@ import {
   dlpDatasetsUploadVersion,
   dlpDatasetsDefineColumns,
   dlpDatasetsUploadDatasetColumn,
+  dlpDocumentFingerprintsReadAll,
+  dlpDocumentFingerprintsCreate,
+  dlpDocumentFingerprintsDelete,
+  dlpDocumentFingerprintsRead,
+  dlpDocumentFingerprintsUpdate,
+  dlpDocumentFingerprintsUpload,
   dlpEmailScannerGetAccountMapping,
   dlpEmailScannerCreateAccountMapping,
   dlpEmailScannerListAllRules,
@@ -907,6 +952,7 @@ import {
   queuesListConsumers,
   queuesCreateConsumer,
   queuesDeleteConsumer,
+  queuesGetConsumer,
   queuesUpdateConsumer,
   queuesPushMessage,
   queuesAckMessages,
@@ -1207,6 +1253,8 @@ import {
   workerScriptGetContent,
   workerDeploymentsListDeployments,
   workerDeploymentsCreateDeployment,
+  workerDeploymentsDeleteDeployment,
+  workerDeploymentsGetDeployment,
   workerCronTriggerGetCronTriggers,
   workerCronTriggerUpdateCronTriggers,
   workerScriptSettingsGetSettings,
@@ -1263,47 +1311,11 @@ import {
   dlpRiskScoreSummaryGet,
   dlpRiskScoreSummaryGetForUser,
   dlpRiskScoreResetPost,
-  getApiAccountsAccountIdAlerts,
-  patchApiAccountsAccountIdAlerts,
-  patchApiAccountsAccountIdAlertsClear,
-  patchApiAccountsAccountIdAlertsRefute,
-  patchApiAccountsAccountIdAlertsVerify,
-  deleteApiAccountsAccountIdBrands,
-  getApiAccountsAccountIdBrands,
-  postApiAccountsAccountIdBrands,
-  deleteApiAccountsAccountIdBrandsPatterns,
-  getApiAccountsAccountIdBrandsPatterns,
-  postApiAccountsAccountIdBrandsPatterns,
-  patchApiAccountsAccountIdClear,
-  getApiAccountsAccountIdDomainInfo,
-  getApiAccountsAccountIdLogoMatches,
-  getApiAccountsAccountIdLogoMatchesDownload,
-  getApiAccountsAccountIdLogos,
-  postApiAccountsAccountIdLogos,
-  deleteApiAccountsAccountIdLogosLogoId,
-  getApiAccountsAccountIdLogosLogoId,
-  getApiAccountsAccountIdMatches,
-  getApiAccountsAccountIdMatchesDownload,
-  deleteApiAccountsAccountIdQueries,
-  getApiAccountsAccountIdQueries,
-  patchApiAccountsAccountIdQueries,
-  postApiAccountsAccountIdQueries,
-  getApiAccountsAccountIdRecentSubmissions,
-  patchApiAccountsAccountIdRefute,
-  postApiAccountsAccountIdScanLogo,
-  postApiAccountsAccountIdSearch,
-  getApiAccountsAccountIdSubmissionInfo,
-  postApiAccountsAccountIdSubmit,
-  getApiAccountsAccountIdTotalQueries,
-  getApiAccountsAccountIdTrackedDomains,
-  getApiAccountsAccountIdUrlInfo,
-  patchApiAccountsAccountIdVerify,
-  postApiInternalSubmit,
-  getApiSignedUrl,
   originCaListCertificates,
   originCaCreateCertificate,
   originCaRevokeCertificate,
   originCaGetCertificate,
+  postInternalSubmit,
   cloudflareIpsCloudflareIpDetails,
   getLive,
   userSAccountMembershipsListMemberships,
@@ -1533,6 +1545,7 @@ import {
   radarGetVerifiedBotsTopByHttpRequests,
   radarGetVerifiedBotsTopCategoriesByHttpRequests,
   getReady,
+  getSignedUrl,
   userUserDetails,
   userEditUser,
   auditLogsGetUserAuditLogs,
@@ -2547,10 +2560,78 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/botnet_feed/configs/asn": botnetThreatFeedListAsn,
   "DELETE /accounts/{account_id}/botnet_feed/configs/asn/{asn_id}":
     botnetThreatFeedDeleteAsn,
+  "GET /accounts/{account_id}/brand-protection/alerts":
+    getAccountsAccountIdBrandProtectionAlerts,
+  "PATCH /accounts/{account_id}/brand-protection/alerts":
+    patchAccountsAccountIdBrandProtectionAlerts,
+  "PATCH /accounts/{account_id}/brand-protection/alerts/clear":
+    patchAccountsAccountIdBrandProtectionAlertsClear,
+  "PATCH /accounts/{account_id}/brand-protection/alerts/refute":
+    patchAccountsAccountIdBrandProtectionAlertsRefute,
+  "PATCH /accounts/{account_id}/brand-protection/alerts/verify":
+    patchAccountsAccountIdBrandProtectionAlertsVerify,
+  "DELETE /accounts/{account_id}/brand-protection/brands":
+    deleteAccountsAccountIdBrandProtectionBrands,
+  "GET /accounts/{account_id}/brand-protection/brands":
+    getAccountsAccountIdBrandProtectionBrands,
+  "POST /accounts/{account_id}/brand-protection/brands":
+    postAccountsAccountIdBrandProtectionBrands,
+  "DELETE /accounts/{account_id}/brand-protection/brands/patterns":
+    deleteAccountsAccountIdBrandProtectionBrandsPatterns,
+  "GET /accounts/{account_id}/brand-protection/brands/patterns":
+    getAccountsAccountIdBrandProtectionBrandsPatterns,
+  "POST /accounts/{account_id}/brand-protection/brands/patterns":
+    postAccountsAccountIdBrandProtectionBrandsPatterns,
+  "PATCH /accounts/{account_id}/brand-protection/clear":
+    patchAccountsAccountIdBrandProtectionClear,
+  "GET /accounts/{account_id}/brand-protection/domain-info":
+    getAccountsAccountIdBrandProtectionDomainInfo,
+  "GET /accounts/{account_id}/brand-protection/logo-matches":
+    getAccountsAccountIdBrandProtectionLogoMatches,
+  "GET /accounts/{account_id}/brand-protection/logo-matches/download":
+    getAccountsAccountIdBrandProtectionLogoMatchesDownload,
+  "GET /accounts/{account_id}/brand-protection/logos":
+    getAccountsAccountIdBrandProtectionLogos,
+  "POST /accounts/{account_id}/brand-protection/logos":
+    postAccountsAccountIdBrandProtectionLogos,
+  "DELETE /accounts/{account_id}/brand-protection/logos/{logo_id}":
+    deleteAccountsAccountIdBrandProtectionLogosLogoId,
+  "GET /accounts/{account_id}/brand-protection/logos/{logo_id}":
+    getAccountsAccountIdBrandProtectionLogosLogoId,
+  "GET /accounts/{account_id}/brand-protection/matches":
+    getAccountsAccountIdBrandProtectionMatches,
+  "GET /accounts/{account_id}/brand-protection/matches/download":
+    getAccountsAccountIdBrandProtectionMatchesDownload,
+  "DELETE /accounts/{account_id}/brand-protection/queries":
+    deleteAccountsAccountIdBrandProtectionQueries,
+  "GET /accounts/{account_id}/brand-protection/queries":
+    getAccountsAccountIdBrandProtectionQueries,
+  "PATCH /accounts/{account_id}/brand-protection/queries":
+    patchAccountsAccountIdBrandProtectionQueries,
+  "POST /accounts/{account_id}/brand-protection/queries":
+    postAccountsAccountIdBrandProtectionQueries,
+  "GET /accounts/{account_id}/brand-protection/recent-submissions":
+    getAccountsAccountIdBrandProtectionRecentSubmissions,
+  "PATCH /accounts/{account_id}/brand-protection/refute":
+    patchAccountsAccountIdBrandProtectionRefute,
+  "POST /accounts/{account_id}/brand-protection/scan-logo":
+    postAccountsAccountIdBrandProtectionScanLogo,
+  "POST /accounts/{account_id}/brand-protection/scan-page":
+    postAccountsAccountIdBrandProtectionScanPage,
+  "POST /accounts/{account_id}/brand-protection/search":
+    postAccountsAccountIdBrandProtectionSearch,
+  "GET /accounts/{account_id}/brand-protection/submission-info":
+    getAccountsAccountIdBrandProtectionSubmissionInfo,
   "POST /accounts/{account_id}/brand-protection/submit":
-    phishingUrlScannerSubmitSuspiciousUrlForScanning,
+    postAccountsAccountIdBrandProtectionSubmit,
+  "GET /accounts/{account_id}/brand-protection/total-queries":
+    getAccountsAccountIdBrandProtectionTotalQueries,
+  "GET /accounts/{account_id}/brand-protection/tracked-domains":
+    getAccountsAccountIdBrandProtectionTrackedDomains,
   "GET /accounts/{account_id}/brand-protection/url-info":
-    phishingUrlInformationGetResultsForAUrlScan,
+    getAccountsAccountIdBrandProtectionUrlInfo,
+  "PATCH /accounts/{account_id}/brand-protection/verify":
+    patchAccountsAccountIdBrandProtectionVerify,
   "POST /accounts/{account_id}/browser-rendering/content": brapiPostContent,
   "POST /accounts/{account_id}/browser-rendering/json": brapiPostJson,
   "POST /accounts/{account_id}/browser-rendering/links": brapiPostLinks,
@@ -2639,6 +2720,8 @@ export const operationsByPath = {
     postDatasetUpdate,
   "GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health":
     getDOHealthCheck,
+  "POST /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/move":
+    postEventMoveToNewDS,
   "DELETE /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}":
     deleteEventTagDelete,
   "POST /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}/create":
@@ -2657,8 +2740,6 @@ export const operationsByPath = {
     getTargetIndustryList,
   "DELETE /accounts/{account_id}/cloudforce-one/events/{dataset_id}/delete":
     deleteEventDeleteDO,
-  "POST /accounts/{account_id}/cloudforce-one/events/{dataset_id}/move":
-    postEventMoveToNewDS,
   "DELETE /accounts/{account_id}/cloudforce-one/events/{event_id}":
     deleteEventDelete,
   "GET /accounts/{account_id}/cloudforce-one/events/{event_id}": getEventRead,
@@ -2919,6 +3000,16 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles":
     dexEndpointsTracerouteTestPercentiles,
   "GET /accounts/{account_id}/dex/warp-change-events": listWarpChangeEvents,
+  "GET /accounts/{account_id}/diagnostics/endpoint-healthchecks":
+    diagnosticsEndpointHealthcheckList,
+  "POST /accounts/{account_id}/diagnostics/endpoint-healthchecks":
+    diagnosticsEndpointHealthcheckCreate,
+  "DELETE /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}":
+    diagnosticsEndpointHealthcheckDelete,
+  "GET /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}":
+    diagnosticsEndpointHealthcheckGet,
+  "PUT /accounts/{account_id}/diagnostics/endpoint-healthchecks/{id}":
+    diagnosticsEndpointHealthcheckUpdate,
   "POST /accounts/{account_id}/diagnostics/traceroute": diagnosticsTraceroute,
   "GET /accounts/{account_id}/dlp/datasets": dlpDatasetsReadAll,
   "POST /accounts/{account_id}/dlp/datasets": dlpDatasetsCreate,
@@ -2933,6 +3024,18 @@ export const operationsByPath = {
     dlpDatasetsDefineColumns,
   "POST /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}":
     dlpDatasetsUploadDatasetColumn,
+  "GET /accounts/{account_id}/dlp/document_fingerprints":
+    dlpDocumentFingerprintsReadAll,
+  "POST /accounts/{account_id}/dlp/document_fingerprints":
+    dlpDocumentFingerprintsCreate,
+  "DELETE /accounts/{account_id}/dlp/document_fingerprints/{document_fingerprint_id}":
+    dlpDocumentFingerprintsDelete,
+  "GET /accounts/{account_id}/dlp/document_fingerprints/{document_fingerprint_id}":
+    dlpDocumentFingerprintsRead,
+  "POST /accounts/{account_id}/dlp/document_fingerprints/{document_fingerprint_id}":
+    dlpDocumentFingerprintsUpdate,
+  "PUT /accounts/{account_id}/dlp/document_fingerprints/{document_fingerprint_id}":
+    dlpDocumentFingerprintsUpload,
   "GET /accounts/{account_id}/dlp/email/account_mapping":
     dlpEmailScannerGetAccountMapping,
   "POST /accounts/{account_id}/dlp/email/account_mapping":
@@ -3701,6 +3804,8 @@ export const operationsByPath = {
     queuesCreateConsumer,
   "DELETE /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}":
     queuesDeleteConsumer,
+  "GET /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}":
+    queuesGetConsumer,
   "PUT /accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}":
     queuesUpdateConsumer,
   "POST /accounts/{account_id}/queues/{queue_id}/messages": queuesPushMessage,
@@ -4220,6 +4325,10 @@ export const operationsByPath = {
     workerDeploymentsListDeployments,
   "POST /accounts/{account_id}/workers/scripts/{script_name}/deployments":
     workerDeploymentsCreateDeployment,
+  "DELETE /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}":
+    workerDeploymentsDeleteDeployment,
+  "GET /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}":
+    workerDeploymentsGetDeployment,
   "GET /accounts/{account_id}/workers/scripts/{script_name}/schedules":
     workerCronTriggerGetCronTriggers,
   "PUT /accounts/{account_id}/workers/scripts/{script_name}/schedules":
@@ -4326,64 +4435,11 @@ export const operationsByPath = {
     dlpRiskScoreSummaryGetForUser,
   "POST /accounts/{account_id}/zt_risk_scoring/{user_id}/reset":
     dlpRiskScoreResetPost,
-  "GET /api/accounts/{account_id}/alerts": getApiAccountsAccountIdAlerts,
-  "PATCH /api/accounts/{account_id}/alerts": patchApiAccountsAccountIdAlerts,
-  "PATCH /api/accounts/{account_id}/alerts/clear":
-    patchApiAccountsAccountIdAlertsClear,
-  "PATCH /api/accounts/{account_id}/alerts/refute":
-    patchApiAccountsAccountIdAlertsRefute,
-  "PATCH /api/accounts/{account_id}/alerts/verify":
-    patchApiAccountsAccountIdAlertsVerify,
-  "DELETE /api/accounts/{account_id}/brands": deleteApiAccountsAccountIdBrands,
-  "GET /api/accounts/{account_id}/brands": getApiAccountsAccountIdBrands,
-  "POST /api/accounts/{account_id}/brands": postApiAccountsAccountIdBrands,
-  "DELETE /api/accounts/{account_id}/brands/patterns":
-    deleteApiAccountsAccountIdBrandsPatterns,
-  "GET /api/accounts/{account_id}/brands/patterns":
-    getApiAccountsAccountIdBrandsPatterns,
-  "POST /api/accounts/{account_id}/brands/patterns":
-    postApiAccountsAccountIdBrandsPatterns,
-  "PATCH /api/accounts/{account_id}/clear": patchApiAccountsAccountIdClear,
-  "GET /api/accounts/{account_id}/domain-info":
-    getApiAccountsAccountIdDomainInfo,
-  "GET /api/accounts/{account_id}/logo-matches":
-    getApiAccountsAccountIdLogoMatches,
-  "GET /api/accounts/{account_id}/logo-matches/download":
-    getApiAccountsAccountIdLogoMatchesDownload,
-  "GET /api/accounts/{account_id}/logos": getApiAccountsAccountIdLogos,
-  "POST /api/accounts/{account_id}/logos": postApiAccountsAccountIdLogos,
-  "DELETE /api/accounts/{account_id}/logos/{logo_id}":
-    deleteApiAccountsAccountIdLogosLogoId,
-  "GET /api/accounts/{account_id}/logos/{logo_id}":
-    getApiAccountsAccountIdLogosLogoId,
-  "GET /api/accounts/{account_id}/matches": getApiAccountsAccountIdMatches,
-  "GET /api/accounts/{account_id}/matches/download":
-    getApiAccountsAccountIdMatchesDownload,
-  "DELETE /api/accounts/{account_id}/queries":
-    deleteApiAccountsAccountIdQueries,
-  "GET /api/accounts/{account_id}/queries": getApiAccountsAccountIdQueries,
-  "PATCH /api/accounts/{account_id}/queries": patchApiAccountsAccountIdQueries,
-  "POST /api/accounts/{account_id}/queries": postApiAccountsAccountIdQueries,
-  "GET /api/accounts/{account_id}/recent-submissions":
-    getApiAccountsAccountIdRecentSubmissions,
-  "PATCH /api/accounts/{account_id}/refute": patchApiAccountsAccountIdRefute,
-  "POST /api/accounts/{account_id}/scan-logo": postApiAccountsAccountIdScanLogo,
-  "POST /api/accounts/{account_id}/search": postApiAccountsAccountIdSearch,
-  "GET /api/accounts/{account_id}/submission-info":
-    getApiAccountsAccountIdSubmissionInfo,
-  "POST /api/accounts/{account_id}/submit": postApiAccountsAccountIdSubmit,
-  "GET /api/accounts/{account_id}/total-queries":
-    getApiAccountsAccountIdTotalQueries,
-  "GET /api/accounts/{account_id}/tracked-domains":
-    getApiAccountsAccountIdTrackedDomains,
-  "GET /api/accounts/{account_id}/url-info": getApiAccountsAccountIdUrlInfo,
-  "PATCH /api/accounts/{account_id}/verify": patchApiAccountsAccountIdVerify,
-  "POST /api/internal/submit": postApiInternalSubmit,
-  "GET /api/signed-url": getApiSignedUrl,
   "GET /certificates": originCaListCertificates,
   "POST /certificates": originCaCreateCertificate,
   "DELETE /certificates/{certificate_id}": originCaRevokeCertificate,
   "GET /certificates/{certificate_id}": originCaGetCertificate,
+  "POST /internal/submit": postInternalSubmit,
   "GET /ips": cloudflareIpsCloudflareIpDetails,
   "GET /live": getLive,
   "GET /memberships": userSAccountMembershipsListMemberships,
@@ -4733,6 +4789,7 @@ export const operationsByPath = {
   "GET /radar/verified_bots/top/categories":
     radarGetVerifiedBotsTopCategoriesByHttpRequests,
   "GET /ready": getReady,
+  "GET /signed-url": getSignedUrl,
   "GET /user": userUserDetails,
   "PATCH /user": userEditUser,
   "GET /user/audit_logs": auditLogsGetUserAuditLogs,

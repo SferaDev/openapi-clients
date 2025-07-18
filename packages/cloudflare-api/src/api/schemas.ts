@@ -1178,33 +1178,27 @@ export type AbuseReportsBadStateError = string;
  */
 export type AbuseReportsBadUrlsError = string;
 
-export type AbuseReportsBaseReportFields = {
-  act: AbuseReportsReportType;
+export type AbuseReportsCSAMReport = {
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name?: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -1220,58 +1214,6 @@ export type AbuseReportsBaseReportFields = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -1285,22 +1227,6 @@ export type AbuseReportsBaseReportFields = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1316,75 +1242,6 @@ export type AbuseReportsBaseReportFields = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_number?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
-};
-
-export type AbuseReportsChildrenAbuseReport = {
-  act: AbuseReportsReportType;
-  /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
-   */
-  address1?: string;
-  /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
-   */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  city?: string;
-  /**
-   * Any additional comments about the infringement not exceeding 2000 characters
-   *
-   * @maxLength 2000
-   * @minLength 1
-   */
-  comments?: string;
-  /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
-   */
-  company?: string;
-  /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
@@ -1392,120 +1249,24 @@ export type AbuseReportsChildrenAbuseReport = {
    */
   country?: string;
   /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  destination_ips?: string;
+  host_notification: "send" | "send-anon";
   /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.
    *
    * @maxLength 5000
    * @minLength 1
    */
-  justification?: string;
+  justification: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
+  ncmec_notification: "send" | "send-anon";
   /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
-   * Text containing 2 characters
-   *
-   * @maxLength 2
-   * @minLength 2
-   */
-  reported_country?: string;
-  /**
-   * Text not exceeding 255 characters
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
-  /**
-   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 20
-   * @minLength 1
-   */
-  tele?: string;
-  /**
-   * Text not exceeding 255 characters
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  title?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_number?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
+  owner_notification: "send" | "send-anon" | "none";
 };
 
 /**
@@ -1514,32 +1275,26 @@ export type AbuseReportsChildrenAbuseReport = {
 export type AbuseReportsDBError = string;
 
 export type AbuseReportsDMCAReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 1 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name?: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls?: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -1555,58 +1310,6 @@ export type AbuseReportsDMCAReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -1620,22 +1323,6 @@ export type AbuseReportsDMCAReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1651,31 +1338,63 @@ export type AbuseReportsDMCAReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
-   * @maxLength 1000
+   * @maxLength 100
    * @minLength 1
    */
-  trademark_number?: string;
+  address1: string;
   /**
-   * Text not exceeding 1000 characters
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
-   * @maxLength 1000
+   * @maxLength 60
    * @minLength 1
    */
-  trademark_office?: string;
+  agent_name: string;
   /**
-   * Text not exceeding 1000 characters
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree: 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
-   * @maxLength 1000
+   * @maxLength 255
    * @minLength 1
    */
-  trademark_symbol?: string;
+  city: string;
   /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
    */
-  urls: string;
+  country: string;
+  /**
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  host_notification: "send";
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work: string;
+  /**
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  owner_notification: "send";
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state: string;
 };
 
 /**
@@ -1725,32 +1444,26 @@ export type AbuseReportsErrorCode =
   | AbuseReportsUrlNotvalidError;
 
 export type AbuseReportsGeneralReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -1766,58 +1479,6 @@ export type AbuseReportsGeneralReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -1831,22 +1492,6 @@ export type AbuseReportsGeneralReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1862,31 +1507,32 @@ export type AbuseReportsGeneralReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * A list of IP addresses separated by ‘\n’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique.
+   */
+  destination_ips?: string;
+  /**
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  host_notification: "send" | "send-anon";
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.
    *
-   * @maxLength 1000
+   * @maxLength 5000
    * @minLength 1
    */
-  trademark_number?: string;
+  justification: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  trademark_office?: string;
+  owner_notification: "send" | "send-anon" | "none";
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
-  trademark_symbol?: string;
+  ports_protocols?: string;
   /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * A list of IP addresses separated by ‘\n’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique.
    */
-  urls: string;
+  source_ips?: string;
 };
 
 /**
@@ -1910,32 +1556,26 @@ export type AbuseReportsMaxIPsError = string;
 export type AbuseReportsMustNotifyError = string;
 
 export type AbuseReportsNCSEIReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -1951,58 +1591,6 @@ export type AbuseReportsNCSEIReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -2016,22 +1604,6 @@ export type AbuseReportsNCSEIReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2047,31 +1619,24 @@ export type AbuseReportsNCSEIReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
-   * @maxLength 1000
+   * @maxLength 255
    * @minLength 1
    */
-  trademark_number?: string;
+  country?: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  trademark_office?: string;
+  host_notification: "send" | "send-anon";
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
    */
-  trademark_symbol?: string;
+  ncsei_subject_representation: boolean;
   /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  urls: string;
+  owner_notification: "send" | "send-anon" | "none";
 };
 
 /**
@@ -2089,38 +1654,7 @@ export type AbuseReportsNoOriginalWorkError = string;
  */
 export type AbuseReportsNoSigError = string;
 
-/**
- * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
- */
-export type AbuseReportsNotification = "send" | "send-anon" | "none";
-
-export type AbuseReportsPhishingReport = {
-  act: AbuseReportsReportType;
-  /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
-   */
-  address1?: string;
-  /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
-   */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  city?: string;
+export type AbuseReportsOptionalBaseReportFields = {
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -2136,33 +1670,45 @@ export type AbuseReportsPhishingReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
    *
    * @maxLength 255
    * @minLength 1
    */
-  country?: string;
+  reported_user_agent?: string;
   /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
    */
-  destination_ips?: string;
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+};
+
+export type AbuseReportsPhishingReport = {
+  act?: AbuseReportsReportType;
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email: string;
+  email?: string;
   /**
    * Should match the value provided in `email`
    */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2170,23 +1716,24 @@ export type AbuseReportsPhishingReport = {
    * @minLength 1
    */
   name: string;
-  ncmec_notification?: AbuseReportsNotification;
   /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  ncsei_subject_representation?: boolean;
+  urls: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * Any additional comments about the infringement not exceeding 2000 characters
    *
-   * @maxLength 255
+   * @maxLength 2000
    * @minLength 1
    */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
+  comments?: string;
   /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
    */
-  ports_protocols?: string;
+  company?: string;
   /**
    * Text containing 2 characters
    *
@@ -2202,22 +1749,6 @@ export type AbuseReportsPhishingReport = {
    */
   reported_user_agent?: string;
   /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
-  /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 20
@@ -2232,31 +1763,27 @@ export type AbuseReportsPhishingReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  host_notification: "send" | "send-anon";
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.
    *
-   * @maxLength 1000
+   * @maxLength 5000
+   * @minLength 20
+   */
+  justification: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
    * @minLength 1
    */
-  trademark_number?: string;
+  original_work?: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
+  owner_notification: "send" | "send-anon";
 };
 
 /**
@@ -2265,32 +1792,26 @@ export type AbuseReportsPhishingReport = {
 export type AbuseReportsPortsProtocolError = string;
 
 export type AbuseReportsRegistrarWhoisReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -2306,58 +1827,6 @@ export type AbuseReportsRegistrarWhoisReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -2371,22 +1840,6 @@ export type AbuseReportsRegistrarWhoisReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2402,35 +1855,13 @@ export type AbuseReportsRegistrarWhoisReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  trademark_number?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
+  owner_notification: "send" | "send-anon" | "none";
 };
 
 /**
- * The abuse report type
+ * The abuse report type.
  *
  * @example abuse_general
  */
@@ -2443,6 +1874,29 @@ export type AbuseReportsReportType =
   | "abuse_threat"
   | "abuse_registrar_whois"
   | "abuse_ncsei";
+
+export type AbuseReportsRequiredBaseReportFields = {
+  act: AbuseReportsReportType;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
 
 export type AbuseReportsSubmitErrorResponse = {
   error_code: AbuseReportsErrorCode;
@@ -2460,14 +1914,30 @@ export type AbuseReportsSubmitErrorResponse = {
 };
 
 export type AbuseReportsSubmitReportRequest =
-  | AbuseReportsDMCAReport
-  | AbuseReportsTrademarkReport
-  | AbuseReportsGeneralReport
-  | AbuseReportsPhishingReport
-  | AbuseReportsChildrenAbuseReport
-  | AbuseReportsThreatReport
-  | AbuseReportsRegistrarWhoisReport
-  | AbuseReportsNCSEIReport;
+  | (Omit<AbuseReportsDMCAReport, "act"> & {
+      act: "abuse_dmca";
+    })
+  | (Omit<AbuseReportsTrademarkReport, "act"> & {
+      act: "abuse_trademark";
+    })
+  | (Omit<AbuseReportsGeneralReport, "act"> & {
+      act: "abuse_general";
+    })
+  | (Omit<AbuseReportsPhishingReport, "act"> & {
+      act: "abuse_phishing";
+    })
+  | (Omit<AbuseReportsCSAMReport, "act"> & {
+      act: "abuse_children";
+    })
+  | (Omit<AbuseReportsThreatReport, "act"> & {
+      act: "abuse_threat";
+    })
+  | (Omit<AbuseReportsRegistrarWhoisReport, "act"> & {
+      act: "abuse_registrar_whois";
+    })
+  | (Omit<AbuseReportsNCSEIReport, "act"> & {
+      act: "abuse_ncsei";
+    });
 
 export type AbuseReportsSubmitReportResponse = {
   /**
@@ -2484,32 +1954,26 @@ export type AbuseReportsSubmitReportResponse = {
 };
 
 export type AbuseReportsThreatReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -2525,58 +1989,6 @@ export type AbuseReportsThreatReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -2590,22 +2002,6 @@ export type AbuseReportsThreatReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2621,60 +2017,43 @@ export type AbuseReportsThreatReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  host_notification: "send" | "send-anon";
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.
    *
-   * @maxLength 1000
+   * @maxLength 5000
    * @minLength 1
    */
-  trademark_number?: string;
+  justification: string;
   /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
    */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
+  owner_notification: "send" | "send-anon";
 };
 
 export type AbuseReportsTrademarkReport = {
-  act: AbuseReportsReportType;
+  act?: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  address1?: string;
+  email?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
+   * Should match the value provided in `email`
    */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
+  email2?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city?: string;
+  name?: string;
+  /**
+   * A list of valid URLs separated by ‘\n’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls?: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -2690,58 +2069,6 @@ export type AbuseReportsTrademarkReport = {
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2: string;
-  host_notification?: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification?: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
    * Text containing 2 characters
    *
    * @maxLength 2
@@ -2755,22 +2082,6 @@ export type AbuseReportsTrademarkReport = {
    * @minLength 1
    */
   reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2786,31 +2097,41 @@ export type AbuseReportsTrademarkReport = {
    */
   title?: string;
   /**
-   * Text not exceeding 1000 characters
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  host_notification: "send";
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters.
    *
-   * @maxLength 1000
+   * @maxLength 5000
    * @minLength 1
    */
-  trademark_number?: string;
+  justification: string;
+  /**
+   * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+   */
+  owner_notification: "send";
   /**
    * Text not exceeding 1000 characters
    *
    * @maxLength 1000
    * @minLength 1
    */
-  trademark_office?: string;
+  trademark_number: string;
   /**
    * Text not exceeding 1000 characters
    *
    * @maxLength 1000
    * @minLength 1
    */
-  trademark_symbol?: string;
+  trademark_office: string;
   /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
    */
-  urls: string;
+  trademark_symbol: string;
 };
 
 /**
@@ -3246,8 +2567,15 @@ export type AccessAppRespEmbeddedPolicies = {
 /**
  * Contains the targets secured by the application.
  */
-export type AccessAppRespEmbeddedTargetCriteria = {
-  target_criteria?: AccessTargetCriteria[];
+export type AccessAppRespEmbeddedTargetCriteriaInfra = {
+  target_criteria?: AccessTargetCriteriaInfraApp[];
+};
+
+/**
+ * Contains the targets secured by the application.
+ */
+export type AccessAppRespEmbeddedTargetCriteriaSelfHosted = {
+  target_criteria?: AccessTargetCriteriaSelfHostedApp[];
 };
 
 export type AccessAppResponse =
@@ -5242,7 +4570,7 @@ export type AccessInfraProps = {
    * @example infrastructure
    */
   type?: AccessType & void;
-} & AccessAppRespEmbeddedTargetCriteria;
+} & AccessAppRespEmbeddedTargetCriteriaInfra;
 
 /**
  * The IP address of the authenticating user.
@@ -5361,6 +4689,20 @@ export type AccessLastSuccessfulLogin = string;
  * @example 10
  */
 export type AccessLimit = number;
+
+/**
+ * Matches OAuth 2.0 access tokens issued by the specified Access OIDC SaaS application. Only compatible with non_identity and bypass decisions.
+ */
+export type AccessLinkedAppTokenRule = {
+  linked_app_token: {
+    /**
+     * The ID of an Access OIDC SaaS application
+     *
+     * @example aa0a4aab-672b-4bdb-bc33-a59f1130a11f
+     */
+    app_uid: string;
+  };
+};
 
 export type AccessLinkedin = {
   /**
@@ -6473,7 +5815,15 @@ export type AccessPrecedence = number;
  * @example SSH
  * @x-auditable true
  */
-export type AccessProtocol = "SSH";
+export type AccessProtocolInfraApp = "SSH";
+
+/**
+ * The communication protocol your application secures.
+ *
+ * @example RDP
+ * @x-auditable true
+ */
+export type AccessProtocolSelfHostedApp = "RDP";
 
 /**
  * The public key to add to your SSH server configuration.
@@ -6508,7 +5858,7 @@ export type AccessRayId = string;
  * Contains the targets secured by the application.
  */
 export type AccessRdpProps = {
-  target_criteria?: AccessTargetCriteria[];
+  target_criteria?: AccessTargetCriteriaSelfHostedApp[];
   allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
   allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
@@ -6743,7 +6093,8 @@ export type AccessRule =
   | AccessOktaGroupRule
   | AccessSamlGroupRule
   | AccessOidcClaimRule
-  | AccessServiceTokenRule;
+  | AccessServiceTokenRule
+  | AccessLinkedAppTokenRule;
 
 export type AccessSaasProps = {
   allowed_idps?: AccessAllowedIdps;
@@ -9841,10 +9192,17 @@ export type AccessTargetAttributes = {
   [key: string]: string[];
 };
 
-export type AccessTargetCriteria = {
+export type AccessTargetCriteriaBase = {
   port: AccessPort;
-  protocol: AccessProtocol;
   target_attributes: AccessTargetAttributes;
+};
+
+export type AccessTargetCriteriaInfraApp = AccessTargetCriteriaBase & {
+  protocol?: AccessProtocolInfraApp;
+};
+
+export type AccessTargetCriteriaSelfHostedApp = AccessTargetCriteriaBase & {
+  protocol?: AccessProtocolSelfHostedApp;
 };
 
 /**
@@ -11922,9 +11280,8 @@ export type ArgoAnalyticsResponseSingle = ArgoAnalyticsApiResponseSingle & {
 export type ArgoConfigApiResponseCommon = {
   errors: ArgoConfigMessages;
   messages: ArgoConfigMessages;
-  result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Describes a successful API response.
    *
    * @example true
    */
@@ -11940,27 +11297,17 @@ export type ArgoConfigApiResponseCommonFailure = {
   messages: ArgoConfigMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Describes a failed API response.
    *
    * @example false
    */
   success: false;
 };
 
-export type ArgoConfigApiResponseSingle = {
-  errors: ArgoConfigMessages;
-  messages: ArgoConfigMessages;
-  result: (Record<string, any> | null) | (string | null) | string;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
+export type ArgoConfigApiResponseSingle = ArgoConfigApiResponseCommon;
 
 /**
- * Identifier
+ * Specifies the zone associated with the API call.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -11976,7 +11323,7 @@ export type ArgoConfigMessages = {
 }[];
 
 /**
- * Update enablement of Argo Smart Routing
+ * Configures the enablement of Argo Smart Routing.
  */
 export type ArgoConfigPatch = {
   value: ArgoConfigValue;
@@ -12971,6 +12318,21 @@ export type BrandProtectionApiQueryMatch = {
   total?: number;
 };
 
+export type BrandProtectionApiURLInfo = {
+  result?: {
+    [key: string]: any;
+  }[];
+};
+
+export type BrandProtectionApiURLSubmit = {
+  skipped_urls?: {
+    [key: string]: any;
+  }[];
+  submitted_urls?: {
+    [key: string]: any;
+  }[];
+};
+
 export type CachePurgeEverything = {
   /**
    * For more information, please refer to [purge everything documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-everything/).
@@ -13043,17 +12405,6 @@ export type CachePurgeSingleFileWithUrlAndHeaders = {
   }[];
 };
 
-export type CachePurgeApiResponseCommon = {
-  errors: CachePurgeMessages;
-  messages: CachePurgeMessages;
-  /**
-   * Whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
 export type CachePurgeApiResponseCommonFailure = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
@@ -13061,21 +12412,33 @@ export type CachePurgeApiResponseCommonFailure = {
    */
   errors: CachePurgeMessages;
   messages: CachePurgeMessages;
-  result: any | null;
+  result: Record<string, any> | null;
   /**
-   * Whether the API call was successful.
+   * Indicates the API call's success or failure.
    *
    * @example false
    */
-  success: false;
+  success: boolean;
 };
 
-export type CachePurgeApiResponseSingleId = CachePurgeApiResponseCommon & {
+export type CachePurgeApiResponseSingleId = {
+  errors: CachePurgeMessages;
+  messages: CachePurgeMessages;
   result?: {
-    id: CachePurgeSchemasIdentifier;
+    id: CachePurgeIdentifier;
   } | null;
+  /**
+   * Indicates the API call's success or failure.
+   *
+   * @example true
+   */
+  success: boolean;
 };
 
+/**
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
 export type CachePurgeIdentifier = string;
 
 export type CachePurgeMessages = {
@@ -13083,21 +12446,8 @@ export type CachePurgeMessages = {
    * @minimum 1000
    */
   code: number;
-  documentation_url?: string;
   message: string;
-  source?: {
-    pointer?: string;
-  };
 }[];
-
-/**
- * Identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- * @x-auditable true
- */
-export type CachePurgeSchemasIdentifier = string;
 
 /**
  * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
@@ -13758,17 +13108,6 @@ export type CacheRulesZoneComplexCacheSettingsResponseSingle =
     result?: CacheRulesResultObjectComplex;
   };
 
-export type CacheApiResponseCommon = {
-  errors: CacheMessages;
-  messages: CacheMessages;
-  /**
-   * Whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
 export type CacheApiResponseCommonFailure = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
@@ -13776,27 +13115,30 @@ export type CacheApiResponseCommonFailure = {
    */
   errors: CacheMessages;
   messages: CacheMessages;
-  result: any | null;
+  result: CacheResult;
   /**
-   * Whether the API call was successful.
+   * Indicates the API call's success or failure.
    *
    * @example false
    */
-  success: false;
+  success: boolean;
 };
 
-export type CacheApiResponseSingle = CacheApiResponseCommon;
-
-export type CacheAutomaticUpgraderResponse = CacheApiResponseSingle & {
-  result?: CacheResponseBase;
+export type CacheApiResponseSingleId = {
+  errors: CacheMessages;
+  messages: CacheMessages;
+  result: CacheResult;
+  /**
+   * Indicates the API call's success or failure.
+   *
+   * @example true
+   */
+  success: boolean;
 };
 
 /**
- * Identifier.
- *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
- * @x-auditable true
  */
 export type CacheIdentifier = string;
 
@@ -13805,26 +13147,10 @@ export type CacheMessages = {
    * @minimum 1000
    */
   code: number;
-  documentation_url?: string;
   message: string;
-  source?: {
-    pointer?: string;
-  };
 }[];
 
-/**
- * Identifier of a recommendation result.
- *
- * @example ssl_recommendation
- */
-export type CacheRecommendationId = string;
-
-/**
- * @example strict
- */
-export type CacheRecommendationValue = "flexible" | "full" | "strict";
-
-export type CacheResponseBase = {
+export type CacheResult = {
   /**
    * Whether this setting can be updated or not.
    */
@@ -13868,14 +13194,6 @@ export type CacheSchemasPatch = {
  * @example auto
  */
 export type CacheSchemasValue = "auto" | "custom";
-
-/**
- * @example 2014-01-01T05:20:00.12345Z
- * @format date-time
- */
-export type CacheTimestamp = string;
-
-export type CacheZoneIdentifier = CacheIdentifier;
 
 /**
  * The account identifier tag.
@@ -17037,6 +16355,8 @@ export type DlpConfidence = "low" | "medium" | "high" | "very_high";
 
 /**
  * Scan the context of predefined entries to only return matches surrounded by keywords.
+ *
+ * @deprecated true
  */
 export type DlpContextAwareness = {
   /**
@@ -17104,6 +16424,9 @@ export type DlpCustomEntryUpdateType = {
 };
 
 export type DlpCustomProfile = {
+  /**
+   * @default false
+   */
   ai_context_enabled?: boolean;
   /**
    * Related DLP policies will trigger when the match count exceeds the number set.
@@ -17115,8 +16438,11 @@ export type DlpCustomProfile = {
    * @minimum 0
    */
   allowed_match_count: number;
+  /**
+   * @default low
+   */
   confidence_threshold?: DlpConfidence;
-  context_awareness: DlpContextAwareness;
+  context_awareness?: DlpContextAwareness;
   /**
    * When the profile was created.
    *
@@ -17140,6 +16466,9 @@ export type DlpCustomProfile = {
    * @x-auditable true
    */
   name: string;
+  /**
+   * @default false
+   */
   ocr_enabled: boolean;
   /**
    * When the profile was lasted updated.
@@ -17150,11 +16479,17 @@ export type DlpCustomProfile = {
 };
 
 export type DlpCustomProfileUpdate = {
+  /**
+   * @default false
+   */
   ai_context_enabled?: boolean;
   /**
    * @format int32
    */
   allowed_match_count?: number | null;
+  /**
+   * @default low
+   */
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
   /**
@@ -17169,6 +16504,9 @@ export type DlpCustomProfileUpdate = {
    */
   entries?: DlpProfileEntryUpdate[] | null;
   name: string;
+  /**
+   * @default false
+   */
   ocr_enabled?: boolean;
   /**
    * Other entries, e.g. predefined or integration.
@@ -17320,6 +16658,42 @@ export type DlpDatasetUploadStatus =
   | "failed"
   | "complete";
 
+export type DlpDocumentFingerprint = {
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * @default
+   */
+  description: string;
+  /**
+   * @format uuid
+   */
+  entry_id: string;
+  file_name?: string | null;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format int32
+   */
+  match_percent: number;
+  name: string;
+  status: DlpDatasetUploadStatus;
+  /**
+   * @format date-time
+   */
+  updated_at: string;
+  /**
+   * @format int64
+   */
+  version?: number | null;
+};
+
+export type DlpDocumentFingerprintArray = DlpDocumentFingerprint[];
+
 export type DlpDocumentFingerprintEntry = {
   /**
    * @format date-time
@@ -17335,6 +16709,37 @@ export type DlpDocumentFingerprintEntry = {
    * @format date-time
    */
   updated_at: string;
+};
+
+export type DlpDocumentFingerprintUpload = {
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  description: string;
+  /**
+   * @format uuid
+   */
+  entry_id: string;
+  file_name: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format int32
+   */
+  match_percent: number;
+  name: string;
+  status: DlpDatasetUploadStatus;
+  /**
+   * @format date-time
+   */
+  updated_at: string;
+  /**
+   * @format int64
+   */
+  version: number;
 };
 
 export type DlpEmailRule = {
@@ -17526,6 +16931,9 @@ export type DlpNewCustomEntryWithId = DlpNewCustomEntry & {
 };
 
 export type DlpNewCustomProfile = {
+  /**
+   * @default false
+   */
   ai_context_enabled?: boolean;
   /**
    * Related DLP policies will trigger when the match count exceeds the number set.
@@ -17537,6 +16945,9 @@ export type DlpNewCustomProfile = {
    * @minimum 0
    */
   allowed_match_count?: number;
+  /**
+   * @default low
+   */
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
   /**
@@ -17545,6 +16956,9 @@ export type DlpNewCustomProfile = {
   description?: string | null;
   entries: DlpEntryOfNewProfile[];
   name: string;
+  /**
+   * @default false
+   */
   ocr_enabled?: boolean;
   /**
    * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your Microsoft Information Protection profiles).
@@ -17596,6 +17010,18 @@ export type DlpNewDatasetColumn =
   | {
       entry_name: string;
     };
+
+export type DlpNewDocumentFingerprint = {
+  /**
+   * @default
+   */
+  description?: string;
+  /**
+   * @format int32
+   */
+  match_percent: number;
+  name: string;
+};
 
 export type DlpNewEntry = {
   enabled: boolean;
@@ -17720,11 +17146,17 @@ export type DlpPredefinedEntryUpdate = {
 };
 
 export type DlpPredefinedProfile = {
+  /**
+   * @default false
+   */
   ai_context_enabled?: boolean;
   /**
    * @format int32
    */
   allowed_match_count: number;
+  /**
+   * @default low
+   */
   confidence_threshold?: DlpConfidence;
   context_awareness?: DlpContextAwareness;
   entries: DlpEntry[];
@@ -17738,6 +17170,9 @@ export type DlpPredefinedProfile = {
    * The name of the predefined profile.
    */
   name: string;
+  /**
+   * @default false
+   */
   ocr_enabled?: boolean;
   /**
    * Whether this profile can be accessed by anyone.
@@ -17754,17 +17189,30 @@ export type DlpPredefinedProfileEntryUpdate = {
 };
 
 export type DlpPredefinedProfileUpdate = {
+  /**
+   * @default false
+   */
   ai_context_enabled?: boolean;
   /**
+   * @default 0
+   * @example 5
    * @format int32
+   * @maximum 1000
+   * @minimum 0
    */
   allowed_match_count?: number | null;
+  /**
+   * @default low
+   */
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
   /**
    * @deprecated true
    */
   entries?: DlpPredefinedProfileEntryUpdate[];
+  /**
+   * @default false
+   */
   ocr_enabled?: boolean;
 };
 
@@ -17934,6 +17382,15 @@ export type DlpUpdateBehaviors = {
   behaviors: {
     [key: string]: DlpUpdateBehavior;
   };
+};
+
+export type DlpUpdateDocumentFingerprint = {
+  description?: string | null;
+  /**
+   * @format int32
+   */
+  match_percent?: number | null;
+  name?: string | null;
 };
 
 /**
@@ -19887,7 +19344,7 @@ export type DnsRecordsMessages = {
 }[];
 
 /**
- * DNS record name (or @ for the zone apex) in Punycode.
+ * Complete DNS record name, including the zone name, in Punycode.
  *
  * @example example.com
  * @maxLength 255
@@ -21098,7 +20555,7 @@ export type EmailSecurityLink = {
 };
 
 /**
- * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","from":"d1994@example.com","from_name":"Sender Name","id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
+ * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
  */
 export type EmailSecurityMailsearchMessage = {
   action_log: void;
@@ -21108,6 +20565,13 @@ export type EmailSecurityMailsearchMessage = {
   detection_reasons: string[];
   edf_hash?: string | null;
   final_disposition?: EmailSecurityDispositionLabel & (string | null);
+  findings?:
+    | {
+        detail?: string | null;
+        name?: string | null;
+        value?: string | null;
+      }[]
+    | null;
   from?: string | null;
   from_name?: string | null;
   is_phish_submission: boolean;
@@ -21115,11 +20579,27 @@ export type EmailSecurityMailsearchMessage = {
   message_id?: string | null;
   postfix_id: EmailSecurityPostfixId;
   properties: {
-    allowlisted_pattern_type?: string;
-    /**
-     * @deprecated true
-     */
-    whitelisted_pattern_type?: string;
+    allowlisted_pattern?: string;
+    allowlisted_pattern_type?:
+      | "quarantine_release"
+      | "blocked_sender"
+      | "acceptable_sender"
+      | "allowed_sender"
+      | "allowed_recipient"
+      | "domain_similarity"
+      | "domain_recency"
+      | "managed_acceptable_sender";
+    blocklisted_message?: boolean;
+    blocklisted_pattern?: string;
+    whitelisted_pattern_type?:
+      | "quarantine_release"
+      | "blocked_sender"
+      | "acceptable_sender"
+      | "allowed_sender"
+      | "allowed_recipient"
+      | "domain_similarity"
+      | "domain_recency"
+      | "managed_acceptable_sender";
   };
   sent_date?: string | null;
   subject?: string | null;
@@ -26800,6 +26280,16 @@ export type IntelWhois = {
   updated_date?: string;
 };
 
+/**
+ * The Account ID for this resource.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @minLength 32
+ * @x-auditable true
+ */
+export type ListsAccountId = string;
+
 export type ListsApiResponseCollection = {
   result: Record<string, any> | Record<string, any>[] | null;
   errors: ListsMessages;
@@ -26862,15 +26352,6 @@ export type ListsCreatedOn = string;
 export type ListsDescription = string;
 
 /**
- * Defines an identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- * @x-auditable true
- */
-export type ListsIdentifier = string;
-
-/**
  * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","ip":"10.0.0.1","modified_on":"2020-01-10T14:00:00Z"}
  */
 export type ListsItem = {
@@ -26920,6 +26401,12 @@ export type ListsItemComment = string;
  * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).
  */
 export type ListsItemHostname = {
+  /**
+   * Only applies to wildcard hostnames (e.g., *.example.com). When true (default), only subdomains are blocked. When false, both the root domain and subdomains are blocked.
+   *
+   * @example true
+   */
+  exclude_exact_hostname?: boolean;
   /**
    * @example example.com
    * @x-auditable true
@@ -27035,7 +26522,7 @@ export type ListsList = {
 export type ListsListDeleteResponseCollection = {
   result:
     | {
-        id?: ListsItemId;
+        id?: ListsListId;
       }
     | Record<string, any>[];
   errors: ListsMessages;
@@ -29189,24 +28676,11 @@ export type LogshareTimestamps = "unix" | "unixnano" | "rfc3339";
 
 export type LogshareZoneIdentifier = LogshareIdentifier;
 
-export type MagicTransitApiResponseCollection = {
-  errors: MagicTransitMessages;
-  messages: MagicTransitMessages;
-  result: Record<string, any> | any[] | string | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
-
 export type MagicTransitApiResponseCommon = {
   errors: MagicTransitMessages;
   messages: MagicTransitMessages;
-  result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -29222,7 +28696,7 @@ export type MagicTransitApiResponseCommonFailure = {
   messages: MagicTransitMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -29233,6 +28707,14 @@ export type MagicTransitApiResponseCommonFailure = {
  * AS number associated with the node object.
  */
 export type MagicTransitAsn = string;
+
+/**
+ * type of check to perform
+ *
+ * @default icmp
+ * @example icmp
+ */
+export type MagicTransitCheckType = "icmp";
 
 export type MagicTransitColo = {
   city?: MagicTransitColoCity;
@@ -29268,6 +28750,37 @@ export type MagicTransitColoResult = {
  * @example sin
  */
 export type MagicTransitColos = string[];
+
+export type MagicTransitEndpointHealthCheck = {
+  check_type: MagicTransitCheckType;
+  /**
+   * the IP address of the host to perform checks against
+   *
+   * @example 203.0.113.1
+   */
+  endpoint: string;
+  /**
+   * Optional name associated with this check
+   *
+   * @example My Endpoint
+   */
+  name?: string;
+};
+
+export type MagicTransitEndpointHealthCheckResponse =
+  MagicTransitEndpointHealthCheck & {
+    id?: MagicTransitUuid;
+  };
+
+export type MagicTransitEndpointHealthCheckResponseCollection =
+  MagicTransitApiResponseCommon & {
+    result?: MagicTransitEndpointHealthCheckResponse[];
+  };
+
+export type MagicTransitEndpointHealthCheckResponseSingle =
+  MagicTransitApiResponseCommon & {
+    result?: MagicTransitEndpointHealthCheckResponse;
+  };
 
 /**
  * Errors resulting from collecting traceroute from colo to target.
@@ -29333,7 +28846,11 @@ export type MagicTransitMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -29455,7 +28972,7 @@ export type MagicTransitTargetSummary = Record<string, any>;
 export type MagicTransitTargets = string[];
 
 export type MagicTransitTracerouteResponseCollection =
-  MagicTransitApiResponseCollection & {
+  MagicTransitApiResponseCommon & {
     result?: MagicTransitTargetResult[];
   };
 
@@ -29463,6 +28980,14 @@ export type MagicTransitTracerouteResponseCollection =
  * Total time of traceroute in ms.
  */
 export type MagicTransitTracerouteTimeMs = number;
+
+/**
+ * UUID.
+ *
+ * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+ * @maxLength 36
+ */
+export type MagicTransitUuid = string;
 
 /**
  * Set the time (in seconds) to wait for a response to a probe.
@@ -36029,30 +35554,35 @@ export type PagesBuildConfig = {
    * Enable build caching for the project.
    *
    * @example true
+   * @x-auditable true
    */
   build_caching?: boolean | null;
   /**
    * Command used to build project.
    *
    * @example npm run build
+   * @x-auditable true
    */
   build_command?: string | null;
   /**
    * Output directory of the build.
    *
    * @example build
+   * @x-auditable true
    */
   destination_dir?: string | null;
   /**
    * Directory to run the command.
    *
    * @example /
+   * @x-auditable true
    */
   root_dir?: string | null;
   /**
    * The classifying tag for analytics.
    *
    * @example cee1c73f6e4743d0b5e6bb1a0bcaabcc
+   * @x-auditable true
    */
   web_analytics_tag?: string | null;
   /**
@@ -36120,6 +35650,9 @@ export type PagesDeploymentConfigsValues = {
    */
   ai_bindings?: {
     [key: string]: {
+      /**
+       * @x-auditable true
+       */
       project_id?: string;
     } | null;
   } | null;
@@ -36134,6 +35667,7 @@ export type PagesDeploymentConfigsValues = {
        * Name of the dataset.
        *
        * @example api_analytics
+       * @x-auditable true
        */
       dataset?: string;
     } | null;
@@ -36150,6 +35684,7 @@ export type PagesDeploymentConfigsValues = {
    * Compatibility date used for Pages Functions.
    *
    * @example 2022-01-01
+   * @x-auditable true
    */
   compatibility_date?: string;
   /**
@@ -36169,6 +35704,7 @@ export type PagesDeploymentConfigsValues = {
        * UUID of the D1 database.
        *
        * @example 445e2955-951a-43f8-a35b-a4d0c8138f63
+       * @x-auditable true
        */
       id?: string;
     } | null;
@@ -36184,6 +35720,7 @@ export type PagesDeploymentConfigsValues = {
        * ID of the Durable Object namespace.
        *
        * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
+       * @x-auditable true
        */
       namespace_id?: string;
     } | null;
@@ -36198,6 +35735,7 @@ export type PagesDeploymentConfigsValues = {
     [key: string]: {
       /**
        * @example a76a99bc342644deb02c38d66082262a
+       * @x-auditable true
        */
       id?: string;
     } | null;
@@ -36213,6 +35751,7 @@ export type PagesDeploymentConfigsValues = {
        * ID of the KV namespace.
        *
        * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
+       * @x-auditable true
        */
       namespace_id?: string;
     } | null;
@@ -36226,6 +35765,7 @@ export type PagesDeploymentConfigsValues = {
     [key: string]: {
       /**
        * @example d7cdd17c-916f-4cb7-aabe-585eb382ec4e
+       * @x-auditable true
        */
       certificate_id?: string;
     } | null;
@@ -36240,6 +35780,7 @@ export type PagesDeploymentConfigsValues = {
      * Placement mode.
      *
      * @example smart
+     * @x-auditable true
      */
     mode?: string;
   } | null;
@@ -36254,6 +35795,7 @@ export type PagesDeploymentConfigsValues = {
        * Name of the Queue.
        *
        * @example some-queue
+       * @x-auditable true
        */
       name?: string;
     } | null;
@@ -36269,12 +35811,14 @@ export type PagesDeploymentConfigsValues = {
        * Jurisdiction of the R2 bucket.
        *
        * @example eu
+       * @x-auditable true
        */
       jurisdiction?: string | null;
       /**
        * Name of the R2 bucket.
        *
        * @example some-bucket
+       * @x-auditable true
        */
       name?: string;
     } | null;
@@ -36288,14 +35832,20 @@ export type PagesDeploymentConfigsValues = {
     [key: string]: {
       /**
        * The entrypoint to bind to.
+       *
+       * @x-auditable true
        */
       entrypoint?: string | null;
       /**
        * The Service environment.
+       *
+       * @x-auditable true
        */
       environment?: string;
       /**
        * The Service name.
+       *
+       * @x-auditable true
        */
       service?: string;
     } | null;
@@ -36309,6 +35859,7 @@ export type PagesDeploymentConfigsValues = {
     [key: string]: {
       /**
        * @example my_index
+       * @x-auditable true
        */
       index_name?: string;
     } | null;
@@ -36319,6 +35870,7 @@ export type PagesDeploymentConfigsValues = {
  * Deployment stage name.
  *
  * @example deploy
+ * @x-auditable true
  */
 export type PagesDeploymentStageName =
   | "queued"
@@ -36340,6 +35892,7 @@ export type PagesDeployments = {
    *
    * @example 2021-03-09T00:55:03.923456Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   /**
@@ -36354,18 +35907,21 @@ export type PagesDeployments = {
        * Where the trigger happened.
        *
        * @example main
+       * @x-auditable true
        */
       branch?: string;
       /**
        * Hash of the deployment trigger commit.
        *
        * @example ad9ccd918a81025731e10e40267e11273a263421
+       * @x-auditable true
        */
       commit_hash?: string;
       /**
        * Message of the deployment trigger commit.
        *
        * @example Update index.html
+       * @x-auditable true
        */
       commit_message?: string;
     };
@@ -36373,6 +35929,7 @@ export type PagesDeployments = {
      * What caused the deployment.
      *
      * @example ad_hoc
+     * @x-auditable true
      */
     type?: "push" | "ad_hoc";
   };
@@ -36381,18 +35938,21 @@ export type PagesDeployments = {
    * Type of deploy.
    *
    * @example preview
+   * @x-auditable true
    */
   environment?: "preview" | "production";
   /**
    * Id of the deployment.
    *
    * @example f64788e9-fccd-4d4a-a28a-cb84f88f6
+   * @x-auditable true
    */
   id?: string;
   /**
    * If the deployment has been skipped.
    *
    * @example true
+   * @x-auditable true
    */
   is_skipped?: boolean;
   latest_stage?: PagesStage;
@@ -36401,24 +35961,28 @@ export type PagesDeployments = {
    *
    * @example 2021-03-09T00:58:59.045655
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   /**
    * Id of the project.
    *
    * @example 7b162ea7-7367-4d67-bcde-1160995d5
+   * @x-auditable true
    */
   project_id?: string;
   /**
    * Name of the project.
    *
    * @example ninjakittens
+   * @x-auditable true
    */
   project_name?: string;
   /**
    * Short Id (8 character) of the deployment.
    *
    * @example f64788e9
+   * @x-auditable true
    */
   short_id?: string;
   source?: PagesSource;
@@ -36436,6 +36000,7 @@ export type PagesDeployments = {
    * The live URL to view this deployment.
    *
    * @example https://f64788e9.ninjakittens.pages.dev
+   * @x-auditable true
    */
   url?: string;
 };
@@ -36443,15 +36008,29 @@ export type PagesDeployments = {
 export type PagesDomainObject = {
   /**
    * @example lets_encrypt
+   * @x-auditable true
    */
   certificate_authority?: "google" | "lets_encrypt";
+  /**
+   * @x-auditable true
+   */
   created_on?: string;
+  /**
+   * @x-auditable true
+   */
   domain_id?: string;
+  /**
+   * @x-auditable true
+   */
   id?: string;
   /**
    * @example example.com
+   * @x-auditable true
    */
   name?: string;
+  /**
+   * @x-auditable true
+   */
   status?:
     | "initializing"
     | "pending"
@@ -36460,16 +36039,37 @@ export type PagesDomainObject = {
     | "blocked"
     | "error";
   validation_data?: {
+    /**
+     * @x-auditable true
+     */
     error_message?: string;
+    /**
+     * @x-auditable true
+     */
     method?: "http" | "txt";
+    /**
+     * @x-auditable true
+     */
     status?: "initializing" | "pending" | "active" | "deactivated" | "error";
+    /**
+     * @x-auditable true
+     */
     txt_name?: string;
+    /**
+     * @x-auditable true
+     */
     txt_value?: string;
   };
   verification_data?: {
+    /**
+     * @x-auditable true
+     */
     error_message?: string;
     status?: "pending" | "active" | "deactivated" | "blocked" | "error";
   };
+  /**
+   * @x-auditable true
+   */
   zone_tag?: string;
 };
 
@@ -36487,12 +36087,14 @@ export type PagesDomainResponseSingle = PagesApiResponseSingle & {
  *
  * @example this-is-my-domain-01.com
  * @pattern ^[a-z0-9][a-z0-9-]*$
+ * @x-auditable true
  */
 export type PagesDomainName = string;
 
 export type PagesDomainsPost = {
   /**
    * @example example.com
+   * @x-auditable true
    */
   name?: string;
 };
@@ -36509,6 +36111,7 @@ export type PagesEnvVars = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type PagesIdentifier = string;
 
@@ -36526,6 +36129,9 @@ export type PagesMessages = {
  * @example {"type":"plain_text","value":"hello world"}
  */
 export type PagesPlainTextEnvVar = {
+  /**
+   * @x-auditable true
+   */
   type: "plain_text";
   /**
    * Environment variable value.
@@ -36544,6 +36150,7 @@ export type PagesProjectObject = {
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   deployment_configs?: PagesDeploymentConfigs;
@@ -36558,6 +36165,7 @@ export type PagesProjectObject = {
    * Id of the project.
    *
    * @example 7b162ea7-7367-4d67-bcde-1160995d5
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -36568,12 +36176,14 @@ export type PagesProjectObject = {
    * Name of the project.
    *
    * @example NextJS Blog
+   * @x-auditable true
    */
   name?: string;
   /**
    * Production branch of the project. Used to identify production deployments.
    *
    * @example main
+   * @x-auditable true
    */
   production_branch?: string;
   source?: PagesSource;
@@ -36581,6 +36191,7 @@ export type PagesProjectObject = {
    * The Cloudflare subdomain associated with the project.
    *
    * @example helloworld.pages.dev
+   * @x-auditable true
    */
   subdomain?: string;
 };
@@ -36599,6 +36210,7 @@ export type PagesProjectResponse = PagesApiResponseCommon & {
  *
  * @example this-is-my-project-01
  * @pattern ^[a-z0-9][a-z0-9-]*$
+ * @x-auditable true
  */
 export type PagesProjectName = string;
 
@@ -36613,6 +36225,9 @@ export type PagesProjectsResponse = PagesApiResponseCommon &
  * @example {"type":"secret_text","value":""}
  */
 export type PagesSecretTextEnvVar = {
+  /**
+   * @x-auditable true
+   */
   type: "secret_text";
   /**
    * Secret value.
@@ -36624,18 +36239,42 @@ export type PagesSecretTextEnvVar = {
 
 export type PagesSource = {
   config?: {
+    /**
+     * @x-auditable true
+     */
     deployments_enabled?: boolean;
+    /**
+     * @x-auditable true
+     */
     owner?: string;
     path_excludes?: string[];
     path_includes?: string[];
+    /**
+     * @x-auditable true
+     */
     pr_comments_enabled?: boolean;
     preview_branch_excludes?: string[];
     preview_branch_includes?: string[];
+    /**
+     * @x-auditable true
+     */
     preview_deployment_setting?: "all" | "none" | "custom";
+    /**
+     * @x-auditable true
+     */
     production_branch?: string;
+    /**
+     * @x-auditable true
+     */
     production_deployments_enabled?: boolean;
+    /**
+     * @x-auditable true
+     */
     repo_name?: string;
   };
+  /**
+   * @x-auditable true
+   */
   type?: string;
 };
 
@@ -36648,12 +36287,14 @@ export type PagesStage = {
    *
    * @example 2021-03-09T00:58:59.045655
    * @format date-time
+   * @x-auditable true
    */
   ended_on?: string | null;
   /**
    * The current build stage.
    *
    * @example deploy
+   * @x-auditable true
    */
   name?: "queued" | "initialize" | "clone_repo" | "build" | "deploy";
   /**
@@ -36661,12 +36302,14 @@ export type PagesStage = {
    *
    * @example 2021-03-09T00:55:03.923456Z
    * @format date-time
+   * @x-auditable true
    */
   started_on?: string | null;
   /**
    * State of the current stage.
    *
    * @example success
+   * @x-auditable true
    */
   status?: "success" | "idle" | "active" | "failure" | "canceled";
 };
@@ -43057,7 +42700,7 @@ export type RumTimestamp = string;
 
 export type RumToggleRumRequest = {
   /**
-   * Value can either be On or Off
+   * Value can either be On or Off.
    *
    * @example on
    */
@@ -43073,7 +42716,7 @@ export type RumUpdateSiteRequest = {
 };
 
 /**
- * Current state of RUM. Returns On, Off, or Manual
+ * Current state of RUM. Returns On, Off, or Manual.
  *
  * @example on
  * @x-auditable true
@@ -43479,7 +43122,32 @@ export type SecretsStoreAccountIdentifier = string;
 
 export type SecretsStoreApiResponseCollection =
   SecretsStoreApiResponseCommon & {
-    result_info?: SecretsStoreResultInfo;
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
 
 export type SecretsStoreApiResponseCommon = {
@@ -43593,33 +43261,6 @@ export type SecretsStoreQuota = number;
 
 export type SecretsStoreQuotaResponse = SecretsStoreApiResponseCollection & {
   result?: SecretsStoreSecretsUsageObject;
-};
-
-export type SecretsStoreResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
 };
 
 /**
@@ -45479,7 +45120,8 @@ export type StreamMediaState =
   | "queued"
   | "inprogress"
   | "ready"
-  | "error";
+  | "error"
+  | "live-inprogress";
 
 /**
  * Specifies a detailed status for a video. If the `state` is `inprogress` or `error`, the `step` field returns `encoding` or `manifest`. If the `state` is `inprogress`, `pctComplete` returns a number between 0 and 100 to indicate the approximate percent of completion. If the `state` is `error`, `errorReasonCode` and `errorReasonText` provide additional details.
@@ -55740,6 +55382,7 @@ export type WorkersBindingKindSecretKey = {
    * @example encrypt
    * @example decrypt
    * @x-auditable true
+   * @x-stainless-collection-type set
    */
   usages: (
     | "encrypt"
@@ -55901,6 +55544,7 @@ export type WorkersBindingName = string;
  * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
  *
  * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+ * @x-stainless-collection-type set
  */
 export type WorkersBindings = WorkersBindingItem[];
 
@@ -55924,6 +55568,7 @@ export type WorkersCompatibilityFlag = string;
  * Flags that enable or disable certain features in the Workers runtime. Used to enable upcoming features or opt in or out of specific changes not included in a `compatibility_date`.
  *
  * @example nodejs_compat
+ * @x-stainless-collection-type set
  */
 export type WorkersCompatibilityFlags = WorkersCompatibilityFlag[];
 
@@ -55937,15 +55582,6 @@ export type WorkersCompletedUploadAssetsResponse = WorkersApiResponseCommon & {
     jwt?: string;
   };
 };
-
-/**
- * Name of the script.
- *
- * @example this-is_my_script-01
- * @pattern ^[a-z0-9_][a-z0-9-_]*$
- * @x-auditable true
- */
-export type WorkersComponentsSchemasScriptName = string;
 
 export type WorkersCreateAssetsUploadSessionObject = {
   /**
@@ -55961,6 +55597,8 @@ export type WorkersCreateAssetsUploadSessionResponse =
     result?: {
       /**
        * The requests to make to upload assets.
+       *
+       * @x-stainless-collection-type set
        */
       buckets?: string[][];
       /**
@@ -55988,14 +55626,7 @@ export type WorkersCreatedOn = string;
  */
 export type WorkersCursor = string;
 
-/**
- * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
- * @maxLength 36
- * @x-auditable true
- */
-export type WorkersDeploymentIdentifier = string;
-
-export type WorkersDeploymentsBase = {
+export type WorkersDeployment = {
   annotations?: {
     /**
      * Human-readable message about the deployment. Truncated to 100 bytes.
@@ -56007,51 +55638,32 @@ export type WorkersDeploymentsBase = {
     ["workers/message"]?: string;
   };
   /**
-   * @example user@example.com
+   * @format email
    * @x-auditable true
    */
   author_email?: string;
   /**
-   * @example 2022-11-08T17:19:29.176266Z
+   * @format date-time
    * @x-auditable true
    */
-  created_on?: string;
+  created_on: string;
   /**
-   * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
-   * @maxLength 36
+   * @format uuid
    * @x-auditable true
    */
-  id?: WorkersDeploymentIdentifier;
+  id: string;
   /**
    * @example api
    * @x-auditable true
    */
-  source?: string;
-  /**
-   * @x-auditable true
-   */
-  strategy?: string;
-};
-
-export type WorkersDeploymentsCreateBody = WorkersDeploymentsBase &
-  WorkersDeploymentsStrategyPercentage;
-
-export type WorkersDeploymentsListResponse = WorkersApiResponseCommon & {
-  result?: {
-    deployments?: (WorkersDeploymentsBase &
-      WorkersDeploymentsStrategyPercentage)[];
-  };
-};
-
-export type WorkersDeploymentsSingleResponse = WorkersApiResponseCommon & {
-  result?: WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage;
-};
-
-export type WorkersDeploymentsStrategyPercentage = {
+  source: string;
   /**
    * @x-auditable true
    */
   strategy: "percentage";
+  /**
+   * @x-auditable true
+   */
   versions: {
     /**
      * @example 100
@@ -56060,7 +55672,11 @@ export type WorkersDeploymentsStrategyPercentage = {
      * @x-auditable true
      */
     percentage: number;
-    version_id: WorkersSchemasVersionIdentifier;
+    /**
+     * @format uuid
+     * @x-auditable true
+     */
+    version_id: string;
   }[];
 };
 
@@ -56162,6 +55778,7 @@ export type WorkersLimits = {
 /**
  * Whether Logpush is turned on for the Worker.
  *
+ * @default false
  * @example false
  * @x-auditable true
  */
@@ -56262,9 +55879,15 @@ export type WorkersMigrationTagConditions = {
 export type WorkersModifiedOn = string;
 
 /**
- * @example {"metadata":{"compatibility_date":{},"compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
+ * @example {"files":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"],"metadata":{"compatibility_date":{},"compatibility_flags":["nodejs_compat"],"main_module":"worker.js"}}
  */
 export type WorkersMultipartScript = {
+  /**
+   * An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.
+   *
+   * @x-stainless-collection-type set
+   */
+  files?: Blob[];
   /**
    * JSON encoded metadata about the uploaded parts and Worker configuration.
    */
@@ -56343,6 +55966,8 @@ export type WorkersMultipartScript = {
     keep_assets?: boolean;
     /**
      * List of binding types to keep from previous_upload.
+     *
+     * @x-stainless-collection-type set
      */
     keep_bindings?: string[];
     logpush?: WorkersLogpush;
@@ -56360,13 +55985,13 @@ export type WorkersMultipartScript = {
     placement?: WorkersPlacementInfo;
     /**
      * List of strings to use as tags for this Worker.
+     *
+     * @x-stainless-collection-type set
      */
     tags?: string[];
     tail_consumers?: WorkersTailConsumers;
     usage_model?: WorkersUsageModel;
   };
-} & {
-  [key: string]: Blob[];
 };
 
 export type WorkersMultipleStepMigrations = WorkersMigrationTagConditions & {
@@ -56601,18 +56226,12 @@ export type WorkersSchemasSubdomain = {
   subdomain: string;
 };
 
-/**
- * @example bcf48806-b317-4351-9ee7-36e7d557d4de
- * @maxLength 36
- * @x-auditable true
- */
-export type WorkersSchemasVersionIdentifier = string;
-
 export type WorkersScriptAndVersionSettingsItem = {
   /**
    * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
    *
    * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+   * @x-stainless-collection-type set
    */
   bindings?: WorkersBindings & WorkersBindingItem[];
   /**
@@ -56627,17 +56246,11 @@ export type WorkersScriptAndVersionSettingsItem = {
    * Flags that enable or disable certain features in the Workers runtime. Used to enable upcoming features or opt in or out of specific changes not included in a `compatibility_date`.
    *
    * @example nodejs_compat
+   * @x-stainless-collection-type set
    */
   compatibility_flags?: WorkersCompatibilityFlags & string[];
   limits?: WorkersLimits;
-  /**
-   * Whether Logpush is turned on for the Worker.
-   *
-   * @example false
-   * @x-auditable true
-   * @default
-   */
-  logpush?: WorkersLogpush & boolean;
+  logpush?: WorkersLogpush;
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
@@ -56651,20 +56264,17 @@ export type WorkersScriptAndVersionSettingsItem = {
   placement?: WorkersPlacementInfoNoStatus & Record<string, any>;
   /**
    * Tags to help you manage your Workers.
+   *
+   * @x-stainless-collection-type set
    */
   tags?: WorkersTags & string[];
   /**
    * List of Workers that will consume logs from the attached Worker.
+   *
+   * @x-stainless-collection-type set
    */
   tail_consumers?: WorkersTailConsumers & WorkersTailConsumersScript[];
-  /**
-   * Usage model for the Worker invocations.
-   *
-   * @example standard
-   * @x-auditable true
-   * @default standard
-   */
-  usage_model?: WorkersUsageModel & string;
+  usage_model?: WorkersUsageModel;
 };
 
 export type WorkersScriptAndVersionSettingsResponse =
@@ -56726,14 +56336,7 @@ export type WorkersScriptResponseUploadSingle = WorkersApiResponseCommon & {
 };
 
 export type WorkersScriptSettingsItem = {
-  /**
-   * Whether Logpush is turned on for the Worker.
-   *
-   * @example false
-   * @x-auditable true
-   * @default false
-   */
-  logpush?: WorkersLogpush & boolean;
+  logpush?: WorkersLogpush;
   /**
    * Observability settings for the Worker.
    *
@@ -56742,6 +56345,8 @@ export type WorkersScriptSettingsItem = {
   observability?: WorkersObservability & (Record<string, any> | null);
   /**
    * List of Workers that will consume logs from the attached Worker.
+   *
+   * @x-stainless-collection-type set
    */
   tail_consumers?: WorkersTailConsumersScript[] | null;
 };
@@ -56822,6 +56427,8 @@ export type WorkersTag = string;
 
 /**
  * Tags to help you manage your Workers.
+ *
+ * @x-stainless-collection-type set
  */
 export type WorkersTags = WorkersTag[];
 
@@ -56840,6 +56447,8 @@ export type WorkersTail = {
 
 /**
  * List of Workers that will consume logs from the attached Worker.
+ *
+ * @x-stainless-collection-type set
  */
 export type WorkersTailConsumers = WorkersTailConsumersScript[];
 
@@ -56877,20 +56486,16 @@ export type WorkersUploadAssetsResponse = WorkersApiResponseCommon & {
   result?: {};
 };
 
-export type WorkersUsageModelObject = {
-  /**
-   * @x-auditable true
-   */
-  usage_model?: string;
-};
-
 export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
-  result: WorkersUsageModelObject;
+  result: {
+    usage_model?: WorkersUsageModel;
+  };
 };
 
 /**
  * Usage model for the Worker invocations.
  *
+ * @default standard
  * @example standard
  * @x-auditable true
  */
@@ -56911,11 +56516,12 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
    */
   resources: {
     /**
-     * @example {"json":"example_binding","name":"JSON_VAR","type":"json"}
+     * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+     *
+     * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+     * @x-stainless-collection-type set
      */
-    bindings?: {
-      result?: WorkersBindings;
-    };
+    bindings?: WorkersBindings & void;
     /**
      * @example {"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api","named_handlers":[{"handlers":["fetch"],"name":"MyClass"}]}
      */
@@ -56926,6 +56532,7 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
       etag?: string;
       /**
        * @example fetch
+       * @x-stainless-collection-type set
        */
       handlers?: string[];
       /**
@@ -56934,10 +56541,12 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
       last_deployed_from?: string;
       /**
        * @example {"handlers":["fetch"],"name":"MyClass"}
+       * @x-stainless-collection-type set
        */
       named_handlers?: {
         /**
          * @example fetch
+         * @x-stainless-collection-type set
          */
         handlers?: string[];
         /**
@@ -56951,6 +56560,9 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
        * @example 2022-11-08
        */
       compatibility_date?: string;
+      /**
+       * @x-stainless-collection-type set
+       */
       compatibility_flags?: string[];
       /**
        * @example {"cpu_ms":50}
@@ -58979,6 +58591,13 @@ export type ZeroTrustGatewayMessages = {
 export type ZeroTrustGatewayName = string;
 
 /**
+ * The rule cannot be shared via the Orgs API
+ *
+ * @x-auditable true
+ */
+export type ZeroTrustGatewayNotSharable = boolean;
+
+/**
  * Configure a message to display on the user's device when an antivirus search is performed.
  */
 export type ZeroTrustGatewayNotificationSettings = {
@@ -59069,6 +58688,13 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse =
  * @x-auditable true
  */
 export type ZeroTrustGatewayPublicKey = string;
+
+/**
+ * The rule was shared via the Orgs API and cannot be edited by the current account
+ *
+ * @x-auditable true
+ */
+export type ZeroTrustGatewayReadOnly = boolean;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -59522,9 +59148,12 @@ export type ZeroTrustGatewayRules = {
   id?: ZeroTrustGatewayRulesComponentsSchemasUuid;
   identity?: ZeroTrustGatewayIdentity;
   name?: ZeroTrustGatewayComponentsSchemasName;
+  not_sharable?: ZeroTrustGatewayNotSharable;
   precedence?: ZeroTrustGatewayPrecedence;
+  read_only?: ZeroTrustGatewayReadOnly;
   rule_settings?: ZeroTrustGatewayRuleSettings;
   schedule?: ZeroTrustGatewaySchedule;
+  source_account?: ZeroTrustGatewaySourceAccount;
   traffic?: ZeroTrustGatewayTraffic;
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   version?: ZeroTrustGatewayVersion;
@@ -59712,6 +59341,13 @@ export type ZeroTrustGatewaySingleResponseWithListItems =
       updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
     };
   };
+
+/**
+ * account tag of account that created the rule
+ *
+ * @x-auditable true
+ */
+export type ZeroTrustGatewaySourceAccount = string;
 
 export type ZeroTrustGatewaySubcategory = {
   beta?: ZeroTrustGatewayBeta;
