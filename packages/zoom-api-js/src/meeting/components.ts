@@ -23673,7 +23673,7 @@ export type WebinarCreateResponse = {
    */
   uuid?: string;
   /**
-   * Webinar agenda.
+   * The webinar's agenda.
    *
    * @example My Webinar
    */
@@ -23686,7 +23686,7 @@ export type WebinarCreateResponse = {
    */
   created_at?: string;
   /**
-   * Webinar duration.
+   * The webinar's duration.
    *
    * @example 60
    */
@@ -24039,6 +24039,41 @@ export type WebinarCreateResponse = {
      */
     global_dial_in_countries?: string[];
     /**
+     * A list of available dial-in numbers for different countries or regions.
+     */
+    global_dial_in_numbers?: {
+      /**
+       * City of the number.
+       *
+       * @example New York
+       */
+      city?: string;
+      /**
+       * The country code.
+       *
+       * @example US
+       */
+      country?: string;
+      /**
+       * Full name of country.
+       *
+       * @example US
+       */
+      country_name?: string;
+      /**
+       * Dial-in phone number.
+       *
+       * @example +1 1000200200
+       */
+      number?: string;
+      /**
+       * Dial-in number type.
+       *
+       * @example toll
+       */
+      type?: "toll" | "tollfree" | "premium";
+    }[];
+    /**
      * Default to HD video.
      *
      * @example false
@@ -24174,7 +24209,7 @@ export type WebinarCreateResponse = {
      */
     notify_registrants?: boolean;
     /**
-     * Make the webinar on-demand
+     * Make the webinar on demand.
      *
      * @example false
      * @default false
@@ -24187,13 +24222,13 @@ export type WebinarCreateResponse = {
      */
     panelists_invitation_email_notification?: boolean;
     /**
-     * Start video when panelists join webinar.
+     * Start video when panelists join the webinar.
      *
      * @example true
      */
     panelists_video?: boolean;
     /**
-     * Zoom will open a survey page in attendees' browsers after leaving the webinar
+     * Zoom will open a survey page in attendees' browsers after leaving the webinar.
      *
      * @example true
      */
@@ -24277,7 +24312,7 @@ export type WebinarCreateResponse = {
       enable?: boolean;
     };
     /**
-     * Send confirmation email to registrants
+     * Send confirmation email to registrants.
      *
      * @example true
      */
@@ -24321,7 +24356,7 @@ export type WebinarCreateResponse = {
      */
     show_share_button?: boolean;
     /**
-     * Survey url for post webinar survey
+     * Survey url for post webinar survey.
      *
      * @example https://example.com
      */
@@ -24371,24 +24406,24 @@ export type WebinarCreateResponse = {
    */
   timezone?: string;
   /**
-   * Webinar topic.
+   * The webinar's topic.
    *
    * @maxLength 200
    * @example My Webinar
    */
   topic?: string;
   /**
-   * Tracking fields
+   * Tracking fields.
    */
   tracking_fields?: {
     /**
-     * Tracking fields type
+     * Tracking fields type.
      *
      * @example field1
      */
     field?: string;
     /**
-     * Tracking fields value
+     * Tracking fields value.
      *
      * @example value1
      */
@@ -24423,6 +24458,29 @@ export type WebinarCreateResponse = {
    */
   transition_to_live?: boolean;
   /**
+   * {"enable":false,"time":0,"timeunit":"second"}
+   */
+  simulive_delay_start?: {
+    /**
+     * Whether simulive need delay playback.
+     *
+     * @example true
+     */
+    enable?: boolean;
+    /**
+     * The time for delayed playback.
+     *
+     * @example 10
+     */
+    time?: number;
+    /**
+     * The time unit for delayed playback.
+     *
+     * @example second or minute
+     */
+    timeunit?: string;
+  };
+  /**
    * The platform through which the meeting was created.
    * * `other` - Created through another platform.
    * * `open_api` - Created through Open API.
@@ -24441,15 +24499,15 @@ export type WebinarCreateRequestBody = {
    */
   agenda?: string;
   /**
-   * Webinar duration in minutes. Used for scheduled webinars only.
+   * Webinar duration, in minutes. Used for scheduled webinars only.
    *
    * @example 60
    */
   duration?: number;
   /**
-   * The webinar passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters like !, @, #, and others..
+   * The webinar passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters like !, @, #, and others.
    *
-   * **Note**:
+   * **Note**
    * - If the account owner or administrator has configured [Passcode Requirement](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063160#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements. You can retrieve the requirements using the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API.
    * - If the **Passcode** user setting is enabled and `default_passcode` is not explicitly set to `false`, a passcode will be automatically generated when one is not provided.
    * - If the **Passcode** setting is enabled and [locked](https://support.zoom.us/hc/en-us/articles/115005269866-Using-Tiered-Settings#locked) for the user, a passcode will be automatically generated when one is not provided.
@@ -24470,7 +24528,7 @@ export type WebinarCreateRequestBody = {
    */
   recurrence?: {
     /**
-     * Select a date when the webinar will recur before it is canceled. Should be in UTC time, such as 2017-11-25T12:00:00Z. Cannot be used with `end_times`.
+     * Select a date when the webinar will recur before it is canceled. Should be in UTC time, such as `2017-11-25T12:00:00Z`. Cannot be used with `end_times`.
      *
      * @format date-time
      * @example 2022-04-02T15:59:00Z
@@ -24485,7 +24543,7 @@ export type WebinarCreateRequestBody = {
      */
     end_times?: number;
     /**
-     * Use this field **only if you're scheduling a recurring webinar of type** `3` to state which day in a month the webinar should recur. The value range is from 1 to 31.
+     * Use this field **only if you're scheduling a recurring webinar of type `3`** to state which day in a month the webinar should recur. The value range is from 1 to 31.
      *
      * For instance, if you would like the webinar to recur on 23rd of each month, provide `23` as the value of this field and `1` as the value of the `repeat_interval` field. Instead, if you would like the webinar to recur once every three months, on 23rd of the month, change the value of the `repeat_interval` field to `3`.
      *
@@ -24493,7 +24551,7 @@ export type WebinarCreateRequestBody = {
      */
     monthly_day?: number;
     /**
-     * Use this field **only if you're scheduling a recurring webinar of type** `3` to state the week of the month when the webinar should recur. If you use this field, **you must also use the `monthly_week_day` field to state the day of the week when the webinar should recur.**
+     * Use this field **only if you're scheduling a recurring webinar of type `3`** to state the week of the month when the webinar should recur. If you use this field, **you must also use the `monthly_week_day` field to state the day of the week when the webinar should recur.**
      *  `-1` - Last week of the month.
      *  `1` - First week of the month.
      *  `2` - Second week of the month.
@@ -24504,7 +24562,7 @@ export type WebinarCreateRequestBody = {
      */
     monthly_week?: -1 | 1 | 2 | 3 | 4;
     /**
-     * Use this field **only if you're scheduling a recurring webinar of type** `3` to state a specific day in a week when the monthly webinar should recur. To use this field, you must also use the `monthly_week` field.
+     * Use this field **only if you're scheduling a recurring webinar of type `3`** to state a specific day in a week when the monthly webinar should recur. To use this field, you must also use the `monthly_week` field.
      *  `1` - Sunday.
      *  `2` - Monday.
      *  `3` - Tuesday.
@@ -24517,7 +24575,7 @@ export type WebinarCreateRequestBody = {
      */
     monthly_week_day?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
     /**
-     * Define the interval when the webinar should recur. For instance, if you would like to schedule a Webinar that recurs every two months, you must set the value of this field as `2` and the value of the `type` parameter as `3`.
+     * Define the interval when the webinar should recur. For instance, to schedule a webinar that recurs every two months, you must set the value of this field as `2` and the value of the `type` parameter as `3`.
      *
      * For a daily webinar, the maximum interval you can set is `90` days. For a weekly webinar, the maximum interval that you can set is `12` weeks. For a monthly webinar, the maximum interval that you can set is `3` months.
      *
@@ -24597,9 +24655,9 @@ export type WebinarCreateRequestBody = {
      */
     attendees_and_panelists_reminder_email_notification?: {
       /**
-       * * `true`: Send reminder email to attendees and panelists.
+       * * `true` -  Send reminder email to attendees and panelists.
        *
-       * * `false`: Do not send reminder email to attendees and panelists.
+       * * `false` - Do not send reminder email to attendees and panelists.
        *
        * @example true
        */
@@ -24626,7 +24684,7 @@ export type WebinarCreateRequestBody = {
      */
     audio?: "both" | "telephony" | "voip" | "thirdParty";
     /**
-     * Third party audio conference info.
+     * Third party audio conference information.
      *
      * @maxLength 2048
      * @example test
@@ -24639,7 +24697,7 @@ export type WebinarCreateRequestBody = {
      */
     authentication_domains?: string;
     /**
-     * Specify the authentication type for users to join a Webinar with`meeting_authentication` setting set to `true`. The value of this field can be retrieved from the `id` field within `authentication_options` array in the response of [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API.
+     * Specify the authentication type for users to join a webinar with `meeting_authentication` setting set to `true`. The value of this field can be retrieved from the `id` field within `authentication_options` array in the response of [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API.
      *
      * @example signIn_D8cJuqWVQ623CI4Q8yQK0Q
      */
@@ -24759,21 +24817,21 @@ export type WebinarCreateRequestBody = {
      */
     global_dial_in_countries?: string[];
     /**
-     * Default to HD video.(Not supported for simulive webinar.)
+     * Default to HD video. Not supported for simulive webinar.
      *
      * @example false
      * @default false
      */
     hd_video?: boolean;
     /**
-     * Whether HD video for attendees is enabled. This value defaults to `false`.(Not supported for simulive webinar.)
+     * Whether HD video for attendees is enabled. This value defaults to `false`. Not supported for simulive webinar.
      *
      * @example false
      * @default false
      */
     hd_video_for_attendees?: boolean;
     /**
-     * Start video when host joins webinar.(Not supported for simulive webinar.)
+     * Start video when host joins webinar. Not supported for simulive webinar.
      *
      * @example true
      */
@@ -25029,7 +25087,7 @@ export type WebinarCreateRequestBody = {
      */
     show_share_button?: boolean;
     /**
-     * Survey URL for post webinar survey
+     * Survey URL for post webinar survey.
      *
      * @example https://example.com
      */
@@ -25041,7 +25099,7 @@ export type WebinarCreateRequestBody = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
+     * Whether to allow the host and cohosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
      *
      * @example false
      */
@@ -25082,7 +25140,7 @@ export type WebinarCreateRequestBody = {
    */
   timezone?: string;
   /**
-   * Webinar topic.
+   * The webinar's topic.
    *
    * @example My Webinar
    */
@@ -25115,7 +25173,7 @@ export type WebinarCreateRequestBody = {
    */
   type?: 5 | 6 | 9;
   /**
-   * Whether to set the webinar simulive.
+   * Whether to set the webinar to simulive.
    *
    * @example true
    */
@@ -25132,6 +25190,34 @@ export type WebinarCreateRequestBody = {
    * @example false
    */
   transition_to_live?: boolean;
+  /**
+   * {"enable":false,"time":0,"timeunit":"second"}
+   */
+  simulive_delay_start?: {
+    /**
+     * Whether simulive need delay playback.
+     *
+     * @example true
+     */
+    enable?: boolean;
+    /**
+     * The time for delayed playback
+     * If the time unit is seconds, then the maximum value is 60 and the minimum value is 1.
+     * If the time unit is minutes, then the maximum value is 10 and the minimum value is 1.
+     *
+     * @example 10
+     */
+    time?: number;
+    /**
+     * The time unit for delayed playback
+     * `second` - The time unit for delayed playback is seconds.
+     * `minute` - The time unit for delayed playback is minutes.
+     *
+     * @example second
+     * @default second
+     */
+    timeunit?: "second" | "minute";
+  };
 };
 
 export type WebinarCreateVariables = {
@@ -25144,10 +25230,10 @@ export type WebinarCreateVariables = {
  *
  *  Webinars allow a host to broadcast a Zoom meeting to up to 10,000 attendees.
  *
- * **Rate limit:**
+ * **Rate limit**
  * Up to a maximum of **100 requests per day**. The rate limit is applied to the `userId` of the **webinar host** used to make the request.
  *
- * **Prerequisites:**
+ * **Prerequisites**
  * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
@@ -25186,7 +25272,7 @@ export type WebinarQueryParams = {
    */
   occurrence_id?: string;
   /**
-   * Set the value of this field to `true` if you would like to view Webinar details of all previous occurrences of a recurring Webinar.
+   * Set the value of this field to `true` to view webinar details of all previous occurrences of a recurring webinar.
    *
    * @example true
    */
@@ -25197,7 +25283,7 @@ export type WebinarError = Fetcher.ErrorWrapper<undefined>;
 
 export type WebinarResponse = {
   /**
-   * Email address of the meeting host.
+   * The meeting host's email address.
    *
    * @format email
    * @example jchill@example.com
@@ -25210,14 +25296,14 @@ export type WebinarResponse = {
    */
   host_id?: string;
   /**
-   * Webinar ID in **long** format(represented as int64 data type in JSON), also known as the webinar number.
+   * The webinar ID in **long** format, represented as int64 data type in JSON, also known as the webinar number.
    *
    * @format int64
    * @example 97871060099
    */
   id?: number;
   /**
-   * Unique webinar ID. Each webinar instance will generate its own webinar UUID. After a webinar ends, a new UUID is generated for the next instance of the webinar. Retrieve a list of UUIDs from past webinar instances using the [**List past webinar instances**](/docs/api-reference/zoom-api/methods#operation/pastWebinars) API. [Double encode](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+   * Unique webinar ID. Each webinar instance generates its own webinar UUID. After a webinar ends, a new UUID is generated for the next instance of the webinar. Retrieve a list of UUIDs from past webinar instances using the [**List past webinar instances**](/docs/api-reference/zoom-api/methods#operation/pastWebinars) API. [Double encode](/docs/api/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
    *
    * @example m3WqMkvuRXyYqH+eKWhk9w==
    */
@@ -25258,7 +25344,7 @@ export type WebinarResponse = {
      */
     duration?: number;
     /**
-     * Occurrence ID: Unique Identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
+     * The occurrence ID, a unique identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
      *
      * @example 1648194360000
      */
@@ -25271,7 +25357,7 @@ export type WebinarResponse = {
      */
     start_time?: string;
     /**
-     * Occurrence status:
+     * Occurrence status.
      *  `available` - Available occurrence.
      *  `deleted` -  Deleted occurrence.
      *
@@ -25305,11 +25391,11 @@ export type WebinarResponse = {
    */
   h323_passcode?: string;
   /**
-   * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
+   * Recurrence object. Use this object only for a webinar of type `9` - a recurring webinar with fixed time.
    */
   recurrence?: {
     /**
-     * Select a date when the webinar will recur before it is canceled. Should be in UTC time, such as 2017-11-25T12:00:00Z. (Cannot be used with `end_times`.)
+     * Select a date when the webinar will recur before it is canceled. Should be in UTC time, such as 2017-11-25T12:00:00Z. Cannot be used with `end_times`.
      *
      * @format date-time
      * @example 2022-04-02T15:59:00Z
@@ -25373,7 +25459,7 @@ export type WebinarResponse = {
      */
     type: 1 | 2 | 3;
     /**
-     * Use this field **only if you're scheduling a recurring webinar of type** `2` to state which day(s) of the week the webinar should repeat.
+     * Use this field **only if you're scheduling a recurring webinar of type** `2` to state which days of the week the webinar should repeat.
      *   The value for this field could be a number between `1` to `7` in string format. For instance, if the Webinar should recur on Sunday, provide `1` as the value of this field.
      *
      *   **Note:** If you would like the webinar to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the Webinar should recur on Sundays and Tuesdays provide `1,3` as the value of this field.
@@ -25475,7 +25561,7 @@ export type WebinarResponse = {
      */
     authentication_name?: string;
     /**
-     * Webinar authentication option id.
+     * Webinar authentication option ID.
      *
      * @example signIn_D8cJuqWVQ623CI4Q8yQK0Q
      */
@@ -25510,8 +25596,8 @@ export type WebinarResponse = {
      */
     contact_name?: string;
     /**
-     * Set the email language. The only options are
-     * `en-US`,`de-DE`,`es-ES`,`fr-FR`,`jp-JP`,`pt-PT`,`ru-RU`,`zh-CN`, `zh-TW`, `ko-KO`, `it-IT`, `vi-VN`.
+     * Set the email language.
+     * `en-US`, `de-DE`, `es-ES`, `fr-FR`, `jp-JP`, `pt-PT`, `ru-RU`,`zh-CN`, `zh-TW`, `ko-KO`, `it-IT`, or `vi-VN`.
      *
      * @example en-US
      */
@@ -25521,7 +25607,7 @@ export type WebinarResponse = {
      *
      * **This field is deprecated and will not be supported in the future.**
      *
-     *  As an alternative, use the `meeting_authentication`, `authentication_option` and `authentication_domains` fields to understand the [authentication configurations](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) set for the Webinar.
+     *  As an alternative, use the `meeting_authentication`, `authentication_option` and `authentication_domains` fields to understand the [authentication configurations](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) set for the webinar.
      *
      * @example true
      * @deprecated true
@@ -25532,7 +25618,7 @@ export type WebinarResponse = {
      *
      * **This field is deprecated and will not be supported in the future.**
      *
-     *  As an alternative, use the `meeting_authentication`, `authentication_option`, and `authentication_domains` fields to understand the [authentication configurations](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) set for the Webinar.
+     *  As an alternative, use the `meeting_authentication`, `authentication_option`, and `authentication_domains` fields to understand the [authentication configurations](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) set for the webinar.
      *
      * @example example.com
      * @deprecated true
@@ -25591,9 +25677,44 @@ export type WebinarResponse = {
       type?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
     };
     /**
-     * List of global dial-in countries
+     * List of global dial-in countries.
      */
     global_dial_in_countries?: string[];
+    /**
+     * A list of available dial-in numbers for different countries or regions.
+     */
+    global_dial_in_numbers?: {
+      /**
+       * The number's city.
+       *
+       * @example New York
+       */
+      city?: string;
+      /**
+       * The country code.
+       *
+       * @example US
+       */
+      country?: string;
+      /**
+       * Full name of country.
+       *
+       * @example US
+       */
+      country_name?: string;
+      /**
+       * Dial-in phone number.
+       *
+       * @example +1 1000200200
+       */
+      number?: string;
+      /**
+       * Dial-in number type.
+       *
+       * @example toll
+       */
+      type?: "toll" | "tollfree" | "premium";
+    }[];
     /**
      * Default to HD video.
      *
@@ -25609,7 +25730,7 @@ export type WebinarResponse = {
      */
     hd_video_for_attendees?: boolean;
     /**
-     * Start video when host joins webinar.
+     * Start video when the host joins the webinar.
      *
      * @example true
      */
@@ -25980,6 +26101,34 @@ export type WebinarResponse = {
    */
   transition_to_live?: boolean;
   /**
+   * {"enable":false,"time":0,"timeunit":"second"}
+   */
+  simulive_delay_start?: {
+    /**
+     * Whether simulive needs to delay playback.
+     *
+     * @example true
+     */
+    enable?: boolean;
+    /**
+     * The time for delayed playback.
+     * If the time unit is seconds, then the maximum value is 60 and the minimum value is 1.
+     * If the time unit is minutes, then the maximum value is 10 and the minimum value is 1.
+     *
+     * @example 10
+     */
+    time?: number;
+    /**
+     * The time unit for delayed playback.
+     * `second` - The time unit for delayed playback is seconds.
+     * `minute` - The time unit for delayed playback is minutes.
+     *
+     * @example second
+     * @default second
+     */
+    timeunit?: "second" | "minute";
+  };
+  /**
    * The platform used when creating the meeting.
    * * `other` - Created through another platform.
    * * `open_api` - Created through Open API.
@@ -25998,9 +26147,7 @@ export type WebinarVariables = {
 /**
  * Get details for a scheduled Zoom webinar.
  *
- *
- *
- * **Prerequisites:**
+ * **Prerequisites**
  * * Pro or higher plan with a Webinar add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
@@ -26487,7 +26634,7 @@ export type WebinarUpdateRequestBody = {
         /**
          * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
          *
-         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
          *
          * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
          *
@@ -26748,7 +26895,7 @@ export type WebinarUpdateRequestBody = {
   /**
    * The timezone to assign to the `start_time` value. This field is only used for scheduled or recurring webinars with a fixed time.
    *
-   * For a list of supported timezones and their formats, see our [timezone list](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+   * For a list of supported timezones and their formats, see our [timezone list](/docs/api/references/abbreviations/#timezones).
    *
    * @example America/Los_Angeles
    */
@@ -26787,7 +26934,7 @@ export type WebinarUpdateRequestBody = {
    */
   type?: 5 | 6 | 9;
   /**
-   * Whether to set the webinar simulive.
+   * Whether to set the webinar to simulive.
    *
    * @example true
    */
@@ -26804,6 +26951,34 @@ export type WebinarUpdateRequestBody = {
    * @example false
    */
   transition_to_live?: boolean;
+  /**
+   * {"enable":false,"time":0,"timeunit":"second"}
+   */
+  simulive_delay_start?: {
+    /**
+     * Whether simulive need delay playback.
+     *
+     * @example true
+     */
+    enable?: boolean;
+    /**
+     * The time for delayed playback.
+     * If the time unit is seconds, then the maximum value is 60 and the minimum value is 1.
+     * If the time unit is minutes, then the maximum value is 10 and the minimum value is 1.
+     *
+     * @example 10
+     */
+    time?: number;
+    /**
+     * The time unit for delayed playback.
+     * `second` - The time unit for delayed playback is seconds.
+     * `minute` - The time unit for delayed playback is minutes.
+     *
+     * @example second
+     * @default second
+     */
+    timeunit?: "second" | "minute";
+  };
 };
 
 export type WebinarUpdateVariables = {
