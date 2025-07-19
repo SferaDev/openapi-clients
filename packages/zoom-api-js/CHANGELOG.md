@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.6.1
+
+### Patch Changes
+
+- 57f2658: Replace single quotes with double quotes for consistency
+
 ## 0.6.0
 
 ### Minor Changes

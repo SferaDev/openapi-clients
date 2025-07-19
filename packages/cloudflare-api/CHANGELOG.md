@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.16.0
+
+### Minor Changes
+
+- 99de2dc: Add auditability annotations to WorkersAi API response types
+- f38416b: Add 'memberships' option to resource_scope parameter in AuditLogsV2GetAccountAuditLogsQueryParams
+
+### Patch Changes
+
+- fbc5a20: [BREAKING] Remove several deprecated `api/` endpoints in Brand Protection.
+
 ## 0.15.3
 
 ### Patch Changes
