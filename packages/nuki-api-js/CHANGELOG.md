@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.1.1
+
+### Patch Changes
+
+- 3a8c590: Standardize import statements by changing single quotes to double quotes
+
 ## 0.1.0
 
 ### Minor Changes
