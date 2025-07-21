@@ -26,7 +26,7 @@
   "devDependencies": {
     "@kubb/cli": "^3.16.0",
     "@kubb/core": "^3.16.0",
-    "@modelcontextprotocol/sdk": "^1.15.1",
+    "@modelcontextprotocol/sdk": "^1.16.0",
     "openapi-utils": "workspace:*"
   },
   "peerDependencies": {
