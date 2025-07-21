@@ -26335,6 +26335,14 @@ export type ListsBulkOperationResponseCollection = {
 } & ListsApiResponseCollection;
 
 /**
+ * The RFC 3339 timestamp of when the operation was completed.
+ *
+ * @example 2020-01-01T08:00:00Z
+ * @x-auditable true
+ */
+export type ListsCompleted = string;
+
+/**
  * The RFC 3339 timestamp of when the list was created.
  *
  * @example 2020-01-01T08:00:00Z
@@ -26493,13 +26501,24 @@ export type ListsItemsListResponseCollection = {
   };
 } & ListsApiResponseCollection;
 
-export type ListsItemsUpdateRequestCollection = {
-  asn?: ListsItemAsn;
-  comment?: ListsItemComment;
-  hostname?: ListsItemHostname;
-  ip?: ListsItemIp;
-  redirect?: ListsItemRedirect;
-}[];
+export type ListsItemsUpdateRequestCollection = (
+  | {
+      comment?: ListsItemComment;
+      ip: ListsItemIp;
+    }
+  | {
+      comment?: ListsItemComment;
+      redirect: ListsItemRedirect;
+    }
+  | {
+      comment?: ListsItemComment;
+      hostname: ListsItemHostname;
+    }
+  | {
+      asn: ListsItemAsn;
+      comment?: ListsItemComment;
+    }
+)[];
 
 /**
  * The type of the list. Each type supports specific list items (IP addresses, ASNs, hostnames or redirects).
@@ -26509,20 +26528,20 @@ export type ListsItemsUpdateRequestCollection = {
 export type ListsKind = "ip" | "redirect" | "hostname" | "asn";
 
 export type ListsList = {
-  created_on?: ListsCreatedOn;
+  created_on: ListsCreatedOn;
   description?: ListsDescription;
-  id?: ListsListId;
-  kind?: ListsKind;
-  modified_on?: ListsModifiedOn;
-  name?: ListsName;
-  num_items?: ListsNumItems;
-  num_referencing_filters?: ListsNumReferencingFilters;
+  id: ListsListId;
+  kind: ListsKind;
+  modified_on: ListsModifiedOn;
+  name: ListsName;
+  num_items: ListsNumItems;
+  num_referencing_filters: ListsNumReferencingFilters;
 };
 
 export type ListsListDeleteResponseCollection = {
   result:
     | {
-        id?: ListsListId;
+        id: ListsListId;
       }
     | Record<string, any>[];
   errors: ListsMessages;
@@ -26559,7 +26578,7 @@ export type ListsListId = string;
 
 export type ListsListsAsyncResponse = {
   result?: {
-    operation_id?: ListsOperationId;
+    operation_id: ListsOperationId;
   };
 } & ListsApiResponseCollection;
 
@@ -26602,37 +26621,53 @@ export type ListsName = string;
 export type ListsNumItems = number;
 
 /**
- * The number of [filters](/operations/filters-list-filters) referencing the list.
+ * The number of [filters](/api/resources/filters/) referencing the list.
  *
  * @example 2
  * @x-auditable true
  */
 export type ListsNumReferencingFilters = number;
 
-export type ListsOperation = {
-  /**
-   * The RFC 3339 timestamp of when the operation was completed.
-   *
-   * @example 2020-01-01T08:00:00Z
-   * @x-auditable true
-   */
-  completed?: string;
-  /**
-   * A message describing the error when the status is `failed`.
-   *
-   * @example This list is at the maximum number of items
-   * @x-auditable true
-   */
-  error?: string;
-  id: ListsOperationId;
-  /**
-   * The current status of the asynchronous operation.
-   *
-   * @example failed
-   * @x-auditable true
-   */
-  status: "pending" | "running" | "completed" | "failed";
-};
+export type ListsOperation =
+  | {
+      completed: ListsCompleted;
+      /**
+       * A message describing the error when the status is `failed`.
+       *
+       * @example This list is at the maximum number of items
+       * @x-auditable true
+       */
+      error: string;
+      id: ListsOperationId;
+      /**
+       * The current status of the asynchronous operation.
+       *
+       * @example failed
+       * @x-auditable true
+       */
+      status: "failed";
+    }
+  | {
+      id: ListsOperationId;
+      /**
+       * The current status of the asynchronous operation.
+       *
+       * @example pending
+       * @x-auditable true
+       */
+      status: "pending" | "running";
+    }
+  | {
+      completed: ListsCompleted;
+      id: ListsOperationId;
+      /**
+       * The current status of the asynchronous operation.
+       *
+       * @example completed
+       * @x-auditable true
+       */
+      status: "completed";
+    };
 
 /**
  * The unique operation ID of the asynchronous action.
