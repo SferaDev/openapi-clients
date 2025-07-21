@@ -365,11 +365,6 @@ import {
   getEventRead,
   patchEventUpdate,
   postEventUpdate,
-  postEventInsightCreate,
-  deleteEventInsightDelete,
-  getEventInsightRead,
-  patchEventInsightUpdate,
-  postEventInsightUpdate,
   getEventRawRead,
   patchEventRawUpdate,
   postEventRawUpdate,
@@ -2747,16 +2742,6 @@ export const operationsByPath = {
     patchEventUpdate,
   "POST /accounts/{account_id}/cloudforce-one/events/{event_id}":
     postEventUpdate,
-  "POST /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create":
-    postEventInsightCreate,
-  "DELETE /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}":
-    deleteEventInsightDelete,
-  "GET /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}":
-    getEventInsightRead,
-  "PATCH /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}":
-    patchEventInsightUpdate,
-  "POST /accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}":
-    postEventInsightUpdate,
   "GET /accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}":
     getEventRawRead,
   "PATCH /accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}":
