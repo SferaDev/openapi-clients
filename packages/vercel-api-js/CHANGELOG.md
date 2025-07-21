@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 1.0.1
+
+### Patch Changes
+
+- ee3042e: Fix baseUrl and updates
+
 ## 1.0.0
 
 ### Major Changes
