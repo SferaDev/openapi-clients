@@ -127,6 +127,7 @@ export type ListArchivedFilesResponse = {
        * *  `CHAT_MESSAGE` - A JSON file encoded in base64 format containing chat messages. The file also includes waiting room chats, deleted messages, meeting emojis and non-verbal feedback.
        * *  `TRANSCRIPT` - A JSON file include audio transcript wording.
        * * `SUB_GROUP_MEMBER_LOG` - A json file containing records of members entering and leaving the subgroup.
+       * * `AIC_COVERSATION` - A json file include internal user archive aic content.
        *
        * @example CHAT
        */
@@ -137,7 +138,8 @@ export type ListArchivedFilesResponse = {
         | "CC"
         | "CHAT_MESSAGE"
         | "TRANSCRIPT"
-        | "SUB_GROUP_MEMBER_LOG";
+        | "SUB_GROUP_MEMBER_LOG"
+        | "AIC_COVERSATION";
       /**
        * The archive file's unique ID.
        *
@@ -181,6 +183,7 @@ export type ListArchivedFilesResponse = {
        * * `closed_caption`
        * * `chat_message`
        * * `audio_transcript`
+       * * `aic_conversation`
        *
        *  For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
        *
@@ -192,7 +195,8 @@ export type ListArchivedFilesResponse = {
         | "chat_file"
         | "closed_caption"
         | "chat_message"
-        | "audio_transcript";
+        | "audio_transcript"
+        | "aic_conversation";
       /**
        * The archived file's processing status.
        * * `completed` - The processing of the file is complete.
@@ -715,6 +719,7 @@ export type GetArchivedFilesResponse = {
      * * `CHAT_MESSAGE` - A JSON file encoded in base64 format containing chat messages. The file also includes waiting room chats, deleted messages, meeting emojis and non-verbal feedback.
      * *  `TRANSCRIPT` - A JSON file include audio transcript wording.
      * * `SUB_GROUP_MEMBER_LOG` - A JSON file containing records of members entering and leaving the subgroup.
+     * * `AIC_COVERSATION` - A json file include internal user archive aic content.
      *
      * @example CHAT
      */
@@ -725,7 +730,8 @@ export type GetArchivedFilesResponse = {
       | "CC"
       | "CHAT_MESSAGE"
       | "TRANSCRIPT"
-      | "SUB_GROUP_MEMBER_LOG";
+      | "SUB_GROUP_MEMBER_LOG"
+      | "AIC_COVERSATION";
     /**
      * The archive file's unique ID.
      *
@@ -769,6 +775,7 @@ export type GetArchivedFilesResponse = {
      * * `closed_caption`
      * * `chat_message`
      * * `audio_transcript`
+     * * `aic_conversation`
      *
      *  For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
      *
@@ -780,7 +787,8 @@ export type GetArchivedFilesResponse = {
       | "chat_file"
       | "closed_caption"
       | "chat_message"
-      | "audio_transcript";
+      | "audio_transcript"
+      | "aic_conversation";
     /**
      * The archived file's processing status.
      * * `completed` - The processing of the file is complete.
@@ -1490,7 +1498,7 @@ export type RecordingDeletePathParams = {
 
 export type RecordingDeleteQueryParams = {
   /**
-   * The recording delete actions:
+   * The recording delete actions.
    *  `trash` - Move recording to trash.
    *  `delete` - Delete recording permanently.
    *
@@ -22787,8 +22795,8 @@ export type WebinarAbsenteesVariables = {
 /**
  * List absentees of a webinar.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
@@ -22854,8 +22862,8 @@ export type PastWebinarsVariables = {
 /**
  * List past webinar instances.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
@@ -23407,9 +23415,10 @@ export type WebinarTemplateCreateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Use this API to create a webinar template from an existing webinar.
+ * Create a webinar template from an existing webinar.
  *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
@@ -27216,7 +27225,11 @@ export type GetWebinarBrandingVariables = {
 } & FetcherExtraProps;
 
 /**
- * Get the webinar's [session branding](https://support.zoom.us/hc/en-us/articles/4836268732045-Using-Webinar-Session-Branding) information. Session branding lets hosts visually customize a webinar by setting a webinar wallpaper that displays behind video tiles. Session branding also lets hosts set the virtual background for and apply name tags to hosts, alternative hosts, panelists, interpreters, and speakers.  **Prerequisites:** * A Pro or higher plan with the Webinar add-on. * The **Webinar Session Branding** setting enabled.
+ * Get the webinar's [session branding](https://support.zoom.us/hc/en-us/articles/4836268732045-Using-Webinar-Session-Branding) information. Session branding lets hosts visually customize a webinar by setting a webinar wallpaper that displays behind video tiles. Session branding also lets hosts set the virtual background for and apply name tags to hosts, alternative hosts, panelists, interpreters, and speakers.
+ *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
+ * * Enable the **Webinar Session Branding** setting.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read`,`webinar:read:admin`
  *
@@ -29038,8 +29051,8 @@ export type WebinarPollsVariables = {
 /**
  * Lists all the [polls](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) of a webinar.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
@@ -29471,8 +29484,8 @@ export type WebinarPollCreateVariables = {
 /**
  * Creates a [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) for a webinar.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
@@ -29725,8 +29738,8 @@ export type WebinarPollGetVariables = {
 /**
  * Returns a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) details.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
@@ -29963,8 +29976,8 @@ export type WebinarPollUpdateVariables = {
 /**
  * Updates a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars).
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
@@ -30015,8 +30028,8 @@ export type WebinarPollDeleteVariables = {
 /**
  * Delete a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars).
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
@@ -30974,6 +30987,9 @@ export type WebinarRegistrantStatusVariables = {
 /**
  * Update webinar registrants' registration status. You can approve or deny a registrant, or revoke a registrant's approval.
  *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:registrant_status`,`webinar:update:registrant_status:admin`
@@ -31314,8 +31330,8 @@ export type DeleteWebinarRegistrantVariables = {
 /**
  * Delete a webinar registrant.
  *
- *
- *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
@@ -31400,6 +31416,9 @@ export type GetWebinarSipDialingWithPasscodeVariables = {
 
 /**
  * Get a webinar's SIP URI. The URI consists of the webinar ID, an optional user-supplied passcode, and participant identifier code. The API return data also includes additional fields to indicate whether the API caller has a valid Cloud Room Connector subscription, the participant identifier code from the URI, and the SIP URI validity period in seconds.
+ *
+ * **Prerequisites**
+ * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:sip_dialing`,`webinar:write:admin:sip_dialing`
  *
