@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.10.2
+
+### Patch Changes
+
+- c65b4e0: Change single quotes to double quotes in code for consistency
+
 ## 0.10.1
 
 ### Patch Changes

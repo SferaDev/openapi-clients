@@ -1,6 +1,6 @@
 {
   "name": "netlify-api",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Netlify auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",

@@ -1,5 +1,18 @@
 # cloudflare-api-js
 
+## 0.16.0
+
+### Minor Changes
+
+- 99de2dc: Add auditability annotations to WorkersAi API response types
+- f38416b: Add 'memberships' option to resource_scope parameter in AuditLogsV2GetAccountAuditLogsQueryParams
+
+### Patch Changes
+
+- fbc5a20: [BREAKING] Remove several deprecated `api/` endpoints in Brand Protection.
+- d67852a: Add ListsCompleted type for operation completion timestamp.
+- d060f3d: Add 'insight' and 'raw' properties to PatchEventUpdateRequestBody and PostEventUpdateRequestBody
+
 ## 0.15.3
 
 ### Patch Changes
