@@ -3,7 +3,7 @@ import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import Case from 'case';
 import type { OperationObject, PathItemObject } from 'openapi3-ts/oas30';
-import { type ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
+import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
 
 export default defineConfig({
@@ -73,7 +73,7 @@ export default defineConfig({
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
