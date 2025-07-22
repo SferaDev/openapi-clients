@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@mcpauth/auth'],
+  transpilePackages: ['@mcpauth/auth', 'vercel-api-js'],
   experimental: {
     authInterrupts: true
   },
