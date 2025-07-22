@@ -29,8 +29,7 @@ const { projects } = await vercel.api.projects.getProjects();`,
       usage: `import { V0Api } from 'v0-api';
 
 const api = new V0Api({ token: '...' });
-const projects = await api.api.projects.getProjects();`,
-      hasMcp: true
+const projects = await api.api.projects.getProjects();`
     },
     {
       id: 'cloudflare',

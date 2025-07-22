@@ -14,6 +14,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "development": "./src/index.ts",
       "import": {
         "types": "./dist/index.d.mts",
         "default": "./dist/index.mjs"
@@ -25,7 +26,7 @@
     }
   },
   "scripts": {
-    "tsc": "tsc --noEmit",
+    "tsc": "tsgo --noEmit",
     "build": "unbuild",
     "prepack": "unbuild",
     "generate": "openapi-codegen api"

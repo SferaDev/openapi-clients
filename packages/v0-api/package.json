@@ -8,15 +8,9 @@
     "url": "https://github.com/SferaDev/openapi-clients/issues"
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
-  "zshy": {
-    "exports": {
-      ".": "./src/index.ts",
-      "./mcp": "./src/mcp.ts"
-    }
-  },
   "scripts": {
-    "tsc": "tsc --noEmit",
-    "build": "zshy",
+    "tsc": "tsgo --noEmit",
+    "build": "unbuild",
     "generate": "rimraf ./src/generated && kubb generate"
   },
   "repository": {
@@ -26,6 +20,8 @@
   "devDependencies": {
     "@kubb/cli": "^3.16.0",
     "@kubb/core": "^3.16.0",
+    "@kubb/plugin-zod": "^3.16.0",
+    "@kubb/react": "^3.16.0",
     "@modelcontextprotocol/sdk": "^1.16.0",
     "openapi-utils": "workspace:*"
   },
@@ -35,22 +31,33 @@
   "dependencies": {
     "zod": "=3.25.76"
   },
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "development": "./src/index.ts",
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./mcp": {
-      "types": "./dist/mcp.d.ts",
-      "import": "./dist/mcp.mjs",
-      "require": "./dist/mcp.js"
+      "development": "./src/mcp.ts",
+      "import": {
+        "types": "./dist/mcp.d.mts",
+        "default": "./dist/mcp.mjs"
+      },
+      "require": {
+        "types": "./dist/mcp.d.cts",
+        "default": "./dist/mcp.cjs"
+      }
     }
   }
 }

@@ -39,7 +39,7 @@ export function UnifiedProviderInterface({ providers }: UnifiedProviderInterface
       {/* Provider Selection Tabs */}
       <div className="mb-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-9 h-auto p-1">
+          <TabsList className="grid w-full grid-cols-8 h-auto p-1">
             {providers.map((provider) => (
               <TabsTrigger key={provider.id} value={provider.id} className="py-2 text-sm font-medium">
                 {provider.name}

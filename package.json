@@ -4,7 +4,7 @@
   "description": "Type-safe unofficial OpenAPI clients for various APIs",
   "scripts": {
     "generate": "turbo run generate",
-    "build": "turbo run build",
+    "build": "turbo run build --filter=./packages/*",
     "tsc": "turbo run tsc",
     "dev": "turbo run dev",
     "format": "pnpm exec biome format --write",
@@ -17,6 +17,7 @@
     "@openapi-codegen/typescript": "^11.0.1",
     "@types/isomorphic-fetch": "^0.0.39",
     "@types/node": "^24.0.15",
+    "@typescript/native-preview": "7.0.0-dev.20250722.1",
     "builtin-modules": "^5.0.0",
     "case": "^1.6.3",
     "isomorphic-fetch": "^3.0.0",
@@ -31,8 +32,7 @@
     "turbo": "^2.5.5",
     "typescript": "^5.8.3",
     "unbuild": "^3.5.0",
-    "vitest": "^3.2.4",
-    "zshy": "^0.2.5"
+    "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@9.15.1"
 }
