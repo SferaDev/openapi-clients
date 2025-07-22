@@ -58356,13 +58356,15 @@ export type ZeroTrustGatewayEnabledUploadPhase = boolean;
 
 /**
  * The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayEndpoints = {
   doh?: ZeroTrustGatewayDohEndpoint;
   dot?: ZeroTrustGatewayDotEndpoint;
   ipv4?: ZeroTrustGatewayIpv4Endpoint;
   ipv6?: ZeroTrustGatewayIpv6Endpoint;
-};
+} | null;
 
 /**
  * The expiration time stamp and default duration of a DNS policy. Takes
