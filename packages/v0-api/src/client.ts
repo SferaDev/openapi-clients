@@ -66,7 +66,7 @@ type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
 
 type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType<(typeof operationsByPath)[T]>;
 
-export class XataApi {
+export class V0Api {
   token: string | null;
   fetch: FetchImpl;
 

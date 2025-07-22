@@ -8,7 +8,7 @@ import { initMcpTools } from 'vercel-api-js/mcp';
 const handler = withMcpAuth(
   (request) => {
     const mcpHandler = createMcpHandler(
-      async (server) => initMcpTools(server),
+      async (server) => initMcpTools(server, { token: null, fetchImpl: fetch }),
       { capabilities: {} },
       {
         basePath: '/api/vercel',
@@ -26,7 +26,8 @@ const handler = withMcpAuth(
     const vercel = new VercelApi({ token: accountToken ?? bearerToken });
 
     try {
-      const { user } = await vercel.api.user.getAuthUser();
+      const response = (await vercel.api.user.getAuthUser()) as any;
+      const { user } = response;
 
       return {
         id: user.id,
