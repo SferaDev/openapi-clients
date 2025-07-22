@@ -154,6 +154,21 @@ export type RulesetsUpdateRuleset = Schemas.RulesetsRuleset & {
 
 export type RulesetsUrlNormalization = Schemas.RulesetsUrlNormalization;
 
+/**
+ * A snippet object.
+ */
+export type SnippetsSnippet = {
+  files: Schemas.SnippetsSnippetFiles;
+  /**
+   * Metadata about the snippet.
+   */
+  metadata: {
+    main_module: Schemas.SnippetsSnippetMainModule;
+  };
+};
+
+export type SnippetsSnippetRules = Schemas.SnippetsSnippetRules;
+
 export type WorkersScriptUpload = Schemas.WorkersMultipartScript;
 
 export type WorkersVersionPost = {

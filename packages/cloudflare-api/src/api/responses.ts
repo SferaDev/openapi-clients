@@ -225,6 +225,108 @@ export type RulesetsUrlNormalization = {
 };
 
 /**
+ * A response object.
+ */
+export type SnippetsFailure = {
+  errors: Schemas.SnippetsErrors;
+  messages: Schemas.SnippetsMessages;
+  /**
+   * A result.
+   *
+   * @x-auditable true
+   */
+  result: any;
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: false;
+};
+
+/**
+ * A response object.
+ */
+export type SnippetsNull = {
+  errors: Schemas.SnippetsErrors;
+  messages: Schemas.SnippetsMessages;
+  /**
+   * A result.
+   *
+   * @x-auditable true
+   */
+  result: any;
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: true;
+};
+
+/**
+ * A response object.
+ */
+export type SnippetsSnippet = {
+  errors: Schemas.SnippetsErrors;
+  messages: Schemas.SnippetsMessages;
+  /**
+   * A result.
+   */
+  result: Schemas.SnippetsSnippet;
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: true;
+};
+
+/**
+ * A snippet content response object.
+ */
+export type SnippetsSnippetContent = {
+  files: Schemas.SnippetsSnippetFiles;
+};
+
+/**
+ * A response object.
+ */
+export type SnippetsSnippetRules = {
+  errors: Schemas.SnippetsErrors;
+  messages: Schemas.SnippetsMessages;
+  /**
+   * A result.
+   */
+  result: Schemas.SnippetsSnippetRules;
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: true;
+};
+
+/**
+ * A response object.
+ */
+export type SnippetsSnippets = {
+  errors: Schemas.SnippetsErrors;
+  messages: Schemas.SnippetsMessages;
+  /**
+   * A list of snippets.
+   */
+  result: Schemas.SnippetsSnippet[];
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: true;
+  result_info?: Schemas.SnippetsResultInfo;
+};
+
+/**
  * @example {"errors":[],"messages":[],"result":{"created_on":"2022-05-05T05:15:11.602148Z","etag":"777f24a43bef5f69174aa69ceaf1dea67968d510a31d1vw3e49d34a0187c06d1","handlers":["fetch"],"id":"this-is_my_script-01","logpush":false,"modified_on":"2022-05-20T19:02:56.446492Z","placement_mode":"smart","startup_time_ms":10,"tail_consumers":[{"environment":"production","service":"my-log-consumer"}],"usage_model":"standard"},"success":true}
  */
 export type Workers200 = Schemas.WorkersScriptResponseUploadSingle &
