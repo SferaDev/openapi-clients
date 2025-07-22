@@ -24114,10 +24114,17 @@ export type IamResourceGroups = IamResourceGroup[];
  * A list of resource names that the policy applies to.
  *
  * @example {"object":{"summary":"Nested object value","value":{"com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4":{"com.cloudflare.api.account.zone.*":"*"}}},"string":{"summary":"Single string value","value":{"com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43":"*"}}}
+ * @x-auditable true
  */
-export type IamResources = {
-  [key: string]: void;
-};
+export type IamResources =
+  | {
+      [key: string]: string;
+    }
+  | {
+      [key: string]: {
+        [key: string]: string;
+      };
+    };
 
 export type IamResponseCollection = IamApiResponseCollection & {
   result?: Record<string, any>[];
