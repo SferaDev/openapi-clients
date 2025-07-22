@@ -201,6 +201,9 @@ importers:
       '@kubb/react':
         specifier: ^3.16.0
         version: 3.16.0
+      case:
+        specifier: ^1.6.3
+        version: 1.6.3
     devDependencies:
       '@types/react':
         specifier: ^19.1.8

@@ -25,7 +25,8 @@
     "@kubb/plugin-oas": "^3.16.0",
     "@kubb/plugin-ts": "^3.16.0",
     "@kubb/plugin-zod": "^3.16.0",
-    "@kubb/react": "^3.16.0"
+    "@kubb/react": "^3.16.0",
+    "case": "^1.6.3"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
@@ -33,7 +34,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
