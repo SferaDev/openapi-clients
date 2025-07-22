@@ -18,7 +18,18 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/**"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "env": [
+        "AUTH_SECRET",
+        "DATABASE_URL",
+        "AUTH_VERCEL_ID",
+        "AUTH_VERCEL_SECRET",
+        "AUTH_VERCEL_APP_NAME",
+        "AUTH_VERCEL_REDIRECT_URI",
+        "MCPAUTH_ALLOWED_ORIGIN",
+        "MCPAUTH_SECRET",
+        "MCPAUTH_PRIVATE_KEY"
+      ]
     }
   }
 }
