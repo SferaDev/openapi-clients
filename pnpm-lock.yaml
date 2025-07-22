@@ -227,6 +227,12 @@ importers:
       '@kubb/core':
         specifier: ^3.16.0
         version: 3.16.0
+      '@kubb/plugin-zod':
+        specifier: ^3.16.0
+        version: 3.16.0(@kubb/react@3.16.0)
+      '@kubb/react':
+        specifier: ^3.16.0
+        version: 3.16.0
       '@modelcontextprotocol/sdk':
         specifier: ^1.16.0
         version: 1.16.0
