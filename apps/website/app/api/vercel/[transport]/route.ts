@@ -20,11 +20,9 @@ const handler = withMcpAuth(
     return mcpHandler(request);
   },
   async (_request, bearerToken) => {
-    console.log('Bearer Token:', bearerToken);
     if (!bearerToken) return undefined;
 
     const accountToken = await getVercelToken(bearerToken);
-    console.log('Account Token:', accountToken);
     const vercel = new VercelApi({ token: accountToken ?? bearerToken });
 
     try {
