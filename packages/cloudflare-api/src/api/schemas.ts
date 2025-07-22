@@ -9718,6 +9718,15 @@ export type AddressingAsn = number | null;
  */
 export type AddressingAsnPrependCount = number;
 
+/**
+ * Determines if Cloudflare advertises a BYOIP BGP prefix even when there is no matching BGP prefix in the Magic routing table. When true, Cloudflare will automatically withdraw the BGP prefix when there are no matching BGP routes, and will resume advertising when there is at least one matching BGP route.
+ *
+ * @default false
+ * @example true
+ * @x-auditable true
+ */
+export type AddressingAutoAdvertiseWithdraw = boolean;
+
 export type AddressingBgpOnDemand = {
   advertised?: AddressingAdvertised;
   advertised_modified_at?: AddressingModifiedAtNullable;
@@ -9740,10 +9749,10 @@ export type AddressingBgpPrefixIdentifier = string;
 
 export type AddressingBgpPrefixUpdateAdvertisement = {
   asn_prepend_count?: AddressingAsnPrependCount;
+  auto_advertise_withdraw?: AddressingAutoAdvertiseWithdraw;
   on_demand?: {
     advertised?: boolean;
   };
-  withdraw_if_no_route?: AddressingWithdrawIfNoRoute;
 };
 
 export type AddressingBgpSignalOpts = {
@@ -9900,13 +9909,13 @@ export type AddressingIpAddress = string;
 export type AddressingIpamBgpPrefixes = {
   asn?: AddressingAsn;
   asn_prepend_count?: AddressingAsnPrependCount;
+  auto_advertise_withdraw?: AddressingAutoAdvertiseWithdraw;
   bgp_signal_opts?: AddressingBgpSignalOpts;
   cidr?: AddressingCidr;
   created_at?: AddressingTimestamp;
   id?: AddressingBgpPrefixIdentifier;
   modified_at?: AddressingTimestamp;
   on_demand?: AddressingBgpOnDemand;
-  withdraw_if_no_route?: AddressingWithdrawIfNoRoute;
 };
 
 export type AddressingIpamDelegations = {
@@ -10148,15 +10157,6 @@ export type AddressingVerified = boolean;
  * @x-auditable true
  */
 export type AddressingVerifiedAt = string | null;
-
-/**
- * Controls whether the BGP prefix is automatically withdrawn when prefix is withdrawn from Magic routing table (for Magic Transit customers using Direct CNI)
- *
- * @default false
- * @example true
- * @x-auditable true
- */
-export type AddressingWithdrawIfNoRoute = boolean;
 
 /**
  * Identifier of a zone.
@@ -24117,14 +24117,24 @@ export type IamResourceGroups = IamResourceGroup[];
  * @x-auditable true
  */
 export type IamResources =
-  | {
-      [key: string]: string;
-    }
-  | {
-      [key: string]: {
-        [key: string]: string;
-      };
-    };
+  | IamResourcesTypeObjectString
+  | IamResourcesTypeObjectNested;
+
+/**
+ * Map of nested resource permissions
+ */
+export type IamResourcesTypeObjectNested = {
+  [key: string]: {
+    [key: string]: string;
+  };
+};
+
+/**
+ * Map of simple string resource permissions
+ */
+export type IamResourcesTypeObjectString = {
+  [key: string]: string;
+};
 
 export type IamResponseCollection = IamApiResponseCollection & {
   result?: Record<string, any>[];
@@ -24752,6 +24762,7 @@ export type ImagesDeletedResponse = ImagesApiResponseSingle & {
 };
 
 export type ImagesImage = {
+  creator?: ImagesImageCreator;
   filename?: ImagesImageFilename;
   id?: ImagesImageIdentifier;
   meta?: ImagesImageMetadata;
@@ -24761,6 +24772,12 @@ export type ImagesImage = {
 };
 
 export type ImagesImageBasicUpload = {
+  /**
+   * Can set the creator field with an internal user ID.
+   *
+   * @maxLength 1024
+   */
+  creator?: string;
   /**
    * An image binary data. Only needed when type is uploading a file.
    *
@@ -24795,7 +24812,20 @@ export type ImagesImageBasicUpload = {
   url?: string;
 };
 
+/**
+ * Can set the creator field with an internal user ID.
+ *
+ * @example 107b9558-dd06-4bbd-5fef-9c2c16bb7900
+ * @maxLength 1024
+ * @x-auditable true
+ */
+export type ImagesImageCreator = string | null;
+
 export type ImagesImageDirectUploadRequestV2 = {
+  /**
+   * Can set the creator field with an internal user ID.
+   */
+  creator?: string;
   /**
    * The date after which the upload will not be accepted. Minimum: Now + 2 minutes. Maximum: Now + 6 hours.
    *
@@ -24929,6 +24959,10 @@ export type ImagesImageMetadata = Record<string, any>;
 export type ImagesImageOriginalUrl = string;
 
 export type ImagesImagePatchRequest = {
+  /**
+   * Can set the creator field with an internal user ID.
+   */
+  creator?: string;
   /**
    * User modifiable key-value store. Can be used for keeping references to another system of record for managing images. No change if not specified.
    */
@@ -41522,7 +41556,11 @@ export type RulesetsSetCacheSettingsRule = {
       /**
        * Determines which browser ttl mode to use.
        */
-      mode: "respect_origin" | "bypass_by_default" | "override_origin";
+      mode:
+        | "respect_origin"
+        | "bypass_by_default"
+        | "override_origin"
+        | "bypass";
     };
     /**
      * Mark whether the request’s response from origin is eligible for caching. Caching itself will still depend on the cache-control header and your other caching configurations.
@@ -42141,6 +42179,10 @@ export type RulesetsSkipRule = {
    * @minProperties 1
    */
   action_parameters?: {
+    /**
+     * A phase to skip the execution of. This property is only compatible with products.
+     */
+    phase?: "current";
     /**
      * A list of phases to skip the execution of. This option is incompatible with the rulesets option.
      *
@@ -43613,96 +43655,210 @@ export type SecurityCenterValueCountsResponse =
 
 export type SecurityCenterZoneId = SecurityCenterIdentifier;
 
-export type SnippetsApiResponseCommon = {
-  errors: SnippetsMessages;
-  messages: SnippetsMessages;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
+/**
+ * A list of error messages.
+ */
+export type SnippetsErrors = SnippetsMessage[];
 
-export type SnippetsApiResponseCommonFailure = {
+/**
+ * A message.
+ */
+export type SnippetsMessage = {
   /**
-   * @example {"code":7003,"message":"No route for the URI"}
+   * A unique code for this message.
+   *
+   * @example 10000
+   * @x-auditable true
+   */
+  code?: number;
+  /**
+   * A text description of this message.
+   *
+   * @example something bad happened
    * @minLength 1
+   * @x-auditable true
    */
-  errors: SnippetsMessages;
-  messages: SnippetsMessages;
-  result: any | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example false
-   */
-  success: false;
+  message: string;
 };
 
 /**
- * Identifier
+ * A list of warning messages.
+ */
+export type SnippetsMessages = SnippetsMessage[];
+
+/**
+ * The current page number.
  *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
+ * @default 1
+ * @example 1
+ * @minimum 1
+ * @x-auditable true
  */
-export type SnippetsIdentifier = string;
-
-export type SnippetsMessages = {
-  /**
-   * @minimum 1000
-   */
-  code: number;
-  message: string;
-}[];
+export type SnippetsPage = number;
 
 /**
- * List of snippet rules
+ * The number of results to return per page.
+ *
+ * @default 25
+ * @example 25
+ * @minimum 1
+ * @x-auditable true
  */
-export type SnippetsRules = {
-  /**
-   * @example Rule description
-   */
-  description?: string;
-  /**
-   * @example true
-   */
-  enabled?: boolean;
-  /**
-   * @example http.cookie eq "a=b"
-   */
-  expression?: string;
-  snippet_name?: SnippetsSnippetName;
-}[];
+export type SnippetsPerPage = number;
 
 /**
- * Snippet Information
+ * A response object.
+ */
+export type SnippetsResponse = {
+  errors: SnippetsErrors;
+  messages: SnippetsMessages;
+  /**
+   * A result.
+   */
+  result: void;
+  /**
+   * Whether the API call was successful.
+   *
+   * @x-auditable true
+   */
+  success: boolean;
+};
+
+/**
+ * Additional information to navigate the results.
+ */
+export type SnippetsResultInfo = {
+  /**
+   * The number of results in the current page.
+   *
+   * @example 25
+   * @minimum 0
+   * @x-auditable true
+   */
+  count: number;
+  page: SnippetsPage;
+  per_page: SnippetsPerPage;
+  /**
+   * The total number of results.
+   *
+   * @example 100
+   * @minimum 0
+   * @x-auditable true
+   */
+  total_count: number;
+  /**
+   * The total number of pages.
+   *
+   * @example 10
+   * @minimum 1
+   * @x-auditable true
+   */
+  total_pages: number;
+};
+
+/**
+ * A snippet object.
  */
 export type SnippetsSnippet = {
   /**
-   * Creation time of the snippet
+   * The timestamp of when the snippet was created.
    *
-   * @example 2023-07-24-00:00:00
+   * @example 2000-01-01T00:00:00.000000Z
+   * @format date-time
+   * @x-auditable true
    */
-  created_on?: string;
+  created_on: string;
   /**
-   * Modification time of the snippet
+   * The timestamp of when the snippet was last modified.
    *
-   * @example 2023-07-24-00:00:00
+   * @example 2000-01-01T00:00:00.000000Z
+   * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
-  snippet_name?: SnippetsSnippetName;
+  snippet_name: SnippetsSnippetName;
 };
 
 /**
- * Snippet identifying name
+ * The list of files belonging to the snippet.
  *
- * @example snippet_name_01
+ * @minItems 1
+ */
+export type SnippetsSnippetFiles = Blob[];
+
+/**
+ * Name of the file that contains the main module of the snippet.
+ *
+ * @example main.js
+ * @minLength 1
+ * @x-auditable true
+ */
+export type SnippetsSnippetMainModule = string;
+
+/**
+ * The identifying name of the snippet.
+ *
+ * @example my_snippet
  * @pattern ^[A-Za-z0-9_]+$
+ * @x-auditable true
  */
 export type SnippetsSnippetName = string;
 
-export type SnippetsZoneIdentifier = SnippetsIdentifier;
+/**
+ * A list of snippet rules.
+ */
+export type SnippetsSnippetRules = {
+  /**
+   * An informative description of the rule.
+   *
+   * @default
+   * @example Execute my_snippet when IP address is 1.1.1.1.
+   * @x-auditable true
+   */
+  description?: string;
+  /**
+   * Whether the rule should be executed.
+   *
+   * @default false
+   * @example true
+   * @x-auditable true
+   */
+  enabled?: boolean;
+  /**
+   * The expression defining which traffic will match the rule.
+   *
+   * @example ip.src ne 1.1.1.1
+   * @minLength 1
+   * @x-auditable true
+   */
+  expression: string;
+  /**
+   * The unique ID of the rule.
+   *
+   * @example 3a03d665bac047339bb530ecb439a90d
+   * @pattern ^[0-9a-f]{32}$
+   * @x-auditable true
+   */
+  id: string;
+  /**
+   * The timestamp of when the rule was last modified.
+   *
+   * @example 2000-01-01T00:00:00.000000Z
+   * @format date-time
+   * @x-auditable true
+   */
+  last_updated: string;
+  snippet_name: SnippetsSnippetName;
+}[];
+
+/**
+ * The unique ID of the zone.
+ *
+ * @example 9f1839b6152d298aca64c4e906b6d074
+ * @pattern ^[0-9a-f]{32}$
+ * @x-auditable true
+ */
+export type SnippetsZoneId = string;
 
 export type SpectrumAnalyticsApiResponseCommon = {
   errors: SpectrumAnalyticsMessages;
@@ -57521,7 +57677,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
 };
 
 /**
- * The action to preform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.
+ * The action to perform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.
  *
  * @example allow
  * @x-auditable true
@@ -58043,8 +58199,10 @@ export type ZeroTrustGatewayDevicePosture = string;
 /**
  * The identifier of the pair of IPv4 addresses assigned to this location.
  *
+ * @default 0e4a32c6-6fb8-4858-9296-98f51631e8e6
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
 
@@ -58053,14 +58211,16 @@ export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
  *
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
 
 /**
- * The uuid identifier of the IPv6 block brought to the gateway, so that this location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block and not from the standard CloudFlare IPv6 block.
+ * The uuid identifier of the IPv6 block brought to the gateway, so that this location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block and not from the standard Cloudflare IPv6 block.
  *
  * @example b08f7231-d458-495c-98ef-190604c9ee83
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
 
@@ -58445,8 +58605,10 @@ export type ZeroTrustGatewayIpNetwork = {
 
 /**
  * A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayIpNetworks = ZeroTrustGatewayIpNetwork[];
+export type ZeroTrustGatewayIpNetworks = ZeroTrustGatewayIpNetwork[] | null;
 
 /**
  * A list of CIDRs to restrict ingress connections.
@@ -58475,8 +58637,10 @@ export type ZeroTrustGatewayIpv4Network = {
 
 /**
  * A list of network ranges that requests from this location would originate from. A non-empty list is only effective if the ipv4 endpoint is enabled for this location.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayIpv4Networks = ZeroTrustGatewayIpv4Network[];
+export type ZeroTrustGatewayIpv4Networks = ZeroTrustGatewayIpv4Network[] | null;
 
 export type ZeroTrustGatewayIpv6Endpoint = {
   /**
@@ -58501,8 +58665,10 @@ export type ZeroTrustGatewayIpv6Network = {
 
 /**
  * A list of allowed source IPv6 network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[];
+export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[] | null;
 
 /**
  * The items in the list.
@@ -58769,7 +58935,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * @example {"My-Next-Header":["foo","bar"],"X-Custom-Header-Name":["somecustomvalue"]}
    */
   add_headers?: {
-    [key: string]: string;
+    [key: string]: string[];
   } | null;
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
