@@ -4,7 +4,7 @@
   "description": "Type-safe unofficial OpenAPI clients for various APIs",
   "scripts": {
     "generate": "turbo run generate",
-    "build": "turbo run build",
+    "build": "turbo run build --filter=./packages/*",
     "tsc": "turbo run tsc",
     "dev": "turbo run dev",
     "format": "pnpm exec biome format --write",

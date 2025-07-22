@@ -10,8 +10,8 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  tsc:
-    name: Type Check
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,5 +33,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Type Check
+      - name: Build
+        run: pnpm build
+
+      - name: Type check
         run: pnpm tsc

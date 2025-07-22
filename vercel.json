@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "turbo run build",
+  "outputDirectory": "apps/website/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/.well-known/(.*)",
+      "destination": "/api/oauth/.well-known/$1"
+    }
+  ]
+}
