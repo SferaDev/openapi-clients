@@ -10,7 +10,7 @@
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
   "scripts": {
-    "tsc": "tsc --noEmit",
+    "tsc": "tsgo --noEmit",
     "build": "unbuild"
   },
   "repository": {
@@ -34,9 +34,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",

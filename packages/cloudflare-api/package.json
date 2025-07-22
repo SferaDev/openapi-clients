@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "tsc": "tsc --noEmit",
+    "tsc": "tsgo --noEmit",
     "build": "unbuild",
     "prepack": "unbuild",
     "generate": "openapi-codegen cloudflare"

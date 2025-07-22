@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
   "scripts": {
-    "tsc": "tsc --noEmit",
+    "tsc": "tsgo --noEmit",
     "build": "unbuild",
     "generate": "rimraf ./src/generated && kubb generate"
   },

@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
   "scripts": {
-    "tsc": "tsc --noEmit",
+    "tsc": "tsgo --noEmit",
     "build": "unbuild",
     "generate": "rimraf ./src/generated && kubb generate"
   },
@@ -31,9 +31,7 @@
   "dependencies": {
     "zod": "=3.25.76"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
