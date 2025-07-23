@@ -1,6 +1,6 @@
 {
   "name": "v0-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vercel v0 auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",
@@ -31,7 +31,9 @@
   "dependencies": {
     "zod": "=3.25.76"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",

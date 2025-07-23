@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.6.2
+
+### Patch Changes
+
+- ca1fe30: Add AIC_CONVERSATION type to ListArchivedFilesResponse and GetArchivedFilesResponse.
+
 ## 0.6.1
 
 ### Patch Changes
