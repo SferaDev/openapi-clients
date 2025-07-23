@@ -58287,6 +58287,7 @@ export type ZeroTrustGatewayDohEndpoint = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpNetworks;
@@ -58295,6 +58296,7 @@ export type ZeroTrustGatewayDohEndpoint = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   require_token?: boolean;
 };
@@ -58305,6 +58307,7 @@ export type ZeroTrustGatewayDotEndpoint = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpNetworks;
@@ -58618,6 +58621,7 @@ export type ZeroTrustGatewayIpv4Endpoint = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   enabled?: boolean;
 };
@@ -58645,6 +58649,7 @@ export type ZeroTrustGatewayIpv6Endpoint = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpv6Networks;
