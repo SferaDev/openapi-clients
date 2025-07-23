@@ -28263,6 +28263,7 @@ export type LogpushDestinationExistsResponse = LogpushApiResponseCommon & {
 /**
  * Flag that indicates if the job is enabled.
  *
+ * @default false
  * @example false
  * @x-auditable true
  */
@@ -28432,7 +28433,6 @@ export type LogpushMaxUploadBytes = 0 | number | null;
 /**
  * The maximum interval in seconds for log batches. This setting must be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify a minimum interval for log batches; this means that log files may be sent in shorter intervals than this.
  *
- * @default 30
  * @example 30
  * @x-auditable true
  */
@@ -28441,7 +28441,6 @@ export type LogpushMaxUploadIntervalSeconds = 0 | number | null;
 /**
  * The maximum number of log lines per batch. This setting must be between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum number of log lines per batch; this means that log files may contain many fewer lines than this.
  *
- * @default 100000
  * @example 1000
  * @x-auditable true
  */
@@ -28476,7 +28475,6 @@ export type LogpushOutputOptions = {
   /**
    * If set to true, will cause all occurrences of `${` in the generated files to be replaced with `x{`.
    *
-   * @default false
    * @x-auditable true
    */
   ["CVE-2021-44228"]?: boolean | null;
@@ -28509,7 +28507,6 @@ export type LogpushOutputOptions = {
   /**
    * Specifies the output type, such as `ndjson` or `csv`. This sets default values for the rest of the settings, depending on the chosen output type. Some formatting rules, like string quoting, are different between output types.
    *
-   * @default ndjson
    * @example ndjson
    * @x-auditable true
    */
@@ -28541,7 +28538,6 @@ export type LogpushOutputOptions = {
   /**
    * Floating number to specify sampling rate. Sampling is applied on top of filtering, and regardless of the current `sample_interval` of the data.
    *
-   * @default 1
    * @format float
    * @maximum 1
    * @minimum 0
@@ -28551,7 +28547,6 @@ export type LogpushOutputOptions = {
   /**
    * String to specify the format for timestamps, such as `unixnano`, `unix`, or `rfc3339`.
    *
-   * @default unixnano
    * @x-auditable true
    */
   timestamp_format?: "unixnano" | "unix" | "rfc3339";
@@ -58357,13 +58352,13 @@ export type ZeroTrustGatewayEnabledUploadPhase = boolean;
 /**
  * The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayEndpoints = {
-  doh?: ZeroTrustGatewayDohEndpoint;
-  dot?: ZeroTrustGatewayDotEndpoint;
-  ipv4?: ZeroTrustGatewayIpv4Endpoint;
-  ipv6?: ZeroTrustGatewayIpv6Endpoint;
+  doh: ZeroTrustGatewayDohEndpoint;
+  dot: ZeroTrustGatewayDotEndpoint;
+  ipv4: ZeroTrustGatewayIpv4Endpoint;
+  ipv6: ZeroTrustGatewayIpv6Endpoint;
 } | null;
 
 /**
@@ -58960,6 +58955,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Configure how browser isolation behaves.
+   *
+   * @x-stainless-terraform-configurability optional
    */
   biso_admin_controls?: {
     /**
@@ -59051,7 +59048,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @x-auditable true
      */
     version?: "v1" | "v2";
-  } | null;
+  };
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
    */
