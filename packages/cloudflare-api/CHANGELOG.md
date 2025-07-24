@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.16.1
+
+### Patch Changes
+
+- 8a73b10: Add @x-stainless-terraform-configurability computed_optional metadata to various endpoint schemas
+- bf2f229: [BREAKING] Allow ZeroTrustGatewayEndpoints to be null
+- 6784a24: Add default false value to LogpushJobFlagEnabled flag.
+- aa8c1d0: Add 'creator' field to CloudflareImagesListImagesQueryParams and V2QueryParams.
+- b158961: Update comment on reportType parameter in SubmitAbuseReportPathParams
+- 582e994: [BREAKING] Change IamResources type to support nested objects with string values
+
 ## 0.16.0
 
 ### Minor Changes

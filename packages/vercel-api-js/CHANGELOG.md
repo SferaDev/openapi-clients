@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 1.0.2
+
+### Patch Changes
+
+- 0477f31: Update constructor
+
 ## 1.0.1
 
 ### Patch Changes
