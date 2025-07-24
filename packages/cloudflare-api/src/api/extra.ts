@@ -330,6 +330,8 @@ import {
   accountsTurnstileWidgetGet,
   accountsTurnstileWidgetUpdate,
   accountsTurnstileWidgetRotateSecret,
+  postBinDBPost,
+  getBinDBGetBinary,
   getEventListGet,
   postEventList,
   getAttackerList,
@@ -355,9 +357,16 @@ import {
   deleteEventTagDelete,
   postEventTagCreate,
   getIndicatorTypesList,
+  getIndicatorList,
+  postIndicatorCreateBulk,
+  postIndicatorCreate,
+  deleteIndicatorDelete,
+  getIndicatorRead,
+  patchIndicatorUpdate,
   getEventRawReadDS,
   deleteEventReferenceDelete,
   postEventReferenceCreate,
+  postCreateEventRelationship,
   postTagCreate,
   getTargetIndustryList,
   deleteEventDeleteDO,
@@ -368,6 +377,7 @@ import {
   getEventRawRead,
   patchEventRawUpdate,
   postEventRawUpdate,
+  getEventRelationships,
   cloudforceOneRequestList,
   cloudforceOneRequestConstants,
   cloudforceOneRequestNew,
@@ -588,11 +598,13 @@ import {
   emailSecurityGetMessageTrace,
   emailSecurityListAllowPolicies,
   emailSecurityCreateAllowPolicy,
+  emailSecurityBatchAllowPolicies,
   emailSecurityDeleteAllowPolicy,
   emailSecurityGetAllowPolicy,
   emailSecurityUpdateAllowPolicy,
   emailSecurityListBlockedSenders,
   emailSecurityCreateBlockedSender,
+  emailSecurityBatchBlockedSenders,
   emailSecurityDeleteBlockedSender,
   emailSecurityGetBlockedSender,
   emailSecurityUpdateBlockedSender,
@@ -606,8 +618,10 @@ import {
   emailSecurityDeleteDisplayName,
   emailSecurityGetDisplayName,
   emailSecurityUpdateDisplayName,
+  emailSecurityBatchSendingDomainRestrictions,
   emailSecurityListTrustedDomains,
   emailSecurityCreateTrustedDomain,
+  emailSecurityBatchTrustedDomains,
   emailSecurityDeleteTrustedDomain,
   emailSecurityGetTrustedDomain,
   emailSecurityUpdateTrustedDomain,
@@ -620,6 +634,10 @@ import {
   r2EventNotificationDeleteConfig,
   r2GetEventNotificationConfig,
   r2PutEventNotificationConfig,
+  subscriptionsList,
+  subscriptionsCreate,
+  subscriptionsDelete,
+  subscriptionsPatch,
   ipAccessRulesForAnAccountListIpAccessRules,
   ipAccessRulesForAnAccountCreateAnIpAccessRule,
   ipAccessRulesForAnAccountDeleteAnIpAccessRule,
@@ -2682,6 +2700,8 @@ export const operationsByPath = {
     accountsTurnstileWidgetUpdate,
   "POST /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret":
     accountsTurnstileWidgetRotateSecret,
+  "POST /accounts/{account_id}/cloudforce-one/binary": postBinDBPost,
+  "GET /accounts/{account_id}/cloudforce-one/binary/{hash}": getBinDBGetBinary,
   "GET /accounts/{account_id}/cloudforce-one/events": getEventListGet,
   "POST /accounts/{account_id}/cloudforce-one/events": postEventList,
   "GET /accounts/{account_id}/cloudforce-one/events/attackers": getAttackerList,
@@ -2723,12 +2743,26 @@ export const operationsByPath = {
     postEventTagCreate,
   "GET /accounts/{account_id}/cloudforce-one/events/indicatorTypes":
     getIndicatorTypesList,
+  "GET /accounts/{account_id}/cloudforce-one/events/indicators":
+    getIndicatorList,
+  "POST /accounts/{account_id}/cloudforce-one/events/indicators/bulk":
+    postIndicatorCreateBulk,
+  "POST /accounts/{account_id}/cloudforce-one/events/indicators/create":
+    postIndicatorCreate,
+  "DELETE /accounts/{account_id}/cloudforce-one/events/indicators/{indicator_id}":
+    deleteIndicatorDelete,
+  "GET /accounts/{account_id}/cloudforce-one/events/indicators/{indicator_id}":
+    getIndicatorRead,
+  "PATCH /accounts/{account_id}/cloudforce-one/events/indicators/{indicator_id}":
+    patchIndicatorUpdate,
   "GET /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}":
     getEventRawReadDS,
   "DELETE /accounts/{account_id}/cloudforce-one/events/relate/{event_id}":
     deleteEventReferenceDelete,
   "POST /accounts/{account_id}/cloudforce-one/events/relate/{event_id}/create":
     postEventReferenceCreate,
+  "POST /accounts/{account_id}/cloudforce-one/events/relationships/create":
+    postCreateEventRelationship,
   "POST /accounts/{account_id}/cloudforce-one/events/tags/create":
     postTagCreate,
   "GET /accounts/{account_id}/cloudforce-one/events/targetIndustries":
@@ -2748,6 +2782,8 @@ export const operationsByPath = {
     patchEventRawUpdate,
   "POST /accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}":
     postEventRawUpdate,
+  "GET /accounts/{account_id}/cloudforce-one/events/{event_id}/relationships":
+    getEventRelationships,
   "POST /accounts/{account_id}/cloudforce-one/requests":
     cloudforceOneRequestList,
   "GET /accounts/{account_id}/cloudforce-one/requests/constants":
@@ -3134,6 +3170,8 @@ export const operationsByPath = {
     emailSecurityListAllowPolicies,
   "POST /accounts/{account_id}/email-security/settings/allow_policies":
     emailSecurityCreateAllowPolicy,
+  "POST /accounts/{account_id}/email-security/settings/allow_policies/batch":
+    emailSecurityBatchAllowPolicies,
   "DELETE /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
     emailSecurityDeleteAllowPolicy,
   "GET /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
@@ -3144,6 +3182,8 @@ export const operationsByPath = {
     emailSecurityListBlockedSenders,
   "POST /accounts/{account_id}/email-security/settings/block_senders":
     emailSecurityCreateBlockedSender,
+  "POST /accounts/{account_id}/email-security/settings/block_senders/batch":
+    emailSecurityBatchBlockedSenders,
   "DELETE /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
     emailSecurityDeleteBlockedSender,
   "GET /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
@@ -3170,10 +3210,14 @@ export const operationsByPath = {
     emailSecurityGetDisplayName,
   "PATCH /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
     emailSecurityUpdateDisplayName,
+  "POST /accounts/{account_id}/email-security/settings/sending_domain_restrictions/batch":
+    emailSecurityBatchSendingDomainRestrictions,
   "GET /accounts/{account_id}/email-security/settings/trusted_domains":
     emailSecurityListTrustedDomains,
   "POST /accounts/{account_id}/email-security/settings/trusted_domains":
     emailSecurityCreateTrustedDomain,
+  "POST /accounts/{account_id}/email-security/settings/trusted_domains/batch":
+    emailSecurityBatchTrustedDomains,
   "DELETE /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
     emailSecurityDeleteTrustedDomain,
   "GET /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
@@ -3198,6 +3242,14 @@ export const operationsByPath = {
     r2GetEventNotificationConfig,
   "PUT /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}":
     r2PutEventNotificationConfig,
+  "GET /accounts/{account_id}/event_subscriptions/subscriptions":
+    subscriptionsList,
+  "POST /accounts/{account_id}/event_subscriptions/subscriptions":
+    subscriptionsCreate,
+  "DELETE /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}":
+    subscriptionsDelete,
+  "PATCH /accounts/{account_id}/event_subscriptions/subscriptions/{subscription_id}":
+    subscriptionsPatch,
   "GET /accounts/{account_id}/firewall/access_rules/rules":
     ipAccessRulesForAnAccountListIpAccessRules,
   "POST /accounts/{account_id}/firewall/access_rules/rules":
