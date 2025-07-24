@@ -18425,6 +18425,8 @@ export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted CERT content. See 'data' to set CERT properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18437,10 +18439,13 @@ export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 8
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     algorithm?: number;
     /**
      * Certificate.
+     *
+     * @x-auditable true
      */
     certificate?: string;
     /**
@@ -18449,6 +18454,7 @@ export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     key_tag?: number;
     /**
@@ -18457,6 +18463,7 @@ export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 9
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     type?: number;
   };
@@ -18494,6 +18501,8 @@ export type DnsRecordsCNAMERecord = {
 export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted DNSKEY content. See 'data' to set DNSKEY properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18506,6 +18515,7 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 5
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     algorithm?: number;
     /**
@@ -18514,6 +18524,7 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     flags?: number;
     /**
@@ -18522,10 +18533,13 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 3
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     protocol?: number;
     /**
      * Public Key.
+     *
+     * @x-auditable true
      */
     public_key?: string;
   };
@@ -18541,6 +18555,8 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted DS content. See 'data' to set DS properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18553,10 +18569,13 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 3
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     algorithm?: number;
     /**
      * Digest.
+     *
+     * @x-auditable true
      */
     digest?: string;
     /**
@@ -18565,6 +18584,7 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     digest_type?: number;
     /**
@@ -18573,6 +18593,7 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     key_tag?: number;
   };
@@ -18588,6 +18609,8 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted HTTPS content. See 'data' to set HTTPS properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18600,18 +18623,21 @@ export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     priority?: number;
     /**
      * target.
      *
      * @example .
+     * @x-auditable true
      */
     target?: string;
     /**
      * value.
      *
      * @example alpn="h3,h2" ipv4hint="127.0.0.1" ipv6hint="::1"
+     * @x-auditable true
      */
     value?: string;
   };
@@ -18629,6 +18655,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
    * Formatted LOC content. See 'data' to set LOC properties.
    *
    * @example IN LOC 37 46 46 N 122 23 35 W 0m 100m 0m 0m
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18641,6 +18668,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 42849672.95
      * @minimum -100000
+     * @x-auditable true
      */
     altitude?: number;
     /**
@@ -18649,12 +18677,14 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 37
      * @maximum 90
      * @minimum 0
+     * @x-auditable true
      */
     lat_degrees?: number;
     /**
      * Latitude direction.
      *
      * @example N
+     * @x-auditable true
      */
     lat_direction?: "N" | "S";
     /**
@@ -18663,6 +18693,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 46
      * @maximum 59
      * @minimum 0
+     * @x-auditable true
      */
     lat_minutes?: number;
     /**
@@ -18671,6 +18702,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 46
      * @maximum 59.999
      * @minimum 0
+     * @x-auditable true
      */
     lat_seconds?: number;
     /**
@@ -18679,12 +18711,14 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 122
      * @maximum 180
      * @minimum 0
+     * @x-auditable true
      */
     long_degrees?: number;
     /**
      * Longitude direction.
      *
      * @example W
+     * @x-auditable true
      */
     long_direction?: "E" | "W";
     /**
@@ -18693,6 +18727,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 23
      * @maximum 59
      * @minimum 0
+     * @x-auditable true
      */
     long_minutes?: number;
     /**
@@ -18701,6 +18736,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 35
      * @maximum 59.999
      * @minimum 0
+     * @x-auditable true
      */
     long_seconds?: number;
     /**
@@ -18709,6 +18745,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 90000000
      * @minimum 0
+     * @x-auditable true
      */
     precision_horz?: number;
     /**
@@ -18717,6 +18754,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 90000000
      * @minimum 0
+     * @x-auditable true
      */
     precision_vert?: number;
     /**
@@ -18725,6 +18763,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 100
      * @maximum 90000000
      * @minimum 0
+     * @x-auditable true
      */
     size?: number;
   };
@@ -18759,6 +18798,8 @@ export type DnsRecordsMXRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted NAPTR content. See 'data' to set NAPTR properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18767,6 +18808,8 @@ export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
   data?: {
     /**
      * Flags.
+     *
+     * @x-auditable true
      */
     flags?: string;
     /**
@@ -18775,6 +18818,7 @@ export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 100
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     order?: number;
     /**
@@ -18783,18 +18827,25 @@ export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 10
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     preference?: number;
     /**
      * Regex.
+     *
+     * @x-auditable true
      */
     regex?: string;
     /**
      * Replacement.
+     *
+     * @x-auditable true
      */
     replacement?: string;
     /**
      * Service.
+     *
+     * @x-auditable true
      */
     service?: string;
   };
@@ -18827,6 +18878,8 @@ export type DnsRecordsNSRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsOPENPGPKEYRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18858,6 +18911,8 @@ export type DnsRecordsPTRRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted SMIMEA content. See 'data' to set SMIMEA properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18866,6 +18921,8 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
   data?: {
     /**
      * Certificate.
+     *
+     * @x-auditable true
      */
     certificate?: string;
     /**
@@ -18874,6 +18931,7 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     matching_type?: number;
     /**
@@ -18882,6 +18940,7 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     selector?: number;
     /**
@@ -18890,6 +18949,7 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 3
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     usage?: number;
   };
@@ -18907,6 +18967,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
    * Priority, weight, port, and SRV target. See 'data' for setting the individual component values.
    *
    * @example 10 IN SRV 5 8806 example.com.
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18919,6 +18980,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 8806
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     port?: number;
     priority?: DnsRecordsPriority;
@@ -18927,6 +18989,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
      *
      * @example example.com
      * @format hostname
+     * @x-auditable true
      */
     target?: string;
     /**
@@ -18935,6 +18998,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 5
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     weight?: number;
   };
@@ -18950,6 +19014,8 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted SSHFP content. See 'data' to set SSHFP properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -18962,10 +19028,13 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 2
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     algorithm?: number;
     /**
      * fingerprint.
+     *
+     * @x-auditable true
      */
     fingerprint?: string;
     /**
@@ -18974,6 +19043,7 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     type?: number;
   };
@@ -18989,6 +19059,8 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted SVCB content. See 'data' to set SVCB properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -19001,18 +19073,21 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     priority?: number;
     /**
      * target.
      *
      * @example .
+     * @x-auditable true
      */
     target?: string;
     /**
      * value.
      *
      * @example alpn="h3,h2" ipv4hint="127.0.0.1" ipv6hint="::1"
+     * @x-auditable true
      */
     value?: string;
   };
@@ -19028,6 +19103,8 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted TLSA content. See 'data' to set TLSA properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -19036,6 +19113,8 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
   data?: {
     /**
      * certificate.
+     *
+     * @x-auditable true
      */
     certificate?: string;
     /**
@@ -19044,6 +19123,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     matching_type?: number;
     /**
@@ -19052,6 +19132,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     selector?: number;
     /**
@@ -19060,6 +19141,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 0
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     usage?: number;
   };
@@ -19079,6 +19161,7 @@ export type DnsRecordsTXTRecord = DnsRecordsDnsRecordSharedFields & {
    * Learn more at <https://www.cloudflare.com/learning/dns/dns-records/dns-txt-record/>.
    *
    * @example "v=spf1 include:example.com -all"
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -19093,6 +19176,8 @@ export type DnsRecordsTXTRecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted URI content. See 'data' to set URI properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -19103,6 +19188,7 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
      * The record content.
      *
      * @example http://example.com/example.html
+     * @x-auditable true
      */
     target?: string;
     /**
@@ -19111,6 +19197,7 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
      * @example 20
      * @maximum 65535
      * @minimum 0
+     * @x-auditable true
      */
     weight?: number;
   };
@@ -19421,6 +19508,8 @@ export type DnsRecordsTagMatch = "any" | "all";
 
 /**
  * Custom tags for the DNS record. This field has no effect on DNS responses.
+ *
+ * @x-auditable true
  */
 export type DnsRecordsTags = string[];
 
@@ -19429,6 +19518,7 @@ export type DnsRecordsTags = string[];
  *
  * @default 1
  * @example 3600
+ * @x-auditable true
  */
 export type DnsRecordsTtl = number | 1;
 
@@ -20569,7 +20659,6 @@ export type EmailSecurityMailsearchMessage = {
     allowlisted_pattern?: string;
     allowlisted_pattern_type?:
       | "quarantine_release"
-      | "blocked_sender"
       | "acceptable_sender"
       | "allowed_sender"
       | "allowed_recipient"
@@ -20580,7 +20669,6 @@ export type EmailSecurityMailsearchMessage = {
     blocklisted_pattern?: string;
     whitelisted_pattern_type?:
       | "quarantine_release"
-      | "blocked_sender"
       | "acceptable_sender"
       | "allowed_sender"
       | "allowed_recipient"
@@ -20859,6 +20947,39 @@ export type EmailSecurityUpdateBlockedSender = {
    */
   pattern?: string | null;
   pattern_type?: EmailSecurityPatternType & (string | null);
+};
+
+export type EmailSecurityUpdateTrustedDomain = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string;
+  /**
+   * Select to prevent recently registered domains from triggering a
+   * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
+   */
+  is_recent?: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean;
+  /**
+   * Select for partner or other approved domains that have similar
+   * spelling to your connected domains. Prevents listed domains from
+   * triggering a Spoof disposition.
+   *
+   * @x-auditable true
+   */
+  is_similarity?: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern?: string;
 };
 
 export type EmailSecurityValidationStatus =
@@ -23539,7 +23660,7 @@ export type IamCreateScope = {
 
 export type IamCreateMemberPolicy = {
   access: IamAccess;
-  id: IamIdentifier;
+  id: IamPolicyIdentifier;
   permission_groups: IamMemberPermissionGroups;
   resource_groups: IamMemberResourceGroups;
 };
@@ -23659,14 +23780,6 @@ export type IamGrants = {
 };
 
 /**
- * Policy identifier.
- *
- * @example f267e341f3dd4697bd3b9f71dd96247f
- * @x-auditable true
- */
-export type IamIdentifier = string;
-
-/**
  * Invite identifier tag.
  *
  * @example 4f5f0c14a2a41d5063dd301b2f829f04
@@ -23731,7 +23844,7 @@ export type IamLastUsedOn = string;
 
 export type IamListMemberPolicy = {
   access?: IamAccess;
-  id?: IamIdentifier;
+  id?: IamPolicyIdentifier;
   permission_groups?: IamPermissionGroups;
   resource_groups?: IamResourceGroups;
 };
@@ -24007,9 +24120,18 @@ export type IamPermissionsGroupResponseCollection = IamApiResponseCollection & {
   }[];
 };
 
+/**
+ * Policy identifier.
+ *
+ * @example f267e341f3dd4697bd3b9f71dd96247f
+ * @x-auditable true
+ * @x-stainless-terraform-always-send true
+ */
+export type IamPolicyIdentifier = string;
+
 export type IamPolicyWithPermissionGroupsAndResources = {
   effect: IamEffect;
-  id: IamIdentifier;
+  id: IamPolicyIdentifier;
   permission_groups: IamPermissionGroups;
   resources: IamResources;
 };
@@ -24565,7 +24687,7 @@ export type IamUserGroup = {
    */
   policies?: {
     access?: IamAccess;
-    id?: IamIdentifier;
+    id?: IamPolicyIdentifier;
     permission_groups?: IamPermissionGroups;
     resource_groups?: IamResourceGroups;
   }[];
@@ -30236,6 +30358,7 @@ export type MagicCreateGreTunnelRequest = {
   description?: MagicSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
   interface_address: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   mtu?: MagicMtu;
   name: MagicGreTunnelName;
   ttl?: MagicTtl;
@@ -30315,6 +30438,7 @@ export type MagicGreTunnel = {
   health_check?: MagicTunnelHealthCheck;
   id: MagicSchemasIdentifier;
   interface_address: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   modified_on?: MagicSchemasModifiedOn;
   mtu?: MagicMtu;
   name: MagicGreTunnelName;
@@ -30327,6 +30451,7 @@ export type MagicGreTunnelAddSingleRequest = {
   description?: MagicSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
   interface_address: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   mtu?: MagicMtu;
   name: MagicGreTunnelName;
   ttl?: MagicTtl;
@@ -30409,6 +30534,7 @@ export type MagicInterconnect = {
   health_check?: MagicInterconnectHealthCheck;
   id?: MagicSchemasIdentifier;
   interface_address?: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   modified_on?: MagicSchemasModifiedOn;
   mtu?: MagicSchemasMtu;
   name?: MagicComponentsSchemasName;
@@ -30428,6 +30554,7 @@ export type MagicInterconnectTunnelUpdateRequest = {
   gre?: MagicGre;
   health_check?: MagicInterconnectHealthCheck;
   interface_address?: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   mtu?: MagicSchemasMtu;
 };
 
@@ -30438,6 +30565,14 @@ export type MagicInterconnectTunnelUpdateRequest = {
  * @x-auditable true
  */
 export type MagicInterfaceAddress = string;
+
+/**
+ * A 127 bit IPV6 prefix from within the virtual_subnet6 prefix space with the address being the first IP of the subnet and not same as the address of virtual_subnet6. Eg if virtual_subnet6 is 2606:54c1:7:0:a9fe:12d2::/127 , interface_address6 could be 2606:54c1:7:0:a9fe:12d2:1:200/127
+ *
+ * @example 2606:54c1:7:0:a9fe:12d2:1:200/127
+ * @x-auditable true
+ */
+export type MagicInterfaceAddress6 = string;
 
 /**
  * A valid IPv4 address.
@@ -30455,6 +30590,7 @@ export type MagicIpsecTunnel = {
   health_check?: MagicTunnelHealthCheck;
   id: MagicSchemasIdentifier;
   interface_address: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   modified_on?: MagicSchemasModifiedOn;
   name: MagicIpsecTunnelName;
   psk_metadata?: MagicPskMetadata;
@@ -30469,6 +30605,7 @@ export type MagicIpsecTunnelAddSingleRequest = {
   description?: MagicComponentsSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
   interface_address: MagicInterfaceAddress;
+  interface_address6?: MagicInterfaceAddress6;
   name: MagicIpsecTunnelName;
   psk?: MagicPsk;
   replay_protection?: MagicReplayProtection;
@@ -32689,16 +32826,19 @@ export type MconnCreateConnectorResponse = MconnGoodResponse & {
 export type MconnCustomerConnector = {
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   activated: boolean;
   device?: MconnCustomerDevice;
   id: MconnUuid;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   interrupt_window_duration_hours: number;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   interrupt_window_hour_of_day: number;
   /**
@@ -32715,10 +32855,12 @@ export type MconnCustomerConnector = {
   last_updated: string;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   notes: string;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   timezone: string;
 };
@@ -32776,6 +32918,7 @@ export type MconnCustomerDevice = {
   id: MconnUuid;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   serial_number?: string;
 };
@@ -34085,6 +34228,325 @@ export type MqBatchSize = number;
 
 export type MqConsumer = MqWorkerConsumer | MqHttpConsumer;
 
+/**
+ * Destination configuration for the subscription
+ */
+export type MqEventDestination = MqEventDestinationQueue;
+
+export type MqEventDestinationQueue = {
+  /**
+   * ID of the target queue
+   *
+   * @x-auditable true
+   */
+  queue_id: string;
+  /**
+   * Type of destination
+   *
+   * @x-auditable true
+   */
+  type: "queues.queue";
+};
+
+/**
+ * Source configuration for the subscription
+ */
+export type MqEventSource =
+  | MqEventSourceAccess
+  | MqEventSourceAccessApplication
+  | MqEventSourceClipboards
+  | MqEventSourceClipboardsClipboard
+  | MqEventSourceDnsZone
+  | MqEventSourceImages
+  | MqEventSourceKv
+  | MqEventSourceKvNamespace
+  | MqEventSourceR2
+  | MqEventSourceR2Bucket
+  | MqEventSourceSecretsStore
+  | MqEventSourceSecretsStoreStore
+  | MqEventSourceSuperSlurper
+  | MqEventSourceVectorize
+  | MqEventSourceVectorizeIndex
+  | MqEventSourceWorkersAiModel
+  | MqEventSourceWorkersBuildsWorker
+  | MqEventSourceWorkflows
+  | MqEventSourceWorkflowsWorkflow;
+
+export type MqEventSourceAccess = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "access";
+};
+
+export type MqEventSourceAccessApplication = {
+  /**
+   * ID of the Access application
+   *
+   * @x-auditable true
+   */
+  application_id?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "access.application";
+};
+
+export type MqEventSourceClipboards = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "clipboards";
+};
+
+export type MqEventSourceClipboardsClipboard = {
+  /**
+   * ID of the clipboard
+   *
+   * @x-auditable true
+   */
+  clipboard_id?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "clipboards.clipboard";
+};
+
+export type MqEventSourceDnsZone = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "dns.zone";
+  /**
+   * ID of the DNS zone
+   *
+   * @x-auditable true
+   */
+  zone_id?: string;
+};
+
+export type MqEventSourceImages = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "images";
+};
+
+export type MqEventSourceKv = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "kv";
+};
+
+export type MqEventSourceKvNamespace = {
+  /**
+   * ID of the KV namespace
+   *
+   * @x-auditable true
+   */
+  namespace_id?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "kv.namespace";
+};
+
+export type MqEventSourceR2 = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "r2";
+};
+
+export type MqEventSourceR2Bucket = {
+  /**
+   * Name of the R2 bucket
+   *
+   * @x-auditable true
+   */
+  bucket_name?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "r2.bucket";
+};
+
+export type MqEventSourceSecretsStore = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "secretsStore";
+};
+
+export type MqEventSourceSecretsStoreStore = {
+  /**
+   * ID of the secrets store
+   *
+   * @x-auditable true
+   */
+  store_id?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "secretsStore.store";
+};
+
+export type MqEventSourceSuperSlurper = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "superSlurper";
+};
+
+export type MqEventSourceVectorize = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "vectorize";
+};
+
+export type MqEventSourceVectorizeIndex = {
+  /**
+   * Name of the Vectorize index
+   *
+   * @x-auditable true
+   */
+  index_name?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "vectorize.index";
+};
+
+export type MqEventSourceWorkersAiModel = {
+  /**
+   * Name of the Workers AI model
+   *
+   * @x-auditable true
+   */
+  model_name?: string;
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "workersAi.model";
+};
+
+export type MqEventSourceWorkersBuildsWorker = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "workersBuilds.worker";
+  /**
+   * Name of the worker
+   *
+   * @x-auditable true
+   */
+  worker_name?: string;
+};
+
+export type MqEventSourceWorkflows = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "workflows";
+};
+
+export type MqEventSourceWorkflowsWorkflow = {
+  /**
+   * Type of source
+   *
+   * @x-auditable true
+   */
+  type?: "workflows.workflow";
+  /**
+   * Name of the workflow
+   *
+   * @x-auditable true
+   */
+  workflow_name?: string;
+};
+
+export type MqEventSubscription = {
+  /**
+   * When the subscription was created
+   *
+   * @format date-time
+   * @x-auditable true
+   */
+  created_at: string;
+  destination: MqEventDestination;
+  /**
+   * Whether the subscription is active
+   *
+   * @x-auditable true
+   */
+  enabled: boolean;
+  /**
+   * List of event types this subscription handles
+   *
+   * @minItems 1
+   * @x-auditable true
+   */
+  events: string[];
+  /**
+   * Unique identifier for the subscription
+   *
+   * @x-auditable true
+   */
+  id: string;
+  /**
+   * When the subscription was last modified
+   *
+   * @format date-time
+   * @x-auditable true
+   */
+  modified_at: string;
+  /**
+   * Name of the subscription
+   *
+   * @x-auditable true
+   */
+  name: string;
+  source: MqEventSource;
+};
+
 export type MqHttpConsumer = {
   consumer_id?: MqIdentifier;
   /**
@@ -34499,6 +34961,7 @@ export type NscInterconnectGcpPartnerBody = {
   owner?: string;
   type?: string;
   region: string;
+  speed?: NscApiBandwidth;
 };
 
 export type NscInterconnectPhysicalBody = {
@@ -57697,6 +58160,8 @@ export type ZeroTrustGatewayAction =
 
 /**
  * Activity log settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayActivityLogSettings = {
   /**
@@ -57705,11 +58170,13 @@ export type ZeroTrustGatewayActivityLogSettings = {
    * @example true
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 } | null;
 
 /**
  * Anti-virus settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayAntiVirusSettings = {
   enabled_download_phase?: ZeroTrustGatewayEnabledDownloadPhase;
@@ -57838,6 +58305,8 @@ export type ZeroTrustGatewayBindingStatus =
 
 /**
  * Block page layout settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBlockPageSettings = {
   /**
@@ -57852,7 +58321,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @example true
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled: boolean | null;
   /**
    * If mode is customized_block_page: block page footer text.
    *
@@ -57897,10 +58366,10 @@ export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.
    *
-   * @default customized_block_page
+   * @default
    * @x-auditable true
    */
-  mode?: "customized_block_page" | "redirect_uri";
+  mode: "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -57913,13 +58382,13 @@ export type ZeroTrustGatewayBlockPageSettings = {
    *
    * @x-auditable true
    */
-  read_only?: boolean;
+  read_only?: boolean | null;
   /**
    * Account tag of account that shared this setting
    *
    * @x-auditable true
    */
-  source_account?: string;
+  source_account?: string | null;
   /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
    *
@@ -57933,10 +58402,19 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @x-auditable true
    */
   target_uri?: string;
+  /**
+   * Version number of the setting
+   *
+   * @example 1
+   * @x-auditable true
+   */
+  version?: number | null;
 } | null;
 
 /**
  * DLP body scanning settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBodyScanningSettings = {
   /**
@@ -57945,11 +58423,13 @@ export type ZeroTrustGatewayBodyScanningSettings = {
    * @example deep
    * @x-auditable true
    */
-  inspection_mode?: string;
+  inspection_mode?: "deep" | "shallow";
 } | null;
 
 /**
  * Browser isolation settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBrowserIsolationSettings = {
   /**
@@ -57994,6 +58474,8 @@ export type ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection =
 
 /**
  * Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayCertificateSettings = {
   /**
@@ -58130,6 +58612,7 @@ export type ZeroTrustGatewayCount = number;
  * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`)
  *
  * @deprecated true
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
@@ -58145,7 +58628,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    * @example true
    * @x-auditable true
    */
-  enabled: boolean;
+  enabled: boolean | null;
   /**
    * UUID of certificate (ID from MTLS certificate store).
    *
@@ -58188,6 +58671,7 @@ export type ZeroTrustGatewayDescriptionItem = string;
  * @default
  * @example any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDevicePosture = string;
 
@@ -58219,6 +58703,9 @@ export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
  */
 export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
 
+/**
+ * @x-stainless-terraform-configurability computed_optional
+ */
 export type ZeroTrustGatewayDnsResolverSettingsV4 = {
   /**
    * IPv4 address of upstream resolver.
@@ -58250,6 +58737,9 @@ export type ZeroTrustGatewayDnsResolverSettingsV4 = {
   vnet_id?: string;
 };
 
+/**
+ * @x-stainless-terraform-configurability computed_optional
+ */
 export type ZeroTrustGatewayDnsResolverSettingsV6 = {
   /**
    * IPv6 address of upstream resolver.
@@ -58341,16 +58831,18 @@ export type ZeroTrustGatewayEnabled = boolean;
  *
  * @example false
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
+export type ZeroTrustGatewayEnabledDownloadPhase = boolean | null;
 
 /**
  * Enable anti-virus scanning on uploads.
  *
  * @example false
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayEnabledUploadPhase = boolean;
+export type ZeroTrustGatewayEnabledUploadPhase = boolean | null;
 
 /**
  * The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.
@@ -58369,6 +58861,8 @@ export type ZeroTrustGatewayEndpoints = {
  * precedence over the policy's `schedule` configuration, if any.
  *
  * This does not apply to HTTP or network policies.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayExpiration = {
   /**
@@ -58408,6 +58902,8 @@ export type ZeroTrustGatewayExpiration = {
 
 /**
  * Extended e-mail matching settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
@@ -58416,19 +58912,26 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
    * @example true
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
   /**
    * This setting was shared via the Orgs API and cannot be edited by the current account
    *
    * @x-auditable true
    */
-  read_only?: boolean;
+  read_only?: boolean | null;
   /**
    * Account tag of account that shared this setting
    *
    * @x-auditable true
    */
-  source_account?: string;
+  source_account?: string | null;
+  /**
+   * Version number of the setting
+   *
+   * @example 1
+   * @x-auditable true
+   */
+  version?: number | null;
 } | null;
 
 /**
@@ -58436,8 +58939,9 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
  *
  * @example false
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type ZeroTrustGatewayFailClosed = boolean;
+export type ZeroTrustGatewayFailClosed = boolean | null;
 
 /**
  * The protocol or layer to evaluate the traffic, identity, and device posture expressions.
@@ -58454,6 +58958,8 @@ export type ZeroTrustGatewayFilters = (
 
 /**
  * FIPS settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayFipsSettings = {
   /**
@@ -58507,6 +59013,7 @@ export type ZeroTrustGatewayGatewayAccountSettings = {
     extended_email_matching?: ZeroTrustGatewayExtendedEmailMatching;
     fips?: ZeroTrustGatewayFipsSettings;
     host_selector?: ZeroTrustGatewayHostSelectorSettings;
+    inspection?: ZeroTrustGatewayInspectionSettings;
     protocol_detection?: ZeroTrustGatewayProtocolDetection;
     sandbox?: ZeroTrustGatewaySandbox;
     tls_decrypt?: ZeroTrustGatewayTlsSettings;
@@ -58553,6 +59060,8 @@ export type ZeroTrustGatewayGenerateCertRequest = {
 
 /**
  * Setting to enable host selector in egress policies.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayHostSelectorSettings = {
   /**
@@ -58561,7 +59070,7 @@ export type ZeroTrustGatewayHostSelectorSettings = {
    * @example false
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 } | null;
 
 /**
@@ -58582,8 +59091,26 @@ export type ZeroTrustGatewayIdentifier = string;
  * @default
  * @example any(identity.groups.name[*] in {"finance"})
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayIdentity = string;
+
+/**
+ * Setting to define inspection settings
+ *
+ * @x-stainless-terraform-configurability optional
+ */
+export type ZeroTrustGatewayInspectionSettings = {
+  /**
+   * Defines the mode of inspection the proxy will use.
+   * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
+   * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+   *
+   * @example static
+   * @x-auditable true
+   */
+  mode?: "static" | "dynamic";
+} | null;
 
 /**
  * IPV6 destination ip assigned to this location. DNS requests sent to this IP will counted as the request under this location. This field is auto-generated by Gateway.
@@ -58674,6 +59201,8 @@ export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[] | null;
 
 /**
  * The items in the list.
+ *
+ * @x-stainless-collection-type set
  */
 export type ZeroTrustGatewayItems = {
   created_at?: ZeroTrustGatewayReadOnlyTimestamp;
@@ -58683,6 +59212,8 @@ export type ZeroTrustGatewayItems = {
 
 /**
  * items to add to the list.
+ *
+ * @x-stainless-collection-type set
  */
 export type ZeroTrustGatewayItemsInput = {
   description?: ZeroTrustGatewayDescriptionItem;
@@ -58792,6 +59323,8 @@ export type ZeroTrustGatewayNotSharable = boolean;
 
 /**
  * Configure a message to display on the user's device when an antivirus search is performed.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
@@ -58829,6 +59362,8 @@ export type ZeroTrustGatewayPrecedence = number;
 
 /**
  * Protocol Detection settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayProtocolDetection = {
   /**
@@ -58837,7 +59372,7 @@ export type ZeroTrustGatewayProtocolDetection = {
    * @example true
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
 } | null;
 
 /**
@@ -58929,12 +59464,15 @@ export type ZeroTrustGatewayResultInfo = {
 
 /**
  * Additional settings that modify the rule's action.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayRuleSettings = {
   /**
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are header names, pointing to an array with its header value(s).
    *
    * @example {"My-Next-Header":["foo","bar"],"X-Custom-Header-Name":["somecustomvalue"]}
+   * @x-stainless-terraform-configurability computed_optional
    */
   add_headers?: {
     [key: string]: string[];
@@ -58944,10 +59482,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example false
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   allow_child_bypass?: boolean | null;
   /**
    * Settings for the Audit SSH action.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   audit_ssh?: {
     /**
@@ -58961,7 +59502,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure how browser isolation behaves.
    *
-   * @x-stainless-terraform-configurability optional
+   * @x-stainless-terraform-configurability computed_optional
    */
   biso_admin_controls?: {
     /**
@@ -59056,6 +59597,8 @@ export type ZeroTrustGatewayRuleSettings = {
   };
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   block_page?: {
     /**
@@ -59077,6 +59620,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   block_page_enabled?: boolean;
   /**
@@ -59084,6 +59628,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example This website is a security risk
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   block_reason?: string;
   /**
@@ -59091,10 +59636,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example false
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   bypass_parent_rule?: boolean | null;
   /**
    * Configure how session check behaves.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   check_session?: {
     /**
@@ -59114,6 +59662,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
@@ -59121,6 +59671,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   egress?: {
     /**
@@ -59150,6 +59702,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   ignore_cname_category_matches?: boolean;
   /**
@@ -59157,6 +59710,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example false
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   insecure_disable_dnssec_validation?: boolean;
   /**
@@ -59164,6 +59718,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   ip_categories?: boolean;
   /**
@@ -59171,10 +59726,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   ip_indicator_feeds?: boolean;
   /**
    * Send matching traffic to the supplied destination IP address and port.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   l4override?: {
     /**
@@ -59193,6 +59751,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Configure a notification to display on the user's device when this rule is matched.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   notification_settings?: {
     /**
@@ -59225,6 +59785,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example example.com
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   override_host?: string;
   /**
@@ -59232,10 +59793,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example 1.1.1.1
    * @example 2.2.2.2
+   * @x-stainless-terraform-configurability computed_optional
    */
   override_ips?: string[] | null;
   /**
    * Configure DLP payload logging.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   payload_log?: {
     /**
@@ -59248,6 +59812,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Settings that apply to quarantine rules
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   quarantine?: {
     /**
@@ -59271,6 +59837,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Settings that apply to redirect rules
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   redirect?: {
     /**
@@ -59295,6 +59863,8 @@ export type ZeroTrustGatewayRuleSettings = {
   } | null;
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   resolve_dns_internally?: {
     /**
@@ -59315,10 +59885,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example true
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   resolve_dns_through_cloudflare?: boolean | null;
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
+   *
+   * @x-stainless-terraform-configurability computed_optional
    */
   untrusted_cert?: {
     /**
@@ -59332,24 +59905,24 @@ export type ZeroTrustGatewayRuleSettings = {
 };
 
 export type ZeroTrustGatewayRules = {
-  action?: ZeroTrustGatewayAction;
+  action: ZeroTrustGatewayAction;
   created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   deleted_at?: ZeroTrustGatewayDeletedAt;
   description?: ZeroTrustGatewaySchemasDescription;
   device_posture?: ZeroTrustGatewayDevicePosture;
-  enabled?: ZeroTrustGatewayEnabled;
+  enabled: ZeroTrustGatewayEnabled;
   expiration?: ZeroTrustGatewayExpiration;
-  filters?: ZeroTrustGatewayFilters;
+  filters: ZeroTrustGatewayFilters;
   id?: ZeroTrustGatewayRulesComponentsSchemasUuid;
   identity?: ZeroTrustGatewayIdentity;
-  name?: ZeroTrustGatewayComponentsSchemasName;
+  name: ZeroTrustGatewayComponentsSchemasName;
   not_sharable?: ZeroTrustGatewayNotSharable;
-  precedence?: ZeroTrustGatewayPrecedence;
+  precedence: ZeroTrustGatewayPrecedence;
   read_only?: ZeroTrustGatewayReadOnly;
   rule_settings?: ZeroTrustGatewayRuleSettings;
   schedule?: ZeroTrustGatewaySchedule;
   source_account?: ZeroTrustGatewaySourceAccount;
-  traffic?: ZeroTrustGatewayTraffic;
+  traffic: ZeroTrustGatewayTraffic;
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   version?: ZeroTrustGatewayVersion;
   warning_status?: ZeroTrustGatewayWarningStatus;
@@ -59371,6 +59944,8 @@ export type ZeroTrustGatewayRulesComponentsSchemasUuid = string;
 
 /**
  * Sandbox settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewaySandbox = {
   /**
@@ -59379,7 +59954,7 @@ export type ZeroTrustGatewaySandbox = {
    * @example true
    * @x-auditable true
    */
-  enabled?: boolean;
+  enabled?: boolean | null;
   /**
    * Action to take when the file cannot be scanned.
    *
@@ -59390,6 +59965,8 @@ export type ZeroTrustGatewaySandbox = {
 
 /**
  * The schedule for activating DNS policies. This does not apply to HTTP or network policies.
+ *
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewaySchedule = {
   /**
@@ -59568,6 +60145,8 @@ export type ZeroTrustGatewayTimestamp = string;
 
 /**
  * TLS interception settings.
+ *
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayTlsSettings = {
   /**
@@ -59585,6 +60164,7 @@ export type ZeroTrustGatewayTlsSettings = {
  * @default
  * @example http.request.uri matches ".*a/partial/uri.*" and http.request.host in $01302951-49f9-47c9-a400-0297e60b6a10
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayTraffic = string;
 
