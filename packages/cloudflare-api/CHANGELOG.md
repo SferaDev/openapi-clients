@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.17.0
+
+### Minor Changes
+
+- 606106d: Add new endpoints for binary data upload and retrieval
+
 ## 0.16.1
 
 ### Patch Changes
