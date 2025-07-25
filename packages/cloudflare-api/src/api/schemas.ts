@@ -38918,7 +38918,6 @@ export type RulesetsBlockRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Block when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -39061,7 +39060,6 @@ export type RulesetsChallengeRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Issue an Interactive Challenge if the visitor had not solved an Interactive Challenge prior to the request when the address is not 1.1.1.1
    */
   description?: string;
@@ -39216,7 +39214,6 @@ export type RulesetsCompressResponseRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Disable compression when address is not 1.1.1.1
    */
   description?: string;
@@ -39367,7 +39364,6 @@ export type RulesetsDDoSDynamicRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Performs a specific action according to a set of internal guidelines defined by Cloudflare.
    */
   description?: string;
@@ -39627,7 +39623,6 @@ export type RulesetsExecuteRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Execute the OWASP ruleset when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -39776,7 +39771,6 @@ export type RulesetsForceConnectionCloseRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Closes ongoing HTTP connections. This action does not block a request, but it forces the client to reconnect. For HTTP/2 and HTTP/3 connections, the connection will be closed even if it breaks other requests running on the same connection.
    */
   description?: string;
@@ -39919,7 +39913,6 @@ export type RulesetsJsChallengeRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Issue a non-interactive Javascript Challenge if the visitor had not solved a Interactive Challenge, Managed Challenge, or Javascript Challenge prior to the request when the address is not 1.1.1.1
    */
   description?: string;
@@ -40147,7 +40140,6 @@ export type RulesetsLogCustomFieldRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Log custom field when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -40290,7 +40282,6 @@ export type RulesetsLogRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Log when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -40433,7 +40424,6 @@ export type RulesetsManagedChallengeRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Issue a Managed Challenge if the visitor had not solved a Managed Challenge or Interactive Challenge prior to the request when the address is not 1.1.1.1
    */
   description?: string;
@@ -40763,7 +40753,6 @@ export type RulesetsRedirectRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Redirect when IP address is not 1.1.1.1
    */
   description?: string;
@@ -41071,7 +41060,6 @@ export type RulesetsRewriteRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Add a header when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -41273,7 +41261,6 @@ export type RulesetsRouteRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Select origin server when IP address is not 1.1.1.1
    */
   description?: string;
@@ -41415,8 +41402,6 @@ export type RulesetsRule = {
   categories?: RulesetsRuleCategory[];
   /**
    * An informative description of the rule.
-   *
-   * @default
    */
   description?: string;
   /**
@@ -41697,7 +41682,6 @@ export type RulesetsScoreRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Increment score when the IP address is not 1.1.1.1
    */
   description?: string;
@@ -41863,7 +41847,6 @@ export type RulesetsServeErrorRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Serve a JSON response to api users on error
    */
   description?: string;
@@ -42272,7 +42255,6 @@ export type RulesetsSetCacheSettingsRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Set cache settings when the hostname address is not example.com
    */
   description?: string;
@@ -42503,7 +42485,6 @@ export type RulesetsSetConfigRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Disable Zaraz when IP address is not 1.1.1.1
    */
   description?: string;
@@ -42696,7 +42677,6 @@ export type RulesetsSkipRule = {
   /**
    * An informative description of the rule.
    *
-   * @default
    * @example Skip the current ruleset when the IP address is not 1.1.1.1
    */
   description?: string;
