@@ -191,6 +191,8 @@ export type SecretsStorePage = number;
  */
 export type SecretsStorePerPage = number;
 
+export type SecretsStoreScopesQuery = Schemas.SecretsStoreScopes[];
+
 export type SecretsStoreSearch = string;
 
 export type TeamsDevicesDevicesListDevicesParamActiveRegistrations =
