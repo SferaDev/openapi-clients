@@ -56502,7 +56502,7 @@ export type WorkersModifiedOn = string;
  */
 export type WorkersMultipartScript = {
   /**
-   * An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.
+   * An array of modules (often JavaScript files) comprising a Worker script. At least one module must be present and referenced in the metadata as `main_module` or `body_part` by filename.<br/>Possible Content-Type(s) are: `application/javascript+module`, `text/javascript+module`, `application/javascript`, `text/javascript`, `text/x-python`, `text/x-python-requirement`, `application/wasm`, `text/plain`, `application/octet-stream`, `application/source-map`.
    *
    * @x-stainless-collection-type set
    */
@@ -58301,7 +58301,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @example true
    * @x-auditable true
    */
-  enabled: boolean | null;
+  enabled?: boolean | null;
   /**
    * If mode is customized_block_page: block page footer text.
    *
@@ -58349,7 +58349,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @default
    * @x-auditable true
    */
-  mode: "customized_block_page" | "redirect_uri";
+  mode?: "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -59610,7 +59610,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * @x-auditable true
    * @x-stainless-terraform-configurability computed_optional
    */
-  block_reason?: string;
+  block_reason?: string | null;
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    *
