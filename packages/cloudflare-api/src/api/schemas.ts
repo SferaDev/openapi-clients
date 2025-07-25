@@ -58161,7 +58161,7 @@ export type ZeroTrustGatewayAction =
 /**
  * Activity log settings.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayActivityLogSettings = {
   /**
@@ -58612,7 +58612,7 @@ export type ZeroTrustGatewayCount = number;
  * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`)
  *
  * @deprecated true
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
@@ -58699,7 +58699,7 @@ export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
  *
  * @example b08f7231-d458-495c-98ef-190604c9ee83
  * @x-auditable true
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
 
@@ -58903,7 +58903,7 @@ export type ZeroTrustGatewayExpiration = {
 /**
  * Extended e-mail matching settings.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
@@ -59061,7 +59061,7 @@ export type ZeroTrustGatewayGenerateCertRequest = {
 /**
  * Setting to enable host selector in egress policies.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayHostSelectorSettings = {
   /**
@@ -59098,7 +59098,7 @@ export type ZeroTrustGatewayIdentity = string;
 /**
  * Setting to define inspection settings
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayInspectionSettings = {
   /**
@@ -59472,7 +59472,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are header names, pointing to an array with its header value(s).
    *
    * @example {"My-Next-Header":["foo","bar"],"X-Custom-Header-Name":["somecustomvalue"]}
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   add_headers?: {
     [key: string]: string[];
@@ -59488,7 +59488,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Settings for the Audit SSH action.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   audit_ssh?: {
     /**
@@ -59502,7 +59502,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure how browser isolation behaves.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   biso_admin_controls?: {
     /**
@@ -59598,7 +59598,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   block_page?: {
     /**
@@ -59636,13 +59636,13 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example false
    * @x-auditable true
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   bypass_parent_rule?: boolean | null;
   /**
    * Configure how session check behaves.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   check_session?: {
     /**
@@ -59663,7 +59663,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
@@ -59672,7 +59672,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   egress?: {
     /**
@@ -59732,7 +59732,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Send matching traffic to the supplied destination IP address and port.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   l4override?: {
     /**
@@ -59752,7 +59752,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure a notification to display on the user's device when this rule is matched.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   notification_settings?: {
     /**
@@ -59799,7 +59799,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure DLP payload logging.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   payload_log?: {
     /**
@@ -59813,7 +59813,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Settings that apply to quarantine rules
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   quarantine?: {
     /**
@@ -59838,7 +59838,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Settings that apply to redirect rules
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   redirect?: {
     /**
@@ -59864,7 +59864,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   resolve_dns_internally?: {
     /**
@@ -59891,7 +59891,7 @@ export type ZeroTrustGatewayRuleSettings = {
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    *
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
   untrusted_cert?: {
     /**
@@ -59945,7 +59945,7 @@ export type ZeroTrustGatewayRulesComponentsSchemasUuid = string;
 /**
  * Sandbox settings.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewaySandbox = {
   /**
