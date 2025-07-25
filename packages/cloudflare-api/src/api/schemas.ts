@@ -43717,6 +43717,7 @@ export type SecretsStoreDeleteSecretObject = {
 export type SecretsStoreDuplicateSecretObject = {
   comment?: SecretsStoreComment;
   name: SecretsStoreSecretName;
+  scopes: SecretsStoreScopes;
 };
 
 /**
@@ -43751,9 +43752,7 @@ export type SecretsStoreModified = string;
 
 export type SecretsStorePatchSecretObject = {
   comment?: SecretsStoreComment;
-  name: SecretsStoreSecretName;
   scopes?: SecretsStoreScopes;
-  value?: SecretsStoreValue;
 };
 
 /**
@@ -43772,6 +43771,7 @@ export type SecretsStoreQuotaResponse = SecretsStoreApiResponseCollection & {
  * The list of services that can use this secret.
  *
  * @example workers
+ * @example ai_gateway
  */
 export type SecretsStoreScopes = string[];
 
@@ -58141,7 +58141,7 @@ export type ZeroTrustGatewayAction =
 /**
  * Activity log settings.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayActivityLogSettings = {
   /**
@@ -58592,7 +58592,7 @@ export type ZeroTrustGatewayCount = number;
  * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`)
  *
  * @deprecated true
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
@@ -58883,7 +58883,7 @@ export type ZeroTrustGatewayExpiration = {
 /**
  * Extended e-mail matching settings.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
@@ -58897,12 +58897,14 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
    * This setting was shared via the Orgs API and cannot be edited by the current account
    *
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   read_only?: boolean | null;
   /**
    * Account tag of account that shared this setting
    *
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   source_account?: string | null;
   /**
@@ -58910,6 +58912,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
    *
    * @example 1
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   version?: number | null;
 } | null;
@@ -59925,7 +59928,7 @@ export type ZeroTrustGatewayRulesComponentsSchemasUuid = string;
 /**
  * Sandbox settings.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewaySandbox = {
   /**
