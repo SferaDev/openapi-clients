@@ -26488,6 +26488,18 @@ export type ListsBulkOperationResponseCollection = {
  */
 export type ListsCompleted = string;
 
+export type ListsCompletedBulkOperation = {
+  completed: ListsCompleted;
+  id: ListsOperationId;
+  /**
+   * The current status of the asynchronous operation.
+   *
+   * @example completed
+   * @x-auditable true
+   */
+  status: "completed";
+};
+
 /**
  * The RFC 3339 timestamp of when the list was created.
  *
@@ -26505,31 +26517,30 @@ export type ListsCreatedOn = string;
  */
 export type ListsDescription = string;
 
-/**
- * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","ip":"10.0.0.1","modified_on":"2020-01-10T14:00:00Z"}
- */
-export type ListsItem = {
-  asn?: ListsItemAsn;
-  comment?: ListsItemComment;
+export type ListsFailedBulkOperation = {
+  completed: ListsCompleted;
   /**
-   * The RFC 3339 timestamp of when the item was created.
+   * A message describing the error when the status is `failed`.
    *
-   * @example 2020-01-01T08:00:00Z
+   * @example This list is at the maximum number of items
    * @x-auditable true
    */
-  created_on?: string;
-  hostname?: ListsItemHostname;
-  id?: ListsListId;
-  ip?: ListsItemIp;
+  error: string;
+  id: ListsOperationId;
   /**
-   * The RFC 3339 timestamp of when the item was last modified.
+   * The current status of the asynchronous operation.
    *
-   * @example 2020-01-10T14:00:00Z
+   * @example failed
    * @x-auditable true
    */
-  modified_on?: string;
-  redirect?: ListsItemRedirect;
+  status: "failed";
 };
+
+export type ListsItem =
+  | ListsListItemIpFull
+  | ListsListItemHostnameFull
+  | ListsListItemRedirectFull
+  | ListsListItemAsnFull;
 
 export type ListsItemResponseCollection = {
   result?: ListsItem;
@@ -26544,12 +26555,38 @@ export type ListsItemResponseCollection = {
 export type ListsItemAsn = number;
 
 /**
+ * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","modified_on":"2020-01-10T14:00:00Z"}
+ */
+export type ListsItemBase = {
+  comment?: ListsItemComment;
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   *
+   * @example 2020-01-01T08:00:00Z
+   * @x-auditable true
+   */
+  created_on: string;
+  id: ListsListId;
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   *
+   * @example 2020-01-10T14:00:00Z
+   * @x-auditable true
+   */
+  modified_on: string;
+};
+
+/**
  * Defines an informative summary of the list item.
  *
  * @example Private IP address
  * @x-auditable true
  */
 export type ListsItemComment = string;
+
+export type ListsItemCommentObject = {
+  comment?: ListsItemComment;
+};
 
 /**
  * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from 0 to 9, wildcards (*), and the hyphen (-).
@@ -26648,22 +26685,10 @@ export type ListsItemsListResponseCollection = {
 } & ListsApiResponseCollection;
 
 export type ListsItemsUpdateRequestCollection = (
-  | {
-      comment?: ListsItemComment;
-      ip: ListsItemIp;
-    }
-  | {
-      comment?: ListsItemComment;
-      redirect: ListsItemRedirect;
-    }
-  | {
-      comment?: ListsItemComment;
-      hostname: ListsItemHostname;
-    }
-  | {
-      asn: ListsItemAsn;
-      comment?: ListsItemComment;
-    }
+  | ListsListItemIpComment
+  | ListsListItemRedirectComment
+  | ListsListItemHostnameComment
+  | ListsListItemAsnComment
 )[];
 
 /**
@@ -26722,6 +26747,56 @@ export type ListsListResponseCollection = {
  */
 export type ListsListId = string;
 
+export type ListsListItemAsnComment = ListsListItemAsnObject &
+  ListsItemCommentObject;
+
+/**
+ * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","modified_on":"2020-01-10T14:00:00Z"}
+ */
+export type ListsListItemAsnFull = ListsListItemAsnObject & ListsItemBase;
+
+export type ListsListItemAsnObject = {
+  asn: ListsItemAsn;
+};
+
+export type ListsListItemHostnameComment = ListsListItemHostnameObject &
+  ListsItemCommentObject;
+
+/**
+ * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","modified_on":"2020-01-10T14:00:00Z"}
+ */
+export type ListsListItemHostnameFull = ListsListItemHostnameObject &
+  ListsItemBase;
+
+export type ListsListItemHostnameObject = {
+  hostname: ListsItemHostname;
+};
+
+export type ListsListItemIpComment = ListsListItemIpObject &
+  ListsItemCommentObject;
+
+/**
+ * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","modified_on":"2020-01-10T14:00:00Z"}
+ */
+export type ListsListItemIpFull = ListsListItemIpObject & ListsItemBase;
+
+export type ListsListItemIpObject = {
+  ip: ListsItemIp;
+};
+
+export type ListsListItemRedirectComment = ListsListItemRedirectObject &
+  ListsItemCommentObject;
+
+/**
+ * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","modified_on":"2020-01-10T14:00:00Z"}
+ */
+export type ListsListItemRedirectFull = ListsListItemRedirectObject &
+  ListsItemBase;
+
+export type ListsListItemRedirectObject = {
+  redirect: ListsItemRedirect;
+};
+
 export type ListsListsAsyncResponse = {
   result?: {
     operation_id: ListsOperationId;
@@ -26775,45 +26850,9 @@ export type ListsNumItems = number;
 export type ListsNumReferencingFilters = number;
 
 export type ListsOperation =
-  | {
-      completed: ListsCompleted;
-      /**
-       * A message describing the error when the status is `failed`.
-       *
-       * @example This list is at the maximum number of items
-       * @x-auditable true
-       */
-      error: string;
-      id: ListsOperationId;
-      /**
-       * The current status of the asynchronous operation.
-       *
-       * @example failed
-       * @x-auditable true
-       */
-      status: "failed";
-    }
-  | {
-      id: ListsOperationId;
-      /**
-       * The current status of the asynchronous operation.
-       *
-       * @example pending
-       * @x-auditable true
-       */
-      status: "pending" | "running";
-    }
-  | {
-      completed: ListsCompleted;
-      id: ListsOperationId;
-      /**
-       * The current status of the asynchronous operation.
-       *
-       * @example completed
-       * @x-auditable true
-       */
-      status: "completed";
-    };
+  | ListsPendingOrRunningBulkOperation
+  | ListsCompletedBulkOperation
+  | ListsFailedBulkOperation;
 
 /**
  * The unique operation ID of the asynchronous action.
@@ -26822,6 +26861,17 @@ export type ListsOperation =
  * @x-auditable true
  */
 export type ListsOperationId = string;
+
+export type ListsPendingOrRunningBulkOperation = {
+  id: ListsOperationId;
+  /**
+   * The current status of the asynchronous operation.
+   *
+   * @example pending
+   * @x-auditable true
+   */
+  status: "pending" | "running";
+};
 
 /**
  * The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.
