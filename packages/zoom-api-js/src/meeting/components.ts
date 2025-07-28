@@ -18792,14 +18792,14 @@ export const reportUsers = (
 
 export type ReportMeetingsPathParams = {
   /**
-   * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   * The user's user ID or email address. For user-level apps, pass the `me` value.
    */
-  userId: string | string | "me";
+  userId: string;
 };
 
 export type ReportMeetingsQueryParams = {
   /**
-   * Start date in 'yyyy-mm-dd' format. The date range defined by the &quot;from&quot; and &quot;to&quot; parameters should only be one month as the report includes only one month worth of data at once.
+   * Start date in 'yyyy-mm-dd' format. The date range defined by the `from` and `to` parameters should only be one month as the report includes only one month worth of data at once.
    *
    * @format date
    * @example 2022-01-01
@@ -18844,7 +18844,7 @@ export type ReportMeetingsResponse = {
   /**
    * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
    *
-   * @example w7587w4eiyfsudgk
+   * @example b43YBRLJFg3V4vsSpxvGdKIGtNbxn9h9If2
    */
   next_page_token?: string;
   /**
@@ -18941,7 +18941,7 @@ export type ReportMeetingsResponse = {
     /**
      * Whether the meeting was created directly through Zoom or via an API request:
      * * If the meeting was created via an OAuth app, this field returns the OAuth app's name.
-     * * If the meeting was created via JWT or the Zoom Web Portal, this returns the `Zoom` value.
+     * * If the meeting was created via the Zoom Web Portal, this returns the `Zoom` value.
      *
      * @example Zoom
      */
@@ -19010,25 +19010,25 @@ export type ReportMeetingsResponse = {
      */
     schedule_time?: string;
     /**
-     * The date and time at which the attendee joined the waiting room.
+     * The date and time when the attendee joined the waiting room.
      *
      * @example 02/11/2022 16:15
      */
     join_waiting_room_time?: string;
     /**
-     * The date and time at which the attendee joined the meeting.
+     * The date and time when the attendee joined the meeting.
      *
      * @example 12/22/2021 16:20
      */
     join_time?: string;
     /**
-     * The date and time at which the attendee left the meeting.
+     * The date and time when the attendee left the meeting.
      *
      * @example 12/22/2021 17:13
      */
     leave_time?: string;
     /**
-     * Host Account Name of Hosting Organization.
+     * Host account name of hosting organization.
      *
      * @example org
      */
@@ -19100,7 +19100,7 @@ export type ReportMeetingsVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:user:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const reportMeetings = (
   variables: ReportMeetingsVariables,
