@@ -18,14 +18,14 @@
     "url": "git+https://github.com/SferaDev/openapi-clients.git"
   },
   "dependencies": {
-    "@kubb/core": "^3.16.0",
-    "@kubb/oas": "^3.16.0",
-    "@kubb/plugin-client": "^3.16.0",
-    "@kubb/plugin-mcp": "^3.16.0",
-    "@kubb/plugin-oas": "^3.16.0",
-    "@kubb/plugin-ts": "^3.16.0",
-    "@kubb/plugin-zod": "^3.16.0",
-    "@kubb/react": "^3.16.0",
+    "@kubb/core": "^3.16.1",
+    "@kubb/oas": "^3.16.1",
+    "@kubb/plugin-client": "^3.16.1",
+    "@kubb/plugin-mcp": "^3.16.1",
+    "@kubb/plugin-oas": "^3.16.1",
+    "@kubb/plugin-ts": "^3.16.1",
+    "@kubb/plugin-zod": "^3.16.1",
+    "@kubb/react": "^3.16.1",
     "case": "^1.6.3"
   },
   "devDependencies": {
