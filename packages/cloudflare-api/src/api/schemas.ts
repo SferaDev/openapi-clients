@@ -14830,25 +14830,40 @@ export type CustomIndicatorFeedsUpdatePublicFieldResponse =
     result?: CustomIndicatorFeedsIndicatorFeedItem;
   };
 
-export type CustomPagesApiResponseCollection = {
-  errors: CustomPagesMessages;
-  messages: CustomPagesMessages;
-  result: Record<string, any> | any[] | string | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-  result_info?: CustomPagesResultInfo;
+export type CustomPagesApiResponseCollection = CustomPagesApiResponseCommon & {
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type CustomPagesApiResponseCommon = {
   errors: CustomPagesMessages;
   messages: CustomPagesMessages;
-  result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -14864,40 +14879,72 @@ export type CustomPagesApiResponseCommonFailure = {
   messages: CustomPagesMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
   success: false;
 };
 
-export type CustomPagesApiResponseSingle = {
-  errors: CustomPagesMessages;
-  messages: CustomPagesMessages;
-  result: Record<string, any> | string | string | null;
+export type CustomPagesApiResponseSingle = CustomPagesApiResponseCommon;
+
+export type CustomPagesCustomPage = {
+  created_on?: CustomPagesTimestamp;
   /**
-   * Whether the API call was successful
-   *
-   * @example true
+   * @example Basic Challenge
+   * @x-auditable true
    */
-  success: true;
+  description?: string;
+  /**
+   * @example basic_challenge
+   * @x-auditable true
+   */
+  id?: string;
+  modified_on?: CustomPagesTimestamp;
+  /**
+   * @example block:basic-sec-captcha
+   * @x-auditable true
+   */
+  preview_target?: string;
+  /**
+   * @example ::CAPTCHA_BOX::
+   * @x-auditable true
+   */
+  required_tokens?: string[];
+  state?: CustomPagesState;
+  url?: CustomPagesUrl;
 };
 
-export type CustomPagesCustomPagesResponseCollection =
-  CustomPagesApiResponseCollection & {
-    result?: Record<string, any>[];
-  };
+export type CustomPagesCustomPageResult = CustomPagesApiResponseSingle & {
+  result?: CustomPagesCustomPage;
+};
 
-export type CustomPagesCustomPagesResponseSingle =
-  CustomPagesApiResponseSingle & {
-    result?: Record<string, any>;
+export type CustomPagesCustomPageResultList =
+  CustomPagesApiResponseCollection & {
+    result?: CustomPagesCustomPage[];
   };
 
 /**
- * Identifier
+ * Error Page Types
+ *
+ * @example ratelimit_block
+ * @x-auditable true
+ */
+export type CustomPagesErrorPageType =
+  | "waf_block"
+  | "ip_block"
+  | "country_challenge"
+  | "500_errors"
+  | "1000_errors"
+  | "managed_challenge"
+  | "ratelimit_block";
+
+/**
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CustomPagesIdentifier = string;
 
@@ -14906,42 +14953,27 @@ export type CustomPagesMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
-
-export type CustomPagesResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * The custom page state.
  *
  * @example default
+ * @x-auditable true
  */
 export type CustomPagesState = "default" | "customized";
+
+/**
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type CustomPagesTimestamp = string;
 
 /**
  * The URL associated with the custom page.
@@ -14949,6 +14981,7 @@ export type CustomPagesState = "default" | "customized";
  * @default
  * @example http://www.example.com
  * @format uri
+ * @x-auditable true
  */
 export type CustomPagesUrl = string;
 
