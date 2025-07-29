@@ -26480,15 +26480,7 @@ export type ListsBulkOperationResponseCollection = {
   result?: ListsOperation;
 } & ListsApiResponseCollection;
 
-/**
- * The RFC 3339 timestamp of when the operation was completed.
- *
- * @example 2020-01-01T08:00:00Z
- * @x-auditable true
- */
-export type ListsCompleted = string;
-
-export type ListsCompletedBulkOperation = {
+export type ListsBulkOperationCompleted = {
   completed: ListsCompleted;
   id: ListsOperationId;
   /**
@@ -26500,24 +26492,7 @@ export type ListsCompletedBulkOperation = {
   status: "completed";
 };
 
-/**
- * The RFC 3339 timestamp of when the list was created.
- *
- * @example 2020-01-01T08:00:00Z
- * @x-auditable true
- */
-export type ListsCreatedOn = string;
-
-/**
- * An informative summary of the list.
- *
- * @example This is a note
- * @maxLength 500
- * @x-auditable true
- */
-export type ListsDescription = string;
-
-export type ListsFailedBulkOperation = {
+export type ListsBulkOperationFailed = {
   completed: ListsCompleted;
   /**
    * A message describing the error when the status is `failed`.
@@ -26535,6 +26510,42 @@ export type ListsFailedBulkOperation = {
    */
   status: "failed";
 };
+
+export type ListsBulkOperationPendingOrRunning = {
+  id: ListsOperationId;
+  /**
+   * The current status of the asynchronous operation.
+   *
+   * @example pending
+   * @x-auditable true
+   */
+  status: "pending" | "running";
+};
+
+/**
+ * The RFC 3339 timestamp of when the operation was completed.
+ *
+ * @example 2020-01-01T08:00:00Z
+ * @x-auditable true
+ */
+export type ListsCompleted = string;
+
+/**
+ * The RFC 3339 timestamp of when the list was created.
+ *
+ * @example 2020-01-01T08:00:00Z
+ * @x-auditable true
+ */
+export type ListsCreatedOn = string;
+
+/**
+ * An informative summary of the list.
+ *
+ * @example This is a note
+ * @maxLength 500
+ * @x-auditable true
+ */
+export type ListsDescription = string;
 
 export type ListsItem =
   | ListsListItemIpFull
@@ -26850,9 +26861,9 @@ export type ListsNumItems = number;
 export type ListsNumReferencingFilters = number;
 
 export type ListsOperation =
-  | ListsPendingOrRunningBulkOperation
-  | ListsCompletedBulkOperation
-  | ListsFailedBulkOperation;
+  | ListsBulkOperationPendingOrRunning
+  | ListsBulkOperationCompleted
+  | ListsBulkOperationFailed;
 
 /**
  * The unique operation ID of the asynchronous action.
@@ -26861,17 +26872,6 @@ export type ListsOperation =
  * @x-auditable true
  */
 export type ListsOperationId = string;
-
-export type ListsPendingOrRunningBulkOperation = {
-  id: ListsOperationId;
-  /**
-   * The current status of the asynchronous operation.
-   *
-   * @example pending
-   * @x-auditable true
-   */
-  status: "pending" | "running";
-};
 
 /**
  * The 'Host' header allows to override the hostname set in the HTTP request. Current support is 1 'Host' header override per origin.
