@@ -58762,7 +58762,7 @@ export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
  *
  * @example b08f7231-d458-495c-98ef-190604c9ee83
  * @x-auditable true
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
 
@@ -58980,24 +58980,24 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
    * This setting was shared via the Orgs API and cannot be edited by the current account
    *
    * @x-auditable true
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
-  read_only?: boolean | null;
+  read_only?: boolean;
   /**
    * Account tag of account that shared this setting
    *
    * @x-auditable true
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
-  source_account?: string | null;
+  source_account?: string;
   /**
    * Version number of the setting
    *
    * @example 1
    * @x-auditable true
-   * @x-stainless-terraform-configurability computed_optional
+   * @x-stainless-terraform-configurability optional
    */
-  version?: number | null;
+  version?: number;
 } | null;
 
 /**
