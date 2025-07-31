@@ -17557,7 +17557,32 @@ export type DlpMessages = {
 }[];
 
 export type DlsApiResponseCollection = DlsApiResponseCommon & {
-  result_info?: DlsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DlsApiResponseCommon = {
@@ -17591,6 +17616,7 @@ export type DlsApiResponseCommonFailure = {
  * DNS hostname to be regionalized, must be a subdomain of the zone. Wildcards are supported for one level, e.g `*.example.com`
  *
  * @example foo.example.com
+ * @x-auditable true
  */
 export type DlsHostname = string;
 
@@ -17599,6 +17625,7 @@ export type DlsHostname = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DlsIdentifier = string;
 
@@ -17618,6 +17645,7 @@ export type DlsMessages = {
  * Identifying key for the region
  *
  * @example ca
+ * @x-auditable true
  */
 export type DlsRegionKey = string;
 
@@ -17627,6 +17655,7 @@ export type DlsRegionalHostnameResponse = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   created_on: DlsTimestamp & void & void;
   hostname: DlsHostname;
@@ -17634,41 +17663,19 @@ export type DlsRegionalHostnameResponse = {
   routing?: DlsRouting;
 };
 
-export type DlsResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 /**
  * Configure which routing method to use for the regional hostname
+ *
+ * @default dns
+ * @example dns
+ * @x-auditable true
  */
 export type DlsRouting = string;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DlsTimestamp = string;
 
@@ -44348,7 +44355,7 @@ export type SnippetsSnippetRules = {
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    * @x-auditable true
    */
@@ -56338,6 +56345,12 @@ export type WorkersDeployment = {
      * @x-auditable true
      */
     ["workers/message"]?: string;
+    /**
+     * Operation that triggered the creation of the deployment.
+     *
+     * @example deployment
+     */
+    ["workers/triggered_by"]?: string;
   };
   /**
    * @format email
@@ -59127,7 +59140,7 @@ export type ZeroTrustGatewayGenerateCertRequest = {
 /**
  * Setting to enable host selector in egress policies.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayHostSelectorSettings = {
   /**
@@ -59164,7 +59177,7 @@ export type ZeroTrustGatewayIdentity = string;
 /**
  * Setting to define inspection settings
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayInspectionSettings = {
   /**
