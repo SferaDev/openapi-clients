@@ -167,7 +167,12 @@ export type SnippetsSnippet = {
   };
 };
 
-export type SnippetsSnippetRules = Schemas.SnippetsSnippetRules;
+/**
+ * A snippet rules object.
+ */
+export type SnippetsSnippetRules = {
+  rules: Schemas.SnippetsSnippetRules;
+};
 
 export type WorkersScriptUpload = Schemas.WorkersMultipartScript;
 

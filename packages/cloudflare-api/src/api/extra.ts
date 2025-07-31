@@ -251,8 +251,11 @@ import {
   notificationPoliciesUpdateANotificationPolicy,
   auditLogsGetAccountAuditLogs,
   autoragConfigAiSearch,
+  autoragConfigListJobs,
+  autoragConfigGetJob,
+  autoragConfigListJobLogs,
   autoragConfigSearch,
-  autoragConfigFullScan,
+  autoragConfigSync,
   accountBillingProfileDeprecatedBillingProfileDetails,
   botnetThreatFeedGetDayReport,
   botnetThreatFeedGetFullReport,
@@ -2562,8 +2565,13 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/audit_logs": auditLogsGetAccountAuditLogs,
   "POST /accounts/{account_id}/autorag/rags/{id}/ai-search":
     autoragConfigAiSearch,
+  "GET /accounts/{account_id}/autorag/rags/{id}/jobs": autoragConfigListJobs,
+  "GET /accounts/{account_id}/autorag/rags/{id}/jobs/{job_id}":
+    autoragConfigGetJob,
+  "GET /accounts/{account_id}/autorag/rags/{id}/jobs/{job_id}/logs":
+    autoragConfigListJobLogs,
   "POST /accounts/{account_id}/autorag/rags/{id}/search": autoragConfigSearch,
-  "PATCH /accounts/{account_id}/autorag/rags/{id}/sync": autoragConfigFullScan,
+  "PATCH /accounts/{account_id}/autorag/rags/{id}/sync": autoragConfigSync,
   "GET /accounts/{account_id}/billing/profile":
     accountBillingProfileDeprecatedBillingProfileDetails,
   "GET /accounts/{account_id}/botnet_feed/asn/{asn_id}/day_report":
