@@ -1,5 +1,20 @@
 # cloudflare-api-js
 
+## 0.17.1
+
+### Patch Changes
+
+- 05df1f4: Introduce types for bulk operation statuses in Lists API.
+- 941bf80: Default viewport added to multiple request bodies.
+- d94b4e1: Remove default annotation from rule description comments.
+- 39a4d16: Add new AI search model '@cf/moonshotai/kimi-k2-instruct' to AutoragConfigAiSearchRequestBody
+- 25fc971: Change terraform configurability to computed_optional for various schema settings
+- 5e1fa8c: Add new endpoint to list autorag jobs.
+- 6158bfa: [BREAKING] Rename ListsCompletedBulkOperation to ListsBulkOperationCompleted.
+- 070fe4f: Add 'scopes' attribute to the SecretsStoreSecretsListQueryParams.
+- 860e35a: Update x-stainless-terraform-configurability for ZeroTrustGatewayDnsDestinationIpv6BlockId to computed_optional.
+- 2688eb8: Add support for Python module content types in Worker script uploads
+
 ## 0.17.0
 
 ### Minor Changes
