@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.6.3
+
+### Patch Changes
+
+- fa20faf: [BREAKING] Change type of userId in ReportMeetingsPathParams to a specific string
+
 ## 0.6.2
 
 ### Patch Changes
