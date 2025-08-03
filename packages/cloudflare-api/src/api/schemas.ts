@@ -37183,12 +37183,6 @@ export type R2AccountLevelMetrics = {
  */
 export type R2AddCustomDomainRequest = {
   /**
-   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-   *
-   * @x-auditable true
-   */
-  ciphers?: string[];
-  /**
    * Name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37218,12 +37212,6 @@ export type R2AddCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2AddCustomDomainResponse = {
-  /**
-   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-   *
-   * @x-auditable true
-   */
-  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37383,12 +37371,6 @@ export type R2DomainName = string;
  */
 export type R2EditCustomDomainRequest = {
   /**
-   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-   *
-   * @x-auditable true
-   */
-  ciphers?: string[];
-  /**
    * Whether to enable public bucket access at the specified custom domain.
    *
    * @x-auditable true
@@ -37406,12 +37388,6 @@ export type R2EditCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2EditCustomDomainResponse = {
-  /**
-   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-   *
-   * @x-auditable true
-   */
-  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37571,12 +37547,6 @@ export type R2Errors = {
  */
 export type R2GetCustomDomainResponse = {
   /**
-   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-   *
-   * @x-auditable true
-   */
-  ciphers?: string[];
-  /**
    * Domain name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37735,12 +37705,6 @@ export type R2LifecycleStorageTransition = {
  */
 export type R2ListCustomDomainsResponse = {
   domains: {
-    /**
-     * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
-     *
-     * @x-auditable true
-     */
-    ciphers?: string[];
     /**
      * Domain name of the custom domain to be added.
      *
@@ -58480,9 +58444,8 @@ export type ZeroTrustGatewayBlockPageSettings = {
    *
    * @default
    * @x-auditable true
-   * @x-stainless-terraform-configurability optional
    */
-  mode?: "" | "customized_block_page" | "redirect_uri";
+  mode?: "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -59440,7 +59403,7 @@ export type ZeroTrustGatewayNotSharable = boolean;
 /**
  * Configure a message to display on the user's device when an antivirus search is performed.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
