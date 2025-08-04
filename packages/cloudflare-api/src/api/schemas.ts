@@ -2450,29 +2450,32 @@ export type AccessAppLauncherLogoUrl = string;
 
 export type AccessAppLauncherProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default App Launcher
    * @example App Launcher
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
    * @example app_launcher
    */
   type: AccessType;
+  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
+  bg_color?: AccessBgColor;
+  footer_links?: AccessFooterLinks;
+  header_bg_color?: AccessHeaderBgColor;
+  landing_page_design?: AccessLandingPageDesign;
+  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
 };
 
 /**
@@ -2517,32 +2520,89 @@ export type AccessAppReqEmbeddedScimConfig = {
 };
 
 export type AccessAppRequest =
-  | (AccessSelfHostedProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessSaasProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
+  | {
+      allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+      allow_iframe?: AccessAllowIframe;
+      allowed_idps?: AccessAllowedIdps;
+      app_launcher_visible?: AccessAppLauncherVisible;
+      auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
+      cors_headers?: AccessCorsHeaders;
+      custom_deny_message?: AccessCustomDenyMessage;
+      custom_deny_url?: AccessCustomDenyUrl;
+      custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+      custom_pages?: AccessSchemasCustomPages;
+      destinations?: AccessDestinations;
+      domain: AccessDomain;
+      enable_binding_cookie?: AccessEnableBindingCookie;
+      http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
+      logo_url?: AccessLogoUrl;
+      name?: AccessAppsComponentsSchemasName;
+      options_preflight_bypass?: AccessOptionsPreflightBypass;
+      path_cookie_attribute?: AccessPathCookieAttribute;
+      read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
+      same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+      scim_config?: AccessScimConfig;
+      self_hosted_domains?: AccessSelfHostedDomains;
+      service_auth_401_redirect?: AccessServiceAuth401Redirect;
+      session_duration?: AccessSchemasSessionDuration;
+      skip_interstitial?: AccessSkipInterstitial;
+      tags?: AccessTags;
+      /**
+       * The application type.
+       *
+       * @example self_hosted
+       */
+      type: AccessType & void;
+      /**
+       * The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.
+       */
+      policies?: (
+        | AccessAppPolicyLink
+        | (void & AccessSchemasUuid)
+        | (Record<string, any> & {
+            id?: AccessSchemasUuid;
+          } & AccessAppPolicyRequest)
+      )[];
+    }
+  | {
+      allowed_idps?: AccessAllowedIdps;
+      app_launcher_visible?: AccessAppLauncherVisible;
+      auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
+      custom_pages?: AccessSchemasCustomPages;
+      logo_url?: AccessLogoUrl;
+      name?: AccessAppsComponentsSchemasName;
+      saas_app?: AccessSamlSaasApp | AccessOidcSaasApp;
+      scim_config?: AccessScimConfig;
+      tags?: AccessTags;
+      /**
+       * The application type.
+       *
+       * @example saas
+       */
+      type?: AccessType & void;
+      /**
+       * The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.
+       */
+      policies?: (
+        | AccessAppPolicyLink
+        | (void & AccessSchemasUuid)
+        | (Record<string, any> & {
+            id?: AccessSchemasUuid;
+          } & AccessAppPolicyRequest)
+      )[];
+    }
   | (AccessSshProps &
       AccessAppReqEmbeddedPolicies &
       AccessAppReqEmbeddedScimConfig)
   | (AccessVncProps &
       AccessAppReqEmbeddedPolicies &
       AccessAppReqEmbeddedScimConfig)
-  | (AccessAppLauncherProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessWarpProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessBisoProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessBookmarkProps & AccessAppReqEmbeddedScimConfig)
+  | (AccessAppLauncherProps & AccessAppReqEmbeddedPolicies)
+  | (AccessWarpProps & AccessAppReqEmbeddedPolicies)
+  | (AccessBisoProps & AccessAppReqEmbeddedPolicies)
+  | AccessBookmarkProps
   | (AccessInfraProps & AccessInfraAppReqEmbeddedPolicies)
-  | (AccessRdpProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig);
+  | (AccessRdpProps & AccessAppReqEmbeddedPolicies);
 
 /**
  * The policies that Access applies to the application.
@@ -2916,7 +2976,6 @@ export type AccessBasicAppResponseProps = {
   aud?: AccessSchemasAud;
   created_at?: AccessTimestamp;
   id?: AccessUuid;
-  scim_config?: AccessScimConfig;
   updated_at?: AccessTimestamp;
 };
 
@@ -2929,23 +2988,20 @@ export type AccessBgColor = string;
 
 export type AccessBisoProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com/browser
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default Clientless Web Isolation
    * @example Clientless Web Isolation
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
@@ -3839,16 +3895,13 @@ export type AccessFailedLoginResponse = AccessApiResponseCollection & {
 
 export type AccessFeatureAppProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   type: AccessType;
 };
 
@@ -5866,6 +5919,7 @@ export type AccessRdpProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -6091,6 +6145,7 @@ export type AccessSaasProps = {
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
   saas_app?: AccessSamlSaasApp | AccessOidcSaasApp;
+  scim_config?: AccessScimConfig;
   tags?: AccessTags;
   /**
    * The application type.
@@ -8941,6 +8996,7 @@ export type AccessSelfHostedProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9098,6 +9154,7 @@ export type AccessSshProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9451,6 +9508,7 @@ export type AccessVncProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9474,23 +9532,20 @@ export type AccessWarpAuthSessionDuration = string;
 
 export type AccessWarpProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com/warp
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default Warp Login App
    * @example Warp Login App
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
@@ -21960,16 +22015,14 @@ export type FirewallFilter = {
 
 export type FirewallFilterDeleteResponseCollection =
   FirewallApiResponseCollection & {
-    result?: FirewallFilter[];
+    result?: {
+      id?: FirewallFiltersComponentsSchemasId;
+    }[];
   };
 
 export type FirewallFilterDeleteResponseSingle = FirewallApiResponseSingle & {
   result: {
-    description?: FirewallFiltersComponentsSchemasDescription;
-    expression?: FirewallExpression;
     id: FirewallFiltersComponentsSchemasId;
-    paused?: FirewallFiltersComponentsSchemasPaused;
-    ref?: FirewallSchemasRef;
   };
 };
 
@@ -21993,6 +22046,21 @@ export type FirewallFilterRuleBase = {
 
 export type FirewallFilterRuleResponse = FirewallFilterRuleBase & {
   filter?: FirewallFilter | FirewallDeletedFilter;
+};
+
+export type FirewallFilterRuleUpdateRequest = {
+  description?: FirewallFiltersComponentsSchemasDescription;
+  expression?: FirewallExpression;
+  /**
+   * The unique identifier of the filter.
+   *
+   * @example 372e67954025e0ba6aaa6d586b9e0b61
+   * @maxLength 32
+   * @minLength 32
+   */
+  id?: FirewallFiltersComponentsSchemasId;
+  paused?: FirewallFiltersComponentsSchemasPaused;
+  ref?: FirewallSchemasRef;
 };
 
 export type FirewallFilterRulesResponseCollection =
@@ -26516,9 +26584,17 @@ export type ListsApiResponseCommonFailure = {
   success: false;
 };
 
-export type ListsBulkOperationResponseCollection = {
-  result?: ListsOperation;
-} & ListsApiResponseCollection;
+export type ListsBulkOperationResponseSingle = {
+  result: ListsOperation;
+  errors: ListsMessages;
+  messages: ListsMessages;
+  /**
+   * Defines whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
 
 export type ListsBulkOperationCompleted = {
   completed: ListsCompleted;
@@ -26610,21 +26686,9 @@ export type ListsItemAsn = number;
  */
 export type ListsItemBase = {
   comment?: ListsItemComment;
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   *
-   * @example 2020-01-01T08:00:00Z
-   * @x-auditable true
-   */
-  created_on: string;
+  created_on: ListsCreatedOn;
   id: ListsListId;
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   *
-   * @example 2020-01-10T14:00:00Z
-   * @x-auditable true
-   */
-  modified_on: string;
+  modified_on: ListsModifiedOn;
 };
 
 /**
@@ -37183,6 +37247,12 @@ export type R2AccountLevelMetrics = {
  */
 export type R2AddCustomDomainRequest = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37212,6 +37282,12 @@ export type R2AddCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2AddCustomDomainResponse = {
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37371,6 +37447,12 @@ export type R2DomainName = string;
  */
 export type R2EditCustomDomainRequest = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Whether to enable public bucket access at the specified custom domain.
    *
    * @x-auditable true
@@ -37388,6 +37470,12 @@ export type R2EditCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2EditCustomDomainResponse = {
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37547,6 +37635,12 @@ export type R2Errors = {
  */
 export type R2GetCustomDomainResponse = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Domain name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37705,6 +37799,12 @@ export type R2LifecycleStorageTransition = {
  */
 export type R2ListCustomDomainsResponse = {
   domains: {
+    /**
+     * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+     *
+     * @x-auditable true
+     */
+    ciphers?: string[];
     /**
      * Domain name of the custom domain to be added.
      *
@@ -46141,7 +46241,7 @@ export type StreamScheduledDeletion = string;
 export type StreamSchemasIdentifier = string;
 
 /**
- * Searches over the `name` key in the `meta` field. This field can be set with or after the upload request.
+ * Provides a partial word match of the `name` key in the `meta` field. Slow for medium to large video libraries. May be unavailable for very large libraries.
  *
  * @example puppy.mp4
  * @x-auditable true
@@ -46354,6 +46454,14 @@ export type StreamVideoCopyRequest = {
   url: string;
   watermark?: StreamWatermarkAtUpload2;
 };
+
+/**
+ * Provides a fast, exact string match on the `name` key in the `meta` field.
+ *
+ * @example puppy.mp4
+ * @x-auditable true
+ */
+export type StreamVideoName = string;
 
 export type StreamVideoResponseCollection = StreamApiResponseCommon & {
   result?: StreamVideos[];
@@ -51847,6 +51955,7 @@ export type TunnelRoute = {
 /**
  * Optional remark describing the route.
  *
+ * @default
  * @example Example comment for this route.
  * @maxLength 100
  * @x-auditable true
@@ -52241,6 +52350,7 @@ export type TunnelVirtualNetwork = {
 /**
  * Optional remark describing the virtual network.
  *
+ * @default
  * @example Staging VPC for data science
  * @maxLength 256
  * @x-auditable true
@@ -58444,8 +58554,9 @@ export type ZeroTrustGatewayBlockPageSettings = {
    *
    * @default
    * @x-auditable true
+   * @x-stainless-terraform-configurability optional
    */
-  mode?: "customized_block_page" | "redirect_uri";
+  mode?: "" | "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -59403,7 +59514,7 @@ export type ZeroTrustGatewayNotSharable = boolean;
 /**
  * Configure a message to display on the user's device when an antivirus search is performed.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
