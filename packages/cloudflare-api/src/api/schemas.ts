@@ -2450,29 +2450,32 @@ export type AccessAppLauncherLogoUrl = string;
 
 export type AccessAppLauncherProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default App Launcher
    * @example App Launcher
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
    * @example app_launcher
    */
   type: AccessType;
+  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
+  bg_color?: AccessBgColor;
+  footer_links?: AccessFooterLinks;
+  header_bg_color?: AccessHeaderBgColor;
+  landing_page_design?: AccessLandingPageDesign;
+  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
 };
 
 /**
@@ -2517,32 +2520,89 @@ export type AccessAppReqEmbeddedScimConfig = {
 };
 
 export type AccessAppRequest =
-  | (AccessSelfHostedProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessSaasProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
+  | {
+      allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+      allow_iframe?: AccessAllowIframe;
+      allowed_idps?: AccessAllowedIdps;
+      app_launcher_visible?: AccessAppLauncherVisible;
+      auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
+      cors_headers?: AccessCorsHeaders;
+      custom_deny_message?: AccessCustomDenyMessage;
+      custom_deny_url?: AccessCustomDenyUrl;
+      custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+      custom_pages?: AccessSchemasCustomPages;
+      destinations?: AccessDestinations;
+      domain: AccessDomain;
+      enable_binding_cookie?: AccessEnableBindingCookie;
+      http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
+      logo_url?: AccessLogoUrl;
+      name?: AccessAppsComponentsSchemasName;
+      options_preflight_bypass?: AccessOptionsPreflightBypass;
+      path_cookie_attribute?: AccessPathCookieAttribute;
+      read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
+      same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+      scim_config?: AccessScimConfig;
+      self_hosted_domains?: AccessSelfHostedDomains;
+      service_auth_401_redirect?: AccessServiceAuth401Redirect;
+      session_duration?: AccessSchemasSessionDuration;
+      skip_interstitial?: AccessSkipInterstitial;
+      tags?: AccessTags;
+      /**
+       * The application type.
+       *
+       * @example self_hosted
+       */
+      type: AccessType & void;
+      /**
+       * The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.
+       */
+      policies?: (
+        | AccessAppPolicyLink
+        | (void & AccessSchemasUuid)
+        | (Record<string, any> & {
+            id?: AccessSchemasUuid;
+          } & AccessAppPolicyRequest)
+      )[];
+    }
+  | {
+      allowed_idps?: AccessAllowedIdps;
+      app_launcher_visible?: AccessAppLauncherVisible;
+      auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
+      custom_pages?: AccessSchemasCustomPages;
+      logo_url?: AccessLogoUrl;
+      name?: AccessAppsComponentsSchemasName;
+      saas_app?: AccessSamlSaasApp | AccessOidcSaasApp;
+      scim_config?: AccessScimConfig;
+      tags?: AccessTags;
+      /**
+       * The application type.
+       *
+       * @example saas
+       */
+      type?: AccessType & void;
+      /**
+       * The policies that Access applies to the application, in ascending order of precedence. Items can reference existing policies or create new policies exclusive to the application.
+       */
+      policies?: (
+        | AccessAppPolicyLink
+        | (void & AccessSchemasUuid)
+        | (Record<string, any> & {
+            id?: AccessSchemasUuid;
+          } & AccessAppPolicyRequest)
+      )[];
+    }
   | (AccessSshProps &
       AccessAppReqEmbeddedPolicies &
       AccessAppReqEmbeddedScimConfig)
   | (AccessVncProps &
       AccessAppReqEmbeddedPolicies &
       AccessAppReqEmbeddedScimConfig)
-  | (AccessAppLauncherProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessWarpProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessBisoProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig)
-  | (AccessBookmarkProps & AccessAppReqEmbeddedScimConfig)
+  | (AccessAppLauncherProps & AccessAppReqEmbeddedPolicies)
+  | (AccessWarpProps & AccessAppReqEmbeddedPolicies)
+  | (AccessBisoProps & AccessAppReqEmbeddedPolicies)
+  | AccessBookmarkProps
   | (AccessInfraProps & AccessInfraAppReqEmbeddedPolicies)
-  | (AccessRdpProps &
-      AccessAppReqEmbeddedPolicies &
-      AccessAppReqEmbeddedScimConfig);
+  | (AccessRdpProps & AccessAppReqEmbeddedPolicies);
 
 /**
  * The policies that Access applies to the application.
@@ -2916,7 +2976,6 @@ export type AccessBasicAppResponseProps = {
   aud?: AccessSchemasAud;
   created_at?: AccessTimestamp;
   id?: AccessUuid;
-  scim_config?: AccessScimConfig;
   updated_at?: AccessTimestamp;
 };
 
@@ -2929,23 +2988,20 @@ export type AccessBgColor = string;
 
 export type AccessBisoProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com/browser
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default Clientless Web Isolation
    * @example Clientless Web Isolation
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
@@ -3839,16 +3895,13 @@ export type AccessFailedLoginResponse = AccessApiResponseCollection & {
 
 export type AccessFeatureAppProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   type: AccessType;
 };
 
@@ -5866,6 +5919,7 @@ export type AccessRdpProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -6091,6 +6145,7 @@ export type AccessSaasProps = {
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
   saas_app?: AccessSamlSaasApp | AccessOidcSaasApp;
+  scim_config?: AccessScimConfig;
   tags?: AccessTags;
   /**
    * The application type.
@@ -8941,6 +8996,7 @@ export type AccessSelfHostedProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9098,6 +9154,7 @@ export type AccessSshProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9451,6 +9508,7 @@ export type AccessVncProps = {
   path_cookie_attribute?: AccessPathCookieAttribute;
   read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  scim_config?: AccessScimConfig;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessSchemasSessionDuration;
@@ -9474,23 +9532,20 @@ export type AccessWarpAuthSessionDuration = string;
 
 export type AccessWarpProps = {
   allowed_idps?: AccessAllowedIdps;
-  app_launcher_logo_url?: AccessAppLauncherLogoUrl;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
-  bg_color?: AccessBgColor;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
   /**
    * @example authdomain.cloudflareaccess.com/warp
    */
   domain?: AccessDomain;
-  footer_links?: AccessFooterLinks;
-  header_bg_color?: AccessHeaderBgColor;
-  landing_page_design?: AccessLandingPageDesign;
   /**
    * @default Warp Login App
    * @example Warp Login App
    */
   name?: AccessAppsComponentsSchemasName;
   session_duration?: AccessSchemasSessionDuration;
-  skip_app_launcher_login_page?: AccessSkipAppLauncherLoginPage;
   /**
    * The application type.
    *
@@ -11264,17 +11319,6 @@ export type ArgoAnalyticsResponseSingle = ArgoAnalyticsApiResponseSingle & {
   result?: Record<string, any>;
 };
 
-export type ArgoConfigApiResponseCommon = {
-  errors: ArgoConfigMessages;
-  messages: ArgoConfigMessages;
-  /**
-   * Describes a successful API response.
-   *
-   * @example true
-   */
-  success: true;
-};
-
 export type ArgoConfigApiResponseCommonFailure = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
@@ -11291,7 +11335,24 @@ export type ArgoConfigApiResponseCommonFailure = {
   success: false;
 };
 
-export type ArgoConfigApiResponseSingle = ArgoConfigApiResponseCommon;
+export type ArgoConfigApiResponseSingle = {
+  errors: ArgoConfigMessages;
+  messages: ArgoConfigMessages;
+  result: ArgoConfigResultObject;
+  /**
+   * Describes a successful API response.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+/**
+ * Specifies if the setting is editable.
+ *
+ * @x-auditable true
+ */
+export type ArgoConfigEditable = boolean;
 
 /**
  * Specifies the zone associated with the API call.
@@ -11310,23 +11371,41 @@ export type ArgoConfigMessages = {
 }[];
 
 /**
+ * Specifies the time when the setting was last modified.
+ *
+ * @format date-time
+ * @x-auditable true
+ */
+export type ArgoConfigModifiedOn = string;
+
+/**
  * Configures the enablement of Argo Smart Routing.
  */
 export type ArgoConfigPatch = {
-  value: ArgoConfigValue;
+  value: ArgoConfigSettingValue;
 };
 
-export type ArgoConfigResponseSingle = ArgoConfigApiResponseSingle & {
-  result?: Record<string, any>;
+export type ArgoConfigResultObject = {
+  editable: ArgoConfigEditable;
+  id: ArgoConfigSettingId;
+  modified_on?: ArgoConfigModifiedOn;
+  value: ArgoConfigSettingValue;
 };
 
 /**
- * Enables Argo Smart Routing.
+ * Specifies the identifier of the Argo Smart Routing setting.
+ *
+ * @x-auditable true
+ */
+export type ArgoConfigSettingId = string;
+
+/**
+ * Specifies the enablement value of Argo Smart Routing.
  *
  * @example on
  * @x-auditable true
  */
-export type ArgoConfigValue = "on" | "off";
+export type ArgoConfigSettingValue = "on" | "off";
 
 export type BillSubsApiAccountSubscriptionResponseCollection =
   BillSubsApiApiResponseCollection & {
@@ -21960,16 +22039,14 @@ export type FirewallFilter = {
 
 export type FirewallFilterDeleteResponseCollection =
   FirewallApiResponseCollection & {
-    result?: FirewallFilter[];
+    result?: {
+      id?: FirewallFiltersComponentsSchemasId;
+    }[];
   };
 
 export type FirewallFilterDeleteResponseSingle = FirewallApiResponseSingle & {
   result: {
-    description?: FirewallFiltersComponentsSchemasDescription;
-    expression?: FirewallExpression;
     id: FirewallFiltersComponentsSchemasId;
-    paused?: FirewallFiltersComponentsSchemasPaused;
-    ref?: FirewallSchemasRef;
   };
 };
 
@@ -21993,6 +22070,21 @@ export type FirewallFilterRuleBase = {
 
 export type FirewallFilterRuleResponse = FirewallFilterRuleBase & {
   filter?: FirewallFilter | FirewallDeletedFilter;
+};
+
+export type FirewallFilterRuleUpdateRequest = {
+  description?: FirewallFiltersComponentsSchemasDescription;
+  expression?: FirewallExpression;
+  /**
+   * The unique identifier of the filter.
+   *
+   * @example 372e67954025e0ba6aaa6d586b9e0b61
+   * @maxLength 32
+   * @minLength 32
+   */
+  id?: FirewallFiltersComponentsSchemasId;
+  paused?: FirewallFiltersComponentsSchemasPaused;
+  ref?: FirewallSchemasRef;
 };
 
 export type FirewallFilterRulesResponseCollection =
@@ -26516,9 +26608,17 @@ export type ListsApiResponseCommonFailure = {
   success: false;
 };
 
-export type ListsBulkOperationResponseCollection = {
-  result?: ListsOperation;
-} & ListsApiResponseCollection;
+export type ListsBulkOperationResponseSingle = {
+  result: ListsOperation;
+  errors: ListsMessages;
+  messages: ListsMessages;
+  /**
+   * Defines whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
 
 export type ListsBulkOperationCompleted = {
   completed: ListsCompleted;
@@ -26593,9 +26693,17 @@ export type ListsItem =
   | ListsListItemRedirectFull
   | ListsListItemAsnFull;
 
-export type ListsItemResponseCollection = {
-  result?: ListsItem;
-} & ListsApiResponseCollection;
+export type ListsItemResponseSingle = {
+  result: ListsItem;
+  errors: ListsMessages;
+  messages: ListsMessages;
+  /**
+   * Defines whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
 
 /**
  * Defines a non-negative 32 bit integer.
@@ -26610,21 +26718,9 @@ export type ListsItemAsn = number;
  */
 export type ListsItemBase = {
   comment?: ListsItemComment;
-  /**
-   * The RFC 3339 timestamp of when the item was created.
-   *
-   * @example 2020-01-01T08:00:00Z
-   * @x-auditable true
-   */
-  created_on: string;
+  created_on: ListsCreatedOn;
   id: ListsListId;
-  /**
-   * The RFC 3339 timestamp of when the item was last modified.
-   *
-   * @example 2020-01-10T14:00:00Z
-   * @x-auditable true
-   */
-  modified_on: string;
+  modified_on: ListsModifiedOn;
 };
 
 /**
@@ -26978,7 +27074,7 @@ export type LoadBalancingApiResponseCommon = {
   errors: LoadBalancingMessages;
   messages: LoadBalancingMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -26994,7 +27090,7 @@ export type LoadBalancingApiResponseCommonFailure = {
   messages: LoadBalancingMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -27055,7 +27151,7 @@ export type LoadBalancingComponentsSchemasIdResponse =
   };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -27095,7 +27191,6 @@ export type LoadBalancingComponentsSchemasZoneName = string;
 /**
  * To be marked unhealthy the monitored origin must fail this healthcheck N consecutive times.
  *
- * @default 0
  * @x-auditable true
  */
 export type LoadBalancingConsecutiveDown = number;
@@ -27103,7 +27198,6 @@ export type LoadBalancingConsecutiveDown = number;
 /**
  * To be marked healthy the monitored origin must pass this healthcheck N consecutive times.
  *
- * @default 0
  * @x-auditable true
  */
 export type LoadBalancingConsecutiveUp = number;
@@ -27129,6 +27223,7 @@ export type LoadBalancingDefaultPools = string[];
 /**
  * Object description.
  *
+ * @default
  * @example Login page monitor
  * @x-auditable true
  */
@@ -27154,6 +27249,7 @@ export type LoadBalancingEnabled = boolean;
 /**
  * A case-insensitive sub-string to look for in the response body. If this string is not found, the origin will be marked as unhealthy. This parameter is only valid for HTTP and HTTPS monitors.
  *
+ * @default
  * @example alive
  * @x-auditable true
  */
@@ -27162,6 +27258,7 @@ export type LoadBalancingExpectedBody = string;
 /**
  * The expected HTTP response code or code range of the health check. This parameter is only valid for HTTP and HTTPS monitors.
  *
+ * @default
  * @example 2xx
  * @x-auditable true
  */
@@ -27219,7 +27316,7 @@ export type LoadBalancingHealthDetails = LoadBalancingApiResponseSingle & {
    */
   result?: {
     /**
-     * Pool ID
+     * Pool ID.
      *
      * @example 17b5962d775c646f3f9725cbc7a53df4
      * @x-auditable true
@@ -27394,9 +27491,9 @@ export type LoadBalancingMessages = {
 /**
  * The method to use for the health check. This defaults to 'GET' for HTTP/HTTPS based checks and 'connection_established' for TCP based health checks.
  *
- * @default GET
  * @example GET
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type LoadBalancingMethod = string;
 
@@ -27595,7 +27692,7 @@ export type LoadBalancingOriginHealthy = boolean;
 export type LoadBalancingOriginIp = string;
 
 /**
- * The origin ipv4/ipv6 address or domain name mapped to it's health data.
+ * The origin ipv4/ipv6 address or domain name mapped to its health data.
  *
  * @example {"failure_reason":"No failures","healthy":true,"response_code":200,"rtt":"66ms"}
  */
@@ -27661,9 +27758,9 @@ export type LoadBalancingPatchPoolsNotificationEmail = "";
 /**
  * The endpoint path you want to conduct a health check against. This parameter is only valid for HTTP and HTTPS monitors.
  *
- * @default /
  * @example /health
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type LoadBalancingPath = string;
 
@@ -27725,7 +27822,7 @@ export type LoadBalancingPoolsReferencesResponse =
   };
 
 /**
- * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any PoPs not explicitly defined will fall back to using the corresponding country_pool, then region_pool mapping if it exists else to default_pools.
+ * Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs (ordered by their failover priority) for the PoP (datacenter). Any PoPs not explicitly defined will fall back to using the corresponding country_pool, then region_pool mapping if it exists else to default_pools.
  *
  * @example {"LAX":["de90f38ced07c2e2f4df50b1f61d4194","9290f38c5d07c2e2f4df57b1f61d4196"],"LHR":["abd90f38ced07c2e2f4df50b1f61d4194","f9138c5d07c2e2f4df57b1f61d4196"],"SJC":["00920f38ce07c2e2f4df50b1f61d4194"]}
  */
@@ -27736,7 +27833,6 @@ export type LoadBalancingPopPools = {
 /**
  * The port number to connect to for the health check. Required for TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port when using a non-standard port (HTTP: default 80, HTTPS: default 443).
  *
- * @default 0
  * @x-auditable true
  */
 export type LoadBalancingPort = number;
@@ -27785,6 +27881,7 @@ export type LoadBalancingPreviewResultResponse =
 /**
  * Assign this monitor to emulate the specified zone while probing. This parameter is only valid for HTTP and HTTPS monitors.
  *
+ * @default
  * @example example.com
  * @x-auditable true
  */
@@ -27881,7 +27978,7 @@ export type LoadBalancingResourceReference = {
   /**
    * @example 17b5962d775c646f3f9725cbc7a53df4
    */
-  resource_id?: void;
+  resource_id?: string;
   /**
    * The human-identifiable name of the resource.
    *
@@ -27900,31 +27997,31 @@ export type LoadBalancingResourceReference = {
 
 export type LoadBalancingResultInfo = {
   /**
-   * Total number of results on the current page
+   * Total number of results on the current page.
    *
    * @example 20
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page
+   * Number of results per page.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
   total_count?: number;
   /**
-   * Total number of pages available
+   * Total number of pages available.
    *
    * @example 100
    */
@@ -28113,10 +28210,7 @@ export type LoadBalancingSearchResult = {
 };
 
 /**
- * Specifies the type of session affinity the load balancer should use unless specified as `"none"`. The supported types are:
- * - `"cookie"`: On the first request to a proxied load balancer, a cookie is generated, encoding information of which origin the request will be forwarded to. Subsequent requests, by the same client to the same load balancer, will be sent to the origin server the cookie encodes, for the duration of the cookie and as long as the origin server remains healthy. If the cookie has expired or the origin server is unhealthy, then a new origin server is calculated and used.
- * - `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin selection is stable and based on the client's ip address.
- * - `"header"`: On the first request to a proxied load balancer, a session key based on the configured HTTP headers (see `session_affinity_attributes.headers`) is generated, encoding the request headers used for storing in the load balancer session state which origin the request will be forwarded to. Subsequent requests to the load balancer with the same headers will be sent to the same origin server, for the duration of the session and as long as the origin server remains healthy. If the session has been idle for the duration of `session_affinity_ttl` seconds or the origin server is unhealthy, then a new origin server is calculated and used. See `headers` in `session_affinity_attributes` for additional required configuration.
+ * Specifies the type of session affinity the load balancer should use unless specified as `"none"`. The supported types are: - `"cookie"`: On the first request to a proxied load balancer, a cookie is generated, encoding information of which origin the request will be forwarded to. Subsequent requests, by the same client to the same load balancer, will be sent to the origin server the cookie encodes, for the duration of the cookie and as long as the origin server remains healthy. If the cookie has expired or the origin server is unhealthy, then a new origin server is calculated and used. - `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin selection is stable and based on the client's ip address. - `"header"`: On the first request to a proxied load balancer, a session key based on the configured HTTP headers (see `session_affinity_attributes.headers`) is generated, encoding the request headers used for storing in the load balancer session state which origin the request will be forwarded to. Subsequent requests to the load balancer with the same headers will be sent to the same origin server, for the duration of the session and as long as the origin server remains healthy. If the session has been idle for the duration of `session_affinity_ttl` seconds or the origin server is unhealthy, then a new origin server is calculated and used. See `headers` in `session_affinity_attributes` for additional required configuration.
  *
  * @default none
  * @example cookie
@@ -28147,9 +28241,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    */
   headers?: string[];
   /**
-   * When header `session_affinity` is enabled, this option can be used to specify how HTTP headers on load balancing requests will be used. The supported values are:
-   * - `"true"`: Load balancing requests must contain *all* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren't created.
-   * - `"false"`: Load balancing requests must contain *at least one* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren't created.
+   * When header `session_affinity` is enabled, this option can be used to specify how HTTP headers on load balancing requests will be used. The supported values are: - `"true"`: Load balancing requests must contain *all* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren't created. - `"false"`: Load balancing requests must contain *at least one* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren't created.
    *
    * @default false
    * @x-auditable true
@@ -28172,10 +28264,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    */
   secure?: "Auto" | "Always" | "Never";
   /**
-   * Configures the zero-downtime failover between origins within a pool when session affinity is enabled. This feature is currently incompatible with Argo, Tiered Cache, and Bandwidth Alliance. The supported values are:
-   * - `"none"`: No failover takes place for sessions pinned to the origin (default).
-   * - `"temporary"`: Traffic will be sent to another other healthy origin until the originally pinned origin is available; note that this can potentially result in heavy origin flapping.
-   * - `"sticky"`: The session affinity cookie is updated and subsequent requests are sent to the new origin. Note: Zero-downtime failover with sticky sessions is currently not supported for session affinity by header.
+   * Configures the zero-downtime failover between origins within a pool when session affinity is enabled. This feature is currently incompatible with Argo, Tiered Cache, and Bandwidth Alliance. The supported values are: - `"none"`: No failover takes place for sessions pinned to the origin (default). - `"temporary"`: Traffic will be sent to another other healthy origin until the originally pinned origin is available; note that this can potentially result in heavy origin flapping. - `"sticky"`: The session affinity cookie is updated and subsequent requests are sent to the new origin. Note: Zero-downtime failover with sticky sessions is currently not supported for session affinity by header.
    *
    * @default none
    * @example sticky
@@ -28185,9 +28274,7 @@ export type LoadBalancingSessionAffinityAttributes = {
 };
 
 /**
- * Time, in seconds, until a client's session expires after being created. Once the expiry time has been reached, subsequent requests may get sent to a different origin server. The accepted ranges per `session_affinity` policy are:
- * - `"cookie"` / `"ip_cookie"`: The current default of 23 hours will be used unless explicitly set. The accepted range of values is between [1800, 604800].
- * - `"header"`: The current default of 1800 seconds will be used unless explicitly set. The accepted range of values is between [30, 3600]. Note: With session affinity by header, sessions only expire after they haven't been used for the number of seconds specified.
+ * Time, in seconds, until a client's session expires after being created. Once the expiry time has been reached, subsequent requests may get sent to a different origin server. The accepted ranges per `session_affinity` policy are: - `"cookie"` / `"ip_cookie"`: The current default of 23 hours will be used unless explicitly set. The accepted range of values is between [1800, 604800]. - `"header"`: The current default of 1800 seconds will be used unless explicitly set. The accepted range of values is between [30, 3600]. Note: With session affinity by header, sessions only expire after they haven't been used for the number of seconds specified.
  *
  * @example 1800
  * @x-auditable true
@@ -37183,6 +37270,12 @@ export type R2AccountLevelMetrics = {
  */
 export type R2AddCustomDomainRequest = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37212,6 +37305,12 @@ export type R2AddCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2AddCustomDomainResponse = {
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37371,6 +37470,12 @@ export type R2DomainName = string;
  */
 export type R2EditCustomDomainRequest = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Whether to enable public bucket access at the specified custom domain.
    *
    * @x-auditable true
@@ -37388,6 +37493,12 @@ export type R2EditCustomDomainRequest = {
  * @example {"domain":"example-domain.com","enabled":true}
  */
 export type R2EditCustomDomainResponse = {
+  /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
   /**
    * Domain name of the affected custom domain.
    *
@@ -37547,6 +37658,12 @@ export type R2Errors = {
  */
 export type R2GetCustomDomainResponse = {
   /**
+   * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+   *
+   * @x-auditable true
+   */
+  ciphers?: string[];
+  /**
    * Domain name of the custom domain to be added.
    *
    * @x-auditable true
@@ -37705,6 +37822,12 @@ export type R2LifecycleStorageTransition = {
  */
 export type R2ListCustomDomainsResponse = {
   domains: {
+    /**
+     * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
+     *
+     * @x-auditable true
+     */
+    ciphers?: string[];
     /**
      * Domain name of the custom domain to be added.
      *
@@ -46141,7 +46264,7 @@ export type StreamScheduledDeletion = string;
 export type StreamSchemasIdentifier = string;
 
 /**
- * Searches over the `name` key in the `meta` field. This field can be set with or after the upload request.
+ * Provides a partial word match of the `name` key in the `meta` field. Slow for medium to large video libraries. May be unavailable for very large libraries.
  *
  * @example puppy.mp4
  * @x-auditable true
@@ -46354,6 +46477,14 @@ export type StreamVideoCopyRequest = {
   url: string;
   watermark?: StreamWatermarkAtUpload2;
 };
+
+/**
+ * Provides a fast, exact string match on the `name` key in the `meta` field.
+ *
+ * @example puppy.mp4
+ * @x-auditable true
+ */
+export type StreamVideoName = string;
 
 export type StreamVideoResponseCollection = StreamApiResponseCommon & {
   result?: StreamVideos[];
@@ -51847,6 +51978,7 @@ export type TunnelRoute = {
 /**
  * Optional remark describing the route.
  *
+ * @default
  * @example Example comment for this route.
  * @maxLength 100
  * @x-auditable true
@@ -52241,6 +52373,7 @@ export type TunnelVirtualNetwork = {
 /**
  * Optional remark describing the virtual network.
  *
+ * @default
  * @example Staging VPC for data science
  * @maxLength 256
  * @x-auditable true
@@ -55748,6 +55881,64 @@ export type WorkersApiResponseNullResult = WorkersApiResponseCommon & {
 export type WorkersApiResponseSingle = WorkersApiResponseCommon;
 
 /**
+ * Configuration for assets within a Worker.
+ */
+export type WorkersAssets = {
+  /**
+   * Configuration for assets within a Worker.
+   */
+  config?: {
+    /**
+         * The contents of a _headers file (used to attach custom headers on asset responses).
+         *
+         * @example /dashboard/*
+        X-Frame-Options: DENY
+        
+        /static/*
+        Access-Control-Allow-Origin: *
+         */
+    _headers?: string;
+    /**
+         * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving).
+         *
+         * @example /foo /bar 301
+        /news/* /blog/:splat
+         */
+    _redirects?: string;
+    /**
+     * Determines the redirects and rewrites of requests for HTML content.
+     *
+     * @example auto-trailing-slash
+     */
+    html_handling?:
+      | "auto-trailing-slash"
+      | "force-trailing-slash"
+      | "drop-trailing-slash"
+      | "none";
+    /**
+     * Determines the response when a request does not match a static asset, and there is no Worker script.
+     *
+     * @example 404-page
+     */
+    not_found_handling?: "none" | "404-page" | "single-page-application";
+    run_worker_first?: string[] | boolean;
+    /**
+     * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
+     *
+     * @deprecated true
+     * @example true
+     */
+    serve_directly?: boolean;
+  };
+  /**
+   * Token provided upon successful upload of all files from a registered manifest.
+   *
+   * @x-sensitive true
+   */
+  jwt?: string;
+};
+
+/**
  * A binding to allow the Worker to communicate with resources.
  */
 export type WorkersBindingItem =
@@ -56604,66 +56795,10 @@ export type WorkersMultipartScript = {
    */
   files?: Blob[];
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
   metadata: {
-    /**
-     * Configuration for assets within a Worker.
-     */
-    assets?: {
-      /**
-       * Configuration for assets within a Worker.
-       */
-      config?: {
-        /**
-                 * The contents of a _headers file (used to attach custom headers on asset responses).
-                 *
-                 * @example /dashboard/*
-                X-Frame-Options: DENY
-                
-                /static/*
-                Access-Control-Allow-Origin: *
-                 */
-        _headers?: string;
-        /**
-                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving).
-                 *
-                 * @example /foo /bar 301
-                /news/* /blog/:splat
-                 */
-        _redirects?: string;
-        /**
-         * Determines the redirects and rewrites of requests for HTML content.
-         *
-         * @example auto-trailing-slash
-         */
-        html_handling?:
-          | "auto-trailing-slash"
-          | "force-trailing-slash"
-          | "drop-trailing-slash"
-          | "none";
-        /**
-         * Determines the response when a request does not match a static asset, and there is no Worker script.
-         *
-         * @example 404-page
-         */
-        not_found_handling?: "none" | "404-page" | "single-page-application";
-        run_worker_first?: string[] | boolean;
-        /**
-         * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
-         *
-         * @deprecated true
-         * @example true
-         */
-        serve_directly?: boolean;
-      };
-      /**
-       * Token provided upon successful upload of all files from a registered manifest.
-       *
-       * @x-sensitive true
-       */
-      jwt?: string;
-    };
+    assets?: WorkersAssets;
     bindings?: WorkersBindings;
     /**
      * Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
@@ -56736,6 +56871,7 @@ export type WorkersNamespaceResponse = {
   namespace_id?: WorkersUuid;
   namespace_name?: WorkersDispatchNamespaceName;
   script_count?: WorkersScriptCount;
+  trusted_workers?: WorkersTrustedWorkers;
 };
 
 /**
@@ -57193,6 +57329,15 @@ export type WorkersTailConsumersScript = {
    */
   service: string;
 };
+
+/**
+ * Whether the Workers in the namespace are executed in a "trusted" manner. When a Worker is trusted, it has access to the shared caches for the zone in the Cache API, and has access to the `request.cf` object on incoming Requests. When a Worker is untrusted, caches are not shared across the zone, and `request.cf` is undefined. By default, Workers in a namespace are "untrusted".
+ *
+ * @default false
+ * @example false
+ * @x-auditable true
+ */
+export type WorkersTrustedWorkers = boolean;
 
 export type WorkersUploadAssetsResponse = WorkersApiResponseCommon & {
   /**
@@ -58444,8 +58589,9 @@ export type ZeroTrustGatewayBlockPageSettings = {
    *
    * @default
    * @x-auditable true
+   * @x-stainless-terraform-configurability optional
    */
-  mode?: "customized_block_page" | "redirect_uri";
+  mode?: "" | "customized_block_page" | "redirect_uri";
   /**
    * If mode is customized_block_page: block page title.
    *
@@ -59403,7 +59549,7 @@ export type ZeroTrustGatewayNotSharable = boolean;
 /**
  * Configure a message to display on the user's device when an antivirus search is performed.
  *
- * @x-stainless-terraform-configurability computed_optional
+ * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**

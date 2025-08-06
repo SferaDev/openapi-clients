@@ -5,6 +5,20 @@
  */
 import type * as Schemas from "./schemas";
 
+/**
+ * Page number of results.
+ *
+ * @default 1
+ */
+export type AccessPage = number;
+
+/**
+ * Number of results per page.
+ *
+ * @default 1000
+ */
+export type AccessPerPage = number;
+
 export type ApiShieldApiDiscoveryOriginParameter =
   Schemas.ApiShieldApiDiscoveryOrigin;
 

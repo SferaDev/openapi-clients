@@ -199,6 +199,8 @@ import {
   workersAiPostRunCfMistralMistral7bInstructV02Lora,
   workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   workersAiPostRunCfMyshellAiMelotts,
+  workersAiPostRunCfOpenaiGptOss120b,
+  workersAiPostRunCfOpenaiGptOss20b,
   workersAiPostRunCfOpenaiWhisper,
   workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
   workersAiPostRunCfOpenaiWhisperTinyEn,
@@ -1234,6 +1236,8 @@ import {
   namespaceWorkerCreate,
   namespaceWorkerDeleteNamespace,
   namespaceWorkerGetNamespace,
+  namespaceWorkerPatchNamespace,
+  namespaceWorkerPutNamespace,
   namespaceWorkerScriptDeleteWorker,
   namespaceWorkerScriptWorkerDetails,
   namespaceWorkerScriptUploadWorkerModule,
@@ -1339,8 +1343,9 @@ import {
   userSAccountMembershipsMembershipDetails,
   userSAccountMembershipsUpdateMembership,
   organizationSharesList,
-  radarGetAiBotsSummaryByUserAgent,
-  radarGetAiBotsTimeseriesGroupByUserAgent,
+  radarGetAiBotsSummary,
+  radarGetAiBotsTimeseries,
+  radarGetAiBotsTimeseriesGroup,
   radarGetAiInferenceSummaryByModel,
   radarGetAiInferenceSummaryByTask,
   radarGetAiInferenceTimeseriesGroupByModel,
@@ -1425,6 +1430,13 @@ import {
   radarGetBotsTimeseries,
   radarGetBotsTimeseriesGroup,
   radarGetBotDetails,
+  radarGetCertificateAuthorities,
+  radarGetCertificateAuthorityDetails,
+  radarGetCertificateLogs,
+  radarGetCertificateLogDetails,
+  radarGetCtSummary,
+  radarGetCtTimeseries,
+  radarGetCtTimeseriesGroup,
   radarGetReportsDatasets,
   radarPostReportsDatasetDownloadUrl,
   radarGetReportsDatasetDownload,
@@ -2465,6 +2477,10 @@ export const operationsByPath = {
     workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/myshell-ai/melotts":
     workersAiPostRunCfMyshellAiMelotts,
+  "POST /accounts/{account_id}/ai/run/@cf/openai/gpt-oss-120b":
+    workersAiPostRunCfOpenaiGptOss120b,
+  "POST /accounts/{account_id}/ai/run/@cf/openai/gpt-oss-20b":
+    workersAiPostRunCfOpenaiGptOss20b,
   "POST /accounts/{account_id}/ai/run/@cf/openai/whisper":
     workersAiPostRunCfOpenaiWhisper,
   "POST /accounts/{account_id}/ai/run/@cf/openai/whisper-large-v3-turbo":
@@ -4303,6 +4319,10 @@ export const operationsByPath = {
     namespaceWorkerDeleteNamespace,
   "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
     namespaceWorkerGetNamespace,
+  "PATCH /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
+    namespaceWorkerPatchNamespace,
+  "PUT /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
+    namespaceWorkerPutNamespace,
   "DELETE /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
     namespaceWorkerScriptDeleteWorker,
   "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
@@ -4493,9 +4513,10 @@ export const operationsByPath = {
   "GET /memberships/{membership_id}": userSAccountMembershipsMembershipDetails,
   "PUT /memberships/{membership_id}": userSAccountMembershipsUpdateMembership,
   "GET /organizations/{organization_id}/shares": organizationSharesList,
-  "GET /radar/ai/bots/summary/user_agent": radarGetAiBotsSummaryByUserAgent,
-  "GET /radar/ai/bots/timeseries_groups/user_agent":
-    radarGetAiBotsTimeseriesGroupByUserAgent,
+  "GET /radar/ai/bots/summary/{dimension}": radarGetAiBotsSummary,
+  "GET /radar/ai/bots/timeseries": radarGetAiBotsTimeseries,
+  "GET /radar/ai/bots/timeseries_groups/{dimension}":
+    radarGetAiBotsTimeseriesGroup,
   "GET /radar/ai/inference/summary/model": radarGetAiInferenceSummaryByModel,
   "GET /radar/ai/inference/summary/task": radarGetAiInferenceSummaryByTask,
   "GET /radar/ai/inference/timeseries_groups/model":
@@ -4626,6 +4647,13 @@ export const operationsByPath = {
   "GET /radar/bots/timeseries": radarGetBotsTimeseries,
   "GET /radar/bots/timeseries_groups/{dimension}": radarGetBotsTimeseriesGroup,
   "GET /radar/bots/{bot_slug}": radarGetBotDetails,
+  "GET /radar/ct/authorities": radarGetCertificateAuthorities,
+  "GET /radar/ct/authorities/{ca_slug}": radarGetCertificateAuthorityDetails,
+  "GET /radar/ct/logs": radarGetCertificateLogs,
+  "GET /radar/ct/logs/{log_slug}": radarGetCertificateLogDetails,
+  "GET /radar/ct/summary/{dimension}": radarGetCtSummary,
+  "GET /radar/ct/timeseries": radarGetCtTimeseries,
+  "GET /radar/ct/timeseries_groups/{dimension}": radarGetCtTimeseriesGroup,
   "GET /radar/datasets": radarGetReportsDatasets,
   "POST /radar/datasets/download": radarPostReportsDatasetDownloadUrl,
   "GET /radar/datasets/{alias}": radarGetReportsDatasetDownload,

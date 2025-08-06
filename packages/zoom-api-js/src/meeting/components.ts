@@ -3055,6 +3055,194 @@ export const recordingStatusUpdateOne = (
     signal,
   });
 
+export type GetMeetingTranscriptPathParams = {
+  /**
+   * To get a meeting's transcript, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID, the response will be for the latest meeting instance.
+   *
+   * To get a webinar's transcript, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID, the response will be for the latest webinar instance.
+   *
+   * If a UUID starts with `/` or contains `//`, like `/ajXp112QmuoKj4854875==`, you must **double encode** the UUID before making an API request.
+   *
+   * @example atsXxhSEQWit9t+U02HXNQ==
+   */
+  meetingId: string;
+};
+
+export type GetMeetingTranscriptError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetMeetingTranscriptResponse = {
+  /**
+   * The meeting ID
+   *
+   * @example uaFkQyFCSwya8iNYtkAw3A==
+   */
+  meeting_id?: string;
+  /**
+   * The user account's unique identifier.
+   *
+   * @example Cx3wERazSgup7ZWRHQM8-w
+   */
+  account_id?: string;
+  /**
+   * The meeting topic.
+   *
+   * @example My Personal Meeting
+   */
+  meeting_topic?: string;
+  /**
+   * ID of the user set as the host of the meeting.
+   *
+   * @example _0ctZtY0REqWalTmwvrdIw
+   */
+  host_id?: string;
+  /**
+   * The date and time that the meeting's transcript was created.
+   *
+   * @example 2025-06-27T13:48:24Z
+   */
+  transcript_created_time?: string;
+  /**
+   * Whether the meeting transcript is available for download.
+   * `true`: The transcript is ready and `download_url` will be returned.
+   * `false`: The transcript cannot be downloaded. and the `download_restriction_reason` field will be returned instead with the explanation.
+   *
+   * Only when `can_download` is `true`, the transcript file can be accessed.
+   *
+   * @example true
+   */
+  can_download?: boolean;
+  /**
+   * Auto-delete status of a meeting's transcript
+   *
+   * Prerequisite: To get the auto-delete status, the host of the recording must have the recording setting **Delete cloud recordings after a specified number of days** enabled.
+   *
+   * @example true
+   */
+  auto_delete?: boolean;
+  /**
+   * The date when the recording will be auto-deleted when `auto_delete` is true. Otherwise, no date will be returned.
+   *
+   * @example 2052-11-07
+   */
+  auto_delete_date?: string;
+  /**
+   * The URL to download the transcript.
+   *
+   * This field is only present when `can_download` is `true`. If present, `download_restriction_reason` will not be included."
+   *
+   *
+   * If a user has authorized and installed your OAuth app that contains recording scopes, use  the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) to download the file. Set the `access_token` as a Bearer token in the Authorization header. For example:
+   *
+   * `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`.
+   *
+   * @example https://example.com/rec/meeting/transcript/download/YDztop0PYLrAQat616a1q1H86RM4jf1Bf3p42a4Ap1jV3bWAJAE.jjixtQU52SEwrsuJ
+   */
+  download_url?: string | null;
+  /**
+   * If `can_download` is false, this field provides the reason why the transcript cannot be downloaded.
+   *
+   * This field is only present when `can_download` is `false`. If present, `download_url` will not be included."
+   *
+   * | Value                | Description                                                                                  |
+   * | -------------------- | -------------------------------------------------------------------------------------------- |
+   * | `DELETED_OR_TRASHED` | The transcript has been deleted or moved to trash and is no longer available.                |
+   * | `UNSUPPORTED`        | The transcript format is not supported for download. |
+   * | `NO_TRANSCRIPT_DATA` | No transcript data exists for the meeting.                                                   |
+   * | `NOT_READY`          | The transcript is still being processed and not yet ready for download.                      |
+   *
+   * @example NOT_READY
+   */
+  download_restriction_reason?:
+    | "DELETED_OR_TRASHED"
+    | "UNSUPPORTED"
+    | "NO_TRANSCRIPT_DATA"
+    | "NOT_READY"
+    | null;
+};
+
+export type GetMeetingTranscriptVariables = {
+  pathParams: GetMeetingTranscriptPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Return a meeting's [transcript](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0076632) information. Use the `download_url` property listed in the response to download the transcript content.
+ *
+ * To download the trancript, send the user's [OAuth access token](/docs/integrations/oauth/) as a Bearer token in the Authorization header.
+ *
+ *  `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}//rec/meeting/transcript/download/xyz`
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read`,`recording:write`,`recording:read:admin`,`recording:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:meeting_transcript`,`cloud_recording:read:meeting_transcript:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const getMeetingTranscript = (
+  variables: GetMeetingTranscriptVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetMeetingTranscriptResponse,
+    GetMeetingTranscriptError,
+    undefined,
+    {},
+    {},
+    GetMeetingTranscriptPathParams
+  >({
+    url: "/meetings/{meetingId}/transcript",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type DeleteMeetingTranscriptPathParams = {
+  /**
+   * To delete a meeting's transcript, provide the meeting ID or meeting's unique universal identifier (UUID). If the meeting ID is provided instead of UUID, the response will be for the latest meeting instance.
+   *
+   * To delete a webinar's transcript, provide the webinar ID or the webinar's UUID. If the webinar ID is provided instead of UUID, the response will be for the latest webinar instance.
+   *
+   * If a UUID starts with `/` or contains `//`, like `/ajXp112QmuoKj4854875==`, you must **double encode** the UUID before making an API request.
+   *
+   * @example atsXxhSEQWit9t+U02HXNQ==
+   */
+  meetingId: string;
+};
+
+export type DeleteMeetingTranscriptError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteMeetingTranscriptVariables = {
+  pathParams: DeleteMeetingTranscriptPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a transcript for a meeting or webinar.
+ *
+ *
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write`,`recording:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:delete:meeting_transcript`,`cloud_recording:delete:meeting_transcript:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const deleteMeetingTranscript = (
+  variables: DeleteMeetingTranscriptVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeleteMeetingTranscriptError,
+    undefined,
+    {},
+    {},
+    DeleteMeetingTranscriptPathParams
+  >({
+    url: "/meetings/{meetingId}/transcript",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
 export type RecordingStatusUpdatePathParams = {
   /**
    * The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
@@ -32258,6 +32446,8 @@ export const operationsByTag = {
     recordingSettingsUpdate,
     recordingDeleteOne,
     recordingStatusUpdateOne,
+    getMeetingTranscript,
+    deleteMeetingTranscript,
     recordingStatusUpdate,
     recordingsList,
   },
