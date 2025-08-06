@@ -184,7 +184,7 @@ export type WorkersVersionPost = {
    */
   files?: Blob[];
   /**
-   * JSON encoded metadata about the uploaded parts and Worker configuration.
+   * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
   metadata: {
     annotations?: {

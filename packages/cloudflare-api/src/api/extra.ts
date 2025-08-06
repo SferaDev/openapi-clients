@@ -199,6 +199,8 @@ import {
   workersAiPostRunCfMistralMistral7bInstructV02Lora,
   workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   workersAiPostRunCfMyshellAiMelotts,
+  workersAiPostRunCfOpenaiGptOss120b,
+  workersAiPostRunCfOpenaiGptOss20b,
   workersAiPostRunCfOpenaiWhisper,
   workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
   workersAiPostRunCfOpenaiWhisperTinyEn,
@@ -1234,6 +1236,8 @@ import {
   namespaceWorkerCreate,
   namespaceWorkerDeleteNamespace,
   namespaceWorkerGetNamespace,
+  namespaceWorkerPatchNamespace,
+  namespaceWorkerPutNamespace,
   namespaceWorkerScriptDeleteWorker,
   namespaceWorkerScriptWorkerDetails,
   namespaceWorkerScriptUploadWorkerModule,
@@ -2473,6 +2477,10 @@ export const operationsByPath = {
     workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/myshell-ai/melotts":
     workersAiPostRunCfMyshellAiMelotts,
+  "POST /accounts/{account_id}/ai/run/@cf/openai/gpt-oss-120b":
+    workersAiPostRunCfOpenaiGptOss120b,
+  "POST /accounts/{account_id}/ai/run/@cf/openai/gpt-oss-20b":
+    workersAiPostRunCfOpenaiGptOss20b,
   "POST /accounts/{account_id}/ai/run/@cf/openai/whisper":
     workersAiPostRunCfOpenaiWhisper,
   "POST /accounts/{account_id}/ai/run/@cf/openai/whisper-large-v3-turbo":
@@ -4311,6 +4319,10 @@ export const operationsByPath = {
     namespaceWorkerDeleteNamespace,
   "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
     namespaceWorkerGetNamespace,
+  "PATCH /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
+    namespaceWorkerPatchNamespace,
+  "PUT /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
+    namespaceWorkerPutNamespace,
   "DELETE /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
     namespaceWorkerScriptDeleteWorker,
   "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
