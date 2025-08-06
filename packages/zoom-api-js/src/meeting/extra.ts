@@ -17,6 +17,8 @@ import {
   recordingSettingsUpdate,
   recordingDeleteOne,
   recordingStatusUpdateOne,
+  getMeetingTranscript,
+  deleteMeetingTranscript,
   recordingStatusUpdate,
   recordingsList,
   listDevices,
@@ -210,6 +212,8 @@ export const operationsByPath = {
   "DELETE /meetings/{meetingId}/recordings/{recordingId}": recordingDeleteOne,
   "PUT /meetings/{meetingId}/recordings/{recordingId}/status":
     recordingStatusUpdateOne,
+  "GET /meetings/{meetingId}/transcript": getMeetingTranscript,
+  "DELETE /meetings/{meetingId}/transcript": deleteMeetingTranscript,
   "PUT /meetings/{meetingUUID}/recordings/status": recordingStatusUpdate,
   "GET /users/{userId}/recordings": recordingsList,
   "GET /devices": listDevices,
