@@ -11422,6 +11422,7 @@ export type BillSubsApiAccountSubscriptionResponseSingle =
  *
  * @example subscription
  * @maxLength 30
+ * @x-auditable true
  */
 export type BillSubsApiAction = string;
 
@@ -11429,6 +11430,7 @@ export type BillSubsApiAction = string;
  * The amount associated with this billing item.
  *
  * @example 20.99
+ * @x-auditable true
  */
 export type BillSubsApiAmount = number;
 
@@ -11572,10 +11574,12 @@ export type BillSubsApiBillingResponseSingle = BillSubsApiApiResponseSingle & {
     edited_on?: string;
     /**
      * @example johndoe@gmail.com
+     * @x-auditable true
      */
     enterprise_billing_email?: string;
     /**
      * @example johndoe@gmail.com
+     * @x-auditable true
      */
     enterprise_primary_email?: string;
     /**
@@ -11642,6 +11646,7 @@ export type BillSubsApiBillingResponseSingle = BillSubsApiApiResponseSingle & {
     payment_zipcode?: string;
     /**
      * @example johndoe@gmail.com
+     * @x-auditable true
      */
     primary_email?: string;
     /**
@@ -11680,6 +11685,7 @@ export type BillSubsApiBillingResponseSingle = BillSubsApiApiResponseSingle & {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type BillSubsApiCanSubscribe = boolean;
 
@@ -11699,6 +11705,7 @@ export type BillSubsApiComponentValues = BillSubsApiComponentValue2[];
  *
  * @example b69a9f3492637782896352daae219e7d
  * @maxLength 32
+ * @x-auditable true
  */
 export type BillSubsApiComponentsSchemasIdentifier = string;
 
@@ -11706,6 +11713,7 @@ export type BillSubsApiComponentsSchemasIdentifier = string;
  * The unique component.
  *
  * @example page_rules
+ * @x-auditable true
  */
 export type BillSubsApiComponentsSchemasName =
   | "zones"
@@ -11717,6 +11725,7 @@ export type BillSubsApiComponentsSchemasName =
  * The monetary unit in which pricing information is displayed.
  *
  * @example USD
+ * @x-auditable true
  */
 export type BillSubsApiCurrency = string;
 
@@ -11725,6 +11734,7 @@ export type BillSubsApiCurrency = string;
  *
  * @example 2014-03-31T12:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type BillSubsApiCurrentPeriodEnd = string;
 
@@ -11733,6 +11743,7 @@ export type BillSubsApiCurrentPeriodEnd = string;
  *
  * @example 2014-05-11T12:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type BillSubsApiCurrentPeriodStart = string;
 
@@ -11740,6 +11751,7 @@ export type BillSubsApiCurrentPeriodStart = string;
  * The default amount allocated.
  *
  * @example 5
+ * @x-auditable true
  */
 export type BillSubsApiDefault = number;
 
@@ -11748,6 +11760,7 @@ export type BillSubsApiDefault = number;
  *
  * @example The billing item description
  * @maxLength 255
+ * @x-auditable true
  */
 export type BillSubsApiDescription = string;
 
@@ -11755,6 +11768,7 @@ export type BillSubsApiDescription = string;
  * The duration of the plan subscription.
  *
  * @example 1
+ * @x-auditable true
  */
 export type BillSubsApiDuration = number;
 
@@ -11763,6 +11777,7 @@ export type BillSubsApiDuration = number;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type BillSubsApiExternallyManaged = boolean;
 
@@ -11770,6 +11785,7 @@ export type BillSubsApiExternallyManaged = boolean;
  * How often the subscription is renewed automatically.
  *
  * @example monthly
+ * @x-auditable true
  */
 export type BillSubsApiFrequency =
   | "weekly"
@@ -11782,11 +11798,14 @@ export type BillSubsApiFrequency =
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type BillSubsApiIdentifier = string;
 
 /**
  * app install id.
+ *
+ * @x-auditable true
  */
 export type BillSubsApiInstallId = string;
 
@@ -11795,6 +11814,7 @@ export type BillSubsApiInstallId = string;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type BillSubsApiIsSubscribed = boolean;
 
@@ -11803,6 +11823,7 @@ export type BillSubsApiIsSubscribed = boolean;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type BillSubsApiLegacyDiscount = boolean;
 
@@ -11810,6 +11831,7 @@ export type BillSubsApiLegacyDiscount = boolean;
  * The legacy identifier for this rate plan, if any.
  *
  * @example free
+ * @x-auditable true
  */
 export type BillSubsApiLegacyId = string;
 
@@ -11827,6 +11849,7 @@ export type BillSubsApiMessages = {
  * @example example.com
  * @maxLength 253
  * @pattern ^([a-zA-Z0-9][\-a-zA-Z0-9]*\.)+[\-a-zA-Z0-9]{2,20}$
+ * @x-auditable true
  */
 export type BillSubsApiName = string;
 
@@ -11835,6 +11858,7 @@ export type BillSubsApiName = string;
  *
  * @example 2014-03-01T12:21:59.3456Z
  * @format date-time
+ * @x-auditable true
  */
 export type BillSubsApiOccurredAt = string;
 
@@ -11847,6 +11871,7 @@ export type BillSubsApiPlanResponseCollection =
  * The price of the subscription that will be billed, in US dollars.
  *
  * @example 20
+ * @x-auditable true
  */
 export type BillSubsApiPrice = number;
 
@@ -11863,6 +11888,7 @@ export type BillSubsApiRatePlan = {
  * Plan identifier tag.
  *
  * @example free
+ * @x-auditable true
  */
 export type BillSubsApiRatePlanComponentsSchemasIdentifier = string;
 
@@ -11902,6 +11928,7 @@ export type BillSubsApiSchemasComponentValues = BillSubsApiComponentValue[];
  * The frequency at which you will be billed for this plan.
  *
  * @example monthly
+ * @x-auditable true
  */
 export type BillSubsApiSchemasFrequency =
   | "weekly"
@@ -11914,6 +11941,7 @@ export type BillSubsApiSchemasFrequency =
  *
  * @example 506e3185e9c882d175a2d0cb0093d9f2
  * @maxLength 32
+ * @x-auditable true
  */
 export type BillSubsApiSchemasIdentifier = string;
 
@@ -11922,6 +11950,7 @@ export type BillSubsApiSchemasIdentifier = string;
  *
  * @example Free Plan
  * @maxLength 80
+ * @x-auditable true
  */
 export type BillSubsApiSchemasName = string;
 
@@ -11929,12 +11958,16 @@ export type BillSubsApiSchemasName = string;
  * The amount you will be billed for this plan.
  *
  * @example 0
+ * @x-auditable true
  */
 export type BillSubsApiSchemasPrice = number;
 
 export type BillSubsApiSchemasRatePlan = BillSubsApiRatePlan;
 
 export type BillSubsApiSchemasZone = {
+  /**
+   * @x-auditable true
+   */
   name?: string;
 };
 
@@ -11942,6 +11975,7 @@ export type BillSubsApiSchemasZone = {
  * The state that the subscription is in.
  *
  * @example Paid
+ * @x-auditable true
  */
 export type BillSubsApiState =
   | "Trial"
@@ -11975,6 +12009,7 @@ export type BillSubsApiSubscriptionV2 = {
  *
  * @example charge
  * @maxLength 30
+ * @x-auditable true
  */
 export type BillSubsApiType = string;
 
@@ -11982,6 +12017,7 @@ export type BillSubsApiType = string;
  * The unit price of the addon.
  *
  * @example 1
+ * @x-auditable true
  */
 export type BillSubsApiUnitPrice = number;
 
@@ -12062,6 +12098,7 @@ export type BotManagementBaseConfig = {
   ai_bots_protection?: BotManagementAiBotsProtection;
   crawler_protection?: BotManagementCrawlerProtection;
   enable_js?: BotManagementEnableJs;
+  is_robots_txt_managed?: BotManagementIsRobotsTxtManaged;
   using_latest_model?: BotManagementUsingLatestModel;
 };
 
@@ -12154,6 +12191,15 @@ export type BotManagementFightModeTurnedOn = boolean;
  * @x-auditable true
  */
 export type BotManagementIdentifier = string;
+
+/**
+ * Enable cloudflare managed robots.txt. If an existing robots.txt is detected, then managed robots.txt will be prepended to the existing robots.txt.
+ *
+ * @default false
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type BotManagementIsRobotsTxtManaged = boolean;
 
 export type BotManagementMessages = {
   /**
@@ -12375,6 +12421,12 @@ export type BrandProtectionApiQuery = {
   scan?: boolean;
   string_matches?: void;
   tag?: string;
+};
+
+export type BrandProtectionApiQueryBulk = {
+  queries?: {
+    [key: string]: any;
+  }[];
 };
 
 export type BrandProtectionApiQueryMatch = {
@@ -49090,8 +49142,24 @@ export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
       hosts?: TlsCertificatesAndHostnamesSchemasHosts;
       id?: TlsCertificatesAndHostnamesIdentifier;
       status?: TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus;
-      type?: TlsCertificatesAndHostnamesAdvancedType;
+      type?: TlsCertificatesAndHostnamesSchemasType;
+      /**
+       * Domain validation errors that have been received by the certificate authority (CA).
+       */
+      validation_errors?: {
+        /**
+         * A domain validation error.
+         *
+         * @example SERVFAIL looking up CAA for app.example.com
+         * @x-auditable true
+         */
+        message?: string;
+      }[];
       validation_method?: TlsCertificatesAndHostnamesValidationMethod;
+      /**
+       * Certificates' validation records. Only present when certificate pack is in "pending_validation" status
+       */
+      validation_records?: TlsCertificatesAndHostnamesValidationRecord[];
       validity_days?: TlsCertificatesAndHostnamesValidityDays;
     };
   };
@@ -49106,7 +49174,32 @@ export type TlsCertificatesAndHostnamesAdvancedType = "advanced";
 
 export type TlsCertificatesAndHostnamesApiResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCommon & {
-    result_info?: TlsCertificatesAndHostnamesResultInfo;
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
 
 export type TlsCertificatesAndHostnamesApiResponseCommon = {
@@ -50113,6 +50206,7 @@ export type TlsCertificatesAndHostnamesHosts = string[];
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesIdentifier = string;
 
@@ -50505,33 +50599,6 @@ export type TlsCertificatesAndHostnamesRequestedValidity =
   | 1095
   | 5475;
 
-export type TlsCertificatesAndHostnamesResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 /**
  * When the certificate was revoked.
  *
@@ -50738,6 +50805,22 @@ export type TlsCertificatesAndHostnamesSchemasSignature =
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasStatus = "active" | "deleted";
+
+/**
+ * Type of certificate pack.
+ *
+ * @example universal
+ * @x-auditable true
+ */
+export type TlsCertificatesAndHostnamesSchemasType =
+  | "mh_custom"
+  | "managed_hostname"
+  | "sni_custom"
+  | "universal"
+  | "advanced"
+  | "total_tls"
+  | "keyless"
+  | "legacy_custom";
 
 /**
  * The time when the certificate was updated.
@@ -65037,24 +65120,28 @@ export type BillSubsApiComponentValue2 = {
    * The default amount assigned.
    *
    * @example 5
+   * @x-auditable true
    */
   ["default"]?: number;
   /**
    * The name of the component value.
    *
    * @example page_rules
+   * @x-auditable true
    */
   name?: string;
   /**
    * The unit price for the component value.
    *
    * @example 5
+   * @x-auditable true
    */
   price?: number;
   /**
    * The amount of the component value assigned.
    *
    * @example 20
+   * @x-auditable true
    */
   value?: number;
 };
@@ -65067,36 +65154,42 @@ export type BillSubsApiRatePlan2 = {
    * The currency applied to the rate plan subscription.
    *
    * @example USD
+   * @x-auditable true
    */
   currency?: string;
   /**
    * Whether this rate plan is managed externally from Cloudflare.
    *
    * @example false
+   * @x-auditable true
    */
   externally_managed?: boolean;
   /**
    * The ID of the rate plan.
    *
    * @example free
+   * @x-auditable true
    */
   id?: string;
   /**
    * Whether a rate plan is enterprise-based (or newly adopted term contract).
    *
    * @example false
+   * @x-auditable true
    */
   is_contract?: boolean;
   /**
    * The full name of the rate plan.
    *
    * @example Business Plan
+   * @x-auditable true
    */
   public_name?: string;
   /**
    * The scope that this rate plan applies to.
    *
    * @example zone
+   * @x-auditable true
    */
   scope?: string;
   /**
