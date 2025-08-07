@@ -288,6 +288,7 @@ import {
   getAccountsAccountIdBrandProtectionQueries,
   patchAccountsAccountIdBrandProtectionQueries,
   postAccountsAccountIdBrandProtectionQueries,
+  postAccountsAccountIdBrandProtectionQueriesBulk,
   getAccountsAccountIdBrandProtectionRecentSubmissions,
   patchAccountsAccountIdBrandProtectionRefute,
   postAccountsAccountIdBrandProtectionScanLogo,
@@ -1860,6 +1861,7 @@ import {
   zones0HoldPost,
   perHostnameTlsSettingsList,
   perHostnameTlsSettingsDelete,
+  perHostnameTlsSettingsGet,
   perHostnameTlsSettingsPut,
   keylessSslForAZoneListKeylessSslConfigurations,
   keylessSslForAZoneCreateKeylessSslConfiguration,
@@ -2647,6 +2649,8 @@ export const operationsByPath = {
     patchAccountsAccountIdBrandProtectionQueries,
   "POST /accounts/{account_id}/brand-protection/queries":
     postAccountsAccountIdBrandProtectionQueries,
+  "POST /accounts/{account_id}/brand-protection/queries/bulk":
+    postAccountsAccountIdBrandProtectionQueriesBulk,
   "GET /accounts/{account_id}/brand-protection/recent-submissions":
     getAccountsAccountIdBrandProtectionRecentSubmissions,
   "PATCH /accounts/{account_id}/brand-protection/refute":
@@ -5361,6 +5365,8 @@ export const operationsByPath = {
     perHostnameTlsSettingsList,
   "DELETE /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}":
     perHostnameTlsSettingsDelete,
+  "GET /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}":
+    perHostnameTlsSettingsGet,
   "PUT /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}":
     perHostnameTlsSettingsPut,
   "GET /zones/{zone_id}/keyless_certificates":
