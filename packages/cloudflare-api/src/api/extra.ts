@@ -1344,8 +1344,10 @@ import {
   userSAccountMembershipsMembershipDetails,
   userSAccountMembershipsUpdateMembership,
   organizationSharesList,
+  radarGetAiBotsSummaryByUserAgent,
   radarGetAiBotsSummary,
   radarGetAiBotsTimeseries,
+  radarGetAiBotsTimeseriesGroupByUserAgent,
   radarGetAiBotsTimeseriesGroup,
   radarGetAiInferenceSummaryByModel,
   radarGetAiInferenceSummaryByTask,
@@ -4517,8 +4519,11 @@ export const operationsByPath = {
   "GET /memberships/{membership_id}": userSAccountMembershipsMembershipDetails,
   "PUT /memberships/{membership_id}": userSAccountMembershipsUpdateMembership,
   "GET /organizations/{organization_id}/shares": organizationSharesList,
+  "GET /radar/ai/bots/summary/user_agent": radarGetAiBotsSummaryByUserAgent,
   "GET /radar/ai/bots/summary/{dimension}": radarGetAiBotsSummary,
   "GET /radar/ai/bots/timeseries": radarGetAiBotsTimeseries,
+  "GET /radar/ai/bots/timeseries_groups/user_agent":
+    radarGetAiBotsTimeseriesGroupByUserAgent,
   "GET /radar/ai/bots/timeseries_groups/{dimension}":
     radarGetAiBotsTimeseriesGroup,
   "GET /radar/ai/inference/summary/model": radarGetAiInferenceSummaryByModel,
