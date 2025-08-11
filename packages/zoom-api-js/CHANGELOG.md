@@ -1,5 +1,13 @@
 # zoom-api-js
 
+## 0.6.3
+
+### Patch Changes
+
+- 5ebc0ca: Add getMeetingTranscript API endpoint to retrieve meeting transcripts
+- edc8a7c: Add example for the 'userId' field in WebinarCreatePathParams
+- fa20faf: [BREAKING] Change type of userId in ReportMeetingsPathParams to a specific string
+
 ## 0.6.2
 
 ### Patch Changes
