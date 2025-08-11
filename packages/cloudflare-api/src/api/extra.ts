@@ -147,6 +147,20 @@ import {
   aigConfigPatchGatewayLog,
   aigConfigGetGatewayLogRequest,
   aigConfigGetGatewayLogResponse,
+  aigConfigListProviders,
+  aigConfigCreateProviders,
+  aigConfigDeleteProviders,
+  aigConfigUpdateProviders,
+  aigConfigListGatewayDynamicRoutes,
+  aigConfigPostGatewayDynamicRoute,
+  aigConfigDeleteGatewayDynamicRoute,
+  aigConfigGetGatewayDynamicRoute,
+  aigConfigUpdateGatewayDynamicRoute,
+  aigConfigListGatewayDynamicRouteDeployments,
+  aigConfigPostGatewayDynamicRouteDeployment,
+  aigConfigListGatewayDynamicRouteVersions,
+  aigConfigPostGatewayDynamicRouteVersion,
+  aigConfigGetGatewayDynamicRouteVersion,
   aigConfigGetGatewayUrl,
   aigConfigDeleteGateway,
   aigConfigFetchGateway,
@@ -350,6 +364,7 @@ import {
   getCountryRead,
   postEventCreate,
   postEventCreateBulk,
+  postEventCreateBulkWithRelationships,
   getCronUpdateRead,
   patchCronUpdate,
   postCronUpdate,
@@ -2384,6 +2399,34 @@ export const operationsByPath = {
     aigConfigGetGatewayLogRequest,
   "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}/response":
     aigConfigGetGatewayLogResponse,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs":
+    aigConfigListProviders,
+  "POST /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs":
+    aigConfigCreateProviders,
+  "DELETE /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs/{id}":
+    aigConfigDeleteProviders,
+  "PUT /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/provider_configs/{id}":
+    aigConfigUpdateProviders,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes":
+    aigConfigListGatewayDynamicRoutes,
+  "POST /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes":
+    aigConfigPostGatewayDynamicRoute,
+  "DELETE /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}":
+    aigConfigDeleteGatewayDynamicRoute,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}":
+    aigConfigGetGatewayDynamicRoute,
+  "PATCH /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}":
+    aigConfigUpdateGatewayDynamicRoute,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments":
+    aigConfigListGatewayDynamicRouteDeployments,
+  "POST /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/deployments":
+    aigConfigPostGatewayDynamicRouteDeployment,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions":
+    aigConfigListGatewayDynamicRouteVersions,
+  "POST /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions":
+    aigConfigPostGatewayDynamicRouteVersion,
+  "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/routes/{id}/versions/{version_id}":
+    aigConfigGetGatewayDynamicRouteVersion,
   "GET /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/url/{provider}":
     aigConfigGetGatewayUrl,
   "DELETE /accounts/{account_id}/ai-gateway/gateways/{id}":
@@ -2751,6 +2794,8 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/cloudforce-one/events/create": postEventCreate,
   "POST /accounts/{account_id}/cloudforce-one/events/create/bulk":
     postEventCreateBulk,
+  "POST /accounts/{account_id}/cloudforce-one/events/create/bulk/relationships":
+    postEventCreateBulkWithRelationships,
   "GET /accounts/{account_id}/cloudforce-one/events/cron": getCronUpdateRead,
   "PATCH /accounts/{account_id}/cloudforce-one/events/cron": patchCronUpdate,
   "POST /accounts/{account_id}/cloudforce-one/events/cron": postCronUpdate,

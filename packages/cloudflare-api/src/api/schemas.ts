@@ -18789,7 +18789,7 @@ export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
    */
   data?: {
     /**
-     * priority.
+     * Priority.
      *
      * @example 1
      * @maximum 65535
@@ -18798,14 +18798,14 @@ export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
      */
     priority?: number;
     /**
-     * target.
+     * Target.
      *
      * @example .
      * @x-auditable true
      */
     target?: string;
     /**
-     * value.
+     * Value.
      *
      * @example alpn="h3,h2" ipv4hint="127.0.0.1" ipv6hint="::1"
      * @x-auditable true
@@ -19194,7 +19194,7 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
    */
   data?: {
     /**
-     * algorithm.
+     * Algorithm.
      *
      * @example 2
      * @maximum 255
@@ -19203,13 +19203,13 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
      */
     algorithm?: number;
     /**
-     * fingerprint.
+     * Fingerprint.
      *
      * @x-auditable true
      */
     fingerprint?: string;
     /**
-     * type.
+     * Type.
      *
      * @example 1
      * @maximum 255
@@ -19239,7 +19239,7 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
    */
   data?: {
     /**
-     * priority.
+     * Priority.
      *
      * @example 1
      * @maximum 65535
@@ -19248,14 +19248,14 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
      */
     priority?: number;
     /**
-     * target.
+     * Target.
      *
      * @example .
      * @x-auditable true
      */
     target?: string;
     /**
-     * value.
+     * Value.
      *
      * @example alpn="h3,h2" ipv4hint="127.0.0.1" ipv6hint="::1"
      * @x-auditable true
@@ -19283,7 +19283,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
    */
   data?: {
     /**
-     * certificate.
+     * Certificate.
      *
      * @x-auditable true
      */
@@ -20358,6 +20358,7 @@ export type DosAsnType = "hosting_provider" | "isp" | "organization";
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DosIdentifier = string;
 
@@ -20376,6 +20377,7 @@ export type DosMessages = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DosTimestamp = string;
 
@@ -33113,22 +33115,27 @@ export type MconnCustomerConnectorFetchResponse = MconnGoodResponse & {
 export type MconnCustomerConnectorFields = {
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   activated?: boolean;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   interrupt_window_duration_hours?: number;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   interrupt_window_hour_of_day?: number;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   notes?: string;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   timezone?: string;
 };
@@ -33147,7 +33154,6 @@ export type MconnCustomerDevice = {
   id: MconnUuid;
   /**
    * @x-auditable true
-   * @x-stainless-terraform-configurability computed_optional
    */
   serial_number?: string;
 };
@@ -33159,10 +33165,12 @@ export type MconnCustomerDevice = {
 export type MconnCustomerDeviceIdentifier = {
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   id?: string;
   /**
    * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   serial_number?: string;
 };
@@ -43634,7 +43642,7 @@ export type SecondaryDnsDisableTransferResponse =
   };
 
 /**
- * The zone transfer status of a primary zone
+ * The zone transfer status of a primary zone.
  *
  * @example Disabled
  * @x-auditable true
@@ -43654,7 +43662,7 @@ export type SecondaryDnsEnableTransferResponse =
   };
 
 /**
- * The zone transfer status of a primary zone
+ * The zone transfer status of a primary zone.
  *
  * @example Enabled
  * @x-auditable true
@@ -43666,7 +43674,7 @@ export type SecondaryDnsForceResponse = SecondaryDnsApiResponseSingle & {
 };
 
 /**
- * When force_axfr query parameter is set to true, the response is a simple string
+ * When force_axfr query parameter is set to true, the response is a simple string.
  *
  * @example OK
  * @x-auditable true
@@ -43764,7 +43772,7 @@ export type SecondaryDnsSchemasForceResponse = SecondaryDnsApiResponseSingle & {
 };
 
 /**
- * When force_notify query parameter is set to true, the response is a simple string
+ * When force_notify query parameter is set to true, the response is a simple string.
  *
  * @example OK
  * @x-auditable true
