@@ -22,7 +22,7 @@
     "@kubb/core": "^3.16.1",
     "@kubb/plugin-zod": "^3.16.1",
     "@kubb/react": "^3.16.1",
-    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@modelcontextprotocol/sdk": "^1.17.2",
     "openapi-utils": "workspace:*"
   },
   "peerDependencies": {
