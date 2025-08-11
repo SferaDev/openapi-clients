@@ -23823,6 +23823,8 @@ export const webinars = (variables: WebinarsVariables, signal?: AbortSignal) =>
 export type WebinarCreatePathParams = {
   /**
    * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
 };
@@ -24399,12 +24401,6 @@ export type WebinarCreateResponse = {
      * @example true
      */
     add_audio_watermark?: boolean;
-    /**
-     * Send notification email to registrants when the host updates a webinar.
-     *
-     * @example true
-     */
-    notify_registrants?: boolean;
     /**
      * Make the webinar on demand.
      *
@@ -26041,12 +26037,6 @@ export type WebinarResponse = {
      * @example true
      */
     add_audio_watermark?: boolean;
-    /**
-     * Send notification email to registrants when the host updates a webinar.
-     *
-     * @example true
-     */
-    notify_registrants?: boolean;
     /**
      * Make the webinar on-demand.
      *
@@ -30811,7 +30801,12 @@ export type WebinarRegistrantCreateRequestBody = {
     | "Influencer"
     | "Not involved";
   /**
-   * The registrant's language preference for confirmation emails:
+   * Specifies the registrant's preferred language for the confirmation email sent upon successful registration.
+   *
+   * **Note** This field is only effective if the webinar's 'Select Email Language' setting is set to 'Same as recipients' default language' in the Zoom web portal. If a fixed language is selected, this value will be ignored.
+   *
+   * **Supported values**
+   *
    * * `en-US` - English (US)
    * * `de-DE` - German (Germany)
    * * `es-ES` - Spanish (Spain)
@@ -30853,7 +30848,7 @@ export type WebinarRegistrantCreateRequestBody = {
 };
 
 export type WebinarRegistrantCreateVariables = {
-  body?: WebinarRegistrantCreateRequestBody;
+  body: WebinarRegistrantCreateRequestBody;
   pathParams: WebinarRegistrantCreatePathParams;
   queryParams?: WebinarRegistrantCreateQueryParams;
 } & FetcherExtraProps;
