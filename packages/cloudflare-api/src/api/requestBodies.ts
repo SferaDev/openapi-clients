@@ -94,6 +94,9 @@ export type ApiShieldSchemaEdit = {
   validation_enabled?: boolean;
 };
 
+export type PayPerCrawlZonesCanBeEnabledPayload =
+  Schemas.PayPerCrawlZonesCanBeEnabledPayload;
+
 /**
  * A ruleset object.
  */

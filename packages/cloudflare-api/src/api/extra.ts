@@ -963,6 +963,14 @@ import {
   pagesDomainsGetDomain,
   pagesDomainsPatchDomain,
   pagesPurgeBuildCache,
+  payPerCrawlCrawlerDeleteStripeConfig,
+  payPerCrawlCrawlerGetStripeConfig,
+  payPerCrawlCrawlerCreateStripeConfig,
+  payPerCrawlPublisherDeleteStripeConfig,
+  payPerCrawlPublisherGetStripeConfig,
+  payPerCrawlPublisherCreateStripeConfig,
+  payPerCrawlSetZonesCanBeEnabled,
+  payPerCrawlQueryZonesCanBeEnabled,
   magicPcapCollectionListPacketCaptureRequests,
   magicPcapCollectionCreatePcapRequest,
   magicPcapCollectionListPcaPsBucketOwnership,
@@ -1951,6 +1959,8 @@ import {
   pageRulesGetAPageRule,
   pageRulesEditAPageRule,
   pageRulesUpdateAPageRule,
+  payPerCrawlGetConfig,
+  payPerCrawlPatchConfig,
   zonePurge,
   rateLimitsForAZoneListRateLimits,
   rateLimitsForAZoneCreateARateLimit,
@@ -3880,6 +3890,22 @@ export const operationsByPath = {
     pagesDomainsPatchDomain,
   "POST /accounts/{account_id}/pages/projects/{project_name}/purge_build_cache":
     pagesPurgeBuildCache,
+  "DELETE /accounts/{account_id}/pay-per-crawl/crawler/stripe":
+    payPerCrawlCrawlerDeleteStripeConfig,
+  "GET /accounts/{account_id}/pay-per-crawl/crawler/stripe":
+    payPerCrawlCrawlerGetStripeConfig,
+  "POST /accounts/{account_id}/pay-per-crawl/crawler/stripe":
+    payPerCrawlCrawlerCreateStripeConfig,
+  "DELETE /accounts/{account_id}/pay-per-crawl/publisher/stripe":
+    payPerCrawlPublisherDeleteStripeConfig,
+  "GET /accounts/{account_id}/pay-per-crawl/publisher/stripe":
+    payPerCrawlPublisherGetStripeConfig,
+  "POST /accounts/{account_id}/pay-per-crawl/publisher/stripe":
+    payPerCrawlPublisherCreateStripeConfig,
+  "PATCH /accounts/{account_id}/pay-per-crawl/zones_can_be_enabled":
+    payPerCrawlSetZonesCanBeEnabled,
+  "POST /accounts/{account_id}/pay-per-crawl/zones_can_be_enabled/query":
+    payPerCrawlQueryZonesCanBeEnabled,
   "GET /accounts/{account_id}/pcaps":
     magicPcapCollectionListPacketCaptureRequests,
   "POST /accounts/{account_id}/pcaps": magicPcapCollectionCreatePcapRequest,
@@ -5530,6 +5556,8 @@ export const operationsByPath = {
   "GET /zones/{zone_id}/pagerules/{pagerule_id}": pageRulesGetAPageRule,
   "PATCH /zones/{zone_id}/pagerules/{pagerule_id}": pageRulesEditAPageRule,
   "PUT /zones/{zone_id}/pagerules/{pagerule_id}": pageRulesUpdateAPageRule,
+  "GET /zones/{zone_id}/pay-per-crawl/configuration": payPerCrawlGetConfig,
+  "PATCH /zones/{zone_id}/pay-per-crawl/configuration": payPerCrawlPatchConfig,
   "POST /zones/{zone_id}/purge_cache": zonePurge,
   "GET /zones/{zone_id}/rate_limits": rateLimitsForAZoneListRateLimits,
   "POST /zones/{zone_id}/rate_limits": rateLimitsForAZoneCreateARateLimit,

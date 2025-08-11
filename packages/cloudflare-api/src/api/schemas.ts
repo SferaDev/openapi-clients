@@ -18117,14 +18117,39 @@ export type DnsCustomNameserversAcnsResponseSingle =
 
 export type DnsCustomNameserversApiResponseCollection =
   DnsCustomNameserversApiResponseCommon & {
-    result_info?: DnsCustomNameserversResultInfo;
+    result_info?: {
+      /**
+       * Total number of results for the requested service.
+       *
+       * @example 1
+       */
+      count?: number;
+      /**
+       * Current page within paginated list of results.
+       *
+       * @example 1
+       */
+      page?: number;
+      /**
+       * Number of results per page of results.
+       *
+       * @example 20
+       */
+      per_page?: number;
+      /**
+       * Total results available without any search parameters.
+       *
+       * @example 2000
+       */
+      total_count?: number;
+    };
   };
 
 export type DnsCustomNameserversApiResponseCommon = {
   errors: DnsCustomNameserversMessages;
   messages: DnsCustomNameserversMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -18140,7 +18165,7 @@ export type DnsCustomNameserversApiResponseCommonFailure = {
   messages: DnsCustomNameserversMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -18175,7 +18200,11 @@ export type DnsCustomNameserversMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -18198,33 +18227,6 @@ export type DnsCustomNameserversNsName = string;
  */
 export type DnsCustomNameserversNsSet = number;
 
-export type DnsCustomNameserversResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 export type DnsCustomNameserversSchemasEmptyResponse =
   DnsCustomNameserversApiResponseCollection & {
     /**
@@ -18234,10 +18236,11 @@ export type DnsCustomNameserversSchemasEmptyResponse =
   };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsCustomNameserversSchemasIdentifier = string;
 
@@ -37068,6 +37071,135 @@ export type PagesStage = {
   status?: "success" | "idle" | "active" | "failure" | "canceled";
 };
 
+export type PayPerCrawlBotAccessMode = "charge" | "bypass";
+
+export type PayPerCrawlDaricConfig = {
+  bot_overrides?: {
+    [key: string]: PayPerCrawlBotAccessMode;
+  };
+  enabled?: boolean;
+  price_usd_microcents?: number;
+};
+
+export type PayPerCrawlDaricZoneCanBeEnabled = {
+  can_be_enabled?: boolean;
+  id?: string;
+};
+
+export type PayPerCrawlErrorSource = {
+  pointer?: string;
+};
+
+export type PayPerCrawlMsg = {
+  code?: number;
+  documentation_url?: string;
+  error_chain?: PayPerCrawlMsg[];
+  message?: string;
+  /**
+   * Meta object containing non-standard meta-information about the error.
+   * This field must be an object or null!
+   */
+  meta?: void;
+  source?: PayPerCrawlSource;
+};
+
+export type PayPerCrawlRESTError = {
+  code?: number;
+  documentation_url?: string;
+  error?: string;
+  source?: PayPerCrawlErrorSource;
+};
+
+export type PayPerCrawlResultInfo = {
+  count?: number;
+  page?: number;
+  per_page?: number;
+  total_count?: number;
+  /**
+   * TotalPages is a pointer so that if TotalPages == 0 we return that there
+   * are indeed 0 pages. omitempty would have removed the field otherwise.
+   * This is important as a customer may be relying on always reading this
+   * property and it should not be absent just because it is 0, only absent
+   * if a value is never provided.
+   */
+  total_pages?: number;
+};
+
+export type PayPerCrawlSource = {
+  /**
+   * Parameter is a string indicating which URI query parameter caused the error.
+   */
+  parameter?: string;
+  /**
+   * ParameterPosition indicates position of parameter value which caused the error,
+   * for cases when there are multiple values for the same parameter.
+   */
+  parameter_value_index?: number;
+  /**
+   * Pointer is a JSON Pointer [RFC6901] to the associated entity in the request document
+   * e.g. "/data" for a primary data object, or "/data/attributes/title" for a specific attribute.
+   */
+  pointer?: string[];
+};
+
+export type PayPerCrawlStripeConnectResp = {
+  url?: string;
+};
+
+export type PayPerCrawlStripeConnection = {
+  connect_status?: string;
+  stripe_account_id?: string;
+};
+
+export type PayPerCrawlZonesCanBeEnabledPayload = {
+  zones?: PayPerCrawlDaricZoneCanBeEnabled[];
+};
+
+export type PayPerCrawlApiErrorResponse = {
+  errors?: PayPerCrawlRESTError[];
+  result?: void;
+  success?: boolean;
+};
+
+export type PayPerCrawlApiNoResultResponse = {
+  errors?: PayPerCrawlMsg[];
+  messages?: PayPerCrawlMsg[];
+  result_info?: PayPerCrawlResultInfo;
+  success?: boolean;
+};
+
+export type PayPerCrawlCreateStripeConfigResponse = {
+  errors?: PayPerCrawlMsg[];
+  messages?: PayPerCrawlMsg[];
+  result?: PayPerCrawlStripeConnectResp;
+  result_info?: PayPerCrawlResultInfo;
+  success?: boolean;
+};
+
+export type PayPerCrawlGetConfigResponse = {
+  errors?: PayPerCrawlMsg[];
+  messages?: PayPerCrawlMsg[];
+  result?: PayPerCrawlDaricConfig;
+  result_info?: PayPerCrawlResultInfo;
+  success?: boolean;
+};
+
+export type PayPerCrawlGetStripeConfigResponse = {
+  errors?: PayPerCrawlMsg[];
+  messages?: PayPerCrawlMsg[];
+  result?: PayPerCrawlStripeConnection;
+  result_info?: PayPerCrawlResultInfo;
+  success?: boolean;
+};
+
+export type PayPerCrawlQueryZonesCanBeEnabledResponse = {
+  errors?: PayPerCrawlMsg[];
+  messages?: PayPerCrawlMsg[];
+  result?: PayPerCrawlZonesCanBeEnabledPayload;
+  result_info?: PayPerCrawlResultInfo;
+  success?: boolean;
+};
+
 export type PublicIpApiResponseCommon = {
   errors: PublicIpMessages;
   messages: PublicIpMessages;
@@ -51615,6 +51747,7 @@ export type TunnelArgoTunnel = {
  */
 export type TunnelCfdTunnel = {
   account_tag?: TunnelAccountId;
+  config_src?: TunnelConfigSrc;
   connections?: TunnelConnectionsDeprecated;
   conns_active_at?: TunnelConnsActiveAt;
   conns_inactive_at?: TunnelConnsInactiveAt;
@@ -52024,8 +52157,11 @@ export type TunnelPerPage = number;
 /**
  * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard. If `false`, the tunnel must be configured locally on the origin machine.
  *
+ * @deprecated true
  * @example true
  * @x-auditable true
+ * @x-stainless-deprecation-message Use the config_src field instead.
+ * @x-stainless-ignore true
  */
 export type TunnelRemoteConfig = boolean;
 
