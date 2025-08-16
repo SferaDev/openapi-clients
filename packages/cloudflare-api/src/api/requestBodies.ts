@@ -94,6 +94,8 @@ export type ApiShieldSchemaEdit = {
   validation_enabled?: boolean;
 };
 
+export type PayPerCrawlDaricConfig = Schemas.PayPerCrawlDaricConfig;
+
 export type PayPerCrawlZonesCanBeEnabledPayload =
   Schemas.PayPerCrawlZonesCanBeEnabledPayload;
 
