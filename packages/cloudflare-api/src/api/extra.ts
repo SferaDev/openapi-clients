@@ -1262,6 +1262,8 @@ import {
   namespaceWorkerGetNamespace,
   namespaceWorkerPatchNamespace,
   namespaceWorkerPutNamespace,
+  namespaceWorkerDeleteScripts,
+  namespaceWorkerListScripts,
   namespaceWorkerScriptDeleteWorker,
   namespaceWorkerScriptWorkerDetails,
   namespaceWorkerScriptUploadWorkerModule,
@@ -1961,6 +1963,7 @@ import {
   pageRulesUpdateAPageRule,
   payPerCrawlGetConfig,
   payPerCrawlPatchConfig,
+  payPerCrawlCreateConfig,
   zonePurge,
   rateLimitsForAZoneListRateLimits,
   rateLimitsForAZoneCreateARateLimit,
@@ -4400,6 +4403,10 @@ export const operationsByPath = {
     namespaceWorkerPatchNamespace,
   "PUT /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}":
     namespaceWorkerPutNamespace,
+  "DELETE /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts":
+    namespaceWorkerDeleteScripts,
+  "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts":
+    namespaceWorkerListScripts,
   "DELETE /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
     namespaceWorkerScriptDeleteWorker,
   "GET /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}":
@@ -5558,6 +5565,7 @@ export const operationsByPath = {
   "PUT /zones/{zone_id}/pagerules/{pagerule_id}": pageRulesUpdateAPageRule,
   "GET /zones/{zone_id}/pay-per-crawl/configuration": payPerCrawlGetConfig,
   "PATCH /zones/{zone_id}/pay-per-crawl/configuration": payPerCrawlPatchConfig,
+  "POST /zones/{zone_id}/pay-per-crawl/configuration": payPerCrawlCreateConfig,
   "POST /zones/{zone_id}/purge_cache": zonePurge,
   "GET /zones/{zone_id}/rate_limits": rateLimitsForAZoneListRateLimits,
   "POST /zones/{zone_id}/rate_limits": rateLimitsForAZoneCreateARateLimit,

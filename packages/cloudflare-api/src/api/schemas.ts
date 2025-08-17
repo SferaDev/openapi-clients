@@ -2271,6 +2271,7 @@ export type AccessAllowAllOrigins = boolean;
 /**
  * When set to true, users can authenticate via WARP for any application in your organization. Application settings will take precedence over this value.
  *
+ * @default false
  * @example false
  * @x-auditable true
  */
@@ -4657,6 +4658,7 @@ export type AccessIsDefault = boolean;
 /**
  * Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.
  *
+ * @default false
  * @example false
  * @x-auditable true
  */
@@ -5713,7 +5715,7 @@ export type AccessPolicyCheckResponse = AccessApiResponseSingle & {
        */
       name?: string;
       /**
-       * @example {"decision":"allow","exclude":[],"include":[{"_type":"email","email":"testuser@gmail.com"}],"precedence":0,"require":[],"status":"Success"}
+       * @example {"decision":"allow","exclude":[],"include":[{"_type":"email","email":"testuser@gmail.com"}],"precedence":1,"require":[],"status":"Success"}
        */
       policies?: Record<string, any>[];
       /**
@@ -20704,7 +20706,7 @@ export type EmailSecurityDisplayName = {
    */
   directory_id?: number | null;
   /**
-   * @format int32
+   * @format int64
    */
   directory_node_id?: number | null;
   /**
@@ -26776,7 +26778,7 @@ export type ListsItemAsn = number;
 export type ListsItemBase = {
   comment?: ListsItemComment;
   created_on: ListsCreatedOn;
-  id: ListsListId;
+  id: ListsItemId;
   modified_on: ListsModifiedOn;
 };
 
@@ -28445,6 +28447,7 @@ export type LogcontrolAccountIdentifier = LogcontrolIdentifier;
  * Allow out of region access
  *
  * @example false
+ * @x-auditable true
  */
 export type LogcontrolAllowOutOfRegionAccess = boolean;
 
@@ -28490,6 +28493,7 @@ export type LogcontrolCmbConfigResponseSingle = LogcontrolApiResponseSingle & {
  * The log retention flag for Logpull API.
  *
  * @example true
+ * @x-auditable true
  */
 export type LogcontrolFlag = boolean;
 
@@ -28520,6 +28524,7 @@ export type LogcontrolMessages = {
  * @example eu
  * @maxLength 256
  * @pattern ^[a-z]*$
+ * @x-auditable true
  */
 export type LogcontrolRegions = string;
 
@@ -28573,6 +28578,7 @@ export type LogpushApiResponseSingle = LogpushApiResponseCommon;
 export type LogpushDataset =
   | "access_requests"
   | "audit_logs"
+  | "audit_logs_v2"
   | "biso_user_actions"
   | "casb_findings"
   | "device_posture_results"
@@ -43215,7 +43221,7 @@ export type RulesetsUrlNormalization = {
    *
    * @example incoming
    */
-  scope: "incoming" | "both";
+  scope: "incoming" | "both" | "none";
   /**
    * The type of URL normalization performed by Cloudflare.
    *
@@ -45028,13 +45034,13 @@ export type SpectrumConfigAppConfig = SpectrumConfigBaseAppConfig & {
   argo_smart_routing?: SpectrumConfigArgoSmartRouting;
   dns: SpectrumConfigDns;
   edge_ips?: SpectrumConfigEdgeIps;
-  ip_firewall: SpectrumConfigIpFirewall;
+  ip_firewall?: SpectrumConfigIpFirewall;
   origin_direct?: SpectrumConfigOriginDirect;
   origin_dns?: SpectrumConfigOriginDns;
   origin_port?: SpectrumConfigOriginPort;
   protocol: SpectrumConfigProtocol;
-  proxy_protocol: SpectrumConfigProxyProtocol;
-  tls: SpectrumConfigTls;
+  proxy_protocol?: SpectrumConfigProxyProtocol;
+  tls?: SpectrumConfigTls;
   traffic_type: SpectrumConfigTrafficType;
 };
 
@@ -45160,7 +45166,8 @@ export type SpectrumConfigIdentifier = string;
  * Enables IP Access Rules for this application.
  * Notes: Only available for TCP applications.
  *
- * @example true
+ * @default false
+ * @example false
  */
 export type SpectrumConfigIpFirewall = boolean;
 
@@ -45255,7 +45262,8 @@ export type SpectrumConfigTimestamp = string;
 /**
  * The type of TLS termination associated with the application.
  *
- * @example full
+ * @default off
+ * @example off
  */
 export type SpectrumConfigTls = "off" | "flexible" | "full" | "strict";
 
@@ -56671,7 +56679,6 @@ export type WorkersBindingName = string;
  * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
  *
  * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
- * @x-stainless-collection-type set
  */
 export type WorkersBindings = WorkersBindingItem[];
 
@@ -57309,7 +57316,6 @@ export type WorkersScriptAndVersionSettingsItem = {
    * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
    *
    * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
-   * @x-stainless-collection-type set
    */
   bindings?: WorkersBindings & WorkersBindingItem[];
   /**
@@ -57606,7 +57612,6 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
      * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
      *
      * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
-     * @x-stainless-collection-type set
      */
     bindings?: WorkersBindings & void;
     /**
@@ -58741,7 +58746,7 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid = string;
 export type ZeroTrustGatewayBeta = boolean;
 
 /**
- * The deployment status of the certificate on Cloudflare's edge. Certificates in the 'available' (previously called 'active') state may be used for Gateway TLS interception.
+ * The read only deployment status of the certificate on Cloudflare's edge. Certificates in the 'available' (previously called 'active') state may be used for Gateway TLS interception.
  *
  * @x-auditable true
  */
@@ -58939,7 +58944,7 @@ export type ZeroTrustGatewayCertificateSettings = {
 export type ZeroTrustGatewayCertificates = {
   binding_status?: ZeroTrustGatewayBindingStatus;
   /**
-   * The CA certificate
+   * The CA certificate(read only).
    *
    * @example -----BEGIN CERTIFICATE-----\nMIIDmDCCAoCgAwIBAgIUKTOAZNjcXVZRj4oQt0SHsl1c1vMwDQYJKoZIhvcNAQELBQAwUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjAgFw0yMjExMjIxNjU5NDdaGA8yMTIyMTAyOTE2NTk0N1owUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRcORwgJFTdcG/2GKI+cFYiOBNDKjCZUXEOvXWY42BkH9wxiMT869CO+enA1w5pIrXow6kCM1sQspHHaVmJUlotEMJxyoLFfA/8Kt1EKFyobOjuZs2SwyVyJ2sStvQuUQEosULZCNGZEqoH5g6zhMPxaxm7ZLrrsDZ9maNGVqo7EWLWHrZ57Q/5MtTrbxQL+eXjUmJ9K3kS+3uEwMdqR6Z3BluU1ivanpPc1CN2GNhdO0/hSY4YkGEnuLsqJyDd3cIiB1MxuCBJ4ZaqOd2viV1WcP3oU3dxVPm4MWyfYIldMWB14FahScxLhWdRnM9YZ/i9IFcLypXsuz7DjrJPtPUCAwEAAaNmMGQwHQYDVR0OBBYEFP5JzLUawNF+c3AXsYTEWHh7z2czMB8GA1UdIwQYMBaAFP5JzLUawNF+c3AXsYTEWHh7z2czMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMA0GCSqGSIb3DQEBCwUAA4IBAQBc+Be7NDhpE09y7hLPZGRPl1cSKBw4RI0XIv6rlbSTFs5EebpTGjhx/whNxwEZhB9HZ7111Oa1YlT8xkI9DshB78mjAHCKBAJ76moK8tkG0aqdYpJ4ZcJTVBB7l98Rvgc7zfTii7WemTy72deBbSeiEtXavm4EF0mWjHhQ5Nxpnp00Bqn5g1x8CyTDypgmugnep+xG+iFzNmTdsz7WI9T/7kDMXqB7M/FPWBORyS98OJqNDswCLF8bIZYwUBEe+bRHFomoShMzaC3tvim7WCb16noDkSTMlfKO4pnvKhpcVdSgwcruATV7y+W+Lvmz2OT/Gui4JhqeoTewsxndhDDE\n-----END CERTIFICATE-----\n
    */
@@ -58947,7 +58952,7 @@ export type ZeroTrustGatewayCertificates = {
   created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   expires_on?: ZeroTrustGatewayReadOnlyTimestamp;
   /**
-   * The SHA256 fingerprint of the certificate.
+   * The SHA256 fingerprint of the certificate(read only).
    *
    * @example E9:19:49:AA:DD:D8:1E:C1:20:2A:D8:22:BF:A5:F8:FC:1A:F7:10:9F:C7:5B:69:AB:0:31:91:8B:61:B4:BF:1C
    * @x-auditable true
@@ -58955,20 +58960,20 @@ export type ZeroTrustGatewayCertificates = {
   fingerprint?: string;
   id?: ZeroTrustGatewayUuid;
   /**
-   * Use this certificate for Gateway TLS interception
+   * Read-only field that shows whether Gateway TLS interception is using this certificate. This value cannot be set directly. To configure the certificate for interception, use the Gateway configuration setting named certificate.
    *
    * @default false
    */
   in_use?: boolean;
   /**
-   * The organization that issued the certificate.
+   * The organization that issued the certificate(read only).
    *
    * @example Example Inc.
    * @x-auditable true
    */
   issuer_org?: string;
   /**
-   * The entire issuer field of the certificate.
+   * The entire issuer field of the certificate(read only).
    *
    * @example O=Example Inc.,L=California,ST=San Francisco,C=US
    * @x-auditable true
@@ -59103,6 +59108,7 @@ export type ZeroTrustGatewayDeletedAt = string | null;
  *
  * @example The serial numbers for administrators
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayDescription = string;
 
@@ -59115,7 +59121,7 @@ export type ZeroTrustGatewayDescription = string;
 export type ZeroTrustGatewayDescriptionItem = string;
 
 /**
- * The wirefilter expression used for device posture check matching.
+ * The wirefilter expression used for device posture check matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
  *
  * @default
  * @example any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})
@@ -59538,7 +59544,7 @@ export type ZeroTrustGatewayId = number;
 export type ZeroTrustGatewayIdentifier = string;
 
 /**
- * The wirefilter expression used for identity matching.
+ * The wirefilter expression used for identity matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
  *
  * @default
  * @example any(identity.groups.name[*] in {"finance"})
@@ -59776,7 +59782,7 @@ export type ZeroTrustGatewayNotSharable = boolean;
 /**
  * Configure a message to display on the user's device when an antivirus search is performed.
  *
- * @x-stainless-terraform-configurability optional
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
@@ -59809,6 +59815,7 @@ export type ZeroTrustGatewayNotificationSettings = {
  * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayPrecedence = number;
 
@@ -60098,7 +60105,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   check_session?: {
     /**
-     * Configure how fresh the session needs to be to be considered valid.
+     * Configure how fresh the session needs to be to be considered valid. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
      *
      * @example 300s
      * @x-auditable true
@@ -60611,7 +60618,7 @@ export type ZeroTrustGatewayTlsSettings = {
 } | null;
 
 /**
- * The wirefilter expression used for traffic matching.
+ * The wirefilter expression used for traffic matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
  *
  * @default
  * @example http.request.uri matches ".*a/partial/uri.*" and http.request.host in $01302951-49f9-47c9-a400-0297e60b6a10
@@ -60621,7 +60628,7 @@ export type ZeroTrustGatewayTlsSettings = {
 export type ZeroTrustGatewayTraffic = string;
 
 /**
- * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
+ * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
  *
  * @example gateway_managed
  * @x-auditable true
@@ -61473,10 +61480,15 @@ export type ZonesBrowserCacheTtl = {
    */
   id?: "browser_cache_ttl";
   /**
-   * The number of seconds to cache resources for. The API prohibits
-   * setting this to 0 for non-Enterprise domains.
+   * The number of seconds to cache resources for.
+   * Minimum values by plan:
+   * - Free: 7200 seconds (2 hours)
+   * - Pro: 3600 seconds (1 hour)
+   * - Business: 1 second
+   * - Enterprise: 1 second
+   * Setting this to 0 enables "Respect Existing Headers" and is allowed for all plans.
    *
-   * @example 30
+   * @example 3600
    * @maximum 31536000
    * @minimum 0
    * @x-auditable true
@@ -61485,40 +61497,19 @@ export type ZonesBrowserCacheTtl = {
 };
 
 /**
- * Value of the zone setting.
- * Notes: Setting a TTL of 0 is equivalent to selecting `Respect Existing Headers`
+ * Value of the zone setting in seconds.
+ * Minimum values by plan:
+ * - Free: 7200 seconds (2 hours)
+ * - Pro: 3600 seconds (1 hour)
+ * - Business: 1 second
+ * - Enterprise: 1 second
+ * Setting a TTL of 0 is equivalent to selecting `Respect Existing Headers` and is allowed for all plans.
  *
  * @default 14400
+ * @maximum 31536000
+ * @minimum 0
  */
-export type ZonesBrowserCacheTtlValue =
-  | 0
-  | 30
-  | 60
-  | 120
-  | 300
-  | 1200
-  | 1800
-  | 3600
-  | 7200
-  | 10800
-  | 14400
-  | 18000
-  | 28800
-  | 43200
-  | 57600
-  | 72000
-  | 86400
-  | 172800
-  | 259200
-  | 345600
-  | 432000
-  | 691200
-  | 1382400
-  | 2073600
-  | 2678400
-  | 5356800
-  | 16070400
-  | 31536000;
+export type ZonesBrowserCacheTtlValue = number;
 
 export type ZonesBrowserCheck = {
   /**
