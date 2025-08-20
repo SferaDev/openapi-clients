@@ -7879,6 +7879,16 @@ export type MeetingUpdateRequestBody = {
      */
     participant_focused_meeting?: boolean;
     /**
+     * Whether to push meeting changes to the calendar.
+     *
+     *  To enable this feature, configure the **Configure Calendar and Contacts Service** in the user's profile page of the Zoom web portal and enable the **Automatically sync Zoom calendar events information bi-directionally between Zoom and integrated calendars.** setting in the **Settings** page of the Zoom web portal.
+     * * `true` - Push meeting changes to the calendar.
+     * * `false` - Do not push meeting changes to the calendar.
+     *
+     * @example false
+     */
+    push_change_to_calendar?: boolean;
+    /**
      * The meeting's resources.
      */
     resources?: {
@@ -9489,6 +9499,13 @@ export type GetameetingsummaryResponse = {
       - Document beta testing findings
      */
   summary_content?: string;
+  /**
+   * The URL to view the full summary document in Zoom Docs.
+   *
+   * @format uri
+   * @example https://docs.zoom.us/doc/1aBcDeFgHiJkLmNoPqRsTu
+   */
+  summary_doc_url?: string;
 };
 
 export type GetameetingsummaryVariables = {
