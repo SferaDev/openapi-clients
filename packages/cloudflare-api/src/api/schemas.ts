@@ -9874,6 +9874,13 @@ export type AddressingCreateBindingRequest = {
 };
 
 /**
+ * Timestamp of the moment the object was created.
+ *
+ * @format date-time
+ */
+export type AddressingCreatedAt = string;
+
+/**
  * If you have legacy TLS clients which do not send the TLS server name indicator, then you can specify one default SNI on the map. If Cloudflare receives a TLS handshake from a client without an SNI, it will respond with the default SNI on those IPs. The default SNI can be any valid zone or subdomain owned by the account.
  *
  * @example *.example.com
@@ -10013,6 +10020,52 @@ export type AddressingIps = AddressingAddressMapsIp[];
  */
 export type AddressingKind = "zone" | "account";
 
+export type AddressingLease = {
+  /**
+   * Timestamp of the moment the lease was created.
+   *
+   * @example 2020-01-01T00:00:00Z
+   * @format date-time
+   */
+  active_from?: string;
+  /**
+   * CIDRs attached to the lease
+   *
+   * @example 192.0.2.100/32
+   * @example 192.0.2.101/32
+   */
+  cidrs?: AddressingSchemasCidr[];
+  created_at?: AddressingCreatedAt;
+  id?: AddressingLeaseId;
+  modified_at?: AddressingModifiedAt;
+  owner_id?: AddressingLeaseOwnerId;
+  /**
+   * Describes the purpose of the addresses.
+   *
+   * @example Spectrum Static IPs
+   */
+  purpose?: string;
+};
+
+/**
+ * Identifier for the lease
+ *
+ * @example 8fee4b6fd361283a72381ccfda355471
+ */
+export type AddressingLeaseId = string;
+
+/**
+ * Cloudflare account ID of the account owning the lease.
+ *
+ * @example 3a7d3de1d0682240cf046c7f50866cc5
+ */
+export type AddressingLeaseOwnerId = string;
+
+export type AddressingLeasesComponentsSchemasResponseCollection =
+  AddressingApiResponseCollection & {
+    result?: AddressingLease[];
+  };
+
 /**
  * Identifier for the uploaded LOA document.
  *
@@ -10050,6 +10103,13 @@ export type AddressingMessages = {
     pointer?: string;
   };
 }[];
+
+/**
+ * Timestamp of the moment the object was modified.
+ *
+ * @format date-time
+ */
+export type AddressingModifiedAt = string;
 
 /**
  * Last time the advertisement status was changed. This field is only not 'null' if on demand is enabled.
@@ -10108,6 +10168,14 @@ export type AddressingResponseCollectionBgp =
   };
 
 /**
+ * Identifier of a Cloudflare account.
+ *
+ * @example 258def64c72dae45f3e4c8516e2111f2
+ * @maxLength 32
+ */
+export type AddressingSchemasAccountIdentifier = string;
+
+/**
  * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
  * `false`, the BGP route is withdrawn.
  *
@@ -10123,6 +10191,13 @@ export type AddressingSchemasAdvertised = boolean;
  * @x-auditable true
  */
 export type AddressingSchemasCanDelete = boolean;
+
+/**
+ * IP Prefix in Classless Inter-Domain Routing format.
+ *
+ * @example 192.0.2.0/24
+ */
+export type AddressingSchemasCidr = string;
 
 /**
  * An optional description field which may be used to describe the types of IPs or zones on the map.
@@ -17292,10 +17367,16 @@ export type DlpPredefinedEntry = {
    * @format uuid
    */
   profile_id?: string | null;
+  variant?: DlpPredefinedEntryVariant;
 };
 
 export type DlpPredefinedEntryUpdate = {
   enabled: boolean;
+};
+
+export type DlpPredefinedEntryVariant = {
+  topic_type: DlpPromptTopicType;
+  type: "PromptTopic";
 };
 
 export type DlpPredefinedProfile = {
@@ -17383,6 +17464,8 @@ export type DlpProfile =
 export type DlpProfileArray = DlpProfile[];
 
 export type DlpProfileEntryUpdate = DlpNewCustomEntryWithId | DlpNewCustomEntry;
+
+export type DlpPromptTopicType = "Intent" | "Content";
 
 export type DlpRegexValidationQuery = {
   /**
@@ -18397,6 +18480,7 @@ export type DnsFirewallDnsFirewallReverseDnsResponse =
  * @example 203.0.113.254
  * @example 2001:DB8:AB::CF
  * @example 2001:DB8:CD::CF
+ * @x-stainless-collection-type set
  */
 export type DnsFirewallDnsFirewallIps = (string | string)[];
 
@@ -18516,6 +18600,7 @@ export type DnsFirewallRetries = number;
  * @example 198.51.100.1
  * @example 2001:DB8:100::CF
  * @minLength 1
+ * @x-stainless-collection-type set
  */
 export type DnsFirewallUpstreamIps = (string | string)[];
 
@@ -19686,6 +19771,7 @@ export type DnsRecordsTagMatch = "any" | "all";
  * Custom tags for the DNS record. This field has no effect on DNS responses.
  *
  * @x-auditable true
+ * @x-stainless-collection-type set
  */
 export type DnsRecordsTags = string[];
 
@@ -20097,6 +20183,8 @@ export type DnsSettingsZoneMode = "standard" | "cdn_only" | "dns_only";
 
 /**
  * The list of zones linked to this view.
+ *
+ * @x-stainless-collection-type set
  */
 export type DnsSettingsZones = string[];
 
@@ -20810,7 +20898,7 @@ export type EmailSecurityLink = {
 };
 
 /**
- * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
+ * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","htmltext_structure_hash":null,"id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
  */
 export type EmailSecurityMailsearchMessage = {
   action_log: void;
@@ -20829,6 +20917,7 @@ export type EmailSecurityMailsearchMessage = {
     | null;
   from?: string | null;
   from_name?: string | null;
+  htmltext_structure_hash?: string | null;
   is_phish_submission: boolean;
   is_quarantined: boolean;
   message_id?: string | null;
@@ -20845,14 +20934,6 @@ export type EmailSecurityMailsearchMessage = {
       | "managed_acceptable_sender";
     blocklisted_message?: boolean;
     blocklisted_pattern?: string;
-    whitelisted_pattern_type?:
-      | "quarantine_release"
-      | "acceptable_sender"
-      | "allowed_sender"
-      | "allowed_recipient"
-      | "domain_similarity"
-      | "domain_recency"
-      | "managed_acceptable_sender";
   };
   sent_date?: string | null;
   subject?: string | null;
@@ -24080,6 +24161,7 @@ export type IamMemberResourceGroup = {
 export type IamMemberResourceGroups = IamMemberResourceGroup[];
 
 export type IamMemberWithPolicies = {
+  email?: IamEmail;
   id?: IamMembershipComponentsSchemasIdentifier;
   /**
    * Access policy for the membership
@@ -25557,6 +25639,7 @@ export type InfraIPInfo = {
      *
      * @example c77b744e-acc8-428f-9257-6878c046ed55
      * @format uuid
+     * @x-stainless-terraform-configurability computed_optional
      */
     virtual_network_id?: string;
   };
@@ -25575,6 +25658,7 @@ export type InfraIPInfo = {
      *
      * @example c77b744e-acc8-428f-9257-6878c046ed55
      * @format uuid
+     * @x-stainless-terraform-configurability computed_optional
      */
     virtual_network_id?: string;
   };
@@ -32627,6 +32711,8 @@ export type MconnAccountId = string;
 export type MconnAdminConnector = {
   account_id: MconnAccountId;
   activated: boolean;
+  cloudflared_tunnel_id?: string;
+  cloudflared_tunnel_token?: string;
   cohort?: string;
   desired_version?: string;
   device_id?: MconnUuid;
@@ -32659,6 +32745,8 @@ export type MconnAdminConnectorFetchResponse = MconnGoodResponse & {
 export type MconnAdminConnectorFields = {
   account_id?: number;
   activated?: boolean;
+  cloudflared_tunnel_id?: string;
+  cloudflared_tunnel_token?: string;
   cohort?: string;
   desired_version?: string;
   device_id?: string;
@@ -32938,6 +33026,7 @@ export type MconnControllerBeginAttestationSessionResult =
 export type MconnControllerConnector = {
   account_id: MconnAccountId;
   activated: boolean;
+  cloudflared_tunnel_token?: string;
   desired_version?: string;
   id: MconnUuid;
   interrupt_window_duration_hours: number;
@@ -34498,88 +34587,14 @@ export type MqEventDestinationQueue = {
  * Source configuration for the subscription
  */
 export type MqEventSource =
-  | MqEventSourceAccess
-  | MqEventSourceAccessApplication
-  | MqEventSourceClipboards
-  | MqEventSourceClipboardsClipboard
-  | MqEventSourceDnsZone
   | MqEventSourceImages
   | MqEventSourceKv
-  | MqEventSourceKvNamespace
   | MqEventSourceR2
-  | MqEventSourceR2Bucket
-  | MqEventSourceSecretsStore
-  | MqEventSourceSecretsStoreStore
   | MqEventSourceSuperSlurper
   | MqEventSourceVectorize
-  | MqEventSourceVectorizeIndex
   | MqEventSourceWorkersAiModel
   | MqEventSourceWorkersBuildsWorker
-  | MqEventSourceWorkflows
   | MqEventSourceWorkflowsWorkflow;
-
-export type MqEventSourceAccess = {
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "access";
-};
-
-export type MqEventSourceAccessApplication = {
-  /**
-   * ID of the Access application
-   *
-   * @x-auditable true
-   */
-  application_id?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "access.application";
-};
-
-export type MqEventSourceClipboards = {
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "clipboards";
-};
-
-export type MqEventSourceClipboardsClipboard = {
-  /**
-   * ID of the clipboard
-   *
-   * @x-auditable true
-   */
-  clipboard_id?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "clipboards.clipboard";
-};
-
-export type MqEventSourceDnsZone = {
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "dns.zone";
-  /**
-   * ID of the DNS zone
-   *
-   * @x-auditable true
-   */
-  zone_id?: string;
-};
 
 export type MqEventSourceImages = {
   /**
@@ -34599,21 +34614,6 @@ export type MqEventSourceKv = {
   type?: "kv";
 };
 
-export type MqEventSourceKvNamespace = {
-  /**
-   * ID of the KV namespace
-   *
-   * @x-auditable true
-   */
-  namespace_id?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "kv.namespace";
-};
-
 export type MqEventSourceR2 = {
   /**
    * Type of source
@@ -34621,45 +34621,6 @@ export type MqEventSourceR2 = {
    * @x-auditable true
    */
   type?: "r2";
-};
-
-export type MqEventSourceR2Bucket = {
-  /**
-   * Name of the R2 bucket
-   *
-   * @x-auditable true
-   */
-  bucket_name?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "r2.bucket";
-};
-
-export type MqEventSourceSecretsStore = {
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "secretsStore";
-};
-
-export type MqEventSourceSecretsStoreStore = {
-  /**
-   * ID of the secrets store
-   *
-   * @x-auditable true
-   */
-  store_id?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "secretsStore.store";
 };
 
 export type MqEventSourceSuperSlurper = {
@@ -34678,21 +34639,6 @@ export type MqEventSourceVectorize = {
    * @x-auditable true
    */
   type?: "vectorize";
-};
-
-export type MqEventSourceVectorizeIndex = {
-  /**
-   * Name of the Vectorize index
-   *
-   * @x-auditable true
-   */
-  index_name?: string;
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "vectorize.index";
 };
 
 export type MqEventSourceWorkersAiModel = {
@@ -34723,15 +34669,6 @@ export type MqEventSourceWorkersBuildsWorker = {
    * @x-auditable true
    */
   worker_name?: string;
-};
-
-export type MqEventSourceWorkflows = {
-  /**
-   * Type of source
-   *
-   * @x-auditable true
-   */
-  type?: "workflows";
 };
 
 export type MqEventSourceWorkflowsWorkflow = {
@@ -39285,6 +39222,8 @@ export type RulesetsBlockRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: {
     /**
@@ -39317,19 +39256,12 @@ export type RulesetsBlockRule = {
       status_code: number;
     };
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Block when the IP address is not 1.1.1.1
+   * @default
+   * @example Block the request.
    */
   description?: string;
   /**
@@ -39339,27 +39271,11 @@ export type RulesetsBlockRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -39371,74 +39287,10 @@ export type RulesetsBlockRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -39457,21 +39309,16 @@ export type RulesetsChallengeRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Issue an Interactive Challenge if the visitor had not solved an Interactive Challenge prior to the request when the address is not 1.1.1.1
+   * @default
+   * @example Issue an Interactive Challenge if the visitor has not solved an Interactive Challenge prior to the request.
    */
   description?: string;
   /**
@@ -39481,27 +39328,11 @@ export type RulesetsChallengeRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -39513,74 +39344,10 @@ export type RulesetsChallengeRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -39599,33 +39366,31 @@ export type RulesetsCompressResponseRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: {
     /**
      * Custom order for compression algorithms.
      *
-     * @example {"name":"none"}
+     * @minItems 1
+     * @uniqueItems true
      */
-    algorithms?: {
+    algorithms: {
       /**
-       * Name of compression algorithm to enable.
+       * Name of the compression algorithm to enable.
+       *
+       * @example none
        */
       name?: "none" | "auto" | "default" | "gzip" | "brotli" | "zstd";
     }[];
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Disable compression when address is not 1.1.1.1
+   * @default
+   * @example Modify the compression algorithm used in the response.
    */
   description?: string;
   /**
@@ -39635,27 +39400,11 @@ export type RulesetsCompressResponseRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -39667,74 +39416,10 @@ export type RulesetsCompressResponseRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -39750,7 +39435,7 @@ export type RulesetsCompressResponseRule = {
 };
 
 /**
- * Cursor to use for the next page.
+ * The cursor to use for the next page.
  *
  * @example dGhpc2lzYW5leGFtcGxlCg
  * @minLength 1
@@ -39761,21 +39446,16 @@ export type RulesetsDDoSDynamicRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Performs a specific action according to a set of internal guidelines defined by Cloudflare.
+   * @default
+   * @example Perform a specific action according to a set of internal guidelines defined by Cloudflare.
    */
   description?: string;
   /**
@@ -39785,27 +39465,11 @@ export type RulesetsDDoSDynamicRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -39817,74 +39481,10 @@ export type RulesetsDDoSDynamicRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -39901,13 +39501,94 @@ export type RulesetsDDoSDynamicRule = {
 
 /**
  * A list of error messages.
+ *
+ * @uniqueItems true
  */
 export type RulesetsErrors = RulesetsMessage[];
+
+/**
+ * A list of category-level overrides. This option has the second-highest precedence after rule-level overrides.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsExecuteCategoryOverrides = {
+  /**
+   * The action to override rules in the category with.
+   *
+   * @pattern ^[a-z_]+$
+   * @example log
+   */
+  action?: RulesetsRuleAction & void;
+  /**
+   * The name of the category to override.
+   *
+   * @example directory-traversal
+   * @minLength 1
+   */
+  category: RulesetsRuleCategory & void;
+  /**
+   * Whether to enable execution of rules in the category.
+   *
+   * @example true
+   */
+  enabled?: RulesetsRuleEnabled & void;
+  /**
+   * The sensitivity level to use for rules in the category. This option is only applicable for DDoS phases.
+   *
+   * @example default
+   */
+  sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
+}[];
+
+/**
+ * The configuration to use for matched data logging.
+ */
+export type RulesetsExecuteMatchedData = {
+  /**
+   * The public key to encrypt matched data logs with.
+   *
+   * @example iGqBmyIUxuWt1rvxoAharN9FUXneUBxA/Y19PyyrEG0=
+   * @minLength 1
+   */
+  public_key: string;
+};
+
+/**
+ * A set of overrides to apply to the target ruleset.
+ *
+ * @minProperties 1
+ */
+export type RulesetsExecuteOverrides = {
+  /**
+   * An action to override all rules with. This option has lower precedence than rule and category overrides.
+   *
+   * @pattern ^[a-z_]+$
+   * @example log
+   */
+  action?: RulesetsRuleAction & void;
+  categories?: RulesetsExecuteCategoryOverrides;
+  /**
+   * Whether to enable execution of all rules. This option has lower precedence than rule and category overrides.
+   *
+   * @example true
+   */
+  enabled?: RulesetsRuleEnabled & void;
+  rules?: RulesetsExecuteRuleOverrides;
+  /**
+   * A sensitivity level to set for all rules. This option has lower precedence than rule and category overrides and is only applicable for DDoS phases.
+   *
+   * @example default
+   */
+  sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
+};
 
 export type RulesetsExecuteRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: {
     /**
@@ -39917,124 +39598,15 @@ export type RulesetsExecuteRule = {
      * @pattern ^[0-9a-f]{32}$
      */
     id: RulesetsRulesetId & void;
-    /**
-     * The configuration to use for matched data logging.
-     */
-    matched_data?: {
-      /**
-       * The public key to encrypt matched data logs with.
-       *
-       * @example iGqBmyIUxuWt1rvxoAharN9FUXneUBxA/Y19PyyrEG0=
-       * @minLength 1
-       */
-      public_key: string;
-    };
-    /**
-     * A set of overrides to apply to the target ruleset.
-     *
-     * @minProperties 1
-     */
-    overrides?: {
-      /**
-       * An action to override all rules with. This option has lower precedence than rule and category overrides.
-       *
-       * @pattern ^[a-z]+$
-       * @example log
-       */
-      action?: RulesetsRuleAction & void;
-      /**
-       * A list of category-level overrides. This option has the second-highest precedence after rule-level overrides.
-       *
-       * @minItems 1
-       * @uniqueItems true
-       */
-      categories?: {
-        /**
-         * The action to override rules in the category with.
-         *
-         * @pattern ^[a-z]+$
-         * @example log
-         */
-        action?: RulesetsRuleAction & void;
-        /**
-         * The name of the category to override.
-         *
-         * @example directory-traversal
-         * @minLength 1
-         */
-        category: RulesetsRuleCategory & void;
-        /**
-         * Whether to enable execution of rules in the category.
-         *
-         * @example true
-         */
-        enabled?: RulesetsRuleEnabled & void;
-        /**
-         * The sensitivity level to use for rules in the category.
-         */
-        sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
-      }[];
-      /**
-       * Whether to enable execution of all rules. This option has lower precedence than rule and category overrides.
-       *
-       * @example true
-       */
-      enabled?: RulesetsRuleEnabled & void;
-      /**
-       * A list of rule-level overrides. This option has the highest precedence.
-       *
-       * @minItems 1
-       * @uniqueItems true
-       */
-      rules?: {
-        /**
-         * The action to override the rule with.
-         *
-         * @pattern ^[a-z]+$
-         * @example log
-         */
-        action?: RulesetsRuleAction & void;
-        /**
-         * Whether to enable execution of the rule.
-         *
-         * @example true
-         */
-        enabled?: RulesetsRuleEnabled & void;
-        /**
-         * The ID of the rule to override.
-         *
-         * @example 8ac8bc2a661e475d940980f9317f28e1
-         * @pattern ^[0-9a-f]{32}$
-         */
-        id: RulesetsRuleId & void;
-        /**
-         * The score threshold to use for the rule.
-         */
-        score_threshold?: number;
-        /**
-         * The sensitivity level to use for the rule.
-         */
-        sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
-      }[];
-      /**
-       * A sensitivity level to set for all rules. This option has lower precedence than rule and category overrides and is only applicable for DDoS phases.
-       */
-      sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
-    };
+    matched_data?: RulesetsExecuteMatchedData;
+    overrides?: RulesetsExecuteOverrides;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Execute the OWASP ruleset when the IP address is not 1.1.1.1
+   * @default
+   * @example Execute another ruleset.
    */
   description?: string;
   /**
@@ -40044,27 +39616,11 @@ export type RulesetsExecuteRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40076,74 +39632,10 @@ export type RulesetsExecuteRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40158,6 +39650,48 @@ export type RulesetsExecuteRule = {
   version: string;
 };
 
+/**
+ * A list of rule-level overrides. This option has the highest precedence.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsExecuteRuleOverrides = {
+  /**
+   * The action to override the rule with.
+   *
+   * @pattern ^[a-z_]+$
+   * @example log
+   */
+  action?: RulesetsRuleAction & void;
+  /**
+   * Whether to enable execution of the rule.
+   *
+   * @example true
+   */
+  enabled?: RulesetsRuleEnabled & void;
+  /**
+   * The ID of the rule to override.
+   *
+   * @example 8ac8bc2a661e475d940980f9317f28e1
+   * @pattern ^[0-9a-f]{32}$
+   */
+  id: RulesetsRuleId & void;
+  /**
+   * The score threshold to use for the rule.
+   */
+  score_threshold?: number;
+  /**
+   * The sensitivity level to use for the rule. This option is only applicable for DDoS phases.
+   *
+   * @example default
+   */
+  sensitivity_level?: RulesetsExecuteSensitivityLevel & void;
+}[];
+
+/**
+ * @example default
+ */
 export type RulesetsExecuteSensitivityLevel =
   | "default"
   | "medium"
@@ -40168,21 +39702,16 @@ export type RulesetsForceConnectionCloseRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Closes ongoing HTTP connections. This action does not block a request, but it forces the client to reconnect. For HTTP/2 and HTTP/3 connections, the connection will be closed even if it breaks other requests running on the same connection.
+   * @default
+   * @example Close ongoing HTTP connections. This action does not block a request, but it forces the client to reconnect. For HTTP/2 and HTTP/3 connections, the connection will be closed even if it breaks other requests running on the same connection.
    */
   description?: string;
   /**
@@ -40192,27 +39721,11 @@ export type RulesetsForceConnectionCloseRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40224,74 +39737,10 @@ export type RulesetsForceConnectionCloseRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40310,21 +39759,16 @@ export type RulesetsJsChallengeRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Issue a non-interactive Javascript Challenge if the visitor had not solved a Interactive Challenge, Managed Challenge, or Javascript Challenge prior to the request when the address is not 1.1.1.1
+   * @default
+   * @example Issue a non-interactive JavaScript Challenge if the visitor has not solved an Interactive Challenge, Managed Challenge, or JavaScript Challenge prior to the request.
    */
   description?: string;
   /**
@@ -40334,27 +39778,11 @@ export type RulesetsJsChallengeRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40366,74 +39794,10 @@ export type RulesetsJsChallengeRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40447,111 +39811,102 @@ export type RulesetsJsChallengeRule = {
    */
   version: string;
 };
+
+/**
+ * The cookie fields to log.
+ *
+ * @minItems 1
+ */
+export type RulesetsLogCustomFieldCookieFields = {
+  /**
+   * The name of the cookie.
+   *
+   * @example myCookie
+   * @minLength 1
+   */
+  name: string;
+}[];
+
+/**
+ * The raw response fields to log.
+ *
+ * @minItems 1
+ */
+export type RulesetsLogCustomFieldRawResponseFields = {
+  /**
+   * The name of the response header.
+   *
+   * @example my-response-header
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Whether to log duplicate values of the same header.
+   *
+   * @default false
+   * @example true
+   */
+  preserve_duplicates?: boolean;
+}[];
+
+/**
+ * The raw request fields to log.
+ *
+ * @minItems 1
+ */
+export type RulesetsLogCustomFieldRequestFields = {
+  /**
+   * The name of the header.
+   *
+   * @example my-request-header
+   * @minLength 1
+   */
+  name: string;
+}[];
+
+/**
+ * The transformed response fields to log.
+ *
+ * @minItems 1
+ */
+export type RulesetsLogCustomFieldResponseFields = {
+  /**
+   * The name of the response header.
+   *
+   * @example my-response-header
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * Whether to log duplicate values of the same header.
+   *
+   * @default false
+   * @example true
+   */
+  preserve_duplicates?: boolean;
+}[];
 
 export type RulesetsLogCustomFieldRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
    *
+   * @default {}
    * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * The cookie fields to log.
-     *
-     * @minItems 1
-     */
-    cookie_fields?: {
-      /**
-       * The name of the field.
-       *
-       * @example cookie_name_1
-       * @minLength 1
-       */
-      name: string;
-    }[];
-    /**
-     * The raw response fields to log.
-     *
-     * @minItems 1
-     */
-    raw_response_fields?: {
-      /**
-       * The name of the field.
-       *
-       * @example http_response_header_name_1_in_lower_case
-       * @minLength 1
-       */
-      name: string;
-      /**
-       * Whether to log duplicate values of the same header.
-       *
-       * @example true
-       */
-      preserve_duplicates?: boolean;
-    }[];
-    /**
-     * The raw request fields to log.
-     *
-     * @minItems 1
-     */
-    request_fields?: {
-      /**
-       * The name of the field.
-       *
-       * @example http_request_header_name_1_in_lower_case
-       * @minLength 1
-       */
-      name: string;
-    }[];
-    /**
-     * The transformed response fields to log.
-     *
-     * @minItems 1
-     */
-    response_fields?: {
-      /**
-       * The name of the field.
-       *
-       * @example http_response_header_name_1_in_lower_case
-       * @minLength 1
-       */
-      name: string;
-      /**
-       * Whether to log duplicate values of the same header.
-       *
-       * @example true
-       */
-      preserve_duplicates?: boolean;
-    }[];
-    /**
-     * The transformed request fields to log.
-     *
-     * @minItems 1
-     */
-    transformed_request_fields?: {
-      /**
-       * The name of the field.
-       *
-       * @example http_request_header_name_1_in_lower_case
-       * @minLength 1
-       */
-      name: string;
-    }[];
+    cookie_fields?: RulesetsLogCustomFieldCookieFields;
+    raw_response_fields?: RulesetsLogCustomFieldRawResponseFields;
+    request_fields?: RulesetsLogCustomFieldRequestFields;
+    response_fields?: RulesetsLogCustomFieldResponseFields;
+    transformed_request_fields?: RulesetsLogCustomFieldTransformedRequestFields;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Log custom field when the IP address is not 1.1.1.1
+   * @default
+   * @example Log additional custom fields.
    */
   description?: string;
   /**
@@ -40561,27 +39916,11 @@ export type RulesetsLogCustomFieldRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40593,74 +39932,10 @@ export type RulesetsLogCustomFieldRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40675,25 +39950,35 @@ export type RulesetsLogCustomFieldRule = {
   version: string;
 };
 
+/**
+ * The transformed request fields to log.
+ *
+ * @minItems 1
+ */
+export type RulesetsLogCustomFieldTransformedRequestFields = {
+  /**
+   * The name of the header.
+   *
+   * @example my-request-header
+   * @minLength 1
+   */
+  name: string;
+}[];
+
 export type RulesetsLogRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Log when the IP address is not 1.1.1.1
+   * @default
+   * @example Log the request.
    */
   description?: string;
   /**
@@ -40703,27 +39988,11 @@ export type RulesetsLogRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40735,74 +40004,10 @@ export type RulesetsLogRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40821,21 +40026,16 @@ export type RulesetsManagedChallengeRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Issue a Managed Challenge if the visitor had not solved a Managed Challenge or Interactive Challenge prior to the request when the address is not 1.1.1.1
+   * @default
+   * @example Issue a Managed Challenge if the visitor has not solved a Managed Challenge or Interactive Challenge prior to the request.
    */
   description?: string;
   /**
@@ -40845,27 +40045,11 @@ export type RulesetsManagedChallengeRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -40877,74 +40061,10 @@ export type RulesetsManagedChallengeRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -40965,6 +40085,9 @@ export type RulesetsManagedChallengeRule = {
 export type RulesetsManagedTransform = {
   /**
    * The Managed Transforms that this Managed Transform conflicts with.
+   *
+   * @minItems 1
+   * @uniqueItems true
    */
   conflicts_with?: (RulesetsManagedTransformId & void)[];
   /**
@@ -40995,10 +40118,15 @@ export type RulesetsManagedTransformId = string;
 export type RulesetsManagedTransforms = {
   /**
    * The list of Managed Request Transforms.
+   *
+   * @uniqueItems true
    */
   managed_request_headers: {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
+     *
+     * @minItems 1
+     * @uniqueItems true
      */
     conflicts_with?: (RulesetsManagedTransformId & void)[];
     /**
@@ -41020,10 +40148,15 @@ export type RulesetsManagedTransforms = {
   }[];
   /**
    * The list of Managed Response Transforms.
+   *
+   * @uniqueItems true
    */
   managed_response_headers: {
     /**
      * The Managed Transforms that this Managed Transform conflicts with.
+     *
+     * @minItems 1
+     * @uniqueItems true
      */
     conflicts_with?: (RulesetsManagedTransformId & void)[];
     /**
@@ -41078,11 +40211,13 @@ export type RulesetsMessage = {
 
 /**
  * A list of warning messages.
+ *
+ * @uniqueItems true
  */
 export type RulesetsMessages = RulesetsMessage[];
 
 /**
- * Number of rulesets to return per page.
+ * The number of rulesets to return per page.
  *
  * @example 3
  * @maximum 50
@@ -41090,81 +40225,86 @@ export type RulesetsMessages = RulesetsMessage[];
  */
 export type RulesetsPerPage = number;
 
+/**
+ * A redirect based on a bulk list lookup.
+ */
+export type RulesetsRedirectFromList = {
+  /**
+   * An expression that evaluates to the list lookup key.
+   *
+   * @example http.request.full_uri
+   * @minLength 1
+   */
+  key: string;
+  /**
+   * The name of the list to match against.
+   *
+   * @example my_list
+   * @pattern ^[a-zA-Z0-9_]+$
+   */
+  name: string;
+};
+
+/**
+ * A redirect based on the request properties.
+ */
+export type RulesetsRedirectFromValue = {
+  /**
+   * Whether to keep the query string of the original request.
+   *
+   * @default false
+   * @example true
+   */
+  preserve_query_string?: boolean;
+  /**
+   * The status code to use for the redirect.
+   *
+   * @example 302
+   */
+  status_code?: 301 | 302 | 303 | 307 | 308;
+  /**
+   * A URL to redirect the request to.
+   *
+   * @maxProperties 1
+   * @minProperties 1
+   */
+  target_url: {
+    /**
+     * An expression that evaluates to a URL to redirect the request to.
+     *
+     * @example concat("https://example.com", http.request.uri.path)
+     * @minLength 1
+     */
+    expression?: string;
+    /**
+     * A URL to redirect the request to.
+     *
+     * @example https://example.com
+     * @minLength 1
+     */
+    value?: string;
+  };
+};
+
 export type RulesetsRedirectRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
+   * @maxProperties 1
+   * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * Serve a redirect based on a bulk list lookup.
-     */
-    from_list?: {
-      /**
-       * Expression that evaluates to the list lookup key.
-       *
-       * @example http.request.full_uri
-       * @minLength 1
-       */
-      key?: string;
-      /**
-       * The name of the list to match against.
-       *
-       * @example list1
-       * @maxLength 50
-       * @pattern ^[a-zA-Z0-9_]+$
-       */
-      name?: string;
-    };
-    /**
-     * Serve a redirect based on the request properties.
-     */
-    from_value?: {
-      /**
-       * Keep the query string of the original request.
-       */
-      preserve_query_string?: boolean;
-      /**
-       * The status code to be used for the redirect.
-       */
-      status_code?: 301 | 302 | 303 | 307 | 308;
-      /**
-       * The URL to redirect the request to.
-       *
-       * @example {"expression":"concat(\"https://m.example.com\", http.request.uri.path)"}
-       */
-      target_url?:
-        | {
-            /**
-             * The URL to redirect the request to.
-             *
-             * @minLength 1
-             */
-            value?: string;
-          }
-        | {
-            /**
-             * An expression to evaluate to get the URL to redirect the request to.
-             *
-             * @minLength 1
-             */
-            expression?: string;
-          };
-    };
+    from_list?: RulesetsRedirectFromList;
+    from_value?: RulesetsRedirectFromValue;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Redirect when IP address is not 1.1.1.1
+   * @default
+   * @example Redirect the request.
    */
   description?: string;
   /**
@@ -41174,27 +40314,11 @@ export type RulesetsRedirectRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -41206,74 +40330,10 @@ export type RulesetsRedirectRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -41298,14 +40358,23 @@ export type RulesetsRequestRule =
   | (Omit<RulesetsCompressResponseRule, "action"> & {
       action: "compress_response";
     })
+  | (Omit<RulesetsDDoSDynamicRule, "action"> & {
+      action: "ddos_dynamic";
+    })
   | (Omit<RulesetsExecuteRule, "action"> & {
       action: "execute";
+    })
+  | (Omit<RulesetsForceConnectionCloseRule, "action"> & {
+      action: "force_connection_close";
     })
   | (Omit<RulesetsJsChallengeRule, "action"> & {
       action: "js_challenge";
     })
   | (Omit<RulesetsLogRule, "action"> & {
       action: "log";
+    })
+  | (Omit<RulesetsLogCustomFieldRule, "action"> & {
+      action: "log_custom_field";
     })
   | (Omit<RulesetsManagedChallengeRule, "action"> & {
       action: "managed_challenge";
@@ -41325,23 +40394,14 @@ export type RulesetsRequestRule =
   | (Omit<RulesetsServeErrorRule, "action"> & {
       action: "serve_error";
     })
+  | (Omit<RulesetsSetCacheSettingsRule, "action"> & {
+      action: "set_cache_settings";
+    })
   | (Omit<RulesetsSetConfigRule, "action"> & {
       action: "set_config";
     })
   | (Omit<RulesetsSkipRule, "action"> & {
       action: "skip";
-    })
-  | (Omit<RulesetsSetCacheSettingsRule, "action"> & {
-      action: "set_cache_settings";
-    })
-  | (Omit<RulesetsLogCustomFieldRule, "action"> & {
-      action: "log_custom_field";
-    })
-  | (Omit<RulesetsDDoSDynamicRule, "action"> & {
-      action: "ddos_dynamic";
-    })
-  | (Omit<RulesetsForceConnectionCloseRule, "action"> & {
-      action: "force_connection_close";
     });
 
 /**
@@ -41373,105 +40433,106 @@ export type RulesetsResponseRule = RulesetsRequestRule & void;
 export type RulesetsResponseRules = RulesetsResponseRule[];
 
 /**
- * Cursors information to navigate the results.
+ * Information to navigate the results.
  */
 export type RulesetsResultInfo = {
   /**
-   * Set of cursors.
+   * The set of cursors.
    */
   cursors?: {
-    after?: RulesetsCursor;
+    /**
+     * The cursor to use for the next page.
+     *
+     * @example dGhpc2lzYW5leGFtcGxlCg
+     * @minLength 1
+     */
+    after: RulesetsCursor & void;
   };
+};
+
+/**
+ * An expression that evaluates to a value for the header.
+ *
+ * @example ip.src
+ * @minLength 1
+ */
+export type RulesetsRewriteHeaderExpression = string;
+
+/**
+ * The operation to perform on the header.
+ */
+export type RulesetsRewriteHeaderOperation = string;
+
+/**
+ * A static value for the header.
+ *
+ * @example my-header-value
+ * @minLength 1
+ */
+export type RulesetsRewriteHeaderValue = string;
+
+/**
+ * A map of headers to rewrite.
+ *
+ * @example {"client-http-version":{"expression":"http.request.version","operation":"set"}}
+ * @minProperties 1
+ */
+export type RulesetsRewriteHeaders = {
+  [key: string]:
+    | {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: RulesetsRewriteHeaderOperation & "add";
+        value: RulesetsRewriteHeaderValue;
+      }
+    | {
+        expression: RulesetsRewriteHeaderExpression;
+        /**
+         * The operation to perform on the header.
+         */
+        operation: RulesetsRewriteHeaderOperation & "add";
+      }
+    | {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: RulesetsRewriteHeaderOperation & "set";
+        value: RulesetsRewriteHeaderValue;
+      }
+    | {
+        expression: RulesetsRewriteHeaderExpression;
+        /**
+         * The operation to perform on the header.
+         */
+        operation: RulesetsRewriteHeaderOperation & "set";
+      }
+    | {
+        /**
+         * The operation to perform on the header.
+         */
+        operation: RulesetsRewriteHeaderOperation & "remove";
+      };
 };
 
 export type RulesetsRewriteRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
+   * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * Map of request headers to modify.
-     *
-     * @example {"client-http-version":{"expression":"http.request.version","operation":"set"}}
-     */
-    headers?: {
-      [key: string]:
-        | {
-            operation: "remove";
-          }
-        | {
-            operation: "add";
-            /**
-             * Static value for the header.
-             *
-             * @example static-header-value
-             * @minLength 1
-             */
-            value: string;
-          }
-        | {
-            operation: "set";
-            /**
-             * Static value for the header.
-             *
-             * @example static-header-value
-             * @minLength 1
-             */
-            value: string;
-          }
-        | {
-            /**
-             * Expression for the header value.
-             *
-             * @example ip.src
-             * @minLength 1
-             */
-            expression: string;
-            operation: "add";
-          }
-        | {
-            /**
-             * Expression for the header value.
-             *
-             * @example ip.src
-             * @minLength 1
-             */
-            expression: string;
-            operation: "set";
-          };
-    };
-    /**
-     * URI to rewrite the request to.
-     */
-    uri?: {
-      /**
-       * Path portion rewrite.
-       *
-       * @example {"expression":"regex_replace(http.request.uri.path, \"/bar$\", \"/baz\")"}
-       */
-      path?: void & RulesetsRewriteUriPart;
-      /**
-       * Query portion rewrite.
-       *
-       * @example {"expression":"regex_replace(http.request.uri.query, \"foo=bar\", \"\")"}
-       */
-      query?: void & RulesetsRewriteUriPart;
-    };
+    headers?: RulesetsRewriteHeaders;
+    uri?: RulesetsRewriteUri;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Add a header when the IP address is not 1.1.1.1
+   * @default
+   * @example Rewrite properties of the request or response.
    */
   description?: string;
   /**
@@ -41481,27 +40542,11 @@ export type RulesetsRewriteRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -41513,74 +40558,10 @@ export type RulesetsRewriteRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -41595,84 +40576,110 @@ export type RulesetsRewriteRule = {
   version: string;
 };
 
-export type RulesetsRewriteUriPart =
+export type RulesetsRewriteUri =
   | {
-      /**
-       * Predefined replacement value.
-       *
-       * @example /images
-       * @minLength 1
-       */
-      value: string;
+      path: RulesetsRewriteUriPath;
     }
   | {
-      /**
-       * Expression to evaluate for the replacement value.
-       *
-       * @example regex_replace(http.request.uri.path, "/bar$", "/baz")
-       * @minLength 1
-       */
-      expression: string;
+      query: RulesetsRewriteUriQuery;
     };
+
+/**
+ * A URI path rewrite.
+ *
+ * @maxProperties 1
+ * @minProperties 1
+ */
+export type RulesetsRewriteUriPath = {
+  /**
+   * An expression that evaluates to a value to rewrite the URI path to.
+   *
+   * @example regex_replace(http.request.uri.path, "/foo$", "/bar")
+   * @minLength 1
+   */
+  expression?: string;
+  /**
+   * A value to rewrite the URI path to.
+   *
+   * @example /foo
+   * @minLength 1
+   */
+  value?: string;
+};
+
+/**
+ * A URI query rewrite.
+ *
+ * @maxProperties 1
+ * @minProperties 1
+ */
+export type RulesetsRewriteUriQuery = {
+  /**
+   * An expression that evaluates to a value to rewrite the URI query to.
+   *
+   * @example regex_replace(http.request.uri.query, "foo=bar", "")
+   * @minLength 1
+   */
+  expression?: string;
+  /**
+   * A value to rewrite the URI query to.
+   *
+   * @example foo=bar
+   * @minLength 1
+   */
+  value?: string;
+};
+
+/**
+ * A value to rewrite the HTTP host header to.
+ *
+ * @example static.example.com
+ * @minLength 1
+ */
+export type RulesetsRouteHostHeader = string;
+
+/**
+ * An origin to route to.
+ *
+ * @minProperties 1
+ */
+export type RulesetsRouteOrigin = {
+  /**
+   * A resolved host to route to.
+   *
+   * @example static.example.com
+   * @minLength 1
+   */
+  host?: string;
+  /**
+   * A destination port to route to.
+   *
+   * @example 80
+   * @maximum 65535
+   * @minimum 1
+   */
+  port?: number;
+};
 
 export type RulesetsRouteRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
+   * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * Rewrite the HTTP Host header.
-     *
-     * @example static.example.com
-     * @minLength 1
-     */
-    host_header?: string;
-    /**
-     * Override the IP/TCP destination.
-     */
-    origin?: {
-      /**
-       * Override the resolved hostname.
-       *
-       * @example static.example.com
-       * @minLength 1
-       */
-      host?: string;
-      /**
-       * Override the destination port.
-       *
-       * @maximum 65535
-       * @minimum 1
-       */
-      port?: number;
-    };
-    /**
-     * Override the Server Name Indication (SNI).
-     */
-    sni?: {
-      /**
-       * The SNI override.
-       *
-       * @example static.example.com
-       * @minLength 1
-       */
-      value: string;
-    };
+    host_header?: RulesetsRouteHostHeader;
+    origin?: RulesetsRouteOrigin;
+    sni?: RulesetsRouteSNI;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Select origin server when IP address is not 1.1.1.1
+   * @default
+   * @example Select an origin server to route the request to.
    */
   description?: string;
   /**
@@ -41682,27 +40689,11 @@ export type RulesetsRouteRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -41714,74 +40705,10 @@ export type RulesetsRouteRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -41794,25 +40721,34 @@ export type RulesetsRouteRule = {
    * @pattern ^[0-9]+$
    */
   version: string;
+};
+
+/**
+ * A Server Name Indication (SNI) override.
+ */
+export type RulesetsRouteSNI = {
+  /**
+   * A value to override the SNI to.
+   *
+   * @example static.example.com
+   * @minLength 1
+   */
+  value: string;
 };
 
 export type RulesetsRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
    */
   action_parameters?: Record<string, any>;
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
+   *
+   * @default
    */
   description?: string;
   /**
@@ -41822,27 +40758,11 @@ export type RulesetsRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -41854,74 +40774,10 @@ export type RulesetsRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -41939,12 +40795,20 @@ export type RulesetsRule = {
 /**
  * The action to perform when the rule matches.
  *
- * @pattern ^[a-z]+$
+ * @pattern ^[a-z_]+$
  */
 export type RulesetsRuleAction = string;
 
 /**
- * A category of the rule.
+ * The categories of the rule.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsRuleCategories = RulesetsRuleCategory[];
+
+/**
+ * The category of a rule.
  *
  * @example directory-traversal
  * @minLength 1
@@ -41959,6 +40823,26 @@ export type RulesetsRuleCategory = string;
 export type RulesetsRuleEnabled = boolean;
 
 /**
+ * Configuration for exposed credential checking.
+ */
+export type RulesetsRuleExposedCredentialCheck = {
+  /**
+   * An expression that selects the password used in the credentials check.
+   *
+   * @example url_decode(http.request.body.form[\"password\"][0])
+   * @minLength 1
+   */
+  password_expression: string;
+  /**
+   * An expression that selects the user ID used in the credentials check.
+   *
+   * @example url_decode(http.request.body.form[\"username\"][0])
+   * @minLength 1
+   */
+  username_expression: string;
+};
+
+/**
  * The unique ID of the rule.
  *
  * @example 3a03d665bac047339bb530ecb439a90d
@@ -41967,9 +40851,81 @@ export type RulesetsRuleEnabled = boolean;
 export type RulesetsRuleId = string;
 
 /**
+ * An object configuring the rule's logging behavior.
+ */
+export type RulesetsRuleLogging = {
+  /**
+   * Whether to generate a log when the rule matches.
+   *
+   * @example true
+   */
+  enabled: boolean;
+};
+
+/**
  * An object configuring where the rule will be placed.
  */
 export type RulesetsRulePosition = Record<string, any>;
+
+/**
+ * An object configuring the rule's rate limit behavior.
+ */
+export type RulesetsRuleRatelimit = {
+  /**
+   * Characteristics of the request on which the rate limit counter will be incremented.
+   *
+   * @minItems 1
+   * @uniqueItems true
+   */
+  characteristics: string[];
+  /**
+   * An expression that defines when the rate limit counter should be incremented. It defaults to the same as the rule's expression.
+   *
+   * @example http.request.body.raw eq "abcd"
+   * @minLength 1
+   */
+  counting_expression?: string;
+  /**
+   * Period of time in seconds after which the action will be disabled following its first execution.
+   *
+   * @example 600
+   */
+  mitigation_timeout?: number;
+  /**
+   * Period in seconds over which the counter is being incremented.
+   *
+   * @example 60
+   * @minimum 0
+   */
+  period: number;
+  /**
+   * The threshold of requests per period after which the action will be executed for the first time.
+   *
+   * @example 1000
+   * @minimum 1
+   */
+  requests_per_period?: number;
+  /**
+   * Whether counting is only performed when an origin is reached.
+   *
+   * @default false
+   * @example true
+   */
+  requests_to_origin?: boolean;
+  /**
+   * The score threshold per period for which the action will be executed the first time.
+   *
+   * @example 400
+   */
+  score_per_period?: number;
+  /**
+   * A response header name provided by the origin, which contains the score to increment rate limit counter with.
+   *
+   * @example my-score
+   * @minLength 1
+   */
+  score_response_header_name?: string;
+};
 
 /**
  * A ruleset object.
@@ -41979,7 +40935,7 @@ export type RulesetsRuleset = {
    * An informative description of the ruleset.
    *
    * @default
-   * @example My ruleset to execute managed rulesets
+   * @example A description for my ruleset.
    */
   description?: string;
   /**
@@ -42065,35 +41021,29 @@ export type RulesetsRulesetPhase =
  */
 export type RulesetsRulesetVersion = string;
 
+/**
+ * A delta to change the score by, which can be either positive or negative.
+ *
+ * @example 3
+ */
+export type RulesetsScoreIncrement = number;
+
 export type RulesetsScoreRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
    *
-   * @example {"increment":3}
-   * @minProperties 1
+   * @default {}
    */
   action_parameters?: {
-    /**
-     * Increment contains the delta to change the score and can be either positive or negative.
-     *
-     * @example 3
-     */
-    increment?: number;
+    increment: RulesetsScoreIncrement;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Increment score when the IP address is not 1.1.1.1
+   * @default
+   * @example Increment the cumulative score.
    */
   description?: string;
   /**
@@ -42103,27 +41053,11 @@ export type RulesetsScoreRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -42135,74 +41069,10 @@ export type RulesetsScoreRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -42216,49 +41086,56 @@ export type RulesetsScoreRule = {
    */
   version: string;
 };
+
+/**
+ * The name of a custom asset to serve as the error response.
+ *
+ * @example 500_errors
+ * @minLength 1
+ */
+export type RulesetsServeErrorAssetName = string;
+
+/**
+ * The response content.
+ * 
+ * @example {
+  "error": "1xxx error occurred"
+}
+ * @minLength 1
+ */
+export type RulesetsServeErrorContent = string;
+
+/**
+ * The content type header to set with the error response.
+ *
+ * @example application/json
+ */
+export type RulesetsServeErrorContentType =
+  | "application/json"
+  | "text/html"
+  | "text/plain"
+  | "text/xml";
 
 export type RulesetsServeErrorRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
-   */
-  action_parameters?: {
-    /**
-     * Error response content.
-     *
-     * @example {"error": "1xxx error occurred"}
-     * @maxLength 10240
-     * @minLength 1
-     */
-    content?: string;
-    /**
-     * Content-type header to set with the response.
-     *
-     * @example application/json
-     */
-    content_type?: "application/json" | "text/xml" | "text/plain" | "text/html";
-    /**
-     * The status code to use for the error.
-     *
-     * @example 500
-     * @maximum 999
-     * @minimum 400
-     */
-    status_code?: number;
-  };
-  /**
-   * The categories of the rule.
    *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
+   * @default {}
    */
-  categories?: RulesetsRuleCategory[];
+  action_parameters?:
+    | {
+        content: RulesetsServeErrorContent;
+      }
+    | {
+        asset_name: RulesetsServeErrorAssetName;
+      };
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Serve a JSON response to api users on error
+   * @default
+   * @example Customize the serving of errors.
    */
   description?: string;
   /**
@@ -42268,27 +41145,11 @@ export type RulesetsServeErrorRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -42300,74 +41161,10 @@ export type RulesetsServeErrorRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -42382,291 +41179,318 @@ export type RulesetsServeErrorRule = {
   version: string;
 };
 
+/**
+ * The status code to use for the error.
+ *
+ * @example 500
+ * @maximum 999
+ * @minimum 400
+ */
+export type RulesetsServeErrorStatusCode = number;
+
+/**
+ * A list of additional ports that caching should be enabled on.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsSetCacheSettingsAdditionalCacheablePorts = number[];
+
+/**
+ * How long client browsers should cache the response. Cloudflare cache purge will not purge content cached on client browsers, so high browser TTLs may lead to stale content.
+ */
+export type RulesetsSetCacheSettingsBrowserTTL = {
+  /**
+   * The browser TTL (in seconds) if you choose the "override_origin" mode.
+   *
+   * @example 60
+   * @minimum 0
+   */
+  ["default"]?: number;
+  /**
+   * The browser TTL mode.
+   *
+   * @example override_origin
+   */
+  mode: "respect_origin" | "bypass_by_default" | "override_origin" | "bypass";
+};
+
+/**
+ * Whether the request's response from the origin is eligible for caching. Caching itself will still depend on the cache control header and your other caching configurations.
+ *
+ * @example true
+ */
+export type RulesetsSetCacheSettingsCache = boolean;
+
+/**
+ * Which components of the request are included in or excluded from the cache key Cloudflare uses to store the response in cache.
+ */
+export type RulesetsSetCacheSettingsCacheKey = {
+  /**
+   * Whether to separate cached content based on the visitor's device type.
+   *
+   * @example true
+   */
+  cache_by_device_type?: boolean;
+  /**
+   * Whether to protect from web cache deception attacks, while allowing static assets to be cached.
+   *
+   * @example true
+   */
+  cache_deception_armor?: boolean;
+  custom_key?: RulesetsSetCacheSettingsCustomCacheKey;
+  /**
+   * Whether to treat requests with the same query parameters the same, regardless of the order those query parameters are in.
+   *
+   * @example true
+   */
+  ignore_query_strings_order?: boolean;
+};
+
+/**
+ * Settings to determine whether the request's response from origin is eligible for Cache Reserve (requires a Cache Reserve add-on plan).
+ */
+export type RulesetsSetCacheSettingsCacheReserve = {
+  /**
+   * Whether Cache Reserve is enabled. If this is true and a request meets eligibility criteria, Cloudflare will write the resource to Cache Reserve.
+   *
+   * @example true
+   */
+  eligible: boolean;
+  /**
+   * The minimum file size eligible for storage in Cache Reserve.
+   *
+   * @example 1024
+   * @minimum 0
+   */
+  minimum_file_size?: number;
+};
+
+/**
+ * Which components of the request are included or excluded from the cache key.
+ */
+export type RulesetsSetCacheSettingsCustomCacheKey = {
+  cookie?: RulesetsSetCacheSettingsCustomCacheKeyCookie;
+  header?: RulesetsSetCacheSettingsCustomCacheKeyHeader;
+  host?: RulesetsSetCacheSettingsCustomCacheKeyHost;
+  query_string?: RulesetsSetCacheSettingsCustomCacheKeyQueryString;
+  user?: RulesetsSetCacheSettingsCustomCacheKeyUser;
+};
+
+/**
+ * Which cookies to include in the cache key.
+ */
+export type RulesetsSetCacheSettingsCustomCacheKeyCookie = {
+  /**
+   * A list of cookies to check for the presence of. The presence of these cookies is included in the cache key.
+   *
+   * @minItems 1
+   * @uniqueItems true
+   */
+  check_presence?: string[];
+  /**
+   * A list of cookies to include in the cache key.
+   *
+   * @minItems 1
+   * @uniqueItems true
+   */
+  include?: string[];
+};
+
+/**
+ * Which headers to include in the cache key.
+ */
+export type RulesetsSetCacheSettingsCustomCacheKeyHeader = {
+  /**
+   * A list of headers to check for the presence of. The presence of these headers is included in the cache key.
+   *
+   * @minItems 1
+   * @uniqueItems true
+   */
+  check_presence?: string[];
+  /**
+   * A mapping of header names to a list of values. If a header is present in the request and contains any of the values provided, its value is included in the cache key.
+   *
+   * @example {"my-header":["my-header-value-1","my-header-value-2"]}
+   * @minProperties 1
+   */
+  contains?: {
+    [key: string]: string[];
+  };
+  /**
+   * Whether to exclude the origin header in the cache key.
+   *
+   * @example true
+   */
+  exclude_origin?: boolean;
+  /**
+   * A list of headers to include in the cache key.
+   *
+   * @minItems 1
+   * @uniqueItems true
+   */
+  include?: string[];
+};
+
+/**
+ * How to use the host in the cache key.
+ */
+export type RulesetsSetCacheSettingsCustomCacheKeyHost = {
+  /**
+   * Whether to use the resolved host in the cache key.
+   *
+   * @example true
+   */
+  resolved?: boolean;
+};
+
+/**
+ * Which query string parameters to include in or exclude from the cache key.
+ *
+ * @maxProperties 1
+ */
+export type RulesetsSetCacheSettingsCustomCacheKeyQueryString = {
+  /**
+   * Which query string parameters to exclude from the cache key.
+   *
+   * @maxProperties 1
+   * @minProperties 1
+   */
+  exclude?: {
+    /**
+     * Whether to exclude all query string parameters from the cache key.
+     */
+    all?: true;
+    /**
+     * A list of query string parameters to exclude from the cache key.
+     *
+     * @minItems 1
+     * @uniqueItems true
+     */
+    list?: string[];
+  };
+  /**
+   * Which query string parameters to include in the cache key.
+   *
+   * @maxProperties 1
+   * @minProperties 1
+   */
+  include?: {
+    /**
+     * Whether to include all query string parameters in the cache key.
+     */
+    all?: true;
+    /**
+     * A list of query string parameters to include in the cache key.
+     *
+     * @minItems 1
+     * @uniqueItems true
+     */
+    list?: string[];
+  };
+};
+
+/**
+ * How to use characteristics of the request user agent in the cache key.
+ */
+export type RulesetsSetCacheSettingsCustomCacheKeyUser = {
+  /**
+   * Whether to use the user agent's device type in the cache key.
+   *
+   * @example true
+   */
+  device_type?: boolean;
+  /**
+   * Whether to use the user agents's country in the cache key.
+   *
+   * @example true
+   */
+  geo?: boolean;
+  /**
+   * Whether to use the user agent's language in the cache key.
+   *
+   * @example true
+   */
+  lang?: boolean;
+};
+
+/**
+ * How long the Cloudflare edge network should cache the response.
+ */
+export type RulesetsSetCacheSettingsEdgeTTL = {
+  /**
+   * The edge TTL (in seconds) if you choose the "override_origin" mode.
+   *
+   * @example 60
+   * @minimum 0
+   */
+  ["default"]?: number;
+  /**
+   * The edge TTL mode.
+   *
+   * @example override_origin
+   */
+  mode: "respect_origin" | "bypass_by_default" | "override_origin";
+  status_code_ttl?: RulesetsSetCacheSettingsStatusCodeTTL;
+};
+
+/**
+ * Whether Cloudflare will aim to strictly adhere to RFC 7234.
+ *
+ * @example true
+ */
+export type RulesetsSetCacheSettingsOriginCacheControl = boolean;
+
+/**
+ * Whether to generate Cloudflare error pages for issues from the origin server.
+ *
+ * @example true
+ */
+export type RulesetsSetCacheSettingsOriginErrorPagePassthru = boolean;
+
+/**
+ * A timeout value between two successive read operations to use for your origin server. Historically, the timeout value between two read options from Cloudflare to an origin server is 100 seconds. If you are attempting to reduce HTTP 524 errors because of timeouts from an origin server, try increasing this timeout value.
+ *
+ * @example 900
+ * @maximum 6000
+ * @minimum 100
+ */
+export type RulesetsSetCacheSettingsReadTimeout = number;
+
+/**
+ * Whether Cloudflare should respect strong ETag (entity tag) headers. If false, Cloudflare converts strong ETag headers to weak ETag headers.
+ *
+ * @example true
+ */
+export type RulesetsSetCacheSettingsRespectStrongEtags = boolean;
+
 export type RulesetsSetCacheSettingsRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
+   * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * List of additional ports that caching can be enabled on.
-     */
-    additional_cacheable_ports?: number[];
-    /**
-         * Specify how long client browsers should cache the response. Cloudflare cache purge will not purge content cached on client browsers, so high browser TTLs may lead to stale content.
-         *
-         * @example {
-            "mode": "override_origin",
-            "default": 1000
-        }
-         */
-    browser_ttl?: {
-      /**
-       * The TTL (in seconds) if you choose override_origin mode.
-       */
-      ["default"]?: number;
-      /**
-       * Determines which browser ttl mode to use.
-       */
-      mode:
-        | "respect_origin"
-        | "bypass_by_default"
-        | "override_origin"
-        | "bypass";
-    };
-    /**
-     * Mark whether the request’s response from origin is eligible for caching. Caching itself will still depend on the cache-control header and your other caching configurations.
-     */
-    cache?: boolean;
-    /**
-     * Define which components of the request are included or excluded from the cache key Cloudflare uses to store the response in cache.
-     */
-    cache_key?: {
-      /**
-       * Separate cached content based on the visitor’s device type.
-       */
-      cache_by_device_type?: boolean;
-      /**
-       * Protect from web cache deception attacks while allowing static assets to be cached.
-       */
-      cache_deception_armor?: boolean;
-      /**
-       * Customize which components of the request are included or excluded from the cache key.
-       */
-      custom_key?: {
-        /**
-         * The cookies to include in building the cache key.
-         */
-        cookie?: {
-          /**
-           * Checks for the presence of these cookie names. The presence of these cookies is used in building the cache key.
-           */
-          check_presence?: string[];
-          /**
-           * Include these cookies' names and their values.
-           */
-          include?: string[];
-        };
-        /**
-         * The header names and values to include in building the cache key.
-         */
-        header?: {
-          /**
-           * Checks for the presence of these header names. The presence of these headers is used in building the cache key.
-           */
-          check_presence?: string[];
-          /**
-           * For each header name and list of values combination, check if the request header contains any of the values provided. The presence of the request header and whether any of the values provided are contained in the request header value is used in building the cache key.
-           */
-          contains?: {
-            [key: string]: string[];
-          };
-          /**
-           * Whether or not to include the origin header. A value of true will exclude the origin header in the cache key.
-           */
-          exclude_origin?: boolean;
-          /**
-           * Include these headers' names and their values.
-           */
-          include?: string[];
-        };
-        /**
-         * Whether to use the original host or the resolved host in the cache key.
-         */
-        host?: {
-          /**
-           * Use the resolved host in the cache key. A value of true will use the resolved host, while a value or false will use the original host.
-           *
-           * @example true
-           */
-          resolved?: boolean;
-        };
-        query_string?:
-          | {
-              include?:
-                | {
-                    /**
-                     * @example foo
-                     * @example bar
-                     */
-                    list?: string[];
-                  }
-                | {
-                    /**
-                     * Determines whether to include all query string parameters in the cache key.
-                     *
-                     * @example true
-                     */
-                    all?: boolean;
-                  };
-            }
-          | {
-              exclude?:
-                | {
-                    /**
-                     * @example foo
-                     * @example bar
-                     */
-                    list?: string[];
-                  }
-                | {
-                    /**
-                     * Determines whether to exclude all query string parameters from the cache key.
-                     *
-                     * @example true
-                     */
-                    all?: boolean;
-                  };
-            };
-        /**
-         * Characteristics of the request user agent used in building the cache key.
-         */
-        user?: {
-          /**
-           * Use the user agent's device type in the cache key.
-           */
-          device_type?: boolean;
-          /**
-           * Use the user agents's country in the cache key.
-           */
-          geo?: boolean;
-          /**
-           * Use the user agent's language in the cache key.
-           */
-          lang?: boolean;
-        };
-      };
-      /**
-       * Treat requests with the same query parameters the same, regardless of the order those query parameters are in. A value of true ignores the query strings' order.
-       */
-      ignore_query_strings_order?: boolean;
-    };
-    /**
-     * Mark whether the request's response from origin is eligible for Cache Reserve (requires a Cache Reserve add-on plan).
-     */
-    cache_reserve?: {
-      /**
-             * Determines whether cache reserve is enabled. If this is true and a request meets eligibility criteria, Cloudflare will write the resource to cache reserve.
-             *
-             * @example {
-                "eligible": true,
-                "minimum_file_size": 100000
-            }
-             */
-      eligible: boolean;
-      /**
-       * The minimum file size eligible for store in cache reserve.
-       */
-      minimum_file_size: number;
-    };
-    /**
-         * TTL (Time to Live) specifies the maximum time to cache a resource in the Cloudflare edge network.
-         *
-         * @example {
-            "status_code_ttl": [
-                {
-                    "status_code_range": {
-                        "to": 299
-                    },
-                    "value": 86400
-                },
-                {
-                    "status_code_range": {
-                        "from": 300,
-                        "to": 499
-                    },
-                    "value": 0
-                },
-                {
-                    "status_code_range": {
-                        "from": 500
-                    },
-                    "value": -1
-                }
-            ],
-            "mode": "respect_origin"
-        }
-         */
-    edge_ttl?: {
-      /**
-       * The TTL (in seconds) if you choose override_origin mode.
-       *
-       * @maximum 9223372036854776000
-       * @minimum 0
-       */
-      ["default"]: number;
-      /**
-       * Edge TTL options.
-       */
-      mode: "respect_origin" | "bypass_by_default" | "override_origin";
-      /**
-       * List of single status codes, or status code ranges to apply the selected mode.
-       */
-      status_code_ttl: {
-        /**
-         * The range of status codes used to apply the selected mode.
-         */
-        status_code_range?: {
-          /**
-           * Response status code lower bound.
-           */
-          from: number;
-          /**
-           * Response status code upper bound.
-           */
-          to: number;
-        };
-        /**
-         * Set the TTL for responses with this specific status code.
-         */
-        status_code_value?: number;
-        /**
-         * Time to cache a response (in seconds). A value of 0 is equivalent to setting the Cache-Control header with the value "no-cache". A value of -1 is equivalent to setting Cache-Control header with the value of "no-store".
-         */
-        value: number;
-      }[];
-    };
-    /**
-     * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-     */
-    origin_cache_control?: boolean;
-    /**
-     * Generate Cloudflare error pages from issues sent from the origin server. When on, error pages will trigger for issues from the origin.
-     */
-    origin_error_page_passthru?: boolean;
-    /**
-     * Define a timeout value between two successive read operations to your origin server. Historically, the timeout value between two read options from Cloudflare to an origin server is 100 seconds. If you are attempting to reduce HTTP 524 errors because of timeouts from an origin server, try increasing this timeout value.
-     *
-     * @example 900
-     */
-    read_timeout?: number;
-    /**
-     * Specify whether or not Cloudflare should respect strong ETag (entity tag) headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-     */
-    respect_strong_etags?: boolean;
-    /**
-     * Define if Cloudflare should serve stale content while getting the latest content from the origin. If on, Cloudflare will not serve stale content while getting the latest content from the origin.
-     */
-    serve_stale?: {
-      /**
-       * Defines whether Cloudflare should serve stale content while updating. If true, Cloudflare will not serve stale content while getting the latest content from the origin.
-       */
-      disable_stale_while_updating: boolean;
-    };
+    additional_cacheable_ports?: RulesetsSetCacheSettingsAdditionalCacheablePorts;
+    browser_ttl?: RulesetsSetCacheSettingsBrowserTTL;
+    cache?: RulesetsSetCacheSettingsCache;
+    cache_key?: RulesetsSetCacheSettingsCacheKey;
+    cache_reserve?: RulesetsSetCacheSettingsCacheReserve;
+    edge_ttl?: RulesetsSetCacheSettingsEdgeTTL;
+    origin_cache_control?: RulesetsSetCacheSettingsOriginCacheControl;
+    origin_error_page_passthru?: RulesetsSetCacheSettingsOriginErrorPagePassthru;
+    read_timeout?: RulesetsSetCacheSettingsReadTimeout;
+    respect_strong_etags?: RulesetsSetCacheSettingsRespectStrongEtags;
+    serve_stale?: RulesetsSetCacheSettingsServeStale;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Set cache settings when the hostname address is not example.com
+   * @default
+   * @example Configure settings for how the response is cached.
    */
   description?: string;
   /**
@@ -42676,27 +41500,11 @@ export type RulesetsSetCacheSettingsRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -42708,74 +41516,10 @@ export type RulesetsSetCacheSettingsRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -42788,81 +41532,177 @@ export type RulesetsSetCacheSettingsRule = {
    * @pattern ^[0-9]+$
    */
   version: string;
+};
+
+/**
+ * When to serve stale content from cache.
+ */
+export type RulesetsSetCacheSettingsServeStale = {
+  /**
+   * Whether Cloudflare should disable serving stale content while getting the latest content from the origin.
+   *
+   * @example true
+   */
+  disable_stale_while_updating?: boolean;
+};
+
+/**
+ * A list of TTLs to apply to specific status codes or status code ranges.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsSetCacheSettingsStatusCodeTTL = {
+  /**
+   * A single status code to apply the TTL to.
+   *
+   * @example 200
+   * @maximum 999
+   * @minimum 100
+   */
+  status_code?: number;
+  /**
+   * A range of status codes to apply the TTL to.
+   *
+   * @minProperties 1
+   */
+  status_code_range?: {
+    /**
+     * The lower bound of the range.
+     *
+     * @example 200
+     * @maximum 999
+     * @minimum 100
+     */
+    from?: number;
+    /**
+     * The upper bound of the range.
+     *
+     * @example 299
+     * @maximum 999
+     * @minimum 100
+     */
+    to?: number;
+  };
+  /**
+   * The time to cache the response for (in seconds). A value of 0 is equivalent to setting the cache control header with the value "no-cache". A value of -1 is equivalent to setting the cache control header with the value of "no-store".
+   *
+   * @example 0
+   */
+  value: number;
+}[];
+
+/**
+ * Which file extensions to minify automatically.
+ */
+export type RulesetsSetConfigAutominify = {
+  /**
+   * Whether to minify CSS files.
+   *
+   * @default false
+   * @example true
+   */
+  css?: boolean;
+  /**
+   * Whether to minify HTML files.
+   *
+   * @default false
+   * @example true
+   */
+  html?: boolean;
+  /**
+   * Whether to minify JavaScript files.
+   *
+   * @default false
+   * @example true
+   */
+  js?: boolean;
 };
 
 export type RulesetsSetConfigRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
+   *
+   * @default {}
+   * @minProperties 1
    */
   action_parameters?: {
     /**
-     * Turn on or off Automatic HTTPS Rewrites.
+     * Whether to enable Automatic HTTPS Rewrites.
+     *
+     * @example true
      */
     automatic_https_rewrites?: boolean;
+    autominify?: RulesetsSetConfigAutominify;
     /**
-     * Select which file extensions to minify automatically.
-     */
-    autominify?: {
-      /**
-       * Minify CSS files.
-       */
-      css?: boolean;
-      /**
-       * Minify HTML files.
-       */
-      html?: boolean;
-      /**
-       * Minify JS files.
-       */
-      js?: boolean;
-    };
-    /**
-     * Turn on or off Browser Integrity Check.
+     * Whether to enable Browser Integrity Check (BIC).
+     *
+     * @example true
      */
     bic?: boolean;
     /**
-     * Turn off all active Cloudflare Apps.
+     * Whether to disable Cloudflare Apps.
      */
     disable_apps?: true;
     /**
-     * Turn off Real User Monitoring (RUM).
+     * Whether to disable Pay Per Crawl.
+     */
+    disable_pay_per_crawl?: true;
+    /**
+     * Whether to disable Real User Monitoring (RUM).
      */
     disable_rum?: true;
     /**
-     * Turn off Zaraz.
+     * Whether to disable Zaraz.
      */
     disable_zaraz?: true;
     /**
-     * Turn on or off Email Obfuscation.
+     * Whether to enable Email Obfuscation.
+     *
+     * @example true
      */
     email_obfuscation?: boolean;
     /**
-     * Turn on or off Cloudflare Fonts.
+     * Whether to enable Cloudflare Fonts.
+     *
+     * @example true
      */
     fonts?: boolean;
     /**
-     * Turn on or off the Hotlink Protection.
+     * Whether to enable Hotlink Protection.
+     *
+     * @example true
      */
     hotlink_protection?: boolean;
     /**
-     * Turn on or off Mirage.
+     * Whether to enable Mirage.
+     *
+     * @example true
      */
     mirage?: boolean;
     /**
-     * Turn on or off Opportunistic Encryption.
+     * Whether to enable Opportunistic Encryption.
+     *
+     * @example true
      */
     opportunistic_encryption?: boolean;
     /**
-     * Configure the Polish level.
+     * The Polish level to configure.
+     *
+     * @example off
      */
     polish?: "off" | "lossless" | "lossy" | "webp";
     /**
-     * Turn on or off Rocket Loader.
+     * Whether to enable Rocket Loader.
+     *
+     * @example true
      */
     rocket_loader?: boolean;
     /**
-     * Configure the Security Level.
+     * The Security Level to configure.
+     *
+     * @example off
      */
     security_level?:
       | "off"
@@ -42872,31 +41712,30 @@ export type RulesetsSetConfigRule = {
       | "high"
       | "under_attack";
     /**
-     * Turn on or off Server Side Excludes.
+     * Whether to enable Server-Side Excludes.
+     *
+     * @example true
      */
     server_side_excludes?: boolean;
     /**
-     * Configure the SSL level.
+     * The SSL level to configure.
+     *
+     * @example off
      */
     ssl?: "off" | "flexible" | "full" | "strict" | "origin_pull";
     /**
-     * Turn on or off Signed Exchanges (SXG).
+     * Whether to enable Signed Exchanges (SXG).
+     *
+     * @example true
      */
     sxg?: boolean;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Disable Zaraz when IP address is not 1.1.1.1
+   * @default
+   * @example Configure settings for the request and response.
    */
   description?: string;
   /**
@@ -42906,27 +41745,11 @@ export type RulesetsSetConfigRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -42938,74 +41761,10 @@ export type RulesetsSetConfigRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -43020,75 +41779,57 @@ export type RulesetsSetConfigRule = {
   version: string;
 };
 
+/**
+ * A phase to skip the execution of. This option is only compatible with the products option.
+ */
+export type RulesetsSkipPhase = "current";
+
+/**
+ * A list of phases to skip the execution of. This option is incompatible with the rulesets option.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsSkipPhases = (RulesetsRulesetPhase & void)[];
+
+/**
+ * A list of legacy security products to skip the execution of.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsSkipProducts = (
+  | "bic"
+  | "hot"
+  | "rateLimit"
+  | "securityLevel"
+  | "uaBlock"
+  | "waf"
+  | "zoneLockdown"
+)[];
+
 export type RulesetsSkipRule = {
   action?: RulesetsRuleAction;
   /**
    * The parameters configuring the rule's action.
    *
-   * @example {"ruleset":"current"}
+   * @default {}
    * @minProperties 1
    */
   action_parameters?: {
-    /**
-     * A phase to skip the execution of. This property is only compatible with products.
-     */
-    phase?: "current";
-    /**
-     * A list of phases to skip the execution of. This option is incompatible with the rulesets option.
-     *
-     * @minItems 1
-     * @uniqueItems true
-     */
-    phases?: (RulesetsRulesetPhase & void)[];
-    /**
-     * A list of legacy security products to skip the execution of.
-     *
-     * @minItems 1
-     * @uniqueItems true
-     */
-    products?: (
-      | "bic"
-      | "hot"
-      | "rateLimit"
-      | "securityLevel"
-      | "uaBlock"
-      | "waf"
-      | "zoneLockdown"
-    )[];
-    /**
-     * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the execution of. This option is incompatible with the ruleset option.
-     *
-     * @example {"4814384a9e5d4991b9815dcfc25d2f1f":["8ac8bc2a661e475d940980f9317f28e1"]}
-     * @minProperties 1
-     */
-    rules?: {
-      [key: string]: (RulesetsRuleId & void)[];
-    };
-    /**
-     * A ruleset to skip the execution of. This option is incompatible with the rulesets option.
-     */
-    ruleset?: "current";
-    /**
-     * A list of ruleset IDs to skip the execution of. This option is incompatible with the ruleset and phases options.
-     *
-     * @minItems 1
-     * @uniqueItems true
-     */
-    rulesets?: (RulesetsRulesetId & void)[];
+    phase?: RulesetsSkipPhase;
+    phases?: RulesetsSkipPhases;
+    products?: RulesetsSkipProducts;
+    rules?: RulesetsSkipRules;
+    ruleset?: RulesetsSkipRuleset;
+    rulesets?: RulesetsSkipRulesets;
   };
-  /**
-   * The categories of the rule.
-   *
-   * @example directory-traversal
-   * @example header
-   * @minItems 1
-   * @uniqueItems true
-   */
-  categories?: RulesetsRuleCategory[];
+  categories?: RulesetsRuleCategories;
   /**
    * An informative description of the rule.
    *
-   * @example Skip the current ruleset when the IP address is not 1.1.1.1
+   * @default
+   * @example Skip executing rulesets, rules, phases, and other products.
    */
   description?: string;
   /**
@@ -43098,27 +41839,11 @@ export type RulesetsSkipRule = {
    * @default true
    */
   enabled?: RulesetsRuleEnabled & void;
-  /**
-   * Configure checks for exposed credentials.
-   */
-  exposed_credential_check?: {
-    /**
-     * Expression that selects the password used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"password\"][0])
-     */
-    password_expression: string;
-    /**
-     * Expression that selects the user ID used in the credentials check.
-     *
-     * @example url_decode(http.request.body.form[\"username\"][0])
-     */
-    username_expression: string;
-  };
+  exposed_credential_check?: RulesetsRuleExposedCredentialCheck;
   /**
    * The expression defining which traffic will match the rule.
    *
-   * @example ip.src ne 1.1.1.1
+   * @example ip.src eq 1.1.1.1
    * @minLength 1
    */
   expression?: string;
@@ -43130,74 +41855,10 @@ export type RulesetsSkipRule = {
    * @format date-time
    */
   last_updated: string;
+  logging?: RulesetsRuleLogging;
+  ratelimit?: RulesetsRuleRatelimit;
   /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: {
-    /**
-     * Whether to generate a log when the rule matches.
-     *
-     * @example true
-     */
-    enabled: boolean;
-  };
-  /**
-   * An object configuring the rule's ratelimit behavior.
-   */
-  ratelimit?: {
-    /**
-     * Characteristics of the request on which the ratelimiter counter will be incremented.
-     *
-     * @example ip.src
-     * @minLength 1
-     */
-    characteristics: string[];
-    /**
-     * Defines when the ratelimit counter should be incremented. It is optional and defaults to the same as the rule's expression.
-     *
-     * @example http.request.body.raw eq "abcd"
-     */
-    counting_expression?: string;
-    /**
-     * Period of time in seconds after which the action will be disabled following its first execution.
-     *
-     * @example 600
-     */
-    mitigation_timeout?: number;
-    /**
-     * Period in seconds over which the counter is being incremented.
-     *
-     * @example 60
-     */
-    period: number;
-    /**
-     * The threshold of requests per period after which the action will be executed for the first time.
-     *
-     * @example 1000
-     * @minimum 1
-     */
-    requests_per_period?: number;
-    /**
-     * Defines if ratelimit counting is only done when an origin is reached.
-     *
-     * @example true
-     */
-    requests_to_origin?: boolean;
-    /**
-     * The score threshold per period for which the action will be executed the first time.
-     *
-     * @example 400
-     */
-    score_per_period?: number;
-    /**
-     * The response header name provided by the origin which should contain the score to increment ratelimit counter on.
-     *
-     * @example my-score
-     */
-    score_response_header_name?: string;
-  };
-  /**
-   * The reference of the rule (the rule ID by default).
+   * The reference of the rule (the rule's ID by default).
    *
    * @example my_ref
    * @minLength 1
@@ -43211,6 +41872,29 @@ export type RulesetsSkipRule = {
    */
   version: string;
 };
+
+/**
+ * A mapping of ruleset IDs to a list of rule IDs in that ruleset to skip the execution of. This option is incompatible with the ruleset option.
+ *
+ * @example {"4814384a9e5d4991b9815dcfc25d2f1f":["8ac8bc2a661e475d940980f9317f28e1"]}
+ * @minProperties 1
+ */
+export type RulesetsSkipRules = {
+  [key: string]: (RulesetsRuleId & void)[];
+};
+
+/**
+ * A ruleset to skip the execution of. This option is incompatible with the rulesets option.
+ */
+export type RulesetsSkipRuleset = "current";
+
+/**
+ * A list of ruleset IDs to skip the execution of. This option is incompatible with the ruleset and phases options.
+ *
+ * @minItems 1
+ * @uniqueItems true
+ */
+export type RulesetsSkipRulesets = (RulesetsRulesetId & void)[];
 
 /**
  * A URL Normalization object.
@@ -43889,6 +42573,7 @@ export type SecondaryDnsPeer = {
  *
  * @example 23ff594956f20c2a721606e94745a8aa
  * @example 00920f38ce07c2e2f4df50b1f61d4194
+ * @x-stainless-collection-type set
  */
 export type SecondaryDnsPeers = SecondaryDnsIdentifier[];
 
@@ -57031,51 +55716,23 @@ export type WorkersMultipartScript = {
   /**
    * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
-  metadata: {
-    assets?: WorkersAssets;
-    bindings?: WorkersBindings;
-    /**
-     * Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
-     *
-     * @example worker.js
-     */
-    body_part?: string;
-    compatibility_date?: WorkersCompatibilityDate;
-    compatibility_flags?: WorkersCompatibilityFlags;
-    /**
-     * Retain assets which exist for a previously uploaded Worker version; used in lieu of providing a completion token.
-     *
-     * @example false
-     */
-    keep_assets?: boolean;
-    /**
-     * List of binding types to keep from previous_upload.
-     *
-     * @x-stainless-collection-type set
-     */
-    keep_bindings?: string[];
-    logpush?: WorkersLogpush;
-    /**
-     * Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-     *
-     * @example worker.js
-     */
-    main_module?: string;
-    /**
-     * Migrations to apply for Durable Objects associated with this Worker.
-     */
-    migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
-    observability?: WorkersObservability;
-    placement?: WorkersPlacementInfo;
-    /**
-     * List of strings to use as tags for this Worker.
-     *
-     * @x-stainless-collection-type set
-     */
-    tags?: string[];
-    tail_consumers?: WorkersTailConsumers;
-    usage_model?: WorkersUsageModel;
-  };
+  metadata:
+    | {
+        /**
+         * Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+         *
+         * @example worker.js
+         */
+        main_module: string;
+      }
+    | {
+        /**
+         * Name of the uploaded file that contains the Worker script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+         *
+         * @example worker.js
+         */
+        body_part: string;
+      };
 };
 
 export type WorkersMultipleStepMigrations = WorkersMigrationTagConditions & {
@@ -58647,7 +57304,7 @@ export type ZeroTrustGatewayApiResponseCommon = {
   errors: ZeroTrustGatewayMessages;
   messages: ZeroTrustGatewayMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -58663,7 +57320,7 @@ export type ZeroTrustGatewayApiResponseCommonFailure = {
   messages: ZeroTrustGatewayMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -58729,7 +57386,7 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse =
   };
 
 /**
- * Seed ID
+ * Seed ID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -58769,7 +57426,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    */
   background_color?: string;
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    *
    * @example true
    * @x-auditable true
@@ -58832,13 +57489,13 @@ export type ZeroTrustGatewayBlockPageSettings = {
    */
   name?: string;
   /**
-   * This setting was shared via the Orgs API and cannot be edited by the current account
+   * This setting was shared via the Orgs API and cannot be edited by the current account.
    *
    * @x-auditable true
    */
   read_only?: boolean | null;
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    *
    * @x-auditable true
    */
@@ -58857,7 +57514,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    */
   target_uri?: string;
   /**
-   * Version number of the setting
+   * Version number of the setting.
    *
    * @example 1
    * @x-auditable true
@@ -59023,7 +57680,7 @@ export type ZeroTrustGatewayClientDefault = boolean;
 export type ZeroTrustGatewayComponentsSchemasDescription = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -59063,7 +57720,7 @@ export type ZeroTrustGatewayComponentsSchemasUuid = string;
 export type ZeroTrustGatewayCount = number;
 
 /**
- * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`)
+ * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`).
  *
  * @deprecated true
  * @x-stainless-terraform-configurability optional
@@ -59077,7 +57734,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    */
   binding_status?: string;
   /**
-   * Enable use of custom certificate authority for signing Gateway traffic.
+   * Enable use of custom certificate authority for signing Gateway. traffic.
    *
    * @example true
    * @x-auditable true
@@ -59113,7 +57770,7 @@ export type ZeroTrustGatewayDeletedAt = string | null;
 export type ZeroTrustGatewayDescription = string;
 
 /**
- * The description of the list item, if present
+ * The description of the list item, if present.
  *
  * @example Austin office IP
  * @minimum 0
@@ -59369,21 +58026,21 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
    */
   enabled?: boolean | null;
   /**
-   * This setting was shared via the Orgs API and cannot be edited by the current account
+   * This setting was shared via the Orgs API and cannot be edited by the current account.
    *
    * @x-auditable true
    * @x-stainless-terraform-configurability optional
    */
   read_only?: boolean;
   /**
-   * Account tag of account that shared this setting
+   * Account tag of account that shared this setting.
    *
    * @x-auditable true
    * @x-stainless-terraform-configurability optional
    */
   source_account?: string;
   /**
-   * Version number of the setting
+   * Version number of the setting.
    *
    * @example 1
    * @x-auditable true
@@ -59402,7 +58059,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
 export type ZeroTrustGatewayFailClosed = boolean | null;
 
 /**
- * The protocol or layer to evaluate the traffic, identity, and device posture expressions.
+ * The protocol or layer to evaluate the traffic, identity, and device. posture expressions.
  *
  * @example http
  */
@@ -59421,7 +58078,7 @@ export type ZeroTrustGatewayFilters = (
  */
 export type ZeroTrustGatewayFipsSettings = {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
+   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
    *
    * @example true
    * @x-auditable true
@@ -59454,11 +58111,11 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettingsResponse =
   };
 
 /**
- * Account settings
+ * Account settings.
  */
 export type ZeroTrustGatewayGatewayAccountSettings = {
   /**
-   * Account settings
+   * Account settings.
    */
   settings?: {
     activity_log?: ZeroTrustGatewayActivityLogSettings;
@@ -59490,7 +58147,7 @@ export type ZeroTrustGatewayGatewayAccount =
 export type ZeroTrustGatewayGatewayAccountConfig =
   ZeroTrustGatewayApiResponseSingle & {
     /**
-     * Account settings
+     * Account settings.
      */
     result?: ZeroTrustGatewayGatewayAccountSettings & {
       created_at?: ZeroTrustGatewayReadOnlyTimestamp;
@@ -59554,7 +58211,7 @@ export type ZeroTrustGatewayIdentifier = string;
 export type ZeroTrustGatewayIdentity = string;
 
 /**
- * Setting to define inspection settings
+ * Setting to define inspection settings.
  *
  * @x-stainless-terraform-configurability optional
  */
@@ -59773,7 +58430,7 @@ export type ZeroTrustGatewayMessages = {
 export type ZeroTrustGatewayName = string;
 
 /**
- * The rule cannot be shared via the Orgs API
+ * The rule cannot be shared via the Orgs API.
  *
  * @x-auditable true
  */
@@ -59786,13 +58443,13 @@ export type ZeroTrustGatewayNotSharable = boolean;
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
-   * Set notification on
+   * Set notification on.
    *
    * @x-auditable true
    */
   enabled?: boolean;
   /**
-   * If true, context information will be passed as query parameters
+   * If true, context information will be passed as query parameters.
    *
    * @x-auditable true
    */
@@ -59835,7 +58492,7 @@ export type ZeroTrustGatewayProtocolDetection = {
 } | null;
 
 /**
- * The name of the provider. Usually Cloudflare.
+ * Provider Name. Usually Cloudflare.
  *
  * @example Cloudflare
  */
@@ -59877,7 +58534,7 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse =
 export type ZeroTrustGatewayPublicKey = string;
 
 /**
- * The rule was shared via the Orgs API and cannot be edited by the current account
+ * The rule was shared via the Orgs API and cannot be edited by the current account.
  *
  * @x-auditable true
  */
@@ -59896,25 +58553,25 @@ export type ZeroTrustGatewayResponseCollection =
 
 export type ZeroTrustGatewayResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -60061,13 +58718,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   block_page?: {
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      *
      * @x-auditable true
      */
     include_context?: boolean;
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      *
      * @format uri
      * @x-auditable true
@@ -60189,7 +58846,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   ip_indicator_feeds?: boolean;
   /**
-   * Send matching traffic to the supplied destination IP address and port.
+   * Send matching traffic to the supplied destination IP address. and port.
    *
    * @x-stainless-terraform-configurability optional
    */
@@ -60215,13 +58872,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   notification_settings?: {
     /**
-     * Set notification on
+     * Set notification on.
      *
      * @x-auditable true
      */
     enabled?: boolean;
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      *
      * @x-auditable true
      */
@@ -60270,7 +58927,7 @@ export type ZeroTrustGatewayRuleSettings = {
     enabled?: boolean;
   } | null;
   /**
-   * Settings that apply to quarantine rules
+   * Settings that apply to quarantine rules.
    *
    * @x-stainless-terraform-configurability optional
    */
@@ -60295,25 +58952,25 @@ export type ZeroTrustGatewayRuleSettings = {
     )[];
   } | null;
   /**
-   * Settings that apply to redirect rules
+   * Settings that apply to redirect rules.
    *
    * @x-stainless-terraform-configurability optional
    */
   redirect?: {
     /**
-     * If true, context information will be passed as query parameters
+     * If true, context information will be passed as query parameters.
      *
      * @x-auditable true
      */
     include_context?: boolean;
     /**
-     * If true, the path and query parameters from the original request will be appended to target_uri
+     * If true, the path and query parameters from the original request will be appended to target_uri.
      *
      * @x-auditable true
      */
     preserve_path_and_query?: boolean;
     /**
-     * URI to which the user will be redirected
+     * URI to which the user will be redirected.
      *
      * @format uri
      * @x-auditable true
@@ -60574,7 +59231,7 @@ export type ZeroTrustGatewaySingleResponseWithListItems =
   };
 
 /**
- * account tag of account that created the rule
+ * account tag of account that created the rule.
  *
  * @x-auditable true
  */
@@ -60653,7 +59310,7 @@ export type ZeroTrustGatewayUuid = string;
 export type ZeroTrustGatewayValue = string;
 
 /**
- * version number of the rule
+ * version number of the rule.
  *
  * @example 1
  * @x-auditable true
