@@ -20826,7 +20826,7 @@ export type EmailSecurityDispositionLabel =
   | "NONE";
 
 /**
- * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
+ * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","regions":["GLOBAL"],"require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
  */
 export type EmailSecurityDomain = {
   allowed_delivery_modes: EmailSecurityDeliveryMode[];
@@ -20887,6 +20887,7 @@ export type EmailSecurityDomain = {
    */
   lookback_hops: number;
   o365_tenant_id?: string | null;
+  regions: ("GLOBAL" | "AU" | "DE" | "IN" | "US")[];
   require_tls_inbound?: boolean | null;
   require_tls_outbound?: boolean | null;
   transport: string;
