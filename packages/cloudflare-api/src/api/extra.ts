@@ -376,9 +376,11 @@ import {
   postDatasetUpdate,
   getDOHealthCheck,
   postEventMoveToNewDS,
+  getTargetIndustryListByDataset,
   deleteEventTagDelete,
   postEventTagCreate,
   getIndicatorTypesList,
+  postIndicatorTypeCreate,
   getIndicatorList,
   postIndicatorCreateBulk,
   postIndicatorCreate,
@@ -1327,6 +1329,7 @@ import {
   workerEnvironmentPutScriptContent,
   workerScriptEnvironmentGetSettings,
   workerScriptEnvironmentPatchSettings,
+  workerSubdomainDeleteSubdomain,
   workerSubdomainGetSubdomain,
   workerSubdomainCreateSubdomain,
   worListWorkflows,
@@ -2827,12 +2830,16 @@ export const operationsByPath = {
     getDOHealthCheck,
   "POST /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/move":
     postEventMoveToNewDS,
+  "GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/targetIndustries":
+    getTargetIndustryListByDataset,
   "DELETE /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}":
     deleteEventTagDelete,
   "POST /accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}/create":
     postEventTagCreate,
   "GET /accounts/{account_id}/cloudforce-one/events/indicatorTypes":
     getIndicatorTypesList,
+  "POST /accounts/{account_id}/cloudforce-one/events/indicatorTypes/create":
+    postIndicatorTypeCreate,
   "GET /accounts/{account_id}/cloudforce-one/events/indicators":
     getIndicatorList,
   "POST /accounts/{account_id}/cloudforce-one/events/indicators/bulk":
@@ -4530,6 +4537,8 @@ export const operationsByPath = {
     workerScriptEnvironmentGetSettings,
   "PATCH /accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/settings":
     workerScriptEnvironmentPatchSettings,
+  "DELETE /accounts/{account_id}/workers/subdomain":
+    workerSubdomainDeleteSubdomain,
   "GET /accounts/{account_id}/workers/subdomain": workerSubdomainGetSubdomain,
   "PUT /accounts/{account_id}/workers/subdomain":
     workerSubdomainCreateSubdomain,
@@ -5490,8 +5499,8 @@ export const operationsByPath = {
     getZonesZoneIdLogpushDatasetsDatasetIdFields,
   "GET /zones/{zone_id}/logpush/datasets/{dataset_id}/jobs":
     getZonesZoneIdLogpushDatasetsDatasetIdJobs,
-  "GET /zones/{zone_id}/logpush/edge": getZonesZoneIdLogpushEdgeJobs,
-  "POST /zones/{zone_id}/logpush/edge": postZonesZoneIdLogpushEdgeJobs,
+  "GET /zones/{zone_id}/logpush/edge/jobs": getZonesZoneIdLogpushEdgeJobs,
+  "POST /zones/{zone_id}/logpush/edge/jobs": postZonesZoneIdLogpushEdgeJobs,
   "GET /zones/{zone_id}/logpush/jobs": getZonesZoneIdLogpushJobs,
   "POST /zones/{zone_id}/logpush/jobs": postZonesZoneIdLogpushJobs,
   "DELETE /zones/{zone_id}/logpush/jobs/{job_id}":
