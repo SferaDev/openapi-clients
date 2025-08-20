@@ -117,7 +117,7 @@ export type RulesetsRule = Schemas.RulesetsRequestRule & {
          * The ID of another rule to place the rule before. An empty value causes the rule to be placed at the top.
          *
          * @example da5e8e506c8e7877fe06cdf4c41add54
-         * @pattern ^(?:[0-9a-f]{32})?$
+         * @pattern ^[0-9a-f]{32}$
          */
         before?: string;
       })
@@ -126,7 +126,7 @@ export type RulesetsRule = Schemas.RulesetsRequestRule & {
          * The ID of another rule to place the rule after. An empty value causes the rule to be placed at the bottom.
          *
          * @example 5bccdbb2a5142cd25cad8591255bd209
-         * @pattern ^(?:[0-9a-f]{32})?$
+         * @pattern ^[0-9a-f]{32}$
          */
         after?: string;
       })

@@ -107,6 +107,7 @@ import {
   ipAddressManagementAddressMapsAddAnIpToAnAddressMap,
   ipAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMap,
   ipAddressManagementAddressMapsAddAZoneMembershipToAnAddressMap,
+  ipAddressManagementListLeases,
   ipAddressManagementPrefixesUploadLoaDocument,
   ipAddressManagementPrefixesDownloadLoaDocument,
   ipAddressManagementPrefixesListPrefixes,
@@ -2334,6 +2335,7 @@ export const operationsByPath = {
     ipAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMap,
   "PUT /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}":
     ipAddressManagementAddressMapsAddAZoneMembershipToAnAddressMap,
+  "GET /accounts/{account_id}/addressing/leases": ipAddressManagementListLeases,
   "POST /accounts/{account_id}/addressing/loa_documents":
     ipAddressManagementPrefixesUploadLoaDocument,
   "GET /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download":
