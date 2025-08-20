@@ -1,5 +1,34 @@
 # cloudflare-api-js
 
+## 0.18.0
+
+### Minor Changes
+
+- 3bd766d: Add new endpoint to list all IP leases owned by an account
+
+### Patch Changes
+
+- 05df1f4: Introduce types for bulk operation statuses in Lists API.
+- 941bf80: Default viewport added to multiple request bodies.
+- 8a6bbfc: Increase default and maximum value for max_num_results in AutoragConfigAiSearchRequestBody.
+- d94b4e1: Remove default annotation from rule description comments.
+- 39a4d16: Add new AI search model '@cf/moonshotai/kimi-k2-instruct' to AutoragConfigAiSearchRequestBody
+- 25fc971: Change terraform configurability to computed_optional for various schema settings
+- f677999: Add system_prompt field to AutoragConfigAiSearchRequestBody type
+- 1bb5971: [BREAKING] Remove optional custom AI models configuration from BrapiPostJsonRequestBody
+- 5e1fa8c: Add new endpoint to list autorag jobs.
+- c86bd08: Add optional store_id field to AigConfig types.
+- 6158bfa: [BREAKING] Rename ListsCompletedBulkOperation to ListsBulkOperationCompleted.
+- 362df9a: Add new endpoints for GPT OSS 120b and 20b under Workers AI CF OpenAI.
+- 070fe4f: Add 'scopes' attribute to the SecretsStoreSecretsListQueryParams.
+- 5c54f53: Add new function to retrieve AI bot traffic distribution by user agent
+- 860e35a: Update x-stainless-terraform-configurability for ZeroTrustGatewayDnsDestinationIpv6BlockId to computed_optional.
+- 2688eb8: Add support for Python module content types in Worker script uploads
+- 57e1e90: Add AutoragConfigSyncError type for error handling with status 400
+- 5f6b93c: Add new API endpoint for bulk creation of saved string queries in Brand Protection.
+- cc6194a: Extend 'limitType' to include 'cost' for various AigConfig responses and requests.
+- 8aba99a: Add pagination support to several Access API list endpoints with page and per_page query parameters
+
 ## 0.17.0
 
 ### Minor Changes

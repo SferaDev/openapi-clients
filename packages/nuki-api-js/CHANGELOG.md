@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.2.0
+
+### Minor Changes
+
+- e290087: Add pagination support for smartlock authorizations
+
 ## 0.1.1
 
 ### Patch Changes
