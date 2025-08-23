@@ -16757,7 +16757,7 @@ export type GethistorymeetingandwebinarlistQueryParams = {
    */
   from: string;
   /**
-   * The end date `yyyy-MM-dd` format.
+   * The end date in `yyyy-mm-dd` format.
    *
    * @example 2024-12-24
    */
@@ -16819,6 +16819,48 @@ export type GethistorymeetingandwebinarlistQueryParams = {
    * @example TaVA8QKik_1233
    */
   group_id?: string;
+  /**
+   * The meeting features to query and return history meetings that use one or more of these features. To provide multiple values, separate them with commas, like `meeting_summary,meeting_questions`
+   *
+   * @example meeting_summary
+   */
+  meeting_feature?:
+    | "screen_sharing"
+    | "video_on"
+    | "remote_control"
+    | "closed_caption"
+    | "language_interpretation"
+    | "telephone_usage"
+    | "in_meeting_chat"
+    | "poll"
+    | "join_by_room"
+    | "waiting_room"
+    | "live_transcription"
+    | "reaction"
+    | "zoom_apps"
+    | "annotation"
+    | "raise_hand"
+    | "virtual_background"
+    | "whiteboard"
+    | "immersive_scene"
+    | "avatar"
+    | "switch_to_mobile"
+    | "file_sharing"
+    | "meeting_summary"
+    | "meeting_questions"
+    | "record_to_computer"
+    | "record_to_cloud"
+    | "live_translation"
+    | "registration"
+    | "smart_recording"
+    | "multi_speaker"
+    | "meeting_wallpaper"
+    | "gen_ai_virtual_background"
+    | "multi_share"
+    | "document_collaboration"
+    | "portrait_lighting"
+    | "personalized_audio_isolation"
+    | "color_themes";
 };
 
 export type GethistorymeetingandwebinarlistError =
@@ -16988,7 +17030,7 @@ export type GethistorymeetingandwebinarlistResponse = {
       value?: string;
     }[];
     /**
-     * VFfeatures used in the meeting.
+     * Features used in the meeting.
      */
     feature_used?: {
       /**
@@ -17165,6 +17207,54 @@ export type GethistorymeetingandwebinarlistResponse = {
        * @example true
        */
       smart_recording?: boolean;
+      /**
+       * Whether anyone used the multi-speaker view in the meeting.
+       *
+       * @example false
+       */
+      multi_speaker?: boolean;
+      /**
+       * Whether host set wallpaper in the meeting.
+       *
+       * @example true
+       */
+      meeting_wallpaper?: boolean;
+      /**
+       * Whether anyone used the GenAI virtual background in the meeting.
+       *
+       * @example true
+       */
+      gen_ai_virtual_background?: boolean;
+      /**
+       * Whether multi-share was used in the meeting
+       *
+       * @example true
+       */
+      multi_share?: boolean;
+      /**
+       * Whether anyone shared the document in the meeting.
+       *
+       * @example false
+       */
+      document_collaboration?: boolean;
+      /**
+       * Whether anyone used portrait lighting in the meeting.
+       *
+       * @example false
+       */
+      portrait_lighting?: boolean;
+      /**
+       * Whether anyone used personalized audio isolation in the meeting.
+       *
+       * @example true
+       */
+      personalized_audio_isolation?: boolean;
+      /**
+       * Whether anyone used color themes in the meeting.
+       *
+       * @example false
+       */
+      color_themes?: boolean;
     };
   }[];
 };
@@ -18997,14 +19087,16 @@ export const reportUsers = (
 
 export type ReportMeetingsPathParams = {
   /**
-   * The user's user ID or email address. For user-level apps, pass the `me` value.
+   * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   *
+   * @example --7IvCwkQWqn67wBsjsWiQ
    */
   userId: string;
 };
 
 export type ReportMeetingsQueryParams = {
   /**
-   * Start date in 'yyyy-mm-dd' format. The date range defined by the `from` and `to` parameters should only be one month as the report includes only one month worth of data at once.
+   * Start date in 'yyyy-mm-dd' format. The date range defined by the &quot;from&quot; and &quot;to&quot; parameters should only be one month as the report includes only one month worth of data at once.
    *
    * @format date
    * @example 2022-01-01
@@ -19033,9 +19125,9 @@ export type ReportMeetingsQueryParams = {
   next_page_token?: string;
   /**
    * The meeting type to query for:
-   * * `past` &mdash; All past meetings.
-   * * `pastOne` &mdash; A single past user meeting.
-   * * `pastJoined` &mdash; All past meetings the account's users hosted or joined.
+   * * `past` - All past meetings.
+   * * `pastOne` - A single past user meeting.
+   * * `pastJoined` - All past meetings the account's users hosted or joined.
    *
    * @example past
    * @default past
@@ -19049,7 +19141,7 @@ export type ReportMeetingsResponse = {
   /**
    * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
    *
-   * @example b43YBRLJFg3V4vsSpxvGdKIGtNbxn9h9If2
+   * @example w7587w4eiyfsudgk
    */
   next_page_token?: string;
   /**
@@ -19146,7 +19238,7 @@ export type ReportMeetingsResponse = {
     /**
      * Whether the meeting was created directly through Zoom or via an API request:
      * * If the meeting was created via an OAuth app, this field returns the OAuth app's name.
-     * * If the meeting was created via the Zoom Web Portal, this returns the `Zoom` value.
+     * * If the meeting was created via JWT or the Zoom Web Portal, this returns the `Zoom` value.
      *
      * @example Zoom
      */
@@ -19174,17 +19266,17 @@ export type ReportMeetingsResponse = {
      * The type of meeting or webinar.
      *
      * meeting:
-     * * `1` &mdash; Instant meeting.
-     * * `2` &mdash; Scheduled meeting.
-     * * `3` &mdash; A recurring meeting with no fixed time.
-     * * `4` &mdash; A meeting created via PMI (Personal Meeting ID).
-     * * `7` &mdash; A [Personal Audio Conference](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference) (PAC).
+     * * `1` - Instant meeting.
+     * * `2` - Scheduled meeting.
+     * * `3` - A recurring meeting with no fixed time.
+     * * `4` - A meeting created via PMI (Personal Meeting ID).
+     * * `7` - A [Personal Audio Conference](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference) (PAC).
      * * `8` - Recurring meeting with a fixed time.
      *
      * webinar:
-     * * `5` &mdash; A webinar.
-     * * `6` &mdash; A recurring webinar without a fixed time
-     * * `9` &mdash; A recurring webinar with a fixed time.
+     * * `5` - A webinar.
+     * * `6` - A recurring webinar without a fixed time
+     * * `9` - A recurring webinar with a fixed time.
      *
      * @example 2
      */
@@ -19215,25 +19307,25 @@ export type ReportMeetingsResponse = {
      */
     schedule_time?: string;
     /**
-     * The date and time when the attendee joined the waiting room.
+     * The date and time at which the attendee joined the waiting room.
      *
      * @example 02/11/2022 16:15
      */
     join_waiting_room_time?: string;
     /**
-     * The date and time when the attendee joined the meeting.
+     * The date and time at which the attendee joined the meeting.
      *
      * @example 12/22/2021 16:20
      */
     join_time?: string;
     /**
-     * The date and time when the attendee left the meeting.
+     * The date and time at which the attendee left the meeting.
      *
      * @example 12/22/2021 17:13
      */
     leave_time?: string;
     /**
-     * Host account name of hosting organization.
+     * Host Account Name of Hosting Organization.
      *
      * @example org
      */
@@ -19245,27 +19337,27 @@ export type ReportMeetingsResponse = {
      */
     host_name?: string;
     /**
-     * Indicates whether or not the screenshare feature was used in the meeting.
+     * Whether or not the screenshare feature was used by this user in the meeting. This is meeting feature for attendee level.
      *
      * @example false
      */
     has_screen_share?: boolean;
     /**
-     * Indicates whether or not the recording feature was used in the meeting.
+     * Whether or not the recording feature was enabled by this user in the meeting. This is meeting feature for attendee level.
      *
      * @example false
      */
     has_recording?: boolean;
     /**
-     * Indicates whether or not the chat feature was used in the meeting.
+     * Whether or not the chat feature was used by this user in the meeting. This is meeting feature for attendee level.
      *
      * @example false
      */
     has_chat?: boolean;
     /**
      * The meeting's encryption status.
-     * * `1` &mdash; E2E encryption.
-     * * `2` &mdash; Enhanced encryption.
+     * * `1` - E2E encryption.
+     * * `2` - Enhanced encryption.
      *
      * @example 1
      */
