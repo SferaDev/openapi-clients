@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.2.1
+
+### Patch Changes
+
+- abac583: Update version to 3.13.1.
+
 ## 0.2.0
 
 ### Minor Changes
