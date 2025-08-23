@@ -483,7 +483,15 @@ export type AaaComponentsSchemasResponseCollection =
  * @example slack
  * @x-auditable true
  */
-export type AaaComponentsSchemasType = "slack" | "generic" | "gchat";
+export type AaaComponentsSchemasType =
+  | "datadog"
+  | "discord"
+  | "feishu"
+  | "gchat"
+  | "generic"
+  | "opsgenie"
+  | "slack"
+  | "splunk";
 
 /**
  * Timestamp of when the webhook destination was created.
@@ -12693,7 +12701,7 @@ export type CacheRulesApiResponseCommon = {
   errors: CacheRulesMessages;
   messages: CacheRulesMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -12709,7 +12717,7 @@ export type CacheRulesApiResponseCommonFailure = {
   messages: CacheRulesMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -12830,7 +12838,14 @@ export type CacheRulesCacheReserveResponseValue = {
 export type CacheRulesCacheReserveValue = "on" | "off";
 
 /**
- * Identifier
+ * Whether the setting is editable.
+ *
+ * @x-auditable true
+ */
+export type CacheRulesEditable = boolean;
+
+/**
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -12845,6 +12860,14 @@ export type CacheRulesMessages = {
   code: number;
   message: string;
 }[];
+
+/**
+ * The time when the setting was last modified.
+ *
+ * @format date-time
+ * @x-auditable true
+ */
+export type CacheRulesModifiedOn = string;
 
 /**
  * Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
@@ -12868,9 +12891,10 @@ export type CacheRulesOriginH2MaxStreams = {
   value?: CacheRulesOriginH2MaxStreamsValue;
 };
 
-export type CacheRulesOriginH2MaxStreamsResponseValue = {
-  result?: CacheRulesOriginH2MaxStreams;
-};
+export type CacheRulesOriginH2MaxStreamsResponseValue =
+  CacheRulesApiResponseCommon & {
+    result?: CacheRulesOriginH2MaxStreams;
+  };
 
 /**
  * Value of the Origin H2 Max Streams Setting.
@@ -12883,7 +12907,7 @@ export type CacheRulesOriginH2MaxStreamsResponseValue = {
 export type CacheRulesOriginH2MaxStreamsValue = number;
 
 /**
- * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1".
  */
 export type CacheRulesOriginMaxHttpVersion = {
   /**
@@ -12916,7 +12940,7 @@ export type CacheRulesOriginMaxHttpVersionResponseValue = {
 export type CacheRulesOriginMaxHttpVersionValue = "2" | "1";
 
 /**
- * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
+ * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised.
  */
 export type CacheRulesOriginPostQuantumEncryption = {
   /**
@@ -12938,7 +12962,7 @@ export type CacheRulesOriginPostQuantumEncryption = {
 
 export type CacheRulesOriginPostQuantumEncryptionResponseValue = {
   /**
-   * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
+   * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised.
    */
   result?: CacheRulesOriginPostQuantumEncryption & {
     value: CacheRulesOriginPostQuantumEncryptionValue;
@@ -12957,7 +12981,7 @@ export type CacheRulesOriginPostQuantumEncryptionValue =
   | "off";
 
 /**
- * Update enablement of Tiered Caching
+ * Update enablement of Tiered Caching.
  */
 export type CacheRulesPatch = {
   value: CacheRulesValue;
@@ -13002,82 +13026,31 @@ export type CacheRulesRegionalTieredCacheResponseValue = {
 export type CacheRulesRegionalTieredCacheValue = "on" | "off";
 
 export type CacheRulesResultObject = {
-  /**
-   * Whether the setting is editable
-   *
-   * @x-auditable true
-   */
-  editable: boolean;
-  /**
-   * The identifier of the caching setting
-   *
-   * @x-auditable true
-   */
-  id: string;
-  /**
-   * The time when the setting was last modified
-   *
-   * @format date-time
-   * @x-auditable true
-   */
-  modified_on?: string;
-  /**
-   * The value of the feature
-   *
-   * @x-auditable true
-   */
-  value: string;
-};
-
-export type CacheRulesResultObjectComplex = {
-  /**
-   * Whether the setting is editable
-   *
-   * @x-auditable true
-   */
-  editable: boolean;
-  /**
-   * The identifier of the caching setting
-   *
-   * @x-auditable true
-   */
-  id: string;
-  /**
-   * The time when the setting was last modified
-   *
-   * @format date-time
-   * @x-auditable true
-   */
-  modified_on?: string;
-  /**
-   * The value of the feature
-   *
-   * @x-auditable true
-   */
-  value: Record<string, any>;
+  editable: CacheRulesEditable;
+  id: CacheRulesSettingId;
+  modified_on?: CacheRulesModifiedOn;
+  value: CacheRulesSettingValue;
 };
 
 export type CacheRulesResultObjectDelete = {
-  /**
-   * Whether the setting is editable
-   *
-   * @x-auditable true
-   */
-  editable: boolean;
-  /**
-   * The identifier of the caching setting
-   *
-   * @x-auditable true
-   */
-  id: string;
-  /**
-   * The time when the setting was last modified
-   *
-   * @format date-time
-   * @x-auditable true
-   */
-  modified_on?: string;
+  editable: CacheRulesEditable;
+  id: CacheRulesSettingId;
+  modified_on?: CacheRulesModifiedOn;
 };
+
+/**
+ * The identifier of the caching setting.
+ *
+ * @x-auditable true
+ */
+export type CacheRulesSettingId = string;
+
+/**
+ * The value of the setting.
+ *
+ * @x-auditable true
+ */
+export type CacheRulesSettingValue = string;
 
 export type CacheRulesSmartTieredCache = {
   /**
@@ -13098,11 +13071,11 @@ export type CacheRulesSmartTieredCache = {
 };
 
 /**
- * Update enablement of Smart Tiered Cache
+ * Update enablement of Smart Tiered Cache.
  */
 export type CacheRulesSmartTieredCachePatch = {
   /**
-   * Enable or disable the Smart Tiered Cache
+   * Enable or disable the Smart Tiered Cache.
    *
    * @example on
    * @x-auditable true
@@ -13296,11 +13269,6 @@ export type CacheRulesZoneCacheSettingsDeleteResponseSingle =
 export type CacheRulesZoneCacheSettingsResponseSingle =
   CacheRulesApiResponseCommon & {
     result?: CacheRulesResultObject;
-  };
-
-export type CacheRulesZoneComplexCacheSettingsResponseSingle =
-  CacheRulesApiResponseCommon & {
-    result?: CacheRulesResultObjectComplex;
   };
 
 export type CacheApiResponseCommonFailure = {
@@ -17182,7 +17150,7 @@ export type DlpNewCustomProfile = {
    * The description of the profile.
    */
   description?: string | null;
-  entries: DlpEntryOfNewProfile[];
+  entries?: DlpEntryOfNewProfile[];
   name: string;
   /**
    * @default false
@@ -17375,6 +17343,7 @@ export type DlpPredefinedEntryUpdate = {
 };
 
 export type DlpPredefinedEntryVariant = {
+  description?: string | null;
   topic_type: DlpPromptTopicType;
   type: "PromptTopic";
 };
@@ -20935,6 +20904,14 @@ export type EmailSecurityMailsearchMessage = {
       | "managed_acceptable_sender";
     blocklisted_message?: boolean;
     blocklisted_pattern?: string;
+    whitelisted_pattern_type?:
+      | "quarantine_release"
+      | "acceptable_sender"
+      | "allowed_sender"
+      | "allowed_recipient"
+      | "domain_similarity"
+      | "domain_recency"
+      | "managed_acceptable_sender";
   };
   sent_date?: string | null;
   subject?: string | null;
@@ -51848,6 +51825,44 @@ export type VectorizeIndexInsertV2Response = {
   mutationId?: VectorizeMutationUuid;
 };
 
+export type VectorizeIndexListVectorsResponse = {
+  /**
+   * Number of vectors returned in this response
+   *
+   * @example 100
+   */
+  count: number;
+  /**
+   * When the cursor expires as an ISO8601 string
+   *
+   * @example 2025-08-12T20:32:52.469144957+00:00
+   * @format date-time
+   */
+  cursorExpirationTimestamp?: string | null;
+  /**
+   * Whether there are more vectors available beyond this response
+   *
+   * @example true
+   */
+  isTruncated: boolean;
+  /**
+   * Cursor for the next page of results
+   *
+   * @example suUTaDY5PFUiRweVccnzyt9n75suNPbXHPshvCzue5mHjtj7Letjvzlza9eGj099
+   */
+  nextCursor?: string | null;
+  /**
+   * Total number of vectors in the index
+   *
+   * @example 500
+   */
+  totalCount: number;
+  /**
+   * Array of vector items
+   */
+  vectors: VectorizeVectorListItem[];
+};
+
 /**
  * Specifies the type of metric to use calculating distance.
  *
@@ -52087,6 +52102,10 @@ export type VectorizeUpdateIndexRequest = {
  * @maxLength 64
  */
 export type VectorizeVectorIdentifier = string;
+
+export type VectorizeVectorListItem = {
+  id: VectorizeVectorIdentifier;
+};
 
 /**
  * Defines the available states for the rule group.
@@ -54720,6 +54739,275 @@ export type WorkersObservabilityTelemetryEvent = {
   timestamp: number;
 };
 
+export type WorkersVersion = {
+  /**
+   * Metadata about the version.
+   */
+  annotations?: {
+    /**
+     * Human-readable message about the version.
+     *
+     * @example Fixed bug.
+     * @maxLength 100
+     */
+    ["workers/message"]?: string;
+    /**
+     * User-provided identifier for the version.
+     *
+     * @example v1.0.1
+     * @maxLength 25
+     */
+    ["workers/tag"]?: string;
+    /**
+     * Operation that triggered the creation of the version.
+     *
+     * @example upload
+     */
+    ["workers/triggered_by"]?: string;
+  };
+  /**
+   * Configuration for assets within a Worker.
+   */
+  assets?: {
+    /**
+     * Configuration for assets within a Worker.
+     */
+    config?: {
+      /**
+       * Determines the redirects and rewrites of requests for HTML content.
+       *
+       * @example auto-trailing-slash
+       */
+      html_handling?:
+        | "auto-trailing-slash"
+        | "force-trailing-slash"
+        | "drop-trailing-slash"
+        | "none";
+      /**
+       * Determines the response when a request does not match a static asset, and there is no Worker script.
+       *
+       * @example 404-page
+       */
+      not_found_handling?: "none" | "404-page" | "single-page-application";
+      run_worker_first?: string[] | boolean;
+    };
+    /**
+     * Token provided upon successful upload of all files from a registered manifest.
+     *
+     * @x-sensitive true
+     */
+    jwt?: string;
+  };
+  bindings?: WorkersBindings;
+  compatibility_date?: WorkersCompatibilityDate;
+  compatibility_flags?: WorkersCompatibilityFlags;
+  /**
+   * When the version was created.
+   *
+   * @format date-time
+   */
+  created_on: string;
+  /**
+   * Version identifier.
+   *
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Resource limits enforced at runtime.
+   *
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  limits?: {
+    /**
+     * CPU time limit in milliseconds.
+     *
+     * @example 50
+     */
+    cpu_ms: number;
+  };
+  /**
+   * The name of the main module in the `modules` array (e.g. the name of the module that exports a `fetch` handler).
+   *
+   * @example index.js
+   */
+  main_module?: string;
+  /**
+   * Migrations for Durable Objects associated with the version. Migrations are applied when the version is deployed.
+   */
+  migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
+  /**
+   * Code, sourcemaps, and other content used at runtime.
+   *
+   * @x-stainless-collection-type set
+   */
+  modules?: {
+    /**
+     * The base64-encoded module content.
+     *
+     * @example ZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3QsIGVudiwgY3R4KSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdIZWxsbyBXb3JsZCEnKQogIH0KfQ==
+     * @format byte
+     */
+    content_base64: string;
+    /**
+     * The content type of the module.
+     *
+     * @example application/javascript+module
+     */
+    content_type: string;
+    /**
+     * The name of the module.
+     *
+     * @example index.js
+     */
+    name: string;
+  }[];
+  /**
+   * The integer version number, starting from one.
+   */
+  number: number;
+  /**
+   * Placement settings for the version.
+   */
+  placement?: {
+    /**
+     * Placement mode for the version.
+     *
+     * @example smart
+     */
+    mode?: "smart";
+  };
+  /**
+   * The client used to create the version.
+   *
+   * @example wrangler
+   */
+  source?: string;
+  /**
+   * Usage model for the version.
+   *
+   * @default standard
+   * @deprecated true
+   * @example standard
+   */
+  usage_model?: "standard" | "bundled" | "unbound";
+};
+
+export type WorkersWorker = {
+  /**
+   * When the Worker was created.
+   *
+   * @format date-time
+   */
+  created_on: string;
+  /**
+   * Identifier.
+   *
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   * @maxLength 32
+   * @x-auditable true
+   */
+  id: WorkersIdentifier;
+  /**
+   * Whether logpush is enabled for the Worker.
+   *
+   * @default false
+   */
+  logpush?: boolean;
+  /**
+   * Name of the Worker.
+   *
+   * @example my-worker
+   * @pattern ^[a-z0-9_][a-z0-9-_]*$
+   */
+  name: string;
+  /**
+   * Observability settings for the Worker.
+   */
+  observability?: {
+    /**
+     * Whether observability is enabled for the Worker.
+     *
+     * @default false
+     */
+    enabled?: boolean;
+    /**
+     * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     *
+     * @default 1
+     */
+    head_sampling_rate?: number;
+    /**
+     * Log settings for the Worker.
+     */
+    logs?: {
+      /**
+       * Whether logs are enabled for the Worker.
+       *
+       * @default false
+       */
+      enabled?: boolean;
+      /**
+       * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       *
+       * @default 1
+       */
+      head_sampling_rate?: number;
+      /**
+       * Whether [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs) are enabled for the Worker.
+       *
+       * @default true
+       */
+      invocation_logs?: boolean;
+    };
+  };
+  /**
+   * Subdomain settings for the Worker.
+   */
+  subdomain?: {
+    /**
+     * Whether the *.workers.dev subdomain is enabled for the Worker.
+     *
+     * @default false
+     */
+    enabled?: boolean;
+    /**
+     * Whether [preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) are enabled for the Worker.
+     *
+     * @default false
+     */
+    previews_enabled?: boolean;
+  };
+  /**
+   * Tags associated with the Worker.
+   *
+   * @example my-team
+   * @example my-public-api
+   * @maxItems 8
+   * @x-stainless-collection-type set
+   */
+  tags?: string[];
+  /**
+   * Other Workers that should consume logs from the Worker.
+   *
+   * @x-stainless-collection-type set
+   */
+  tail_consumers?: {
+    /**
+     * Name of the consumer Worker.
+     *
+     * @example my-tail-consumer
+     */
+    name: string;
+  }[];
+  /**
+   * When the Worker was most recently updated.
+   *
+   * @format date-time
+   */
+  updated_on: string;
+};
+
 export type WorkersAccountSettings = {
   /**
    * @x-auditable true
@@ -56250,7 +56538,7 @@ export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
  * @example standard
  * @x-auditable true
  */
-export type WorkersUsageModel = "standard";
+export type WorkersUsageModel = "standard" | "bundled" | "unbound";
 
 /**
  * API Resource UUID tag.
