@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.6.4
+
+### Patch Changes
+
+- fe9b002: Fix description format for end date parameter.
+
 ## 0.6.3
 
 ### Patch Changes
