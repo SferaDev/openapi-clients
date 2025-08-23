@@ -220,6 +220,7 @@ import {
   workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
   workersAiPostRunCfOpenaiWhisperTinyEn,
   workersAiPostRunCfOpenchatOpenchat350106,
+  workersAiPostWebsocketRunCfPipecatAiSmartTurnV2,
   workersAiPostRunCfQwenQwen1505bChat,
   workersAiPostRunCfQwenQwen1518bChat,
   workersAiPostRunCfQwenQwen1514bChatAwq,
@@ -229,6 +230,7 @@ import {
   workersAiPostRunCfRunwaymlStableDiffusionV15Img2img,
   workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting,
   workersAiPostRunCfStabilityaiStableDiffusionXlBase10,
+  workersAiPostWebsocketRunCfSvenTestPipeHttp,
   workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq,
   workersAiPostRunCfTiiuaeFalcon7bInstruct,
   workersAiPostRunCfTinyllamaTinyllama11bChatV10,
@@ -1244,6 +1246,7 @@ import {
   vectorizeGetVectorsById,
   vectorizeIndexInfo,
   vectorizeInsertVector,
+  vectorizeListVectors,
   vectorizeCreateMetadataIndex,
   vectorizeDeleteMetadataIndex,
   vectorizeListMetadataIndexes,
@@ -1332,6 +1335,15 @@ import {
   workerSubdomainDeleteSubdomain,
   workerSubdomainGetSubdomain,
   workerSubdomainCreateSubdomain,
+  listWorkers,
+  createWorker,
+  deleteWorker,
+  getWorker,
+  updateWorker,
+  listWorkerVersions,
+  createWorkerVersion,
+  deleteWorkerVersion,
+  getWorkerVersion,
   worListWorkflows,
   worDeleteWorkflow,
   worGetWorkflowDetails,
@@ -2554,6 +2566,8 @@ export const operationsByPath = {
     workersAiPostRunCfOpenaiWhisperTinyEn,
   "POST /accounts/{account_id}/ai/run/@cf/openchat/openchat-3.5-0106":
     workersAiPostRunCfOpenchatOpenchat350106,
+  "GET /accounts/{account_id}/ai/run/@cf/pipecat-ai/smart-turn-v2":
+    workersAiPostWebsocketRunCfPipecatAiSmartTurnV2,
   "POST /accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-0.5b-chat":
     workersAiPostRunCfQwenQwen1505bChat,
   "POST /accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-1.8b-chat":
@@ -2572,6 +2586,8 @@ export const operationsByPath = {
     workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting,
   "POST /accounts/{account_id}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0":
     workersAiPostRunCfStabilityaiStableDiffusionXlBase10,
+  "GET /accounts/{account_id}/ai/run/@cf/sven/test-pipe-http":
+    workersAiPostWebsocketRunCfSvenTestPipeHttp,
   "POST /accounts/{account_id}/ai/run/@cf/thebloke/discolm-german-7b-v1-awq":
     workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq,
   "POST /accounts/{account_id}/ai/run/@cf/tiiuae/falcon-7b-instruct":
@@ -4372,6 +4388,8 @@ export const operationsByPath = {
     vectorizeIndexInfo,
   "POST /accounts/{account_id}/vectorize/v2/indexes/{index_name}/insert":
     vectorizeInsertVector,
+  "GET /accounts/{account_id}/vectorize/v2/indexes/{index_name}/list":
+    vectorizeListVectors,
   "POST /accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/create":
     vectorizeCreateMetadataIndex,
   "POST /accounts/{account_id}/vectorize/v2/indexes/{index_name}/metadata_index/delete":
@@ -4542,6 +4560,19 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/workers/subdomain": workerSubdomainGetSubdomain,
   "PUT /accounts/{account_id}/workers/subdomain":
     workerSubdomainCreateSubdomain,
+  "GET /accounts/{account_id}/workers/workers": listWorkers,
+  "POST /accounts/{account_id}/workers/workers": createWorker,
+  "DELETE /accounts/{account_id}/workers/workers/{worker_id}": deleteWorker,
+  "GET /accounts/{account_id}/workers/workers/{worker_id}": getWorker,
+  "PUT /accounts/{account_id}/workers/workers/{worker_id}": updateWorker,
+  "GET /accounts/{account_id}/workers/workers/{worker_id}/versions":
+    listWorkerVersions,
+  "POST /accounts/{account_id}/workers/workers/{worker_id}/versions":
+    createWorkerVersion,
+  "DELETE /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}":
+    deleteWorkerVersion,
+  "GET /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}":
+    getWorkerVersion,
   "GET /accounts/{account_id}/workflows": worListWorkflows,
   "DELETE /accounts/{account_id}/workflows/{workflow_name}": worDeleteWorkflow,
   "GET /accounts/{account_id}/workflows/{workflow_name}": worGetWorkflowDetails,
