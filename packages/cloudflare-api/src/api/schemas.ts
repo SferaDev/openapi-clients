@@ -16649,7 +16649,7 @@ export type DlpCustomProfile = {
    * The description of the profile.
    */
   description?: string | null;
-  entries: DlpEntry[];
+  entries?: DlpEntry[];
   /**
    * The id of the profile (uuid).
    *
@@ -17379,6 +17379,8 @@ export type DlpPredefinedProfile = {
   ocr_enabled?: boolean;
   /**
    * Whether this profile can be accessed by anyone.
+   *
+   * @default false
    */
   open_access?: boolean;
 };
@@ -44399,6 +44401,14 @@ export type StreamDirectUploadResponse = StreamApiResponseSingle & {
 export type StreamDirectUser = boolean;
 
 /**
+ * The type of downloads available are: `default`, `audio`
+ *
+ * @default default
+ * @example audio
+ */
+export type StreamDownloadType = string;
+
+/**
  * The source URL for a downloaded image. If the watermark profile was created via direct upload, this field is null.
  *
  * @example https://company.com/logo.png
@@ -56005,23 +56015,52 @@ export type WorkersMultipartScript = {
   /**
    * JSON-encoded metadata about the uploaded parts and Worker configuration.
    */
-  metadata:
-    | {
-        /**
-         * Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
-         *
-         * @example worker.js
-         */
-        main_module: string;
-      }
-    | {
-        /**
-         * Name of the uploaded file that contains the Worker script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
-         *
-         * @example worker.js
-         */
-        body_part: string;
-      };
+  metadata: {
+    assets?: WorkersAssets;
+    bindings?: WorkersBindings;
+    /**
+     * Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+     *
+     * @example worker.js
+     */
+    body_part?: string;
+    compatibility_date?: WorkersCompatibilityDate;
+    compatibility_flags?: WorkersCompatibilityFlags;
+    /**
+     * Retain assets which exist for a previously uploaded Worker version; used in lieu of providing a completion token.
+     *
+     * @example false
+     */
+    keep_assets?: boolean;
+    /**
+     * List of binding types to keep from previous_upload.
+     *
+     * @x-stainless-collection-type set
+     */
+    keep_bindings?: string[];
+    limits?: WorkersLimits;
+    logpush?: WorkersLogpush;
+    /**
+     * Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     *
+     * @example worker.js
+     */
+    main_module?: string;
+    /**
+     * Migrations to apply for Durable Objects associated with this Worker.
+     */
+    migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
+    observability?: WorkersObservability;
+    placement?: WorkersPlacementInfo;
+    /**
+     * List of strings to use as tags for this Worker.
+     *
+     * @x-stainless-collection-type set
+     */
+    tags?: string[];
+    tail_consumers?: WorkersTailConsumers;
+    usage_model?: WorkersUsageModel;
+  };
 };
 
 export type WorkersMultipleStepMigrations = WorkersMigrationTagConditions & {
@@ -56313,8 +56352,17 @@ export type WorkersScriptAndVersionSettingsResponse =
   };
 
 export type WorkersScriptResponse = {
+  compatibility_date?: WorkersCompatibilityDate;
+  compatibility_flags?: WorkersCompatibilityFlags;
   created_on?: WorkersCreatedOn;
   etag?: WorkersEtag;
+  /**
+   * The names of handlers exported as part of the default export.
+   *
+   * @example fetch
+   * @example scheduled
+   */
+  handlers?: string[];
   has_assets?: WorkersHasAssets;
   has_modules?: WorkersHasModules;
   /**
@@ -56324,8 +56372,37 @@ export type WorkersScriptResponse = {
    * @x-auditable true
    */
   id?: string;
+  /**
+   * The client most recently used to deploy this Worker.
+   *
+   * @example wrangler
+   */
+  last_deployed_from?: string;
   logpush?: WorkersLogpush;
+  /**
+   * The tag of the Durable Object migration that was most recently applied for this Worker.
+   *
+   * @example v1
+   */
+  migration_tag?: string;
   modified_on?: WorkersModifiedOn;
+  /**
+   * Named exports, such as Durable Object class implementations and named entrypoints.
+   */
+  named_handlers?: {
+    /**
+     * The names of handlers exported as part of the named export.
+     *
+     * @example class
+     */
+    handlers?: string[];
+    /**
+     * The name of the export.
+     *
+     * @example MyDurableObject
+     */
+    name?: string;
+  }[];
   placement?: WorkersPlacementInfo;
   /**
    * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
