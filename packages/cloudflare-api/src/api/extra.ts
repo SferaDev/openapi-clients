@@ -1182,8 +1182,8 @@ import {
   streamSubtitlesCaptionsUploadCaptionsOrSubtitles,
   streamSubtitlesCaptionsGenerateCaptionOrSubtitleForLanguage,
   streamSubtitlesCaptionsGetVttCaptionOrSubtitle,
-  streamMP4DownloadsDeleteDownloads,
   streamMP4DownloadsListDownloads,
+  streamMP4DownloadsDeleteDownloads,
   streamMP4DownloadsCreateDownloads,
   streamVideosRetreieveEmbedCodeHtml,
   streamVideosCreateSignedUrlTokensForVideos,
@@ -4274,11 +4274,11 @@ export const operationsByPath = {
     streamSubtitlesCaptionsGenerateCaptionOrSubtitleForLanguage,
   "GET /accounts/{account_id}/stream/{identifier}/captions/{language}/vtt":
     streamSubtitlesCaptionsGetVttCaptionOrSubtitle,
-  "DELETE /accounts/{account_id}/stream/{identifier}/downloads":
-    streamMP4DownloadsDeleteDownloads,
   "GET /accounts/{account_id}/stream/{identifier}/downloads":
     streamMP4DownloadsListDownloads,
-  "POST /accounts/{account_id}/stream/{identifier}/downloads":
+  "DELETE /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
+    streamMP4DownloadsDeleteDownloads,
+  "POST /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
     streamMP4DownloadsCreateDownloads,
   "GET /accounts/{account_id}/stream/{identifier}/embed":
     streamVideosRetreieveEmbedCodeHtml,
