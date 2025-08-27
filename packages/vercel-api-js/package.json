@@ -29,9 +29,7 @@
   "dependencies": {
     "zod": "=3.25.76"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
