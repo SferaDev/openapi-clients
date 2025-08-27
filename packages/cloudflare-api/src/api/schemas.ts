@@ -2710,6 +2710,7 @@ export type AccessApprovalGroup = {
  *
  * @example {"approvals_needed":1,"email_addresses":["test1@cloudflare.com","test2@cloudflare.com"]}
  * @example {"approvals_needed":3,"email_list_uuid":"597147a1-976b-4ef2-9af0-81d5d007fc34"}
+ * @x-stainless-collection-type set
  */
 export type AccessApprovalGroups = AccessApprovalGroup[];
 
@@ -6937,6 +6938,8 @@ export type AccessSchemasEmptyResponse = {
 
 /**
  * Rules evaluated with a NOT logical operator. To match the policy, a user cannot meet any of the Exclude rules.
+ *
+ * @x-stainless-collection-type set
  */
 export type AccessSchemasExclude = AccessRule[];
 
@@ -7391,6 +7394,8 @@ export type AccessSchemasIdentityProviders =
 
 /**
  * Rules evaluated with an OR logical operator. A user needs to meet only one of the Include rules.
+ *
+ * @x-stainless-collection-type set
  */
 export type AccessSchemasInclude = AccessRule[];
 
@@ -8192,6 +8197,8 @@ export type AccessSchemasPurposeJustificationRequired = boolean;
 
 /**
  * Rules evaluated with an AND logical operator. To match the policy, a user must meet all of the Require rules.
+ *
+ * @x-stainless-collection-type set
  */
 export type AccessSchemasRequire = AccessRule[];
 
@@ -9217,6 +9224,8 @@ export type AccessTagWithoutAppCount = {
 
 /**
  * The tags you want assigned to an application. Tags are used to filter applications in the App Launcher dashboard.
+ *
+ * @x-stainless-collection-type set
  */
 export type AccessTags = string[];
 
@@ -12187,8 +12196,18 @@ export type BotManagementBaseConfig = {
   using_latest_model?: BotManagementUsingLatestModel;
 };
 
+/**
+ * Indicates that the bot management cookie can be placed on end user devices accessing the site. Defaults to true
+ *
+ * @example true
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type BotManagementBmCookieEnabled = boolean;
+
 export type BotManagementBmSubscriptionConfig = BotManagementBaseConfig & {
   auto_update_model?: BotManagementAutoUpdateModel;
+  bm_cookie_enabled?: BotManagementBmCookieEnabled;
   /**
    * A read-only field that shows which unauthorized settings are currently active on the zone. These settings typically result from upgrades or downgrades.
    */
@@ -23706,7 +23725,10 @@ export type IamAccount = {
      */
     enforce_twofactor?: boolean;
   };
+  type: IamAccountType;
 };
+
+export type IamAccountType = "standard" | "enterprise";
 
 /**
  * Identifier
@@ -23852,13 +23874,7 @@ export type IamCreateAccount = {
    * Account name
    */
   name: string;
-  /**
-   * the type of account being created. For self-serve customers, use standard. for enterprise customers, use enterprise.
-   *
-   * @example standard
-   * @x-auditable true
-   */
-  type: "standard" | "enterprise";
+  type?: IamAccountType;
   /**
    * information related to the tenant unit, and optionally, an id of the unit to create the account on. see https://developers.cloudflare.com/tenant/how-to/manage-accounts/
    */
@@ -30548,6 +30564,67 @@ export type MagicAppsCollectionResponse = {
   success: true;
 };
 
+export type MagicBgpConfig = {
+  /**
+   * ASN used on the customer end of the BGP session
+   *
+   * @format int32
+   * @minimum 0
+   */
+  customer_asn: number;
+  /**
+   * Prefixes in this list will be advertised to the customer device, in addition to the routes in the Magic routing table.
+   */
+  extra_prefixes?: string[];
+  /**
+   * MD5 key to use for session authentication.
+   *
+   * Note that *this is not a security measure*. MD5 is not a valid security mechanism, and the
+   * key is not treated as a secret value. This is *only* supported for preventing
+   * misconfiguration, not for defending against malicious attacks.
+   *
+   * The MD5 key, if set, must be of non-zero length and consist only of the following types of
+   * character:
+   *
+   * * ASCII alphanumerics: `[a-zA-Z0-9]`
+   * * Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+   *
+   * In other words, MD5 keys may contain any printable ASCII character aside from newline (0x0A),
+   * quotation mark (`"`), vertical tab (0x0B), carriage return (0x0D), tab (0x09), form feed
+   * (0x0C), and the question mark (`?`). Requests specifying an MD5 key with one or more of
+   * these disallowed characters will be rejected.
+   */
+  md5_key?: string;
+};
+
+export type MagicBgpStatusWithState = {
+  bgp_state?: string;
+  /**
+   * @format ipv4
+   */
+  cf_speaker_ip?: string;
+  /**
+   * @maximum 65535
+   * @minimum 1
+   */
+  cf_speaker_port?: number;
+  /**
+   * @format ipv4
+   */
+  customer_speaker_ip?: string;
+  /**
+   * @maximum 65535
+   * @minimum 1
+   */
+  customer_speaker_port?: number;
+  state: "BGP_DOWN" | "BGP_UP" | "BGP_ESTABLISHING";
+  tcp_established: boolean;
+  /**
+   * @format date-time
+   */
+  updated_at: string;
+};
+
 /**
  * A valid CIDR notation representing an IP range.
  *
@@ -30657,6 +30734,7 @@ export type MagicComponentsSchemasTunnelsCollectionResponse =
 export type MagicConnectorId = string;
 
 export type MagicCreateGreTunnelRequest = {
+  bgp?: MagicBgpConfig;
   cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
   customer_gre_endpoint: MagicCustomerGreEndpoint;
   description?: MagicSchemasDescription;
@@ -30735,6 +30813,8 @@ export type MagicGre = {
 };
 
 export type MagicGreTunnel = {
+  bgp?: MagicBgpConfig;
+  bgp_status?: MagicBgpStatusWithState;
   cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
   created_on?: MagicSchemasCreatedOn;
   customer_gre_endpoint: MagicCustomerGreEndpoint;
@@ -30887,6 +30967,8 @@ export type MagicIpAddress = string;
 
 export type MagicIpsecTunnel = {
   allow_null_cipher?: MagicAllowNullCipher;
+  bgp?: MagicBgpConfig;
+  bgp_status?: MagicBgpStatusWithState;
   cloudflare_endpoint: MagicCloudflareIpsecEndpoint;
   created_on?: MagicSchemasCreatedOn;
   customer_endpoint?: MagicCustomerIpsecEndpoint;
@@ -30904,6 +30986,7 @@ export type MagicIpsecTunnel = {
 export type MagicIpsecTunnelAddRequest = MagicIpsecTunnelAddSingleRequest;
 
 export type MagicIpsecTunnelAddSingleRequest = {
+  bgp?: MagicBgpConfig;
   cloudflare_endpoint: MagicCloudflareIpsecEndpoint;
   customer_endpoint?: MagicCustomerIpsecEndpoint;
   description?: MagicComponentsSchemasDescription;
@@ -44401,14 +44484,6 @@ export type StreamDirectUploadResponse = StreamApiResponseSingle & {
 export type StreamDirectUser = boolean;
 
 /**
- * The type of downloads available are: `default`, `audio`
- *
- * @default default
- * @example audio
- */
-export type StreamDownloadType = string;
-
-/**
  * The source URL for a downloaded image. If the watermark profile was created via direct upload, this field is null.
  *
  * @example https://company.com/logo.png
@@ -48201,7 +48276,7 @@ export type TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus =
 
 export type TlsCertificatesAndHostnamesCertificateObject = {
   certificate?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate;
-  expires_on?: TlsCertificatesAndHostnamesComponentsSchemasExpiresOn;
+  expires_on?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasExpiresOn;
   id?: TlsCertificatesAndHostnamesIdentifier;
   issuer?: TlsCertificatesAndHostnamesIssuer;
   signature?: TlsCertificatesAndHostnamesSignature;
@@ -48212,13 +48287,13 @@ export type TlsCertificatesAndHostnamesCertificateObject = {
 export type TlsCertificatesAndHostnamesCertificateObjectPost = {
   ca?: TlsCertificatesAndHostnamesCa;
   certificates?: TlsCertificatesAndHostnamesSchemasCertificates;
-  expires_on?: TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn;
+  expires_on?: TlsCertificatesAndHostnamesSchemasExpiresOn;
   id?: TlsCertificatesAndHostnamesIdentifier;
   issuer?: TlsCertificatesAndHostnamesSchemasIssuer;
   name?: TlsCertificatesAndHostnamesSchemasName;
   serial_number?: TlsCertificatesAndHostnamesSchemasSerialNumber;
   signature?: TlsCertificatesAndHostnamesSignature;
-  updated_at?: TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt;
+  updated_at?: TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUpdatedAt;
   uploaded_on?: TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn;
 };
 
@@ -48301,14 +48376,38 @@ export type TlsCertificatesAndHostnamesCertificateStatus =
   | "pending_deployment";
 
 export type TlsCertificatesAndHostnamesCertificates = {
-  certificate?: TlsCertificatesAndHostnamesComponentsSchemasCertificate;
+  certificate?: TlsCertificatesAndHostnamesCertificatesComponentsSchemasCertificate;
   csr: TlsCertificatesAndHostnamesCsr;
-  expires_on?: TlsCertificatesAndHostnamesSchemasExpiresOn;
+  expires_on?: TlsCertificatesAndHostnamesComponentsSchemasExpiresOn;
   hostnames: TlsCertificatesAndHostnamesHostnames;
   id?: TlsCertificatesAndHostnamesIdentifier;
   request_type: TlsCertificatesAndHostnamesRequestType;
   requested_validity: TlsCertificatesAndHostnamesRequestedValidity;
 };
+
+/**
+ * The Origin CA certificate. Will be newline-encoded.
+ * 
+ * @example -----BEGIN CERTIFICATE-----
+MIICvDCCAaQCAQAwdzELMAkGA1UEBhMCVVMxDTALBgNVBAgMBFV0YWgxDzANBgNV
+BAcMBkxpbmRvbjEWMBQGA1UECgwNRGlnaUNlcnQgSW5jLjERMA8GA1UECwwIRGln
+aUNlcnQxHTAbBgNVBAMMFGV4YW1wbGUuZGlnaWNlcnQuY29tMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8+To7d+2kPWeBv/orU3LVbJwDrSQbeKamCmo
+wp5bqDxIwV20zqRb7APUOKYoVEFFOEQs6T6gImnIolhbiH6m4zgZ/CPvWBOkZc+c
+1Po2EmvBz+AD5sBdT5kzGQA6NbWyZGldxRthNLOs1efOhdnWFuhI162qmcflgpiI
+WDuwq4C9f+YkeJhNn9dF5+owm8cOQmDrV8NNdiTqin8q3qYAHHJRW28glJUCZkTZ
+wIaSR6crBQ8TbYNE0dc+Caa3DOIkz1EOsHWzTx+n0zKfqcbgXi4DJx+C1bjptYPR
+BPZL8DAeWuA8ebudVT44yEp82G96/Ggcf7F33xMxe0yc+Xa6owIDAQABoAAwDQYJ
+KoZIhvcNAQEFBQADggEBAB0kcrFccSmFDmxox0Ne01UIqSsDqHgL+XmHTXJwre6D
+hJSZwbvEtOK0G3+dr4Fs11WuUNt5qcLsx5a8uk4G6AKHMzuhLsJ7XZjgmQXGECpY
+Q4mC3yT3ZoCGpIXbw+iP3lmEEXgaQL0Tx5LFl/okKbKYwIqNiyKWOMj7ZR/wxWg/
+ZDGRs55xuoeLDJ/ZRFf9bI+IaCUd1YrfYcHIl3G87Av+r49YVwqRDT0VDV7uLgqn
+29XI1PpVUNCPQGn9p/eX6Qo7vpDaPybRtA2R7XLKjQaF9oXWeCUqy1hvJac9QFO2
+97Ob1alpHPoZ7mWiEuJwjBPii6a9M9G30nUo39lBi1w=
+-----END CERTIFICATE-----
+ */
+export type TlsCertificatesAndHostnamesCertificatesComponentsSchemasCertificate =
+  string;
 
 /**
  * The Client Certificate PEM
@@ -48392,24 +48491,10 @@ export type TlsCertificatesAndHostnamesCloudflareBranding = boolean;
 export type TlsCertificatesAndHostnamesCommonName = string;
 
 /**
- * The Origin CA certificate. Will be newline-encoded.
+ * The zone's SSL certificate or certificate and the intermediate(s).
  * 
  * @example -----BEGIN CERTIFICATE-----
-MIICvDCCAaQCAQAwdzELMAkGA1UEBhMCVVMxDTALBgNVBAgMBFV0YWgxDzANBgNV
-BAcMBkxpbmRvbjEWMBQGA1UECgwNRGlnaUNlcnQgSW5jLjERMA8GA1UECwwIRGln
-aUNlcnQxHTAbBgNVBAMMFGV4YW1wbGUuZGlnaWNlcnQuY29tMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8+To7d+2kPWeBv/orU3LVbJwDrSQbeKamCmo
-wp5bqDxIwV20zqRb7APUOKYoVEFFOEQs6T6gImnIolhbiH6m4zgZ/CPvWBOkZc+c
-1Po2EmvBz+AD5sBdT5kzGQA6NbWyZGldxRthNLOs1efOhdnWFuhI162qmcflgpiI
-WDuwq4C9f+YkeJhNn9dF5+owm8cOQmDrV8NNdiTqin8q3qYAHHJRW28glJUCZkTZ
-wIaSR6crBQ8TbYNE0dc+Caa3DOIkz1EOsHWzTx+n0zKfqcbgXi4DJx+C1bjptYPR
-BPZL8DAeWuA8ebudVT44yEp82G96/Ggcf7F33xMxe0yc+Xa6owIDAQABoAAwDQYJ
-KoZIhvcNAQEFBQADggEBAB0kcrFccSmFDmxox0Ne01UIqSsDqHgL+XmHTXJwre6D
-hJSZwbvEtOK0G3+dr4Fs11WuUNt5qcLsx5a8uk4G6AKHMzuhLsJ7XZjgmQXGECpY
-Q4mC3yT3ZoCGpIXbw+iP3lmEEXgaQL0Tx5LFl/okKbKYwIqNiyKWOMj7ZR/wxWg/
-ZDGRs55xuoeLDJ/ZRFf9bI+IaCUd1YrfYcHIl3G87Av+r49YVwqRDT0VDV7uLgqn
-29XI1PpVUNCPQGn9p/eX6Qo7vpDaPybRtA2R7XLKjQaF9oXWeCUqy1hvJac9QFO2
-97Ob1alpHPoZ7mWiEuJwjBPii6a9M9G30nUo39lBi1w=
+MIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...
 -----END CERTIFICATE-----
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasCertificate = string;
@@ -48417,7 +48502,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificate = string;
 export type TlsCertificatesAndHostnamesComponentsSchemasCertificateObject = {
   ca?: TlsCertificatesAndHostnamesCa;
   certificates?: TlsCertificatesAndHostnamesSchemasCertificates;
-  expires_on?: TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn;
+  expires_on?: TlsCertificatesAndHostnamesSchemasExpiresOn;
   id?: TlsCertificatesAndHostnamesIdentifier;
   issuer?: TlsCertificatesAndHostnamesSchemasIssuer;
   name?: TlsCertificatesAndHostnamesSchemasName;
@@ -48465,10 +48550,9 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCreatedAt = string;
 export type TlsCertificatesAndHostnamesComponentsSchemasEnabled = boolean;
 
 /**
- * When the certificate from the authority expires.
+ * When the certificate will expire.
  *
- * @example 2100-01-01T05:20:00Z
- * @format date-time
+ * @example 2014-01-01 05:20:00 +0000 UTC
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasExpiresOn = string;
@@ -48532,9 +48616,9 @@ export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
   | "blocked";
 
 /**
- * This is the time the certificate was updated.
+ * The time when the certificate was updated.
  *
- * @example 2022-11-22T17:32:30.467938Z
+ * @example 2100-01-01T05:20:00Z
  * @format date-time
  * @x-auditable true
  */
@@ -48642,6 +48726,32 @@ export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSch
     | "deployment_timed_out"
     | "deletion_timed_out";
 
+export type TlsCertificatesAndHostnamesCustomTrustStoreObject = {
+  certificate: TlsCertificatesAndHostnamesComponentsSchemasCertificate;
+  expires_on: TlsCertificatesAndHostnamesSchemasExpiresOn;
+  id: TlsCertificatesAndHostnamesIdentifier;
+  issuer: TlsCertificatesAndHostnamesIssuer;
+  signature: TlsCertificatesAndHostnamesSignature;
+  status: TlsCertificatesAndHostnamesCustomTrustStoreComponentsSchemasStatus;
+  updated_at: TlsCertificatesAndHostnamesSchemasUpdatedAt;
+  uploaded_on: TlsCertificatesAndHostnamesUploadedOn;
+};
+
+/**
+ * Status of the zone's custom SSL.
+ *
+ * @example active
+ * @x-auditable true
+ */
+export type TlsCertificatesAndHostnamesCustomTrustStoreComponentsSchemasStatus =
+
+    | "initializing"
+    | "pending_deployment"
+    | "active"
+    | "pending_deletion"
+    | "deleted"
+    | "expired";
+
 export type TlsCertificatesAndHostnamesCustomCertAndKey = {
   /**
      * If a custom uploaded certificate is used.
@@ -48703,6 +48813,16 @@ export type TlsCertificatesAndHostnamesCustomOriginServer = string;
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomOriginSni = string;
+
+export type TlsCertificatesAndHostnamesCustomTrustStoreResponseCollection =
+  TlsCertificatesAndHostnamesApiResponseCollection & {
+    result?: TlsCertificatesAndHostnamesCustomTrustStoreObject[];
+  };
+
+export type TlsCertificatesAndHostnamesCustomTrustStoreResponseSingle =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: TlsCertificatesAndHostnamesCustomTrustStoreObject;
+  };
 
 export type TlsCertificatesAndHostnamesCustomhostname = {
   created_at?: TlsCertificatesAndHostnamesCreatedAt;
@@ -48832,7 +48952,7 @@ export type TlsCertificatesAndHostnamesHostname = string;
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPull = {
   cert_id?: TlsCertificatesAndHostnamesIdentifier;
   cert_status?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus;
-  cert_updated_at?: TlsCertificatesAndHostnamesSchemasUpdatedAt;
+  cert_updated_at?: TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt;
   cert_uploaded_on?: TlsCertificatesAndHostnamesComponentsSchemasUploadedOn;
   certificate?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificate;
   created_at?: TlsCertificatesAndHostnamesComponentsSchemasCreatedAt;
@@ -48843,7 +48963,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPull = {
   serial_number?: TlsCertificatesAndHostnamesSerialNumber;
   signature?: TlsCertificatesAndHostnamesSignature;
   status?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus;
-  updated_at?: TlsCertificatesAndHostnamesSchemasUpdatedAt;
+  updated_at?: TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt;
   id?: TlsCertificatesAndHostnamesIdentifier;
   private_key?: TlsCertificatesAndHostnamesSchemasPrivateKey;
 };
@@ -48989,7 +49109,7 @@ export type TlsCertificatesAndHostnamesHostnameCertidInput = {
 export type TlsCertificatesAndHostnamesHostnameCertidObject = {
   cert_id?: TlsCertificatesAndHostnamesIdentifier;
   cert_status?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus;
-  cert_updated_at?: TlsCertificatesAndHostnamesSchemasUpdatedAt;
+  cert_updated_at?: TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt;
   cert_uploaded_on?: TlsCertificatesAndHostnamesComponentsSchemasUploadedOn;
   certificate?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificate;
   created_at?: TlsCertificatesAndHostnamesComponentsSchemasCreatedAt;
@@ -49000,7 +49120,7 @@ export type TlsCertificatesAndHostnamesHostnameCertidObject = {
   serial_number?: TlsCertificatesAndHostnamesSerialNumber;
   signature?: TlsCertificatesAndHostnamesSignature;
   status?: TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus;
-  updated_at?: TlsCertificatesAndHostnamesSchemasUpdatedAt;
+  updated_at?: TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt;
 };
 
 /**
@@ -49156,22 +49276,22 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificat
   };
 
 /**
- * When the certificate expires.
- *
- * @example 2122-10-29T16:59:47Z
- * @format date-time
- * @x-auditable true
- */
-export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn =
-  string;
-
-/**
  * Certificate deployment status for the given service.
  *
  * @example pending_deployment
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus =
+  string;
+
+/**
+ * This is the time the certificate was updated.
+ *
+ * @example 2022-11-22T17:32:30.467938Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUpdatedAt =
   string;
 
 /**
@@ -49515,9 +49635,10 @@ export type TlsCertificatesAndHostnamesSchemasCsr = string;
 export type TlsCertificatesAndHostnamesSchemasEnabled = boolean;
 
 /**
- * When the certificate will expire.
+ * When the certificate expires.
  *
- * @example 2014-01-01 05:20:00 +0000 UTC
+ * @example 2122-10-29T16:59:47Z
+ * @format date-time
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasExpiresOn = string;
@@ -49644,9 +49765,9 @@ export type TlsCertificatesAndHostnamesSchemasType =
   | "legacy_custom";
 
 /**
- * The time when the certificate was updated.
+ * When the certificate was last modified.
  *
- * @example 2100-01-01T05:20:00Z
+ * @example 2014-01-01T05:20:00Z
  * @format date-time
  * @x-auditable true
  */
@@ -50282,7 +50403,7 @@ export type TlsCertificatesAndHostnamesVerificationType = "cname" | "meta tag";
 
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPull = {
   certificate?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasCertificate;
-  expires_on?: TlsCertificatesAndHostnamesComponentsSchemasExpiresOn;
+  expires_on?: TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasExpiresOn;
   id?: TlsCertificatesAndHostnamesIdentifier;
   issuer?: TlsCertificatesAndHostnamesIssuer;
   signature?: TlsCertificatesAndHostnamesSignature;
@@ -50329,6 +50450,16 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled =
   boolean;
+
+/**
+ * When the certificate from the authority expires.
+ *
+ * @example 2100-01-01T05:20:00Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasExpiresOn =
+  string;
 
 /**
  * Status of the certificate activation.
@@ -54137,13 +54268,6 @@ export type WorkersKvMessages = {
 export type WorkersKvMetadata = WorkersKvAny & void;
 
 export type WorkersKvNamespace = {
-  /**
-   * True if new beta namespace, with additional preview features.
-   *
-   * @example true
-   * @x-auditable true
-   */
-  beta?: boolean;
   id: WorkersKvNamespaceIdentifier;
   /**
    * True if keys written on the URL will be URL-decoded before storing. For example, if set to "true", a key written on the URL as "%3F" will be stored as "?".
@@ -60522,8 +60646,8 @@ export type ZonesBrowserCacheTtl = {
 /**
  * Value of the zone setting in seconds.
  * Minimum values by plan:
- * - Free: 7200 seconds (2 hours)
- * - Pro: 3600 seconds (1 hour)
+ * - Free: 1 second
+ * - Pro: 1 second
  * - Business: 1 second
  * - Enterprise: 1 second
  * Setting a TTL of 0 is equivalent to selecting `Respect Existing Headers` and is allowed for all plans.
@@ -60671,7 +60795,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
 export type ZonesCacheRulesOriginH2MaxStreamsValue = number;
 
 /**
- * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1".
  */
 export type ZonesCacheRulesOriginMaxHttpVersion = {
   /**
@@ -61786,6 +61910,8 @@ export type ZonesMirage = {
  * Value of the zone setting.
  *
  * @default off
+ * @deprecated true
+ * @x-stainless-deprecation-message Mirage is being deprecated. More information at https://developers.cloudflare.com/speed/optimization/images/mirage/
  */
 export type ZonesMirageValue = "on" | "off";
 
@@ -62528,8 +62654,6 @@ export type ZonesSchemasAutomaticHttpsRewrites = {
 export type ZonesSchemasAutomaticPlatformOptimization = {
   /**
    * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
-   *
-   * @default true
    */
   editable?: true | false;
   /**
@@ -62551,6 +62675,32 @@ export type ZonesSchemasAutomaticPlatformOptimization = {
    * @example on
    */
   value: ZonesAutomaticPlatformOptimization;
+};
+
+export type ZonesSchemasBase = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   */
+  editable?: true | false;
+  /**
+   * Identifier of the zone setting.
+   *
+   * @example development_mode
+   */
+  id: string;
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: void;
 };
 
 /**
@@ -62764,6 +62914,9 @@ export type ZonesSchemasMessages = {
  * Automatically optimize image loading for website visitors on mobile
  * devices. Refer to [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed)
  * for more information.
+ *
+ * @deprecated true
+ * @x-stainless-deprecation-message Mirage is being deprecated. More information at https://developers.cloudflare.com/speed/optimization/images/mirage/
  */
 export type ZonesSchemasMirage = {
   /**
@@ -64088,14 +64241,14 @@ export type ZonesZone = {
    * Legacy permissions based on legacy user membership information.
    *
    * @deprecated true
-   * @x-stainless-message This has been replaced by Account memberships.
+   * @x-stainless-deprecation-message This has been replaced by Account memberships.
    */
   permissions?: string[];
   /**
      * A Zones subscription information.
      *
      * @deprecated true
-     * @x-stainless-message Please use the `/zones/{zone_id}/subscription` API
+     * @x-stainless-deprecation-message Please use the `/zones/{zone_id}/subscription` API
     to update a zone's plan. Changing this value will create/cancel
     associated subscriptions. To view available plans for this zone,
     see [Zone Plans](https://developers.cloudflare.com/api/resources/zones/subresources/plans/).
