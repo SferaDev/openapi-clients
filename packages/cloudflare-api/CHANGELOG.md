@@ -1,5 +1,12 @@
 # cloudflare-api-js
 
+## 0.18.1
+
+### Patch Changes
+
+- 33ccecb: Add the 'indicatorType' field to POST request body types.
+- d78d3d4: Add `dlp` property to gateway response types.
+
 ## 0.18.0
 
 ### Minor Changes
