@@ -178,8 +178,14 @@ import {
   workersAiPostRunCfBaaiBgeM3,
   workersAiPostRunCfBaaiBgeRerankerBase,
   workersAiPostRunCfBaaiBgeSmallEnV15,
+  workersAiPostRunCfBaaiOmniBgeBaseEnV15,
   workersAiPostRunCfBlackForestLabsFlux1Schnell,
   workersAiPostRunCfBytedanceStableDiffusionXlLightning,
+  workersAiPostWebsocketRunCfDeepgramAura,
+  workersAiPostWebsocketRunCfDeepgramAura2,
+  workersAiPostWebsocketRunCfDeepgramAura2Internal,
+  workersAiPostWebsocketRunCfDeepgramNova3,
+  workersAiPostWebsocketRunCfDeepgramNova3Internal,
   workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct,
   workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b,
   workersAiPostRunCfDefogSqlcoder7b2,
@@ -1182,8 +1188,8 @@ import {
   streamSubtitlesCaptionsUploadCaptionsOrSubtitles,
   streamSubtitlesCaptionsGenerateCaptionOrSubtitleForLanguage,
   streamSubtitlesCaptionsGetVttCaptionOrSubtitle,
-  streamMP4DownloadsListDownloads,
   streamMP4DownloadsDeleteDownloads,
+  streamMP4DownloadsListDownloads,
   streamMP4DownloadsCreateDownloads,
   streamVideosRetreieveEmbedCodeHtml,
   streamVideosCreateSignedUrlTokensForVideos,
@@ -1718,6 +1724,9 @@ import {
   zoneLevelAccessServiceTokensDeleteAServiceToken,
   zoneLevelAccessServiceTokensGetAServiceToken,
   zoneLevelAccessServiceTokensUpdateAServiceToken,
+  customOriginTrustStoreListDetails,
+  customOriginTrustStoreCreate,
+  customOriginTrustStoreDetails,
   totalTlsTotalTlsSettingsDetails,
   totalTlsEnableOrDisableTotalTls,
   putZonesZoneIdActivationCheck,
@@ -2482,10 +2491,22 @@ export const operationsByPath = {
     workersAiPostRunCfBaaiBgeRerankerBase,
   "POST /accounts/{account_id}/ai/run/@cf/baai/bge-small-en-v1.5":
     workersAiPostRunCfBaaiBgeSmallEnV15,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-base-en-v1.5":
+    workersAiPostRunCfBaaiOmniBgeBaseEnV15,
   "POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell":
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
   "POST /accounts/{account_id}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning":
     workersAiPostRunCfBytedanceStableDiffusionXlLightning,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura":
+    workersAiPostWebsocketRunCfDeepgramAura,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-2":
+    workersAiPostWebsocketRunCfDeepgramAura2,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-2-internal":
+    workersAiPostWebsocketRunCfDeepgramAura2Internal,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/nova-3":
+    workersAiPostWebsocketRunCfDeepgramNova3,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/nova-3-internal":
+    workersAiPostWebsocketRunCfDeepgramNova3Internal,
   "POST /accounts/{account_id}/ai/run/@cf/deepseek-ai/deepseek-math-7b-instruct":
     workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b":
@@ -4274,11 +4295,11 @@ export const operationsByPath = {
     streamSubtitlesCaptionsGenerateCaptionOrSubtitleForLanguage,
   "GET /accounts/{account_id}/stream/{identifier}/captions/{language}/vtt":
     streamSubtitlesCaptionsGetVttCaptionOrSubtitle,
+  "DELETE /accounts/{account_id}/stream/{identifier}/downloads":
+    streamMP4DownloadsDeleteDownloads,
   "GET /accounts/{account_id}/stream/{identifier}/downloads":
     streamMP4DownloadsListDownloads,
-  "DELETE /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
-    streamMP4DownloadsDeleteDownloads,
-  "POST /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
+  "POST /accounts/{account_id}/stream/{identifier}/downloads":
     streamMP4DownloadsCreateDownloads,
   "GET /accounts/{account_id}/stream/{identifier}/embed":
     streamVideosRetreieveEmbedCodeHtml,
@@ -5161,6 +5182,11 @@ export const operationsByPath = {
     zoneLevelAccessServiceTokensGetAServiceToken,
   "PUT /zones/{zone_id}/access/service_tokens/{service_token_id}":
     zoneLevelAccessServiceTokensUpdateAServiceToken,
+  "GET /zones/{zone_id}/acm/custom_trust_store":
+    customOriginTrustStoreListDetails,
+  "POST /zones/{zone_id}/acm/custom_trust_store": customOriginTrustStoreCreate,
+  "GET /zones/{zone_id}/acm/custom_trust_store/{custom_origin_trust_store_id}":
+    customOriginTrustStoreDetails,
   "GET /zones/{zone_id}/acm/total_tls": totalTlsTotalTlsSettingsDetails,
   "POST /zones/{zone_id}/acm/total_tls": totalTlsEnableOrDisableTotalTls,
   "PUT /zones/{zone_id}/activation_check": putZonesZoneIdActivationCheck,
