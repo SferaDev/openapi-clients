@@ -1,3 +1,4 @@
+import React from 'react';
 import { camelCase } from '@kubb/core/transformers';
 import { isNullable, isReference } from '@kubb/oas';
 import type { PluginMcp } from '@kubb/plugin-mcp';
