@@ -1,3 +1,4 @@
+import React from 'react';
 import { URLPath } from '@kubb/core/utils';
 import { isOptional, type Operation } from '@kubb/oas';
 import type { PluginClient } from '@kubb/plugin-client';

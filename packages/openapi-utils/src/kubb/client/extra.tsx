@@ -1,3 +1,4 @@
+import React from 'react';
 import type { PluginClient } from '@kubb/plugin-client';
 import { createReactGenerator } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
