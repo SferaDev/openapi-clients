@@ -9,7 +9,7 @@ import { clientGenerator } from './client/operations';
 import { serverGenerator } from './mcp/server';
 import { toolsGenerator } from './mcp/tools';
 
-export const baseConfig = {
+export const baseConfig: Omit<UserConfig, 'input'> = {
   root: '.',
   output: {
     path: './src/generated'
@@ -68,4 +68,4 @@ export const baseConfig = {
       generators: [toolsGenerator, serverGenerator]
     })
   ]
-} satisfies Omit<UserConfig, 'input'>;
+};
