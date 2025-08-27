@@ -485,10 +485,6 @@ export const userEventSchema = z
         }),
         z.object({
           id: z.string(),
-          domain: z.string()
-        }),
-        z.object({
-          id: z.string(),
           value: z.string(),
           name: z.string(),
           domain: z.string(),
@@ -794,6 +790,13 @@ export const userEventSchema = z
           )
         }),
         z.object({
+          projectId: z.string(),
+          prevAttackModeEnabled: z.boolean().optional(),
+          prevAttackModeActiveUntil: z.number().nullable().nullish(),
+          attackModeEnabled: z.boolean(),
+          attackModeActiveUntil: z.number().nullable().nullish()
+        }),
+        z.object({
           integrationId: z.string(),
           integrationSlug: z.string(),
           integrationName: z.string()
@@ -860,7 +863,7 @@ export const userEventSchema = z
                     .string()
                     .describe('Since November 2021. Guides the abuse scanner in build container.')
                     .optional(),
-                  updatedAt: z.number().describe('Since November 2021').optional(),
+                  updatedAt: z.number().describe('Since November 2021'),
                   creationUserAgent: z.string().optional(),
                   creationIp: z.string().optional(),
                   removedPhoneNumbers: z.string().optional()
@@ -1002,6 +1005,14 @@ export const userEventSchema = z
                       cores: z.number().optional(),
                       memory: z.number().optional()
                     })
+                    .optional(),
+                  security: z
+                    .object({
+                      customRules: z.number().optional(),
+                      ipBlocks: z.number().optional(),
+                      ipBypass: z.number().optional(),
+                      rateLimit: z.number().optional()
+                    })
                     .optional()
                 })
                 .optional(),
@@ -1128,17 +1139,35 @@ export const userEventSchema = z
               teams: z
                 .array(
                   z.object({
-                    created: z.number().optional(),
-                    createdAt: z.number().optional(),
+                    created: z.number(),
+                    createdAt: z.number(),
                     teamId: z.string(),
-                    role: z
-                      .enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR'])
-                      .optional(),
-                    confirmed: z.boolean().optional(),
-                    confirmedAt: z.number().optional(),
+                    role: z.enum([
+                      'OWNER',
+                      'MEMBER',
+                      'DEVELOPER',
+                      'SECURITY',
+                      'BILLING',
+                      'VIEWER',
+                      'VIEWER_FOR_PLUS',
+                      'CONTRIBUTOR'
+                    ]),
+                    confirmed: z.boolean(),
+                    confirmedAt: z.number(),
                     accessRequestedAt: z.number().optional(),
                     teamRoles: z
-                      .array(z.enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR']))
+                      .array(
+                        z.enum([
+                          'OWNER',
+                          'MEMBER',
+                          'DEVELOPER',
+                          'SECURITY',
+                          'BILLING',
+                          'VIEWER',
+                          'VIEWER_FOR_PLUS',
+                          'CONTRIBUTOR'
+                        ])
+                      )
                       .optional(),
                     teamPermissions: z
                       .array(
@@ -1147,7 +1176,10 @@ export const userEventSchema = z
                           'FullProductionDeployment',
                           'UsageViewer',
                           'EnvVariableManager',
-                          'EnvironmentManager'
+                          'EnvironmentManager',
+                          'V0Builder',
+                          'V0Chatter',
+                          'V0Viewer'
                         ])
                       )
                       .optional(),
@@ -1531,19 +1563,19 @@ export const userEventSchema = z
                 .object({
                   webAnalytics: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       graceEmailSentAt: z.number().optional()
                     })
                     .optional(),
                   monitoring: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       blockType: z.enum(['soft', 'hard'])
                     })
                     .describe(
@@ -1552,10 +1584,10 @@ export const userEventSchema = z
                     .optional(),
                   observabilityPlus: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       blockType: z.enum(['soft', 'hard'])
                     })
                     .optional(),
@@ -1585,10 +1617,10 @@ export const userEventSchema = z
                     .optional(),
                   blob: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       overageReason: z.enum([
                         'analyticsUsage',
                         'artifacts',
@@ -1634,10 +1666,10 @@ export const userEventSchema = z
                     .optional(),
                   postgres: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       overageReason: z.enum([
                         'analyticsUsage',
                         'artifacts',
@@ -1683,10 +1715,10 @@ export const userEventSchema = z
                     .optional(),
                   redis: z
                     .object({
-                      updatedAt: z.number().optional(),
+                      updatedAt: z.number(),
                       blockedFrom: z.number().optional(),
                       blockedUntil: z.number().optional(),
-                      blockReason: z.enum(['admin_override', 'limits_exceeded']).optional(),
+                      blockReason: z.enum(['admin_override', 'limits_exceeded']),
                       overageReason: z.enum([
                         'analyticsUsage',
                         'artifacts',
@@ -1911,7 +1943,16 @@ export const userEventSchema = z
             .object({})
             .catchall(
               z.object({
-                role: z.enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR']),
+                role: z.enum([
+                  'OWNER',
+                  'MEMBER',
+                  'DEVELOPER',
+                  'SECURITY',
+                  'BILLING',
+                  'VIEWER',
+                  'VIEWER_FOR_PLUS',
+                  'CONTRIBUTOR'
+                ]),
                 confirmed: z.boolean(),
                 confirmedAt: z.number().optional(),
                 joinedFrom: z
@@ -1949,6 +1990,10 @@ export const userEventSchema = z
           userAgent: z.string().optional(),
           isReactivate: z.boolean().optional(),
           isTrialUpgrade: z.boolean().optional()
+        }),
+        z.object({
+          projectName: z.string(),
+          branch: z.string()
         }),
         z.object({
           projectName: z.string().optional(),
@@ -2152,12 +2197,16 @@ export const userEventSchema = z
           projectId: z.string()
         }),
         z.object({
+          source: z.string(),
+          projectId: z.string()
+        }),
+        z.object({
           projectId: z.string(),
           projectName: z.string()
         }),
         z.object({
-          projectId: z.string().optional(),
-          projectName: z.string().optional(),
+          projectId: z.string(),
+          projectName: z.string(),
           newTargetPercentage: z.number().optional()
         }),
         z.object({
@@ -2252,7 +2301,7 @@ export const userEventSchema = z
               isActive: z.boolean().describe('Is the budget currently active for a customer'),
               pauseProjects: z.boolean().describe('Should all projects be paused if budget is exceeded').optional(),
               pricingPlan: z
-                .enum(['legacy', 'unbundled'])
+                .enum(['plus', 'legacy', 'unbundled'])
                 .describe('The acive pricing plan the team is billed with')
                 .optional(),
               teamId: z.string().describe('Partition key'),
@@ -2283,7 +2332,7 @@ export const userEventSchema = z
                 isActive: z.boolean().describe('Is the budget currently active for a customer'),
                 pauseProjects: z.boolean().describe('Should all projects be paused if budget is exceeded').optional(),
                 pricingPlan: z
-                  .enum(['legacy', 'unbundled'])
+                  .enum(['plus', 'legacy', 'unbundled'])
                   .describe('The acive pricing plan the team is billed with')
                   .optional(),
                 teamId: z.string().describe('Partition key'),
@@ -2497,9 +2546,9 @@ export const userEventSchema = z
           }),
           projectMembership: z
             .object({
-              role: z.enum(['ADMIN', 'PROJECT_DEVELOPER', 'PROJECT_VIEWER']).optional(),
-              uid: z.string().optional(),
-              createdAt: z.number().optional(),
+              role: z.enum(['ADMIN', 'PROJECT_DEVELOPER', 'PROJECT_VIEWER']),
+              uid: z.string(),
+              createdAt: z.number(),
               username: z.string().optional()
             })
             .nullable()
@@ -2510,9 +2559,9 @@ export const userEventSchema = z
             id: z.string().optional()
           }),
           removedMembership: z.object({
-            role: z.enum(['ADMIN', 'PROJECT_DEVELOPER', 'PROJECT_VIEWER']).optional(),
-            uid: z.string().optional(),
-            createdAt: z.number().optional(),
+            role: z.enum(['ADMIN', 'PROJECT_DEVELOPER', 'PROJECT_VIEWER']),
+            uid: z.string(),
+            createdAt: z.number(),
             username: z.string().optional()
           })
         }),
@@ -2537,6 +2586,11 @@ export const userEventSchema = z
             id: z.string().optional(),
             invitedUserId: z.string().optional()
           })
+        }),
+        z.object({
+          projectName: z.string(),
+          tags: z.array(z.string()),
+          target: z.string().optional()
         }),
         z.object({
           edgeConfigId: z.string(),
@@ -2570,7 +2624,7 @@ export const userEventSchema = z
           prev: z.object({
             name: z.string(),
             slug: z.string(),
-            fallbackEnvironment: z.string().optional()
+            fallbackEnvironment: z.string()
           })
         }),
         z.object({
@@ -2723,6 +2777,10 @@ export const userEventSchema = z
           appName: z.string()
         }),
         z.object({
+          appName: z.string(),
+          appId: z.string()
+        }),
+        z.object({
           team: z.object({
             id: z.string(),
             name: z.string()
@@ -2781,6 +2839,7 @@ export const userEventSchema = z
           authMethod: z.enum([
             'email',
             'saml',
+            'app',
             'github',
             'gitlab',
             'bitbucket',
@@ -2846,6 +2905,10 @@ export const teamSchema = z
           .describe(
             "When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team's SAML Single Sign-On provider."
           ),
+        defaultRedirectUri: z
+          .enum(['v0.app', 'v0.dev', 'vercel.com'])
+          .describe('The default redirect URI to use after successful SAML authentication.')
+          .optional(),
         roles: z
           .object({})
           .catchall(
@@ -2853,7 +2916,16 @@ export const teamSchema = z
               z.object({
                 accessGroupId: z.string()
               }),
-              z.enum(['OWNER', 'MEMBER', 'DEVELOPER', 'SECURITY', 'BILLING', 'VIEWER', 'CONTRIBUTOR'])
+              z.enum([
+                'OWNER',
+                'MEMBER',
+                'DEVELOPER',
+                'SECURITY',
+                'BILLING',
+                'VIEWER',
+                'VIEWER_FOR_PLUS',
+                'CONTRIBUTOR'
+              ])
             ])
           )
           .describe(
@@ -2898,6 +2970,7 @@ export const teamSchema = z
       .describe('The hostname that is current set as preview deployment suffix.')
       .nullable()
       .nullish(),
+    disableHardAutoBlocks: z.union([z.boolean(), z.number()]).optional(),
     remoteCaching: z
       .object({
         enabled: z.boolean().optional()
@@ -2968,11 +3041,21 @@ export const teamSchema = z
           .optional(),
         teamId: z.string().optional(),
         confirmed: z.boolean(),
-        confirmedAt: z.number(),
         accessRequestedAt: z.number().optional(),
-        role: z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER']),
+        role: z.enum([
+          'BILLING',
+          'CONTRIBUTOR',
+          'DEVELOPER',
+          'MEMBER',
+          'OWNER',
+          'SECURITY',
+          'VIEWER',
+          'VIEWER_FOR_PLUS'
+        ]),
         teamRoles: z
-          .array(z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER']))
+          .array(
+            z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER', 'VIEWER_FOR_PLUS'])
+          )
           .optional(),
         teamPermissions: z
           .array(
@@ -2981,7 +3064,10 @@ export const teamSchema = z
               'EnvVariableManager',
               'EnvironmentManager',
               'FullProductionDeployment',
-              'UsageViewer'
+              'UsageViewer',
+              'V0Builder',
+              'V0Chatter',
+              'V0Viewer'
             ])
           )
           .optional(),
@@ -3084,11 +3170,21 @@ export const teamLimitedSchema = z
           .optional(),
         teamId: z.string().optional(),
         confirmed: z.boolean(),
-        confirmedAt: z.number(),
         accessRequestedAt: z.number().optional(),
-        role: z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER']),
+        role: z.enum([
+          'BILLING',
+          'CONTRIBUTOR',
+          'DEVELOPER',
+          'MEMBER',
+          'OWNER',
+          'SECURITY',
+          'VIEWER',
+          'VIEWER_FOR_PLUS'
+        ]),
         teamRoles: z
-          .array(z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER']))
+          .array(
+            z.enum(['BILLING', 'CONTRIBUTOR', 'DEVELOPER', 'MEMBER', 'OWNER', 'SECURITY', 'VIEWER', 'VIEWER_FOR_PLUS'])
+          )
           .optional(),
         teamPermissions: z
           .array(
@@ -3097,7 +3193,10 @@ export const teamLimitedSchema = z
               'EnvVariableManager',
               'EnvironmentManager',
               'FullProductionDeployment',
-              'UsageViewer'
+              'UsageViewer',
+              'V0Builder',
+              'V0Chatter',
+              'V0Viewer'
             ])
           )
           .optional(),
@@ -3158,38 +3257,44 @@ export const authTokenSchema = z
                 expiresAt: z.number()
               })
               .optional(),
-            origin: z.enum([
-              'saml',
-              'github',
-              'gitlab',
-              'bitbucket',
-              'email',
-              'manual',
-              'passkey',
-              'otp',
-              'sms',
-              'invite',
-              'google'
-            ]),
+            origin: z
+              .enum([
+                'saml',
+                'github',
+                'gitlab',
+                'bitbucket',
+                'email',
+                'manual',
+                'passkey',
+                'otp',
+                'sms',
+                'invite',
+                'google',
+                'app'
+              ])
+              .optional(),
             createdAt: z.number(),
             expiresAt: z.number().optional()
           }),
           z.object({
             type: z.enum(['team']),
             teamId: z.string(),
-            origin: z.enum([
-              'saml',
-              'github',
-              'gitlab',
-              'bitbucket',
-              'email',
-              'manual',
-              'passkey',
-              'otp',
-              'sms',
-              'invite',
-              'google'
-            ]),
+            origin: z
+              .enum([
+                'saml',
+                'github',
+                'gitlab',
+                'bitbucket',
+                'email',
+                'manual',
+                'passkey',
+                'otp',
+                'sms',
+                'invite',
+                'google',
+                'app'
+              ])
+              .optional(),
             createdAt: z.number(),
             expiresAt: z.number().optional()
           })
@@ -3446,6 +3551,37 @@ export const authUserSchema = z
               )
               .optional(),
             memory: z
+              .number()
+              .describe(
+                'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
+              )
+              .optional()
+          })
+          .describe(
+            'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
+          )
+          .optional(),
+        security: z
+          .object({
+            customRules: z
+              .number()
+              .describe(
+                'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
+              )
+              .optional(),
+            ipBlocks: z
+              .number()
+              .describe(
+                'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
+              )
+              .optional(),
+            ipBypass: z
+              .number()
+              .describe(
+                'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
+              )
+              .optional(),
+            rateLimit: z
               .number()
               .describe(
                 'An object containing infomation related to the amount of platform resources may be allocated to the User account.'
@@ -4297,6 +4433,7 @@ export const rerequestCheckPathParamsSchema = z.object({
 
 export const rerequestCheckQueryParamsSchema = z
   .object({
+    autoUpdate: z.boolean().describe('Mark the check as running').optional(),
     teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
     slug: z.string().describe('The Team slug to perform the request on behalf of.').optional()
   })
@@ -4605,6 +4742,8 @@ export const buyDomain409Schema = z.unknown();
 
 export const buyDomain429Schema = z.unknown();
 
+export const buyDomain500Schema = z.unknown();
+
 export const buyDomainMutationResponseSchema = z.union([
   z.lazy(() => buyDomain201Schema),
   z.lazy(() => buyDomain202Schema)
@@ -4636,6 +4775,8 @@ export const checkDomainPrice401Schema = z.unknown();
  * @description You do not have permission to access this resource.
  */
 export const checkDomainPrice403Schema = z.unknown();
+
+export const checkDomainPrice500Schema = z.unknown();
 
 export const checkDomainPriceQueryResponseSchema = z.lazy(() => checkDomainPrice200Schema);
 
@@ -4841,6 +4982,12 @@ export const getDomainConfigPathParamsSchema = z.object({
 
 export const getDomainConfigQueryParamsSchema = z
   .object({
+    projectIdOrName: z
+      .string()
+      .describe(
+        'The project id or name that will be associated with the domain. Use this when the domain is not yet associated with a project.'
+      )
+      .optional(),
     strict: z
       .enum(['true', 'false'])
       .describe(
@@ -4865,8 +5012,6 @@ export const getDomainConfig401Schema = z.unknown();
  * @description You do not have permission to access this resource.
  */
 export const getDomainConfig403Schema = z.unknown();
-
-export const getDomainConfig500Schema = z.unknown();
 
 export const getDomainConfigQueryResponseSchema = z.lazy(() => getDomainConfig200Schema);
 
@@ -4998,6 +5143,8 @@ export const patchDomain403Schema = z.unknown();
 export const patchDomain404Schema = z.unknown();
 
 export const patchDomain409Schema = z.unknown();
+
+export const patchDomain500Schema = z.unknown();
 
 export const patchDomainMutationResponseSchema = z.lazy(() => patchDomain200Schema);
 
@@ -5222,7 +5369,6 @@ export const patchEdgeConfigItemsPathParamsSchema = z.object({
 
 export const patchEdgeConfigItemsQueryParamsSchema = z
   .object({
-    dryRun: z.string().optional(),
     teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
     slug: z.string().describe('The Team slug to perform the request on behalf of.').optional()
   })
@@ -5250,6 +5396,8 @@ export const patchEdgeConfigItems403Schema = z.unknown();
 export const patchEdgeConfigItems404Schema = z.unknown();
 
 export const patchEdgeConfigItems409Schema = z.unknown();
+
+export const patchEdgeConfigItems412Schema = z.unknown();
 
 export const patchEdgeConfigItemsMutationResponseSchema = z.lazy(() => patchEdgeConfigItems200Schema);
 
@@ -5628,6 +5776,37 @@ export const listUserEvents401Schema = z.unknown();
 export const listUserEvents403Schema = z.unknown();
 
 export const listUserEventsQueryResponseSchema = z.lazy(() => listUserEvents200Schema);
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansPathParamsSchema = z.object({
+  integrationIdOrSlug: z.string(),
+  productIdOrSlug: z.string()
+});
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQueryParamsSchema = z
+  .object({
+    metadata: z.string().optional()
+  })
+  .optional();
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans200Schema = z.unknown();
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans400Schema = z.unknown();
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans401Schema = z.unknown();
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans403Schema = z.unknown();
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans404Schema = z.unknown();
+
+export const GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQueryResponseSchema = z.lazy(
+  () => GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans200Schema
+);
 
 export const getAccountInfoPathParamsSchema = z.object({
   integrationConfigurationId: z.string()
@@ -6047,6 +6226,40 @@ export const deleteConfiguration404Schema = z.unknown();
 
 export const deleteConfigurationMutationResponseSchema = z.lazy(() => deleteConfiguration204Schema);
 
+export const getConfigurationProductsPathParamsSchema = z.object({
+  id: z.string().describe('ID of the integration configuration')
+});
+
+export const getConfigurationProductsQueryParamsSchema = z
+  .object({
+    teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
+    slug: z.string().describe('The Team slug to perform the request on behalf of.').optional()
+  })
+  .optional();
+
+/**
+ * @description List of products available for this integration configuration
+ */
+export const getConfigurationProducts200Schema = z.unknown();
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export const getConfigurationProducts400Schema = z.unknown();
+
+export const getConfigurationProducts401Schema = z.unknown();
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export const getConfigurationProducts403Schema = z.unknown();
+
+export const getConfigurationProducts404Schema = z.unknown();
+
+export const getConfigurationProducts500Schema = z.unknown();
+
+export const getConfigurationProductsQueryResponseSchema = z.lazy(() => getConfigurationProducts200Schema);
+
 export const exchangeSsoToken200Schema = z.unknown();
 
 /**
@@ -6276,6 +6489,8 @@ export const updateExperimentationEdgeConfig403Schema = z.unknown();
 
 export const updateExperimentationEdgeConfig404Schema = z.unknown();
 
+export const updateExperimentationEdgeConfig409Schema = z.unknown();
+
 export const updateExperimentationEdgeConfig412Schema = z.unknown();
 
 export const updateExperimentationEdgeConfigMutationResponseSchema = z.lazy(
@@ -6408,6 +6623,10 @@ export const getProjectsQueryParamsSchema = z
     edgeConfigId: z.string().describe('Filter results by connected Edge Config ID').optional(),
     edgeConfigTokenId: z.string().describe('Filter results by connected Edge Config Token ID').optional(),
     deprecated: z.boolean().optional(),
+    elasticConcurrencyEnabled: z
+      .enum(['1', '0'])
+      .describe('Filter results by projects with elastic concurrency enabled')
+      .optional(),
     teamId: z.string().describe('The Team identifier to perform the request on behalf of.').optional(),
     slug: z.string().describe('The Team slug to perform the request on behalf of.').optional()
   })
@@ -6461,10 +6680,21 @@ export const createProject402Schema = z.unknown();
  */
 export const createProject403Schema = z.unknown();
 
+export const createProject404Schema = z.unknown();
+
 /**
  * @description A project with the provided name already exists.
  */
 export const createProject409Schema = z.unknown();
+
+/**
+ * @description Owner does not have protection add-on
+ */
+export const createProject428Schema = z.unknown();
+
+export const createProject429Schema = z.unknown();
+
+export const createProject500Schema = z.unknown();
 
 export const createProjectMutationResponseSchema = z.lazy(() => createProject200Schema);
 
@@ -7066,10 +7296,16 @@ export const createProjectEnv402Schema = z.unknown();
  */
 export const createProjectEnv403Schema = z.unknown();
 
+export const createProjectEnv404Schema = z.unknown();
+
 /**
  * @description The project is being transfered and creating an environment variable is not possible
  */
 export const createProjectEnv409Schema = z.unknown();
+
+export const createProjectEnv429Schema = z.unknown();
+
+export const createProjectEnv500Schema = z.unknown();
 
 export const createProjectEnvMutationResponseSchema = z.lazy(() => createProjectEnv201Schema);
 
@@ -7169,10 +7405,16 @@ export const editProjectEnv401Schema = z.unknown();
  */
 export const editProjectEnv403Schema = z.unknown();
 
+export const editProjectEnv404Schema = z.unknown();
+
 /**
  * @description The project is being transfered and removing an environment variable is not possible
  */
 export const editProjectEnv409Schema = z.unknown();
+
+export const editProjectEnv429Schema = z.unknown();
+
+export const editProjectEnv500Schema = z.unknown();
 
 export const editProjectEnvMutationResponseSchema = z.lazy(() => editProjectEnv200Schema);
 
@@ -7753,7 +7995,7 @@ export const getActiveAttackStatusQueryResponseSchema = z.lazy(() => getActiveAt
 
 export const getBypassIpQueryParamsSchema = z.object({
   projectId: z.string(),
-  limit: z.coerce.number().max(128).optional(),
+  limit: z.coerce.number().max(256).optional(),
   sourceIp: z.string().max(49).describe('Filter by source IP').optional(),
   domain: z
     .string()
