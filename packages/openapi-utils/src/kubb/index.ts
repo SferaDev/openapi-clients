@@ -9,7 +9,7 @@ import { clientGenerator } from './client/operations';
 import { serverGenerator } from './mcp/server';
 import { toolsGenerator } from './mcp/tools';
 
-export const baseConfig = {
+export const baseConfig: Omit<UserConfig, 'input'> = {
   root: '.',
   output: {
     path: './src/generated'
@@ -47,7 +47,7 @@ export const baseConfig = {
       paramsType: 'object',
       urlType: 'export',
       importPath: '../utils/fetcher',
-      generators: [clientGenerator, extraGenerator]
+      generators: [clientGenerator as any, extraGenerator as any]
     }),
     pluginZod({
       output: {
@@ -65,7 +65,7 @@ export const baseConfig = {
         barrelType: false
       },
       client: { importPath: '../utils/fetcher' },
-      generators: [toolsGenerator, serverGenerator]
+      generators: [toolsGenerator as any, serverGenerator as any]
     })
   ]
-} satisfies Omit<UserConfig, 'input'>;
+};

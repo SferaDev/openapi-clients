@@ -73,7 +73,7 @@ export default defineConfig({
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 }
+    compilerOptions: { module: ts.ModuleKind.ESNext as any, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
