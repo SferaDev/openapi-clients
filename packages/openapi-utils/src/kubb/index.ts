@@ -47,7 +47,7 @@ export const baseConfig: Omit<UserConfig, 'input'> = {
       paramsType: 'object',
       urlType: 'export',
       importPath: '../utils/fetcher',
-      generators: [clientGenerator, extraGenerator]
+      generators: [clientGenerator as any, extraGenerator as any]
     }),
     pluginZod({
       output: {
@@ -65,7 +65,7 @@ export const baseConfig: Omit<UserConfig, 'input'> = {
         barrelType: false
       },
       client: { importPath: '../utils/fetcher' },
-      generators: [toolsGenerator, serverGenerator]
+      generators: [toolsGenerator as any, serverGenerator as any]
     })
   ]
 };
