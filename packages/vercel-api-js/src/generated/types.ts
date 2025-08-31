@@ -427,6 +427,7 @@ export const teamsRoleEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS',
   CONTRIBUTOR: 'CONTRIBUTOR'
 } as const;
 
@@ -439,6 +440,7 @@ export const teamsTeamRolesEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS',
   CONTRIBUTOR: 'CONTRIBUTOR'
 } as const;
 
@@ -449,7 +451,10 @@ export const teamsTeamPermissionsEnum = {
   FullProductionDeployment: 'FullProductionDeployment',
   UsageViewer: 'UsageViewer',
   EnvVariableManager: 'EnvVariableManager',
-  EnvironmentManager: 'EnvironmentManager'
+  EnvironmentManager: 'EnvironmentManager',
+  V0Builder: 'V0Builder',
+  V0Chatter: 'V0Chatter',
+  V0Viewer: 'V0Viewer'
 } as const;
 
 export type TeamsTeamPermissionsEnum = (typeof teamsTeamPermissionsEnum)[keyof typeof teamsTeamPermissionsEnum];
@@ -745,6 +750,7 @@ export const roleEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS',
   CONTRIBUTOR: 'CONTRIBUTOR'
 } as const;
 
@@ -896,6 +902,7 @@ export const budgetTypeEnum = {
 export type BudgetTypeEnum = (typeof budgetTypeEnum)[keyof typeof budgetTypeEnum];
 
 export const budgetPricingPlanEnum = {
+  plus: 'plus',
   legacy: 'legacy',
   unbundled: 'unbundled'
 } as const;
@@ -909,6 +916,7 @@ export const budgetItemTypeEnum = {
 export type BudgetItemTypeEnum = (typeof budgetItemTypeEnum)[keyof typeof budgetItemTypeEnum];
 
 export const budgetItemPricingPlanEnum = {
+  plus: 'plus',
   legacy: 'legacy',
   unbundled: 'unbundled'
 } as const;
@@ -999,6 +1007,7 @@ export type PayloadGrantTypeEnum = (typeof payloadGrantTypeEnum)[keyof typeof pa
 export const payloadAuthMethodEnum = {
   email: 'email',
   saml: 'saml',
+  app: 'app',
   github: 'github',
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
@@ -2075,16 +2084,6 @@ export type UserEvent = {
             /**
              * @type string
              */
-            domain: string;
-          }
-        | {
-            /**
-             * @type string
-             */
-            id: string;
-            /**
-             * @type string
-             */
             value: string;
             /**
              * @type string
@@ -2754,6 +2753,28 @@ export type UserEvent = {
             /**
              * @type string
              */
+            projectId: string;
+            /**
+             * @type boolean | undefined
+             */
+            prevAttackModeEnabled?: boolean | undefined;
+            /**
+             * @type number
+             */
+            prevAttackModeActiveUntil?: (number | null) | undefined;
+            /**
+             * @type boolean
+             */
+            attackModeEnabled: boolean;
+            /**
+             * @type number
+             */
+            attackModeActiveUntil?: (number | null) | undefined;
+          }
+        | {
+            /**
+             * @type string
+             */
             integrationId: string;
             /**
              * @type string
@@ -2880,9 +2901,9 @@ export type UserEvent = {
                     scanner?: string | undefined;
                     /**
                      * @description Since November 2021
-                     * @type number | undefined
+                     * @type number
                      */
-                    updatedAt?: number | undefined;
+                    updatedAt: number;
                     /**
                      * @type string | undefined
                      */
@@ -3274,6 +3295,29 @@ export type UserEvent = {
                           memory?: number | undefined;
                         }
                       | undefined;
+                    /**
+                     * @type object | undefined
+                     */
+                    security?:
+                      | {
+                          /**
+                           * @type number | undefined
+                           */
+                          customRules?: number | undefined;
+                          /**
+                           * @type number | undefined
+                           */
+                          ipBlocks?: number | undefined;
+                          /**
+                           * @type number | undefined
+                           */
+                          ipBypass?: number | undefined;
+                          /**
+                           * @type number | undefined
+                           */
+                          rateLimit?: number | undefined;
+                        }
+                      | undefined;
                   }
                 | undefined;
               /**
@@ -3431,29 +3475,29 @@ export type UserEvent = {
               teams?:
                 | {
                     /**
-                     * @type number | undefined
+                     * @type number
                      */
-                    created?: number | undefined;
+                    created: number;
                     /**
-                     * @type number | undefined
+                     * @type number
                      */
-                    createdAt?: number | undefined;
+                    createdAt: number;
                     /**
                      * @type string
                      */
                     teamId: string;
                     /**
-                     * @type string | undefined
+                     * @type string
                      */
-                    role?: TeamsRoleEnum | undefined;
+                    role: TeamsRoleEnum;
                     /**
-                     * @type boolean | undefined
+                     * @type boolean
                      */
-                    confirmed?: boolean | undefined;
+                    confirmed: boolean;
                     /**
-                     * @type number | undefined
+                     * @type number
                      */
-                    confirmedAt?: number | undefined;
+                    confirmedAt: number;
                     /**
                      * @type number | undefined
                      */
@@ -4362,9 +4406,9 @@ export type UserEvent = {
                     webAnalytics?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4374,9 +4418,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: WebAnalyticsBlockReasonEnum | undefined;
+                          blockReason: WebAnalyticsBlockReasonEnum;
                           /**
                            * @type number | undefined
                            */
@@ -4390,9 +4434,9 @@ export type UserEvent = {
                     monitoring?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4402,9 +4446,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: MonitoringBlockReasonEnum | undefined;
+                          blockReason: MonitoringBlockReasonEnum;
                           /**
                            * @type string
                            */
@@ -4417,9 +4461,9 @@ export type UserEvent = {
                     observabilityPlus?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4429,9 +4473,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: ObservabilityPlusBlockReasonEnum | undefined;
+                          blockReason: ObservabilityPlusBlockReasonEnum;
                           /**
                            * @type string
                            */
@@ -4513,9 +4557,9 @@ export type UserEvent = {
                     blob?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4525,9 +4569,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: BlobBlockReasonEnum | undefined;
+                          blockReason: BlobBlockReasonEnum;
                           /**
                            * @type string
                            */
@@ -4540,9 +4584,9 @@ export type UserEvent = {
                     postgres?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4552,9 +4596,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: PostgresBlockReasonEnum | undefined;
+                          blockReason: PostgresBlockReasonEnum;
                           /**
                            * @type string
                            */
@@ -4567,9 +4611,9 @@ export type UserEvent = {
                     redis?:
                       | {
                           /**
-                           * @type number | undefined
+                           * @type number
                            */
-                          updatedAt?: number | undefined;
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
@@ -4579,9 +4623,9 @@ export type UserEvent = {
                            */
                           blockedUntil?: number | undefined;
                           /**
-                           * @type string | undefined
+                           * @type string
                            */
-                          blockReason?: RedisBlockReasonEnum | undefined;
+                          blockReason: RedisBlockReasonEnum;
                           /**
                            * @type string
                            */
@@ -5097,6 +5141,16 @@ export type UserEvent = {
           }
         | {
             /**
+             * @type string
+             */
+            projectName: string;
+            /**
+             * @type string
+             */
+            branch: string;
+          }
+        | {
+            /**
              * @type string | undefined
              */
             projectName?: string | undefined;
@@ -5475,6 +5529,16 @@ export type UserEvent = {
             /**
              * @type string
              */
+            source: string;
+            /**
+             * @type string
+             */
+            projectId: string;
+          }
+        | {
+            /**
+             * @type string
+             */
             projectId: string;
             /**
              * @type string
@@ -5483,13 +5547,13 @@ export type UserEvent = {
           }
         | {
             /**
-             * @type string | undefined
+             * @type string
              */
-            projectId?: string | undefined;
+            projectId: string;
             /**
-             * @type string | undefined
+             * @type string
              */
-            projectName?: string | undefined;
+            projectName: string;
             /**
              * @type number | undefined
              */
@@ -6376,17 +6440,17 @@ export type UserEvent = {
              */
             projectMembership: {
               /**
-               * @type string | undefined
+               * @type string
                */
-              role?: ProjectMembershipRoleEnum | undefined;
+              role: ProjectMembershipRoleEnum;
               /**
-               * @type string | undefined
+               * @type string
                */
-              uid?: string | undefined;
+              uid: string;
               /**
-               * @type number | undefined
+               * @type number
                */
-              createdAt?: number | undefined;
+              createdAt: number;
               /**
                * @type string | undefined
                */
@@ -6412,17 +6476,17 @@ export type UserEvent = {
              */
             removedMembership: {
               /**
-               * @type string | undefined
+               * @type string
                */
-              role?: RemovedMembershipRoleEnum | undefined;
+              role: RemovedMembershipRoleEnum;
               /**
-               * @type string | undefined
+               * @type string
                */
-              uid?: string | undefined;
+              uid: string;
               /**
-               * @type number | undefined
+               * @type number
                */
-              createdAt?: number | undefined;
+              createdAt: number;
               /**
                * @type string | undefined
                */
@@ -6495,6 +6559,20 @@ export type UserEvent = {
                */
               invitedUserId?: string | undefined;
             };
+          }
+        | {
+            /**
+             * @type string
+             */
+            projectName: string;
+            /**
+             * @type array
+             */
+            tags: string[];
+            /**
+             * @type string | undefined
+             */
+            target?: string | undefined;
           }
         | {
             /**
@@ -6593,9 +6671,9 @@ export type UserEvent = {
                */
               slug: string;
               /**
-               * @type string | undefined
+               * @type string
                */
-              fallbackEnvironment?: string | undefined;
+              fallbackEnvironment: string;
             };
           }
         | {
@@ -6880,6 +6958,16 @@ export type UserEvent = {
           }
         | {
             /**
+             * @type string
+             */
+            appName: string;
+            /**
+             * @type string
+             */
+            appId: string;
+          }
+        | {
+            /**
              * @type object
              */
             team: {
@@ -7045,6 +7133,14 @@ export type UserEvent = {
     | undefined;
 };
 
+export const samlDefaultRedirectUriEnum = {
+  'v0.app': 'v0.app',
+  'v0.dev': 'v0.dev',
+  'vercel.com': 'vercel.com'
+} as const;
+
+export type SamlDefaultRedirectUriEnum = (typeof samlDefaultRedirectUriEnum)[keyof typeof samlDefaultRedirectUriEnum];
+
 export const rolesEnum = {
   OWNER: 'OWNER',
   MEMBER: 'MEMBER',
@@ -7052,6 +7148,7 @@ export const rolesEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS',
   CONTRIBUTOR: 'CONTRIBUTOR'
 } as const;
 
@@ -7097,7 +7194,8 @@ export const membershipRoleEnum = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER'
+  VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS'
 } as const;
 
 export type MembershipRoleEnum = (typeof membershipRoleEnum)[keyof typeof membershipRoleEnum];
@@ -7109,7 +7207,8 @@ export const membershipTeamRolesEnum = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER'
+  VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS'
 } as const;
 
 export type MembershipTeamRolesEnum = (typeof membershipTeamRolesEnum)[keyof typeof membershipTeamRolesEnum];
@@ -7119,7 +7218,10 @@ export const membershipTeamPermissionsEnum = {
   EnvVariableManager: 'EnvVariableManager',
   EnvironmentManager: 'EnvironmentManager',
   FullProductionDeployment: 'FullProductionDeployment',
-  UsageViewer: 'UsageViewer'
+  UsageViewer: 'UsageViewer',
+  V0Builder: 'V0Builder',
+  V0Chatter: 'V0Chatter',
+  V0Viewer: 'V0Viewer'
 } as const;
 
 export type MembershipTeamPermissionsEnum =
@@ -7244,6 +7346,11 @@ export type Team = {
          */
         enforced: boolean;
         /**
+         * @description The default redirect URI to use after successful SAML authentication.
+         * @type string | undefined
+         */
+        defaultRedirectUri?: SamlDefaultRedirectUriEnum | undefined;
+        /**
          * @description When \"Directory Sync\" is configured, this object contains a mapping of which Directory Group (by ID) should be assigned to which Vercel Team \"role\".
          * @type object | undefined
          */
@@ -7334,6 +7441,7 @@ export type Team = {
    * @type string
    */
   previewDeploymentSuffix?: (string | null) | undefined;
+  disableHardAutoBlocks?: (number | boolean) | undefined;
   /**
    * @description Is remote caching enabled for this team
    * @type object | undefined
@@ -7465,10 +7573,6 @@ export type Team = {
      */
     confirmed: boolean;
     /**
-     * @type number
-     */
-    confirmedAt: number;
-    /**
      * @type number | undefined
      */
     accessRequestedAt?: number | undefined;
@@ -7562,7 +7666,8 @@ export const membershipRoleEnum2 = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER'
+  VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS'
 } as const;
 
 export type MembershipRoleEnum2 = (typeof membershipRoleEnum2)[keyof typeof membershipRoleEnum2];
@@ -7574,7 +7679,8 @@ export const membershipTeamRolesEnum2 = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER'
+  VIEWER: 'VIEWER',
+  VIEWER_FOR_PLUS: 'VIEWER_FOR_PLUS'
 } as const;
 
 export type MembershipTeamRolesEnum2 = (typeof membershipTeamRolesEnum2)[keyof typeof membershipTeamRolesEnum2];
@@ -7584,7 +7690,10 @@ export const membershipTeamPermissionsEnum2 = {
   EnvVariableManager: 'EnvVariableManager',
   EnvironmentManager: 'EnvironmentManager',
   FullProductionDeployment: 'FullProductionDeployment',
-  UsageViewer: 'UsageViewer'
+  UsageViewer: 'UsageViewer',
+  V0Builder: 'V0Builder',
+  V0Chatter: 'V0Chatter',
+  V0Viewer: 'V0Viewer'
 } as const;
 
 export type MembershipTeamPermissionsEnum2 =
@@ -7742,10 +7851,6 @@ export type TeamLimited = {
      */
     confirmed: boolean;
     /**
-     * @type number
-     */
-    confirmedAt: number;
-    /**
      * @type number | undefined
      */
     accessRequestedAt?: number | undefined;
@@ -7850,7 +7955,8 @@ export const scopesOriginEnum = {
   otp: 'otp',
   sms: 'sms',
   invite: 'invite',
-  google: 'google'
+  google: 'google',
+  app: 'app'
 } as const;
 
 export type ScopesOriginEnum = (typeof scopesOriginEnum)[keyof typeof scopesOriginEnum];
@@ -7872,7 +7978,8 @@ export const scopesOriginEnum2 = {
   otp: 'otp',
   sms: 'sms',
   invite: 'invite',
-  google: 'google'
+  google: 'google',
+  app: 'app'
 } as const;
 
 export type ScopesOriginEnum2 = (typeof scopesOriginEnum2)[keyof typeof scopesOriginEnum2];
@@ -7929,9 +8036,9 @@ export type AuthToken = {
                 }
               | undefined;
             /**
-             * @type string
+             * @type string | undefined
              */
-            origin: ScopesOriginEnum;
+            origin?: ScopesOriginEnum | undefined;
             /**
              * @type number
              */
@@ -7951,9 +8058,9 @@ export type AuthToken = {
              */
             teamId: string;
             /**
-             * @type string
+             * @type string | undefined
              */
-            origin: ScopesOriginEnum2;
+            origin?: ScopesOriginEnum2 | undefined;
             /**
              * @type number
              */
@@ -8272,6 +8379,34 @@ export type AuthUser = {
            * @type number | undefined
            */
           memory?: number | undefined;
+        }
+      | undefined;
+    /**
+     * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     * @type object | undefined
+     */
+    security?:
+      | {
+          /**
+           * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+           * @type number | undefined
+           */
+          customRules?: number | undefined;
+          /**
+           * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+           * @type number | undefined
+           */
+          ipBlocks?: number | undefined;
+          /**
+           * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+           * @type number | undefined
+           */
+          ipBypass?: number | undefined;
+          /**
+           * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
+           * @type number | undefined
+           */
+          rateLimit?: number | undefined;
         }
       | undefined;
   };
@@ -9602,6 +9737,11 @@ export type RerequestCheckPathParams = {
 
 export type RerequestCheckQueryParams = {
   /**
+   * @description Mark the check as running
+   * @type boolean | undefined
+   */
+  autoUpdate?: boolean | undefined;
+  /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
@@ -10127,12 +10267,14 @@ export type BuyDomain409 = unknown;
 
 export type BuyDomain429 = unknown;
 
+export type BuyDomain500 = unknown;
+
 export type BuyDomainMutationResponse = BuyDomain201 | BuyDomain202;
 
 export type BuyDomainMutation = {
   Response: BuyDomain201 | BuyDomain202;
   QueryParams: BuyDomainQueryParams;
-  Errors: BuyDomain400 | BuyDomain401 | BuyDomain403 | BuyDomain409 | BuyDomain429;
+  Errors: BuyDomain400 | BuyDomain401 | BuyDomain403 | BuyDomain409 | BuyDomain429 | BuyDomain500;
 };
 
 export const checkDomainPriceQueryParamsTypeEnum = {
@@ -10185,12 +10327,14 @@ export type CheckDomainPrice401 = unknown;
  */
 export type CheckDomainPrice403 = unknown;
 
+export type CheckDomainPrice500 = unknown;
+
 export type CheckDomainPriceQueryResponse = CheckDomainPrice200;
 
 export type CheckDomainPriceQuery = {
   Response: CheckDomainPrice200;
   QueryParams: CheckDomainPriceQueryParams;
-  Errors: CheckDomainPrice400 | CheckDomainPrice401 | CheckDomainPrice403;
+  Errors: CheckDomainPrice400 | CheckDomainPrice401 | CheckDomainPrice403 | CheckDomainPrice500;
 };
 
 export type CheckDomainStatusQueryParams = {
@@ -10527,6 +10671,11 @@ export type GetDomainConfigQueryParamsStrictEnum =
 
 export type GetDomainConfigQueryParams = {
   /**
+   * @description The project id or name that will be associated with the domain. Use this when the domain is not yet associated with a project.
+   * @type string | undefined
+   */
+  projectIdOrName?: string | undefined;
+  /**
    * @description When true, the response will only include the nameservers assigned directly to the specified domain. When false and there are no nameservers assigned directly to the specified domain, the response will include the nameservers of the domain\'s parent zone.
    */
   strict?: GetDomainConfigQueryParamsStrictEnum | undefined;
@@ -10556,15 +10705,13 @@ export type GetDomainConfig401 = unknown;
  */
 export type GetDomainConfig403 = unknown;
 
-export type GetDomainConfig500 = unknown;
-
 export type GetDomainConfigQueryResponse = GetDomainConfig200;
 
 export type GetDomainConfigQuery = {
   Response: GetDomainConfig200;
   PathParams: GetDomainConfigPathParams;
   QueryParams: GetDomainConfigQueryParams;
-  Errors: GetDomainConfig400 | GetDomainConfig401 | GetDomainConfig403 | GetDomainConfig500;
+  Errors: GetDomainConfig400 | GetDomainConfig401 | GetDomainConfig403;
 };
 
 export type GetDomainPathParams = {
@@ -10765,13 +10912,15 @@ export type PatchDomain404 = unknown;
 
 export type PatchDomain409 = unknown;
 
+export type PatchDomain500 = unknown;
+
 export type PatchDomainMutationResponse = PatchDomain200;
 
 export type PatchDomainMutation = {
   Response: PatchDomain200;
   PathParams: PatchDomainPathParams;
   QueryParams: PatchDomainQueryParams;
-  Errors: PatchDomain400 | PatchDomain401 | PatchDomain403 | PatchDomain404 | PatchDomain409;
+  Errors: PatchDomain400 | PatchDomain401 | PatchDomain403 | PatchDomain404 | PatchDomain409 | PatchDomain500;
 };
 
 export type DeleteDomainPathParams = {
@@ -11105,10 +11254,6 @@ export type PatchEdgeConfigItemsPathParams = {
 
 export type PatchEdgeConfigItemsQueryParams = {
   /**
-   * @type string | undefined
-   */
-  dryRun?: string | undefined;
-  /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
@@ -11143,6 +11288,8 @@ export type PatchEdgeConfigItems404 = unknown;
 
 export type PatchEdgeConfigItems409 = unknown;
 
+export type PatchEdgeConfigItems412 = unknown;
+
 export type PatchEdgeConfigItemsMutationResponse = PatchEdgeConfigItems200;
 
 export type PatchEdgeConfigItemsMutation = {
@@ -11155,7 +11302,8 @@ export type PatchEdgeConfigItemsMutation = {
     | PatchEdgeConfigItems402
     | PatchEdgeConfigItems403
     | PatchEdgeConfigItems404
-    | PatchEdgeConfigItems409;
+    | PatchEdgeConfigItems409
+    | PatchEdgeConfigItems412;
 };
 
 export type GetEdgeConfigSchemaPathParams = {
@@ -11767,6 +11915,54 @@ export type ListUserEventsQuery = {
   Response: ListUserEvents200;
   QueryParams: ListUserEventsQueryParams;
   Errors: ListUserEvents400 | ListUserEvents401 | ListUserEvents403;
+};
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansPathParams = {
+  /**
+   * @type string
+   */
+  integrationIdOrSlug: string;
+  /**
+   * @type string
+   */
+  productIdOrSlug: string;
+};
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQueryParams = {
+  /**
+   * @type string | undefined
+   */
+  metadata?: string | undefined;
+};
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans200 = unknown;
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans400 = unknown;
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans401 = unknown;
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans403 = unknown;
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans404 = unknown;
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQueryResponse =
+  GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans200;
+
+export type GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQuery = {
+  Response: GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans200;
+  PathParams: GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansPathParams;
+  QueryParams: GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlansQueryParams;
+  Errors:
+    | GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans400
+    | GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans401
+    | GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans403
+    | GETV1IntegrationsIntegrationIntegrationIdOrSlugProductsProductIdOrSlugPlans404;
 };
 
 export type GetAccountInfoPathParams = {
@@ -12430,6 +12626,62 @@ export type DeleteConfigurationMutation = {
   Errors: DeleteConfiguration400 | DeleteConfiguration401 | DeleteConfiguration403 | DeleteConfiguration404;
 };
 
+export type GetConfigurationProductsPathParams = {
+  /**
+   * @description ID of the integration configuration
+   * @type string
+   */
+  id: string;
+};
+
+export type GetConfigurationProductsQueryParams = {
+  /**
+   * @description The Team identifier to perform the request on behalf of.
+   * @type string | undefined
+   */
+  teamId?: string | undefined;
+  /**
+   * @description The Team slug to perform the request on behalf of.
+   * @type string | undefined
+   */
+  slug?: string | undefined;
+};
+
+/**
+ * @description List of products available for this integration configuration
+ */
+export type GetConfigurationProducts200 = unknown;
+
+/**
+ * @description One of the provided values in the request query is invalid.
+ */
+export type GetConfigurationProducts400 = unknown;
+
+export type GetConfigurationProducts401 = unknown;
+
+/**
+ * @description You do not have permission to access this resource.
+ */
+export type GetConfigurationProducts403 = unknown;
+
+export type GetConfigurationProducts404 = unknown;
+
+export type GetConfigurationProducts500 = unknown;
+
+export type GetConfigurationProductsQueryResponse = GetConfigurationProducts200;
+
+export type GetConfigurationProductsQuery = {
+  Response: GetConfigurationProducts200;
+  PathParams: GetConfigurationProductsPathParams;
+  QueryParams: GetConfigurationProductsQueryParams;
+  Errors:
+    | GetConfigurationProducts400
+    | GetConfigurationProducts401
+    | GetConfigurationProducts403
+    | GetConfigurationProducts404
+    | GetConfigurationProducts500;
+};
+
 export type ExchangeSsoToken200 = unknown;
 
 /**
@@ -12788,6 +13040,8 @@ export type UpdateExperimentationEdgeConfig403 = unknown;
 
 export type UpdateExperimentationEdgeConfig404 = unknown;
 
+export type UpdateExperimentationEdgeConfig409 = unknown;
+
 export type UpdateExperimentationEdgeConfig412 = unknown;
 
 export type UpdateExperimentationEdgeConfigMutationResponse = UpdateExperimentationEdgeConfig200;
@@ -12800,6 +13054,7 @@ export type UpdateExperimentationEdgeConfigMutation = {
     | UpdateExperimentationEdgeConfig401
     | UpdateExperimentationEdgeConfig403
     | UpdateExperimentationEdgeConfig404
+    | UpdateExperimentationEdgeConfig409
     | UpdateExperimentationEdgeConfig412;
 };
 
@@ -12978,6 +13233,14 @@ export const getProjectsQueryParamsGitForkProtectionEnum = {
 export type GetProjectsQueryParamsGitForkProtectionEnum =
   (typeof getProjectsQueryParamsGitForkProtectionEnum)[keyof typeof getProjectsQueryParamsGitForkProtectionEnum];
 
+export const getProjectsQueryParamsElasticConcurrencyEnabledEnum = {
+  '1': '1',
+  '0': '0'
+} as const;
+
+export type GetProjectsQueryParamsElasticConcurrencyEnabledEnum =
+  (typeof getProjectsQueryParamsElasticConcurrencyEnabledEnum)[keyof typeof getProjectsQueryParamsElasticConcurrencyEnabledEnum];
+
 export type GetProjectsQueryParams = {
   /**
    * @description Query only projects updated after the given timestamp
@@ -13034,6 +13297,11 @@ export type GetProjectsQueryParams = {
    * @type boolean | undefined
    */
   deprecated?: boolean | undefined;
+  /**
+   * @description Filter results by projects with elastic concurrency enabled
+   * @type string | undefined
+   */
+  elasticConcurrencyEnabled?: GetProjectsQueryParamsElasticConcurrencyEnabledEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
@@ -13106,17 +13374,37 @@ export type CreateProject402 = unknown;
  */
 export type CreateProject403 = unknown;
 
+export type CreateProject404 = unknown;
+
 /**
  * @description A project with the provided name already exists.
  */
 export type CreateProject409 = unknown;
+
+/**
+ * @description Owner does not have protection add-on
+ */
+export type CreateProject428 = unknown;
+
+export type CreateProject429 = unknown;
+
+export type CreateProject500 = unknown;
 
 export type CreateProjectMutationResponse = CreateProject200;
 
 export type CreateProjectMutation = {
   Response: CreateProject200;
   QueryParams: CreateProjectQueryParams;
-  Errors: CreateProject400 | CreateProject401 | CreateProject402 | CreateProject403 | CreateProject409;
+  Errors:
+    | CreateProject400
+    | CreateProject401
+    | CreateProject402
+    | CreateProject403
+    | CreateProject404
+    | CreateProject409
+    | CreateProject428
+    | CreateProject429
+    | CreateProject500;
 };
 
 export type GetProjectPathParams = {
@@ -14157,10 +14445,16 @@ export type CreateProjectEnv402 = unknown;
  */
 export type CreateProjectEnv403 = unknown;
 
+export type CreateProjectEnv404 = unknown;
+
 /**
  * @description The project is being transfered and creating an environment variable is not possible
  */
 export type CreateProjectEnv409 = unknown;
+
+export type CreateProjectEnv429 = unknown;
+
+export type CreateProjectEnv500 = unknown;
 
 export type CreateProjectEnvMutationResponse = CreateProjectEnv201;
 
@@ -14168,7 +14462,15 @@ export type CreateProjectEnvMutation = {
   Response: CreateProjectEnv201;
   PathParams: CreateProjectEnvPathParams;
   QueryParams: CreateProjectEnvQueryParams;
-  Errors: CreateProjectEnv400 | CreateProjectEnv401 | CreateProjectEnv402 | CreateProjectEnv403 | CreateProjectEnv409;
+  Errors:
+    | CreateProjectEnv400
+    | CreateProjectEnv401
+    | CreateProjectEnv402
+    | CreateProjectEnv403
+    | CreateProjectEnv404
+    | CreateProjectEnv409
+    | CreateProjectEnv429
+    | CreateProjectEnv500;
 };
 
 export type GetProjectEnvPathParams = {
@@ -14327,10 +14629,16 @@ export type EditProjectEnv401 = unknown;
  */
 export type EditProjectEnv403 = unknown;
 
+export type EditProjectEnv404 = unknown;
+
 /**
  * @description The project is being transfered and removing an environment variable is not possible
  */
 export type EditProjectEnv409 = unknown;
+
+export type EditProjectEnv429 = unknown;
+
+export type EditProjectEnv500 = unknown;
 
 export type EditProjectEnvMutationResponse = EditProjectEnv200;
 
@@ -14338,7 +14646,14 @@ export type EditProjectEnvMutation = {
   Response: EditProjectEnv200;
   PathParams: EditProjectEnvPathParams;
   QueryParams: EditProjectEnvQueryParams;
-  Errors: EditProjectEnv400 | EditProjectEnv401 | EditProjectEnv403 | EditProjectEnv409;
+  Errors:
+    | EditProjectEnv400
+    | EditProjectEnv401
+    | EditProjectEnv403
+    | EditProjectEnv404
+    | EditProjectEnv409
+    | EditProjectEnv429
+    | EditProjectEnv500;
 };
 
 export type GetRollingReleaseBillingStatusPathParams = {
@@ -15312,7 +15627,7 @@ export type GetBypassIpQueryParams = {
    */
   projectId: string;
   /**
-   * @maxLength 128
+   * @maxLength 256
    * @type number | undefined
    */
   limit?: number | undefined;
