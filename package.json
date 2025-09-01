@@ -17,7 +17,7 @@
     "@openapi-codegen/typescript": "^11.0.1",
     "@types/isomorphic-fetch": "^0.0.39",
     "@types/node": "^24.3.0",
-    "@typescript/native-preview": "7.0.0-dev.20250827.1",
+    "@typescript/native-preview": "7.0.0-dev.20250831.1",
     "builtin-modules": "^5.0.0",
     "case": "^1.6.3",
     "isomorphic-fetch": "^3.0.0",
