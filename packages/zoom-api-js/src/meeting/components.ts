@@ -1459,6 +1459,8 @@ export type RecordingGetVariables = {
  *
  *  `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`
  *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read`,`phone_recording:read:admin`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:list_recording_files:admin`,`cloud_recording:read:list_recording_files`,`cloud_recording:read:list_recording_files:master`
@@ -1518,8 +1520,8 @@ export type RecordingDeleteVariables = {
 /**
  * Delete all of a meeting's or webinar's recording files.
  *
- * **Prerequisites**:
- * * Cloud Recording should be enabled on the user's account.
+ * **Prerequisites**
+ * * Enable Cloud Recording on the user's account. Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  *
  *
@@ -2425,6 +2427,8 @@ export type RecordingRegistrantsQuestionsGetVariables = {
  *
  * For [on-demand](https://support.zoom.us/hc/en-us/articles/360000488283-On-demand-Recordings) meeting recordings, you can include fields with questions that will be shown to registrants when they register to view the recording.
  *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
+ *
  *
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
@@ -2458,6 +2462,8 @@ export type RecordingRegistrantQuestionUpdatePathParams = {
    * To get a webinar's cloud recordings, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
    *
    * If a UUID starts with `/` or contains `//`, like `/ajXp112QmuoKj4854875==`, you must **double encode** the UUID before making an API request.
+   *
+   * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
    *
    * @example atsXxhSEQWit9t+U02HXNQ==
    */
@@ -2538,7 +2544,7 @@ export type RecordingRegistrantQuestionUpdateVariables = {
  *
  * For [on-demand](https://support.zoom.us/hc/en-us/articles/360000488283-On-demand-Recordings) meeting recordings, you can include fields with questions that will be shown to registrants when they register to view the recording.
  *
- *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
@@ -2755,10 +2761,12 @@ export type RecordingSettingUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieve settings applied to a meeting's [Cloud Recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
+ * Retrieve settings applied to a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
  *
  *
  * Response includes recording content access information, which requires the current user to have the `View the recording content` permission to access it.
+ *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
@@ -2790,7 +2798,7 @@ export type RecordingSettingsUpdatePathParams = {
    *
    * To get cloud recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID, the response is for the latest webinar instance.
    *
-   * If a UUID starts with &quot;/&quot; or contains &quot;//&quot; (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double encode** the UUID before making an API request.
+   * If a UUID starts with `/` or contains `//` (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double encode** the UUID before making an API request.
    *
    * @example atsXxhSEQWit9t+U02HXNQ==
    */
@@ -2825,13 +2833,13 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   authentication_option?: string;
   /**
-   * This field determines whether the registration is required to view the recording.
+   * Determine whether the registration is required to view the recording.
    *
    * @example false
    */
   on_demand?: boolean;
   /**
-   * This field enables passcode protection for the recording by setting a passcode.
+   * Enable passcode protection for the recording by setting a passcode.
    *
    * The passcode must have a minimum of **eight** characters with a mix of numbers, letters and special characters.
    *
@@ -2846,25 +2854,25 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   password?: string;
   /**
-   * This field indicates that only authenticated users can view.
+   * Indicate that only authenticated users can view.
    *
    * @example true
    */
   recording_authentication?: boolean;
   /**
-   * This field sends an email to host when someone registers to view the recording. This setting applies for On-demand recordings only.
+   * Send an email to host when someone registers to view the recording. This setting applies for On-demand recordings only.
    *
    * @example false
    */
   send_email_to_host?: boolean;
   /**
-   * This field determines how the meeting recording is shared.
+   * Determine how the meeting recording is shared.
    *
    * @example publicly
    */
   share_recording?: "publicly" | "internally" | "none";
   /**
-   * This field shows social share buttons on registration page. This setting applies for On-demand recordings only.
+   * Show social share buttons on registration page. This setting applies for On-demand recordings only.
    *
    * @example true
    */
@@ -2876,7 +2884,7 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   topic?: string;
   /**
-   * This field determines whether a viewer can download the recording file or not.
+   * Determine whether a viewer can download the recording file or not.
    *
    * @example true
    */
@@ -2899,6 +2907,8 @@ export type RecordingSettingsUpdateVariables = {
 /**
  * Update settings applied to a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
  * The request contains the recording content access information, which requires the current user to have the `view recording content` and `recording editing` permissions to access.
+ *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
@@ -3695,7 +3705,7 @@ export type RecordingsListVariables = {
  *
  * **Prerequisites:**
  * * Must have a Pro or a higher plan.
- * * Must enable Cloud Recording on the user's account.
+ * * Must enable Cloud Recording on the user's account. Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
@@ -5703,20 +5713,20 @@ export type ListmeetingsummariesQueryParams = {
    */
   page_size?: number;
   /**
-   * The next page token paginates through a large set of results. A next page token returns whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
    */
   next_page_token?: string;
   /**
-   * The start date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-19T07:00:00Z
    */
   from?: string;
   /**
-   * The end date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-20T07:00:00Z
@@ -5736,20 +5746,20 @@ export type ListmeetingsummariesResponse = {
    */
   page_size?: number;
   /**
-   * The next page token paginates through a large set of results. A next page token returns whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
    */
   next_page_token?: string;
   /**
-   * The start date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-19T07:00:00Z
    */
   from?: string;
   /**
-   * The end date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-20T07:00:00Z
@@ -5820,14 +5830,14 @@ export type ListmeetingsummariesResponse = {
      */
     summary_end_time?: string;
     /**
-     * The date and time at which the meeting summary was created.
+     * The date and time when the meeting summary was created.
      *
      * @format date-time
      * @example 2019-07-15T23:24:52Z
      */
     summary_created_time?: string;
     /**
-     * The date and time at which the meeting summary was last modified.
+     * The date and time when the meeting summary was last modified.
      *
      * @format date-time
      * @example 2020-07-15T23:30:19Z
@@ -5848,6 +5858,8 @@ export type ListmeetingsummariesVariables = {
  * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
  * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
  * * End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
  *
@@ -9520,6 +9532,8 @@ export type GetameetingsummaryVariables = {
  * - For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
  * - For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
  * - End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
  *
@@ -13691,6 +13705,8 @@ export type ListMeetingTemplatesVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
@@ -13779,9 +13795,11 @@ export type MeetingTemplateCreateVariables = {
 /**
  * Create a meeting template from an existing meeting.
  *
- * **Prerequisites**:
+ * **Prerequisites**
  * * Host user must have a Zoom Meetings Basic license or higher.
  * * You can only create up to 40 meeting templates.
+ *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
