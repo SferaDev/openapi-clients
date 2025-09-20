@@ -1,6 +1,7 @@
 import {
   accountsListAccounts,
   accountCreation,
+  accountsBatchMoveAccounts,
   customPagesForAnAccountListCustomPages,
   customPagesForAnAccountGetACustomPage,
   customPagesForAnAccountUpdateACustomPage,
@@ -117,6 +118,7 @@ import {
   ipAddressManagementPrefixesUpdatePrefixDescription,
   ipAddressManagementPrefixesListBgpPrefixes,
   ipAddressManagementPrefixesCreateBgpPrefix,
+  ipAddressManagementPrefixesDeleteBgpPrefix,
   ipAddressManagementPrefixesFetchBgpPrefix,
   ipAddressManagementPrefixesUpdateBgpPrefix,
   ipAddressManagementDynamicAdvertisementGetAdvertisementStatus,
@@ -178,24 +180,28 @@ import {
   workersAiPostRunCfBaaiBgeM3,
   workersAiPostRunCfBaaiBgeRerankerBase,
   workersAiPostRunCfBaaiBgeSmallEnV15,
-  workersAiPostRunCfBaaiOmniBgeBaseEnV15,
   workersAiPostRunCfBlackForestLabsFlux1Schnell,
   workersAiPostRunCfBytedanceStableDiffusionXlLightning,
   workersAiPostWebsocketRunCfDeepgramAura,
+  workersAiPostWebsocketRunCfDeepgramAura1,
+  workersAiPostRunCfDeepgramAura1,
+  workersAiPostWebsocketRunCfDeepgramAura1Internal,
   workersAiPostWebsocketRunCfDeepgramAura2,
-  workersAiPostWebsocketRunCfDeepgramAura2Internal,
   workersAiPostWebsocketRunCfDeepgramNova3,
+  workersAiPostRunCfDeepgramNova3,
   workersAiPostWebsocketRunCfDeepgramNova3Internal,
   workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct,
   workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b,
   workersAiPostRunCfDefogSqlcoder7b2,
   workersAiPostRunCfFacebookBartLargeCnn,
-  workersAiPostRunCfFacebookDetrResnet50,
   workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
+  workersAiPostRunCfGoogleEmbeddinggemma300m,
   workersAiPostRunCfGoogleGemma2bItLora,
   workersAiPostRunCfGoogleGemma312bIt,
   workersAiPostRunCfGoogleGemma7bItLora,
   workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
+  workersAiPostRunCfLeonardoLucidOrigin,
+  workersAiPostRunCfLeonardoPhoenix10,
   workersAiPostRunCfLykonDreamshaper8Lcm,
   workersAiPostRunCfMetaLlamaLlama27bChatHfLora,
   workersAiPostRunCfMetaLlama27bChatFp16,
@@ -362,7 +368,7 @@ import {
   postBinDBPost,
   getBinDBGetBinary,
   getEventListGet,
-  postEventList,
+  getEventAggregate,
   getAttackerList,
   getCategoryList,
   postCategoryCreate,
@@ -374,15 +380,12 @@ import {
   postEventCreate,
   postEventCreateBulk,
   postEventCreateBulkWithRelationships,
-  getCronUpdateRead,
-  patchCronUpdate,
-  postCronUpdate,
   getDatasetList,
   postDatasetCreate,
+  deleteDatasetDelete,
   getDatasetRead,
   patchDatasetUpdate,
   postDatasetUpdate,
-  getDOHealthCheck,
   postEventMoveToNewDS,
   getTargetIndustryListByDataset,
   deleteEventTagDelete,
@@ -395,11 +398,20 @@ import {
   deleteIndicatorDelete,
   getIndicatorRead,
   patchIndicatorUpdate,
+  getIndicatorTagsList,
   getEventRawReadDS,
   deleteEventReferenceDelete,
   postEventReferenceCreate,
   postCreateEventRelationship,
+  getTagList,
+  getTagCategoryList,
+  postTagCategoryCreate,
+  deleteTagCategoryDelete,
+  patchTagCategoryUpdate,
   postTagCreate,
+  deleteTagDelete,
+  patchTagUpdate,
+  getTagIndicatorsList,
   getTargetIndustryList,
   deleteEventDeleteDO,
   deleteEventDelete,
@@ -453,6 +465,11 @@ import {
   updateSettings,
   listSlots,
   getSlot,
+  irisConnectivityServicesList,
+  irisConnectivityServicesPost,
+  irisConnectivityServicesDelete,
+  irisConnectivityServicesGet,
+  irisConnectivityServicesPut,
   accountLevelCustomNameserversListAccountCustomNameservers,
   accountLevelCustomNameserversAddAccountCustomNameserver,
   accountLevelCustomNameserversDeleteAccountCustomNameserver,
@@ -678,6 +695,8 @@ import {
   zeroTrustAccountsGetZeroTrustAccountInformation,
   zeroTrustAccountsCreateZeroTrustAccount,
   zeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappings,
+  zeroTrustAppReviewList,
+  zeroTrustAppReviewUpdate,
   zeroTrustGetAuditSshSettings,
   zeroTrustUpdateAuditSshSettings,
   zeroTrustRotateSshAccountSeed,
@@ -713,6 +732,7 @@ import {
   zeroTrustGatewayProxyEndpointsUpdateProxyEndpoint,
   zeroTrustGatewayRulesListZeroTrustGatewayRules,
   zeroTrustGatewayRulesCreateZeroTrustGatewayRule,
+  zeroTrustGatewayRulesListZeroTrustGatewayRulesTenant,
   zeroTrustGatewayRulesDeleteZeroTrustGatewayRule,
   zeroTrustGatewayRulesZeroTrustGatewayRuleDetails,
   zeroTrustGatewayRulesUpdateZeroTrustGatewayRule,
@@ -791,6 +811,12 @@ import {
   miscategorizationCreateMiscategorization,
   sinkholeConfigGetSinkholes,
   whoisRecordGetWhoisRecord,
+  accountLoadBalancerMonitorGroupsListMonitorGroups,
+  accountLoadBalancerMonitorGroupsCreateMonitorGroup,
+  accountLoadBalancerMonitorGroupsDeleteMonitorGroup,
+  accountLoadBalancerMonitorGroupsMonitorGroupDetails,
+  accountLoadBalancerMonitorGroupsPatchMonitorGroup,
+  accountLoadBalancerMonitorGroupsUpdateMonitorGroup,
   accountLoadBalancerMonitorsListMonitors,
   accountLoadBalancerMonitorsCreateMonitor,
   accountLoadBalancerMonitorsDeleteMonitor,
@@ -951,11 +977,13 @@ import {
   magicNetworkMonitoringRulesUpdateRule,
   magicNetworkMonitoringRulesUpdateAdvertisementForRule,
   magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken,
+  accountsMoveAccounts,
   mTlsCertificateManagementListMTlsCertificates,
   mTlsCertificateManagementUploadMTlsCertificate,
   mTlsCertificateManagementDeleteMTlsCertificate,
   mTlsCertificateManagementGetMTlsCertificate,
   mTlsCertificateManagementListMTlsCertificateAssociations,
+  accountsListAccountOrganizations,
   pagesProjectGetProjects,
   pagesProjectCreateProject,
   pagesProjectDeleteProject,
@@ -996,6 +1024,8 @@ import {
   deleteV4AccountsByAccountIdPipelinesByPipelineName,
   getV4AccountsByAccountIdPipelinesByPipelineName,
   putV4AccountsByAccountIdPipelinesByPipelineName,
+  accountsGetAccountProfile,
+  accountsModifyAccountProfile,
   queuesList,
   queuesCreate,
   queuesDelete,
@@ -1037,6 +1067,69 @@ import {
   r2PutBucketSippyConfig,
   r2GetAccountLevelMetrics,
   r2CreateTempAccessCredentials,
+  getOrgAnalytics,
+  getLivestreamAnalyticsDaywise,
+  getLivestreamAnalyticsComplete,
+  fetchAllLivestreams,
+  postAccountsAccountIdRealtimekitLivestreams,
+  getV2LivestreamsLivestreamSessionId,
+  getV2LivestreamSessionLivestreamId,
+  getV2ActiveLivestreamSessionDetails,
+  disableLivestream,
+  enableLivestream,
+  resetStreamKey,
+  getAllMeetings,
+  createMeeting,
+  getMeeting,
+  updateMeeting,
+  replaceMeeting,
+  getV2MeetingsMeetingIdActiveLivestream,
+  stopLivestreaming,
+  getActiveSession,
+  kickPartcipants,
+  kickAllParticipants,
+  muteParticipants,
+  muteAllParticipants,
+  createPoll,
+  livestreamSessionDetails,
+  startLivestreaming,
+  getMeetingParticipants,
+  addParticipant,
+  deleteMeetingParticipant,
+  getMeetingParticipant,
+  editParticipant,
+  regenerateToken,
+  getAllOrgs,
+  createOrg,
+  getOrg,
+  editOrg,
+  getPresets,
+  postPresets,
+  deletePresetsPresetId,
+  getPresetsPresetId,
+  patchPresetsPresetId,
+  getAllRecordings,
+  startRecording,
+  getActiveRecording,
+  startTrackRecordingForAMeeting,
+  getOneRecording,
+  pauseResumeStopRecording,
+  getSessions,
+  getParticipantDataFromPeerId,
+  getSessionDetails,
+  getSessionChat,
+  getV2LivestreamsessionSessionMeetingIdActiveLivestream,
+  getSessionParticipants,
+  getParticipantDetails,
+  getSessionSummary,
+  postSessionsSessionIdSummary,
+  getSessionTranscript,
+  getAllWebhooks,
+  addWebhook,
+  deleteWebhook,
+  getWebhook,
+  editWebhook,
+  replaceWebhook,
   registrarDomainsListDomains,
   registrarDomainsGetDomain,
   registrarDomainsUpdateDomain,
@@ -1118,6 +1211,7 @@ import {
   shareUpdate,
   shareRecipientsList,
   shareRecipientCreate,
+  shareRecipientsUpdate,
   shareRecipientDelete,
   shareRecipientsGetById,
   shareResourcesList,
@@ -1191,6 +1285,8 @@ import {
   streamMP4DownloadsDeleteDownloads,
   streamMP4DownloadsListDownloads,
   streamMP4DownloadsCreateDownloads,
+  streamDownloadsDeleteTypeSpecificDownloads,
+  streamDownloadsCreateTypeSpecificDownloads,
   streamVideosRetreieveEmbedCodeHtml,
   streamVideosCreateSignedUrlTokensForVideos,
   accountSubscriptionsListSubscriptions,
@@ -1303,6 +1399,7 @@ import {
   telemetryQuery,
   telemetryValuesList,
   workerScriptListWorkers,
+  workerScriptSearchWorkers,
   workerScriptDeleteWorker,
   workerScriptDownloadWorker,
   workerScriptUploadWorkerModule,
@@ -1345,6 +1442,7 @@ import {
   createWorker,
   deleteWorker,
   getWorker,
+  editWorker,
   updateWorker,
   listWorkerVersions,
   createWorkerVersion,
@@ -1366,6 +1464,11 @@ import {
   worDescribeWorkflowVersions,
   zeroTrustAccountsGetConnectivitySettings,
   zeroTrustAccountsPatchConnectivitySettings,
+  zeroTrustNetworksRouteHostnameList,
+  zeroTrustNetworksRouteHostnameCreate,
+  zeroTrustNetworksRouteHostnameDelete,
+  zeroTrustNetworksRouteHostnameGet,
+  zeroTrustNetworksRouteHostnameUpdate,
   zeroTrustNetworksSubnetsList,
   zeroTrustNetworksSubnetUpdateCloudflareSource,
   dlpRiskScoreBehaviorsGet,
@@ -1390,6 +1493,18 @@ import {
   userSAccountMembershipsDeleteMembership,
   userSAccountMembershipsMembershipDetails,
   userSAccountMembershipsUpdateMembership,
+  organizationsCreateUserOrganization,
+  organizationsDelete,
+  organizationsRetrieve,
+  organizationsModify,
+  organizationsGetAccounts,
+  membersDelete,
+  membersList,
+  membersCreate,
+  membersRetrieve,
+  membersBatchCreate,
+  organizationsGetProfile,
+  organizationsModifyProfile,
   organizationSharesList,
   radarGetAiBotsSummaryByUserAgent,
   radarGetAiBotsSummary,
@@ -1398,8 +1513,10 @@ import {
   radarGetAiBotsTimeseriesGroup,
   radarGetAiInferenceSummaryByModel,
   radarGetAiInferenceSummaryByTask,
+  radarGetAiInferenceSummary,
   radarGetAiInferenceTimeseriesGroupByModel,
   radarGetAiInferenceTimeseriesGroupByTask,
+  radarGetAiInferenceTimeseriesGroup,
   radarGetAnnotations,
   radarGetAnnotationsOutages,
   radarGetAnnotationsOutagesTop,
@@ -1550,6 +1667,7 @@ import {
   radarGetEntitiesAsnList,
   radarGetEntitiesAsnByIp,
   radarGetEntitiesAsnById,
+  radarGetAsnsAsSet,
   radarGetAsnsRel,
   radarGetEntitiesIp,
   radarGetEntitiesLocations,
@@ -1595,8 +1713,10 @@ import {
   radarGetHttpTopLocationsByTlsVersion,
   radarGetLeakedCredentialChecksSummaryByBotClass,
   radarGetLeakedCredentialChecksSummaryByCompromised,
+  radarGetLeakedCredentialChecksSummary,
   radarGetLeakedCredentialChecksTimeseriesGroupByBotClass,
   radarGetLeakedCredentialChecksTimeseriesGroupByCompromised,
+  radarGetLeakedCredentialChecksTimeseriesGroup,
   radarGetNetflowsSummary,
   radarGetNetflowsTimeseries,
   radarGetNetflowsTopAses,
@@ -1624,6 +1744,11 @@ import {
   radarGetVerifiedBotsTopCategoriesByHttpRequests,
   getReady,
   getSignedUrl,
+  tenantsRetrieveTenant,
+  tenantsValidAccountTypes,
+  tenantsListAccounts,
+  tenantsListEntitlements,
+  tenantsListMemberships,
   userUserDetails,
   userEditUser,
   auditLogsGetUserAuditLogs,
@@ -1670,6 +1795,8 @@ import {
   userApiTokensTokenDetails,
   userApiTokensUpdateToken,
   userApiTokensRollToken,
+  userListUserOrganizations,
+  userListUserTenants,
   zonesGet,
   zonesPost,
   zoneAnalyticsDeprecatedGetAnalyticsByCoLocations,
@@ -1726,6 +1853,7 @@ import {
   zoneLevelAccessServiceTokensUpdateAServiceToken,
   customOriginTrustStoreListDetails,
   customOriginTrustStoreCreate,
+  customOriginTrustStoreDelete,
   customOriginTrustStoreDetails,
   totalTlsTotalTlsSettingsDetails,
   totalTlsEnableOrDisableTotalTls,
@@ -1802,6 +1930,7 @@ import {
   wafContentScanningAddCustomScanExpressions,
   wafContentScanningDeleteCustomScanExpressions,
   wafContentScanningGetStatus,
+  wafContentScanningUpdateSettings,
   customSslForAZoneListSslConfigurations,
   customSslForAZoneCreateSslConfiguration,
   customSslForAZoneRePrioritizeSslCertificates,
@@ -1831,6 +1960,9 @@ import {
   dnsRecordsForAZoneExportDnsRecords,
   dnsRecordsForAZoneImportDnsRecords,
   dnsRecordsForAZoneScanDnsRecords,
+  dnsRecordsForAZoneReviewDnsScan,
+  dnsRecordsForAZoneApplyDnsScanResults,
+  dnsRecordsForAZoneTriggerDnsScan,
   dnsRecordsForAZoneDeleteDnsRecord,
   dnsRecordsForAZoneDnsRecordDetails,
   dnsRecordsForAZonePatchDnsRecord,
@@ -1920,12 +2052,6 @@ import {
   keylessSslForAZoneDeleteKeylessSslConfiguration,
   keylessSslForAZoneGetKeylessSslConfiguration,
   keylessSslForAZoneEditKeylessSslConfiguration,
-  wafProductApiLeakedCredentialsGetStatus,
-  wafProductApiLeakedCredentialsSetStatus,
-  wafProductApiLeakedCredentialsListDetections,
-  wafProductApiLeakedCredentialsCreateDetection,
-  wafProductApiLeakedCredentialsDeleteDetection,
-  wafProductApiLeakedCredentialsUpdateDetection,
   loadBalancersListLoadBalancers,
   loadBalancersCreateLoadBalancer,
   loadBalancersDeleteLoadBalancer,
@@ -2164,6 +2290,7 @@ import {
 export const operationsByPath = {
   "GET /accounts": accountsListAccounts,
   "POST /accounts": accountCreation,
+  "POST /accounts/move": accountsBatchMoveAccounts,
   "GET /accounts/{account_identifier}/custom_pages":
     customPagesForAnAccountListCustomPages,
   "GET /accounts/{account_identifier}/custom_pages/{identifier}":
@@ -2378,6 +2505,8 @@ export const operationsByPath = {
     ipAddressManagementPrefixesListBgpPrefixes,
   "POST /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes":
     ipAddressManagementPrefixesCreateBgpPrefix,
+  "DELETE /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}":
+    ipAddressManagementPrefixesDeleteBgpPrefix,
   "GET /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}":
     ipAddressManagementPrefixesFetchBgpPrefix,
   "PATCH /accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}":
@@ -2491,20 +2620,24 @@ export const operationsByPath = {
     workersAiPostRunCfBaaiBgeRerankerBase,
   "POST /accounts/{account_id}/ai/run/@cf/baai/bge-small-en-v1.5":
     workersAiPostRunCfBaaiBgeSmallEnV15,
-  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-base-en-v1.5":
-    workersAiPostRunCfBaaiOmniBgeBaseEnV15,
   "POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell":
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
   "POST /accounts/{account_id}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning":
     workersAiPostRunCfBytedanceStableDiffusionXlLightning,
   "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura":
     workersAiPostWebsocketRunCfDeepgramAura,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-1":
+    workersAiPostWebsocketRunCfDeepgramAura1,
+  "POST /accounts/{account_id}/ai/run/@cf/deepgram/aura-1":
+    workersAiPostRunCfDeepgramAura1,
+  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-1-internal":
+    workersAiPostWebsocketRunCfDeepgramAura1Internal,
   "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-2":
     workersAiPostWebsocketRunCfDeepgramAura2,
-  "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura-2-internal":
-    workersAiPostWebsocketRunCfDeepgramAura2Internal,
   "GET /accounts/{account_id}/ai/run/@cf/deepgram/nova-3":
     workersAiPostWebsocketRunCfDeepgramNova3,
+  "POST /accounts/{account_id}/ai/run/@cf/deepgram/nova-3":
+    workersAiPostRunCfDeepgramNova3,
   "GET /accounts/{account_id}/ai/run/@cf/deepgram/nova-3-internal":
     workersAiPostWebsocketRunCfDeepgramNova3Internal,
   "POST /accounts/{account_id}/ai/run/@cf/deepseek-ai/deepseek-math-7b-instruct":
@@ -2515,10 +2648,10 @@ export const operationsByPath = {
     workersAiPostRunCfDefogSqlcoder7b2,
   "POST /accounts/{account_id}/ai/run/@cf/facebook/bart-large-cnn":
     workersAiPostRunCfFacebookBartLargeCnn,
-  "POST /accounts/{account_id}/ai/run/@cf/facebook/detr-resnet-50":
-    workersAiPostRunCfFacebookDetrResnet50,
   "POST /accounts/{account_id}/ai/run/@cf/fblgit/una-cybertron-7b-v2-bf16":
     workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
+  "POST /accounts/{account_id}/ai/run/@cf/google/embeddinggemma-300m":
+    workersAiPostRunCfGoogleEmbeddinggemma300m,
   "POST /accounts/{account_id}/ai/run/@cf/google/gemma-2b-it-lora":
     workersAiPostRunCfGoogleGemma2bItLora,
   "POST /accounts/{account_id}/ai/run/@cf/google/gemma-3-12b-it":
@@ -2527,6 +2660,10 @@ export const operationsByPath = {
     workersAiPostRunCfGoogleGemma7bItLora,
   "POST /accounts/{account_id}/ai/run/@cf/huggingface/distilbert-sst-2-int8":
     workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
+  "POST /accounts/{account_id}/ai/run/@cf/leonardo/lucid-origin":
+    workersAiPostRunCfLeonardoLucidOrigin,
+  "POST /accounts/{account_id}/ai/run/@cf/leonardo/phoenix-1.0":
+    workersAiPostRunCfLeonardoPhoenix10,
   "POST /accounts/{account_id}/ai/run/@cf/lykon/dreamshaper-8-lcm":
     workersAiPostRunCfLykonDreamshaper8Lcm,
   "POST /accounts/{account_id}/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora":
@@ -2831,7 +2968,8 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/cloudforce-one/binary": postBinDBPost,
   "GET /accounts/{account_id}/cloudforce-one/binary/{hash}": getBinDBGetBinary,
   "GET /accounts/{account_id}/cloudforce-one/events": getEventListGet,
-  "POST /accounts/{account_id}/cloudforce-one/events": postEventList,
+  "GET /accounts/{account_id}/cloudforce-one/events/aggregate":
+    getEventAggregate,
   "GET /accounts/{account_id}/cloudforce-one/events/attackers": getAttackerList,
   "GET /accounts/{account_id}/cloudforce-one/events/categories":
     getCategoryList,
@@ -2851,20 +2989,17 @@ export const operationsByPath = {
     postEventCreateBulk,
   "POST /accounts/{account_id}/cloudforce-one/events/create/bulk/relationships":
     postEventCreateBulkWithRelationships,
-  "GET /accounts/{account_id}/cloudforce-one/events/cron": getCronUpdateRead,
-  "PATCH /accounts/{account_id}/cloudforce-one/events/cron": patchCronUpdate,
-  "POST /accounts/{account_id}/cloudforce-one/events/cron": postCronUpdate,
   "GET /accounts/{account_id}/cloudforce-one/events/dataset": getDatasetList,
   "POST /accounts/{account_id}/cloudforce-one/events/dataset/create":
     postDatasetCreate,
+  "DELETE /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}":
+    deleteDatasetDelete,
   "GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}":
     getDatasetRead,
   "PATCH /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}":
     patchDatasetUpdate,
   "POST /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}":
     postDatasetUpdate,
-  "GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health":
-    getDOHealthCheck,
   "POST /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/move":
     postEventMoveToNewDS,
   "GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/targetIndustries":
@@ -2889,6 +3024,8 @@ export const operationsByPath = {
     getIndicatorRead,
   "PATCH /accounts/{account_id}/cloudforce-one/events/indicators/{indicator_id}":
     patchIndicatorUpdate,
+  "GET /accounts/{account_id}/cloudforce-one/events/indicators/{indicator_type}/tags":
+    getIndicatorTagsList,
   "GET /accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}":
     getEventRawReadDS,
   "DELETE /accounts/{account_id}/cloudforce-one/events/relate/{event_id}":
@@ -2897,8 +3034,23 @@ export const operationsByPath = {
     postEventReferenceCreate,
   "POST /accounts/{account_id}/cloudforce-one/events/relationships/create":
     postCreateEventRelationship,
+  "GET /accounts/{account_id}/cloudforce-one/events/tags": getTagList,
+  "GET /accounts/{account_id}/cloudforce-one/events/tags/categories":
+    getTagCategoryList,
+  "POST /accounts/{account_id}/cloudforce-one/events/tags/categories/create":
+    postTagCategoryCreate,
+  "DELETE /accounts/{account_id}/cloudforce-one/events/tags/categories/{category_uuid}":
+    deleteTagCategoryDelete,
+  "PATCH /accounts/{account_id}/cloudforce-one/events/tags/categories/{category_uuid}":
+    patchTagCategoryUpdate,
   "POST /accounts/{account_id}/cloudforce-one/events/tags/create":
     postTagCreate,
+  "DELETE /accounts/{account_id}/cloudforce-one/events/tags/{tag_uuid}":
+    deleteTagDelete,
+  "PATCH /accounts/{account_id}/cloudforce-one/events/tags/{tag_uuid}":
+    patchTagUpdate,
+  "GET /accounts/{account_id}/cloudforce-one/events/tags/{tag_uuid}/indicators":
+    getTagIndicatorsList,
   "GET /accounts/{account_id}/cloudforce-one/events/targetIndustries":
     getTargetIndustryList,
   "DELETE /accounts/{account_id}/cloudforce-one/events/{dataset_id}/delete":
@@ -2988,6 +3140,16 @@ export const operationsByPath = {
   "PUT /accounts/{account_id}/cni/settings": updateSettings,
   "GET /accounts/{account_id}/cni/slots": listSlots,
   "GET /accounts/{account_id}/cni/slots/{slot}": getSlot,
+  "GET /accounts/{account_id}/connectivity/directory/services":
+    irisConnectivityServicesList,
+  "POST /accounts/{account_id}/connectivity/directory/services":
+    irisConnectivityServicesPost,
+  "DELETE /accounts/{account_id}/connectivity/directory/services/{service_id}":
+    irisConnectivityServicesDelete,
+  "GET /accounts/{account_id}/connectivity/directory/services/{service_id}":
+    irisConnectivityServicesGet,
+  "PUT /accounts/{account_id}/connectivity/directory/services/{service_id}":
+    irisConnectivityServicesPut,
   "GET /accounts/{account_id}/custom_ns":
     accountLevelCustomNameserversListAccountCustomNameservers,
   "POST /accounts/{account_id}/custom_ns":
@@ -3400,6 +3562,10 @@ export const operationsByPath = {
     zeroTrustAccountsCreateZeroTrustAccount,
   "GET /accounts/{account_id}/gateway/app_types":
     zeroTrustGatewayApplicationAndApplicationTypeMappingsListApplicationAndApplicationTypeMappings,
+  "GET /accounts/{account_id}/gateway/apps/review_status":
+    zeroTrustAppReviewList,
+  "PUT /accounts/{account_id}/gateway/apps/review_status":
+    zeroTrustAppReviewUpdate,
   "GET /accounts/{account_id}/gateway/audit_ssh_settings":
     zeroTrustGetAuditSshSettings,
   "PUT /accounts/{account_id}/gateway/audit_ssh_settings":
@@ -3469,6 +3635,8 @@ export const operationsByPath = {
     zeroTrustGatewayRulesListZeroTrustGatewayRules,
   "POST /accounts/{account_id}/gateway/rules":
     zeroTrustGatewayRulesCreateZeroTrustGatewayRule,
+  "GET /accounts/{account_id}/gateway/rules/tenant":
+    zeroTrustGatewayRulesListZeroTrustGatewayRulesTenant,
   "DELETE /accounts/{account_id}/gateway/rules/{rule_id}":
     zeroTrustGatewayRulesDeleteZeroTrustGatewayRule,
   "GET /accounts/{account_id}/gateway/rules/{rule_id}":
@@ -3607,6 +3775,18 @@ export const operationsByPath = {
     miscategorizationCreateMiscategorization,
   "GET /accounts/{account_id}/intel/sinkholes": sinkholeConfigGetSinkholes,
   "GET /accounts/{account_id}/intel/whois": whoisRecordGetWhoisRecord,
+  "GET /accounts/{account_id}/load_balancers/monitor_groups":
+    accountLoadBalancerMonitorGroupsListMonitorGroups,
+  "POST /accounts/{account_id}/load_balancers/monitor_groups":
+    accountLoadBalancerMonitorGroupsCreateMonitorGroup,
+  "DELETE /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}":
+    accountLoadBalancerMonitorGroupsDeleteMonitorGroup,
+  "GET /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}":
+    accountLoadBalancerMonitorGroupsMonitorGroupDetails,
+  "PATCH /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}":
+    accountLoadBalancerMonitorGroupsPatchMonitorGroup,
+  "PUT /accounts/{account_id}/load_balancers/monitor_groups/{monitor_group_id}":
+    accountLoadBalancerMonitorGroupsUpdateMonitorGroup,
   "GET /accounts/{account_id}/load_balancers/monitors":
     accountLoadBalancerMonitorsListMonitors,
   "POST /accounts/{account_id}/load_balancers/monitors":
@@ -3895,6 +4075,7 @@ export const operationsByPath = {
     magicNetworkMonitoringRulesUpdateAdvertisementForRule,
   "POST /accounts/{account_id}/mnm/vpc-flows/token":
     magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken,
+  "POST /accounts/{account_id}/move": accountsMoveAccounts,
   "GET /accounts/{account_id}/mtls_certificates":
     mTlsCertificateManagementListMTlsCertificates,
   "POST /accounts/{account_id}/mtls_certificates":
@@ -3905,6 +4086,7 @@ export const operationsByPath = {
     mTlsCertificateManagementGetMTlsCertificate,
   "GET /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}/associations":
     mTlsCertificateManagementListMTlsCertificateAssociations,
+  "GET /accounts/{account_id}/organizations": accountsListAccountOrganizations,
   "GET /accounts/{account_id}/pages/projects": pagesProjectGetProjects,
   "POST /accounts/{account_id}/pages/projects": pagesProjectCreateProject,
   "DELETE /accounts/{account_id}/pages/projects/{project_name}":
@@ -3980,6 +4162,8 @@ export const operationsByPath = {
     getV4AccountsByAccountIdPipelinesByPipelineName,
   "PUT /accounts/{account_id}/pipelines/{pipeline_name}":
     putV4AccountsByAccountIdPipelinesByPipelineName,
+  "GET /accounts/{account_id}/profile": accountsGetAccountProfile,
+  "PUT /accounts/{account_id}/profile": accountsModifyAccountProfile,
   "GET /accounts/{account_id}/queues": queuesList,
   "POST /accounts/{account_id}/queues": queuesCreate,
   "DELETE /accounts/{account_id}/queues/{queue_id}": queuesDelete,
@@ -4046,6 +4230,114 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/r2/metrics": r2GetAccountLevelMetrics,
   "POST /accounts/{account_id}/r2/temp-access-credentials":
     r2CreateTempAccessCredentials,
+  "GET /accounts/{account_id}/realtimekit/analytics/daywise": getOrgAnalytics,
+  "GET /accounts/{account_id}/realtimekit/analytics/livestreams/daywise":
+    getLivestreamAnalyticsDaywise,
+  "GET /accounts/{account_id}/realtimekit/analytics/livestreams/overall":
+    getLivestreamAnalyticsComplete,
+  "GET /accounts/{account_id}/realtimekit/livestreams": fetchAllLivestreams,
+  "POST /accounts/{account_id}/realtimekit/livestreams":
+    postAccountsAccountIdRealtimekitLivestreams,
+  "GET /accounts/{account_id}/realtimekit/livestreams/sessions/{livestream-session-id}":
+    getV2LivestreamsLivestreamSessionId,
+  "GET /accounts/{account_id}/realtimekit/livestreams/{livestream_id}":
+    getV2LivestreamSessionLivestreamId,
+  "GET /accounts/{account_id}/realtimekit/livestreams/{livestream_id}/active-livestream-session":
+    getV2ActiveLivestreamSessionDetails,
+  "PUT /accounts/{account_id}/realtimekit/livestreams/{livestream_id}/disable":
+    disableLivestream,
+  "PUT /accounts/{account_id}/realtimekit/livestreams/{livestream_id}/enable":
+    enableLivestream,
+  "POST /accounts/{account_id}/realtimekit/livestreams/{livestream_id}/reset-stream-key":
+    resetStreamKey,
+  "GET /accounts/{account_id}/realtimekit/meetings": getAllMeetings,
+  "POST /accounts/{account_id}/realtimekit/meetings": createMeeting,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}": getMeeting,
+  "PATCH /accounts/{account_id}/realtimekit/meetings/{meeting_id}":
+    updateMeeting,
+  "PUT /accounts/{account_id}/realtimekit/meetings/{meeting_id}":
+    replaceMeeting,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-livestream":
+    getV2MeetingsMeetingIdActiveLivestream,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-livestream/stop":
+    stopLivestreaming,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session":
+    getActiveSession,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session/kick":
+    kickPartcipants,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session/kick-all":
+    kickAllParticipants,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session/mute":
+    muteParticipants,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session/mute-all":
+    muteAllParticipants,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/active-session/poll":
+    createPoll,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}/livestream":
+    livestreamSessionDetails,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/livestreams":
+    startLivestreaming,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants":
+    getMeetingParticipants,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants":
+    addParticipant,
+  "DELETE /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants/{participant_id}":
+    deleteMeetingParticipant,
+  "GET /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants/{participant_id}":
+    getMeetingParticipant,
+  "PATCH /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants/{participant_id}":
+    editParticipant,
+  "POST /accounts/{account_id}/realtimekit/meetings/{meeting_id}/participants/{participant_id}/token":
+    regenerateToken,
+  "GET /accounts/{account_id}/realtimekit/orgs": getAllOrgs,
+  "POST /accounts/{account_id}/realtimekit/orgs": createOrg,
+  "GET /accounts/{account_id}/realtimekit/orgs/{org_id}": getOrg,
+  "PATCH /accounts/{account_id}/realtimekit/orgs/{org_id}": editOrg,
+  "GET /accounts/{account_id}/realtimekit/presets": getPresets,
+  "POST /accounts/{account_id}/realtimekit/presets": postPresets,
+  "DELETE /accounts/{account_id}/realtimekit/presets/{preset_id}":
+    deletePresetsPresetId,
+  "GET /accounts/{account_id}/realtimekit/presets/{preset_id}":
+    getPresetsPresetId,
+  "PATCH /accounts/{account_id}/realtimekit/presets/{preset_id}":
+    patchPresetsPresetId,
+  "GET /accounts/{account_id}/realtimekit/recordings": getAllRecordings,
+  "POST /accounts/{account_id}/realtimekit/recordings": startRecording,
+  "GET /accounts/{account_id}/realtimekit/recordings/active-recording/{meeting_id}":
+    getActiveRecording,
+  "POST /accounts/{account_id}/realtimekit/recordings/track":
+    startTrackRecordingForAMeeting,
+  "GET /accounts/{account_id}/realtimekit/recordings/{recording_id}":
+    getOneRecording,
+  "PUT /accounts/{account_id}/realtimekit/recordings/{recording_id}":
+    pauseResumeStopRecording,
+  "GET /accounts/{account_id}/realtimekit/sessions": getSessions,
+  "GET /accounts/{account_id}/realtimekit/sessions/peer-report/{peer_id}":
+    getParticipantDataFromPeerId,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}":
+    getSessionDetails,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/chat":
+    getSessionChat,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/livestream-sessions":
+    getV2LivestreamsessionSessionMeetingIdActiveLivestream,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/participants":
+    getSessionParticipants,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/participants/{participant_id}":
+    getParticipantDetails,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/summary":
+    getSessionSummary,
+  "POST /accounts/{account_id}/realtimekit/sessions/{session_id}/summary":
+    postSessionsSessionIdSummary,
+  "GET /accounts/{account_id}/realtimekit/sessions/{session_id}/transcript":
+    getSessionTranscript,
+  "GET /accounts/{account_id}/realtimekit/webhooks": getAllWebhooks,
+  "POST /accounts/{account_id}/realtimekit/webhooks": addWebhook,
+  "DELETE /accounts/{account_id}/realtimekit/webhooks/{webhook_id}":
+    deleteWebhook,
+  "GET /accounts/{account_id}/realtimekit/webhooks/{webhook_id}": getWebhook,
+  "PATCH /accounts/{account_id}/realtimekit/webhooks/{webhook_id}": editWebhook,
+  "PUT /accounts/{account_id}/realtimekit/webhooks/{webhook_id}":
+    replaceWebhook,
   "GET /accounts/{account_id}/registrar/domains": registrarDomainsListDomains,
   "GET /accounts/{account_id}/registrar/domains/{domain_name}":
     registrarDomainsGetDomain,
@@ -4175,6 +4467,8 @@ export const operationsByPath = {
     shareRecipientsList,
   "POST /accounts/{account_id}/shares/{share_id}/recipients":
     shareRecipientCreate,
+  "PUT /accounts/{account_id}/shares/{share_id}/recipients":
+    shareRecipientsUpdate,
   "DELETE /accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}":
     shareRecipientDelete,
   "GET /accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}":
@@ -4301,6 +4595,10 @@ export const operationsByPath = {
     streamMP4DownloadsListDownloads,
   "POST /accounts/{account_id}/stream/{identifier}/downloads":
     streamMP4DownloadsCreateDownloads,
+  "DELETE /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
+    streamDownloadsDeleteTypeSpecificDownloads,
+  "POST /accounts/{account_id}/stream/{identifier}/downloads/{download_type}":
+    streamDownloadsCreateTypeSpecificDownloads,
   "GET /accounts/{account_id}/stream/{identifier}/embed":
     streamVideosRetreieveEmbedCodeHtml,
   "POST /accounts/{account_id}/stream/{identifier}/token":
@@ -4506,6 +4804,8 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/workers/observability/telemetry/values":
     telemetryValuesList,
   "GET /accounts/{account_id}/workers/scripts": workerScriptListWorkers,
+  "GET /accounts/{account_id}/workers/scripts-search":
+    workerScriptSearchWorkers,
   "DELETE /accounts/{account_id}/workers/scripts/{script_name}":
     workerScriptDeleteWorker,
   "GET /accounts/{account_id}/workers/scripts/{script_name}":
@@ -4585,6 +4885,7 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/workers/workers": createWorker,
   "DELETE /accounts/{account_id}/workers/workers/{worker_id}": deleteWorker,
   "GET /accounts/{account_id}/workers/workers/{worker_id}": getWorker,
+  "PATCH /accounts/{account_id}/workers/workers/{worker_id}": editWorker,
   "PUT /accounts/{account_id}/workers/workers/{worker_id}": updateWorker,
   "GET /accounts/{account_id}/workers/workers/{worker_id}/versions":
     listWorkerVersions,
@@ -4623,6 +4924,16 @@ export const operationsByPath = {
     zeroTrustAccountsGetConnectivitySettings,
   "PATCH /accounts/{account_id}/zerotrust/connectivity_settings":
     zeroTrustAccountsPatchConnectivitySettings,
+  "GET /accounts/{account_id}/zerotrust/routes/hostname":
+    zeroTrustNetworksRouteHostnameList,
+  "POST /accounts/{account_id}/zerotrust/routes/hostname":
+    zeroTrustNetworksRouteHostnameCreate,
+  "DELETE /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}":
+    zeroTrustNetworksRouteHostnameDelete,
+  "GET /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}":
+    zeroTrustNetworksRouteHostnameGet,
+  "PATCH /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}":
+    zeroTrustNetworksRouteHostnameUpdate,
   "GET /accounts/{account_id}/zerotrust/subnets": zeroTrustNetworksSubnetsList,
   "PATCH /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}":
     zeroTrustNetworksSubnetUpdateCloudflareSource,
@@ -4659,6 +4970,19 @@ export const operationsByPath = {
     userSAccountMembershipsDeleteMembership,
   "GET /memberships/{membership_id}": userSAccountMembershipsMembershipDetails,
   "PUT /memberships/{membership_id}": userSAccountMembershipsUpdateMembership,
+  "POST /organizations": organizationsCreateUserOrganization,
+  "DELETE /organizations/{organization_id}": organizationsDelete,
+  "GET /organizations/{organization_id}": organizationsRetrieve,
+  "PUT /organizations/{organization_id}": organizationsModify,
+  "GET /organizations/{organization_id}/accounts": organizationsGetAccounts,
+  "DELETE /organizations/{organization_id}/members": membersDelete,
+  "GET /organizations/{organization_id}/members": membersList,
+  "POST /organizations/{organization_id}/members": membersCreate,
+  "GET /organizations/{organization_id}/members/{member_id}": membersRetrieve,
+  "POST /organizations/{organization_id}/members:batchCreate":
+    membersBatchCreate,
+  "GET /organizations/{organization_id}/profile": organizationsGetProfile,
+  "PUT /organizations/{organization_id}/profile": organizationsModifyProfile,
   "GET /organizations/{organization_id}/shares": organizationSharesList,
   "GET /radar/ai/bots/summary/user_agent": radarGetAiBotsSummaryByUserAgent,
   "GET /radar/ai/bots/summary/{dimension}": radarGetAiBotsSummary,
@@ -4669,10 +4993,13 @@ export const operationsByPath = {
     radarGetAiBotsTimeseriesGroup,
   "GET /radar/ai/inference/summary/model": radarGetAiInferenceSummaryByModel,
   "GET /radar/ai/inference/summary/task": radarGetAiInferenceSummaryByTask,
+  "GET /radar/ai/inference/summary/{dimension}": radarGetAiInferenceSummary,
   "GET /radar/ai/inference/timeseries_groups/model":
     radarGetAiInferenceTimeseriesGroupByModel,
   "GET /radar/ai/inference/timeseries_groups/task":
     radarGetAiInferenceTimeseriesGroupByTask,
+  "GET /radar/ai/inference/timeseries_groups/{dimension}":
+    radarGetAiInferenceTimeseriesGroup,
   "GET /radar/annotations": radarGetAnnotations,
   "GET /radar/annotations/outages": radarGetAnnotationsOutages,
   "GET /radar/annotations/outages/locations": radarGetAnnotationsOutagesTop,
@@ -4902,6 +5229,7 @@ export const operationsByPath = {
   "GET /radar/entities/asns": radarGetEntitiesAsnList,
   "GET /radar/entities/asns/ip": radarGetEntitiesAsnByIp,
   "GET /radar/entities/asns/{asn}": radarGetEntitiesAsnById,
+  "GET /radar/entities/asns/{asn}/as_set": radarGetAsnsAsSet,
   "GET /radar/entities/asns/{asn}/rel": radarGetAsnsRel,
   "GET /radar/entities/ip": radarGetEntitiesIp,
   "GET /radar/entities/locations": radarGetEntitiesLocations,
@@ -4974,10 +5302,14 @@ export const operationsByPath = {
     radarGetLeakedCredentialChecksSummaryByBotClass,
   "GET /radar/leaked_credential_checks/summary/compromised":
     radarGetLeakedCredentialChecksSummaryByCompromised,
+  "GET /radar/leaked_credential_checks/summary/{dimension}":
+    radarGetLeakedCredentialChecksSummary,
   "GET /radar/leaked_credential_checks/timeseries_groups/bot_class":
     radarGetLeakedCredentialChecksTimeseriesGroupByBotClass,
   "GET /radar/leaked_credential_checks/timeseries_groups/compromised":
     radarGetLeakedCredentialChecksTimeseriesGroupByCompromised,
+  "GET /radar/leaked_credential_checks/timeseries_groups/{dimension}":
+    radarGetLeakedCredentialChecksTimeseriesGroup,
   "GET /radar/netflows/summary": radarGetNetflowsSummary,
   "GET /radar/netflows/timeseries": radarGetNetflowsTimeseries,
   "GET /radar/netflows/top/ases": radarGetNetflowsTopAses,
@@ -5013,6 +5345,11 @@ export const operationsByPath = {
     radarGetVerifiedBotsTopCategoriesByHttpRequests,
   "GET /ready": getReady,
   "GET /signed-url": getSignedUrl,
+  "GET /tenants/{tenant_id}": tenantsRetrieveTenant,
+  "GET /tenants/{tenant_id}/account_types": tenantsValidAccountTypes,
+  "GET /tenants/{tenant_id}/accounts": tenantsListAccounts,
+  "GET /tenants/{tenant_id}/entitlements": tenantsListEntitlements,
+  "GET /tenants/{tenant_id}/memberships": tenantsListMemberships,
   "GET /user": userUserDetails,
   "PATCH /user": userEditUser,
   "GET /user/audit_logs": auditLogsGetUserAuditLogs,
@@ -5080,6 +5417,8 @@ export const operationsByPath = {
   "GET /user/tokens/{token_id}": userApiTokensTokenDetails,
   "PUT /user/tokens/{token_id}": userApiTokensUpdateToken,
   "PUT /user/tokens/{token_id}/value": userApiTokensRollToken,
+  "GET /users/organizations": userListUserOrganizations,
+  "GET /users/tenants": userListUserTenants,
   "GET /zones": zonesGet,
   "POST /zones": zonesPost,
   "GET /zones/{zone_identifier}/analytics/colos":
@@ -5185,6 +5524,8 @@ export const operationsByPath = {
   "GET /zones/{zone_id}/acm/custom_trust_store":
     customOriginTrustStoreListDetails,
   "POST /zones/{zone_id}/acm/custom_trust_store": customOriginTrustStoreCreate,
+  "DELETE /zones/{zone_id}/acm/custom_trust_store/{custom_origin_trust_store_id}":
+    customOriginTrustStoreDelete,
   "GET /zones/{zone_id}/acm/custom_trust_store/{custom_origin_trust_store_id}":
     customOriginTrustStoreDetails,
   "GET /zones/{zone_id}/acm/total_tls": totalTlsTotalTlsSettingsDetails,
@@ -5327,6 +5668,8 @@ export const operationsByPath = {
     wafContentScanningDeleteCustomScanExpressions,
   "GET /zones/{zone_id}/content-upload-scan/settings":
     wafContentScanningGetStatus,
+  "PUT /zones/{zone_id}/content-upload-scan/settings":
+    wafContentScanningUpdateSettings,
   "GET /zones/{zone_id}/custom_certificates":
     customSslForAZoneListSslConfigurations,
   "POST /zones/{zone_id}/custom_certificates":
@@ -5377,6 +5720,12 @@ export const operationsByPath = {
   "POST /zones/{zone_id}/dns_records/import":
     dnsRecordsForAZoneImportDnsRecords,
   "POST /zones/{zone_id}/dns_records/scan": dnsRecordsForAZoneScanDnsRecords,
+  "GET /zones/{zone_id}/dns_records/scan/review":
+    dnsRecordsForAZoneReviewDnsScan,
+  "POST /zones/{zone_id}/dns_records/scan/review":
+    dnsRecordsForAZoneApplyDnsScanResults,
+  "POST /zones/{zone_id}/dns_records/scan/trigger":
+    dnsRecordsForAZoneTriggerDnsScan,
   "DELETE /zones/{zone_id}/dns_records/{dns_record_id}":
     dnsRecordsForAZoneDeleteDnsRecord,
   "GET /zones/{zone_id}/dns_records/{dns_record_id}":
@@ -5530,18 +5879,6 @@ export const operationsByPath = {
     keylessSslForAZoneGetKeylessSslConfiguration,
   "PATCH /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}":
     keylessSslForAZoneEditKeylessSslConfiguration,
-  "GET /zones/{zone_id}/leaked-credential-checks":
-    wafProductApiLeakedCredentialsGetStatus,
-  "POST /zones/{zone_id}/leaked-credential-checks":
-    wafProductApiLeakedCredentialsSetStatus,
-  "GET /zones/{zone_id}/leaked-credential-checks/detections":
-    wafProductApiLeakedCredentialsListDetections,
-  "POST /zones/{zone_id}/leaked-credential-checks/detections":
-    wafProductApiLeakedCredentialsCreateDetection,
-  "DELETE /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}":
-    wafProductApiLeakedCredentialsDeleteDetection,
-  "PUT /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}":
-    wafProductApiLeakedCredentialsUpdateDetection,
   "GET /zones/{zone_id}/load_balancers": loadBalancersListLoadBalancers,
   "POST /zones/{zone_id}/load_balancers": loadBalancersCreateLoadBalancer,
   "DELETE /zones/{zone_id}/load_balancers/{load_balancer_id}":
