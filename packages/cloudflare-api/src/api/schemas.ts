@@ -109,7 +109,16 @@ export type AaaAlertType =
   | "web_analytics_metrics_update"
   | "zone_aop_custom_certificate_expiration_type";
 
-export type AaaApiResponseCollection = AaaApiResponseCommon & {
+export type AaaAlertsResponseCollection = AaaSchemasApiResponseCommon & {
+  /**
+   * @example {"Origin Monitoring":[{"description":"High levels of 5xx HTTP errors at your origin.","display_name":"Origin Error Rate Alert","filter_options":[{"AvailableValues":null,"ComparisonOperator":"==","Key":"zones","Range":"1-n"},{"AvailableValues":[{"Description":"Service-Level Objective of 99.7","ID":"99.7"},{"Description":"Service-Level Objective of 99.8","ID":"99.8"}],"ComparisonOperator":">=","Key":"slo","Range":"0-1"}],"type":"http_alert_origin_error"}]}
+   */
+  result?: {
+    [key: string]: AaaAlertTypes[];
+  };
+};
+
+export type AaaApiResponseCollection = AaaSchemasApiResponseCommon & {
   result_info?: AaaSchemasResultInfo;
 };
 
@@ -139,7 +148,7 @@ export type AaaApiResponseCommonFailure = {
   success: false;
 };
 
-export type AaaApiResponseSingle = AaaApiResponseCommon;
+export type AaaApiResponseSingle = AaaSchemasApiResponseCommon;
 
 export type AaaAuditLogs = {
   action?: {
@@ -447,8 +456,8 @@ export type AaaComponentsSchemasApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: AaaMessages;
-  messages: AaaMessages;
+  errors: AaaComponentsSchemasMessages;
+  messages: AaaComponentsSchemasMessages;
   /**
    * Whether the API call was successful
    *
@@ -464,6 +473,14 @@ export type AaaComponentsSchemasApiResponseCommonFailure = {
  */
 export type AaaComponentsSchemasDescription = string;
 
+export type AaaComponentsSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code?: number;
+  message: string;
+}[];
+
 /**
  * The name of the webhook destination. This will be included in the request body when you receive a webhook notification.
  *
@@ -473,7 +490,7 @@ export type AaaComponentsSchemasDescription = string;
 export type AaaComponentsSchemasName = string;
 
 export type AaaComponentsSchemasResponseCollection =
-  AaaApiResponseCollection & {
+  AaaSchemasApiResponseCommon & {
     result?: AaaPagerduty[];
   };
 
@@ -877,7 +894,7 @@ export type AaaPolicies = {
 };
 
 export type AaaPoliciesComponentsSchemasResponseCollection =
-  AaaApiResponseCollection & {
+  AaaSchemasApiResponseCommon & {
     result?: AaaPolicies[];
   };
 
@@ -897,15 +914,6 @@ export type AaaPolicyId = string;
  * @x-auditable true
  */
 export type AaaReady = boolean;
-
-export type AaaResponseCollection = AaaApiResponseCollection & {
-  /**
-   * @example {"Origin Monitoring":[{"description":"High levels of 5xx HTTP errors at your origin.","display_name":"Origin Error Rate Alert","filter_options":[{"AvailableValues":null,"ComparisonOperator":"==","Key":"zones","Range":"1-n"},{"AvailableValues":[{"Description":"Service-Level Objective of 99.7","ID":"99.7"},{"Description":"Service-Level Objective of 99.8","ID":"99.8"}],"ComparisonOperator":">=","Key":"slo","Range":"0-1"}],"type":"http_alert_origin_error"}]}
-   */
-  result?: {
-    [key: string]: AaaAlertTypes[];
-  };
-};
 
 /**
  * Provides information about the result of the request, including count and cursor.
@@ -931,6 +939,17 @@ export type AaaResultInfo = {
  * @example universal_ssl_event_type
  */
 export type AaaSchemasAlertType = string;
+
+export type AaaSchemasApiResponseCommon = {
+  errors: AaaComponentsSchemasMessages;
+  messages: AaaComponentsSchemasMessages;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: true;
+};
 
 export type AaaSchemasApiResponseCommonFailure = {
   /**
@@ -983,7 +1002,7 @@ export type AaaSchemasMessages = {
  */
 export type AaaSchemasName = string;
 
-export type AaaSchemasResponseCollection = AaaApiResponseCollection & {
+export type AaaSchemasResponseCollection = AaaSchemasApiResponseCommon & {
   /**
    * @example {"email":{"eligible":true,"ready":true,"type":"email"}}
    */
@@ -1117,7 +1136,7 @@ export type AaaWebhooks = {
 };
 
 export type AaaWebhooksComponentsSchemasResponseCollection =
-  AaaApiResponseCollection & {
+  AaaSchemasApiResponseCommon & {
     result?: AaaWebhooks[];
   };
 
@@ -2984,9 +3003,9 @@ export type AccessBasePolicyResp = {
 
 export type AccessBasicAppResponseProps = {
   aud?: AccessSchemasAud;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   id?: AccessUuid;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -3041,7 +3060,7 @@ export type AccessBookmarkProps = {
 
 export type AccessBookmarks = {
   app_launcher_visible?: AccessSchemasAppLauncherVisible;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   domain?: AccessSchemasDomain;
   /**
    * The unique identifier for the Bookmark application.
@@ -3049,7 +3068,7 @@ export type AccessBookmarks = {
   id?: string;
   logo_url?: AccessSchemasLogoUrl;
   name?: AccessBookmarksComponentsSchemasName;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -3225,7 +3244,7 @@ export type AccessCertificateRule = {
 
 export type AccessCertificates = {
   associated_hostnames?: AccessAssociatedHostnames;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   expires_on?: AccessTimestamp;
   fingerprint?: AccessFingerprint;
   /**
@@ -3235,7 +3254,7 @@ export type AccessCertificates = {
    */
   id?: string;
   name?: AccessCertificatesComponentsSchemasName;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -3294,6 +3313,14 @@ export type AccessClientId = string;
  * @x-sensitive true
  */
 export type AccessClientSecret = string;
+
+/**
+ * A version number identifying the current `client_secret` associated with the service token. Incrementing it triggers a rotation; the previous secret will still be accepted until the time indicated by `previous_client_secret_expires_at`.
+ *
+ * @default 1
+ * @x-auditable true
+ */
+export type AccessClientSecretVersion = number;
 
 /**
  * Matches a specific common name.
@@ -3476,16 +3503,24 @@ export type AccessCreateResponse = AccessApiResponseSingle & {
   result?: {
     client_id?: AccessClientId;
     client_secret?: AccessClientSecret;
-    created_at?: AccessTimestamp;
+    created_at?: AccessCreatedAt;
     duration?: AccessDuration;
     /**
      * The ID of the service token.
      */
     id?: string;
     name?: AccessSchemasName;
-    updated_at?: AccessTimestamp;
+    updated_at?: AccessUpdatedAt;
   };
 };
+
+/**
+ * @x-stainless-skip true
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type AccessCreatedAt = void & AccessTimestamp;
 
 export type AccessCustomClaimsSupport = {
   /**
@@ -3540,7 +3575,7 @@ export type AccessCustomNonIdentityDenyUrl = string;
 
 export type AccessCustomPage = {
   app_count?: AccessSchemasAppCount;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   /**
    * Custom page HTML.
    *
@@ -3551,16 +3586,16 @@ export type AccessCustomPage = {
   name: AccessCustomPagesComponentsSchemasName;
   type: AccessSchemasType;
   uid?: AccessUuid;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 export type AccessCustomPageWithoutHtml = {
   app_count?: AccessSchemasAppCount;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   name: AccessCustomPagesComponentsSchemasName;
   type: AccessSchemasType;
   uid?: AccessUuid;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 export type AccessCustomPages = {
@@ -5129,7 +5164,7 @@ export type AccessOidcSaasApp = {
    * @x-sensitive true
    */
   client_secret?: string;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   custom_claims?: {
     /**
      * The name of the claim.
@@ -5223,7 +5258,7 @@ export type AccessOidcSaasApp = {
    * @example profile
    */
   scopes?: ("openid" | "groups" | "email" | "profile")[];
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 export type AccessOkta = {
@@ -5518,14 +5553,14 @@ export type AccessOrganizations = {
   allow_authenticate_via_warp?: AccessAllowAuthenticateViaWarp;
   auth_domain?: AccessAuthDomain;
   auto_redirect_to_identity?: AccessAutoRedirectToIdentity;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   custom_pages?: AccessCustomPages;
   is_ui_read_only?: AccessIsUiReadOnly;
   login_design?: AccessLoginDesign;
   name?: AccessName;
   session_duration?: AccessSessionDuration;
   ui_read_only_toggle_reason?: AccessUiReadOnlyToggleReason;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
   user_seat_expiration_inactive_time?: AccessUserSeatExpirationInactiveTime;
   warp_auth_session_duration?: AccessWarpAuthSessionDuration;
 };
@@ -5859,6 +5894,15 @@ export type AccessPort = number;
  * The order of execution for this policy. Must be unique for each policy within an app.
  */
 export type AccessPrecedence = number;
+
+/**
+ * The expiration of the previous `client_secret`. This can be modified at any point after a rotation. For example, you may extend it further into the future if you need more time to update services with the new secret; or move it into the past to immediately invalidate the previous token in case of compromise.
+ *
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type AccessPreviousClientSecretExpiresAt = string;
 
 /**
  * The communication protocol your application secures.
@@ -6344,7 +6388,7 @@ export type AccessSamlSaasApp = {
    * @example https://example.com
    */
   consumer_service_url?: string;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   custom_attributes?: {
     /**
      * The SAML FriendlyName of the attribute.
@@ -6450,7 +6494,7 @@ export type AccessSamlSaasApp = {
    * @x-stainless-configurability computed_optional
    */
   sso_endpoint?: string;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -6483,6 +6527,7 @@ export type AccessSchemasAllowedOrigins = any[];
  * Number of apps the custom page is assigned to.
  *
  * @x-auditable true
+ * @x-stainless-skip true
  */
 export type AccessSchemasAppCount = number;
 
@@ -7271,14 +7316,14 @@ export type AccessSchemasGoogleApps = {
 };
 
 export type AccessSchemasGroups = {
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   exclude?: AccessExclude;
   id?: AccessUuid;
   include?: AccessInclude;
   is_default?: AccessRequire;
   name?: AccessGroupsComponentsSchemasName;
   require?: AccessRequire;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -9029,7 +9074,7 @@ export type AccessSelfHostedProps = {
 
 export type AccessServiceTokens = {
   client_id?: AccessClientId;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   duration?: AccessDuration;
   expires_at?: AccessTimestamp;
   /**
@@ -9040,9 +9085,15 @@ export type AccessServiceTokens = {
    * @x-auditable true
    */
   id?: void & AccessUuid;
-  last_seen_at?: AccessTimestamp;
+  /**
+   * @x-stainless-skip true
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   * @x-auditable true
+   */
+  last_seen_at?: void & AccessTimestamp;
   name?: AccessSchemasName;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -9206,20 +9257,21 @@ export type AccessTag = {
    *
    * @example 1
    * @x-auditable true
+   * @x-stainless-skip true
    */
   app_count?: number;
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   name: AccessTagsComponentsSchemasName;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
  * A tag
  */
 export type AccessTagWithoutAppCount = {
-  created_at?: AccessTimestamp;
+  created_at?: AccessCreatedAt;
   name: AccessTagsComponentsSchemasName;
-  updated_at?: AccessTimestamp;
+  updated_at?: AccessUpdatedAt;
 };
 
 /**
@@ -9340,6 +9392,14 @@ export type AccessUpdateStatus =
   | "processing"
   | "exceeded time"
   | "complete";
+
+/**
+ * @x-stainless-skip true
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type AccessUpdatedAt = void & AccessTimestamp;
 
 /**
  * Policy evaluation result for an individual user.
@@ -9695,14 +9755,27 @@ export type AddressingAddressMapIdentifier = string;
 /**
  * Prefix advertisement status to the Internet. This field is only not 'null' if on demand is enabled.
  *
+ * @deprecated true
  * @example true
  * @x-auditable true
+ * @x-stainless-deprecation-message Prefer the [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/) instead, which allows for advertising multiple BGP routes within a single IP Prefix.
  */
 export type AddressingAdvertised = boolean | null;
 
+/**
+ * Last time the advertisement status was changed. This field is only not 'null' if on demand is enabled.
+ *
+ * @deprecated true
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ * @x-auditable true
+ * @x-stainless-deprecation-message Prefer the [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/) instead, which allows for advertising multiple BGP routes within a single IP Prefix.
+ */
+export type AddressingAdvertisedModifiedAtNullable = string | null;
+
 export type AddressingAdvertisedResponse = AddressingApiResponseSingle & {
   result?: {
-    advertised?: AddressingSchemasAdvertised;
+    advertised?: AddressingComponentsSchemasAdvertised;
     advertised_modified_at?: AddressingModifiedAtNullable;
   };
 };
@@ -9802,10 +9875,10 @@ export type AddressingAsnPrependCount = number;
 export type AddressingAutoAdvertiseWithdraw = boolean;
 
 export type AddressingBgpOnDemand = {
-  advertised?: AddressingAdvertised;
+  advertised?: AddressingSchemasAdvertised;
   advertised_modified_at?: AddressingModifiedAtNullable;
-  on_demand_enabled?: AddressingOnDemandEnabled;
-  on_demand_locked?: AddressingOnDemandLocked;
+  on_demand_enabled?: AddressingSchemasOnDemandEnabled;
+  on_demand_locked?: AddressingSchemasOnDemandLocked;
 };
 
 export type AddressingBgpPrefixCreate = {
@@ -9874,6 +9947,15 @@ export type AddressingCanModifyIps = boolean;
  * @x-auditable true
  */
 export type AddressingCidr = string;
+
+/**
+ * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
+ * `false`, the BGP route is withdrawn.
+ *
+ * @example true
+ * @x-auditable true
+ */
+export type AddressingComponentsSchemasAdvertised = boolean;
 
 export type AddressingComponentsSchemasResponseCollection =
   AddressingApiResponseCollection & {
@@ -10011,7 +10093,7 @@ export type AddressingIpamDelegations = {
 export type AddressingIpamPrefixes = {
   account_id?: AddressingAccountIdentifier;
   advertised?: AddressingAdvertised;
-  advertised_modified_at?: AddressingModifiedAtNullable;
+  advertised_modified_at?: AddressingAdvertisedModifiedAtNullable;
   approved?: AddressingApproved;
   asn?: AddressingAsn;
   cidr?: AddressingCidr;
@@ -10140,16 +10222,20 @@ export type AddressingModifiedAtNullable = string | null;
 /**
  * Whether advertisement of the prefix to the Internet may be dynamically enabled or disabled.
  *
+ * @deprecated true
  * @example true
  * @x-auditable true
+ * @x-stainless-deprecation-message Prefer the [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/) instead, which allows for advertising multiple BGP routes within a single IP Prefix.
  */
 export type AddressingOnDemandEnabled = boolean;
 
 /**
  * Whether advertisement status of the prefix is locked, meaning it cannot be changed.
  *
+ * @deprecated true
  * @example false
  * @x-auditable true
+ * @x-stainless-deprecation-message Prefer the [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/) instead, which allows for advertising multiple BGP routes within a single IP Prefix.
  */
 export type AddressingOnDemandLocked = boolean;
 
@@ -10193,13 +10279,12 @@ export type AddressingResponseCollectionBgp =
 export type AddressingSchemasAccountIdentifier = string;
 
 /**
- * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
- * `false`, the BGP route is withdrawn.
+ * Prefix advertisement status to the Internet. This field is only not 'null' if on demand is enabled.
  *
  * @example true
  * @x-auditable true
  */
-export type AddressingSchemasAdvertised = boolean;
+export type AddressingSchemasAdvertised = boolean | null;
 
 /**
  * Controls whether the membership can be deleted via the API or not.
@@ -10223,6 +10308,22 @@ export type AddressingSchemasCidr = string;
  * @x-auditable true
  */
 export type AddressingSchemasDescription = string | null;
+
+/**
+ * Whether advertisement of the prefix to the Internet may be dynamically enabled or disabled.
+ *
+ * @example true
+ * @x-auditable true
+ */
+export type AddressingSchemasOnDemandEnabled = boolean;
+
+/**
+ * Whether advertisement status of the prefix is locked, meaning it cannot be changed.
+ *
+ * @example false
+ * @x-auditable true
+ */
+export type AddressingSchemasOnDemandLocked = boolean;
 
 export type AddressingSchemasResponseCollection =
   AddressingApiResponseCollection & {
@@ -14683,6 +14784,130 @@ export type CloudforceOneWhoisWhois = {
   whois_server?: string;
 };
 
+export type ContentUploadScanApiResponseCollection = {
+  errors: ContentUploadScanMessages;
+  messages: ContentUploadScanMessages;
+  result: Record<string, any> | Record<string, any>[] | (string | null) | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type ContentUploadScanApiResponseCommon = {
+  errors: ContentUploadScanMessages;
+  messages: ContentUploadScanMessages;
+  result: Record<string, any> | Record<string, any>[] | (string | null);
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type ContentUploadScanApiResponseCommonFailure = {
+  /**
+   * @example {"code":10000,"message":"Authentication error"}
+   * @minLength 1
+   */
+  errors: ContentUploadScanMessages;
+  messages: ContentUploadScanMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: false;
+};
+
+export type ContentUploadScanApiResponseSingle = {
+  errors: ContentUploadScanMessages;
+  messages: ContentUploadScanMessages;
+  result: (Record<string, any> | null) | (string | null) | (string | null);
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+/**
+ * Defines a custom scan expression to match Content Scanning on.
+ */
+export type ContentUploadScanCustomScan = {
+  id?: ContentUploadScanCustomScanId;
+  payload?: ContentUploadScanCustomScanPayload;
+};
+
+/**
+ * Defines an identifier.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type ContentUploadScanCustomScanId = ContentUploadScanIdentifier;
+
+/**
+ * Defines the ruleset expression to use in matching content objects.
+ *
+ * @example lookup_json_string(http.request.body.raw, "file")
+ * @x-auditable true
+ */
+export type ContentUploadScanCustomScanPayload = string;
+
+/**
+ * Defines an identifier.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type ContentUploadScanIdentifier = string;
+
+export type ContentUploadScanMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  message: string;
+}[];
+
+export type ContentUploadScanResponseCustomScanCollection =
+  ContentUploadScanApiResponseCollection & {
+    result?: ContentUploadScanCustomScan[];
+  };
+
+export type ContentUploadScanResponseStatus =
+  ContentUploadScanApiResponseSingle & {
+    result?: ContentUploadScanStatus;
+  };
+
+/**
+ * Defines the status for Content Scanning.
+ */
+export type ContentUploadScanStatus = {
+  /**
+   * Defines the last modification date (ISO 8601) of the Content Scanning status.
+   *
+   * @example 2024-12-02T09:57:23.150259Z
+   * @x-auditable true
+   */
+  modified?: string;
+  /**
+   * Defines the status of Content Scanning.
+   *
+   * @example enabled
+   * @x-auditable true
+   */
+  value?: string;
+};
+
 export type CustomIndicatorFeedsApiResponseCommon = {
   errors: CustomIndicatorFeedsSchemasMessages;
   messages: CustomIndicatorFeedsSchemasMessages;
@@ -18145,6 +18370,8 @@ export type DnsAnalyticsUntil = string;
 export type DnsCustomNameserversCustomNS = {
   /**
    * A and AAAA records associated with the nameserver.
+   *
+   * @x-stainless-collection-type set
    */
   dns_records: {
     /**
@@ -19561,6 +19788,12 @@ export type DnsRecordsDnsRecordResponse =
   | DnsRecordsDnsRecordWithoutData
   | DnsRecordsDnsRecordWithData;
 
+export type DnsRecordsDnsRecordScanBatchAccept = DnsRecordsDnsRecordPatch;
+
+export type DnsRecordsDnsRecordScanBatchReject = {
+  id?: DnsRecordsIdentifier;
+};
+
 export type DnsRecordsDnsRecordSharedFields = {
   comment?: DnsRecordsComment;
   name?: DnsRecordsName;
@@ -19602,11 +19835,21 @@ export type DnsRecordsDnsRequestBatchObject = {
   puts?: DnsRecordsDnsRecordBatchPut[];
 };
 
+export type DnsRecordsDnsRequestReviewScanObject = {
+  accepts?: DnsRecordsDnsRecordScanBatchAccept[];
+  rejects?: DnsRecordsDnsRecordScanBatchReject[];
+};
+
 export type DnsRecordsDnsResponseBatchObject = {
   deletes?: DnsRecordsDnsRecordResponse[];
   patches?: DnsRecordsDnsRecordResponse[];
   posts?: DnsRecordsDnsRecordResponse[];
   puts?: DnsRecordsDnsRecordResponse[];
+};
+
+export type DnsRecordsDnsResponseReviewScanObject = {
+  accepts?: DnsRecordsDnsRecordResponse[];
+  rejects?: DnsRecordsIdentifier[];
 };
 
 export type DnsRecordsDnsResponseBatch = DnsRecordsApiResponseSingle & {
@@ -19635,9 +19878,15 @@ export type DnsRecordsDnsResponseImportScan = DnsRecordsApiResponseSingle & {
   };
 };
 
+export type DnsRecordsDnsResponseReviewScan = DnsRecordsApiResponseSingle & {
+  result?: DnsRecordsDnsResponseReviewScanObject;
+};
+
 export type DnsRecordsDnsResponseSingle = DnsRecordsApiResponseSingle & {
   result?: DnsRecordsDnsRecordResponse;
 };
+
+export type DnsRecordsDnsResponseTriggerScan = DnsRecordsApiResponseSingle;
 
 /**
  * Identifier.
@@ -19674,6 +19923,7 @@ export type DnsRecordsMessages = {
  * @example example.com
  * @maxLength 255
  * @minLength 1
+ * @x-auditable true
  */
 export type DnsRecordsName = string;
 
@@ -19717,6 +19967,7 @@ export type DnsRecordsPriority = number;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type DnsRecordsProxied = boolean;
 
@@ -19778,6 +20029,7 @@ export type DnsRecordsTtl = number | 1;
  * Record type.
  *
  * @example A
+ * @x-auditable true
  */
 export type DnsRecordsType =
   | "A"
@@ -19803,7 +20055,11 @@ export type DnsRecordsType =
   | "URI";
 
 export type DnsSettingsAccountSettings = {
-  zone_defaults?: DnsSettingsDnsSettingsAccount;
+  zone_defaults: DnsSettingsDnsSettingsAccountResponse;
+};
+
+export type DnsSettingsAccountSettingsPatch = {
+  zone_defaults?: DnsSettingsDnsSettingsAccountPatch;
 };
 
 export type DnsSettingsApiResponseCollection = DnsSettingsApiResponseCommon & {
@@ -19880,18 +20136,7 @@ export type DnsSettingsCreatedTime = string;
  */
 export type DnsSettingsDirection = "asc" | "desc";
 
-export type DnsSettingsDnsSettings = {
-  flatten_all_cnames?: DnsSettingsFlattenAllCnames;
-  foundation_dns?: DnsSettingsFoundationDns;
-  internal_dns?: DnsSettingsInternalDns;
-  multi_provider?: DnsSettingsMultiProvider;
-  ns_ttl?: DnsSettingsNsTtl;
-  secondary_overrides?: DnsSettingsSecondaryOverrides;
-  soa?: DnsSettingsSoa;
-  zone_mode?: DnsSettingsZoneMode;
-};
-
-export type DnsSettingsDnsSettingsAccount = DnsSettingsDnsSettings & {
+export type DnsSettingsDnsSettingsAccountPatch = DnsSettingsDnsSettingsPatch & {
   /**
    * Settings determining the nameservers through which the zone should be available.
    */
@@ -19902,7 +20147,7 @@ export type DnsSettingsDnsSettingsAccount = DnsSettingsDnsSettings & {
      * @example cloudflare.standard
      * @x-auditable true
      */
-    type:
+    type?:
       | "cloudflare.standard"
       | "cloudflare.standard.random"
       | "custom.account"
@@ -19910,7 +20155,51 @@ export type DnsSettingsDnsSettingsAccount = DnsSettingsDnsSettings & {
   };
 };
 
-export type DnsSettingsDnsSettingsZone = DnsSettingsDnsSettings & {
+export type DnsSettingsDnsSettingsAccountResponse =
+  DnsSettingsDnsSettingsResponse & {
+    /**
+     * Settings determining the nameservers through which the zone should be available.
+     */
+    nameservers: {
+      /**
+       * Nameserver type
+       *
+       * @example cloudflare.standard
+       * @x-auditable true
+       */
+      type:
+        | "cloudflare.standard"
+        | "cloudflare.standard.random"
+        | "custom.account"
+        | "custom.tenant";
+    };
+  };
+
+export type DnsSettingsDnsSettingsBase = {
+  flatten_all_cnames?: DnsSettingsFlattenAllCnames;
+  foundation_dns?: DnsSettingsFoundationDns;
+  internal_dns?: DnsSettingsInternalDnsBase;
+  multi_provider?: DnsSettingsMultiProvider;
+  ns_ttl?: DnsSettingsNsTtl;
+  secondary_overrides?: DnsSettingsSecondaryOverrides;
+  soa?: DnsSettingsSoaBase;
+  zone_mode?: DnsSettingsZoneMode;
+};
+
+export type DnsSettingsDnsSettingsPatch = DnsSettingsDnsSettingsBase;
+
+export type DnsSettingsDnsSettingsResponse = {
+  flatten_all_cnames: DnsSettingsFlattenAllCnames;
+  foundation_dns: DnsSettingsFoundationDns;
+  internal_dns: DnsSettingsInternalDnsResponse;
+  multi_provider: DnsSettingsMultiProvider;
+  ns_ttl: DnsSettingsNsTtl;
+  secondary_overrides: DnsSettingsSecondaryOverrides;
+  soa: DnsSettingsSoaResponse;
+  zone_mode: DnsSettingsZoneMode;
+};
+
+export type DnsSettingsDnsSettingsZonePatch = DnsSettingsDnsSettingsPatch & {
   /**
    * Settings determining the nameservers through which the zone should be available.
    */
@@ -19930,13 +20219,42 @@ export type DnsSettingsDnsSettingsZone = DnsSettingsDnsSettings & {
      * @example cloudflare.standard
      * @x-auditable true
      */
-    type:
+    type?:
       | "cloudflare.standard"
       | "custom.account"
       | "custom.tenant"
       | "custom.zone";
   };
 };
+
+export type DnsSettingsDnsSettingsZoneResponse =
+  DnsSettingsDnsSettingsResponse & {
+    /**
+     * Settings determining the nameservers through which the zone should be available.
+     */
+    nameservers: {
+      /**
+       * Configured nameserver set to be used for this zone
+       *
+       * @example 1
+       * @maximum 5
+       * @minimum 1
+       * @x-auditable true
+       */
+      ns_set?: number;
+      /**
+       * Nameserver type
+       *
+       * @example cloudflare.standard
+       * @x-auditable true
+       */
+      type:
+        | "cloudflare.standard"
+        | "custom.account"
+        | "custom.tenant"
+        | "custom.zone";
+    };
+  };
 
 export type DnsSettingsDnsView = {
   created_time?: DnsSettingsCreatedTime;
@@ -19994,13 +20312,25 @@ export type DnsSettingsIdentifier = string;
 /**
  * Settings for this internal zone.
  */
-export type DnsSettingsInternalDns = {
+export type DnsSettingsInternalDnsBase = {
   /**
    * The ID of the zone to fallback to.
    *
    * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string","x-auditable":true}
    */
   reference_zone_id?: string;
+};
+
+/**
+ * Settings for this internal zone.
+ */
+export type DnsSettingsInternalDnsResponse = {
+  /**
+   * The ID of the zone to fallback to.
+   *
+   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string","x-auditable":true}
+   */
+  reference_zone_id: string;
 };
 
 /**
@@ -20087,7 +20417,7 @@ export type DnsSettingsPerPage = number;
 
 export type DnsSettingsSchemasDnsResponseSingle =
   DnsSettingsApiResponseSingle & {
-    result?: DnsSettingsDnsSettingsZone;
+    result?: DnsSettingsDnsSettingsZoneResponse;
   };
 
 /**
@@ -20101,7 +20431,72 @@ export type DnsSettingsSecondaryOverrides = boolean;
 /**
  * Components of the zone's SOA record.
  */
-export type DnsSettingsSoa = {
+export type DnsSettingsSoaBase = {
+  /**
+   * Time in seconds of being unable to query the primary server after which secondary servers should stop serving the zone.
+   *
+   * @example 604800
+   * @maximum 2419200
+   * @minimum 86400
+   * @x-auditable true
+   */
+  expire?: number;
+  /**
+   * The time to live (TTL) for negative caching of records within the zone.
+   *
+   * @example 1800
+   * @maximum 86400
+   * @minimum 60
+   * @x-auditable true
+   */
+  min_ttl?: number;
+  /**
+   * The primary nameserver, which may be used for outbound zone transfers. If null, a Cloudflare-assigned value will be used.
+   *
+   * @example kristina.ns.cloudflare.com
+   * @x-auditable true
+   */
+  mname?: string | null;
+  /**
+   * Time in seconds after which secondary servers should re-check the SOA record to see if the zone has been updated.
+   *
+   * @example 10000
+   * @maximum 86400
+   * @minimum 600
+   * @x-auditable true
+   */
+  refresh?: number;
+  /**
+   * Time in seconds after which secondary servers should retry queries after the primary server was unresponsive.
+   *
+   * @example 2400
+   * @maximum 86400
+   * @minimum 600
+   * @x-auditable true
+   */
+  retry?: number;
+  /**
+   * The email address of the zone administrator, with the first label representing the local part of the email address.
+   *
+   * @example admin.example.com
+   * @x-auditable true
+   */
+  rname?: string;
+  /**
+   * The time to live (TTL) of the SOA record itself.
+   *
+   * @example 3600
+   * @maximum 86400
+   * @minimum 300
+   * @x-auditable true
+   */
+  ttl?: number;
+};
+
+/**
+ * Components of the zone's SOA record.
+ */
+export type DnsSettingsSoaResponse = {
   /**
    * Time in seconds of being unable to query the primary server after which secondary servers should stop serving the zone.
    *
@@ -20121,12 +20516,12 @@ export type DnsSettingsSoa = {
    */
   min_ttl: number;
   /**
-   * The primary nameserver, which may be used for outbound zone transfers.
+   * The primary nameserver, which may be used for outbound zone transfers. If null, a Cloudflare-assigned value will be used.
    *
    * @example kristina.ns.cloudflare.com
    * @x-auditable true
    */
-  mname: string;
+  mname: string | null;
   /**
    * Time in seconds after which secondary servers should re-check the SOA record to see if the zone has been updated.
    *
@@ -20816,7 +21211,7 @@ export type EmailSecurityDispositionLabel =
   | "NONE";
 
 /**
- * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","regions":["GLOBAL"],"require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
+ * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","dmarc_status":"good","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","regions":["GLOBAL"],"require_tls_inbound":false,"require_tls_outbound":true,"spf_status":"good","transport":"example.com"}
  */
 export type EmailSecurityDomain = {
   allowed_delivery_modes: EmailSecurityDeliveryMode[];
@@ -20832,6 +21227,7 @@ export type EmailSecurityDomain = {
    * @format date-time
    */
   created_at: string;
+  dmarc_status?: "none" | "good" | "invalid" | null;
   domain: string;
   drop_dispositions: EmailSecurityDispositionLabel[];
   emails_processed?: {
@@ -20880,6 +21276,7 @@ export type EmailSecurityDomain = {
   regions: ("GLOBAL" | "AU" | "DE" | "IN" | "US")[];
   require_tls_inbound?: boolean | null;
   require_tls_outbound?: boolean | null;
+  spf_status?: "none" | "good" | "neutral" | "open" | "invalid" | null;
   transport: string;
 };
 
@@ -21478,7 +21875,7 @@ export type EmailEmailRoutingGetResponseDnsErrors =
 export type EmailEmailSettingCreated = string;
 
 export type EmailEmailSettingDnsRequestBody = {
-  name: EmailEmailSettingName;
+  name?: EmailEmailSettingName;
 } | null;
 
 /**
@@ -23072,6 +23469,7 @@ export type FirewallZonelockdownResponseSingle = FirewallApiResponseSingle & {
  * The hostname or IP address of the origin server to run health checks on.
  *
  * @example www.example.com
+ * @x-auditable true
  */
 export type HealthchecksAddress = string;
 
@@ -23080,7 +23478,7 @@ export type HealthchecksApiResponseCollection = {
   messages: HealthchecksMessages;
   result: Record<string, any> | any[] | string | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -23093,7 +23491,7 @@ export type HealthchecksApiResponseCommon = {
   messages: HealthchecksMessages;
   result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -23109,7 +23507,7 @@ export type HealthchecksApiResponseCommonFailure = {
   messages: HealthchecksMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -23123,7 +23521,7 @@ export type HealthchecksApiResponseSingle = {
     | (Record<string, any> | any[] | string)
     | (Record<string, any> | any[] | string);
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -23135,6 +23533,7 @@ export type HealthchecksApiResponseSingle = {
  *
  * @example WEU
  * @example ENAM
+ * @x-auditable true
  */
 export type HealthchecksCheckRegions =
   | (
@@ -23159,6 +23558,7 @@ export type HealthchecksCheckRegions =
  * The number of consecutive fails required from a health check before changing the health to unhealthy.
  *
  * @default 1
+ * @x-auditable true
  */
 export type HealthchecksConsecutiveFails = number;
 
@@ -23166,6 +23566,7 @@ export type HealthchecksConsecutiveFails = number;
  * The number of consecutive successes required from a health check before changing the health to healthy.
  *
  * @default 1
+ * @x-auditable true
  */
 export type HealthchecksConsecutiveSuccesses = number;
 
@@ -23173,6 +23574,7 @@ export type HealthchecksConsecutiveSuccesses = number;
  * A human-readable description of the health check.
  *
  * @example Health check for www.example.com
+ * @x-auditable true
  */
 export type HealthchecksDescription = string;
 
@@ -23180,6 +23582,7 @@ export type HealthchecksDescription = string;
  * The current failure reason if status is unhealthy.
  *
  * @example
+ * @x-auditable true
  */
 export type HealthchecksFailureReason = string;
 
@@ -23212,12 +23615,14 @@ export type HealthchecksHttpConfig = {
    * Do not validate the certificate when the health check uses HTTPS.
    *
    * @default false
+   * @x-auditable true
    */
   allow_insecure?: boolean;
   /**
    * A case-insensitive sub-string to look for in the response body. If this string is not found, the origin will be marked as unhealthy.
    *
    * @example success
+   * @x-auditable true
    */
   expected_body?: string;
   /**
@@ -23226,12 +23631,14 @@ export type HealthchecksHttpConfig = {
    * @default 200
    * @example 2xx
    * @example 302
+   * @x-auditable true
    */
   expected_codes?: string[] | null;
   /**
    * Follow redirects if the origin returns a 3xx status code.
    *
    * @default false
+   * @x-auditable true
    */
   follow_redirects?: boolean;
   /**
@@ -23246,6 +23653,7 @@ export type HealthchecksHttpConfig = {
    * The HTTP method to use for the health check.
    *
    * @default GET
+   * @x-auditable true
    */
   method?: "GET" | "HEAD";
   /**
@@ -23253,12 +23661,14 @@ export type HealthchecksHttpConfig = {
    *
    * @default /
    * @example /health
+   * @x-auditable true
    */
   path?: string;
   /**
    * Port number to connect to for the health check. Defaults to 80 if type is HTTP or 443 if type is HTTPS.
    *
    * @default 80
+   * @x-auditable true
    */
   port?: number;
 } | null;
@@ -23274,6 +23684,7 @@ export type HealthchecksIdResponse = HealthchecksApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type HealthchecksIdentifier = string;
 
@@ -23281,6 +23692,7 @@ export type HealthchecksIdentifier = string;
  * The interval between each health check. Shorter intervals may give quicker notifications if the origin status changes, but will increase load on the origin as we check from multiple locations.
  *
  * @default 60
+ * @x-auditable true
  */
 export type HealthchecksInterval = number;
 
@@ -23296,6 +23708,7 @@ export type HealthchecksMessages = {
  * A short name to identify the health check. Only alphanumeric characters, hyphens and underscores are allowed.
  *
  * @example server-1
+ * @x-auditable true
  */
 export type HealthchecksName = string;
 
@@ -23351,6 +23764,7 @@ export type HealthchecksResultInfo = {
  * The number of retries to attempt in case of a timeout before marking the origin as unhealthy. Retries are attempted immediately.
  *
  * @default 2
+ * @x-auditable true
  */
 export type HealthchecksRetries = number;
 
@@ -23362,6 +23776,7 @@ export type HealthchecksSingleResponse = HealthchecksApiResponseSingle & {
  * The current status of the origin server according to the health check.
  *
  * @example healthy
+ * @x-auditable true
  */
 export type HealthchecksStatus =
   | "unknown"
@@ -23373,6 +23788,7 @@ export type HealthchecksStatus =
  * If suspended, no health checks are sent to the origin.
  *
  * @default false
+ * @x-auditable true
  */
 export type HealthchecksSuspended = boolean;
 
@@ -23384,12 +23800,14 @@ export type HealthchecksTcpConfig = {
    * The TCP connection method to use for the health check.
    *
    * @default connection_established
+   * @x-auditable true
    */
   method?: "connection_established";
   /**
    * Port number to connect to for the health check. Defaults to 80.
    *
    * @default 80
+   * @x-auditable true
    */
   port?: number;
 } | null;
@@ -23398,12 +23816,14 @@ export type HealthchecksTcpConfig = {
  * The timeout (in seconds) before marking the health check as failed.
  *
  * @default 5
+ * @x-auditable true
  */
 export type HealthchecksTimeout = number;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type HealthchecksTimestamp = string;
 
@@ -23412,6 +23832,7 @@ export type HealthchecksTimestamp = string;
  *
  * @default HTTP
  * @example HTTPS
+ * @x-auditable true
  */
 export type HealthchecksType = string;
 
@@ -25616,6 +26037,40 @@ export type ImagesSigningKeyIdentifier = string;
  */
 export type InfraAccountTag = string;
 
+export type InfraConnectivityService = InfraServiceConfig & {
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  host: InfraServiceHost;
+  /**
+   * @format uuid
+   */
+  service_id: string;
+  /**
+   * @format date-time
+   */
+  updated_at: string;
+};
+
+export type InfraConnectivityServiceRequest = InfraServiceConfig & {
+  host: InfraServiceHost;
+};
+
+export type InfraHttpServiceConfig = {
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  http_port?: number | null;
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  https_port?: number | null;
+  name: string;
+};
+
 /**
  * The IPv4/IPv6 address that identifies where to reach a target
  */
@@ -25628,6 +26083,7 @@ export type InfraIPInfo = {
      * IP address of the target
      *
      * @example 187.26.29.249
+     * @x-auditable true
      */
     ip_addr?: string;
     /**
@@ -25635,6 +26091,7 @@ export type InfraIPInfo = {
      *
      * @example c77b744e-acc8-428f-9257-6878c046ed55
      * @format uuid
+     * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
     virtual_network_id?: string;
@@ -25647,6 +26104,7 @@ export type InfraIPInfo = {
      * IP address of the target
      *
      * @example 64c0:64e8:f0b4:8dbf:7104:72b0:ec8f:f5e0
+     * @x-auditable true
      */
     ip_addr?: string;
     /**
@@ -25654,11 +26112,45 @@ export type InfraIPInfo = {
      *
      * @example c77b744e-acc8-428f-9257-6878c046ed55
      * @format uuid
+     * @x-auditable true
      * @x-stainless-terraform-configurability computed_optional
      */
     virtual_network_id?: string;
   };
 };
+
+export type InfraNetwork = {
+  /**
+   * @format uuid
+   */
+  tunnel_id: string;
+};
+
+export type InfraResolverNetwork = {
+  resolver_ips?: string[] | null;
+  /**
+   * @format uuid
+   */
+  tunnel_id: string;
+};
+
+export type InfraServiceConfig =
+  | (InfraTcpServiceConfig & {
+      type: "tcp";
+    })
+  | (InfraHttpServiceConfig & {
+      type: "http";
+    });
+
+export type InfraServiceHost = {
+  hostname?: string | null;
+  ipv4?: string;
+  ipv6?: string;
+  network?: Record<string, any>;
+  resolver_network?: Record<string, any>;
+};
+
+export type InfraServiceType = "tcp" | "http";
 
 export type InfraSortingDirection = "asc" | "desc";
 
@@ -25695,8 +26187,19 @@ export type InfraTargetArray = InfraTarget[];
  * @example 0191dce4-9ab4-7fce-b660-8e5dec5172da
  * @format uuid
  * @maxLength 36
+ * @x-auditable true
  */
 export type InfraTargetId = string;
+
+export type InfraTcpServiceConfig = {
+  app_protocol?: string | null;
+  name: string;
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  tcp_port?: number | null;
+};
 
 export type InfraApiResponseCollection = InfraApiResponseCommon & {
   result_info?: {
@@ -27669,6 +28172,81 @@ export type LoadBalancingMonitorEditable = {
   type?: LoadBalancingType;
 };
 
+export type LoadBalancingMonitorGroup = {
+  /**
+   * The timestamp of when the monitor group was created
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  created_at?: string;
+  /**
+   * A short description of the monitor group
+   *
+   * @example Primary datacenter monitors
+   */
+  description: string;
+  id: LoadBalancingMonitorGroupId;
+  /**
+   * List of monitors in this group
+   */
+  members: LoadBalancingMonitorGroupMember[];
+  /**
+   * The timestamp of when the monitor group was last updated
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  updated_at?: string;
+};
+
+export type LoadBalancingMonitorGroupMember = {
+  /**
+   * The timestamp of when the monitor was added to the group
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  created_at?: string;
+  /**
+   * Whether this monitor is enabled in the group
+   *
+   * @example true
+   */
+  enabled: boolean;
+  monitor_id: LoadBalancingMonitorId;
+  /**
+   * Whether this monitor is used for monitoring only (does not affect pool health)
+   *
+   * @example false
+   */
+  monitoring_only: boolean;
+  /**
+   * Whether this monitor must be healthy for the pool to be considered healthy
+   *
+   * @example true
+   */
+  must_be_healthy: boolean;
+  /**
+   * The timestamp of when the monitor group member was last updated
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  updated_at?: string;
+};
+
+export type LoadBalancingMonitorGroupResponseCollection =
+  LoadBalancingApiResponseCommon & {
+    result?: LoadBalancingMonitorGroup[];
+    result_info?: LoadBalancingResultInfo;
+  };
+
+export type LoadBalancingMonitorGroupSingleResponse =
+  LoadBalancingApiResponseCommon & {
+    result?: LoadBalancingMonitorGroup;
+  };
+
 export type LoadBalancingMonitorReferencesResponse =
   LoadBalancingApiResponseCommon & {
     /**
@@ -27705,6 +28283,13 @@ export type LoadBalancingMonitorResponseSingle =
   LoadBalancingApiResponseSingle & {
     result?: LoadBalancingMonitor;
   };
+
+/**
+ * The ID of the Monitor Group to use for checking the health of origins within this pool.
+ *
+ * @x-auditable true
+ */
+export type LoadBalancingMonitorGroupId = string;
 
 /**
  * The ID of the Monitor to use for checking the health of origins within this pool.
@@ -27916,6 +28501,7 @@ export type LoadBalancingPool = {
   minimum_origins?: LoadBalancingMinimumOrigins;
   modified_on?: LoadBalancingTimestamp;
   monitor?: LoadBalancingMonitorId;
+  monitor_group?: LoadBalancingMonitorGroupId;
   name?: LoadBalancingName;
   networks?: LoadBalancingNetworks;
   notification_email?: LoadBalancingNotificationEmail;
@@ -29072,7 +29658,7 @@ export type LogshareApiResponseCommonFailure = {
   messages: LogshareMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -29112,10 +29698,11 @@ export type LogshareFieldsResponse = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type LogshareIdentifier = string;
 
@@ -29131,7 +29718,11 @@ export type LogshareMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -29822,7 +30413,7 @@ export type MagicVisibilityPcapsApiResponseCollection = {
   messages: MagicVisibilityPcapsMessages;
   result: Record<string, any> | any[] | string | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -29835,7 +30426,7 @@ export type MagicVisibilityPcapsApiResponseCommon = {
   messages: MagicVisibilityPcapsMessages;
   result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -29851,7 +30442,7 @@ export type MagicVisibilityPcapsApiResponseCommonFailure = {
   messages: MagicVisibilityPcapsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -29863,7 +30454,7 @@ export type MagicVisibilityPcapsApiResponseSingle = {
   messages: MagicVisibilityPcapsMessages;
   result: Record<string, any> | string | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -29871,7 +30462,7 @@ export type MagicVisibilityPcapsApiResponseSingle = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -30038,7 +30629,7 @@ export type MagicVisibilityPcapsPcapsOwnershipSingleResponse = {
   messages: MagicVisibilityPcapsMessages;
   result: MagicVisibilityPcapsPcapsOwnershipResponse;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -30190,25 +30781,25 @@ export type MagicVisibilityPcapsPcapsType = "simple" | "full";
 
 export type MagicVisibilityPcapsResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -30564,6 +31155,15 @@ export type MagicAppsCollectionResponse = {
   success: true;
 };
 
+/**
+ * True if automatic stateful return routing should be enabled for a tunnel, false otherwise.
+ *
+ * @default false
+ * @example true
+ * @x-auditable true
+ */
+export type MagicAutomaticReturnRouting = boolean;
+
 export type MagicBgpConfig = {
   /**
    * ASN used on the customer end of the BGP session
@@ -30734,6 +31334,7 @@ export type MagicComponentsSchemasTunnelsCollectionResponse =
 export type MagicConnectorId = string;
 
 export type MagicCreateGreTunnelRequest = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   bgp?: MagicBgpConfig;
   cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
   customer_gre_endpoint: MagicCustomerGreEndpoint;
@@ -30771,6 +31372,20 @@ export type MagicCreateRouteResponse = MagicApiResponseSingle & {
  * @x-auditable true
  */
 export type MagicCreatedOn = string;
+
+export type MagicCustomRemoteIdentities = {
+  /**
+   * A custom IKE ID of type FQDN that may be used to identity the IPsec tunnel. The
+   * generated IKE IDs can still be used even if this custom value is specified.
+   *
+   * Must be of the form `<custom label>.<account ID>.custom.ipsec.cloudflare.com`.
+   *
+   * This custom ID does not need to be unique. Two IPsec tunnels may have the same custom
+   * fqdn_id. However, if another IPsec tunnel has the same value then the two tunnels
+   * cannot have the same cloudflare_endpoint.
+   */
+  fqdn_id?: string;
+};
 
 /**
  * The IP address assigned to the customer side of the GRE tunnel.
@@ -30813,6 +31428,7 @@ export type MagicGre = {
 };
 
 export type MagicGreTunnel = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   bgp?: MagicBgpConfig;
   bgp_status?: MagicBgpStatusWithState;
   cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
@@ -30830,6 +31446,7 @@ export type MagicGreTunnel = {
 };
 
 export type MagicGreTunnelAddSingleRequest = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
   customer_gre_endpoint: MagicCustomerGreEndpoint;
   description?: MagicSchemasDescription;
@@ -30911,6 +31528,7 @@ export type MagicHealthCheckTarget = {
 export type MagicIdentifier = string;
 
 export type MagicInterconnect = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   colo_name?: MagicComponentsSchemasName;
   created_on?: MagicSchemasCreatedOn;
   description?: MagicInterconnectComponentsSchemasDescription;
@@ -30934,6 +31552,7 @@ export type MagicInterconnectComponentsSchemasDescription = string;
 export type MagicInterconnectHealthCheck = MagicHealthCheckBase;
 
 export type MagicInterconnectTunnelUpdateRequest = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   description?: MagicInterconnectComponentsSchemasDescription;
   gre?: MagicGre;
   health_check?: MagicInterconnectHealthCheck;
@@ -30967,10 +31586,12 @@ export type MagicIpAddress = string;
 
 export type MagicIpsecTunnel = {
   allow_null_cipher?: MagicAllowNullCipher;
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   bgp?: MagicBgpConfig;
   bgp_status?: MagicBgpStatusWithState;
   cloudflare_endpoint: MagicCloudflareIpsecEndpoint;
   created_on?: MagicSchemasCreatedOn;
+  custom_remote_identities?: MagicCustomRemoteIdentities;
   customer_endpoint?: MagicCustomerIpsecEndpoint;
   description?: MagicComponentsSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
@@ -30986,6 +31607,7 @@ export type MagicIpsecTunnel = {
 export type MagicIpsecTunnelAddRequest = MagicIpsecTunnelAddSingleRequest;
 
 export type MagicIpsecTunnelAddSingleRequest = {
+  automatic_return_routing?: MagicAutomaticReturnRouting;
   bgp?: MagicBgpConfig;
   cloudflare_endpoint: MagicCloudflareIpsecEndpoint;
   customer_endpoint?: MagicCustomerIpsecEndpoint;
@@ -32771,12 +33393,53 @@ export type McnYamlItem = {
  */
 export type MconnAccountId = string;
 
+export type MconnAdminCohort = {
+  desired_version?: string;
+  id: MconnUuid;
+  name: string;
+};
+
+export type MconnAdminCohortCreateRequest = MconnAdminCohortFields;
+
+export type MconnAdminCohortCreateResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort;
+};
+
+export type MconnAdminCohortDeleteResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort;
+};
+
+export type MconnAdminCohortFetchResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort;
+};
+
+export type MconnAdminCohortFields = {
+  desired_version?: string;
+  name?: string;
+};
+
+export type MconnAdminCohortListResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort[];
+};
+
+export type MconnAdminCohortReplaceRequest = MconnAdminCohortFields;
+
+export type MconnAdminCohortReplaceResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort;
+};
+
+export type MconnAdminCohortUpdateRequest = MconnAdminCohortFields;
+
+export type MconnAdminCohortUpdateResponse = MconnGoodResponse & {
+  result?: MconnAdminCohort;
+};
+
 export type MconnAdminConnector = {
   account_id: MconnAccountId;
   activated: boolean;
   cloudflared_tunnel_id?: string;
   cloudflared_tunnel_token?: string;
-  cohort?: string;
+  cohort_id?: MconnUuid;
   desired_version?: string;
   device_id?: MconnUuid;
   id: MconnUuid;
@@ -32786,7 +33449,6 @@ export type MconnAdminConnector = {
   last_seen_version?: string;
   last_updated: string;
   notes: string;
-  pinned_version?: string;
   timezone: string;
   upgrade_asap: boolean;
 };
@@ -32810,7 +33472,7 @@ export type MconnAdminConnectorFields = {
   activated?: boolean;
   cloudflared_tunnel_id?: string;
   cloudflared_tunnel_token?: string;
-  cohort?: string;
+  cohort_id?: string;
   desired_version?: string;
   device_id?: string;
   interrupt_window_duration_hours?: number;
@@ -32819,7 +33481,6 @@ export type MconnAdminConnectorFields = {
   last_seen_version?: string;
   last_updated?: string;
   notes?: string;
-  pinned_version?: string;
   timezone?: string;
   upgrade_asap?: boolean;
 };
@@ -33090,12 +33751,16 @@ export type MconnControllerConnector = {
   account_id: MconnAccountId;
   activated: boolean;
   cloudflared_tunnel_token?: string;
+  cohort_desired_version?: string;
   desired_version?: string;
   id: MconnUuid;
   interrupt_window_duration_hours: number;
   interrupt_window_hour_of_day: number;
   last_heartbeat?: string;
   last_seen_version?: string;
+  /**
+   * @deprecated true
+   */
   pinned_version?: string;
   timezone: string;
   upgrade_asap: boolean;
@@ -35753,6 +36418,250 @@ export type ObservatoryUrl = string;
  * @x-auditable true
  */
 export type ObservatoryUuid = string;
+
+export type OrganizationsApiAccount = {
+  /**
+   * @format date-time
+   */
+  created_on: string;
+  id: string;
+  name: string | null;
+  settings: {
+    abuse_contact_email: string | null;
+    /**
+     * @format date-time
+     */
+    access_approval_expiry: string | null;
+    api_access_enabled: boolean | null;
+    /**
+     * Use [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-list-dns-settings) instead. Deprecated.
+     *
+     * @deprecated true
+     */
+    default_nameservers: string | null;
+    enforce_twofactor: boolean | null;
+    /**
+     * Use [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-list-dns-settings) instead. Deprecated.
+     *
+     * @deprecated true
+     */
+    use_account_custom_ns_by_default: boolean | null;
+  };
+  type: "standard" | "enterprise";
+};
+
+export type OrganizationsApiBatchAccountMoveResponse = {
+  statuses: {
+    message?: string;
+    moved: boolean;
+    tag: string;
+  };
+};
+
+export type OrganizationsApiBatchCreateMembersRequest = {
+  members: OrganizationsApiCreateSingleMember[];
+};
+
+export type OrganizationsApiBoolAllocation = {
+  type: "bool";
+  value: boolean;
+};
+
+export type OrganizationsApiCreateMemberRequest = {
+  member: OrganizationsApiCreateSingleMember;
+};
+
+export type OrganizationsApiCreateSingleMember = {
+  status?: "active" | "canceled";
+  user: {
+    email: string;
+  };
+};
+
+export type OrganizationsApiEntitlement = {
+  allocation:
+    | OrganizationsApiMaxCountAllocation
+    | OrganizationsApiBoolAllocation
+    | OrganizationsApiNullAllocation;
+  feature: OrganizationsApiFeature;
+};
+
+export type OrganizationsApiFeature = {
+  key: string;
+};
+
+export type OrganizationsApiInnateEntitlements = {
+  allow_add_subdomain: OrganizationsApiBoolAllocation;
+  allow_auto_accept_invites: OrganizationsApiBoolAllocation;
+  cname_setup_allowed: OrganizationsApiBoolAllocation;
+  custom_entitlements: OrganizationsApiEntitlement[] | null;
+  mhs_certificate_count: OrganizationsApiMaxCountAllocation;
+  partial_setup_allowed: OrganizationsApiBoolAllocation;
+};
+
+export type OrganizationsApiMaxCountAllocation = {
+  type: "max_count";
+  value: number;
+};
+
+export type OrganizationsApiMember = {
+  /**
+   * @format date-time
+   */
+  create_time: string;
+  id: OrganizationsApiMemberID;
+  meta: {
+    [key: string]: Record<string, any>;
+  };
+  status: "active" | "canceled";
+  /**
+   * @format date-time
+   */
+  update_time: string;
+  user: OrganizationsApiMemberSubjectUser;
+};
+
+/**
+ * @pattern ^[a-f0-9]{32}$
+ */
+export type OrganizationsApiMemberID = string;
+
+export type OrganizationsApiMemberSubjectUser = {
+  email: string;
+  id: string;
+  name: string;
+  two_factor_authentication_enabled: boolean;
+};
+
+export type OrganizationsApiNullAllocation = {
+  type: "";
+  value?: Record<string, any>;
+};
+
+/**
+ * Represents an Organization in the Cloudflare data model
+ */
+export type OrganizationsApiOrganization = {
+  /**
+   * @format date-time
+   */
+  create_time: string;
+  /**
+   * @pattern ^[a-f0-9]{32}$
+   */
+  id: OrganizationsApiOrganizationID;
+  meta: {
+    /**
+     * Organization flags for feature enablement
+     */
+    flags?: OrganizationsApiOrganizationFlags;
+    managed_by?: string;
+  } & {
+    [key: string]: Record<string, any>;
+  };
+  name: string;
+  parent?: {
+    id: OrganizationsApiOrganizationID;
+    name: string;
+  };
+  profile?: OrganizationsApiProfile;
+};
+
+/**
+ * Organization flags for feature enablement
+ */
+export type OrganizationsApiOrganizationFlags = {
+  account_creation: string;
+  account_deletion: string;
+  account_migration: string;
+  account_mobility: string;
+  sub_org_creation: string;
+};
+
+/**
+ * @pattern ^[a-f0-9]{32}$
+ */
+export type OrganizationsApiOrganizationID = string;
+
+export type OrganizationsApiPageTokenResultInfo = {
+  /**
+   * Use this opaque token in the next request to retrieve the
+   * next page.
+   *
+   * Parameters used to filter the retrieved list must remain in subsequent
+   * requests with a page token.
+   */
+  next_page_token?: string;
+  /**
+   * Counts the total amount of items in a list with the applied filters. The API omits next_page_token to indicate no more items in a particular list.
+   */
+  total_size?: number;
+};
+
+export type OrganizationsApiProfile = {
+  business_address: string;
+  business_email: string;
+  business_name: string;
+  business_phone: string;
+  external_metadata: string;
+};
+
+export type OrganizationsApiTenant = {
+  /**
+   * @format date-time
+   */
+  cdate: string;
+  customer_id?: string;
+  /**
+   * @format date-time
+   */
+  edate: string;
+  tenant_contacts: {
+    email?: string;
+    website?: string;
+  };
+  tenant_labels: string[];
+  tenant_metadata: {
+    dns?: {
+      ns_pool: {
+        primary?: string;
+        secondary?: string;
+      };
+    };
+  };
+  tenant_name: string;
+  tenant_network: Record<string, any>;
+  tenant_status: string;
+  tenant_tag: string;
+  tenant_type: string;
+  tenant_units: OrganizationsApiTenantUnit[];
+};
+
+export type OrganizationsApiTenantMembership = {
+  user_email: string;
+  user_name: string;
+  user_tag: string;
+};
+
+export type OrganizationsApiTenantUnit = {
+  unit_memberships: Record<string, any>[];
+  unit_metadata: Record<string, any>;
+  unit_name: string;
+  unit_status: string;
+  unit_tag: string;
+};
+
+export type OrganizationsApiV4ErrorResponse = {
+  error: OrganizationsApiV4Message[];
+  messages: OrganizationsApiV4Message[];
+  result?: Record<string, any>;
+  success: false;
+};
+
+export type OrganizationsApiV4Message = {
+  code: number;
+  message: string;
+};
 
 export type PageShieldApiGetResponseCollection = PageShieldApiResponseCommon & {
   result?: Record<string, any> | null;
@@ -38463,6 +39372,1899 @@ export type R2V4ResponseList = R2V4Response & {
 };
 
 /**
+ * The AI Config allows you to customize the behavior of meeting transcriptions and summaries
+ */
+export type RealtimekitAIConfig = {
+  summarization?: RealtimekitSummarizationConfig;
+  transcription?: RealtimekitTranscriptionConfig;
+};
+
+export type RealtimekitActiveSession = {
+  /**
+   * ID of the meeting this session is associated with. In the case of V2 meetings, it is always a UUID. In V1 meetings, it is a room name of the form `abcdef-ghijkl`
+   */
+  associated_id: string;
+  breakout_rooms?: RealtimekitActiveSession[];
+  /**
+   * timestamp when session created
+   */
+  created_at: string;
+  /**
+   * timestamp when session ended
+   */
+  ended_at?: string;
+  /**
+   * ID of the session
+   */
+  id: string;
+  /**
+   * number of participants currently in the session
+   */
+  live_participants: number;
+  /**
+   * number of maximum participants that were in the session
+   */
+  max_concurrent_participants: number;
+  /**
+   * Title of the meeting this session belongs to
+   */
+  meeting_display_name: string;
+  /**
+   * Any meta data about session.
+   */
+  meta?: Record<string, any>;
+  /**
+   * number of minutes consumed since the session started
+   */
+  minutes_consumed: number;
+  /**
+   * Organization id that hosted this session
+   */
+  organization_id: string;
+  /**
+   * timestamp when session started
+   */
+  started_at: string;
+  /**
+   * current status of session
+   */
+  status: "LIVE" | "ENDED";
+  /**
+   * type of session
+   */
+  type: "meeting" | "livestream" | "participant";
+  /**
+   * timestamp when session was last updated
+   */
+  updated_at: string;
+};
+
+/**
+ * Object containing configuration regarding the audio that is being recorded.
+ */
+export type RealtimekitAudioConfig = {
+  /**
+   * Audio signal pathway within an audio file that carries a specific sound source.
+   *
+   * @default stereo
+   */
+  channel?: "mono" | "stereo";
+  /**
+   * Codec using which the recording will be encoded. If VP8/VP9 is selected for videoConfig, changing audioConfig is not allowed. In this case, the codec in the audioConfig is automatically set to vorbis.
+   *
+   * @default AAC
+   */
+  codec?: "MP3" | "AAC";
+  /**
+   * Controls whether to export audio file seperately
+   *
+   * @default true
+   */
+  export_file?: boolean;
+};
+
+export type RealtimekitChatMessage = {
+  /**
+   * URL where the chat logs can be downloaded
+   */
+  chat_download_url: string;
+  /**
+   * Time when the download URL will expire
+   */
+  chat_download_url_expiry: string;
+};
+
+export type RealtimekitCreateChatChannelInfo = {
+  custom_participant_ids?: string[];
+  display_name?: string;
+  visibility?: "public" | "private";
+};
+
+export type RealtimekitDaywiseStats = {
+  /**
+   * Date in YYYY-MM-DD format
+   */
+  date?: string;
+  /**
+   * Total recordings minutes consumed across all sessions in the given time period.
+   */
+  recordings_minutes_consumed?: number;
+  /**
+   * Number of sessions_count happened in the given time period
+   */
+  sessions_count?: number;
+  /**
+   * Total meetings minutes consumed across all sessions in the given time period.
+   */
+  sessions_minutes_consumed?: number;
+};
+
+export type RealtimekitErrorResponse = {
+  /**
+   * Object containing details of the error that occurred
+   */
+  error: {
+    /**
+     * Error code
+     *
+     * @example 404
+     */
+    code: number;
+    /**
+     * Error message
+     *
+     * @example Error: resource not found
+     */
+    message: string;
+  };
+  /**
+   * Whether the operation succeeded or not
+   *
+   * @example false
+   */
+  success: boolean;
+};
+
+export type RealtimekitGenericErrorResponse = {
+  error: {
+    /**
+     * HTTP status code of the error.
+     */
+    code: number;
+    /**
+     * Error message describing what went wrong.
+     */
+    message: string;
+  };
+  /**
+   * Success status of the request.
+   *
+   * @default false
+   */
+  success: boolean;
+};
+
+export type RealtimekitGenericSuccessResponse = {
+  /**
+   * Data returned by the operation
+   */
+  data?: Record<string, any>;
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success: boolean;
+};
+
+/**
+ * Allows you to add timed metadata to your recordings, which are digital markers inserted into a video file to provide contextual information at specific points in the content range. The ID3 tags containing this information are available to clients on the playback timeline in HLS format. The output files are generated in a compressed .tar format.
+ */
+export type RealtimekitInteractiveConfig = {
+  /**
+   * The metadata is presented in the form of ID3 tags.
+   */
+  type?: "ID3";
+};
+
+export type RealtimekitLivestreamBase = {
+  /**
+   * The timestamp at which the livestream was created. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  created_at?: string;
+  /**
+   * Specifies if the livestream was disabled.
+   */
+  disabled?: boolean;
+  /**
+   * The livestream ID.
+   */
+  id?: string;
+  /**
+   * The server URL to which the RTMP encoder sends the video and audio data.
+   */
+  ingest_server?: string;
+  /**
+   * ID of the meeting.
+   */
+  meeting_id?: string | null;
+  /**
+   * Name of the livestream.
+   */
+  name?: string | null;
+  org_id?: string;
+  /**
+   * The web address that viewers can use to watch the livestream.
+   */
+  playback_url?: string;
+  /**
+   * The status of the livestream.
+   */
+  status?: "LIVE" | "IDLE" | "ERRORED" | "INVOKED";
+  /**
+   * Unique key for accessing each livestream.
+   */
+  stream_key?: string;
+  /**
+   * The timestamp at which the livestream was updated. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  updated_at?: string;
+};
+
+export type RealtimekitLivestreamingConfig = {
+  /**
+   * RTMP URL to stream to
+   *
+   * @example rtmp://a.rtmp.youtube.com/live2
+   * @format uri
+   */
+  rtmp_url?: string;
+};
+
+export type RealtimekitMeeting = {
+  /**
+   * Timestamp the object was created at. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * ID of the meeting.
+   *
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Specifies if the meeting should start getting livestreamed on start.
+   */
+  live_stream_on_start?: boolean;
+  /**
+   * Specifies if Chat within a meeting should persist for a week.
+   */
+  persist_chat?: boolean;
+  /**
+   * The region in which this meeting should be created.
+   */
+  preferred_region?:
+    | "ap-south-1"
+    | "ap-southeast-1"
+    | "us-east-1"
+    | "eu-central-1"
+    | any
+    | null;
+  /**
+   * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
+   */
+  record_on_start?: boolean;
+  /**
+   * Time in seconds, for which a session remains active, after the last participant has left the meeting.
+   *
+   * @default 60
+   * @maximum 600
+   * @minimum 60
+   */
+  session_keep_alive_time_in_secs?: number;
+  /**
+   * Whether the meeting is `ACTIVE` or `INACTIVE`. Users will not be able to join an `INACTIVE` meeting.
+   */
+  status?: "ACTIVE" | "INACTIVE";
+  /**
+   * Automatically generate summary of meetings using transcripts. Requires Transcriptions to be enabled, and can be retrieved via Webhooks or summary API.
+   */
+  summarize_on_end?: boolean;
+  /**
+   * Title of the meeting.
+   */
+  title?: string;
+  /**
+   * Timestamp the object was updated at. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  updated_at: string;
+};
+
+export type RealtimekitOrganizationData = {
+  /**
+   * @example 4deeb3d8e8b5e74d5522
+   */
+  apikey: string;
+  /**
+   * @example 778-330-2389
+   */
+  contact: string;
+  /**
+   * @example 2022-05-28T08:18:34.804Z
+   * @format date-time
+   */
+  created_at: string;
+  feature_flags: string[];
+  /**
+   * ID of the organization
+   *
+   * @example bbb0e958-93ce-41c7-9745-16e7aa51c568
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Must be a unique organization name
+   *
+   * @example RealtimeKit
+   */
+  name: string;
+  /**
+   * @example us-east-1
+   */
+  preferred_region: string;
+  /**
+   * @example 2022-05-28T08:18:34.804Z
+   * @format date-time
+   */
+  updated_at: string;
+  /**
+   * @example https://realtimekit.cloudflare.com
+   * @format uri
+   */
+  website: string;
+};
+
+export type RealtimekitOrganizationListSuccessResponse = {
+  data: RealtimekitOrganizationData[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitOrganizationRequest = {
+  /**
+   * @example 778-330-2389
+   */
+  contact: string;
+  feature_flags?: string[];
+  /**
+   * Must be a unique organization name
+   *
+   * @example RealtimeKit
+   */
+  name: string;
+  /**
+   * @default ap-south-1
+   * @example us-east-1
+   */
+  preferred_region?:
+    | "ap-south-1"
+    | "ap-southeast-1"
+    | "us-east-1"
+    | "eu-central-1";
+  /**
+   * @example https://realtimekit.cloudflare.com
+   * @format uri
+   */
+  website: string;
+};
+
+export type RealtimekitOrganizationSuccessResponse = {
+  data: RealtimekitOrganizationData;
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitOverallStats = {
+  /**
+   * Total recordings minutes consumed across all sessions in the given time period.
+   */
+  recordings_minutes_consumed?: number;
+  /**
+   * Number of sessions_count happened in the given time period
+   */
+  sessions_count?: number;
+  /**
+   * Total meetings minutes consumed across all sessions in the given time period.
+   */
+  sessions_minutes_consumed?: number;
+};
+
+export type RealtimekitPagingResponse = {
+  data: Record<string, any>[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     * @minimum 0
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+/**
+ * Represents a participant.
+ */
+export type RealtimekitParticipant = {
+  /**
+   * When this object was created. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * A unique participant ID generated by the client.
+   */
+  custom_participant_id: string;
+  /**
+   * ID of the participant.
+   *
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Name of the participant.
+   */
+  name?: string | null;
+  /**
+   * URL to a picture of the participant.
+   *
+   * @format uri
+   */
+  picture?: string | null;
+  /**
+   * Preset applied to the participant.
+   */
+  preset_name: string;
+  /**
+   * When this object was updated. The time is returned in ISO format.
+   *
+   * @format date-time
+   */
+  updated_at: string;
+};
+
+export type RealtimekitParticipantPeerStats = {
+  peer_stats?: {
+    config?: string;
+    device_info?: {
+      browser?: string;
+      browser_version?: string;
+      cpus?: number;
+      engine?: string;
+      is_mobile?: boolean;
+      memory?: number;
+      os?: string;
+      os_version?: string;
+      sdk_name?: string;
+      sdk_version?: string;
+      user_agent?: string;
+      webgl_support?: string;
+    };
+    events?: {
+      timestamp?: string;
+      type?: string;
+    }[];
+    ip_information?: {
+      city?: string;
+      country?: string;
+      ip_location?: string;
+      ipv4?: string;
+      org?: string;
+      portal?: string;
+      region?: string;
+      timezone?: string;
+    };
+    precall_network_information?: {
+      backend_rtt?: number;
+      effective_networktype?: string;
+      fractional_loss?: number;
+      jitter?: number;
+      reflexive_connectivity?: boolean;
+      relay_connectivity?: boolean;
+      rtt?: number;
+      throughtput?: number;
+      turn_connectivity?: boolean;
+    };
+    status?: string;
+  };
+};
+
+export type RealtimekitParticipantQualityStats = {
+  quality_stats?: {
+    audio_bandwidth?: number;
+    audio_packet_loss?: number;
+    audio_stats?: {
+      concealment_events?: number;
+      jitter?: number;
+      packets_lost?: number;
+      quality?: number;
+      timestamp?: string;
+    }[];
+    average_quality?: number;
+    end?: string;
+    peer_id?: string;
+    start?: string;
+    video_bandwidth?: number;
+    video_packet_loss?: number;
+    video_stats?: {
+      frame_height?: number;
+      frame_width?: number;
+      frames_dropped?: number;
+      frames_per_second?: number;
+      jitter?: number;
+      packets_lost?: number;
+      quality?: number;
+      timestamp?: string;
+    }[];
+  }[];
+};
+
+export type RealtimekitParticipantsList = {
+  /**
+   * timestamp when this participant was created.
+   */
+  created_at?: string;
+  /**
+   * ID passed by client to create this participant.
+   */
+  custom_participant_id?: string;
+  /**
+   * Display name of participant when joining the session.
+   */
+  display_name?: string;
+  /**
+   * number of minutes for which the participant was in the session.
+   */
+  duration?: number;
+  /**
+   * Participant ID. This maps to the corresponding peerId.
+   */
+  id?: string;
+  /**
+   * timestamp at which participant joined the session.
+   */
+  joined_at?: string;
+  /**
+   * timestamp at which participant left the session.
+   */
+  left_at?: string;
+  /**
+   * Name of the preset associated with the participant.
+   */
+  preset_name?: string;
+  /**
+   * timestamp when this participant's data was last updated.
+   */
+  updated_at?: string;
+  /**
+   * User id for this participant.
+   */
+  user_id?: string;
+};
+
+export type RealtimekitPatchOrganizationRequest = {
+  contact?: string;
+  feature_flags?: string[];
+  /**
+   * Must be a unique organization name
+   */
+  name?: string;
+  preferred_region?:
+    | "ap-south-1"
+    | "ap-southeast-1"
+    | "us-east-1"
+    | "eu-central-1";
+  /**
+   * @example https://realtimekit.cloudflare.com
+   * @format uri
+   */
+  website?: string;
+};
+
+export type RealtimekitPatchWebhookRequest = {
+  /**
+   * @default true
+   */
+  enabled?: boolean;
+  /**
+   * Events that the webhook will get triggered by
+   */
+  events?: (
+    | "meeting.started"
+    | "meeting.ended"
+    | "meeting.participantJoined"
+    | "meeting.participantLeft"
+    | "recording.statusUpdate"
+    | "livestreaming.statusUpdate"
+    | "meeting.chatSynced"
+    | "meeting.transcript"
+    | "meeting.summary"
+  )[];
+  /**
+   * Name of the webhook
+   */
+  name?: string;
+  /**
+   * URL the webhook will send events to
+   *
+   * @example https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e
+   * @format uri
+   */
+  url?: string;
+};
+
+export type RealtimekitPoll = {
+  anonymous?: boolean;
+  created_by?: string;
+  hide_votes?: boolean;
+  /**
+   * ID of the poll
+   */
+  id: string;
+  /**
+   * Answer options
+   */
+  options: {
+    count: number;
+    /**
+     * Text of the answer option
+     */
+    text: string;
+    votes: {
+      id: string;
+      name: string;
+    }[];
+  }[];
+  /**
+   * Question asked by the poll
+   */
+  question: string;
+  voted?: string[];
+};
+
+export type RealtimekitPreset = {
+  config: {
+    /**
+     * Maximum number of screen shares that can be active at a given time
+     */
+    max_screenshare_count: number;
+    /**
+     * Maximum number of streams that are visible on a device
+     */
+    max_video_streams: {
+      /**
+       * Maximum number of video streams visible on desktop devices
+       */
+      desktop: number;
+      /**
+       * Maximum number of streams visible on mobile devices
+       */
+      mobile: number;
+    };
+    /**
+     * Media configuration options. eg: Video quality
+     */
+    media: {
+      /**
+       * Control options for Audio quality.
+       */
+      audio?: {
+        /**
+         * Enable High Quality Audio for your meetings
+         *
+         * @default false
+         */
+        enable_high_bitrate?: boolean;
+        /**
+         * Enable Stereo for your meetings
+         *
+         * @default false
+         */
+        enable_stereo?: boolean;
+      };
+      /**
+       * Configuration options for participant screen shares
+       */
+      screenshare: {
+        /**
+         * Frame rate of screen share
+         */
+        frame_rate: number;
+        /**
+         * Quality of screen share
+         */
+        quality: "hd" | "vga" | "qvga";
+      };
+      /**
+       * Configuration options for participant videos
+       */
+      video: {
+        /**
+         * Frame rate of participants' video
+         *
+         * @maximum 30
+         */
+        frame_rate: number;
+        /**
+         * Video quality of participants
+         */
+        quality: "hd" | "vga" | "qvga";
+      };
+    };
+    /**
+     * Type of the meeting
+     */
+    view_type: "GROUP_CALL" | "WEBINAR" | "AUDIO_ROOM";
+  };
+  /**
+   * Name of the preset
+   */
+  name: string;
+  permissions?: {
+    /**
+     * Whether this participant can accept waiting requests
+     */
+    accept_waiting_requests: boolean;
+    can_accept_production_requests: boolean;
+    can_change_participant_permissions: boolean;
+    can_edit_display_name: boolean;
+    can_livestream: boolean;
+    can_record: boolean;
+    can_spotlight: boolean;
+    /**
+     * Chat permissions
+     */
+    chat: {
+      private: {
+        can_receive: boolean;
+        can_send: boolean;
+        files: boolean;
+        text: boolean;
+      };
+      public: {
+        /**
+         * Can send messages in general
+         */
+        can_send: boolean;
+        /**
+         * Can send file messages
+         */
+        files: boolean;
+        /**
+         * Can send text messages
+         */
+        text: boolean;
+      };
+    };
+    connected_meetings: {
+      can_alter_connected_meetings: boolean;
+      can_switch_connected_meetings: boolean;
+      can_switch_to_parent_meeting: boolean;
+    };
+    disable_participant_audio: boolean;
+    disable_participant_screensharing: boolean;
+    disable_participant_video: boolean;
+    /**
+     * Whether this participant is visible to others or not
+     */
+    hidden_participant: boolean;
+    /**
+     * @default false
+     */
+    is_recorder?: boolean;
+    kick_participant: boolean;
+    /**
+     * Media permissions
+     */
+    media: {
+      /**
+       * Audio permissions
+       */
+      audio: {
+        /**
+         * Can produce audio
+         */
+        can_produce: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+      /**
+       * Screenshare permissions
+       */
+      screenshare: {
+        /**
+         * Can produce screen share video
+         */
+        can_produce: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+      /**
+       * Video permissions
+       */
+      video: {
+        /**
+         * Can produce video
+         */
+        can_produce: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+    };
+    pin_participant: boolean;
+    /**
+     * Plugin permissions
+     */
+    plugins: {
+      /**
+       * Can close plugins that are already open
+       */
+      can_close: boolean;
+      /**
+       * Can edit plugin config
+       */
+      can_edit_config: boolean;
+      /**
+       * Can start plugins
+       */
+      can_start: boolean;
+      config:
+        | string
+        | {
+            access_control: "FULL_ACCESS" | "VIEW_ONLY";
+            handles_view_only: boolean;
+          };
+    };
+    /**
+     * Poll permissions
+     */
+    polls: {
+      /**
+       * Can create polls
+       */
+      can_create: boolean;
+      /**
+       * Can view polls
+       */
+      can_view: boolean;
+      /**
+       * Can vote on polls
+       */
+      can_vote: boolean;
+    };
+    /**
+     * Type of the recording peer
+     *
+     * @default NONE
+     */
+    recorder_type: "RECORDER" | "LIVESTREAMER" | "NONE";
+    show_participant_list: boolean;
+    /**
+     * Waiting room type
+     */
+    waiting_room_type: "SKIP" | "ON_PRIVILEGED_USER_ENTRY" | "SKIP_ON_ACCEPT";
+  };
+  ui: {
+    config_diff?: Record<string, any>;
+    design_tokens: {
+      border_radius: "rounded";
+      border_width: "thin";
+      colors: {
+        background: {
+          /**
+           * @default #222222
+           */
+          ["600"]: string;
+          /**
+           * @default #1f1f1f
+           */
+          ["700"]: string;
+          /**
+           * @default #1b1b1b
+           */
+          ["800"]: string;
+          /**
+           * @default #181818
+           */
+          ["900"]: string;
+          /**
+           * @default #141414
+           */
+          ["1000"]: string;
+        };
+        brand: {
+          /**
+           * @default #844d1c
+           */
+          ["300"]: string;
+          /**
+           * @default #9d5b22
+           */
+          ["400"]: string;
+          /**
+           * @default #b56927
+           */
+          ["500"]: string;
+          /**
+           * @default #d37c30
+           */
+          ["600"]: string;
+          /**
+           * @default #d9904f
+           */
+          ["700"]: string;
+        };
+        /**
+         * @default #FF2D2D
+         */
+        danger: string;
+        /**
+         * @default #62A504
+         */
+        success: string;
+        /**
+         * @default #EEEEEE
+         */
+        text: string;
+        /**
+         * @default #EEEEEE
+         */
+        text_on_brand: string;
+        /**
+         * @default #191919
+         */
+        video_bg: string;
+        /**
+         * @default #FFCD07
+         */
+        warning: string;
+      };
+      logo: string;
+      /**
+       * @default 4
+       */
+      spacing_base: number;
+      theme: "dark";
+    };
+  };
+};
+
+/**
+ * Returned by Get All Presets route
+ */
+export type RealtimekitPresetListItem = {
+  /**
+   * Timestamp this preset was created at
+   *
+   * @format date-time
+   */
+  created_at?: string;
+  /**
+   * ID of the preset
+   *
+   * @format uuid
+   */
+  id?: string;
+  /**
+   * Name of the preset
+   */
+  name?: string;
+  /**
+   * Timestamp this preset was last updated
+   *
+   * @format date-time
+   */
+  updated_at?: string;
+};
+
+export type RealtimekitRecording = {
+  /**
+   * If the audio_config is passed, the URL for downloading the audio recording is returned.
+   *
+   * @format uri
+   */
+  audio_download_url: string | null;
+  /**
+   * URL where the recording can be downloaded.
+   *
+   * @format uri
+   */
+  download_url: string | null;
+  /**
+   * Timestamp when the download URL expires.
+   *
+   * @format date-time
+   */
+  download_url_expiry: string | null;
+  /**
+   * File size of the recording, in bytes.
+   */
+  file_size: number | null;
+  /**
+   * ID of the recording
+   *
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Timestamp when this recording was invoked.
+   *
+   * @format date-time
+   */
+  invoked_time: string;
+  /**
+   * File name of the recording.
+   */
+  output_file_name: string;
+  /**
+   * Total recording time in seconds.
+   */
+  recording_duration?: number;
+  /**
+   * ID of the meeting session this recording is for.
+   *
+   * @format uuid
+   */
+  session_id: string | null;
+  /**
+   * Timestamp when this recording actually started after being invoked. Usually a few seconds after `invoked_time`.
+   *
+   * @format date-time
+   */
+  started_time: string | null;
+  /**
+   * Current status of the recording.
+   */
+  status:
+    | "INVOKED"
+    | "RECORDING"
+    | "UPLOADING"
+    | "UPLOADED"
+    | "ERRORED"
+    | "PAUSED";
+  /**
+   * Timestamp when this recording was stopped. Optional; is present only when the recording has actually been stopped.
+   *
+   * @format date-time
+   */
+  stopped_time: string | null;
+};
+
+/**
+ * Recording Configurations to be used for this meeting. This level of configs takes higher preference over organization level configs on the RealtimeKit developer portal.
+ */
+export type RealtimekitRecordingConfig = {
+  audio_config?: RealtimekitAudioConfig;
+  /**
+   * Adds a prefix to the beginning of the file name of the recording.
+   */
+  file_name_prefix?: string;
+  live_streaming_config?: RealtimekitLivestreamingConfig;
+  /**
+   * Specifies the maximum duration for recording in seconds, ranging from a minimum of 60 seconds to a maximum of 24 hours.
+   *
+   * @maximum 86400
+   * @minimum 60
+   */
+  max_seconds?: number;
+  realtimekit_bucket_config?: RealtimekitRealtimekitBucketConfig;
+  storage_config?: RealtimekitStorageConfig;
+  video_config?: RealtimekitVideoConfig;
+};
+
+export type RealtimekitSessionParticipant = {
+  created_at: string;
+  /**
+   * Email of the session participant.
+   */
+  email?: string;
+  /**
+   * ID of the session participant
+   */
+  id: string;
+  /**
+   * Name of the session participant.
+   */
+  name?: string;
+  /**
+   * A URL pointing to a picture of the participant.
+   */
+  picture?: string;
+  updated_at: string;
+};
+
+export type RealtimekitStorageConfig = {
+  /**
+   * Access key of the storage medium. Access key is not required for the `gcs` storage media type.
+   *
+   * Note that this field is not readable by clients, only writeable.
+   */
+  access_key?: string;
+  /**
+   * Authentication method used for "sftp" type storage medium
+   */
+  auth_method?: "KEY" | "PASSWORD";
+  /**
+   * Name of the storage medium's bucket.
+   */
+  bucket?: string;
+  /**
+   * SSH destination server host for SFTP type storage medium
+   */
+  host?: string;
+  /**
+   * SSH destination server password for SFTP type storage medium when auth_method is "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh private key.
+   */
+  password?: string;
+  /**
+   * Path relative to the bucket root at which the recording will be placed.
+   */
+  path?: string;
+  /**
+   * SSH destination server port for SFTP type storage medium
+   */
+  port?: number;
+  /**
+   * Private key used to login to destination SSH server for SFTP type storage medium, when auth_method used is "KEY"
+   */
+  private_key?: string;
+  /**
+   * Region of the storage medium.
+   *
+   * @example us-east-1
+   */
+  region?: string;
+  /**
+   * Secret key of the storage medium. Similar to `access_key`, it is only writeable by clients, not readable.
+   */
+  secret?: string;
+  /**
+   * Type of storage media.
+   */
+  type: "aws" | "azure" | "digitalocean" | "gcs" | "sftp";
+  /**
+   * SSH destination server username for SFTP type storage medium
+   */
+  username?: string;
+} | null;
+
+/**
+ * Summary Config
+ */
+export type RealtimekitSummarizationConfig = {
+  /**
+   * Defines the style of the summary, such as general, team meeting, or sales call.
+   *
+   * @default general
+   */
+  summary_type?:
+    | "general"
+    | "team_meeting"
+    | "sales_call"
+    | "client_check_in"
+    | "interview"
+    | "daily_standup"
+    | "one_on_one_meeting"
+    | "lecture"
+    | "code_review";
+  /**
+   * Determines the text format of the summary, such as plain text or markdown.
+   *
+   * @default markdown
+   */
+  text_format?: "plain_text" | "markdown";
+  /**
+   * Sets the maximum number of words in the meeting summary.
+   *
+   * @default 500
+   * @maximum 1000
+   * @minimum 150
+   */
+  word_limit?: number;
+};
+
+export type RealtimekitTrackConfigLayer = {
+  /**
+   * A file name prefix to apply for files generated from this layer
+   */
+  file_name_prefix?: string;
+  outputs?: RealtimekitTrackLayerOutput[];
+};
+
+export type RealtimekitTrackLayerOutput = {
+  storage_config?: RealtimekitStorageConfig;
+  /**
+   * The type of output destination this layer is being exported to.
+   *
+   * @default REALTIMEKIT_BUCKET
+   */
+  type?: "REALTIMEKIT_BUCKET" | "STORAGE_CONFIG";
+};
+
+export type RealtimekitTranscript = {
+  sessionId: string;
+  /**
+   * URL where the transcript can be downloaded
+   */
+  transcript_download_url: string;
+  /**
+   * Time when the download URL will expire
+   */
+  transcript_download_url_expiry: string;
+};
+
+export type RealtimekitTranscriptSummary = {
+  sessionId: string;
+  /**
+   * URL where the summary of transcripts can be downloaded
+   */
+  summaryDownloadUrl: string;
+  /**
+   * Time of Expiry before when you need to download the csv file.
+   */
+  summaryDownloadUrlExpiry: string;
+};
+
+/**
+ * Transcription Configurations
+ */
+export type RealtimekitTranscriptionConfig = {
+  /**
+   * Adds specific terms to improve accurate detection during transcription.
+   */
+  keywords?: string[];
+  /**
+   * Specifies the language code for transcription to ensure accurate results.
+   *
+   * @default en-US
+   */
+  language?:
+    | "en-US"
+    | "en-IN"
+    | "de"
+    | "hi"
+    | "sv"
+    | "ru"
+    | "pl"
+    | "el"
+    | "fr"
+    | "nl";
+  /**
+   * Control the inclusion of offensive language in transcriptions.
+   *
+   * @default false
+   */
+  profanity_filter?: boolean;
+};
+
+export type RealtimekitUpdatePreset = {
+  config?: {
+    /**
+     * Maximum number of screen shares that can be active at a given time
+     */
+    max_screenshare_count?: number;
+    /**
+     * Maximum number of streams that are visible on a device
+     */
+    max_video_streams?: {
+      /**
+       * Maximum number of video streams visible on desktop devices
+       */
+      desktop?: number;
+      /**
+       * Maximum number of streams visible on mobile devices
+       */
+      mobile?: number;
+    };
+    /**
+     * Media configuration options. eg: Video quality
+     */
+    media?: {
+      /**
+       * Configuration options for participant screen shares
+       */
+      screenshare?: {
+        /**
+         * Frame rate of screen share
+         */
+        frame_rate?: number;
+        /**
+         * Quality of screen share
+         */
+        quality?: "hd" | "vga" | "qvga";
+      };
+      /**
+       * Configuration options for participant videos
+       */
+      video?: {
+        /**
+         * Frame rate of participants' video
+         *
+         * @maximum 30
+         */
+        frame_rate?: number;
+        /**
+         * Video quality of participants
+         */
+        quality?: "hd" | "vga" | "qvga";
+      };
+    };
+    /**
+     * Type of the meeting
+     */
+    view_type?: "GROUP_CALL" | "WEBINAR" | "AUDIO_ROOM";
+  };
+  /**
+   * Name of the preset
+   */
+  name?: string;
+  permissions?: {
+    /**
+     * Whether this participant can accept waiting requests
+     */
+    accept_waiting_requests?: boolean;
+    can_accept_production_requests?: boolean;
+    can_change_participant_permissions?: boolean;
+    can_edit_display_name?: boolean;
+    can_livestream?: boolean;
+    can_record?: boolean;
+    can_spotlight?: boolean;
+    /**
+     * Chat permissions
+     */
+    chat?: {
+      private?: {
+        can_receive?: boolean;
+        can_send?: boolean;
+        files?: boolean;
+        text?: boolean;
+      };
+      public?: {
+        /**
+         * Can send messages in general
+         */
+        can_send?: boolean;
+        /**
+         * Can send file messages
+         */
+        files?: boolean;
+        /**
+         * Can send text messages
+         */
+        text?: boolean;
+      };
+    };
+    connected_meetings?: {
+      can_alter_connected_meetings?: boolean;
+      can_switch_connected_meetings?: boolean;
+      can_switch_to_parent_meeting?: boolean;
+    };
+    disable_participant_audio?: boolean;
+    disable_participant_screensharing?: boolean;
+    disable_participant_video?: boolean;
+    /**
+     * Whether this participant is visible to others or not
+     */
+    hidden_participant?: boolean;
+    /**
+     * @default false
+     */
+    is_recorder?: boolean;
+    kick_participant?: boolean;
+    /**
+     * Media permissions
+     */
+    media?: {
+      /**
+       * Audio permissions
+       */
+      audio?: {
+        /**
+         * Can produce audio
+         */
+        can_produce?: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+      /**
+       * Screenshare permissions
+       */
+      screenshare?: {
+        /**
+         * Can produce screen share video
+         */
+        can_produce?: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+      /**
+       * Video permissions
+       */
+      video?: {
+        /**
+         * Can produce video
+         */
+        can_produce?: "ALLOWED" | "NOT_ALLOWED" | "CAN_REQUEST";
+      };
+    };
+    pin_participant?: boolean;
+    /**
+     * Plugin permissions
+     */
+    plugins?: {
+      /**
+       * Can close plugins that are already open
+       */
+      can_close?: boolean;
+      /**
+       * Can edit plugin config
+       */
+      can_edit_config?: boolean;
+      /**
+       * Can start plugins
+       */
+      can_start?: boolean;
+      config?:
+        | string
+        | {
+            access_control?: "FULL_ACCESS" | "VIEW_ONLY";
+            handles_view_only?: boolean;
+          };
+    };
+    /**
+     * Poll permissions
+     */
+    polls?: {
+      /**
+       * Can create polls
+       */
+      can_create?: boolean;
+      /**
+       * Can view polls
+       */
+      can_view?: boolean;
+      /**
+       * Can vote on polls
+       */
+      can_vote?: boolean;
+    };
+    /**
+     * Type of the recording peer
+     *
+     * @default NONE
+     */
+    recorder_type?: "RECORDER" | "LIVESTREAMER" | "NONE";
+    show_participant_list?: boolean;
+    /**
+     * Waiting room type
+     */
+    waiting_room_type?: "SKIP" | "ON_PRIVILEGED_USER_ENTRY" | "SKIP_ON_ACCEPT";
+  };
+  ui?: {
+    config_diff?: Record<string, any>;
+    design_tokens?: {
+      border_radius?: "rounded";
+      border_width?: "thin";
+      colors?: {
+        background?: {
+          /**
+           * @default #222222
+           */
+          ["600"]?: string;
+          /**
+           * @default #1f1f1f
+           */
+          ["700"]?: string;
+          /**
+           * @default #1b1b1b
+           */
+          ["800"]?: string;
+          /**
+           * @default #181818
+           */
+          ["900"]?: string;
+          /**
+           * @default #141414
+           */
+          ["1000"]?: string;
+        };
+        brand?: {
+          /**
+           * @default #844d1c
+           */
+          ["300"]?: string;
+          /**
+           * @default #9d5b22
+           */
+          ["400"]?: string;
+          /**
+           * @default #b56927
+           */
+          ["500"]?: string;
+          /**
+           * @default #d37c30
+           */
+          ["600"]?: string;
+          /**
+           * @default #d9904f
+           */
+          ["700"]?: string;
+        };
+        /**
+         * @default #FF2D2D
+         */
+        danger?: string;
+        /**
+         * @default #62A504
+         */
+        success?: string;
+        /**
+         * @default #EEEEEE
+         */
+        text?: string;
+        /**
+         * @default #EEEEEE
+         */
+        text_on_brand?: string;
+        /**
+         * @default #191919
+         */
+        video_bg?: string;
+        /**
+         * @default #FFCD07
+         */
+        warning?: string;
+      };
+      logo?: string;
+      /**
+       * @default 4
+       */
+      spacing_base?: number;
+      theme?: "dark";
+    };
+  };
+};
+
+export type RealtimekitVideoConfig = {
+  /**
+   * Codec using which the recording will be encoded.
+   *
+   * @default H264
+   */
+  codec?: "H264" | "VP8";
+  /**
+   * Controls whether to export video file seperately
+   *
+   * @default true
+   */
+  export_file?: boolean;
+  /**
+   * Height of the recording video in pixels
+   *
+   * @default 720
+   * @example 720
+   * @maximum 1920
+   * @minimum 1
+   */
+  height?: number;
+  /**
+   * Watermark to be added to the recording
+   */
+  watermark?: {
+    /**
+     * Position of the watermark
+     *
+     * @default left top
+     */
+    position?: "left top" | "right top" | "left bottom" | "right bottom";
+    /**
+     * Size of the watermark
+     */
+    size?: {
+      /**
+       * Height of the watermark in px
+       *
+       * @minimum 1
+       */
+      height?: number;
+      /**
+       * Width of the watermark in px
+       *
+       * @minimum 1
+       */
+      width?: number;
+    };
+    /**
+     * URL of the watermark image
+     *
+     * @format uri
+     */
+    url?: string;
+  };
+  /**
+   * Width of the recording video in pixels
+   *
+   * @default 1280
+   * @example 1280
+   * @maximum 1920
+   * @minimum 1
+   */
+  width?: number;
+};
+
+export type RealtimekitWebhook = {
+  /**
+   * Timestamp when this webhook was created
+   *
+   * @example 2022-05-28T07:01:53.075Z
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * Set to true if the webhook is active
+   */
+  enabled: boolean;
+  /**
+   * Events this webhook will send updates for
+   *
+   * @example meeting.started
+   * @example meeting.ended
+   * @example meeting.participantJoined
+   * @example meeting.participantLeft
+   * @example meeting.chatSynced
+   * @example recording.statusUpdate
+   * @example livestreaming.statusUpdate
+   * @example meeting.transcript
+   * @example meeting.summary
+   */
+  events: (
+    | "meeting.started"
+    | "meeting.ended"
+    | "meeting.participantJoined"
+    | "meeting.participantLeft"
+    | "meeting.chatSynced"
+    | "recording.statusUpdate"
+    | "livestreaming.statusUpdate"
+    | "meeting.transcript"
+    | "meeting.summary"
+  )[];
+  /**
+   * ID of the webhook
+   *
+   * @example 0d1f069d-43bb-489a-ad8c-7eb95592ba8e
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Name of the webhook
+   *
+   * @example All events webhook
+   */
+  name: string;
+  /**
+   * Timestamp when this webhook was updated
+   *
+   * @example 2022-05-28T07:01:53.075Z
+   * @format date-time
+   */
+  updated_at: string;
+  /**
+   * URL the webhook will send events to
+   *
+   * @example https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e
+   * @format uri
+   */
+  url: string;
+};
+
+export type RealtimekitWebhookRequest = {
+  /**
+   * Set whether or not the webhook should be active when created
+   *
+   * @default true
+   */
+  enabled?: boolean;
+  /**
+   * Events that this webhook will get triggered by
+   *
+   * @example meeting.started
+   * @example meeting.ended
+   * @example meeting.participantJoined
+   * @example meeting.participantLeft
+   * @example meeting.chatSynced
+   * @example recording.statusUpdate
+   * @example livestreaming.statusUpdate
+   * @example meeting.transcript
+   * @example meeting.summary
+   */
+  events: (
+    | "meeting.started"
+    | "meeting.ended"
+    | "meeting.participantJoined"
+    | "meeting.participantLeft"
+    | "meeting.chatSynced"
+    | "recording.statusUpdate"
+    | "livestreaming.statusUpdate"
+    | "meeting.transcript"
+    | "meeting.summary"
+  )[];
+  /**
+   * Name of the webhook
+   *
+   * @example All events webhook
+   */
+  name: string;
+  /**
+   * URL this webhook will send events to
+   *
+   * @example https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e
+   * @format uri
+   */
+  url: string;
+};
+
+export type RealtimekitWebhookSuccessResponse = {
+  data: RealtimekitWebhook;
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitWebhooksListSuccessResponse = {
+  data: RealtimekitWebhook[];
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+/**
+ * The account identifier tag.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type RealtimekitAccountIdentifier = string;
+
+/**
+ * The date and time the item was created.
+ *
+ * @example 2025-01-02T02:20:00Z
+ * @format date-time
+ */
+export type RealtimekitCreated = string;
+
+/**
+ * A Cloudflare-generated unique identifier for a item.
+ *
+ * @example 2a95132c15732412d22c1476fa83f27a
+ * @maxLength 32
+ * @minLength 32
+ * @x-auditable true
+ */
+export type RealtimekitIdentifier = string;
+
+/**
+ * The date and time the item was last modified.
+ *
+ * @example 2025-01-02T02:20:00Z
+ * @format date-time
+ */
+export type RealtimekitModified = string;
+
+export type RealtimekitRealtimekitBucketConfig = {
+  /**
+   * Controls whether recordings are uploaded to RealtimeKit's bucket. If set to false, `download_url`, `audio_download_url`, `download_url_expiry` won't be generated for a recording.
+   */
+  enabled: boolean;
+};
+
+/**
+ * Bearer token
+ *
+ * @example 66bcf64aa8907b9f9d90ac17746a77ce394c393b92b3916633dc02846e608ad4
+ * @maxLength 64
+ * @minLength 64
+ * @x-sensitive true
+ */
+export type RealtimekitSecret = string;
+
+export type RealtimekitStartReason = {
+  caller?: {
+    /**
+     * Name of the user who started the recording.
+     *
+     * @example RealtimeKit_test
+     */
+    name?: string;
+    /**
+     * The type can be an organization or a user. If the type is `user`, then only the `user_Id` and `name` are returned.
+     */
+    type?: "ORGANIZATION" | "USER";
+    /**
+     * The user ID of the person who started the recording.
+     *
+     * @example d61f6956-e68f-4375-bf10-c38a704d1bec
+     * @format uuid
+     */
+    user_Id?: string;
+  };
+  /**
+   * Specifies if the recording was started using the "Start a Recording"API or using the parameter RECORD_ON_START in the "Create a meeting" API.
+   *
+   * If the recording is initiated using the "RECORD_ON_START" parameter, the user details will not be populated.
+   */
+  reason?: "API_CALL" | "RECORD_ON_START";
+};
+
+export type RealtimekitStopReason = {
+  caller?: {
+    /**
+     * Name of the user who stopped the recording.
+     *
+     * @example RealtimeKit_test
+     */
+    name?: string;
+    /**
+     * The type can be an organization or a user. If the type is `user`, then only the `user_Id` and `name` are returned.
+     */
+    type?: "ORGANIZATION" | "USER";
+    /**
+     * The user ID of the person who stopped the recording.
+     *
+     * @example d61f6956-e68f-4375-bf10-c38a704d1bec
+     * @format uuid
+     */
+    user_Id?: string;
+  };
+  /**
+   * Specifies the reason why the recording stopped.
+   */
+  reason?: "API_CALL" | "INTERNAL_ERROR" | "ALL_PEERS_LEFT";
+};
+
+export type RealtimekitSuccess = boolean;
+
+/**
  * Address.
  *
  * @example 123 Sesame St.
@@ -38863,7 +41665,7 @@ export type RequestTracerApiResponseCommon = {
   errors: RequestTracerMessages;
   messages: RequestTracerMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -38879,7 +41681,7 @@ export type RequestTracerApiResponseCommonFailure = {
   messages: RequestTracerMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -38887,10 +41689,11 @@ export type RequestTracerApiResponseCommonFailure = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type RequestTracerIdentifier = string;
 
@@ -38899,7 +41702,11 @@ export type RequestTracerMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type RequestTracerTrace = {
@@ -38908,48 +41715,56 @@ export type RequestTracerTrace = {
    *
    * @example execute
    * @pattern ^[a-z_]+$
+   * @x-auditable true
    */
   action?: string;
   /**
    * If step type is rule, then action parameters of this rule as JSON
    *
    * @example {"id":"4814384a9e5d4991b9815dcfc25d2f1f"}
+   * @x-auditable true
    */
   action_parameters?: Record<string, any>;
   /**
    * If step type is rule or ruleset, the description of this entity
    *
    * @example some rule
+   * @x-auditable true
    */
   description?: string;
   /**
    * If step type is rule, then expression used to match for this rule
    *
    * @example ip.src ne 1.1.1.1
+   * @x-auditable true
    */
   expression?: string;
   /**
    * If step type is ruleset, then kind of this ruleset
    *
    * @example zone
+   * @x-auditable true
    */
   kind?: string;
   /**
    * Whether tracing step affected tracing request/response
    *
    * @example true
+   * @x-auditable true
    */
   matched?: boolean;
   /**
    * If step type is ruleset, then name of this ruleset
    *
    * @example some ruleset name
+   * @x-auditable true
    */
   name?: string;
   /**
    * Tracing step identifying name
    *
    * @example rule_id01
+   * @x-auditable true
    */
   step_name?: string;
   trace?: RequestTracerTrace;
@@ -38957,6 +41772,7 @@ export type RequestTracerTrace = {
    * Tracing step type
    *
    * @example rule
+   * @x-auditable true
    */
   type?: string;
 }[];
@@ -38966,6 +41782,7 @@ export type RequestTracerTrace = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingAccountId = string;
 
@@ -38973,6 +41790,7 @@ export type ResourceSharingAccountId = string;
  * The display name of an account.
  *
  * @example Account A
+ * @x-auditable true
  */
 export type ResourceSharingAccountName = string;
 
@@ -39010,6 +41828,7 @@ export type ResourceSharingApiResponseCommonFailure = {
    * Whether the API call was successful.
    *
    * @example false
+   * @x-auditable true
    */
   success: boolean;
 };
@@ -39040,6 +41859,7 @@ export type ResourceSharingCreateShareResourceRequest = {
  *
  * @example 2023-09-21T18:56:32.624632Z
  * @format date-time
+ * @x-auditable true
  */
 export type ResourceSharingCreated = string;
 
@@ -39048,6 +41868,7 @@ export type ResourceSharingCreated = string;
  *
  * @example 2023-09-21T18:56:32.624632Z
  * @format date-time
+ * @x-auditable true
  */
 export type ResourceSharingModified = string;
 
@@ -39056,11 +41877,14 @@ export type ResourceSharingModified = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingOrganizationId = string;
 
 /**
  * Share Recipient association status.
+ *
+ * @x-auditable true
  */
 export type ResourceSharingRecipientAssociationStatus =
   | "associating"
@@ -39073,13 +41897,23 @@ export type ResourceSharingRecipientAssociationStatus =
  *
  * @example 3fd85f74b32742f1bff64a85009dda07
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingRecipientId = string;
+
+/**
+ * Share Recipient error message.
+ *
+ * @example Recipient is missing necessary entitlement
+ * @x-auditable true
+ */
+export type ResourceSharingRecipientResourceError = string;
 
 /**
  * Share Recipient status message.
  *
  * @example Cannot share to account that owns the resource
+ * @x-auditable true
  */
 export type ResourceSharingRecipientStatusMessage = string;
 
@@ -39088,6 +41922,7 @@ export type ResourceSharingRecipientStatusMessage = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingResourceId = string;
 
@@ -39101,21 +41936,34 @@ export type ResourceSharingResourceMeta = Record<string, any>;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingResourceResourceId = string;
 
 /**
  * Resource Status.
+ *
+ * @x-auditable true
  */
 export type ResourceSharingResourceStatus = "active" | "deleting" | "deleted";
 
 /**
  * Resource Type.
+ *
+ * @x-auditable true
  */
-export type ResourceSharingResourceType = "custom-ruleset" | "widget";
+export type ResourceSharingResourceType =
+  | "custom-ruleset"
+  | "widget"
+  | "gateway-policy"
+  | "gateway-destination-ip"
+  | "gateway-block-page-settings"
+  | "gateway-extended-email-matching";
 
 /**
  * Resource Version.
+ *
+ * @x-auditable true
  */
 export type ResourceSharingResourceVersion = number;
 
@@ -39157,27 +42005,60 @@ export type ResourceSharingResultInfo = {
  *
  * @example 3fd85f74b32742f1bff64a85009dda07
  * @maxLength 32
+ * @x-auditable true
  */
 export type ResourceSharingShareId = string;
 
+/**
+ * @x-auditable true
+ */
 export type ResourceSharingShareKind = "sent" | "received";
 
 /**
  * The name of the share.
  *
  * @example My Shared WAF Managed Rule
+ * @x-auditable true
  */
 export type ResourceSharingShareName = string;
 
 export type ResourceSharingShareObject = {
   account_id: ResourceSharingAccountId;
   account_name: ResourceSharingAccountName;
+  /**
+   * The number of recipients in the 'associated' state. This field is only included when requested via the 'include_recipient_counts' parameter.
+   *
+   * @example 10
+   */
+  associated_recipient_count?: number;
+  /**
+   * The number of recipients in the 'associating' state. This field is only included when requested via the 'include_recipient_counts' parameter.
+   *
+   * @example 1
+   */
+  associating_recipient_count?: number;
   created: ResourceSharingCreated;
+  /**
+   * The number of recipients in the 'disassociated' state. This field is only included when requested via the 'include_recipient_counts' parameter.
+   *
+   * @example 0
+   */
+  disassociated_recipient_count?: number;
+  /**
+   * The number of recipients in the 'disassociating' state. This field is only included when requested via the 'include_recipient_counts' parameter.
+   *
+   * @example 0
+   */
+  disassociating_recipient_count?: number;
   id: ResourceSharingShareId;
   kind?: ResourceSharingShareKind;
   modified: ResourceSharingModified;
   name: ResourceSharingShareName;
   organization_id: ResourceSharingOrganizationId;
+  /**
+   * A list of resources that are part of the share. This field is only included when requested via the 'include_resources' parameter.
+   */
+  resources?: ResourceSharingShareResourceObject[];
   status: ResourceSharingShareStatus;
   target_type: ResourceSharingShareTargetType;
 };
@@ -39188,7 +42069,14 @@ export type ResourceSharingShareRecipientObject = {
   created: ResourceSharingCreated;
   id: ResourceSharingRecipientId;
   modified: ResourceSharingModified;
+  resources?: ResourceSharingShareRecipientResourceObject[];
   status_message: ResourceSharingRecipientStatusMessage;
+};
+
+export type ResourceSharingShareRecipientResourceObject = {
+  error: ResourceSharingRecipientResourceError;
+  resource_id: ResourceSharingResourceResourceId;
+  resource_version: ResourceSharingResourceVersion;
 };
 
 export type ResourceSharingShareRecipientResponseCollection =
@@ -39251,9 +42139,18 @@ export type ResourceSharingShareResponseSingle = {
   success: boolean;
 };
 
+/**
+ * @x-auditable true
+ */
 export type ResourceSharingShareStatus = "active" | "deleting" | "deleted";
 
+/**
+ * @x-auditable true
+ */
 export type ResourceSharingShareTargetType = "account" | "organization";
+
+export type ResourceSharingUpdateShareRecipientsRequest =
+  ResourceSharingCreateShareRecipientRequest[];
 
 export type ResourceSharingUpdateShareRequest = {
   name: ResourceSharingShareName;
@@ -44042,7 +46939,7 @@ export type SpeedApiResponseCommon = {
   errors: SpeedMessages;
   messages: SpeedMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    * @x-auditable true
@@ -44059,7 +46956,7 @@ export type SpeedApiResponseCommonFailure = {
   messages: SpeedMessages;
   result: Record<string, any> | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    * @x-auditable true
@@ -44183,7 +47080,7 @@ export type SpeedCloudflareSpeedBrainResponse = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -44482,6 +47379,15 @@ export type StreamDirectUploadResponse = StreamApiResponseSingle & {
  * @x-auditable true
  */
 export type StreamDirectUser = boolean;
+
+/**
+ * The type of downloads available are: `default`, `audio`.
+ *
+ * @default default
+ * @example audio
+ * @x-auditable true
+ */
+export type StreamDownloadType = string;
 
 /**
  * The source URL for a downloaded image. If the watermark profile was created via direct upload, this field is null.
@@ -47101,6 +50007,10 @@ export type TeamsDevicesPhysicalDevice = {
    */
   last_seen_at: string | null;
   /**
+   * The summary of a registration.
+   */
+  last_seen_registration?: TeamsDevicesRegistrationDetails | null;
+  /**
    * The last user to use the WARP device.
    */
   last_seen_user?: TeamsDevicesUser | null;
@@ -47180,6 +50090,36 @@ export type TeamsDevicesPlatform =
   | "chromeos";
 
 /**
+ * The device settings profile assigned to this registration.
+ */
+export type TeamsDevicesPolicySummary = {
+  /**
+   * Whether the device settings profile is the default profile for the account.
+   */
+  ["default"]: boolean;
+  /**
+   * Whether the device settings profile was deleted.
+   */
+  deleted: boolean;
+  /**
+   * The ID of the device settings profile.
+   *
+   * @example 11ffb86f-3f0c-4306-b4a2-e62f872b166a
+   */
+  id: string;
+  /**
+   * The name of the device settings profile.
+   */
+  name: string;
+  /**
+   * The RFC3339 timestamp of when the device settings profile last changed for the registration.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  updated_at: string;
+};
+
+/**
  * The precedence of the policy. Lower values indicate higher precedence. Policies will be evaluated in ascending order of this field.
  *
  * @example 100
@@ -47241,6 +50181,7 @@ export type TeamsDevicesRegistration = {
    * @x-auditable true
    */
   last_seen_at: string;
+  policy?: TeamsDevicesPolicySummary;
   /**
    * The RFC3339 timestamp when the registration was revoked.
    *
@@ -47263,6 +50204,16 @@ export type TeamsDevicesRegistration = {
    */
   updated_at: string;
   user?: TeamsDevicesUser;
+};
+
+/**
+ * The summary of a registration.
+ */
+export type TeamsDevicesRegistrationDetails = {
+  /**
+   * The device settings profile assigned to this registration.
+   */
+  policy?: TeamsDevicesPolicySummary | null;
 };
 
 /**
@@ -48726,7 +51677,7 @@ export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSch
     | "deployment_timed_out"
     | "deletion_timed_out";
 
-export type TlsCertificatesAndHostnamesCustomTrustStoreObject = {
+export type TlsCertificatesAndHostnamesCustomTrustStore = {
   certificate: TlsCertificatesAndHostnamesComponentsSchemasCertificate;
   expires_on: TlsCertificatesAndHostnamesSchemasExpiresOn;
   id: TlsCertificatesAndHostnamesIdentifier;
@@ -48816,12 +51767,19 @@ export type TlsCertificatesAndHostnamesCustomOriginSni = string;
 
 export type TlsCertificatesAndHostnamesCustomTrustStoreResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
-    result?: TlsCertificatesAndHostnamesCustomTrustStoreObject[];
+    result?: TlsCertificatesAndHostnamesCustomTrustStore[];
+  };
+
+export type TlsCertificatesAndHostnamesCustomTrustStoreResponseIdOnly =
+  TlsCertificatesAndHostnamesApiResponseSingle & {
+    result?: {
+      id?: TlsCertificatesAndHostnamesIdentifier;
+    };
   };
 
 export type TlsCertificatesAndHostnamesCustomTrustStoreResponseSingle =
   TlsCertificatesAndHostnamesApiResponseSingle & {
-    result?: TlsCertificatesAndHostnamesCustomTrustStoreObject;
+    result?: TlsCertificatesAndHostnamesCustomTrustStore;
   };
 
 export type TlsCertificatesAndHostnamesCustomhostname = {
@@ -50591,6 +53549,16 @@ export type TunnelClientId = string;
 export type TunnelColoName = string;
 
 /**
+ * UUID of the tunnel.
+ *
+ * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
+ * @format uuid
+ * @maxLength 36
+ * @x-auditable true
+ */
+export type TunnelComponentsSchemasTunnelId = string;
+
+/**
  * The tunnel configuration and ingress rules.
  */
 export type TunnelConfig = {
@@ -50723,6 +53691,65 @@ export type TunnelExistedAt = string;
  * Features enabled for the Cloudflare Tunnel.
  */
 export type TunnelFeatures = string[];
+
+/**
+ * The hostname of the route.
+ *
+ * @example office-1.local
+ * @x-auditable true
+ */
+export type TunnelHostname = string;
+
+/**
+ * An optional description of the hostname route.
+ *
+ * @example example comment
+ * @x-auditable true
+ */
+export type TunnelHostnameComment = string;
+
+/**
+ * If set, only list hostname routes with the given comment.
+ *
+ * @example example%20comment
+ */
+export type TunnelHostnameQueryComment = string;
+
+export type TunnelHostnameRoute = {
+  comment?: TunnelHostnameComment;
+  created_at?: TunnelCreatedAt;
+  deleted_at?: TunnelDeletedAt;
+  hostname?: TunnelHostname;
+  id?: TunnelHostnameRouteId;
+  tunnel_id?: TunnelComponentsSchemasTunnelId;
+  tunnel_name?: TunnelSchemasTunnelName;
+};
+
+/**
+ * The hostname route ID.
+ *
+ * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
+ * @format uuid
+ * @x-auditable true
+ */
+export type TunnelHostnameRouteId = string;
+
+export type TunnelHostnameRouteResponseCollection =
+  TunnelApiResponseCollection & {
+    result?: TunnelHostnameRoute[];
+  };
+
+export type TunnelHostnameRouteResponseSingle = {
+  errors: TunnelMessages;
+  messages: TunnelMessages;
+  result: TunnelHostnameRoute;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: true;
+};
 
 /**
  * A flag to enable the ICMP proxy for the account network.
@@ -51136,6 +54163,13 @@ export type TunnelSchemasMessages = {
  * @maxLength 36
  */
 export type TunnelSchemasTunnelId = string;
+
+/**
+ * A user-friendly name for a tunnel.
+ *
+ * @example api-tunnel
+ */
+export type TunnelSchemasTunnelName = string;
 
 /**
  * The status of the tunnel. Valid values are `inactive` (tunnel has never been run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy state), `healthy` (tunnel is active and able to serve traffic), or `down` (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
@@ -52568,240 +55602,6 @@ export type WafManagedRulesTraditionalDenyRule = WafManagedRulesBase & {
   allowed_modes?: WafManagedRulesAllowedModesDenyTraditional;
   default_mode?: WafManagedRulesDefaultMode;
   mode?: WafManagedRulesModeDenyTraditional;
-};
-
-export type WafProductApiBundleApiResponseCollection = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: Record<string, any> | Record<string, any>[] | string | null;
-  /**
-   * Defines whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type WafProductApiBundleApiResponseCommon = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: Record<string, any> | Record<string, any>[] | string;
-  /**
-   * Defines whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type WafProductApiBundleApiResponseCommonFailure = {
-  /**
-   * @example {"code":10100,"message":"Unknown error occured, please try again"}
-   * @minLength 1
-   */
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: any | null;
-  /**
-   * Defines whether the API call was successful.
-   *
-   * @example false
-   */
-  success: false;
-};
-
-export type WafProductApiBundleApiResponseSingle = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: (Record<string, any> | null) | (string | null) | string;
-  /**
-   * Defines whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-/**
- * Defines a custom set of username/password expressions to match Leaked Credential Checks on.
- */
-export type WafProductApiBundleCustomDetection = {
-  id?: WafProductApiBundleDetectionId;
-  /**
-   * Defines ehe ruleset expression to use in matching the password in a request.
-   *
-   * @example lookup_json_string(http.request.body.raw, "secret")
-   * @x-auditable true
-   */
-  password?: string;
-  /**
-   * Defines the ruleset expression to use in matching the username in a request.
-   *
-   * @example lookup_json_string(http.request.body.raw, "user")
-   * @x-auditable true
-   */
-  username?: string;
-};
-
-/**
- * Defines a custom scan expression to match Content Scanning on.
- */
-export type WafProductApiBundleCustomScan = {
-  id?: WafProductApiBundleCustomScanId;
-  payload?: WafProductApiBundleCustomScanPayload;
-};
-
-/**
- * Defines an identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- * @x-auditable true
- */
-export type WafProductApiBundleCustomScanId = WafProductApiBundleIdentifier;
-
-/**
- * Defines the ruleset expression to use in matching content objects.
- *
- * @example lookup_json_string(http.request.body.raw, "file")
- * @x-auditable true
- */
-export type WafProductApiBundleCustomScanPayload = string;
-
-/**
- * Defines an identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @x-auditable true
- * @maxLength 32
- */
-export type WafProductApiBundleDetectionId = WafProductApiBundleIdentifier;
-
-/**
- * Defines an identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- * @x-auditable true
- */
-export type WafProductApiBundleIdentifier = string;
-
-export type WafProductApiBundleMessages = {
-  /**
-   * @minimum 1000
-   */
-  code: number;
-  message: string;
-}[];
-
-export type WafProductApiBundleResponseCustomDetection =
-  WafProductApiBundleApiResponseSingle & {
-    result?: WafProductApiBundleCustomDetection;
-  };
-
-export type WafProductApiBundleResponseCustomDetectionCollection =
-  WafProductApiBundleApiResponseCollection & {
-    result?: WafProductApiBundleCustomDetection[];
-  };
-
-export type WafProductApiBundleResponseCustomScanCollection =
-  WafProductApiBundleSchemasApiResponseCollection & {
-    result?: WafProductApiBundleCustomScan[];
-  };
-
-export type WafProductApiBundleResponseStatus =
-  WafProductApiBundleApiResponseSingle & {
-    result?: WafProductApiBundleStatus;
-  };
-
-export type WafProductApiBundleSchemasApiResponseCollection = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: Record<string, any> | Record<string, any>[] | (string | null) | null;
-  /**
-   * Whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type WafProductApiBundleSchemasApiResponseCommon = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: Record<string, any> | Record<string, any>[] | (string | null);
-  /**
-   * Whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type WafProductApiBundleSchemasApiResponseCommonFailure = {
-  /**
-   * @example {"code":10000,"message":"Authentication error"}
-   * @minLength 1
-   */
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: any | null;
-  /**
-   * Whether the API call was successful.
-   *
-   * @example false
-   */
-  success: false;
-};
-
-export type WafProductApiBundleSchemasApiResponseSingle = {
-  errors: WafProductApiBundleMessages;
-  messages: WafProductApiBundleMessages;
-  result: (Record<string, any> | null) | (string | null) | (string | null);
-  /**
-   * Whether the API call was successful.
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type WafProductApiBundleSchemasResponseStatus =
-  WafProductApiBundleSchemasApiResponseSingle & {
-    result?: WafProductApiBundleSchemasStatus;
-  };
-
-/**
- * Defines the status for Content Scanning.
- */
-export type WafProductApiBundleSchemasStatus = {
-  /**
-   * Defines the last modification date (ISO 8601) of the Content Scanning status.
-   *
-   * @example 2024-12-02T09:57:23.150259Z
-   * @x-auditable true
-   */
-  modified?: string;
-  /**
-   * Defines the status of Content Scanning.
-   *
-   * @example enabled
-   * @x-auditable true
-   */
-  value?: string;
-};
-
-/**
- * Defines the overall status for Leaked Credential Checks.
- */
-export type WafProductApiBundleStatus = {
-  /**
-   * Determines whether or not Leaked Credential Checks are enabled.
-   *
-   * @example true
-   * @x-auditable true
-   */
-  enabled?: boolean;
 };
 
 /**
@@ -54901,6 +57701,10 @@ export type WorkersVersion = {
   };
   /**
    * Configuration for assets within a Worker.
+   *
+   * [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers) and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/) files should be
+   * included as modules named `_headers` and `_redirects` with content type `text/plain`.
    */
   assets?: {
     /**
@@ -54910,6 +57714,7 @@ export type WorkersVersion = {
       /**
        * Determines the redirects and rewrites of requests for HTML content.
        *
+       * @default auto-trailing-slash
        * @example auto-trailing-slash
        */
       html_handling?:
@@ -54920,9 +57725,13 @@ export type WorkersVersion = {
       /**
        * Determines the response when a request does not match a static asset, and there is no Worker script.
        *
+       * @default none
        * @example 404-page
        */
       not_found_handling?: "none" | "404-page" | "single-page-application";
+      /**
+       * @default false
+       */
       run_worker_first?: string[] | boolean;
     };
     /**
@@ -54972,6 +57781,11 @@ export type WorkersVersion = {
   migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
   /**
    * Code, sourcemaps, and other content used at runtime.
+   *
+   * This includes [`_headers`](https://developers.cloudflare.com/workers/static-assets/headers/#custom-headers) and
+   * [`_redirects`](https://developers.cloudflare.com/workers/static-assets/redirects/) files used to configure
+   * [Static Assets](https://developers.cloudflare.com/workers/static-assets/). `_headers` and `_redirects` files should be
+   * included as modules named `_headers` and `_redirects` with content type `text/plain`.
    *
    * @x-stainless-collection-type set
    */
@@ -55035,19 +57849,17 @@ export type WorkersWorker = {
    */
   created_on: string;
   /**
-   * Identifier.
+   * Immutable ID of the Worker.
    *
-   * @example 023e105f4ecef8ad9ca31a8372d0c353
-   * @maxLength 32
-   * @x-auditable true
+   * @example e8f70fdbc8b1fb0b8ddb1af166186758
    */
-  id: WorkersIdentifier;
+  id: string;
   /**
    * Whether logpush is enabled for the Worker.
    *
    * @default false
    */
-  logpush?: boolean;
+  logpush: boolean;
   /**
    * Name of the Worker.
    *
@@ -55058,7 +57870,7 @@ export type WorkersWorker = {
   /**
    * Observability settings for the Worker.
    */
-  observability?: {
+  observability: {
     /**
      * Whether observability is enabled for the Worker.
      *
@@ -55069,6 +57881,7 @@ export type WorkersWorker = {
      * The sampling rate for observability. From 0 to 1 (1 = 100%, 0.1 = 10%).
      *
      * @default 1
+     * @example 1
      */
     head_sampling_rate?: number;
     /**
@@ -55085,6 +57898,7 @@ export type WorkersWorker = {
        * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%).
        *
        * @default 1
+       * @example 1
        */
       head_sampling_rate?: number;
       /**
@@ -55098,7 +57912,7 @@ export type WorkersWorker = {
   /**
    * Subdomain settings for the Worker.
    */
-  subdomain?: {
+  subdomain: {
     /**
      * Whether the *.workers.dev subdomain is enabled for the Worker.
      *
@@ -55120,13 +57934,13 @@ export type WorkersWorker = {
    * @maxItems 8
    * @x-stainless-collection-type set
    */
-  tags?: string[];
+  tags: string[];
   /**
    * Other Workers that should consume logs from the Worker.
    *
    * @x-stainless-collection-type set
    */
-  tail_consumers?: {
+  tail_consumers: {
     /**
      * Name of the consumer Worker.
      *
@@ -55290,9 +58104,12 @@ export type WorkersBindingItem =
   | WorkersBindingKindAssets
   | WorkersBindingKindBrowser
   | WorkersBindingKindD1
+  | WorkersBindingKindDataBlob
   | WorkersBindingKindDispatchNamespace
   | WorkersBindingKindDurableObjectNamespace
   | WorkersBindingKindHyperdrive
+  | WorkersBindingKindInherit
+  | WorkersBindingKindImages
   | WorkersBindingKindJson
   | WorkersBindingKindKvNamespace
   | WorkersBindingKindMtlsCertificate
@@ -55301,13 +58118,16 @@ export type WorkersBindingItem =
   | WorkersBindingKindQueue
   | WorkersBindingKindR2Bucket
   | WorkersBindingKindSecretText
+  | WorkersBindingKindSendEmail
   | WorkersBindingKindService
   | WorkersBindingKindTailConsumer
+  | WorkersBindingKindTextBlob
   | WorkersBindingKindVectorize
   | WorkersBindingKindVersionMetadata
   | WorkersBindingKindSecretsStoreSecret
   | WorkersBindingKindSecretKey
-  | WorkersBindingKindWorkflow;
+  | WorkersBindingKindWorkflow
+  | WorkersBindingKindWasmModule;
 
 export type WorkersBindingKindAi = {
   name: WorkersBindingName;
@@ -55371,6 +58191,24 @@ export type WorkersBindingKindD1 = {
    * @x-auditable true
    */
   type: "d1";
+};
+
+export type WorkersBindingKindDataBlob = {
+  name: WorkersBindingName;
+  /**
+   * The name of the file containing the data content. Only accepted for `service worker syntax` Workers.
+   *
+   * @example my-module.bin
+   * @x-auditable true
+   */
+  part: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @deprecated true
+   * @x-auditable true
+   */
+  type: "data_blob";
 };
 
 export type WorkersBindingKindDispatchNamespace = {
@@ -55475,6 +58313,47 @@ export type WorkersBindingKindHyperdrive = {
   type: "hyperdrive";
 };
 
+export type WorkersBindingKindImages = {
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
+   */
+  type: "images";
+};
+
+export type WorkersBindingKindInherit = {
+  /**
+   * The name of the inherited binding.
+   *
+   * @example MY_BINDING
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * The old name of the inherited binding. If set, the binding will be renamed from `old_name` to `name` in the new version. If not set, the binding will keep the same name between versions.
+   *
+   * @example MY_OLD_BINDING
+   * @x-auditable true
+   */
+  old_name?: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
+   */
+  type: "inherit";
+  /**
+   * Identifier for the version to inherit the binding from, which can be the version ID or the literal "latest" to inherit from the latest version. Defaults to inheriting the binding from the latest version.
+   *
+   * @default latest
+   * @example 8969331f-7192-434c-9938-6aea24ed58bf
+   * @x-auditable true
+   */
+  version_id?: string;
+};
+
 export type WorkersBindingKindJson = {
   /**
    * JSON data to use.
@@ -55577,6 +58456,13 @@ export type WorkersBindingKindR2Bucket = {
    * @x-auditable true
    */
   bucket_name: string;
+  /**
+   * The [jurisdiction](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) of the R2 bucket.
+   *
+   * @example eu
+   * @x-auditable true
+   */
+  jurisdiction?: "eu" | "fedramp";
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
@@ -55680,14 +58566,49 @@ export type WorkersBindingKindSecretsStoreSecret = {
   type: "secrets_store_secret";
 };
 
+export type WorkersBindingKindSendEmail = {
+  /**
+   * List of allowed destination addresses.
+   *
+   * @example user1@example.com
+   * @example user2@example.com
+   * @x-auditable true
+   */
+  allowed_destination_addresses?: string[];
+  /**
+   * List of allowed sender addresses.
+   *
+   * @example user1@example.com
+   * @example user2@example.com
+   * @x-auditable true
+   */
+  allowed_sender_addresses?: string[];
+  /**
+   * Destination address for the email.
+   *
+   * @example user@example.com
+   * @format email
+   * @x-auditable true
+   */
+  destination_address?: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
+   */
+  type: "send_email";
+};
+
 export type WorkersBindingKindService = {
   /**
    * Optional environment if the Worker utilizes one.
    *
+   * @default production
    * @example production
    * @x-auditable true
    */
-  environment: string;
+  environment?: string;
   name: WorkersBindingName;
   /**
    * Name of Worker to bind to.
@@ -55721,6 +58642,24 @@ export type WorkersBindingKindTailConsumer = {
   type: "tail_consumer";
 };
 
+export type WorkersBindingKindTextBlob = {
+  name: WorkersBindingName;
+  /**
+   * The name of the file containing the text content. Only accepted for `service worker syntax` Workers.
+   *
+   * @example my-module.txt
+   * @x-auditable true
+   */
+  part: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @deprecated true
+   * @x-auditable true
+   */
+  type: "text_blob";
+};
+
 export type WorkersBindingKindVectorize = {
   /**
    * Name of the Vectorize index to bind to.
@@ -55746,6 +58685,24 @@ export type WorkersBindingKindVersionMetadata = {
    * @x-auditable true
    */
   type: "version_metadata";
+};
+
+export type WorkersBindingKindWasmModule = {
+  name: WorkersBindingName;
+  /**
+   * The name of the file containing the WebAssembly module content. Only accepted for `service worker syntax` Workers.
+   *
+   * @example my-module.wasm
+   * @x-auditable true
+   */
+  part: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @deprecated true
+   * @x-auditable true
+   */
+  type: "wasm_module";
 };
 
 export type WorkersBindingKindWorkflow = {
@@ -56143,7 +59100,7 @@ export type WorkersMultipartScript = {
     assets?: WorkersAssets;
     bindings?: WorkersBindings;
     /**
-     * Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+     * Name of the uploaded file that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
      *
      * @example worker.js
      */
@@ -56165,7 +59122,7 @@ export type WorkersMultipartScript = {
     limits?: WorkersLimits;
     logpush?: WorkersLogpush;
     /**
-     * Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     * Name of the uploaded file that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
      *
      * @example worker.js
      */
@@ -56215,6 +59172,23 @@ export type WorkersNamespaceResponse = {
   namespace_name?: WorkersDispatchNamespaceName;
   script_count?: WorkersScriptCount;
   trusted_workers?: WorkersTrustedWorkers;
+};
+
+/**
+ * Detail about bulk deletion of scripts in a namespace.
+ */
+export type WorkersNamespaceScriptDeleteBulkResponse = {
+  deleted?: {
+    id?: WorkersUuid;
+  }[];
+  /**
+   * @example 100
+   */
+  deleted_count?: number;
+  /**
+   * @example false
+   */
+  has_more?: boolean;
 };
 
 /**
@@ -56282,6 +59256,13 @@ export type WorkersObservability = {
    */
   logs?: {
     /**
+     * A list of destinations where logs will be exported to.
+     *
+     * @example cloudflare
+     * @x-auditable true
+     */
+    destinations?: string[];
+    /**
      * Whether logs are enabled for the Worker.
      *
      * @example true
@@ -56302,6 +59283,14 @@ export type WorkersObservability = {
      * @x-auditable true
      */
     invocation_logs: boolean;
+    /**
+     * Whether log persistence is enabled for the Worker.
+     *
+     * @default true
+     * @example true
+     * @x-auditable true
+     */
+    persist?: boolean;
   } | null;
 };
 
@@ -56456,8 +59445,12 @@ export type WorkersScriptAndVersionSettingsItem = {
    */
   placement?: WorkersPlacementInfoNoStatus & Record<string, any>;
   /**
-   * Tags to help you manage your Workers.
+   * Tags associated with the Worker.
    *
+   * @example my-team
+   * @example my-public-api
+   * @maxItems 10
+   * @x-auditable true
    * @x-stainless-collection-type set
    */
   tags?: WorkersTags & string[];
@@ -56575,6 +59568,16 @@ export type WorkersScriptSettingsItem = {
    */
   observability?: WorkersObservability & (Record<string, any> | null);
   /**
+   * Tags associated with the Worker.
+   *
+   * @example my-team
+   * @example my-public-api
+   * @maxItems 10
+   * @x-auditable true
+   * @x-stainless-collection-type set
+   */
+  tags?: WorkersTags & (WorkersTag[] | null);
+  /**
    * List of Workers that will consume logs from the attached Worker.
    *
    * @x-stainless-collection-type set
@@ -56618,6 +59621,14 @@ export type WorkersSecret =
 export type WorkersSecretName = string;
 
 /**
+ * Flag that indicates whether the secret name is URL encoded.
+ *
+ * @example true
+ * @x-auditable true
+ */
+export type WorkersSecretNameUrlEncoded = boolean;
+
+/**
  * Name of Worker to bind to.
  *
  * @example my-worker
@@ -56635,30 +59646,35 @@ export type WorkersSubdomain = {
   /**
    * Whether the Worker is available on the workers.dev subdomain.
    *
-   * @example true
+   * @default false
+   * @example false
    * @x-auditable true
    */
   enabled: boolean;
   /**
    * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    *
-   * @example true
+   * @default false
+   * @example false
    * @x-auditable true
    */
   previews_enabled: boolean;
 };
 
 /**
- * Tag to help you manage your Worker.
- *
  * @example my-tag
- * @x-auditable true
+ * @maxLength 1024
+ * @pattern ^[^,&]*$
  */
 export type WorkersTag = string;
 
 /**
- * Tags to help you manage your Workers.
+ * Tags associated with the Worker.
  *
+ * @example my-team
+ * @example my-public-api
+ * @maxItems 10
+ * @x-auditable true
  * @x-stainless-collection-type set
  */
 export type WorkersTags = WorkersTag[];
@@ -57717,7 +60733,7 @@ export type ZarazZoneIdentifier = ZarazIdentifier;
 
 export type ZeroTrustGatewayAccountLogOptions = {
   /**
-   * Log all requests to this service.
+   * Specify whether to log all requests to this service.
    *
    * @default false
    * @example false
@@ -57725,7 +60741,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
    */
   log_all?: boolean;
   /**
-   * Log only blocking requests to this service.
+   * Specify whether to log only blocking requests to this service.
    *
    * @default false
    * @example true
@@ -57735,7 +60751,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
 };
 
 /**
- * The action to perform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.
+ * Specify the action to perform when the associated traffic, identity, and device posture expressions either absent or evaluate to `true`.
  *
  * @example allow
  * @x-auditable true
@@ -57759,13 +60775,13 @@ export type ZeroTrustGatewayAction =
   | "redirect";
 
 /**
- * Activity log settings.
+ * Specify activity log settings.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayActivityLogSettings = {
   /**
-   * Enable activity logging.
+   * Specify whether to log activity.
    *
    * @example true
    * @x-auditable true
@@ -57774,7 +60790,7 @@ export type ZeroTrustGatewayActivityLogSettings = {
 } | null;
 
 /**
- * Anti-virus settings.
+ * Specify anti-virus settings.
  *
  * @x-stainless-terraform-configurability optional
  */
@@ -57794,7 +60810,7 @@ export type ZeroTrustGatewayApiResponseCommon = {
   errors: ZeroTrustGatewayMessages;
   messages: ZeroTrustGatewayMessages;
   /**
-   * Whether the API call was successful.
+   * Indicate whether the API call was successful.
    *
    * @example true
    */
@@ -57810,7 +60826,7 @@ export type ZeroTrustGatewayApiResponseCommonFailure = {
   messages: ZeroTrustGatewayMessages;
   result: any | null;
   /**
-   * Whether the API call was successful.
+   * Indicate whether the API call was successful.
    *
    * @example false
    */
@@ -57825,7 +60841,7 @@ export type ZeroTrustGatewayAppTypes =
   | ZeroTrustGatewayApplicationType;
 
 /**
- * The name of the application or application type.
+ * Specify the name of the application or application type.
  *
  * @example Facebook
  * @x-auditable true
@@ -57838,14 +60854,32 @@ export type ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection =
   };
 
 /**
- * The identifier for this application. There is only one application per ID.
+ * Identify this application. Only one application per ID.
  *
  * @x-auditable true
  */
 export type ZeroTrustGatewayAppId = number;
 
 /**
- * The identifier for the type of this application. There can be many applications with the same type. This refers to the `id` of a returned application type.
+ * @x-auditable true
+ */
+export type ZeroTrustGatewayAppReviewResponse =
+  ZeroTrustGatewayApiResponseSingle & {
+    result?: Record<string, any>;
+  };
+
+export type ZeroTrustGatewayAppReviewResponseContent = {
+  result?: {
+    approved_apps?: ZeroTrustGatewayApprovedApps;
+    created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+    in_review_apps?: ZeroTrustGatewayInReviewApps;
+    unapproved_apps?: ZeroTrustGatewayUnapprovedApps;
+    updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+  };
+};
+
+/**
+ * Identify the type of this application. Multiple applications can share the same type. Refers to the `id` of a returned application type.
  *
  * @x-auditable true
  */
@@ -57861,7 +60895,7 @@ export type ZeroTrustGatewayApplication = {
 export type ZeroTrustGatewayApplicationType = {
   created_at?: ZeroTrustGatewayTimestamp;
   /**
-   * A short summary of applications with this type.
+   * Provide a short summary of applications with this type.
    *
    * @example Applications used to communicate or collaborate in a business setting.
    */
@@ -57870,13 +60904,20 @@ export type ZeroTrustGatewayApplicationType = {
   name?: ZeroTrustGatewayAppTypesComponentsSchemasName;
 };
 
+/**
+ * Defines the list of "approved" app ids.
+ *
+ * @x-stainless-collection-type set
+ */
+export type ZeroTrustGatewayApprovedApps = number[];
+
 export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse =
   ZeroTrustGatewayApiResponseSingle & {
     result?: ZeroTrustGatewaySettings;
   };
 
 /**
- * Seed ID.
+ * Identify the seed ID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -57885,7 +60926,7 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse =
 export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid = string;
 
 /**
- * True if the category is in beta and subject to change.
+ * Indicate whether the category is in beta and subject to change.
  *
  * @example false
  * @x-auditable true
@@ -57893,7 +60934,7 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid = string;
 export type ZeroTrustGatewayBeta = boolean;
 
 /**
- * The read only deployment status of the certificate on Cloudflare's edge. Certificates in the 'available' (previously called 'active') state may be used for Gateway TLS interception.
+ * Indicate the read-only deployment status of the certificate on Cloudflare's edge. Gateway TLS interception can use certificates in the 'available' (previously called 'active') state.
  *
  * @x-auditable true
  */
@@ -57904,67 +60945,67 @@ export type ZeroTrustGatewayBindingStatus =
   | "inactive";
 
 /**
- * Block page layout settings.
+ * Specify block page layout settings.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBlockPageSettings = {
   /**
-   * If mode is customized_block_page: block page background color in #rrggbb format.
+   * Specify the block page background color in `#rrggbb` format when the mode is customized_block_page.
    *
    * @x-auditable true
    */
   background_color?: string;
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
+   * Specify whether to enable the custom block page.
    *
    * @example true
    * @x-auditable true
    */
   enabled?: boolean | null;
   /**
-   * If mode is customized_block_page: block page footer text.
+   * Specify the block page footer text when the mode is customized_block_page.
    *
    * @example --footer--
    * @x-auditable true
    */
   footer_text?: string;
   /**
-   * If mode is customized_block_page: block page header text.
+   * Specify the block page header text when the mode is customized_block_page.
    *
    * @example --header--
    * @x-auditable true
    */
   header_text?: string;
   /**
-   * If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.
+   * Specify whether to append context to target_uri as query parameters. This applies only when the mode is redirect_uri.
    *
    * @x-auditable true
    */
   include_context?: boolean;
   /**
-   * If mode is customized_block_page: full URL to the logo file.
+   * Specify the full URL to the logo file when the mode is customized_block_page.
    *
    * @example https://logos.com/a.png
    * @x-auditable true
    */
   logo_path?: string;
   /**
-   * If mode is customized_block_page: admin email for users to contact.
+   * Specify the admin email for users to contact when the mode is customized_block_page.
    *
    * @example admin@example.com
    * @x-auditable true
    */
   mailto_address?: string;
   /**
-   * If mode is customized_block_page: subject line for emails created from block page.
+   * Specify the subject line for emails created from the block page when the mode is customized_block_page.
    *
    * @example Blocked User Inquiry
    * @x-auditable true
    */
   mailto_subject?: string;
   /**
-   * Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.
+   * Specify whether to redirect users to a Cloudflare-hosted block page or a customer-provided URI.
    *
    * @default
    * @x-auditable true
@@ -57972,39 +61013,39 @@ export type ZeroTrustGatewayBlockPageSettings = {
    */
   mode?: "" | "customized_block_page" | "redirect_uri";
   /**
-   * If mode is customized_block_page: block page title.
+   * Specify the block page title when the mode is customized_block_page.
    *
    * @example Cloudflare
    * @x-auditable true
    */
   name?: string;
   /**
-   * This setting was shared via the Orgs API and cannot be edited by the current account.
+   * Indicate that this setting was shared via the Orgs API and read only for the current account.
    *
    * @x-auditable true
    */
   read_only?: boolean | null;
   /**
-   * Account tag of account that shared this setting.
+   * Indicate the account tag of the account that shared this setting.
    *
    * @x-auditable true
    */
   source_account?: string | null;
   /**
-   * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
+   * Specify whether to suppress detailed information at the bottom of the block page when the mode is customized_block_page.
    *
    * @example false
    */
   suppress_footer?: boolean;
   /**
-   * If mode is redirect_uri: URI to which the user should be redirected.
+   * Specify the URI to redirect users to when the mode is redirect_uri.
    *
    * @format uri
    * @x-auditable true
    */
   target_uri?: string;
   /**
-   * Version number of the setting.
+   * Indicate the version number of the setting.
    *
    * @example 1
    * @x-auditable true
@@ -58013,13 +61054,13 @@ export type ZeroTrustGatewayBlockPageSettings = {
 } | null;
 
 /**
- * DLP body scanning settings.
+ * Specify the DLP inspection mode.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBodyScanningSettings = {
   /**
-   * Set the inspection mode to either `deep` or `shallow`.
+   * Specify the inspection mode as either `deep` or `shallow`.
    *
    * @example deep
    * @x-auditable true
@@ -58028,20 +61069,20 @@ export type ZeroTrustGatewayBodyScanningSettings = {
 } | null;
 
 /**
- * Browser isolation settings.
+ * Specify Clientless Browser Isolation settings.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayBrowserIsolationSettings = {
   /**
-   * Enable non-identity onramp support for Browser Isolation.
+   * Specify whether to enable non-identity onramp support for Browser Isolation.
    *
    * @example true
    * @x-auditable true
    */
   non_identity_enabled?: boolean;
   /**
-   * Enable Clientless Browser Isolation.
+   * Specify whether to enable Clientless Browser Isolation.
    *
    * @example true
    * @x-auditable true
@@ -58056,13 +61097,13 @@ export type ZeroTrustGatewayCategories = {
   id?: ZeroTrustGatewayId;
   name?: ZeroTrustGatewayCategoriesComponentsSchemasName;
   /**
-   * All subcategories for this category.
+   * Provide all subcategories for this category.
    */
   subcategories?: ZeroTrustGatewaySubcategory[];
 };
 
 /**
- * The name of the category.
+ * Specify the category name.
  *
  * @example Education
  */
@@ -58074,13 +61115,13 @@ export type ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection =
   };
 
 /**
- * Certificate settings for Gateway TLS interception. If not specified, the Cloudflare Root CA will be used.
+ * Specify certificate settings for Gateway TLS interception. If unset, the Cloudflare Root CA handles interception.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayCertificateSettings = {
   /**
-   * UUID of certificate to be used for interception. Certificate must be available (previously called 'active') on the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
+   * Specify the UUID of the certificate used for interception. Ensure the certificate is available at the edge(previously called 'active'). A nil UUID directs Cloudflare to use the Root CA.
    *
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
    * @x-auditable true
@@ -58091,7 +61132,7 @@ export type ZeroTrustGatewayCertificateSettings = {
 export type ZeroTrustGatewayCertificates = {
   binding_status?: ZeroTrustGatewayBindingStatus;
   /**
-   * The CA certificate(read only).
+   * Provide the CA certificate (read-only).
    *
    * @example -----BEGIN CERTIFICATE-----\nMIIDmDCCAoCgAwIBAgIUKTOAZNjcXVZRj4oQt0SHsl1c1vMwDQYJKoZIhvcNAQELBQAwUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjAgFw0yMjExMjIxNjU5NDdaGA8yMTIyMTAyOTE2NTk0N1owUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRcORwgJFTdcG/2GKI+cFYiOBNDKjCZUXEOvXWY42BkH9wxiMT869CO+enA1w5pIrXow6kCM1sQspHHaVmJUlotEMJxyoLFfA/8Kt1EKFyobOjuZs2SwyVyJ2sStvQuUQEosULZCNGZEqoH5g6zhMPxaxm7ZLrrsDZ9maNGVqo7EWLWHrZ57Q/5MtTrbxQL+eXjUmJ9K3kS+3uEwMdqR6Z3BluU1ivanpPc1CN2GNhdO0/hSY4YkGEnuLsqJyDd3cIiB1MxuCBJ4ZaqOd2viV1WcP3oU3dxVPm4MWyfYIldMWB14FahScxLhWdRnM9YZ/i9IFcLypXsuz7DjrJPtPUCAwEAAaNmMGQwHQYDVR0OBBYEFP5JzLUawNF+c3AXsYTEWHh7z2czMB8GA1UdIwQYMBaAFP5JzLUawNF+c3AXsYTEWHh7z2czMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMA0GCSqGSIb3DQEBCwUAA4IBAQBc+Be7NDhpE09y7hLPZGRPl1cSKBw4RI0XIv6rlbSTFs5EebpTGjhx/whNxwEZhB9HZ7111Oa1YlT8xkI9DshB78mjAHCKBAJ76moK8tkG0aqdYpJ4ZcJTVBB7l98Rvgc7zfTii7WemTy72deBbSeiEtXavm4EF0mWjHhQ5Nxpnp00Bqn5g1x8CyTDypgmugnep+xG+iFzNmTdsz7WI9T/7kDMXqB7M/FPWBORyS98OJqNDswCLF8bIZYwUBEe+bRHFomoShMzaC3tvim7WCb16noDkSTMlfKO4pnvKhpcVdSgwcruATV7y+W+Lvmz2OT/Gui4JhqeoTewsxndhDDE\n-----END CERTIFICATE-----\n
    */
@@ -58099,7 +61140,7 @@ export type ZeroTrustGatewayCertificates = {
   created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   expires_on?: ZeroTrustGatewayReadOnlyTimestamp;
   /**
-   * The SHA256 fingerprint of the certificate(read only).
+   * Provide the SHA256 fingerprint of the certificate (read-only).
    *
    * @example E9:19:49:AA:DD:D8:1E:C1:20:2A:D8:22:BF:A5:F8:FC:1A:F7:10:9F:C7:5B:69:AB:0:31:91:8B:61:B4:BF:1C
    * @x-auditable true
@@ -58107,20 +61148,20 @@ export type ZeroTrustGatewayCertificates = {
   fingerprint?: string;
   id?: ZeroTrustGatewayUuid;
   /**
-   * Read-only field that shows whether Gateway TLS interception is using this certificate. This value cannot be set directly. To configure the certificate for interception, use the Gateway configuration setting named certificate.
+   * Indicate whether Gateway TLS interception uses this certificate (read-only). You cannot set this value directly. To configure interception, use the Gateway configuration setting named `certificate` (read-only).
    *
-   * @default false
+   * @x-stainless-terraform-configurability computed
    */
   in_use?: boolean;
   /**
-   * The organization that issued the certificate(read only).
+   * Indicate the organization that issued the certificate (read-only).
    *
    * @example Example Inc.
    * @x-auditable true
    */
   issuer_org?: string;
   /**
-   * The entire issuer field of the certificate(read only).
+   * Provide the entire issuer field of the certificate (read-only).
    *
    * @example O=Example Inc.,L=California,ST=San Francisco,C=US
    * @x-auditable true
@@ -58132,7 +61173,7 @@ export type ZeroTrustGatewayCertificates = {
 };
 
 /**
- * Cloudflare account ID.
+ * Specify the Cloudflare account ID.
  *
  * @example 699d98642c564d2e855e9661899b7252
  * @maxLength 32
@@ -58140,7 +61181,7 @@ export type ZeroTrustGatewayCertificates = {
 export type ZeroTrustGatewayCfAccountId = string;
 
 /**
- * Which account types are allowed to create policies based on this category. `blocked` categories are blocked unconditionally for all accounts. `removalPending` categories can be removed from policies but not added. `noBlock` categories cannot be blocked.
+ * Specify which account types can create policies for this category. `blocked` Blocks unconditionally for all accounts. `removalPending` Allows removal from policies but disables addition. `noBlock` Prevents blocking.
  *
  * @example premium
  * @x-auditable true
@@ -58153,7 +61194,7 @@ export type ZeroTrustGatewayClass =
   | "noBlock";
 
 /**
- * True if the location is the default location.
+ * Indicate whether this location is the default location.
  *
  * @default false
  * @example false
@@ -58162,7 +61203,7 @@ export type ZeroTrustGatewayClass =
 export type ZeroTrustGatewayClientDefault = boolean;
 
 /**
- * A short summary of domains in the category.
+ * Provide a short summary of domains in the category.
  *
  * @example Sites related to educational content that are not included in other categories such as Science, Technology or Educational institutions.
  * @x-auditable true
@@ -58170,7 +61211,7 @@ export type ZeroTrustGatewayClientDefault = boolean;
 export type ZeroTrustGatewayComponentsSchemasDescription = string;
 
 /**
- * Identifier.
+ * Provide the identifier string.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -58179,7 +61220,7 @@ export type ZeroTrustGatewayComponentsSchemasDescription = string;
 export type ZeroTrustGatewayComponentsSchemasIdentifier = string;
 
 /**
- * The name of the rule.
+ * Specify the rule name.
  *
  * @example block bad websites
  * @x-auditable true
@@ -58203,35 +61244,35 @@ export type ZeroTrustGatewayComponentsSchemasSingleResponse =
 export type ZeroTrustGatewayComponentsSchemasUuid = string;
 
 /**
- * The number of items in the list.
+ * Indicate the number of items in the list.
  *
  * @example 20
  */
 export type ZeroTrustGatewayCount = number;
 
 /**
- * Custom certificate settings for BYO-PKI. (deprecated and replaced by `certificate`).
+ * Specify custom certificate settings for BYO-PKI. This field is deprecated; use `certificate` instead.
  *
  * @deprecated true
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
-   * Certificate status (internal).
+   * Indicate the internal certificate status.
    *
    * @example pending_deployment
    * @x-auditable true
    */
   binding_status?: string;
   /**
-   * Enable use of custom certificate authority for signing Gateway. traffic.
+   * Specify whether to enable a custom certificate authority for signing Gateway traffic.
    *
    * @example true
    * @x-auditable true
    */
   enabled: boolean | null;
   /**
-   * UUID of certificate (ID from MTLS certificate store).
+   * Specify the UUID of the certificate (ID from MTLS certificate store).
    *
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
    * @x-auditable true
@@ -58244,14 +61285,14 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
 } | null;
 
 /**
- * Date of deletion, if any.
+ * Indicate the date of deletion, if any.
  *
  * @format date-time
  */
 export type ZeroTrustGatewayDeletedAt = string | null;
 
 /**
- * The description of the list.
+ * Provide the list description.
  *
  * @example The serial numbers for administrators
  * @x-auditable true
@@ -58260,7 +61301,7 @@ export type ZeroTrustGatewayDeletedAt = string | null;
 export type ZeroTrustGatewayDescription = string;
 
 /**
- * The description of the list item, if present.
+ * Provide the list item description (optional).
  *
  * @example Austin office IP
  * @minimum 0
@@ -58268,7 +61309,7 @@ export type ZeroTrustGatewayDescription = string;
 export type ZeroTrustGatewayDescriptionItem = string;
 
 /**
- * The wirefilter expression used for device posture check matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
+ * Specify the wirefilter expression used for device posture check. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.
  *
  * @default
  * @example any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})
@@ -58278,7 +61319,7 @@ export type ZeroTrustGatewayDescriptionItem = string;
 export type ZeroTrustGatewayDevicePosture = string;
 
 /**
- * The identifier of the pair of IPv4 addresses assigned to this location.
+ * Indicate the identifier of the pair of IPv4 addresses assigned to this location.
  *
  * @default 0e4a32c6-6fb8-4858-9296-98f51631e8e6
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
@@ -58288,7 +61329,7 @@ export type ZeroTrustGatewayDevicePosture = string;
 export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
 
 /**
- * The identifier of the pair of IPv4 addresses assigned to this location. When creating a location, if this field is absent or set with null, the pair of shared IPv4 addresses (0e4a32c6-6fb8-4858-9296-98f51631e8e6) is auto-assigned. When updating a location, if the field is absent or set with null, the pre-assigned pair remains unchanged.
+ * Specify the identifier of the pair of IPv4 addresses assigned to this location. When creating a location, if this field is absent or set to null, the pair of shared IPv4 addresses (0e4a32c6-6fb8-4858-9296-98f51631e8e6) is auto-assigned. When updating a location, if this field is absent or set to null, the pre-assigned pair remains unchanged.
  *
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
  * @x-auditable true
@@ -58297,7 +61338,7 @@ export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
 export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
 
 /**
- * The uuid identifier of the IPv6 block brought to the gateway, so that this location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block and not from the standard Cloudflare IPv6 block.
+ * Specify the UUID of the IPv6 block brought to the gateway so that this location's IPv6 address is allocated from the Bring Your Own IPv6 (BYOIPv6) block rather than the standard Cloudflare IPv6 block.
  *
  * @example b08f7231-d458-495c-98ef-190604c9ee83
  * @x-auditable true
@@ -58310,28 +61351,28 @@ export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
  */
 export type ZeroTrustGatewayDnsResolverSettingsV4 = {
   /**
-   * IPv4 address of upstream resolver.
+   * Specify the IPv4 address of the upstream resolver.
    *
    * @example 2.2.2.2
    * @x-auditable true
    */
   ip: string;
   /**
-   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
+   * Specify a port number to use for the upstream resolver. Defaults to 53 if unspecified.
    *
    * @example 5053
    * @x-auditable true
    */
   port?: number;
   /**
-   * Whether to connect to this resolver over a private network. Must be set when vnet_id is set.
+   * Indicate whether to connect to this resolver over a private network. Must set when vnet_id set.
    *
    * @example true
    * @x-auditable true
    */
   route_through_private_network?: boolean;
   /**
-   * Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.
+   * Specify an optional virtual network for this resolver. Uses default virtual network id if omitted.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @x-auditable true
@@ -58344,28 +61385,28 @@ export type ZeroTrustGatewayDnsResolverSettingsV4 = {
  */
 export type ZeroTrustGatewayDnsResolverSettingsV6 = {
   /**
-   * IPv6 address of upstream resolver.
+   * Specify the IPv6 address of the upstream resolver.
    *
    * @example 2001:DB8::
    * @x-auditable true
    */
   ip: string;
   /**
-   * A port number to use for upstream resolver. Defaults to 53 if unspecified.
+   * Specify a port number to use for the upstream resolver. Defaults to 53 if unspecified.
    *
    * @example 5053
    * @x-auditable true
    */
   port?: number;
   /**
-   * Whether to connect to this resolver over a private network. Must be set when vnet_id is set.
+   * Indicate whether to connect to this resolver over a private network. Must set when vnet_id set.
    *
    * @example true
    * @x-auditable true
    */
   route_through_private_network?: boolean;
   /**
-   * Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.
+   * Specify an optional virtual network for this resolver. Uses default virtual network id if omitted.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @x-auditable true
@@ -58375,7 +61416,7 @@ export type ZeroTrustGatewayDnsResolverSettingsV6 = {
 
 export type ZeroTrustGatewayDohEndpoint = {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOH endpoint is enabled for this location.
    *
    * @example true
    * @x-auditable true
@@ -58384,7 +61425,7 @@ export type ZeroTrustGatewayDohEndpoint = {
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpNetworks;
   /**
-   * True if the endpoint requires [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user) authentication.
+   * Specify whether the DOH endpoint requires user identity authentication.
    *
    * @example true
    * @x-auditable true
@@ -58395,7 +61436,7 @@ export type ZeroTrustGatewayDohEndpoint = {
 
 export type ZeroTrustGatewayDotEndpoint = {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the DOT endpoint is enabled for this location.
    *
    * @example true
    * @x-auditable true
@@ -58406,7 +61447,7 @@ export type ZeroTrustGatewayDotEndpoint = {
 };
 
 /**
- * True if the location needs to resolve EDNS queries.
+ * Indicate whether the location must resolve EDNS queries.
  *
  * @default false
  * @example false
@@ -58420,7 +61461,7 @@ export type ZeroTrustGatewayEmptyResponse =
   };
 
 /**
- * True if the rule is enabled.
+ * Specify whether the rule is enabled.
  *
  * @default false
  * @example true
@@ -58429,7 +61470,7 @@ export type ZeroTrustGatewayEmptyResponse =
 export type ZeroTrustGatewayEnabled = boolean;
 
 /**
- * Enable anti-virus scanning on downloads.
+ * Specify whether to enable anti-virus scanning on downloads.
  *
  * @example false
  * @x-auditable true
@@ -58438,7 +61479,7 @@ export type ZeroTrustGatewayEnabled = boolean;
 export type ZeroTrustGatewayEnabledDownloadPhase = boolean | null;
 
 /**
- * Enable anti-virus scanning on uploads.
+ * Specify whether to enable anti-virus scanning on uploads.
  *
  * @example false
  * @x-auditable true
@@ -58447,7 +61488,7 @@ export type ZeroTrustGatewayEnabledDownloadPhase = boolean | null;
 export type ZeroTrustGatewayEnabledUploadPhase = boolean | null;
 
 /**
- * The destination endpoints configured for this location. When updating a location, if this field is absent or set with null, the endpoints configuration remains unchanged.
+ * Configure the destination endpoints for this location.
  *
  * @x-stainless-terraform-configurability optional
  */
@@ -58459,16 +61500,13 @@ export type ZeroTrustGatewayEndpoints = {
 } | null;
 
 /**
- * The expiration time stamp and default duration of a DNS policy. Takes
- * precedence over the policy's `schedule` configuration, if any.
- *
- * This does not apply to HTTP or network policies.
+ * Defines the expiration time stamp and default duration of a DNS policy. Takes precedence over the policy's `schedule` configuration, if any. This  does not apply to HTTP or network policies. Settable only for `dns` rules.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayExpiration = {
   /**
-   * The default duration a policy will be active in minutes. Must be set in order to use the `reset_expiration` endpoint on this rule.
+   * Defines the default duration a policy active in minutes. Must set in order to use the `reset_expiration` endpoint on this rule.
    *
    * @example 10
    * @minimum 5
@@ -58476,24 +61514,14 @@ export type ZeroTrustGatewayExpiration = {
    */
   duration?: number;
   /**
-   * Whether the policy has expired.
+   * Indicates whether the policy is expired.
    *
    * @example false
    * @x-auditable true
    */
   expired?: boolean;
   /**
-   * The time stamp at which the policy will expire and cease to be
-   * applied.
-   *
-   * Must adhere to RFC 3339 and include a UTC offset. Non-zero
-   * offsets are accepted but will be converted to the equivalent
-   * value with offset zero (UTC+00:00) and will be returned as time
-   * stamps with offset zero denoted by a trailing 'Z'.
-   *
-   * Policies with an expiration do not consider the timezone of
-   * clients they are applied to, and expire "globally" at the point
-   * given by their `expires_at` value.
+   * Show the timestamp when the policy expires and stops applying.  The value must follow RFC 3339 and include a UTC offset.  The system accepts non-zero offsets but converts them to the equivalent UTC+00:00  value and returns timestamps with a trailing Z. Expiration policies ignore client  timezones and expire globally at the specified expires_at time.
    *
    * @example 2014-01-01T05:20:20Z
    * @format date-time
@@ -58503,34 +61531,34 @@ export type ZeroTrustGatewayExpiration = {
 } | null;
 
 /**
- * Extended e-mail matching settings.
+ * Specify user email settings for the firewall policies. When this is enabled, we standardize the email addresses in the identity part of the rule, so that they match the extended email variants in the firewall policies. When this setting is turned off, the email addresses in the identity part of the rule will be matched exactly as provided. If your email has `.` or `+` modifiers, you should enable this setting.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
-   * Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.
+   * Specify whether to match all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.
    *
    * @example true
    * @x-auditable true
    */
   enabled?: boolean | null;
   /**
-   * This setting was shared via the Orgs API and cannot be edited by the current account.
+   * Indicate that this setting was shared via the Orgs API and read only for the current account.
    *
    * @x-auditable true
    * @x-stainless-terraform-configurability optional
    */
   read_only?: boolean;
   /**
-   * Account tag of account that shared this setting.
+   * Indicate the account tag of the account that shared this setting.
    *
    * @x-auditable true
    * @x-stainless-terraform-configurability optional
    */
   source_account?: string;
   /**
-   * Version number of the setting.
+   * Indicate the version number of the setting.
    *
    * @example 1
    * @x-auditable true
@@ -58540,7 +61568,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
 } | null;
 
 /**
- * Block requests for files that cannot be scanned.
+ * Specify whether to block requests for unscannable files.
  *
  * @example false
  * @x-auditable true
@@ -58549,7 +61577,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
 export type ZeroTrustGatewayFailClosed = boolean | null;
 
 /**
- * The protocol or layer to evaluate the traffic, identity, and device. posture expressions.
+ * Specify the protocol or layer to evaluate the traffic, identity, and device posture expressions.
  *
  * @example http
  */
@@ -58562,13 +61590,13 @@ export type ZeroTrustGatewayFilters = (
 )[];
 
 /**
- * FIPS settings.
+ * Specify FIPS settings.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayFipsSettings = {
   /**
-   * Enable only cipher suites and TLS versions compliant with FIPS. 140-2.
+   * Enforce cipher suites and TLS versions compliant with FIPS 140-2.
    *
    * @example true
    * @x-auditable true
@@ -58578,7 +61606,7 @@ export type ZeroTrustGatewayFipsSettings = {
 
 export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
   /**
-   * Redact personally identifiable information from activity logging (PII fields are: source IP, user email, user ID, device ID, URL, referrer, user agent).
+   * Indicate whether to redact personally identifiable information from activity logging (PII fields include source IP, user email, user ID, device ID, URL, referrer, and user agent).
    *
    * @default false
    * @example true
@@ -58586,11 +61614,20 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
    */
   redact_pii?: boolean;
   /**
-   * Logging settings by rule type.
+   * Configure logging settings for each rule type.
    */
   settings_by_rule_type?: {
+    /**
+     * Configure logging settings for DNS firewall.
+     */
     dns?: ZeroTrustGatewayAccountLogOptions;
+    /**
+     * Configure logging settings for HTTP/HTTPS firewall.
+     */
     http?: ZeroTrustGatewayAccountLogOptions;
+    /**
+     * Configure logging settings for Network firewall.
+     */
     l4?: ZeroTrustGatewayAccountLogOptions;
   };
 };
@@ -58601,11 +61638,11 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettingsResponse =
   };
 
 /**
- * Account settings.
+ * Specify account settings.
  */
 export type ZeroTrustGatewayGatewayAccountSettings = {
   /**
-   * Account settings.
+   * Specify account settings.
    */
   settings?: {
     activity_log?: ZeroTrustGatewayActivityLogSettings;
@@ -58637,7 +61674,7 @@ export type ZeroTrustGatewayGatewayAccount =
 export type ZeroTrustGatewayGatewayAccountConfig =
   ZeroTrustGatewayApiResponseSingle & {
     /**
-     * Account settings.
+     * Specify account settings.
      */
     result?: ZeroTrustGatewayGatewayAccountSettings & {
       created_at?: ZeroTrustGatewayReadOnlyTimestamp;
@@ -58646,7 +61683,7 @@ export type ZeroTrustGatewayGatewayAccountConfig =
   };
 
 /**
- * Gateway internal ID.
+ * Specify the gateway internal ID.
  *
  * @example f174e90afafe4643bbbc4a0ed4fc8415
  * @maxLength 32
@@ -58655,7 +61692,7 @@ export type ZeroTrustGatewayGatewayTag = string;
 
 export type ZeroTrustGatewayGenerateCertRequest = {
   /**
-   * Number of days the generated certificate will be valid, minimum 1 day and maximum 30 years. Defaults to 5 years. In terraform, validity_period_days can only be used while creating a certificate, and this CAN NOT be used to extend the validity of an already generated certificate.
+   * Sets the certificate validity period in days (range: 1-10,950 days / ~30 years). Defaults to 1,825 days (5 years). **Important**: This field is only settable during the certificate creation.  Certificates becomes immutable after creation - use the `/activate` and `/deactivate` endpoints to manage certificate lifecycle.
    *
    * @example 1826
    * @x-auditable true
@@ -58664,13 +61701,13 @@ export type ZeroTrustGatewayGenerateCertRequest = {
 };
 
 /**
- * Setting to enable host selector in egress policies.
+ * Enable host selection in egress policies.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayHostSelectorSettings = {
   /**
-   * Enable filtering via hosts for egress policies.
+   * Specify whether to enable filtering via hosts for egress policies.
    *
    * @example false
    * @x-auditable true
@@ -58679,7 +61716,7 @@ export type ZeroTrustGatewayHostSelectorSettings = {
 } | null;
 
 /**
- * The identifier for this category. There is only one category per ID.
+ * Identify this category. Only one category per ID.
  *
  * @x-auditable true
  */
@@ -58691,7 +61728,7 @@ export type ZeroTrustGatewayId = number;
 export type ZeroTrustGatewayIdentifier = string;
 
 /**
- * The wirefilter expression used for identity matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
+ * Specify the wirefilter expression used for identity matching. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.
  *
  * @default
  * @example any(identity.groups.name[*] in {"finance"})
@@ -58701,15 +61738,20 @@ export type ZeroTrustGatewayIdentifier = string;
 export type ZeroTrustGatewayIdentity = string;
 
 /**
- * Setting to define inspection settings.
+ * Defines the list of "in review" app ids.
+ *
+ * @x-stainless-collection-type set
+ */
+export type ZeroTrustGatewayInReviewApps = number[];
+
+/**
+ * Define the proxy inspection mode.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayInspectionSettings = {
   /**
-   * Defines the mode of inspection the proxy will use.
-   * - static: Gateway will use static inspection to inspect HTTP on TCP(80). If TLS decryption is on, Gateway will inspect HTTPS traffic on TCP(443) & UDP(443).
-   * - dynamic: Gateway will use protocol detection to dynamically inspect HTTP and HTTPS traffic on any port. TLS decryption must be on to inspect HTTPS traffic.
+   * Define the proxy inspection mode.   1. static: Gateway applies static inspection to HTTP on TCP(80). With TLS decryption on, Gateway inspects HTTPS traffic on TCP(443) and UDP(443).   2. dynamic: Gateway applies protocol detection to inspect HTTP and HTTPS traffic on any port. TLS decryption must remain on to inspect HTTPS traffic.
    *
    * @example static
    * @x-auditable true
@@ -58718,7 +61760,7 @@ export type ZeroTrustGatewayInspectionSettings = {
 } | null;
 
 /**
- * IPV6 destination ip assigned to this location. DNS requests sent to this IP will counted as the request under this location. This field is auto-generated by Gateway.
+ * Defines the automatically generated IPv6 destination IP assigned to this location. Gateway counts all DNS requests sent to this IP as requests under this location.
  *
  * @example 2001:0db8:85a3:0000:0000:8a2e:0370:7334
  * @x-auditable true
@@ -58727,7 +61769,7 @@ export type ZeroTrustGatewayIp = string;
 
 export type ZeroTrustGatewayIpNetwork = {
   /**
-   * The IP address or IP CIDR.
+   * Specify the IP address or IP CIDR.
    *
    * @example 2001:85a3::/64
    * @x-auditable true
@@ -58736,20 +61778,20 @@ export type ZeroTrustGatewayIpNetwork = {
 };
 
 /**
- * A list of allowed source IP network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.
+ * Specify the list of allowed source IP network ranges for this endpoint. When the list is empty, the endpoint allows all source IPs. The list takes effect only if the endpoint is enabled for this location.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayIpNetworks = ZeroTrustGatewayIpNetwork[] | null;
 
 /**
- * A list of CIDRs to restrict ingress connections.
+ * Specify the list of CIDRs to restrict ingress connections.
  */
 export type ZeroTrustGatewayIps = string[];
 
 export type ZeroTrustGatewayIpv4Endpoint = {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPv4 endpoint is enabled for this location.
    *
    * @example true
    * @x-auditable true
@@ -58760,7 +61802,7 @@ export type ZeroTrustGatewayIpv4Endpoint = {
 
 export type ZeroTrustGatewayIpv4Network = {
   /**
-   * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
+   * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
    *
    * @example 192.0.2.1/32
    * @x-auditable true
@@ -58769,7 +61811,7 @@ export type ZeroTrustGatewayIpv4Network = {
 };
 
 /**
- * A list of network ranges that requests from this location would originate from. A non-empty list is only effective if the ipv4 endpoint is enabled for this location.
+ * Specify the list of network ranges from which requests at this location originate. The list takes effect only if it is non-empty and the IPv4 endpoint is enabled for this location.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
@@ -58777,7 +61819,7 @@ export type ZeroTrustGatewayIpv4Networks = ZeroTrustGatewayIpv4Network[] | null;
 
 export type ZeroTrustGatewayIpv6Endpoint = {
   /**
-   * True if the endpoint is enabled for this location.
+   * Indicate whether the IPV6 endpoint is enabled for this location.
    *
    * @example true
    * @x-auditable true
@@ -58789,7 +61831,7 @@ export type ZeroTrustGatewayIpv6Endpoint = {
 
 export type ZeroTrustGatewayIpv6Network = {
   /**
-   * The IPv6 address or IPv6 CIDR.
+   * Specify the IPv6 address or IPv6 CIDR.
    *
    * @example 2001:85a3::/64
    * @x-auditable true
@@ -58798,14 +61840,14 @@ export type ZeroTrustGatewayIpv6Network = {
 };
 
 /**
- * A list of allowed source IPv6 network ranges for this endpoint. When empty, all source IPs are allowed. A non-empty list is only effective if the endpoint is enabled for this location.
+ * Specify the list of allowed source IPv6 network ranges for this endpoint. When the list is empty, the endpoint allows all source IPs. The list takes effect only if the endpoint is enabled for this location.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[] | null;
 
 /**
- * The items in the list.
+ * Provide the list items.
  *
  * @x-stainless-collection-type set
  */
@@ -58816,7 +61858,7 @@ export type ZeroTrustGatewayItems = {
 }[];
 
 /**
- * items to add to the list.
+ * Add items to the list.
  *
  * @x-stainless-collection-type set
  */
@@ -58831,25 +61873,25 @@ export type ZeroTrustGatewayListItemResponseCollection =
   } & {
     result_info?: {
       /**
-       * Total results returned based on your search parameters.
+       * Shows the total results returned based on your search parameters.
        *
        * @example 1
        */
       count?: number;
       /**
-       * Current page within paginated list of results.
+       * Show the current page within paginated list of results.
        *
        * @example 1
        */
       page?: number;
       /**
-       * Number of results per page of results.
+       * Show the number of results per page of results.
        *
        * @example 20
        */
       per_page?: number;
       /**
-       * Total results available without any search parameters.
+       * Show the total results available without any search parameters.
        *
        * @example 2000
        */
@@ -58887,13 +61929,13 @@ export type ZeroTrustGatewayLocations = {
   id?: ZeroTrustGatewayComponentsSchemasUuid;
   ip?: ZeroTrustGatewayIp;
   /**
-   * The primary destination IPv4 address from the pair identified by the dns_destination_ips_id. This field is read-only.
+   * Show the primary destination IPv4 address from the pair identified dns_destination_ips_id. This field read-only.
    *
    * @example 172.64.36.1
    */
   ipv4_destination?: string;
   /**
-   * The backup destination IPv4 address from the pair identified by the dns_destination_ips_id. This field is read-only.
+   * Show the backup destination IPv4 address from the pair identified dns_destination_ips_id. This field read-only.
    *
    * @example 172.64.36.2
    */
@@ -58912,7 +61954,7 @@ export type ZeroTrustGatewayMessages = {
 }[];
 
 /**
- * The name of the list.
+ * Specify the list name.
  *
  * @example Admin Serial Numbers
  * @x-auditable true
@@ -58920,38 +61962,31 @@ export type ZeroTrustGatewayMessages = {
 export type ZeroTrustGatewayName = string;
 
 /**
- * The rule cannot be shared via the Orgs API.
- *
- * @x-auditable true
- */
-export type ZeroTrustGatewayNotSharable = boolean;
-
-/**
- * Configure a message to display on the user's device when an antivirus search is performed.
+ * Configure the message the user's device shows during an antivirus scan.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayNotificationSettings = {
   /**
-   * Set notification on.
+   * Specify whether to enable notifications.
    *
    * @x-auditable true
    */
   enabled?: boolean;
   /**
-   * If true, context information will be passed as query parameters.
+   * Specify whether to include context information as query parameters.
    *
    * @x-auditable true
    */
   include_context?: boolean;
   /**
-   * Customize the message shown in the notification.
+   * Specify the message to show in the notification.
    *
    * @x-auditable true
    */
   msg?: string;
   /**
-   * Optional URL to direct users to additional information. If not set, the notification will open a block page.
+   * Specify a URL that directs users to more information. If unset, the notification opens a block page.
    *
    * @x-auditable true
    */
@@ -58959,7 +61994,7 @@ export type ZeroTrustGatewayNotificationSettings = {
 } | null;
 
 /**
- * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.
+ * Set the order of your rules. Lower values indicate higher precedence. At each processing phase, evaluate applicable rules in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) to manage precedence via Terraform.
  *
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
@@ -58967,13 +62002,13 @@ export type ZeroTrustGatewayNotificationSettings = {
 export type ZeroTrustGatewayPrecedence = number;
 
 /**
- * Protocol Detection settings.
+ * Specify whether to detect protocols from the initial bytes of client traffic.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayProtocolDetection = {
   /**
-   * Enable detecting protocol on initial bytes of client traffic.
+   * Specify whether to detect protocols from the initial bytes of client traffic.
    *
    * @example true
    * @x-auditable true
@@ -58982,7 +62017,7 @@ export type ZeroTrustGatewayProtocolDetection = {
 } | null;
 
 /**
- * Provider Name. Usually Cloudflare.
+ * Specify the provider name (usually Cloudflare).
  *
  * @example Cloudflare
  */
@@ -58998,7 +62033,7 @@ export type ZeroTrustGatewayProxyEndpoints = {
 };
 
 /**
- * The name of the proxy endpoint.
+ * Specify the name of the proxy endpoint.
  *
  * @example Devops team
  * @x-auditable true
@@ -59016,7 +62051,7 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse =
   };
 
 /**
- * Base64 encoded HPKE public key used to encrypt all your ssh session logs. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
+ * Provide the Base64-encoded HPKE public key that encrypts SSH session logs. See https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging.
  *
  * @example 1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=
  * @x-auditable true
@@ -59024,7 +62059,7 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse =
 export type ZeroTrustGatewayPublicKey = string;
 
 /**
- * The rule was shared via the Orgs API and cannot be edited by the current account.
+ * Indicate that this rule is shared via the Orgs API and read only.
  *
  * @x-auditable true
  */
@@ -59043,25 +62078,25 @@ export type ZeroTrustGatewayResponseCollection =
 
 export type ZeroTrustGatewayResultInfo = {
   /**
-   * Total number of results for the requested service.
+   * Indicate the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results.
+   * Indicate the current page within a paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results.
+   * Indicate the number of results per page.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters.
+   * Indicate the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -59069,13 +62104,13 @@ export type ZeroTrustGatewayResultInfo = {
 };
 
 /**
- * Additional settings that modify the rule's action.
+ * Set settings related to this rule. Each setting is only valid for specific rule types and can only be used with the appropriate selectors. If Terraform drift is observed in these setting values, verify that the setting is supported for the given rule type and that the API response reflects the requested value. If the API response returns sanitized or modified values that differ from the request, use the API-provided values in Terraform to ensure consistency.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewayRuleSettings = {
   /**
-   * Add custom headers to allowed requests, in the form of key-value pairs. Keys are header names, pointing to an array with its header value(s).
+   * Add custom headers to allowed requests as key-value pairs. Use header names as keys that map to arrays of header values. Settable only for `http` rules with the action set to `allow`.
    *
    * @example {"My-Next-Header":["foo","bar"],"X-Custom-Header-Name":["somecustomvalue"]}
    * @x-stainless-terraform-configurability optional
@@ -59084,7 +62119,7 @@ export type ZeroTrustGatewayRuleSettings = {
     [key: string]: string[];
   } | null;
   /**
-   * Set by parent MSP accounts to enable their children to bypass this rule.
+   * Set to enable MSP children to bypass this rule. Only parent MSP accounts can set this. this rule. Settable for all types of rules.
    *
    * @example false
    * @x-auditable true
@@ -59092,13 +62127,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   allow_child_bypass?: boolean | null;
   /**
-   * Settings for the Audit SSH action.
+   * Define the settings for the Audit SSH action. Settable only for `l4` rules with `audit_ssh` action.
    *
    * @x-stainless-terraform-configurability optional
    */
   audit_ssh?: {
     /**
-     * Enable to turn on SSH command logging.
+     * Enable SSH command logging.
      *
      * @example false
      * @x-auditable true
@@ -59106,13 +62141,13 @@ export type ZeroTrustGatewayRuleSettings = {
     command_logging?: boolean;
   } | null;
   /**
-   * Configure how browser isolation behaves.
+   * Configure browser isolation behavior. Settable only for `http` rules with the action set to `isolate`.
    *
    * @x-stainless-terraform-configurability optional
    */
   biso_admin_controls?: {
     /**
-     * Configure whether copy is enabled or not. When set with "remote_only", copying isolated content from the remote browser to the user's local clipboard is disabled. When absent, copy is enabled. Only applies when `version == "v2"`.
+     * Configure copy behavior. If set to remote_only, users cannot copy isolated content from the remote browser to the local clipboard. If this field is absent, copying remains enabled. Applies only when version == "v2".
      *
      * @example remote_only
      * @x-auditable true
@@ -59143,7 +62178,7 @@ export type ZeroTrustGatewayRuleSettings = {
      */
     dk?: boolean;
     /**
-     * Configure whether downloading enabled or not. When set with "remote_only", downloads are only available for viewing. Only applies when `version == "v2"`.
+     * Configure download behavior. When set to remote_only, users can view downloads but cannot save them. Applies only when version == "v2".
      *
      * @example enabled
      * @x-auditable true
@@ -59166,35 +62201,35 @@ export type ZeroTrustGatewayRuleSettings = {
      */
     du?: boolean;
     /**
-     * Configure whether keyboard usage is enabled or not. When absent, keyboard usage is enabled. Only applies when `version == "v2"`.
+     * Configure keyboard usage behavior. If this field is absent, keyboard usage remains enabled. Applies only when version == "v2".
      *
      * @example enabled
      * @x-auditable true
      */
     keyboard?: "enabled" | "disabled";
     /**
-     * Configure whether pasting is enabled or not. When set with "remote_only", pasting content from the user's local clipboard into isolated pages is disabled. When absent, paste is enabled. Only applies when `version == "v2"`.
+     * Configure paste behavior. If set to remote_only, users cannot paste content from the local clipboard into isolated pages. If this field is absent, pasting remains enabled. Applies only when version == "v2".
      *
      * @example enabled
      * @x-auditable true
      */
     paste?: "enabled" | "disabled" | "remote_only";
     /**
-     * Configure whether printing is enabled or not. When absent, printing is enabled. Only applies when `version == "v2"`.
+     * Configure print behavior. Default, Printing is enabled. Applies only when version == "v2".
      *
      * @example enabled
      * @x-auditable true
      */
     printing?: "enabled" | "disabled";
     /**
-     * Configure whether uploading is enabled or not. When absent, uploading is enabled. Only applies when `version == "v2"`.
+     * Configure upload behavior. If this field is absent, uploading remains enabled. Applies only when version == "v2".
      *
      * @example enabled
      * @x-auditable true
      */
     upload?: "enabled" | "disabled";
     /**
-     * Indicates which version of the browser isolation controls should apply.
+     * Indicate which version of the browser isolation controls should apply.
      *
      * @default v1
      * @x-auditable true
@@ -59202,19 +62237,19 @@ export type ZeroTrustGatewayRuleSettings = {
     version?: "v1" | "v2";
   };
   /**
-   * Custom block page settings. If missing/null, blocking will use the the account settings.
+   * Configure custom block page settings. If missing or null, use the account settings. Settable only for `http` rules with the action set to `block`.
    *
    * @x-stainless-terraform-configurability optional
    */
   block_page?: {
     /**
-     * If true, context information will be passed as query parameters.
+     * Specify whether to pass the context information as query parameters.
      *
      * @x-auditable true
      */
     include_context?: boolean;
     /**
-     * URI to which the user will be redirected.
+     * Specify the URI to which the user is redirected.
      *
      * @format uri
      * @x-auditable true
@@ -59222,7 +62257,7 @@ export type ZeroTrustGatewayRuleSettings = {
     target_uri: string;
   } | null;
   /**
-   * Enable the custom block page.
+   * Enable the custom block page. Settable only for `dns` rules with action `block`.
    *
    * @example true
    * @x-auditable true
@@ -59230,7 +62265,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   block_page_enabled?: boolean;
   /**
-   * The text describing why this block occurred, displayed on the custom block page (if enabled).
+   * Explain why the rule blocks the request. The custom block page shows this text (if enabled). Settable only for `dns`, `l4`, and `http` rules when the action set to `block`.
    *
    * @example This website is a security risk
    * @x-auditable true
@@ -59238,7 +62273,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   block_reason?: string | null;
   /**
-   * Set by children MSP accounts to bypass their parent's rules.
+   * Set to enable MSP accounts to bypass their parent's rules. Only MSP child accounts can set this. Settable for all types of rules.
    *
    * @example false
    * @x-auditable true
@@ -59246,20 +62281,20 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   bypass_parent_rule?: boolean | null;
   /**
-   * Configure how session check behaves.
+   * Configure session check behavior. Settable only for `l4` and `http` rules with the action set to `allow`.
    *
    * @x-stainless-terraform-configurability optional
    */
   check_session?: {
     /**
-     * Configure how fresh the session needs to be to be considered valid. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
+     * Sets the required session freshness threshold. The API returns a normalized version of this value.
      *
      * @example 300s
      * @x-auditable true
      */
     duration?: string;
     /**
-     * Set to true to enable session enforcement.
+     * Enable session enforcement.
      *
      * @example true
      * @x-auditable true
@@ -59267,7 +62302,7 @@ export type ZeroTrustGatewayRuleSettings = {
     enforce?: boolean;
   } | null;
   /**
-   * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
+   * Configure custom resolvers to route queries that match the resolver policy. Unused with 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' settings. DNS queries get routed to the address closest to their origin. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.
    *
    * @x-stainless-terraform-configurability optional
    */
@@ -59276,27 +62311,27 @@ export type ZeroTrustGatewayRuleSettings = {
     ipv6?: ZeroTrustGatewayDnsResolverSettingsV6[];
   } | null;
   /**
-   * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
+   * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs. Settable only for `egress` rules.
    *
    * @x-stainless-terraform-configurability optional
    */
   egress?: {
     /**
-     * The IPv4 address to be used for egress.
+     * Specify the IPv4 address to use for egress.
      *
      * @example 192.0.2.2
      * @x-auditable true
      */
     ipv4?: string;
     /**
-     * The fallback IPv4 address to be used for egress in the event of an error egressing with the primary IPv4. Can be '0.0.0.0' to indicate local egress via WARP IPs.
+     * Specify the fallback IPv4 address to use for egress when the primary IPv4 fails. Set '0.0.0.0' to indicate local egress via WARP IPs.
      *
      * @example 192.0.2.3
      * @x-auditable true
      */
     ipv4_fallback?: string;
     /**
-     * The IPv6 range to be used for egress.
+     * Specify the IPv6 range to use for egress.
      *
      * @example 2001:DB8::/64
      * @x-auditable true
@@ -59304,7 +62339,7 @@ export type ZeroTrustGatewayRuleSettings = {
     ipv6?: string;
   } | null;
   /**
-   * Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.
+   * Ignore category matches at CNAME domains in a response. When off, evaluate categories in this rule against all CNAME domain categories in the response. Settable only for `dns` and `dns_resolver` rules.
    *
    * @example true
    * @x-auditable true
@@ -59312,7 +62347,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   ignore_cname_category_matches?: boolean;
   /**
-   * INSECURE - disable DNSSEC validation (for Allow actions).
+   * Specify whether to disable DNSSEC validation (for Allow actions) [INSECURE]. Settable only for `dns` rules.
    *
    * @example false
    * @x-auditable true
@@ -59320,7 +62355,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   insecure_disable_dnssec_validation?: boolean;
   /**
-   * Set to true to enable IPs in DNS resolver category blocks. By default categories only block based on domain names.
+   * Enable IPs in DNS resolver category blocks. The system blocks only domain name categories unless you enable this setting. Settable only for `dns` and `dns_resolver` rules.
    *
    * @example true
    * @x-auditable true
@@ -59328,7 +62363,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   ip_categories?: boolean;
   /**
-   * Set to true to include IPs in DNS resolver indicator feed blocks. By default indicator feeds only block based on domain names.
+   * Indicates whether to include IPs in DNS resolver indicator feed blocks. Default, indicator feeds block only domain names. Settable only for `dns` and `dns_resolver` rules.
    *
    * @example true
    * @x-auditable true
@@ -59336,39 +62371,39 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   ip_indicator_feeds?: boolean;
   /**
-   * Send matching traffic to the supplied destination IP address. and port.
+   * Send matching traffic to the supplied destination IP address and port. Settable only for `l4` rules with the action set to `l4_override`.
    *
    * @x-stainless-terraform-configurability optional
    */
   l4override?: {
     /**
-     * IPv4 or IPv6 address.
+     * Defines the IPv4 or IPv6 address.
      *
      * @example 1.1.1.1
      * @x-auditable true
      */
     ip?: string;
     /**
-     * A port number to use for TCP/UDP overrides.
+     * Defines a port number to use for TCP/UDP overrides.
      *
      * @x-auditable true
      */
     port?: number;
   } | null;
   /**
-   * Configure a notification to display on the user's device when this rule is matched.
+   * Configure a notification to display on the user's device when this rule matched. Settable for all types of rules with the action set to `block`.
    *
    * @x-stainless-terraform-configurability optional
    */
   notification_settings?: {
     /**
-     * Set notification on.
+     * Enable notification.
      *
      * @x-auditable true
      */
     enabled?: boolean;
     /**
-     * If true, context information will be passed as query parameters.
+     * Indicates whether to pass the context information as query parameters.
      *
      * @x-auditable true
      */
@@ -59380,14 +62415,14 @@ export type ZeroTrustGatewayRuleSettings = {
      */
     msg?: string;
     /**
-     * Optional URL to direct users to additional information. If not set, the notification will open a block page.
+     * Defines an optional URL to direct users to additional information. If unset, the notification opens a block page.
      *
      * @x-auditable true
      */
     support_url?: string;
   } | null;
   /**
-   * Override matching DNS queries with a hostname.
+   * Defines a hostname for override, for the matching DNS queries. Settable only for `dns` rules with the action set to `override`.
    *
    * @example example.com
    * @x-auditable true
@@ -59395,7 +62430,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   override_host?: string;
   /**
-   * Override matching DNS queries with an IP or set of IPs.
+   * Defines a an IP or set of IPs for overriding matched DNS queries. Settable only for `dns` rules with the action set to `override`.
    *
    * @example 1.1.1.1
    * @example 2.2.2.2
@@ -59403,13 +62438,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   override_ips?: string[] | null;
   /**
-   * Configure DLP payload logging.
+   * Configure DLP payload logging. Settable only for `http` rules.
    *
    * @x-stainless-terraform-configurability optional
    */
   payload_log?: {
     /**
-     * Set to true to enable DLP payload logging for this rule.
+     * Enable DLP payload logging for this rule.
      *
      * @example true
      * @x-auditable true
@@ -59417,13 +62452,13 @@ export type ZeroTrustGatewayRuleSettings = {
     enabled?: boolean;
   } | null;
   /**
-   * Settings that apply to quarantine rules.
+   * Configure settings that apply to quarantine rules. Settable only for `http` rules.
    *
    * @x-stainless-terraform-configurability optional
    */
   quarantine?: {
     /**
-     * Types of files to sandbox.
+     * Specify the types of files to sandbox.
      */
     file_types?: (
       | "exe"
@@ -59442,25 +62477,25 @@ export type ZeroTrustGatewayRuleSettings = {
     )[];
   } | null;
   /**
-   * Settings that apply to redirect rules.
+   * Apply settings to redirect rules. Settable only for `http` rules with the action set to `redirect`.
    *
    * @x-stainless-terraform-configurability optional
    */
   redirect?: {
     /**
-     * If true, context information will be passed as query parameters.
+     * Specify whether to pass the context information as query parameters.
      *
      * @x-auditable true
      */
     include_context?: boolean;
     /**
-     * If true, the path and query parameters from the original request will be appended to target_uri.
+     * Specify whether to append the path and query parameters from the original request to target_uri.
      *
      * @x-auditable true
      */
     preserve_path_and_query?: boolean;
     /**
-     * URI to which the user will be redirected.
+     * Specify the URI to which the user is redirected.
      *
      * @format uri
      * @x-auditable true
@@ -59468,26 +62503,26 @@ export type ZeroTrustGatewayRuleSettings = {
     target_uri: string;
   } | null;
   /**
-   * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
+   * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Not used when 'dns_resolvers' is specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.
    *
    * @x-stainless-terraform-configurability optional
    */
   resolve_dns_internally?: {
     /**
-     * The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.
+     * Specify the fallback behavior to apply when the internal DNS response code differs from 'NOERROR' or when the response data contains only CNAME records for 'A' or 'AAAA' queries.
      *
      * @x-auditable true
      */
     fallback?: "none" | "public_dns";
     /**
-     * The internal DNS view identifier that's passed to the internal DNS service.
+     * Specify the internal DNS view identifier to pass to the internal DNS service.
      *
      * @x-auditable true
      */
     view_id?: string;
   } | null;
   /**
-   * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
+   * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot set when 'dns_resolvers' specified or 'resolve_dns_internally' is set. Only valid when a rule's action set to 'resolve'. Settable only for `dns_resolver` rules.
    *
    * @example true
    * @x-auditable true
@@ -59495,13 +62530,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   resolve_dns_through_cloudflare?: boolean | null;
   /**
-   * Configure behavior when an upstream cert is invalid or an SSL error occurs.
+   * Configure behavior when an upstream certificate is invalid or an SSL error occurs. Settable only for `http` rules with the action set to `allow`.
    *
    * @x-stainless-terraform-configurability optional
    */
   untrusted_cert?: {
     /**
-     * The action performed when an untrusted certificate is seen. The default action is an error with HTTP code 526.
+     * Defines the action performed when an untrusted certificate seen. The default action an error with HTTP code 526.
      *
      * @example error
      * @x-auditable true
@@ -59519,14 +62554,14 @@ export type ZeroTrustGatewayRules = {
   enabled: ZeroTrustGatewayEnabled;
   expiration?: ZeroTrustGatewayExpiration;
   filters: ZeroTrustGatewayFilters;
-  id?: ZeroTrustGatewayRulesComponentsSchemasUuid;
+  id?: ZeroTrustGatewaySchemasUuid;
   identity?: ZeroTrustGatewayIdentity;
   name: ZeroTrustGatewayComponentsSchemasName;
-  not_sharable?: ZeroTrustGatewayNotSharable;
   precedence: ZeroTrustGatewayPrecedence;
   read_only?: ZeroTrustGatewayReadOnly;
   rule_settings?: ZeroTrustGatewayRuleSettings;
   schedule?: ZeroTrustGatewaySchedule;
+  sharable?: ZeroTrustGatewaySharable;
   source_account?: ZeroTrustGatewaySourceAccount;
   traffic: ZeroTrustGatewayTraffic;
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
@@ -59540,29 +62575,20 @@ export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection =
   };
 
 /**
- * The API resource UUID.
- *
- * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
- * @maxLength 36
- * @x-auditable true
- */
-export type ZeroTrustGatewayRulesComponentsSchemasUuid = string;
-
-/**
- * Sandbox settings.
+ * Specify whether to enable the sandbox.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewaySandbox = {
   /**
-   * Enable sandbox.
+   * Specify whether to enable the sandbox.
    *
    * @example true
    * @x-auditable true
    */
   enabled?: boolean | null;
   /**
-   * Action to take when the file cannot be scanned.
+   * Specify the action to take when the system cannot scan the file.
    *
    * @x-auditable true
    */
@@ -59570,62 +62596,62 @@ export type ZeroTrustGatewaySandbox = {
 } | null;
 
 /**
- * The schedule for activating DNS policies. This does not apply to HTTP or network policies.
+ * Defines the schedule for activating DNS policies. Settable only for `dns` and `dns_resolver` rules.
  *
  * @x-stainless-terraform-configurability computed_optional
  */
 export type ZeroTrustGatewaySchedule = {
   /**
-   * The time intervals when the rule will be active on Fridays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Fridays.
+   * Specify the time intervals when the rule is active on Fridays, in the increasing order from 00:00-24:00.  If this parameter omitted, the rule is deactivated on Fridays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   fri?: string;
   /**
-   * The time intervals when the rule will be active on Mondays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Mondays.
+   * Specify the time intervals when the rule is active on Mondays, in the increasing order from 00:00-24:00(capped at maximum of 6 time splits). If this parameter omitted, the rule is deactivated on Mondays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   mon?: string;
   /**
-   * The time intervals when the rule will be active on Saturdays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Saturdays.
+   * Specify the time intervals when the rule is active on Saturdays, in the increasing order from 00:00-24:00.  If this parameter omitted, the rule is deactivated on Saturdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   sat?: string;
   /**
-   * The time intervals when the rule will be active on Sundays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Sundays.
+   * Specify the time intervals when the rule is active on Sundays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Sundays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   sun?: string;
   /**
-   * The time intervals when the rule will be active on Thursdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Thursdays.
+   * Specify the time intervals when the rule is active on Thursdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Thursdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   thu?: string;
   /**
-   * The time zone the rule will be evaluated against. If a [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) is provided, Gateway will always use the current time at that time zone. If this parameter is omitted, then Gateway will use the time zone inferred from the user's source IP to evaluate the rule. If Gateway cannot determine the time zone from the IP, we will fall back to the time zone of the user's connected data center.
+   * Specify the time zone for rule evaluation. When a [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) is provided, Gateway always uses the current time for that time zone. When this parameter is omitted, Gateway uses the time zone determined from the user's IP address. Colo time zone is used when the user's IP address does not resolve to a location.
    *
    * @example America/New York
    * @x-auditable true
    */
   time_zone?: string;
   /**
-   * The time intervals when the rule will be active on Tuesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Tuesdays.
+   * Specify the time intervals when the rule is active on Tuesdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Tuesdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
    */
   tue?: string;
   /**
-   * The time intervals when the rule will be active on Wednesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Wednesdays.
+   * Specify the time intervals when the rule is active on Wednesdays, in the increasing order from 00:00-24:00. If this parameter omitted, the rule is deactivated on Wednesdays. API returns a formatted version of this string, which may cause Terraform drift if a unformatted value is used.
    *
    * @example 08:00-12:30,13:30-17:00
    * @x-auditable true
@@ -59634,7 +62660,7 @@ export type ZeroTrustGatewaySchedule = {
 } | null;
 
 /**
- * The description of the rule.
+ * Specify the rule description.
  *
  * @example Block bad websites based on their host name.
  * @x-auditable true
@@ -59648,7 +62674,7 @@ export type ZeroTrustGatewaySchemasDescription = string;
 export type ZeroTrustGatewaySchemasIdentifier = string;
 
 /**
- * The name of the location.
+ * Specify the location name.
  *
  * @example Austin Office Location
  * @x-auditable true
@@ -59666,7 +62692,7 @@ export type ZeroTrustGatewaySchemasSingleResponse =
   };
 
 /**
- * The subdomain to be used as the destination in the proxy client.
+ * Specify the subdomain to use as the destination in the proxy client.
  *
  * @example oli3n9zkz5.proxy.cloudflare-gateway.com
  * @x-auditable true
@@ -59674,7 +62700,7 @@ export type ZeroTrustGatewaySchemasSingleResponse =
 export type ZeroTrustGatewaySchemasSubdomain = string;
 
 /**
- * The type of list.
+ * Specify the list type.
  *
  * @example SERIAL
  * @x-auditable true
@@ -59687,7 +62713,7 @@ export type ZeroTrustGatewaySchemasType =
   | "IP";
 
 /**
- * API Resource UUID tag.
+ * Identify the API resource with a UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -59701,6 +62727,13 @@ export type ZeroTrustGatewaySettings = {
   seed_id?: ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid;
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
+
+/**
+ * Indicate that this rule is sharable via the Orgs API.
+ *
+ * @x-auditable true
+ */
+export type ZeroTrustGatewaySharable = boolean;
 
 export type ZeroTrustGatewaySingleResponse =
   ZeroTrustGatewayApiResponseSingle & {
@@ -59721,7 +62754,7 @@ export type ZeroTrustGatewaySingleResponseWithListItems =
   };
 
 /**
- * account tag of account that created the rule.
+ * Provide the account tag of the account that created the rule.
  *
  * @x-auditable true
  */
@@ -59736,7 +62769,7 @@ export type ZeroTrustGatewaySubcategory = {
 };
 
 /**
- * The DNS over HTTPS domain to send DNS requests to. This field is auto-generated by Gateway.
+ * Specify the DNS over HTTPS domain that receives DNS requests. Gateway automatically generates this value.
  *
  * @example oli3n9zkz5
  * @x-auditable true
@@ -59750,13 +62783,13 @@ export type ZeroTrustGatewaySubdomain = string;
 export type ZeroTrustGatewayTimestamp = string;
 
 /**
- * TLS interception settings.
+ * Specify whether to inspect encrypted HTTP traffic.
  *
  * @x-stainless-terraform-configurability optional
  */
 export type ZeroTrustGatewayTlsSettings = {
   /**
-   * Enable inspecting encrypted HTTP traffic.
+   * Specify whether to inspect encrypted HTTP traffic.
    *
    * @example true
    * @x-auditable true
@@ -59765,7 +62798,7 @@ export type ZeroTrustGatewayTlsSettings = {
 } | null;
 
 /**
- * The wirefilter expression used for traffic matching. The API automatically formats and sanitizes this expression. This returns a normalized version that may differ from your input and cause Terraform state drift.
+ * Specify the wirefilter expression used for traffic matching. The API automatically formats and sanitizes expressions before storing them. To prevent Terraform state drift, use the formatted expression returned in the API response.
  *
  * @default
  * @example http.request.uri matches ".*a/partial/uri.*" and http.request.host in $01302951-49f9-47c9-a400-0297e60b6a10
@@ -59775,7 +62808,7 @@ export type ZeroTrustGatewayTlsSettings = {
 export type ZeroTrustGatewayTraffic = string;
 
 /**
- * The type of certificate, either BYO-PKI (custom) or Gateway-managed(read only).
+ * Indicate the read-only certificate type, BYO-PKI (custom) or Gateway-managed.
  *
  * @example gateway_managed
  * @x-auditable true
@@ -59783,7 +62816,14 @@ export type ZeroTrustGatewayTraffic = string;
 export type ZeroTrustGatewayType = "custom" | "gateway_managed";
 
 /**
- * Certificate UUID tag.
+ * Defines the list of "unapproved" app ids.
+ *
+ * @x-stainless-collection-type set
+ */
+export type ZeroTrustGatewayUnapprovedApps = number[];
+
+/**
+ * Identify the certificate with a UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -59792,7 +62832,7 @@ export type ZeroTrustGatewayType = "custom" | "gateway_managed";
 export type ZeroTrustGatewayUuid = string;
 
 /**
- * The value of the item in a list.
+ * Specify the item value.
  *
  * @example 8GE8721REF
  * @x-auditable true
@@ -59800,7 +62840,7 @@ export type ZeroTrustGatewayUuid = string;
 export type ZeroTrustGatewayValue = string;
 
 /**
- * version number of the rule.
+ * Indicate the version number of the rule(read-only).
  *
  * @example 1
  * @x-auditable true
@@ -59808,7 +62848,7 @@ export type ZeroTrustGatewayValue = string;
 export type ZeroTrustGatewayVersion = number;
 
 /**
- * Warning for a misconfigured rule, if any.
+ * Indicate a warning for a misconfigured rule, if any.
  */
 export type ZeroTrustGatewayWarningStatus = string | null;
 
