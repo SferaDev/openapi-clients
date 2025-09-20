@@ -1459,6 +1459,8 @@ export type RecordingGetVariables = {
  *
  *  `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`
  *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read`,`phone_recording:read:admin`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:list_recording_files:admin`,`cloud_recording:read:list_recording_files`,`cloud_recording:read:list_recording_files:master`
@@ -1518,8 +1520,8 @@ export type RecordingDeleteVariables = {
 /**
  * Delete all of a meeting's or webinar's recording files.
  *
- * **Prerequisites**:
- * * Cloud Recording should be enabled on the user's account.
+ * **Prerequisites**
+ * * Enable Cloud Recording on the user's account. Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  *
  *
@@ -2425,6 +2427,8 @@ export type RecordingRegistrantsQuestionsGetVariables = {
  *
  * For [on-demand](https://support.zoom.us/hc/en-us/articles/360000488283-On-demand-Recordings) meeting recordings, you can include fields with questions that will be shown to registrants when they register to view the recording.
  *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
+ *
  *
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
@@ -2458,6 +2462,8 @@ export type RecordingRegistrantQuestionUpdatePathParams = {
    * To get a webinar's cloud recordings, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
    *
    * If a UUID starts with `/` or contains `//`, like `/ajXp112QmuoKj4854875==`, you must **double encode** the UUID before making an API request.
+   *
+   * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
    *
    * @example atsXxhSEQWit9t+U02HXNQ==
    */
@@ -2538,7 +2544,7 @@ export type RecordingRegistrantQuestionUpdateVariables = {
  *
  * For [on-demand](https://support.zoom.us/hc/en-us/articles/360000488283-On-demand-Recordings) meeting recordings, you can include fields with questions that will be shown to registrants when they register to view the recording.
  *
- *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
@@ -2755,10 +2761,12 @@ export type RecordingSettingUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieve settings applied to a meeting's [Cloud Recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
+ * Retrieve settings applied to a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
  *
  *
  * Response includes recording content access information, which requires the current user to have the `View the recording content` permission to access it.
+ *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
@@ -2790,7 +2798,7 @@ export type RecordingSettingsUpdatePathParams = {
    *
    * To get cloud recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID, the response is for the latest webinar instance.
    *
-   * If a UUID starts with &quot;/&quot; or contains &quot;//&quot; (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double encode** the UUID before making an API request.
+   * If a UUID starts with `/` or contains `//` (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double encode** the UUID before making an API request.
    *
    * @example atsXxhSEQWit9t+U02HXNQ==
    */
@@ -2825,13 +2833,13 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   authentication_option?: string;
   /**
-   * This field determines whether the registration is required to view the recording.
+   * Determine whether the registration is required to view the recording.
    *
    * @example false
    */
   on_demand?: boolean;
   /**
-   * This field enables passcode protection for the recording by setting a passcode.
+   * Enable passcode protection for the recording by setting a passcode.
    *
    * The passcode must have a minimum of **eight** characters with a mix of numbers, letters and special characters.
    *
@@ -2846,25 +2854,25 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   password?: string;
   /**
-   * This field indicates that only authenticated users can view.
+   * Indicate that only authenticated users can view.
    *
    * @example true
    */
   recording_authentication?: boolean;
   /**
-   * This field sends an email to host when someone registers to view the recording. This setting applies for On-demand recordings only.
+   * Send an email to host when someone registers to view the recording. This setting applies for On-demand recordings only.
    *
    * @example false
    */
   send_email_to_host?: boolean;
   /**
-   * This field determines how the meeting recording is shared.
+   * Determine how the meeting recording is shared.
    *
    * @example publicly
    */
   share_recording?: "publicly" | "internally" | "none";
   /**
-   * This field shows social share buttons on registration page. This setting applies for On-demand recordings only.
+   * Show social share buttons on registration page. This setting applies for On-demand recordings only.
    *
    * @example true
    */
@@ -2876,7 +2884,7 @@ export type RecordingSettingsUpdateRequestBody = {
    */
   topic?: string;
   /**
-   * This field determines whether a viewer can download the recording file or not.
+   * Determine whether a viewer can download the recording file or not.
    *
    * @example true
    */
@@ -2899,6 +2907,8 @@ export type RecordingSettingsUpdateVariables = {
 /**
  * Update settings applied to a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
  * The request contains the recording content access information, which requires the current user to have the `view recording content` and `recording editing` permissions to access.
+ *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
@@ -3695,7 +3705,7 @@ export type RecordingsListVariables = {
  *
  * **Prerequisites:**
  * * Must have a Pro or a higher plan.
- * * Must enable Cloud Recording on the user's account.
+ * * Must enable Cloud Recording on the user's account. Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
@@ -5703,20 +5713,20 @@ export type ListmeetingsummariesQueryParams = {
    */
   page_size?: number;
   /**
-   * The next page token paginates through a large set of results. A next page token returns whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
    */
   next_page_token?: string;
   /**
-   * The start date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-19T07:00:00Z
    */
   from?: string;
   /**
-   * The end date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-20T07:00:00Z
@@ -5736,20 +5746,20 @@ export type ListmeetingsummariesResponse = {
    */
   page_size?: number;
   /**
-   * The next page token paginates through a large set of results. A next page token returns whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
    */
   next_page_token?: string;
   /**
-   * The start date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-19T07:00:00Z
    */
   from?: string;
   /**
-   * The end date in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format used to retrieve the creation date range of the meeting summaries.
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
    *
    * @format date-time
    * @example 2023-10-20T07:00:00Z
@@ -5820,14 +5830,14 @@ export type ListmeetingsummariesResponse = {
      */
     summary_end_time?: string;
     /**
-     * The date and time at which the meeting summary was created.
+     * The date and time when the meeting summary was created.
      *
      * @format date-time
      * @example 2019-07-15T23:24:52Z
      */
     summary_created_time?: string;
     /**
-     * The date and time at which the meeting summary was last modified.
+     * The date and time when the meeting summary was last modified.
      *
      * @format date-time
      * @example 2020-07-15T23:30:19Z
@@ -5848,6 +5858,8 @@ export type ListmeetingsummariesVariables = {
  * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
  * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
  * * End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
  *
@@ -6161,6 +6173,18 @@ export type MeetingResponse = {
      */
     alternative_host_update_polls?: boolean;
     /**
+     * Whether to allow an alternative host to manage meeting summaries.
+     *
+     * @example true
+     */
+    alternative_host_manage_meeting_summary?: boolean;
+    /**
+     * Whether to allow an alternative host to manage meeting cloud recordings.
+     *
+     * @example false
+     */
+    alternative_host_manage_cloud_recording?: boolean;
+    /**
      * Enable registration and set approval for the registration. Note that this feature requires the host to be of **Licensed** user type. **Registration cannot be enabled for a basic user.**
      *
      *
@@ -6277,6 +6301,38 @@ export type MeetingResponse = {
      * @default none
      */
     auto_recording?: "local" | "cloud" | "none";
+    /**
+     * Automatically add meeting recordings to a video channel in video management. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     */
+    auto_add_recording_to_video_management?: {
+      /**
+       * Whether to automatically add the meeting recording to video management.
+       *
+       * @example true
+       * @default false
+       */
+      enable: boolean;
+      /**
+       * List of video management channels where the meeting recording will be added.
+       *
+       * @maxItems 5
+       * @minItems 1
+       */
+      channels?: {
+        /**
+         * The unique ID of a video management channel.
+         *
+         * @example Uyh5qeykTDiA66YQEYmFPg
+         */
+        channel_id: string;
+        /**
+         * The name of the video management channel.
+         *
+         * @example Team Weekly Meetings
+         */
+        name?: string;
+      }[];
+    };
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -6694,7 +6750,34 @@ export type MeetingResponse = {
      */
     waiting_room?: boolean;
     /**
-     * Add watermark when viewing a shared screen.
+     * Configuration settings for the meeting's waiting room.
+     */
+    waiting_room_options?: {
+      /**
+       * This field specifies the waiting room behavior for this meeting.
+       * * `follow_setting` - Use the Zoom web portal setting.
+       * * `custom` - Specify which participants should go into the waiting room.
+       *
+       * @example follow_setting
+       */
+      mode: "follow_setting" | "custom";
+      /**
+       * This field specifies which participants should be placed into the waiting room. Required if `mode` is set to `custom`.
+       * * `everyone` - Everyone.
+       * * `users_not_in_account` - Users not in your account.
+       * * `users_not_in_account_or_whitelisted_domains` - Users who are not in your account and not part of your whitelisted domains.
+       * * `users_not_on_invite` - Users not on the meeting invite.
+       *
+       * @example everyone
+       */
+      who_goes_to_waiting_room?:
+        | "everyone"
+        | "users_not_in_account"
+        | "users_not_in_account_or_whitelisted_domains"
+        | "users_not_on_invite";
+    };
+    /**
+     * This field adds a watermark when viewing a shared screen.
      *
      * @example false
      * @default false
@@ -6756,18 +6839,6 @@ export type MeetingResponse = {
        * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
-      /**
-       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
-       * * `all_users` - For all users, including external invitees and meeting participants.
-       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
-       * * `org_invitees` - Only for meeting invitees in your organization.
-       *
-       * @example all_users
-       */
-      who_is_added?:
-        | "all_users"
-        | "org_invitees_and_participants"
-        | "org_invitees";
       /**
        * The channel's ID.
        *
@@ -6993,7 +7064,7 @@ export type MeetingVariables = {
 /**
  * Retrieve the given meeting's details.
  *
- * **Prerequisites**:
+ * **Prerequisites**
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
@@ -7270,6 +7341,18 @@ export type MeetingUpdateRequestBody = {
      */
     alternative_host_update_polls?: boolean;
     /**
+     * Whether to allow an alternative host to manage meeting summaries.
+     *
+     * @example true
+     */
+    alternative_host_manage_meeting_summary?: boolean;
+    /**
+     * Whether to allow an alternative host to manage meeting cloud recordings.
+     *
+     * @example false
+     */
+    alternative_host_manage_cloud_recording?: boolean;
+    /**
      * Enable registration and set approval for the registration. Note that this feature requires the host to be of **Licensed** user type. **Registration cannot be enabled for a basic user.**
      *
      *
@@ -7386,6 +7469,38 @@ export type MeetingUpdateRequestBody = {
      * @default none
      */
     auto_recording?: "local" | "cloud" | "none";
+    /**
+     * Automatically add meeting recordings to a video channel in video management. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     */
+    auto_add_recording_to_video_management?: {
+      /**
+       * Whether to automatically add the meeting recording to video management.
+       *
+       * @example true
+       * @default false
+       */
+      enable: boolean;
+      /**
+       * List of video management channels where the meeting recording will be added.
+       *
+       * @maxItems 5
+       * @minItems 1
+       */
+      channels?: {
+        /**
+         * The unique ID of a video management channel.
+         *
+         * @example Uyh5qeykTDiA66YQEYmFPg
+         */
+        channel_id: string;
+        /**
+         * The video management channel's name.
+         *
+         * @example Team Weekly Meetings
+         */
+        name?: string;
+      }[];
+    };
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -7815,6 +7930,33 @@ export type MeetingUpdateRequestBody = {
      */
     waiting_room?: boolean;
     /**
+     * Configuration settings for the meeting's waiting room.
+     */
+    waiting_room_options?: {
+      /**
+       * Specifies the waiting room behavior for this meeting.
+       * * `follow_setting` - Use the Zoom web portal setting.
+       * * `custom` - Specify which participants should go into the waiting room.
+       *
+       * @example follow_setting
+       */
+      mode: "follow_setting" | "custom";
+      /**
+       * Specifies which participants should be placed into the waiting room. Required if `mode` is set to `custom`.
+       * * `everyone` - Everyone.
+       * * `users_not_in_account` - Users not in your account.
+       * * `users_not_in_account_or_whitelisted_domains` - Users who are not in your account and not part of your whitelisted domains.
+       * * `users_not_on_invite` - Users not on the meeting invite.
+       *
+       * @example everyone
+       */
+      who_goes_to_waiting_room?:
+        | "everyone"
+        | "users_not_in_account"
+        | "users_not_in_account_or_whitelisted_domains"
+        | "users_not_on_invite";
+    };
+    /**
      * Add a watermark when viewing a shared screen.
      *
      * @example false
@@ -7858,18 +8000,6 @@ export type MeetingUpdateRequestBody = {
        * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
-      /**
-       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
-       * * `all_users` - For all users, including external invitees and meeting participants.
-       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
-       * * `org_invitees` - Only for meeting invitees in your organization.
-       *
-       * @example all_users
-       */
-      who_is_added?:
-        | "all_users"
-        | "org_invitees_and_participants"
-        | "org_invitees";
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -8052,7 +8182,7 @@ export type MeetingUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Update meeting details.
+ * Updates meeting details.
  *
  * **Prerequisites**
  * * The `start_time` value must be a future date. If the value is omitted or a date is in the past, the API ignores this value and does not update any recurring meetings.
@@ -9520,6 +9650,8 @@ export type GetameetingsummaryVariables = {
  * - For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
  * - For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
  * - End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
  *
@@ -13691,6 +13823,8 @@ export type ListMeetingTemplatesVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
@@ -13779,9 +13913,11 @@ export type MeetingTemplateCreateVariables = {
 /**
  * Create a meeting template from an existing meeting.
  *
- * **Prerequisites**:
+ * **Prerequisites**
  * * Host user must have a Zoom Meetings Basic license or higher.
  * * You can only create up to 40 meeting templates.
+ *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
@@ -14287,6 +14423,18 @@ export type MeetingCreateResponse = {
      */
     alternative_host_update_polls?: boolean;
     /**
+     * Whether to allow an alternative host to manage meeting summaries.
+     *
+     * @example true
+     */
+    alternative_host_manage_meeting_summary?: boolean;
+    /**
+     * Whether to allow an alternative host to manage meeting cloud recordings.
+     *
+     * @example false
+     */
+    alternative_host_manage_cloud_recording?: boolean;
+    /**
      * Enable registration and set approval for the registration. Note that this feature requires the host to be of **Licensed** user type. **Registration cannot be enabled for a basic user.**
      *
      *
@@ -14403,6 +14551,38 @@ export type MeetingCreateResponse = {
      * @default none
      */
     auto_recording?: "local" | "cloud" | "none";
+    /**
+     * Automatically add meeting recordings to a video channel in Video Management. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     */
+    auto_add_recording_to_video_management?: {
+      /**
+       * Whether to automatically add the meeting recording to video management.
+       *
+       * @example true
+       * @default false
+       */
+      enable: boolean;
+      /**
+       * List of video management channels where the meeting recording will be added.
+       *
+       * @maxItems 5
+       * @minItems 1
+       */
+      channels?: {
+        /**
+         * The unique ID of a video management channel.
+         *
+         * @example Uyh5qeykTDiA66YQEYmFPg
+         */
+        channel_id: string;
+        /**
+         * The name of the video management channel.
+         *
+         * @example Team Weekly Meetings
+         */
+        name?: string;
+      }[];
+    };
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
@@ -14820,6 +15000,33 @@ export type MeetingCreateResponse = {
      */
     waiting_room?: boolean;
     /**
+     * Configuration settings for the meeting's waiting room.
+     */
+    waiting_room_options?: {
+      /**
+       * Specifies the waiting room behavior for this meeting.
+       * * `follow_setting` - Use the Zoom web portal setting.
+       * * `custom` - Specify which participants should go into the waiting room.
+       *
+       * @example follow_setting
+       */
+      mode: "follow_setting" | "custom";
+      /**
+       * Specifies which participants should be placed into the waiting room. Required if `mode` is set to `custom`.
+       * * `everyone` - Everyone.
+       * * `users_not_in_account` - Users not in your account.
+       * * `users_not_in_account_or_whitelisted_domains` - Users who are not in your account and not part of your whitelisted domains.
+       * * `users_not_on_invite` - Users not on the meeting invite.
+       *
+       * @example everyone
+       */
+      who_goes_to_waiting_room?:
+        | "everyone"
+        | "users_not_in_account"
+        | "users_not_in_account_or_whitelisted_domains"
+        | "users_not_on_invite";
+    };
+    /**
      * Whether to add a watermark when viewing a shared screen. If not provided, the default value will be based on the user's setting.
      *
      * @example false
@@ -14874,18 +15081,6 @@ export type MeetingCreateResponse = {
        * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
-      /**
-       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
-       * * `all_users` - For all users, including external invitees and meeting participants.
-       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
-       * * `org_invitees` - Only for meeting invitees in your organization.
-       *
-       * @example all_users
-       */
-      who_is_added?:
-        | "all_users"
-        | "org_invitees_and_participants"
-        | "org_invitees";
       /**
        * The channel's ID.
        *
@@ -15096,14 +15291,14 @@ export type MeetingCreateRequestBody = {
    */
   agenda?: string;
   /**
-   * Determines whether to automatically generate a passcode for the meeting when no passcode is provided and the user's **Require a passcode when scheduling new meetings** setting is enabled. Defaults to `true`. When set to `false`, meetings will only have a passcode if one is explicitly provided.
+   * Whether to automatically generate a passcode for the meeting when no passcode is provided and the user's **Require a passcode when scheduling new meetings** setting is enabled. Defaults to `true`. When set to `false`, meetings will only have a passcode if one is explicitly provided.
    *
    * @example true
    * @default true
    */
   default_password?: boolean;
   /**
-   * The meeting's scheduled duration, in minutes. This field is used for `2` scheduled meetings and `8` recurring meetings with a fixed time. The value must be between 1 and 1440 minutes, wuich is equivalent to 24 hours.
+   * The meeting's scheduled duration, in minutes. This field is used for `2` scheduled meetings and `8` recurring meetings with a fixed time. The value must be between 1 and 1440 minutes, which is equivalent to 24 hours.
    *
    * @maximum 1440
    * @minimum 1
@@ -15133,18 +15328,18 @@ export type MeetingCreateRequestBody = {
    */
   pre_schedule?: boolean;
   /**
-   * Recurrence object. Use this object only for a meeting with type `8`, a recurring meeting with a fixed time.
+   * The recurrence object. Use this object only for a meeting with type `8`, a recurring meeting with a fixed time.
    */
   recurrence?: {
     /**
-     * Select the final date when the meeting will recur before it is canceled. Should be in UTC time, such as 2017-11-25T12:00:00Z. Cannot be used with `end_times`.
+     * This field selects the final date when the meeting will recur before it is canceled. Should be in UTC time, such as 2017-11-25T12:00:00Z. Cannot be used with `end_times`.
      *
      * @format date-time
      * @example 2022-04-02T15:59:00Z
      */
     end_date_time?: string;
     /**
-     * Select how many times the meeting should recur before it is canceled. If `end_times` is set to 0, it means there is no end time. The maximum number of recurring is 60. Cannot be used with `end_date_time`.
+     * This field selects how many times the meeting should recur before it is canceled. If `end_times` is set to 0, it means there is no end time. The maximum number of recurring is 60. Cannot be used with `end_date_time`.
      *
      * @maximum 60
      * @example 7
@@ -15152,7 +15347,7 @@ export type MeetingCreateRequestBody = {
      */
     end_times?: number;
     /**
-     * Use this field **only** if you're scheduling a **recurring meeting of type `3`** to state the day in a month when the meeting should recur. The value range is from `1` to `31`.
+     * This field is **only** for scheduling a **recurring meeting of type `3`**. It states the day in a month when the meeting should recur. The value range is from `1` to `31`.
      *
      * For the meeting to recur on 23rd of each month, provide `23` as this field's value and `1` as the `repeat_interval` field's value. To have the meeting recur every three months on 23rd of the month, change the `repeat_interval` field value to `3`.
      *
@@ -15161,7 +15356,7 @@ export type MeetingCreateRequestBody = {
      */
     monthly_day?: number;
     /**
-     * Use this field **only if** you're scheduling a **recurring meeting of type `3`** to state the week of the month when the meeting should recur. If you use this field, you must also use the `monthly_week_day` field to state the day of the week when the meeting should recur.
+     * This field is **only if** for scheduling a **recurring meeting of type `3`**.  It states the week of the month when the meeting should recur. If you use this field, you must also use the `monthly_week_day` field to state the day of the week when the meeting should recur.
      *  `-1` - Last week of the month.
      *  `1` - First week of the month.
      *  `2` - Second week of the month.
@@ -15172,7 +15367,7 @@ export type MeetingCreateRequestBody = {
      */
     monthly_week?: -1 | 1 | 2 | 3 | 4;
     /**
-     * Use this field **only if** you're scheduling a **recurring meeting of type `3`** to state a specific day in a week when the monthly meeting should recur. To use this field, you must also use the `monthly_week` field.
+     * This field is **only if** for scheduling a **recurring meeting of type `3`**. It states a specific day in a week when the monthly meeting should recur. To use this field, you must also use the `monthly_week` field.
      *
      *
      *  `1` - Sunday.
@@ -15187,7 +15382,7 @@ export type MeetingCreateRequestBody = {
      */
     monthly_week_day?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
     /**
-     * Define the interval when the meeting should recur. For instance, to schedule a meeting that recurs every two months, set this field's value as `2` and the value of the `type` parameter as `3`.
+     * This field defines the interval when the meeting should recur. For instance, to schedule a meeting that recurs every two months, set this field's value as `2` and the value of the `type` parameter as `3`.
      *
      * For a daily meeting, the maximum number of recurrences is `99` days. For a weekly meeting, the maximum is `50` weeks. For a monthly meeting, the maximum is `10` months.
      *
@@ -15195,7 +15390,7 @@ export type MeetingCreateRequestBody = {
      */
     repeat_interval?: number;
     /**
-     * Recurrence meeting types.
+     * The recurrence meeting types.
      *  `1` - Daily.
      *  `2` - Weekly.
      *  `3` - Monthly.
@@ -15204,7 +15399,7 @@ export type MeetingCreateRequestBody = {
      */
     type: 1 | 2 | 3;
     /**
-     * **Required** if you're scheduling a recurring meeting of type `2` to state the days of the week when the meeting should repeat.
+     * This field is **required** if you're scheduling a recurring meeting of type `2`. It states the days of the week when the meeting should repeat.
      *
      * This field's value could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `1` as this field's value.
      *
@@ -15235,7 +15430,7 @@ export type MeetingCreateRequestBody = {
    */
   settings?: {
     /**
-     * Add additional meeting [data center regions](https://support.zoom.us/hc/en-us/articles/360042411451-Selecting-data-center-regions-for-hosted-meetings-and-webinars). Provide this value as an array of [country codes](/docs/api/references/abbreviations/#countries) for the countries available as data center regions in the [**Account Profile**](https://zoom.us/account/setting) interface but have been opted out of in the [user settings](https://zoom.us/profile).
+     * This field adds additional meeting [data center regions](https://support.zoom.us/hc/en-us/articles/360042411451-Selecting-data-center-regions-for-hosted-meetings-and-webinars). Provide this value as an array of [country codes](/docs/api/references/abbreviations/#countries) for the countries available as data center regions in the [**Account Profile**](https://zoom.us/account/setting) interface but have been opted out of in the [user settings](https://zoom.us/profile).
      *
      * For example, the data center regions selected in your [**Account Profile**](https://zoom.us/account) are `Europe`, `Hong Kong SAR`, `Australia`, `India`, `Japan`, `China`, `United States`, and `Canada`. However, in the [**My Profile**](https://zoom.us/profile) settings, you did **not** select `India` and `Japan` for meeting and webinar traffic routing.
      *
@@ -15362,6 +15557,38 @@ export type MeetingCreateRequestBody = {
      * @default none
      */
     auto_recording?: "local" | "cloud" | "none";
+    /**
+     * Automatically add meeting recordings to a video channel in video management. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     */
+    auto_add_recording_to_video_management?: {
+      /**
+       * Whether to automatically add the meeting recording to video management.
+       *
+       * @example true
+       * @default false
+       */
+      enable: boolean;
+      /**
+       * List of video management channels where the meeting recording will be added.
+       *
+       * @maxItems 5
+       * @minItems 1
+       */
+      channels?: {
+        /**
+         * The unique ID of a video management channel.
+         *
+         * @example Uyh5qeykTDiA66YQEYmFPg
+         */
+        channel_id: string;
+        /**
+         * The name of the video management channel.
+         *
+         * @example Team Weekly Meetings
+         */
+        name?: string;
+      }[];
+    };
     /**
      * The [pre-assigned breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms) settings.
      */
@@ -15712,6 +15939,33 @@ export type MeetingCreateRequestBody = {
      */
     waiting_room?: boolean;
     /**
+     * Configuration settings for the meeting's waiting room.
+     */
+    waiting_room_options?: {
+      /**
+       * Specifies the waiting room behavior for this meeting.
+       * * `follow_setting` - Use the Zoom web portal setting.
+       * * `custom` - Specify which participants should go into the waiting room.
+       *
+       * @example follow_setting
+       */
+      mode: "follow_setting" | "custom";
+      /**
+       * Specifies which participants should be placed into the waiting room. Required if `mode` is set to `custom`.
+       * * `everyone` - Everyone.
+       * * `users_not_in_account` - Users not in your account.
+       * * `users_not_in_account_or_whitelisted_domains` - Users who are not in your account and not part of your whitelisted domains.
+       * * `users_not_on_invite` - Users not on the meeting invite.
+       *
+       * @example everyone
+       */
+      who_goes_to_waiting_room?:
+        | "everyone"
+        | "users_not_in_account"
+        | "users_not_in_account_or_whitelisted_domains"
+        | "users_not_on_invite";
+    };
+    /**
      * Whether to add a watermark when viewing a shared screen. If not provided, the default value will be based on the user's setting.
      *
      * @example false
@@ -15729,6 +15983,18 @@ export type MeetingCreateRequestBody = {
      * @example true
      */
     alternative_host_update_polls?: boolean;
+    /**
+     * Whether to allow an alternative host to manage meeting summaries.
+     *
+     * @example true
+     */
+    alternative_host_manage_meeting_summary?: boolean;
+    /**
+     * Whether to allow an alternative host to manage meeting cloud recordings.
+     *
+     * @example false
+     */
+    alternative_host_manage_cloud_recording?: boolean;
     /**
      * Whether to set the meeting as an internal meeting.
      *
@@ -15760,18 +16026,6 @@ export type MeetingCreateRequestBody = {
        * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
-      /**
-       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
-       * * `all_users` - For all users, including external invitees and meeting participants.
-       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
-       * * `org_invitees` - Only for meeting invitees in your organization.
-       *
-       * @example all_users
-       */
-      who_is_added?:
-        | "all_users"
-        | "org_invitees_and_participants"
-        | "org_invitees";
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -15963,7 +16217,7 @@ export type MeetingCreateVariables = {
 } & FetcherExtraProps;
 
 /**
- * [Create a meeting](https://support.zoom.us/hc/en-us/articles/201362413-Scheduling-meetings) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ * [Creates a meeting](https://support.zoom.us/hc/en-us/articles/201362413-Scheduling-meetings) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
  * **Prerequisites:**
  * * A meeting's `start_url` value is the URL a host or an alternative host can use to start a meeting. The `start_url` value's expiration time is **two hours** for all regular users.
@@ -20245,475 +20499,6 @@ export const reportWebinarSurvey = (
     signal,
   });
 
-export type ListSipPhonesQueryParams = {
-  /**
-   * **Deprecated.** We will no longer support this field in a future release. Instead, use the `next_page_token` for pagination.
-   *
-   * @example 1
-   * @default 1
-   */
-  page_number?: number;
-  /**
-   * A user's user name or email address. If this parameter is provided, only the SIP phone system integration enabled for that specific user will be returned. Otherwise, all SIP phones on an account will be returned.
-   *
-   * @example jchill@example.com
-   */
-  search_key?: string;
-  /**
-   * The number of records returned within a single API call.
-   *
-   * @example 30
-   */
-  page_size?: number;
-  /**
-   * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-   *
-   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
-   */
-  next_page_token?: string;
-};
-
-export type ListSipPhonesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListSipPhonesResponse = {
-  /**
-   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
-   */
-  next_page_token?: string;
-  /**
-   * The number of pages returned for the request made.
-   *
-   * @example 1
-   */
-  page_count?: number;
-  /**
-   * The page number of the current results.
-   *
-   * @example 1
-   */
-  page_number?: number;
-  /**
-   * The number of records returned within a single API call.
-   *
-   * @example 30
-   */
-  page_size?: number;
-  /**
-   * SIP phones object.
-   */
-  phones?: {
-    /**
-     * The authorization name of the user that is registered for SIP phone.
-     *
-     * @example testname
-     */
-    authorization_name?: string;
-    /**
-     * The name or IP address of your provider's SIP domain.
-     *
-     * @example example.com
-     */
-    domain?: string;
-    /**
-     * The SIP phone ID.
-     *
-     * @example 123456
-     */
-    id?: string;
-    /**
-     * The password generated for the user in the SIP account.
-     *
-     * @example apassword1
-     */
-    password?: string;
-    /**
-     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-     *
-     * @example 192.0.2.2
-     */
-    proxy_server?: string;
-    /**
-     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-     *
-     * @example 192.0.2.4
-     */
-    proxy_server2?: string;
-    /**
-     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-     *
-     * @example 192.0.2.6
-     */
-    proxy_server3?: string;
-    /**
-     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-     *
-     * @example 192.0.2.1
-     */
-    register_server?: string;
-    /**
-     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-     *
-     * @example 192.0.2.3
-     */
-    register_server2?: string;
-    /**
-     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-     *
-     * @example 192.0.2.5
-     */
-    register_server3?: string;
-    /**
-     * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
-     *
-     * @example 60
-     */
-    registration_expire_time?: number;
-    /**
-     * Protocols supported by the SIP provider.
-     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-     *
-     * @example UDP
-     */
-    transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
-    /**
-     * Protocols supported by the SIP provider.
-     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-     *
-     * @example UDP
-     */
-    transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
-    /**
-     * Protocols supported by the SIP provider.
-     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-     *
-     * @example UDP
-     */
-    transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
-    /**
-     * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
-     *
-     * @format email
-     * @example jchill@example.com
-     */
-    user_email?: string;
-    /**
-     * The phone number associated with the user in the SIP account.
-     *
-     * @example Jill Chill
-     */
-    user_name?: string;
-    /**
-     * The number to dial for checking voicemail.
-     *
-     * @example 4000
-     */
-    voice_mail?: string;
-  }[];
-  /**
-   * The total number of all the records available across pages.
-   *
-   * @example 20
-   */
-  total_records?: number;
-};
-
-export type ListSipPhonesVariables = {
-  queryParams?: ListSipPhonesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * List SIP phones on an account.
- *
- * Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a Softphone registration to supported premise based PBX system. End users will have the ability to have Softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.
- *
- * **Prerequisites**:
- * * Currently only supported on Cisco and Avaya PBX systems.
- * * User must enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
- *
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:list_sip_phones:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const listSipPhones = (
-  variables: ListSipPhonesVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    ListSipPhonesResponse,
-    ListSipPhonesError,
-    undefined,
-    {},
-    ListSipPhonesQueryParams,
-    {}
-  >({ url: "/sip_phones", method: "get", ...variables, signal });
-
-export type CreateSIPPhoneError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateSIPPhoneResponse = {
-  /**
-   * The SIP phone ID.
-   *
-   * @example 123456
-   */
-  id?: string;
-  /**
-   * The authorization name of the user that is registered for SIP phone.
-   *
-   * @maxLength 64
-   * @example testname
-   */
-  authorization_name?: string;
-  /**
-   * The name or IP address of your provider's SIP domain (example: CDC.WEB).
-   *
-   * @maxLength 64
-   * @example example.com
-   */
-  domain?: string;
-  /**
-   * The password generated for the user in the SIP account.
-   *
-   * @example 123456
-   */
-  password?: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
-   *
-   * @example 192.0.2.2
-   */
-  proxy_server?: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-   *
-   * @example 192.0.2.4
-   */
-  proxy_server2?: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-   *
-   * @example 192.0.2.6
-   */
-  proxy_server3?: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.1
-   */
-  register_server?: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.3
-   */
-  register_server2?: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.5
-   */
-  register_server3?: string;
-  /**
-   * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
-   *
-   * @maximum 127
-   * @minimum 1
-   * @example 60
-   * @default 60
-   */
-  registration_expire_time?: number;
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
-   *
-   * @maxLength 64
-   * @format email
-   * @example jchill@example.com
-   */
-  user_email?: string;
-  /**
-   * The phone number associated with the user in the SIP account.
-   *
-   * @maxLength 64
-   * @example Jill Chill
-   */
-  user_name?: string;
-  /**
-   * The number to dial for checking voicemail.
-   *
-   * @maxLength 255
-   * @example 4000
-   */
-  voice_mail?: string;
-};
-
-export type CreateSIPPhoneRequestBody = {
-  /**
-   * The authorization name of the user that is registered for SIP phone.
-   *
-   * @maxLength 64
-   * @example testname
-   */
-  authorization_name: string;
-  /**
-   * The name or IP address of your provider's SIP domain (example: CDC.WEB).
-   *
-   * @maxLength 64
-   * @example example.com
-   */
-  domain: string;
-  /**
-   * The password generated for the user in the SIP account.
-   *
-   * @example 123456
-   */
-  password: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
-   *
-   * @example 192.0.2.2
-   */
-  proxy_server: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-   *
-   * @example 192.0.2.4
-   */
-  proxy_server2?: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server, or empty.
-   *
-   * @example 192.0.2.6
-   */
-  proxy_server3?: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.1
-   */
-  register_server: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.3
-   */
-  register_server2?: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.5
-   */
-  register_server3?: string;
-  /**
-   * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
-   *
-   * @maximum 127
-   * @minimum 1
-   * @example 60
-   * @default 60
-   */
-  registration_expire_time?: number;
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * The email address of the user to associate with the SIP Phone. Can add `.win`, `.mac`, `.android`, `.ipad`, `.iphone`, `.linux`, `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
-   *
-   * @maxLength 64
-   * @format email
-   * @example jchill@example.com
-   */
-  user_email: string;
-  /**
-   * The phone number associated with the user in the SIP account.
-   *
-   * @maxLength 64
-   * @example Jill Chill
-   */
-  user_name: string;
-  /**
-   * The number to dial for checking voicemail.
-   *
-   * @maxLength 255
-   * @example 4000
-   */
-  voice_mail?: string;
-};
-
-export type CreateSIPPhoneVariables = {
-  body: CreateSIPPhoneRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Enable a user to use SIP phone.
- *
- * Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a softphone registration to supported premise based PBX system. End users will have the ability to have softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.
- *
- *
- * **Prerequisites**:
- * * Currently only supported on Cisco and Avaya PBX systems.
- * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
- *
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:sip_phone:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const createSIPPhone = (
-  variables: CreateSIPPhoneVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    CreateSIPPhoneResponse,
-    CreateSIPPhoneError,
-    CreateSIPPhoneRequestBody,
-    {},
-    {},
-    {}
-  >({ url: "/sip_phones", method: "post", ...variables, signal });
-
 export type ListSIPPhonePhonesQueryParams = {
   /**
    * A user's user name or email address. If this parameter is provided, only the SIP phone system integration enabled for that specific user will be returned. Otherwise, all SIP phones on an account will be returned.
@@ -21451,188 +21236,6 @@ export const updateSIPPhonePhones = (
     ...variables,
     signal,
   });
-
-export type DeleteSIPPhonePathParams = {
-  /**
-   * The SIP phone ID. It can be retrieved from the List SIP phones API.
-   *
-   * @example 123456
-   */
-  phoneId: string;
-};
-
-export type DeleteSIPPhoneError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteSIPPhoneVariables = {
-  pathParams: DeleteSIPPhonePathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete a Zoom account's SIP phone.
- *
- *  **Prerequisites**:
- * * Currently only supported on Cisco and Avaya PBX systems.
- * * The user must enable **SIP Phone Integration** by contacting the [Zoom Sales](https://zoom.us/contactsales) team.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:delete:sip_phone:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const deleteSIPPhone = (
-  variables: DeleteSIPPhoneVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteSIPPhoneError,
-    undefined,
-    {},
-    {},
-    DeleteSIPPhonePathParams
-  >({ url: "/sip_phones/{phoneId}", method: "delete", ...variables, signal });
-
-export type UpdateSIPPhonePathParams = {
-  /**
-   * The SIP phone ID. This can be retrieved from the List SIP phones API.
-   *
-   * @example 123456
-   */
-  phoneId: string;
-};
-
-export type UpdateSIPPhoneError = Fetcher.ErrorWrapper<undefined>;
-
-export type UpdateSIPPhoneRequestBody = {
-  /**
-   * The authorization name of the user that is registered for SIP phone.
-   *
-   * @maxLength 64
-   * @example testname
-   */
-  authorization_name: string;
-  /**
-   * The name or IP address of your provider's SIP domain (example: CDC.WEB).
-   *
-   * @maxLength 64
-   * @example example.com
-   */
-  domain: string;
-  /**
-   * The password generated for the user in the SIP account.
-   *
-   * @example 123456
-   */
-  password: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
-   *
-   * @example 192.0.2.2
-   */
-  proxy_server: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
-   *
-   * @example 192.0.2.4
-   */
-  proxy_server2: string;
-  /**
-   * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
-   *
-   * @example 192.0.2.6
-   */
-  proxy_server3: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.1
-   */
-  register_server: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.3
-   */
-  register_server2: string;
-  /**
-   * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
-   *
-   * @example 192.0.2.5
-   */
-  register_server3: string;
-  /**
-   * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
-   *
-   * @maximum 127
-   * @minimum 1
-   * @example 60
-   * @default 60
-   */
-  registration_expire_time?: number;
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol2?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * Protocols supported by the SIP provider.
-   *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
-   *
-   * @example UDP
-   */
-  transport_protocol3?: "UDP" | "TCP" | "TLS" | "AUTO";
-  /**
-   * The phone number associated with the user in the SIP account.
-   *
-   * @maxLength 64
-   * @example Jill Chill
-   */
-  user_name: string;
-  /**
-   * The number to dial for checking voicemail.
-   *
-   * @maxLength 255
-   * @example 4000
-   */
-  voice_mail: string;
-};
-
-export type UpdateSIPPhoneVariables = {
-  body: UpdateSIPPhoneRequestBody;
-  pathParams: UpdateSIPPhonePathParams;
-} & FetcherExtraProps;
-
-/**
- * Update information of a specific SIP phone on a Zoom account.  n Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a Softphone registration to supported premise based PBX system. End users will have the ability to have Softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.   **Prerequisites**:* Currently only supported on Cisco and Avaya PBX systems. * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:update:sip_phone:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const updateSIPPhone = (
-  variables: UpdateSIPPhoneVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    UpdateSIPPhoneError,
-    UpdateSIPPhoneRequestBody,
-    {},
-    {},
-    UpdateSIPPhonePathParams
-  >({ url: "/sip_phones/{phoneId}", method: "patch", ...variables, signal });
 
 export type TspError = Fetcher.ErrorWrapper<undefined>;
 
@@ -32649,14 +32252,10 @@ export const operationsByTag = {
     reportWebinarSurvey,
   },
   sIPPhone: {
-    listSipPhones,
-    createSIPPhone,
     listSIPPhonePhones,
     enableSIPPhonePhones,
     deleteSIPPhonePhones,
     updateSIPPhonePhones,
-    deleteSIPPhone,
-    updateSIPPhone,
   },
   tsp: {
     tsp,
