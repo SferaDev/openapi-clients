@@ -13468,29 +13468,47 @@ export type GetAdminRealmsRealmUsersCountPathParams = {
 
 export type GetAdminRealmsRealmUsersCountQueryParams = {
   /**
-   * email filter
+   * A String contained in email, or the complete email, if param "exact" is true
    */
   email?: string;
+  /**
+   * whether the email has been verified
+   */
   emailVerified?: boolean;
   /**
    * Boolean representing if user is enabled or not
    */
   enabled?: boolean;
   /**
-   * first name filter
+   * Boolean which defines whether the params "last", "first", "email" and "username" must match exactly
+   */
+  exact?: boolean;
+  /**
+   * A String contained in firstName, or the complete firstName, if param "exact" is true
    */
   firstName?: string;
   /**
-   * last name filter
+   * The alias of an Identity Provider linked to the user
+   */
+  idpAlias?: string;
+  /**
+   * The userId at an Identity Provider linked to the user
+   */
+  idpUserId?: string;
+  /**
+   * A String contained in lastName, or the complete lastName, if param "exact" is true
    */
   lastName?: string;
+  /**
+   * A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+   */
   q?: string;
   /**
-   * arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+   * A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
    */
   search?: string;
   /**
-   * username filter
+   * A String contained in username, or the complete username, if param "exact" is true
    */
   username?: string;
 };
@@ -14195,6 +14213,7 @@ export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderError =
 
 export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderVariables =
   {
+    body?: Schemas.FederatedIdentityRepresentation;
     pathParams: PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams;
   } & FetcherExtraProps;
 
@@ -14205,7 +14224,7 @@ export const postAdminRealmsRealmUsersUserIdFederatedIdentityProvider = (
   fetch<
     undefined,
     PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderError,
-    undefined,
+    Schemas.FederatedIdentityRepresentation,
     {},
     {},
     PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams
