@@ -1008,6 +1008,8 @@ export type GetArchivedFilesVariables = {
 /**
  * Return a specific meeting instance's [archived files](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-indicators).
  *
+ * See [Archived JSON schemas](/docs/api/references/archived-json-schema/) for in-meeting chat message and subgroup archiving activity JSON schemas.
+ *
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
@@ -16149,9 +16151,10 @@ export type MeetingCreateRequestBody = {
   };
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
-   * * To set a meeting's start time in GMT, use the `yyyy-MM-ddTHH:mm:ssZ` date-time format. For example, `2020-03-31T12:02:00Z`.
+   * * To set a meeting's start time in GMT, use the `yyyy-MM-ddTHH:mm:ssZ` date-time format, such as `2020-03-31T12:02:00Z`.
    * * To set a meeting's start time using a specific timezone, use the `yyyy-MM-ddTHH:mm:ss` date-time format and specify the [timezone ID](/docs/api/references/abbreviations/#timezones) in the `timezone` field. If you do not specify a timezone, the `timezone` value defaults to your Zoom account's timezone. You can also use `UTC` for the `timezone` value.
-   * **Note:** If no `start_time` is set for a scheduled meeting, the `start_time` is set at the current time and the meeting type changes to an instant meeting, which expires after 30 days.
+   *
+   * **Note:** If `start_time` is not specified or is set to a past value, it defaults to the current time.
    *
    * @format date-time
    * @example 2022-03-25T07:32:55Z
@@ -16229,7 +16232,7 @@ export type MeetingCreateVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:meeting`,`meeting:write:meeting:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingCreate = (
   variables: MeetingCreateVariables,
