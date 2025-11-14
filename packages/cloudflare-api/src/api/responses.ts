@@ -5,7 +5,63 @@
  */
 import type * as Schemas from "./schemas";
 
+export type ApiShieldBulkCreateRulesSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldRule[];
+  };
+
+export type ApiShieldBulkEditRulesSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldRule[];
+  };
+
+export type ApiShieldConfigGetSuccess =
+  Schemas.ApiShieldConfigurationSingleResponse;
+
+export type ApiShieldConfigUpdateSuccess =
+  Schemas.ApiShieldConfigurationSingleResponse;
+
+export type ApiShieldCreateConfigSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: Schemas.ApiShieldTokenConfiguration;
+  };
+
+export type ApiShieldCreateRuleSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: Schemas.ApiShieldRule;
+};
+
+export type ApiShieldDeleteConfigSuccess =
+  Schemas.ApiShieldApiResponseCommon & {
+    result: {
+      id?: Schemas.ApiShieldSchemasUuid;
+    };
+  };
+
+export type ApiShieldDeleteRuleSuccess = Schemas.ApiShieldApiResponseSingleObj;
+
+export type ApiShieldEditConfigSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: {
+    description?: Schemas.ApiShieldDescription;
+    title?: Schemas.ApiShieldTitle;
+    token_sources?: Schemas.ApiShieldTokenSources;
+  };
+};
+
+export type ApiShieldEditRuleSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: Schemas.ApiShieldRule;
+};
+
 export type ApiShieldGenericFailure = Schemas.ApiShieldApiResponseCommonFailure;
+
+export type ApiShieldGenericFailure = Schemas.ApiShieldApiResponseCommonFailure;
+
+export type ApiShieldGetConfigSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: Schemas.ApiShieldTokenConfiguration;
+};
+
+export type ApiShieldGetRuleSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: Schemas.ApiShieldRule;
+};
 
 export type ApiShieldGlobalSettingsEditSuccess =
   Schemas.ApiShieldApiResponseSingle & {
@@ -20,6 +76,16 @@ export type ApiShieldGlobalSettingsGetSuccess =
 export type ApiShieldGlobalSettingsUpdateSuccess =
   Schemas.ApiShieldApiResponseSingle & {
     result: Schemas.ApiShieldGlobalSettings;
+  };
+
+export type ApiShieldListConfigsSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldTokenConfiguration[];
+  };
+
+export type ApiShieldListRulesSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: Schemas.ApiShieldRule[];
   };
 
 export type ApiShieldPerOperationSettingGetSuccess =
@@ -47,6 +113,60 @@ export type ApiShieldPerOperationSettingsDeleteSuccess =
 export type ApiShieldPerOperationSettingsListSuccess =
   Schemas.ApiShieldApiResponseCollection & {
     result: Schemas.ApiShieldPerOperationSetting[];
+  };
+
+export type ApiShieldPreviewRulesSuccess =
+  Schemas.ApiShieldApiResponseCollection & {
+    result: {
+      /**
+       * All hostnames on zone used by operations
+       *
+       * @uniqueItems true
+       */
+      available_hosts?: Schemas.ApiShieldHost[];
+      /**
+       * Number of operations with `excluded` `state`
+       *
+       * @example 40
+       * @x-auditable true
+       */
+      excluded?: number;
+      /**
+       * Number of operations with `ignored` `state`
+       *
+       * @example 10
+       * @x-auditable true
+       */
+      ignored?: number;
+      /**
+       * Number of operations with `included` `state`
+       *
+       * @example 50
+       * @x-auditable true
+       */
+      included?: number;
+      operations?: {
+        endpoint?: Schemas.ApiShieldEndpoint;
+        host?: Schemas.ApiShieldHost;
+        last_updated?: Schemas.ApiShieldSchemasTimestamp;
+        method?: Schemas.ApiShieldMethod;
+        operation_id?: Schemas.ApiShieldSchemasUuid;
+        state?: Schemas.ApiShieldSelectorOperationState;
+      }[];
+      /**
+       * Hostnames of `included` operations
+       *
+       * @uniqueItems true
+       */
+      selected_hosts?: Schemas.ApiShieldHost[];
+      /**
+       * Number of operations on zone
+       *
+       * @example 100
+       * @x-auditable true
+       */
+      total?: number;
+    };
   };
 
 export type ApiShieldSchemaCreateFailure = {
@@ -91,7 +211,7 @@ export type ApiShieldSchemaDeleteSuccess =
        * @format uuid
        * @x-auditable true
        */
-      schema_id: string;
+      id: string;
     };
   };
 
@@ -113,13 +233,24 @@ export type ApiShieldSchemasExtractOperationsGetSuccess =
 
 export type ApiShieldSchemasListSuccess =
   Schemas.ApiShieldApiResponseCollection & {
-    result: Schemas.ApiShieldSchemasPublicSchema[];
+    result: Schemas.ApiShieldPublicSchema[];
   };
+
+export type ApiShieldUpdateConfigCredentialsSuccess =
+  Schemas.ApiShieldApiResponseCommon & Schemas.ApiShieldCredentials;
 
 export type BrandProtectionApiDEFAULTERROR = Schemas.BrandProtectionApiError;
 
 export type BrandProtectionApiUNPROCESSABLECONTENT =
   Schemas.BrandProtectionApiError;
+
+export type BuildsBadRequest = Schemas.BuildsErrorResponse;
+
+export type BuildsNotFound = Schemas.BuildsErrorResponse;
+
+export type BuildsSuccessEmpty = Schemas.BuildsAPIResponse;
+
+export type BuildsUnauthorized = Schemas.BuildsErrorResponse;
 
 export type EmailSecurityClientError = {
   /**
@@ -132,6 +263,586 @@ export type EmailSecurityClientError = {
    * @example false
    */
   success: boolean;
+};
+
+export type RealtimekitAddParticipant = {
+  /**
+   * Represents a participant.
+   */
+  data?: Schemas.RealtimekitParticipant & {
+    /**
+     * The participant's auth token that can be used for joining a meeting from the client side.
+     */
+    token: string;
+  };
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success: boolean;
+};
+
+export type RealtimekitCreatePoll = {
+  data?: {
+    action?: string;
+    poll?: Schemas.RealtimekitPoll;
+  };
+  success?: boolean;
+};
+
+export type RealtimekitDeleteParticipant = {
+  /**
+   * Data returned by the operation
+   */
+  data?: {
+    /**
+     * Timestamp this object was created at. The time is returned in ISO format.
+     *
+     * @format date-time
+     */
+    created_at: string;
+    /**
+     * A unique participant ID generated by the client.
+     */
+    custom_participant_id: string;
+    /**
+     * ID of the preset applied to this participant.
+     *
+     * @format uuid
+     */
+    preset_id: string;
+    /**
+     * Timestamp this object was updated at. The time is returned in ISO format.
+     *
+     * @format date-time
+     */
+    updated_at: string;
+  };
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGenericError = Schemas.RealtimekitGenericErrorResponse;
+
+export type RealtimekitGetActiveRecording = {
+  /**
+   * Data returned by the operation
+   */
+  data: Schemas.RealtimekitRecording;
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type RealtimekitGetActiveSession = {
+  data?: Schemas.RealtimekitActiveSession;
+  success?: boolean;
+};
+
+export type RealtimekitGetActiveSessionNotFound =
+  Schemas.RealtimekitGenericErrorResponse;
+
+export type RealtimekitGetAllMeetings = {
+  data: Schemas.RealtimekitMeeting[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     * @minimum 0
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGetAllParticipants = {
+  data: Schemas.RealtimekitParticipant[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     * @minimum 0
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGetAllPresets = {
+  data: Schemas.RealtimekitPresetListItem[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     * @minimum 0
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGetDaywiseStats = {
+  data?: Schemas.RealtimekitDaywiseStats[];
+  succes?: boolean;
+};
+
+export type RealtimekitGetMeeting =
+  Schemas.RealtimekitGenericSuccessResponse & {
+    data?: Schemas.RealtimekitMeeting;
+  } & Record<string, any>;
+
+export type RealtimekitGetOverallStats = {
+  data?: Schemas.RealtimekitOverallStats;
+  success?: boolean;
+};
+
+export type RealtimekitGetParticipant = {
+  /**
+   * Data returned by the operation
+   */
+  data: Schemas.RealtimekitParticipant;
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type RealtimekitGetParticipantDataFromPeerId = {
+  data?: {
+    participant?: {
+      created_at?: string;
+      custom_participant_id?: string;
+      display_name?: string;
+      duration?: number;
+      id?: string;
+      joined_at?: string;
+      left_at?: string;
+      peer_report?: {
+        metadata?: {
+          audio_devices_updates?: Record<string, any>[];
+          browser_metadata?: {
+            browser?: string;
+            browser_version?: string;
+            engine?: string;
+            user_agent?: string;
+            webgl_support?: string;
+          };
+          candidate_pairs?: {
+            consuming_transport?: Record<string, any>[];
+            producing_transport?: {
+              available_outgoing_bitrate?: number;
+              bytes_discarded_on_send?: number;
+              bytes_received?: number;
+              bytes_sent?: number;
+              current_round_trip_time?: number;
+              last_packet_received_timestamp?: number;
+              last_packet_sent_timestamp?: number;
+              local_candidate_address?: string;
+              local_candidate_id?: string;
+              local_candidate_network_type?: string;
+              local_candidate_port?: number;
+              local_candidate_protocol?: string;
+              local_candidate_related_address?: string;
+              local_candidate_related_port?: number;
+              local_candidate_type?: string;
+              nominated?: boolean;
+              packets_discarded_on_send?: number;
+              packets_received?: number;
+              packets_sent?: number;
+              remote_candidate_address?: string;
+              remote_candidate_id?: string;
+              remote_candidate_port?: number;
+              remote_candidate_protocol?: string;
+              remote_candidate_type?: string;
+              total_round_trip_time?: number;
+            }[];
+          };
+          device_info?: {
+            cpus?: number;
+            is_mobile?: boolean;
+            os?: string;
+            os_version?: string;
+          };
+          events?: {
+            name?: string;
+            timestamp?: string;
+          }[];
+          ip_information?: {
+            asn?: {
+              asn?: string;
+            };
+            city?: string;
+            country?: string;
+            ipv4?: string;
+            region?: string;
+            timezone?: string;
+          };
+          pc_metadata?: {
+            effective_network_type?: string;
+            reflexive_connectivity?: boolean;
+            relay_connectivity?: boolean;
+            timestamp?: string;
+            turn_connectivity?: boolean;
+          }[];
+          room_view_type?: string;
+          sdk_name?: string;
+          sdk_version?: string;
+          selected_device_updates?: Record<string, any>[];
+          speaker_devices_updates?: Record<string, any>[];
+          video_devices_updates?: Record<string, any>[];
+        };
+        quality?: {
+          audio_consumer?: Record<string, any>[];
+          audio_consumer_cumulative?: Record<string, any>;
+          audio_producer?: {
+            bytes_sent?: number;
+            jitter?: number;
+            mid?: string;
+            mos_quality?: number;
+            packets_lost?: number;
+            packets_sent?: number;
+            producer_id?: string;
+            rtt?: number;
+            ssrc?: number;
+            timestamp?: string;
+          }[];
+          audio_producer_cumulative?: {
+            packet_loss?: {
+              ["10_or_greater_event_fraction"]?: number;
+              ["25_or_greater_event_fraction"]?: number;
+              ["50_or_greater_event_fraction"]?: number;
+              ["5_or_greater_event_fraction"]?: number;
+              avg?: number;
+            };
+            quality_mos?: {
+              avg?: number;
+              p50?: number;
+              p75?: number;
+              p90?: number;
+            };
+            rtt?: {
+              ["100ms_or_greater_event_fraction"]?: number;
+              ["250ms_or_greater_event_fraction"]?: number;
+              ["500ms_or_greater_event_fraction"]?: number;
+              avg?: number;
+            };
+          };
+          screenshare_audio_consumer?: Record<string, any>[];
+          screenshare_audio_consumer_cumulative?: Record<string, any>;
+          screenshare_audio_producer?: Record<string, any>[];
+          screenshare_audio_producer_cumulative?: Record<string, any>;
+          screenshare_video_consumer?: Record<string, any>[];
+          screenshare_video_consumer_cumulative?: Record<string, any>;
+          screenshare_video_producer?: Record<string, any>[];
+          screenshare_video_producer_cumulative?: Record<string, any>;
+          video_consumer?: Record<string, any>[];
+          video_consumer_cumulative?: Record<string, any>;
+          video_producer?: Record<string, any>[];
+          video_producer_cumulative?: Record<string, any>;
+        };
+      };
+      peer_stats?: {
+        device_info?: {
+          browser?: string;
+          browser_version?: string;
+          cpus?: number;
+          engine?: string;
+          is_mobile?: boolean;
+          os?: string;
+          os_version?: string;
+          sdk_name?: string;
+          sdk_version?: string;
+          user_agent?: string;
+          webgl_support?: string;
+        };
+        events?: {
+          metadata?: {
+            connection_info?: {
+              backend_r_t_t?: number;
+              connectivity?: {
+                host?: boolean;
+                reflexive?: boolean;
+                relay?: boolean;
+              };
+              effective_network_type?: string;
+              fractional_loss?: number;
+              ip_details?: {
+                asn?: {
+                  asn?: string;
+                };
+                city?: string;
+                country?: string;
+                ip?: string;
+                loc?: string;
+                postal?: string;
+                region?: string;
+                timezone?: string;
+              };
+              jitter?: number;
+              location?: {
+                coords?: {
+                  latitude?: number;
+                  longitude?: number;
+                };
+              };
+              r_t_t?: number;
+              throughput?: number;
+              turn_connectivity?: boolean;
+            };
+          };
+          timestamp?: string;
+          type?: string;
+        }[];
+        ip_information?: {
+          asn?: {
+            asn?: string;
+          };
+          city?: string;
+          country?: string;
+          ip_location?: string;
+          ipv4?: string;
+          org?: string;
+          region?: string;
+          timezone?: string;
+        };
+        precall_network_information?: {
+          backend_rtt?: number;
+          effective_networktype?: string;
+          fractional_loss?: number;
+          jitter?: number;
+          reflexive_connectivity?: boolean;
+          relay_connectivity?: boolean;
+          rtt?: number;
+          throughput?: number;
+          turn_connectivity?: boolean;
+        };
+      };
+      quality_stats?: {
+        audio_bandwidth?: number;
+        audio_stats?: Record<string, any>[];
+        average_quality?: number;
+        end?: string | null;
+        first_audio_packet_received?: string;
+        first_video_packet_received?: string;
+        last_audio_packet_received?: string;
+        last_video_packet_received?: string;
+        peer_ids?: string[];
+        start?: string | null;
+        total_audio_packets?: number;
+        total_audio_packets_lost?: number;
+        total_video_packets?: number;
+        total_video_packets_lost?: number;
+        video_bandwidth?: number;
+        video_stats?: Record<string, any>[];
+      };
+      role?: string;
+      updated_at?: string;
+      user_id?: string;
+    };
+  };
+  success?: boolean;
+};
+
+export type RealtimekitGetParticipantDetails = {
+  data?: {
+    participant?: Schemas.RealtimekitParticipantsList &
+      Schemas.RealtimekitParticipantPeerStats &
+      Schemas.RealtimekitParticipantQualityStats;
+  };
+  success?: boolean;
+};
+
+export type RealtimekitGetPresetBody = {
+  /**
+   * Data returned by the operation
+   */
+  data: {
+    /**
+     * ID of the preset
+     *
+     * @format uuid
+     */
+    id: string;
+  } & Schemas.RealtimekitPreset;
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type RealtimekitGetRecording = {
+  /**
+   * Data returned by the operation
+   */
+  data?: Schemas.RealtimekitRecording & {
+    start_reason?: Schemas.RealtimekitStartReason;
+    stop_reason?: Schemas.RealtimekitStopReason;
+    storage_config?: Schemas.RealtimekitStorageConfig;
+  };
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGetRecordings = {
+  data: (Schemas.RealtimekitRecording & {
+    storage_config?: Schemas.RealtimekitStorageConfig;
+  } & {
+    meeting?: Schemas.RealtimekitMeeting;
+  })[];
+  paging: {
+    /**
+     * @example 30
+     */
+    end_offset: number;
+    /**
+     * @example 1
+     */
+    start_offset: number;
+    /**
+     * @example 30
+     * @minimum 0
+     */
+    total_count: number;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RealtimekitGetSessionChat = {
+  data?: Schemas.RealtimekitChatMessage;
+  success?: boolean;
+};
+
+export type RealtimekitGetSessionDetails = {
+  data?: {
+    session?: Schemas.RealtimekitActiveSession;
+  };
+  success?: boolean;
+};
+
+export type RealtimekitGetSessionParticipants = {
+  data?: {
+    participants?: Schemas.RealtimekitParticipantsList[];
+  };
+  success?: boolean;
+};
+
+export type RealtimekitGetSessionTranscript = {
+  data?: Schemas.RealtimekitTranscript;
+  success?: boolean;
+};
+
+export type RealtimekitGetSessionTranscriptSummary = {
+  data?: Schemas.RealtimekitTranscriptSummary;
+  success?: boolean;
+};
+
+export type RealtimekitGetSessions = {
+  data?: {
+    sessions?: Schemas.RealtimekitActiveSession[];
+  };
+  success?: boolean;
+};
+
+export type RealtimekitKickAllParticipants = {
+  data?: {
+    action?: string;
+    kicked_participants_count?: number;
+  };
+  success?: boolean;
+};
+
+export type RealtimekitKickParticipants = {
+  data?: {
+    action?: string;
+    participants?: Schemas.RealtimekitSessionParticipant[];
+  };
+  success?: boolean;
+};
+
+export type RealtimekitMuteAllParticipants = {
+  data?: {
+    action?: string;
+    muted_participants_count?: number;
+  };
+  success?: boolean;
+};
+
+export type RealtimekitMuteParticipants = {
+  data?: {
+    action?: string;
+    participants?: Schemas.RealtimekitSessionParticipant[];
+  };
+  success?: boolean;
+};
+
+export type RealtimekitParticipantNotFound =
+  Schemas.RealtimekitGenericErrorResponse;
+
+export type RealtimekitRegenToken = {
+  /**
+   * Data returned by the operation
+   */
+  data: {
+    /**
+     * Regenerated participant's authentication token.
+     */
+    token: string;
+  };
+  /**
+   * Success status of the operation
+   *
+   * @default true
+   */
+  success?: boolean;
 };
 
 export type RulesetsEmpty = void;
@@ -286,7 +997,7 @@ export type SnippetsSnippet = {
  * A snippet content response object.
  */
 export type SnippetsSnippetContent = {
-  files: Schemas.SnippetsSnippetFiles;
+  [key: string]: Schemas.SnippetsSnippetFiles;
 };
 
 /**
@@ -333,3 +1044,51 @@ export type Workers200 = Schemas.WorkersScriptResponseUploadSingle &
   Record<string, any>;
 
 export type Workers4XX = Schemas.WorkersApiResponseCommonFailure;
+
+export type WorkersErrorAuth = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: Schemas.WorkersMessages;
+  messages: Schemas.WorkersMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success?: false;
+};
+
+export type WorkersErrorInternalServer = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: Schemas.WorkersMessages;
+  messages: Schemas.WorkersMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success?: false;
+};
+
+export type WorkersErrorWorkerNotFound = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: Schemas.WorkersMessages;
+  messages: Schemas.WorkersMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success?: false;
+};

@@ -25,6 +25,8 @@ export type ApiShieldApiDiscoveryOriginParameter =
 export type ApiShieldApiDiscoveryStateParameter =
   Schemas.ApiShieldApiDiscoveryState;
 
+export type ApiShieldConfigId = Schemas.ApiShieldSchemasUuid;
+
 /**
  * When `true`, only return API Discovery results that are not saved into API Shield Endpoint Management
  */
@@ -61,7 +63,13 @@ export type ApiShieldMethodParameter = string[];
 /**
  * @default false
  */
-export type ApiShieldOmitSource = boolean;
+export type ApiShieldOldOmitSource = boolean;
+
+/**
+ * @format uuid
+ * @maxLength 36
+ */
+export type ApiShieldOldSchemaId = string;
 
 /**
  * @default false
@@ -107,11 +115,7 @@ export type ApiShieldParametersOperationId = Schemas.ApiShieldSchemasUuid;
  */
 export type ApiShieldPerPage = number;
 
-/**
- * @format uuid
- * @maxLength 36
- */
-export type ApiShieldSchemaId = string;
+export type ApiShieldRuleId = Schemas.ApiShieldSchemasUuid;
 
 /**
  * @format uuid
@@ -119,6 +123,39 @@ export type ApiShieldSchemaId = string;
 export type ApiShieldSchemaIdPath = Schemas.ApiShieldSchemasUuid & string;
 
 export type ApiShieldZoneId = Schemas.ApiShieldSchemasIdentifier;
+
+/**
+ * @example account-123
+ */
+export type BuildsAccountId = string;
+
+/**
+ * @format uuid
+ */
+export type BuildsBuildUuid = string;
+
+/**
+ * @default 1
+ * @minimum 1
+ */
+export type BuildsPage = number;
+
+/**
+ * @default 50
+ * @maximum 200
+ * @minimum 1
+ */
+export type BuildsPerPage = number;
+
+/**
+ * @format uuid
+ */
+export type BuildsRepoConnectionUuid = string;
+
+/**
+ * @format uuid
+ */
+export type BuildsTriggerUuid = string;
 
 export type DlsAccountId = Schemas.DlsIdentifier;
 
@@ -139,10 +176,121 @@ export type HealthchecksPage = number;
  */
 export type HealthchecksPerPage = number;
 
+export type OrganizationsApiOrganizationListFiltersContainingAccount = string;
+
+export type OrganizationsApiOrganizationListFiltersContainingOrganization =
+  string;
+
+export type OrganizationsApiOrganizationListFiltersContainingUser = string;
+
+export type OrganizationsApiOrganizationListFiltersId =
+  Schemas.OrganizationsApiOrganizationID[];
+
+export type OrganizationsApiOrganizationListFiltersName = string;
+
+export type OrganizationsApiOrganizationListFiltersNameContains = string;
+
+export type OrganizationsApiOrganizationListFiltersNameEndsWith = string;
+
+export type OrganizationsApiOrganizationListFiltersNameStartsWith = string;
+
+export type OrganizationsApiOrganizationListFiltersParentId =
+  | Schemas.OrganizationsApiOrganizationID
+  | "null";
+
+/**
+ * @maximum 1000
+ * @minimum 0
+ */
+export type OrganizationsApiPageTokenParamsPageSize = number;
+
+export type OrganizationsApiPageTokenParamsPageToken = string;
+
+export type RealtimekitAccountId = Schemas.RealtimekitAccountIdentifier;
+
+export type RealtimekitAppId = Schemas.RealtimekitAppId;
+
+/**
+ * @example 2022-09-22
+ */
+export type RealtimekitEndDate = string;
+
+/**
+ * @format date-time
+ */
+export type RealtimekitEndTime = string;
+
+export type RealtimekitMeetingId = string;
+
+/**
+ * @pattern ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
+ */
+export type RealtimekitMeetingId = string;
+
+/**
+ * @minimum 0
+ */
+export type RealtimekitPageNo = number;
+
+export type RealtimekitParticipantId = string;
+
+/**
+ * @example 1:10
+ */
+export type RealtimekitParticipants = string;
+
+export type RealtimekitParticipantsSortBy = "joinedAt" | "duration";
+
+/**
+ * @minimum 0
+ */
+export type RealtimekitPerPage = number;
+
+export type RealtimekitRecordingSortBy = "invokedTime";
+
+export type RealtimekitRecordingStatus = (
+  | "INVOKED"
+  | "RECORDING"
+  | "UPLOADING"
+  | "UPLOADED"
+)[];
+
+export type RealtimekitSearch = string;
+
+export type RealtimekitSessionId = string;
+
+export type RealtimekitSortBy = "minutesConsumed" | "createdAt";
+
+export type RealtimekitSortOrder = "ASC" | "DESC";
+
+/**
+ * @example 2022-09-01
+ */
+export type RealtimekitStartDate = string;
+
+/**
+ * @format date-time
+ */
+export type RealtimekitStartTime = string;
+
+export type RealtimekitStatus = "LIVE" | "ENDED";
+
+export type RealtimekitStreamId = number;
+
 /**
  * @default asc
  */
 export type ResourceSharingDirection = "asc" | "desc";
+
+/**
+ * @example true
+ */
+export type ResourceSharingIncludeRecipientCounts = boolean;
+
+/**
+ * @example true
+ */
+export type ResourceSharingIncludeResources = boolean;
 
 export type ResourceSharingKind = Schemas.ResourceSharingShareKind;
 
@@ -170,6 +318,9 @@ export type ResourceSharingResourceStatus =
   Schemas.ResourceSharingResourceStatus;
 
 export type ResourceSharingResourceType = Schemas.ResourceSharingResourceType;
+
+export type ResourceSharingResourceTypes =
+  Schemas.ResourceSharingResourceType[];
 
 export type ResourceSharingStatus = Schemas.ResourceSharingShareStatus;
 
@@ -208,6 +359,23 @@ export type SecretsStorePerPage = number;
 export type SecretsStoreScopesQuery = Schemas.SecretsStoreScopes[];
 
 export type SecretsStoreSearch = string;
+
+/**
+ * @default 1
+ * @minimum 1
+ */
+export type SmartshieldPage = number;
+
+/**
+ * @default 25
+ * @maximum 1000
+ * @minimum 5
+ */
+export type SmartshieldPerPage = number;
+
+export type TeamsDevicesDevicesGetDeviceParamInclude = string;
+
+export type TeamsDevicesDevicesGetRegistrationParamInclude = string;
 
 export type TeamsDevicesDevicesListDevicesParamActiveRegistrations =
   | "include"

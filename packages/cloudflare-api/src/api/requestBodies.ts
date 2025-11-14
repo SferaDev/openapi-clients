@@ -5,6 +5,41 @@
  */
 import type * as Schemas from "./schemas";
 
+export type ApiShieldBulkCreateRules =
+  Schemas.ApiShieldCreateSingleRuleRequest[];
+
+export type ApiShieldBulkEditRules = ({
+  /**
+   * Rule ID this patch applies to
+   *
+   * @example 0d9bf70c-92e1-4bb3-9411-34a3bcc59003
+   * @format uuid
+   * @maxLength 36
+   * @x-auditable true
+   */
+  id: string;
+} & Schemas.ApiShieldEditSingleRuleRequest)[];
+
+export type ApiShieldConfigUpdate = Schemas.ApiShieldConfiguration;
+
+export type ApiShieldCreateConfig = {
+  credentials: Schemas.ApiShieldCredentials;
+  description: Schemas.ApiShieldDescription;
+  title: Schemas.ApiShieldTitle;
+  token_sources: Schemas.ApiShieldTokenSources;
+  token_type: Schemas.ApiShieldTokenType;
+};
+
+export type ApiShieldCreateRule = Schemas.ApiShieldCreateSingleRuleRequest;
+
+export type ApiShieldEditConfig = {
+  description?: Schemas.ApiShieldDescription;
+  title?: Schemas.ApiShieldTitle;
+  token_sources?: Schemas.ApiShieldTokenSources;
+};
+
+export type ApiShieldEditRule = Schemas.ApiShieldEditSingleRuleRequest;
+
 export type ApiShieldGlobalSettingsEdit =
   Schemas.ApiShieldGlobalSettingChangeBase;
 
@@ -62,6 +97,8 @@ export type ApiShieldPerOperationSettingsBulkEdit = {
   };
 };
 
+export type ApiShieldPreviewRules = Schemas.ApiShieldSelector;
+
 export type ApiShieldSchemaCreate = {
   /**
    * The kind of the schema
@@ -94,10 +131,249 @@ export type ApiShieldSchemaEdit = {
   validation_enabled?: boolean;
 };
 
+export type ApiShieldUpdateConfigCredentials = Schemas.ApiShieldCredentials;
+
 export type PayPerCrawlDaricConfig = Schemas.PayPerCrawlDaricConfig;
 
 export type PayPerCrawlZonesCanBeEnabledPayload =
   Schemas.PayPerCrawlZonesCanBeEnabledPayload;
+
+export type RealtimekitAddParticipantBody = {
+  /**
+   * A unique participant ID. You must specify a unique ID for the participant, for example, UUID, email address, and so on.
+   */
+  custom_participant_id: string;
+  /**
+   * (Optional) Name of the participant.
+   *
+   * @example Mary Sue
+   */
+  name?: string | null;
+  /**
+   * (Optional) A URL to a picture to be used for the participant.
+   *
+   * @example https://i.imgur.com/test.jpg
+   * @format uri
+   */
+  picture?: string | null;
+  /**
+   * Name of the preset to apply to this participant.
+   *
+   * @default group_call_host
+   */
+  preset_name: string;
+};
+
+export type RealtimekitCreateMeetingBody = {
+  ai_config?: Schemas.RealtimekitAIConfig;
+  /**
+   * Specifies if the meeting should start getting livestreamed on start.
+   *
+   * @default false
+   */
+  live_stream_on_start?: boolean | null;
+  /**
+   * If a meeting is set to persist_chat, meeting chat would remain for a week within the meeting space.
+   *
+   * @default false
+   */
+  persist_chat?: boolean;
+  /**
+   * The region in which this meeting should be created.
+   */
+  preferred_region?:
+    | "ap-south-1"
+    | "ap-southeast-1"
+    | "us-east-1"
+    | "eu-central-1"
+    | any
+    | null;
+  /**
+   * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
+   *
+   * @default false
+   */
+  record_on_start?: boolean | null;
+  recording_config?: Schemas.RealtimekitRecordingConfig;
+  /**
+   * Time in seconds, for which a session remains active, after the last participant has left the meeting.
+   *
+   * @default 60
+   * @maximum 600
+   * @minimum 60
+   */
+  session_keep_alive_time_in_secs?: number;
+  /**
+   * Automatically generate summary of meetings using transcripts. Requires Transcriptions to be enabled, and can be retrieved via Webhooks or summary API.
+   *
+   * @default false
+   */
+  summarize_on_end?: boolean;
+  /**
+   * Title of the meeting
+   */
+  title?: string | null;
+};
+
+export type RealtimekitCreatePollBody = {
+  /**
+   * if voters on a poll are anonymous
+   */
+  anonymous?: boolean;
+  /**
+   * if votes on an option are visible before a person votes
+   */
+  hide_votes?: boolean;
+  /**
+   * Different options for the question
+   */
+  options?: string[];
+  /**
+   * Question of the poll
+   */
+  question?: string;
+};
+
+export type RealtimekitCreatePresetBody = Schemas.RealtimekitPreset;
+
+export type RealtimekitEditParticipantBody = {
+  /**
+   * (Optional) Name of the participant.
+   *
+   * @example Jane Doe
+   */
+  name?: string | null;
+  /**
+   * (Optional) A URL to a picture to be used for the participant.
+   *
+   * @format uri
+   */
+  picture?: string | null;
+  /**
+   * (Optional) Name of the preset to apply to this participant.
+   */
+  preset_name?: string | null;
+};
+
+export type RealtimekitKickParticipantsBody = {
+  custom_participant_ids?: string[];
+  participant_ids?: string[];
+};
+
+export type RealtimekitMuteAllParticipantsBody = {
+  /**
+   * if false, participants won't be able to unmute themselves after they are muted
+   */
+  allow_unmute?: boolean;
+};
+
+export type RealtimekitStartRecording = {
+  /**
+   * By default, a meeting allows only one recording to run at a time. Enabling the `allow_multiple_recordings` parameter to true allows you to initiate multiple recordings concurrently in the same meeting. This allows you to record separate videos of the same meeting with different configurations, such as portrait mode or landscape mode.
+   *
+   * @default false
+   */
+  allow_multiple_recordings?: boolean;
+  audio_config?: Schemas.RealtimekitAudioConfig;
+  /**
+   * Update the recording file name.
+   */
+  file_name_prefix?: string;
+  interactive_config?: Schemas.RealtimekitInteractiveConfig;
+  /**
+   * Specifies the maximum duration for recording in seconds, ranging from a minimum of 60 seconds to a maximum of 24 hours.
+   *
+   * @maximum 86400
+   * @minimum 60
+   */
+  max_seconds?: number;
+  /**
+   * ID of the meeting to record.
+   *
+   * @format uuid
+   */
+  meeting_id?: string;
+  realtimekit_bucket_config?: Schemas.RealtimekitRealtimekitBucketConfig;
+  rtmp_out_config?: Schemas.RealtimekitLivestreamingConfig;
+  storage_config?: Schemas.RealtimekitStorageConfig;
+  /**
+   * Pass a custom url to record arbitary screen
+   *
+   * @format uri
+   */
+  url?: string;
+  video_config?: Schemas.RealtimekitVideoConfig;
+};
+
+export type RealtimekitStartTrackRecordingBody = {
+  layers: {
+    [key: string]: Schemas.RealtimekitTrackConfigLayer;
+  };
+  /**
+   * Maximum seconds this recording should be active for (beta)
+   */
+  max_seconds?: number;
+  /**
+   * ID of the meeting to record.
+   */
+  meeting_id?: string;
+};
+
+export type RealtimekitUpdateMeetingBody = {
+  ai_config?: Schemas.RealtimekitAIConfig;
+  /**
+   * Specifies if the meeting should start getting livestreamed on start.
+   *
+   * @default false
+   */
+  live_stream_on_start?: boolean;
+  /**
+   * If a meeting is updated to persist_chat, meeting chat would remain for a week within the meeting space.
+   *
+   * @default false
+   */
+  persist_chat?: boolean;
+  /**
+   * The region in which this meeting should be created.
+   */
+  preferred_region?:
+    | "ap-south-1"
+    | "ap-southeast-1"
+    | "us-east-1"
+    | "eu-central-1";
+  /**
+   * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
+   *
+   * @default false
+   */
+  record_on_start?: boolean;
+  /**
+   * Time in seconds, for which a session remains active, after the last participant has left the meeting.
+   *
+   * @default 60
+   * @maximum 600
+   * @minimum 60
+   */
+  session_keep_alive_time_in_secs?: number;
+  /**
+   * Whether the meeting is `ACTIVE` or `INACTIVE`. Users will not be able to join an `INACTIVE` meeting.
+   *
+   * @example INACTIVE
+   */
+  status?: "ACTIVE" | "INACTIVE";
+  /**
+   * Automatically generate summary of meetings using transcripts. Requires Transcriptions to be enabled, and can be retrieved via Webhooks or summary API.
+   *
+   * @default false
+   */
+  summarize_on_end?: boolean;
+  /**
+   * Title of the meeting
+   */
+  title?: string;
+};
+
+export type RealtimekitUpdatePresetBody = Schemas.RealtimekitUpdatePreset;
 
 /**
  * A ruleset object.
@@ -163,13 +439,14 @@ export type RulesetsUrlNormalization = Schemas.RulesetsUrlNormalization;
  * A snippet object.
  */
 export type SnippetsSnippet = {
-  files: Schemas.SnippetsSnippetFiles;
   /**
    * Metadata about the snippet.
    */
   metadata: {
     main_module: Schemas.SnippetsSnippetMainModule;
   };
+} & {
+  [key: string]: Schemas.SnippetsSnippetFiles;
 };
 
 /**
@@ -193,6 +470,13 @@ export type WorkersVersionPost = {
    */
   metadata: {
     annotations?: {
+      /**
+       * Associated alias for a version.
+       *
+       * @example staging
+       * @maxLength 63
+       */
+      ["workers/alias"]?: string;
       /**
        * Human-readable message about the version. Truncated to 100 bytes.
        *
