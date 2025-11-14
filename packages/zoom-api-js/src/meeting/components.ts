@@ -1008,6 +1008,8 @@ export type GetArchivedFilesVariables = {
 /**
  * Return a specific meeting instance's [archived files](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-indicators).
  *
+ * See [Archived JSON schemas](/docs/api/references/archived-json-schema/) for in-meeting chat message and subgroup archiving activity JSON schemas.
+ *
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
@@ -2611,6 +2613,8 @@ export type MeetingRecordingRegistrantStatusVariables = {
 /**
  * Update a registrant's status.
  * A registrant can either be approved or denied from viewing the [on-demand](https://support.zoom.us/hc/en-us/articles/360000488283-On-demand-Recordings) recording.
+ *
+ * Learn more about [enabling cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063923) and [managing cloud recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065362).
  *
  *
  *
@@ -5420,6 +5424,9 @@ export type InMeetingControlRequestBody = {
    * * `participant.invite.callout` - Invite a participant to the meeting through [call out (phone)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062038).
    * * `participant.invite.room_system_callout` - Invite a participant to the meeting through [call out (room system)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065721).
    * * `waiting_room.update` - Update the waiting room with a custom message.
+   * * `ai_companion.start` - Start the AI Companion.
+   * * `ai_companion.stop` - Stop the AI Companion.
+   * * `ai_companion.disable` - Disable the AI Companion.
    *
    * @example recording.start
    */
@@ -5431,7 +5438,10 @@ export type InMeetingControlRequestBody = {
     | "participant.invite"
     | "participant.invite.callout"
     | "participant.invite.room_system_callout"
-    | "waiting_room.update";
+    | "waiting_room.update"
+    | "ai_companion.start"
+    | "ai_companion.stop"
+    | "ai_companion.disable";
   /**
    * The in-meeting parameters.
    */
@@ -5580,6 +5590,25 @@ export type InMeetingControlRequestBody = {
      * @example waiting room description
      */
     waiting_room_description?: string;
+    /**
+     * Which AI Companion mode to start or stop. Use this field if you pass the `ai_companion.start` or `ai_companion.stop` value for the `method` field.
+     * * `questions` — The AI Companion for answering questions.
+     * * `summary` — The AI Companion for generating meeting summaries.
+     * * `all` — Both modes.
+     *
+     * If this field is not provided, `all` is used by default.
+     *
+     * @example questions
+     * @default all
+     */
+    ai_companion_mode?: "questions" | "summary" | "all";
+    /**
+     * Whether to delete all meeting assets - such as transcripts and summaries - when stopping the AI Companion. Use this field only if you pass the `ai_companion.stop` value for the `method` field **and** the `ai_companion_mode` field is set to `all`.
+     *
+     * @example false
+     * @default false
+     */
+    delete_meeting_assets?: boolean;
   };
 };
 
@@ -5589,13 +5618,14 @@ export type InMeetingControlVariables = {
 } & FetcherExtraProps;
 
 /**
- * Control [in-meeting](https://support.zoom.us/hc/en-us/articles/360021921032-In-Meeting-Controls) features. In-meeting controls include starting and stopping a recording, pausing and resuming a recording, and inviting participants.
+ * Control [in-meeting](https://support.zoom.us/hc/en-us/articles/360021921032-In-Meeting-Controls) features. In-meeting controls include starting, stopping, pausing, and resuming a recording; inviting participants; updating the waiting room with a custom message; and starting, stopping, or disabling the AI Companion.
  *
  * **Note:** This API's recording control only works for cloud recordings, **not** for local recordings.
  *
  * **Prerequisites:**
  * * The meeting **must** be a live meeting **except** inviting participants to the meeting through [call out (phone)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062038)/[call out (room system)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065721).
- * * Recording control: [Cloud recording](https://support.zoom.us/hc/en-us/articles/360060231472-Enabling-cloud-recording) must be enabled on the account.
+ * * Recording control: [Cloud recording](https://support.zoom.us/hc/en-us/articles/360060231472-Enabling-cloud-recording) must be enabled.
+ * * AI Companion control: [AI Companion](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057623) must be enabled.
  * * The user calling this API must be the host or an alternative meeting host.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`,`meeting:master`
@@ -6736,10 +6766,9 @@ export type MeetingResponse = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`).
      *
      * @example false
-     * @default false
      */
     use_pmi?: boolean;
     /**
@@ -6940,10 +6969,15 @@ export type MeetingResponse = {
      */
     device_testing?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -7916,10 +7950,9 @@ export type MeetingUpdateRequestBody = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`).
      *
      * @example false
-     * @default false
      */
     use_pmi?: boolean;
     /**
@@ -8094,10 +8127,15 @@ export type MeetingUpdateRequestBody = {
      */
     device_testing?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -12065,6 +12103,8 @@ export type MeetingRegistrantStatusVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Registration must be enabled for the meeting.
  *
+ * This API has an additional rate limit of requests per registrant, per 24-hour period. [See the Rate Limits page](/docs/api/rate-limits/) for more information.
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
@@ -14986,10 +15026,9 @@ export type MeetingCreateResponse = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`). If not provided, the default value will be based on the user's setting.
      *
      * @example false
-     * @default false
      */
     use_pmi?: boolean;
     /**
@@ -15180,7 +15219,14 @@ export type MeetingCreateResponse = {
      */
     device_testing?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants. If not provided, the default value will be based on the user's setting.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     * @default false
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. If not provided, the default value will be based on the user's setting. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
      */
@@ -15926,10 +15972,9 @@ export type MeetingCreateRequestBody = {
      */
     show_share_button?: boolean;
     /**
-     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi) instead of a generated meeting ID. This field is only used for scheduled meetings (`2`), instant meetings (`1`), or recurring meetings with no fixed time (`3`). This value defaults to `false`.
+     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`). If not provided, the default value will be based on the user's setting.
      *
      * @example false
-     * @default false
      */
     use_pmi?: boolean;
     /**
@@ -16128,7 +16173,14 @@ export type MeetingCreateRequestBody = {
      */
     device_testing?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants. If not provided, the default value will be based on the user's setting.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     * @default false
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. If not provided, the default value will be based on the user's setting. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
      */
@@ -16149,9 +16201,10 @@ export type MeetingCreateRequestBody = {
   };
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
-   * * To set a meeting's start time in GMT, use the `yyyy-MM-ddTHH:mm:ssZ` date-time format. For example, `2020-03-31T12:02:00Z`.
+   * * To set a meeting's start time in GMT, use the `yyyy-MM-ddTHH:mm:ssZ` date-time format, such as `2020-03-31T12:02:00Z`.
    * * To set a meeting's start time using a specific timezone, use the `yyyy-MM-ddTHH:mm:ss` date-time format and specify the [timezone ID](/docs/api/references/abbreviations/#timezones) in the `timezone` field. If you do not specify a timezone, the `timezone` value defaults to your Zoom account's timezone. You can also use `UTC` for the `timezone` value.
-   * **Note:** If no `start_time` is set for a scheduled meeting, the `start_time` is set at the current time and the meeting type changes to an instant meeting, which expires after 30 days.
+   *
+   * **Note:** If `start_time` is not specified or is set to a past value, it defaults to the current time.
    *
    * @format date-time
    * @example 2022-03-25T07:32:55Z
@@ -16229,7 +16282,7 @@ export type MeetingCreateVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:meeting`,`meeting:write:meeting:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingCreate = (
   variables: MeetingCreateVariables,
@@ -18676,6 +18729,165 @@ export const reportOperationLogs = (
     ReportOperationLogsQueryParams,
     {}
   >({ url: "/report/operationlogs", method: "get", ...variables, signal });
+
+export type GetremotesupportreportQueryParams = {
+  /**
+   * The start date in `yyyy-MM-dd` format. The date range defined by the `from` and `to` parameters should only be one month, as the report includes only one month's worth of data at once. It is the date range for remote support to start.
+   *
+   * @example 2025-09-15
+   */
+  from: string;
+  /**
+   * The end date in `yyyy-MM-dd` format.
+   *
+   * @example 2025-09-16
+   */
+  to: string;
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
+   */
+  next_page_token?: string;
+  /**
+   * The number of records to be returned within a single API call.
+   *
+   * @example 30
+   */
+  page_size?: string;
+};
+
+export type GetremotesupportreportError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetremotesupportreportResponse = {
+  /**
+   * Array of remote support logs.
+   */
+  remote_support_logs?: {
+    /**
+     * The meeting's start time.
+     *
+     * @example 2025-09-15T13:20:12Z
+     */
+    meeting_start_time?: string;
+    /**
+     * The meeting's unique universal identifier (UUID). Double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     *
+     * @example gm8s9L+PTEC+FG3sFbd1Cw==
+     */
+    meeting_uuid?: string;
+    /**
+     * The meeting number.
+     *
+     * @example 93201235621
+     */
+    meeting_number?: number;
+    /**
+     * The meeting's topic.
+     *
+     * @example My Meeting
+     */
+    topic?: string;
+    /**
+     * The meeting's host id.
+     *
+     * @example FyOCGDLEShWSihPcupWHtA
+     */
+    meeting_host_id?: string;
+    /**
+     * The supporter's user name.
+     *
+     * @example Jill Chill
+     */
+    supporter_name?: string;
+    /**
+     * The supporter's user email.
+     *
+     * @example jchill@example.com
+     */
+    supporter_email?: string;
+    /**
+     * The supportee's user name.
+     *
+     * @example Tom
+     */
+    supportee_name?: string;
+    /**
+     * The supportee's user email.
+     *
+     * @example tom@example.com
+     */
+    supportee_email?: string;
+    /**
+     * The time to request remote support.
+     *
+     * @example 2025-09-15T13:21:29Z
+     */
+    request_time?: string;
+    /**
+     * The waiting time for remote support from request to start, formatted in `hh:mm:ss`.
+     *
+     * @example 01:28
+     */
+    wait_time?: string;
+    /**
+     * Remote support start time.
+     *
+     * @example 2025-09-15T13:22:57Z
+     */
+    start_time?: string;
+    /**
+     * Remote support end time
+     *
+     * @example 2025-09-15T13:42:34Z
+     */
+    end_time?: string;
+    /**
+     * The duration of remote support, formatted in `hh:mm:ss`.
+     *
+     * @example 19:37
+     */
+    duration?: string;
+  }[];
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example b43YBRLJFg3V4vsSpxvGdKIGtNbxn9h9If2
+   */
+  next_page_token?: string;
+  /**
+   * The number of records returned with a single API call.
+   *
+   * @example 30
+   */
+  page_size?: number;
+};
+
+export type GetremotesupportreportVariables = {
+  queryParams: GetremotesupportreportQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve a list of remote support records.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:remote_support:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
+ */
+export const getremotesupportreport = (
+  variables: GetremotesupportreportVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetremotesupportreportResponse,
+    GetremotesupportreportError,
+    undefined,
+    {},
+    GetremotesupportreportQueryParams,
+    {}
+  >({ url: "/report/remote_support", method: "get", ...variables, signal });
 
 export type ReportTelephoneQueryParams = {
   /**
@@ -24273,7 +24485,14 @@ export type WebinarCreateResponse = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. Not supported for simulive webinar. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     * @default false
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and cohosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
      */
@@ -25004,7 +25223,14 @@ export type WebinarCreateRequestBody = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow the host and cohosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. Not supported for simulive webinar. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     * @default false
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and cohosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
      */
@@ -25909,10 +26135,15 @@ export type WebinarResponse = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. Not supported for simulive webinar. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -26771,10 +27002,15 @@ export type WebinarUpdateRequestBody = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow host and co-hosts to fully control the mute state of participants.
+     * Whether to enable the [**Request permission to unmute participants**](https://support.zoom.us/hc/en-us/articles/203435537-Muting-and-unmuting-participants-in-a-meeting) setting. Not supported for simulive webinar. This option cannot be used together with `allow_host_control_participant_mute_state`, only one of the two can be enabled at a time.
+     *
+     * @example true
+     */
+    request_permission_to_unmute_participants?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. This option cannot be used together with `request_permission_to_unmute_participants`, only one of the two can be enabled at a time.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -32241,6 +32477,7 @@ export const operationsByTag = {
     reportMeetingQA,
     reportMeetingSurvey,
     reportOperationLogs,
+    getremotesupportreport,
     reportTelephone,
     reportUpcomingEvents,
     reportUsers,
