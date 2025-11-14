@@ -1,5 +1,5 @@
 ---
-"netlify-api": undefined
+"netlify-api": patch
 ---
 
-undefined
+Update endpoints
