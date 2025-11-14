@@ -583,6 +583,7 @@ export type ComponentTypeRepresentation = {
   id?: string;
   helpText?: string;
   properties?: ConfigPropertyRepresentation[];
+  clientProperties?: ConfigPropertyRepresentation[];
   metadata?: {
     [key: string]: any;
   };
@@ -921,7 +922,7 @@ export type KeyStoreConfig = {
   validity?: number;
 };
 
-export type KeyUse = "ENC" | "SIG";
+export type KeyUse = "ENC" | "JWT_SVID" | "SIG";
 
 export type KeysMetadataRepresentation = {
   active?: {
@@ -1641,14 +1642,6 @@ export type RealmRepresentation = {
    * @deprecated true
    */
   clientTemplates?: ClientTemplateRepresentation[];
-  /**
-   * @format int32
-   */
-  oAuth2DeviceCodeLifespan?: number;
-  /**
-   * @format int32
-   */
-  oAuth2DevicePollingInterval?: number;
 };
 
 export type RequiredActionConfigInfoRepresentation = {
@@ -1812,6 +1805,7 @@ export type UPAttribute = {
   selector?: UPAttributeSelector;
   group?: string;
   multivalued?: boolean;
+  defaultValue?: string;
 };
 
 export type UPAttributePermissions = {
@@ -1938,6 +1932,7 @@ export type UserProfileAttributeMetadata = {
   };
   group?: string;
   multivalued?: boolean;
+  defaultValue?: string;
 };
 
 export type UserProfileMetadata = {
@@ -2016,4 +2011,42 @@ export type UserSessionRepresentation = {
     [key: string]: string;
   };
   transientUser?: boolean;
+};
+
+export type WorkflowConditionRepresentation = {
+  uses?: string;
+  id?: string;
+  config?: MultivaluedHashMapStringString;
+};
+
+export type WorkflowRepresentation = {
+  id?: string;
+  name?: string;
+  uses?: string;
+  enabled?: boolean;
+  on?: void;
+  ["reset-on"]?: void;
+  recurring?: boolean;
+  ["if"]?: WorkflowConditionRepresentation[];
+  steps?: WorkflowStepRepresentation[];
+  state?: WorkflowStateRepresentation;
+  ["with"]?: MultivaluedHashMapStringString;
+  onValues?: string[];
+  onEventsReset?: string[];
+};
+
+export type WorkflowSetRepresentation = {
+  workflows?: WorkflowRepresentation[];
+};
+
+export type WorkflowStateRepresentation = {
+  errors?: string[];
+};
+
+export type WorkflowStepRepresentation = {
+  id?: string;
+  uses?: string;
+  after?: string;
+  priority?: string;
+  config?: MultivaluedHashMapStringString;
 };
