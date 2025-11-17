@@ -13212,6 +13212,8 @@ export type PastMeetingDetailsPathParams = {
    * The meeting's ID or universally unique ID (UUID).
    * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
    * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** [double encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) the meeting UUID before making an API request.
+   *
+   * @example ABCDE12345
    */
   meetingId: string;
 };
@@ -13316,6 +13318,12 @@ export type PastMeetingDetailsResponse = {
    * @example Jill Chill
    */
   user_name?: string;
+  /**
+   * Whether the summary feature was used in the meeting.
+   *
+   * @example false
+   */
+  has_meeting_summary?: boolean;
 };
 
 export type PastMeetingDetailsVariables = {
@@ -13325,7 +13333,7 @@ export type PastMeetingDetailsVariables = {
 /**
  * Get information about a past meeting.
  *
- * **Prerequisites**:
+ * **Prerequisites**
  * * The meeting must have ended before you can retrieve the data.
  * * You cannot access a meeting that occurred more than one year ago.
  *
