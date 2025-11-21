@@ -6766,6 +6766,12 @@ export type MeetingResponse = {
      */
     show_share_button?: boolean;
     /**
+     * Whether to show the meeting's join information on the registration confirmation page. This setting is only applied to meetings with registration enabled.
+     *
+     * @example true
+     */
+    show_join_info?: boolean;
+    /**
      * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`).
      *
      * @example false
@@ -7015,7 +7021,9 @@ export type MeetingResponse = {
    */
   start_url?: string;
   /**
-   * Meeting status
+   * The meeting status.
+   * * `waiting` - The meeting has not started.
+   * * `started` - The meeting is currently in progress.
    *
    * @example waiting
    */
@@ -14235,12 +14243,24 @@ export type MeetingCreateResponse = {
    */
   host_email?: string;
   /**
+   * The ID of the user who is set as the meeting host.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
+   */
+  host_id?: string;
+  /**
    * The [meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in **long** format(represented as int64 data type in JSON), also known as the meeting number.
    *
    * @format int64
    * @example 92674392836
    */
   id?: number;
+  /**
+   * Unique meeting ID. Each meeting instance generates its own meeting UUID - after a meeting ends, a new UUID is generated for the next instance of the meeting. Retrieve a list of UUIDs from past meeting instances using the [**List past meeting instances**](/docs/api/rest/reference/zoom-api/methods#operation/pastMeetings) API. [Double encode](/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+   *
+   * @example aDYlohsHRtCd4ii1uC2+hA==
+   */
+  uuid?: string;
   /**
    * The URL that registrants can use to register for a meeting. This field is only returned for meetings that have enabled registration.
    *
@@ -15034,6 +15054,12 @@ export type MeetingCreateResponse = {
      */
     show_share_button?: boolean;
     /**
+     * Whether to show the meeting's join information on the registration confirmation page. This setting is only applied to meetings with registration enabled.
+     *
+     * @example true
+     */
+    show_join_info?: boolean;
+    /**
      * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`). If not provided, the default value will be based on the user's setting.
      *
      * @example false
@@ -15266,6 +15292,14 @@ export type MeetingCreateResponse = {
    * @example https://example.com/s/11111
    */
   start_url?: string;
+  /**
+   * The meeting status.
+   * * `waiting` - The meeting has not started.
+   * * `started` - The meeting is currently in progress.
+   *
+   * @example waiting
+   */
+  status?: "waiting" | "started";
   /**
    * Timezone to format `start_time`.
    *
@@ -15979,6 +16013,12 @@ export type MeetingCreateRequestBody = {
      * @example true
      */
     show_share_button?: boolean;
+    /**
+     * Whether to show the meeting's join information on the registration confirmation page. This setting is only applied to meetings with registration enabled.
+     *
+     * @example true
+     */
+    show_join_info?: boolean;
     /**
      * Whether to use a [Personal Meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi) for the meeting. This field is only used for scheduled meetings(`2`) and recurring meetings with no fixed time(`3`). If not provided, the default value will be based on the user's setting.
      *
@@ -17764,10 +17804,10 @@ export const reportMeetingactivitylogs = (
 export type ReportMeetingDetailsPathParams = {
   /**
    * The meeting's ID or universally unique ID (UUID).
-   * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
+   * * If you provide a meeting ID, the API returns a response for the latest meeting instance.
    * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** [double encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) the meeting UUID before making an API request.
    */
-  meetingId: number | string;
+  meetingId: string;
 };
 
 export type ReportMeetingDetailsError = Fetcher.ErrorWrapper<undefined>;
@@ -17897,7 +17937,7 @@ export type ReportMeetingDetailsVariables = {
 /**
  * Get a detailed report for a past meeting.
  *
- * **Prerequisites:**
+ * **Prerequisites**
  *
  * * Pro or a higher plan.
  *
@@ -17907,7 +17947,7 @@ export type ReportMeetingDetailsVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:meeting:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const reportMeetingDetails = (
   variables: ReportMeetingDetailsVariables,
