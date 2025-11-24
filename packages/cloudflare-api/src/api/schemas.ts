@@ -1248,9 +1248,19 @@ export type AbuseReportsAbuseReport = {
    * Public facing ID of abuse report, aka abuse_rand.
    */
   id: string;
+  /**
+   * Justification for the report.
+   */
+  justification?: string;
   mitigation_summary: AbuseReportsMitigationSummary;
+  /**
+   * Original work / Targeted brand in the alleged abuse.
+   */
+  original_work?: string;
   status: AbuseReportsReportStatus;
+  submitter?: AbuseReportsSubmitterDetails;
   type: AbuseReportsReportType;
+  urls?: string[];
 };
 
 /**
@@ -2211,6 +2221,16 @@ export type AbuseReportsSubmitReportResponse = {
    * The result should be 'success' for successful response
    */
   result: string;
+};
+
+/**
+ * Information about the submitter of the report.
+ */
+export type AbuseReportsSubmitterDetails = {
+  company?: string;
+  email?: string;
+  name?: string;
+  telephone?: string;
 };
 
 export type AbuseReportsThreatReport = {
@@ -13073,35 +13093,6 @@ export type BotManagementFeedbackReport = {
   type: BotManagementFeedbackType;
 };
 
-export type BotManagementFeedbackReportCreate = {
-  /**
-   * @format date-time
-   */
-  created_at?: string;
-  description: string;
-  /**
-   * Wirefilter expression describing the traffic being reported.
-   */
-  expression: string;
-  /**
-   * @format date-time
-   */
-  first_request_seen_at: string;
-  /**
-   * @format date-time
-   */
-  last_request_seen_at: string;
-  /**
-   * @format int64
-   */
-  requests: number;
-  requests_by_attribute: BotManagementRequestsByAttribute;
-  requests_by_score: BotManagementRequestsByScore;
-  requests_by_score_src: BotManagementRequestsByScoreSrc;
-  subtype?: string;
-  type: BotManagementFeedbackType;
-};
-
 /**
  * Type of feedback report.
  *
@@ -13307,7 +13298,6 @@ export type BotManagementSbfmVerifiedBotsTurnedOn = string;
 /**
  * Whether to disable tracking the highest bot score for a session in the Bot Management cookie.
  *
- * @default false
  * @example false
  * @x-auditable true
  * @x-stainless-terraform-configurability computed_optional
@@ -18505,7 +18495,7 @@ export type DlpContextAwareness = {
 export type DlpCreateEmailRule = {
   action: DlpEmailRuleAction;
   /**
-   * Rule is triggered if all conditions match.
+   * Triggered if all conditions match.
    */
   conditions: DlpEmailRuleCondition[];
   description?: string | null;
@@ -18680,7 +18670,7 @@ export type DlpDataset = {
   secret: boolean;
   status: DlpDatasetUploadStatus;
   /**
-   * When the dataset was last updated.
+   * Stores when the dataset was last updated.
    *
    * This includes name or description changes as well as uploads.
    *
@@ -18722,8 +18712,9 @@ export type DlpDatasetCreation = {
    */
   max_cells: number;
   /**
-   * The secret to use for Exact Data Match datasets. This is not present in
-   * Custom Wordlists.
+   * The secret to use for Exact Data Match datasets.
+   *
+   * This is not present in Custom Wordlists.
    *
    * @format password
    */
@@ -18883,7 +18874,7 @@ export type DlpDocumentFingerprintUpload = {
 export type DlpEmailRule = {
   action: DlpEmailRuleAction;
   /**
-   * Rule is triggered if all conditions match.
+   * Triggered if all conditions match.
    */
   conditions: DlpEmailRuleCondition[];
   /**
@@ -19173,8 +19164,10 @@ export type DlpNewEntry = {
 };
 
 /**
- * Struct for creating a new predefined or integration entry. Predefined or integration entries
- * can not be updated via the API so these fields will simply update the entry's settings
+ * Used to create a new predefined or integration entry.
+ *
+ * Predefined or integration entries can not be updated via the API so
+ * these fields will update the entry's settings.
  */
 export type DlpNewPredefinedEntry = {
   enabled: boolean;
@@ -19183,8 +19176,8 @@ export type DlpNewPredefinedEntry = {
    */
   entry_id: string;
   /**
-   * This field is not actually used as the owning profile for a predefined entry is already set
-   * to a predefined profile
+   * This field is not used as the owning profile.
+   * For predefined entries it is already set to a predefined profile.
    *
    * @format uuid
    */
@@ -23335,835 +23328,6 @@ export type DosTimestamp = string;
  */
 export type DosUuid = string;
 
-/**
- * Account Identifier
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- * @minLength 32
- */
-export type EmailSecurityAccountId = string;
-
-/**
- * @example {"comments":"Trust all messages send from test@example.com","created_at":"2023-11-14T22:13:20Z","id":2401,"is_acceptable_sender":false,"is_exempt_recipient":false,"is_recipient":false,"is_regex":false,"is_sender":true,"is_spoof":false,"is_trusted_sender":true,"last_modified":"2023-11-14T22:13:20Z","pattern":"test@example.com","pattern_type":"EMAIL","verify_sender":true}
- */
-export type EmailSecurityAllowPolicy = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
-   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
-   *
-   * @x-auditable true
-   */
-  is_acceptable_sender?: boolean;
-  /**
-   * Messages to this recipient will bypass all detections.
-   *
-   * @x-auditable true
-   */
-  is_exempt_recipient?: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_recipient?: boolean;
-  /**
-   * @x-auditable true
-   */
-  is_regex: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_sender?: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_spoof?: boolean;
-  /**
-   * Messages from this sender will bypass all detections and link following.
-   *
-   * @x-auditable true
-   */
-  is_trusted_sender?: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern: string;
-  pattern_type: EmailSecurityPatternType;
-  /**
-   * Enforce DMARC, SPF or DKIM authentication.
-   * When on, Email Security only honors policies that pass authentication.
-   *
-   * @x-auditable true
-   */
-  verify_sender: boolean;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  created_at: string;
-  id: EmailSecurityAllowPolicyId;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  last_modified: string;
-};
-
-/**
- * The unique identifier for the allow policy.
- *
- * @example 2401
- * @format int32
- */
-export type EmailSecurityAllowPolicyId = number;
-
-export type EmailSecurityApiResponseCommon = {
-  errors: EmailSecurityMessage[];
-  messages: EmailSecurityMessage[];
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type EmailSecurityAttachment = {
-  content_type?: string | null;
-  detection?: EmailSecurityDispositionLabel & (string | null);
-  encrypted?: boolean | null;
-  name?: string | null;
-  /**
-   * @minimum 0
-   */
-  size: number;
-};
-
-/**
- * @example {"comments":"block sender with email test@example.com","created_at":"2023-11-14T22:13:20Z","id":2402,"is_regex":false,"last_modified":"2023-11-14T22:13:20Z","pattern":"test@example.com","pattern_type":"EMAIL"}
- */
-export type EmailSecurityBlockedSender = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * @x-auditable true
-   */
-  is_regex?: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern?: string;
-  pattern_type?: EmailSecurityPatternType;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  created_at: string;
-  id: EmailSecurityBlockedSenderId;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  last_modified: string;
-};
-
-/**
- * The unique identifier for the allow policy.
- *
- * @example 2402
- * @format int32
- */
-export type EmailSecurityBlockedSenderId = number;
-
-/**
- * @example {"comments":"Trust all messages send from test@example.com","is_acceptable_sender":false,"is_exempt_recipient":false,"is_recipient":false,"is_regex":false,"is_sender":true,"is_spoof":false,"is_trusted_sender":true,"pattern":"test@example.com","pattern_type":"EMAIL","verify_sender":true}
- */
-export type EmailSecurityCreateAllowPolicy = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
-   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
-   *
-   * @x-auditable true
-   */
-  is_acceptable_sender: boolean;
-  /**
-   * Messages to this recipient will bypass all detections.
-   *
-   * @x-auditable true
-   */
-  is_exempt_recipient: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_recipient?: boolean;
-  /**
-   * @x-auditable true
-   */
-  is_regex: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_sender?: boolean;
-  /**
-   * @deprecated true
-   * @x-auditable true
-   */
-  is_spoof?: boolean;
-  /**
-   * Messages from this sender will bypass all detections and link following.
-   *
-   * @x-auditable true
-   */
-  is_trusted_sender: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern: string;
-  pattern_type: EmailSecurityPatternType;
-  /**
-   * Enforce DMARC, SPF or DKIM authentication.
-   * When on, Email Security only honors policies that pass authentication.
-   *
-   * @x-auditable true
-   */
-  verify_sender: boolean;
-};
-
-/**
- * @example {"comments":"block sender with email test@example.com","is_regex":false,"pattern":"test@example.com","pattern_type":"EMAIL"}
- */
-export type EmailSecurityCreateBlockedSender = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * @x-auditable true
-   */
-  is_regex: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern: string;
-  pattern_type: EmailSecurityPatternType;
-};
-
-export type EmailSecurityCreateDisplayName = {
-  /**
-   * @x-auditable true
-   */
-  email: string;
-  /**
-   * @x-auditable true
-   */
-  is_email_regex: boolean;
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  name: string;
-};
-
-/**
- * @example {"comments":null,"is_recent":true,"is_regex":false,"is_similarity":false,"pattern":"example.com"}
- */
-export type EmailSecurityCreateTrustedDomain = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * Select to prevent recently registered domains from triggering a
-   * Suspicious or Malicious disposition.
-   *
-   * @x-auditable true
-   */
-  is_recent: boolean;
-  /**
-   * @x-auditable true
-   */
-  is_regex: boolean;
-  /**
-   * Select for partner or other approved domains that have similar
-   * spelling to your connected domains. Prevents listed domains from
-   * triggering a Spoof disposition.
-   *
-   * @x-auditable true
-   */
-  is_similarity: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern: string;
-};
-
-export type EmailSecurityCursorWithLegacyResultInfo = {
-  /**
-   * @format int32
-   * @minimum 0
-   */
-  count: number;
-  next?: string | null;
-  /**
-   * Deprecated: Returns always 0
-   *
-   * @deprecated true
-   * @format int32
-   * @minimum 0
-   */
-  page: number;
-  /**
-   * number of items per page
-   *
-   * @format int32
-   * @minimum 0
-   */
-  per_page: number;
-  previous?: string | null;
-  /**
-   * Deprecated: Returns always 0
-   *
-   * @deprecated true
-   * @format int32
-   * @minimum 0
-   */
-  total_count: number;
-};
-
-export type EmailSecurityDeliveryMode =
-  | "DIRECT"
-  | "BCC"
-  | "JOURNAL"
-  | "API"
-  | "RETRO_SCAN";
-
-export type EmailSecurityDisplayName = {
-  /**
-   * @x-auditable true
-   */
-  email?: string;
-  /**
-   * @x-auditable true
-   */
-  is_email_regex?: boolean;
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  name?: string;
-  comments?: string | null;
-  /**
-   * @format date-time
-   */
-  created_at: string;
-  /**
-   * @format int64
-   */
-  directory_id?: number | null;
-  /**
-   * @format int64
-   */
-  directory_node_id?: number | null;
-  /**
-   * @deprecated true
-   */
-  external_directory_node_id?: string | null;
-  /**
-   * @example 2403
-   * @format int32
-   */
-  id: number;
-  /**
-   * @format date-time
-   */
-  last_modified: string;
-  provenance?: string | null;
-};
-
-export type EmailSecurityDispositionLabel =
-  | "MALICIOUS"
-  | "MALICIOUS-BEC"
-  | "SUSPICIOUS"
-  | "SPOOF"
-  | "SPAM"
-  | "BULK"
-  | "ENCRYPTED"
-  | "EXTERNAL"
-  | "UNKNOWN"
-  | "NONE";
-
-/**
- * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","dmarc_status":"good","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","regions":["GLOBAL"],"require_tls_inbound":false,"require_tls_outbound":true,"spf_status":"good","transport":"example.com"}
- */
-export type EmailSecurityDomain = {
-  allowed_delivery_modes: EmailSecurityDeliveryMode[];
-  authorization?: {
-    authorized: boolean;
-    status_message?: string | null;
-    /**
-     * @format date-time
-     */
-    timestamp: string;
-  } | null;
-  /**
-   * @format date-time
-   */
-  created_at: string;
-  dmarc_status?: "none" | "good" | "invalid" | null;
-  domain: string;
-  drop_dispositions: EmailSecurityDispositionLabel[];
-  emails_processed?: {
-    /**
-     * @format date-time
-     */
-    timestamp: string;
-    /**
-     * @format int32
-     * @minimum 0
-     */
-    total_emails_processed: number;
-    /**
-     * @format int32
-     * @minimum 0
-     */
-    total_emails_processed_previous: number;
-  } | null;
-  folder?: EmailSecurityScannableFolder & (string | null);
-  /**
-   * The unique identifier for the domain.
-   *
-   * @example 2400
-   * @format int32
-   */
-  id: number;
-  inbox_provider?: "Microsoft" | "Google" | null;
-  /**
-   * @format uuid
-   */
-  integration_id?: string | null;
-  /**
-   * @example 192.0.2.0/24
-   * @example 2001:db8::/32
-   */
-  ip_restrictions: string[];
-  /**
-   * @format date-time
-   */
-  last_modified: string;
-  /**
-   * @format int32
-   */
-  lookback_hops: number;
-  o365_tenant_id?: string | null;
-  regions: ("GLOBAL" | "AU" | "DE" | "IN" | "US")[];
-  require_tls_inbound?: boolean | null;
-  require_tls_outbound?: boolean | null;
-  spf_status?: "none" | "good" | "neutral" | "open" | "invalid" | null;
-  transport: string;
-};
-
-export type EmailSecurityLink = {
-  href: string;
-  text?: string | null;
-};
-
-/**
- * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","htmltext_structure_hash":null,"id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
- */
-export type EmailSecurityMailsearchMessage = {
-  action_log: void;
-  alert_id?: string | null;
-  client_recipients: string[];
-  delivery_mode?: EmailSecurityMessageDeliveryMode & (string | null);
-  detection_reasons: string[];
-  edf_hash?: string | null;
-  final_disposition?: EmailSecurityDispositionLabel & (string | null);
-  findings?:
-    | {
-        attachment?: string | null;
-        detail?: string | null;
-        detection?: EmailSecurityDispositionLabel & (string | null);
-        field?: string | null;
-        name?: string | null;
-        portion?: string | null;
-        reason?: string | null;
-        /**
-         * @format double
-         */
-        score?: number | null;
-        value?: string | null;
-      }[]
-    | null;
-  from?: string | null;
-  from_name?: string | null;
-  htmltext_structure_hash?: string | null;
-  is_phish_submission: boolean;
-  is_quarantined: boolean;
-  message_id?: string | null;
-  postfix_id: EmailSecurityPostfixId;
-  properties: {
-    allowlisted_pattern?: string;
-    allowlisted_pattern_type?:
-      | "quarantine_release"
-      | "acceptable_sender"
-      | "allowed_sender"
-      | "allowed_recipient"
-      | "domain_similarity"
-      | "domain_recency"
-      | "managed_acceptable_sender"
-      | "outbound_ndr";
-    blocklisted_message?: boolean;
-    blocklisted_pattern?: string;
-    whitelisted_pattern_type?:
-      | "quarantine_release"
-      | "acceptable_sender"
-      | "allowed_sender"
-      | "allowed_recipient"
-      | "domain_similarity"
-      | "domain_recency"
-      | "managed_acceptable_sender"
-      | "outbound_ndr";
-  };
-  sent_date?: string | null;
-  subject?: string | null;
-  threat_categories?: string[] | null;
-  to?: string[] | null;
-  to_name?: string[] | null;
-  ts?: string;
-  validation?: {
-    comment?: string | null;
-    dkim?: EmailSecurityValidationStatus & (string | null);
-    dmarc?: EmailSecurityValidationStatus & (string | null);
-    spf?: EmailSecurityValidationStatus & (string | null);
-  } | null;
-  /**
-   * @x-auditable true
-   */
-  id: string;
-};
-
-export type EmailSecurityMessage = {
-  /**
-   * @format int32
-   * @minimum 1000
-   */
-  code: number;
-  message: string;
-};
-
-export type EmailSecurityMessageDeliveryMode =
-  | "DIRECT"
-  | "BCC"
-  | "JOURNAL"
-  | "REVIEW_SUBMISSION"
-  | "DMARC_UNVERIFIED"
-  | "DMARC_FAILURE_REPORT"
-  | "DMARC_AGGREGATE_REPORT"
-  | "THREAT_INTEL_SUBMISSION"
-  | "SIMULATION_SUBMISSION"
-  | "API"
-  | "RETRO_SCAN";
-
-export type EmailSecurityMessageHeader = {
-  name: string;
-  value: string;
-};
-
-export type EmailSecurityPatternType = "EMAIL" | "DOMAIN" | "IP" | "UNKNOWN";
-
-/**
- * The identifier of the message.
- *
- * @example 4Njp3P0STMz2c02Q
- */
-export type EmailSecurityPostfixId = string;
-
-export type EmailSecurityReleaseResponse = {
-  delivered?: string[] | null;
-  failed?: string[] | null;
-  undelivered?: string[] | null;
-  postfix_id: EmailSecurityPostfixId;
-};
-
-export type EmailSecurityResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   * @format int32
-   */
-  count: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   * @format int32
-   */
-  page: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   * @format int32
-   */
-  per_page: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   * @format int32
-   */
-  total_count: number;
-};
-
-export type EmailSecurityRetractionResponseItem = {
-  /**
-   * @format date-time
-   */
-  completed_timestamp: string;
-  destination?: string | null;
-  /**
-   * @format int32
-   */
-  item_count: number;
-  message_id?: string | null;
-  operation?: string | null;
-  recipient?: string | null;
-  status?: string | null;
-};
-
-export type EmailSecurityScannableFolder = "AllItems" | "Inbox";
-
-export type EmailSecuritySortingDirection = "asc" | "desc";
-
-export type EmailSecuritySubmission = {
-  original_disposition?: EmailSecurityDispositionLabel & (string | null);
-  original_edf_hash?: string | null;
-  outcome?: string | null;
-  outcome_disposition?: EmailSecurityDispositionLabel & (string | null);
-  requested_by?: string | null;
-  requested_disposition?: EmailSecurityDispositionLabel & (string | null);
-  /**
-   * @format date-time
-   */
-  requested_ts: string;
-  status?: string | null;
-  subject?: string | null;
-  submission_id: string;
-  type?: string | null;
-};
-
-export type EmailSecurityThreatCategory = {
-  description?: string | null;
-  /**
-   * @format int64
-   */
-  id: number;
-  name?: string | null;
-};
-
-export type EmailSecurityTraceLine = {
-  /**
-   * @format int64
-   */
-  lineno: number;
-  message: string;
-  /**
-   * @format date-time
-   */
-  ts: string;
-};
-
-/**
- * @example {"comments":null,"created_at":"2023-11-14T22:13:20Z","id":2401,"is_recent":true,"is_regex":false,"is_similarity":false,"last_modified":"2023-11-14T22:13:20Z","pattern":"example.com"}
- */
-export type EmailSecurityTrustedDomain = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * Select to prevent recently registered domains from triggering a
-   * Suspicious or Malicious disposition.
-   *
-   * @x-auditable true
-   */
-  is_recent?: boolean;
-  /**
-   * @x-auditable true
-   */
-  is_regex?: boolean;
-  /**
-   * Select for partner or other approved domains that have similar
-   * spelling to your connected domains. Prevents listed domains from
-   * triggering a Spoof disposition.
-   *
-   * @x-auditable true
-   */
-  is_similarity?: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern: string;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  created_at: string;
-  /**
-   * The unique identifier for the trusted domain.
-   *
-   * @example 2401
-   * @format int32
-   */
-  id: number;
-  /**
-   * @format date-time
-   * @x-auditable true
-   */
-  last_modified: string;
-};
-
-/**
- * The unique identifier for the trusted domain.
- *
- * @example 2401
- * @format int32
- */
-export type EmailSecurityTrustedDomainId = number;
-
-export type EmailSecurityUpdateAllowPolicy = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
-   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
-   *
-   * @x-auditable true
-   */
-  is_acceptable_sender?: boolean | null;
-  /**
-   * Messages to this recipient will bypass all detections.
-   *
-   * @x-auditable true
-   */
-  is_exempt_recipient?: boolean | null;
-  /**
-   * @x-auditable true
-   */
-  is_regex?: boolean | null;
-  /**
-   * Messages from this sender will bypass all detections and link following.
-   *
-   * @x-auditable true
-   */
-  is_trusted_sender?: boolean | null;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern?: string | null;
-  pattern_type?: EmailSecurityPatternType & (string | null);
-  /**
-   * Enforce DMARC, SPF or DKIM authentication.
-   * When on, Email Security only honors policies that pass authentication.
-   *
-   * @x-auditable true
-   */
-  verify_sender?: boolean | null;
-};
-
-export type EmailSecurityUpdateBlockedSender = {
-  /**
-   * @x-auditable true
-   */
-  comments?: string | null;
-  /**
-   * @x-auditable true
-   */
-  is_regex?: boolean | null;
-  /**
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern?: string | null;
-  pattern_type?: EmailSecurityPatternType & (string | null);
-};
-
-export type EmailSecurityUpdateTrustedDomain = {
-  /**
-   * @maxLength 1024
-   * @x-auditable true
-   */
-  comments?: string;
-  /**
-   * Select to prevent recently registered domains from triggering a
-   * Suspicious or Malicious disposition.
-   *
-   * @x-auditable true
-   */
-  is_recent?: boolean;
-  /**
-   * @x-auditable true
-   */
-  is_regex?: boolean;
-  /**
-   * Select for partner or other approved domains that have similar
-   * spelling to your connected domains. Prevents listed domains from
-   * triggering a Spoof disposition.
-   *
-   * @x-auditable true
-   */
-  is_similarity?: boolean;
-  /**
-   * @maxLength 1024
-   * @minLength 1
-   * @x-auditable true
-   */
-  pattern?: string;
-};
-
-export type EmailSecurityValidationStatus =
-  | "pass"
-  | "neutral"
-  | "fail"
-  | "error"
-  | "none";
-
 export type EmailAccountId = EmailIdentifier;
 
 export type EmailAddresses = EmailDestinationAddressProperties;
@@ -26141,6 +25305,7 @@ export type HealthchecksHttpConfig = {
   /**
    * A case-insensitive sub-string to look for in the response body. If this string is not found, the origin will be marked as unhealthy.
    *
+   * @default
    * @example success
    * @x-auditable true
    */
@@ -27686,6 +26851,10 @@ export type IamSingleMembershipResponseWithPolicies = IamApiResponseSingle & {
 
 export type IamSingleOrganizationResponse = IamApiResponseSingle & {
   result?: Record<string, any>;
+};
+
+export type IamSinglePermissionGroupsResponse = IamApiResponseSingle & {
+  result?: IamPermissionGroup;
 };
 
 export type IamSingleRoleResponse = IamApiResponseSingle & {
@@ -40003,70 +39172,60 @@ export type PageShieldZoneSettingsResponseSingle =
     result?: Record<string, any>;
   };
 
+export type PagesApiResponseCollection = PagesApiResponseCommon & {
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
+};
+
 export type PagesApiResponseCommon = {
   errors: PagesMessages;
   messages: PagesMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
-  success: false | true;
+  success: true;
 };
 
 export type PagesApiResponseCommonFailure = {
   /**
-   * @example {"code":7003,"message":"No route for the URI."}
+   * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
   errors: PagesMessages;
   messages: PagesMessages;
-  result: Record<string, any> | null;
+  result: any | null;
   /**
    * Whether the API call was successful.
    *
    * @example false
    */
   success: false;
-};
-
-export type PagesApiResponsePagination = {
-  result_info?: {
-    /**
-     * The number of items on the current page.
-     *
-     * @example 1
-     */
-    count: number;
-    /**
-     * The page currently being requested.
-     *
-     * @example 1
-     */
-    page: number;
-    /**
-     * The number of items per page being returned.
-     *
-     * @example 100
-     */
-    per_page: number;
-    /**
-     * The total count of items.
-     *
-     * @example 1
-     */
-    total_count: number;
-    /**
-     * The total count of pages.
-     *
-     * @example 1
-     */
-    total_pages?: number;
-  };
-};
-
-export type PagesApiResponseSingle = PagesApiResponseCommon & {
-  result?: Record<string, any> | null;
 };
 
 /**
@@ -40088,7 +39247,7 @@ export type PagesBuildConfig = {
    */
   build_command?: string | null;
   /**
-   * Output directory of the build.
+   * Assets output directory of the build.
    *
    * @example build
    * @x-auditable true
@@ -40107,65 +39266,150 @@ export type PagesBuildConfig = {
    * @example cee1c73f6e4743d0b5e6bb1a0bcaabcc
    * @x-auditable true
    */
-  web_analytics_tag?: string | null;
+  web_analytics_tag: string | null;
   /**
    * The auth token for analytics.
    *
    * @example 021e1057c18547eca7b79f2516f06o7x
    * @x-sensitive true
    */
-  web_analytics_token?: string | null;
+  web_analytics_token: string | null;
 };
 
-export type PagesDeploymentListResponse = PagesApiResponseCommon &
-  PagesApiResponsePagination & {
-    result?: PagesDeployments[];
+export type PagesDeployment = {
+  /**
+   * A list of alias URLs pointing to this deployment.
+   *
+   * @example https://branchname.projectname.pages.dev
+   */
+  aliases: string[] | null;
+  build_config: PagesBuildConfig;
+  /**
+   * When the deployment was created.
+   *
+   * @example 2021-03-09T00:55:03.923456Z
+   * @format date-time
+   * @x-auditable true
+   */
+  created_on: string;
+  /**
+   * Info about what caused the deployment.
+   */
+  deployment_trigger: {
+    /**
+     * Additional info about the trigger.
+     */
+    metadata: {
+      /**
+       * Where the trigger happened.
+       *
+       * @example main
+       * @x-auditable true
+       */
+      branch: string;
+      /**
+       * Whether the deployment trigger commit was dirty.
+       *
+       * @example false
+       * @x-auditable true
+       */
+      commit_dirty: boolean;
+      /**
+       * Hash of the deployment trigger commit.
+       *
+       * @example ad9ccd918a81025731e10e40267e11273a263421
+       * @x-auditable true
+       */
+      commit_hash: string;
+      /**
+       * Message of the deployment trigger commit.
+       *
+       * @example Update index.html
+       * @x-auditable true
+       */
+      commit_message: string;
+    };
+    /**
+     * What caused the deployment.
+     *
+     * @example ad_hoc
+     * @x-auditable true
+     */
+    type: "github:push" | "ad_hoc" | "deploy_hook";
   };
-
-export type PagesDeploymentNewDeployment = PagesApiResponseCommon & {
-  result?: PagesDeployments;
+  env_vars: PagesEnvVars;
+  /**
+   * Type of deploy.
+   *
+   * @example preview
+   * @x-auditable true
+   */
+  environment: "preview" | "production";
+  /**
+   * Id of the deployment.
+   *
+   * @example f64788e9-fccd-4d4a-a28a-cb84f88f6
+   * @x-auditable true
+   */
+  id: string;
+  /**
+   * If the deployment has been skipped.
+   *
+   * @example true
+   * @x-auditable true
+   */
+  is_skipped: boolean;
+  latest_stage: PagesStage;
+  /**
+   * When the deployment was last modified.
+   *
+   * @example 2021-03-09T00:58:59.045655
+   * @format date-time
+   * @x-auditable true
+   */
+  modified_on: string;
+  /**
+   * Id of the project.
+   *
+   * @example 7b162ea7-7367-4d67-bcde-1160995d5
+   * @x-auditable true
+   */
+  project_id: string;
+  project_name: PagesProjectName;
+  /**
+   * Short Id (8 character) of the deployment.
+   *
+   * @example f64788e9
+   * @x-auditable true
+   */
+  short_id: string;
+  source: PagesSource;
+  /**
+   * List of past stages.
+   *
+   * @example {"ended_on":"2021-06-03T15:39:03.134378Z","name":"queued","started_on":"2021-06-03T15:38:15.608194Z","status":"active"}
+   * @example {"ended_on":null,"name":"initialize","started_on":null,"status":"idle"}
+   * @example {"ended_on":null,"name":"clone_repo","started_on":null,"status":"idle"}
+   * @example {"ended_on":null,"name":"build","started_on":null,"status":"idle"}
+   * @example {"ended_on":null,"name":"deploy","started_on":null,"status":"idle"}
+   */
+  stages: PagesStage[];
+  /**
+   * The live URL to view this deployment.
+   *
+   * @example https://f64788e9.ninjakittens.pages.dev
+   * @x-auditable true
+   */
+  url: string;
+  /**
+   * Whether the deployment uses functions.
+   *
+   * @x-auditable true
+   */
+  uses_functions?: boolean | null;
 };
 
-export type PagesDeploymentResponseDetails = PagesApiResponseCommon & {
-  result?: PagesDeployments;
-};
-
-export type PagesDeploymentResponseLogs = PagesApiResponseCommon & {
-  /**
-   * @example {"data":[{"line":"Cloning repository...","ts":"2021-04-20T19:35:29.0749819Z"},{"line":"From https://github.com/cloudflare/example","ts":"2021-04-20T19:35:30.0749819Z"},{"line":" * branch            209c5bb11d89533f426b2f8469bcae12fdccf71b -> FETCH_HEAD","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"HEAD is now at 209c5bb Update index.html","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"Success: Finished cloning repository files","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"Installing dependencies","ts":"2021-04-20T19:35:59.0749819Z"},{"line":"Python version set to 2.7","ts":"2021-04-20T19:35:59.0931208Z"},{"line":"v12.18.0 is already installed.","ts":"2021-04-20T19:36:02.2369501Z"},{"line":"Now using node v12.18.0 (npm v6.14.4)","ts":"2021-04-20T19:36:02.6028886Z"},{"line":"Started restoring cached build plugins","ts":"2021-04-20T19:36:02.624555Z"},{"line":"Finished restoring cached build plugins","ts":"2021-04-20T19:36:02.6340688Z"},{"line":"Attempting ruby version 2.7.1, read from environment","ts":"2021-04-20T19:36:02.963095Z"},{"line":"Using ruby version 2.7.1","ts":"2021-04-20T19:36:04.2236084Z"},{"line":"Using PHP version 5.6","ts":"2021-04-20T19:36:04.5450152Z"},{"line":"5.2 is already installed.","ts":"2021-04-20T19:36:04.5740509Z"},{"line":"Using Swift version 5.2","ts":"2021-04-20T19:36:04.577035Z"},{"line":"Installing Hugo 0.54.0","ts":"2021-04-20T19:36:04.5771615Z"},{"line":"Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z","ts":"2021-04-20T19:36:05.4786868Z"},{"line":"Started restoring cached go cache","ts":"2021-04-20T19:36:05.4794366Z"},{"line":"Finished restoring cached go cache","ts":"2021-04-20T19:36:05.481977Z"},{"line":"go version go1.14.4 linux/amd64","ts":"2021-04-20T19:36:05.9049776Z"},{"line":"go version go1.14.4 linux/amd64","ts":"2021-04-20T19:36:05.9086053Z"},{"line":"Installing missing commands","ts":"2021-04-20T19:36:05.9163568Z"},{"line":"Verify run directory","ts":"2021-04-20T19:36:05.9163934Z"},{"line":"Executing user command: echo \"skipping build step: no build command specified\"","ts":"2021-04-20T19:36:05.9164636Z"},{"line":"skipping build step: no build command specified","ts":"2021-04-20T19:36:05.9165087Z"},{"line":"Finished","ts":"2021-04-20T19:36:05.917412Z"}],"includes_container_logs":true,"total":30}
-   */
-  result?: {
-    data?: {
-      line?: string;
-      ts?: string;
-    }[];
-    includes_container_logs?: boolean;
-    total?: number;
-  };
-};
-
-export type PagesDeploymentResponseStageLogs = PagesApiResponseCommon & {
-  /**
-   * @example {"data":[{"id":15,"message":"Installing dependencies","timestamp":"2021-04-20T19:35:59.0749819Z"},{"id":16,"message":"Python version set to 2.7","timestamp":"2021-04-20T19:35:59.0931208Z"},{"id":17,"message":"v12.18.0 is already installed.","timestamp":"2021-04-20T19:36:02.2369501Z"},{"id":18,"message":"Now using node v12.18.0 (npm v6.14.4)","timestamp":"2021-04-20T19:36:02.6028886Z"},{"id":19,"message":"Started restoring cached build plugins","timestamp":"2021-04-20T19:36:02.624555Z"},{"id":20,"message":"Finished restoring cached build plugins","timestamp":"2021-04-20T19:36:02.6340688Z"},{"id":21,"message":"Attempting ruby version 2.7.1, read from environment","timestamp":"2021-04-20T19:36:02.963095Z"},{"id":22,"message":"Using ruby version 2.7.1","timestamp":"2021-04-20T19:36:04.2236084Z"},{"id":23,"message":"Using PHP version 5.6","timestamp":"2021-04-20T19:36:04.5450152Z"},{"id":24,"message":"5.2 is already installed.","timestamp":"2021-04-20T19:36:04.5740509Z"},{"id":25,"message":"Using Swift version 5.2","timestamp":"2021-04-20T19:36:04.577035Z"},{"id":26,"message":"Installing Hugo 0.54.0","timestamp":"2021-04-20T19:36:04.5771615Z"},{"id":27,"message":"Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z","timestamp":"2021-04-20T19:36:05.4786868Z"},{"id":28,"message":"Started restoring cached go cache","timestamp":"2021-04-20T19:36:05.4794366Z"},{"id":29,"message":"Finished restoring cached go cache","timestamp":"2021-04-20T19:36:05.481977Z"},{"id":30,"message":"go version go1.14.4 linux/amd64","timestamp":"2021-04-20T19:36:05.9049776Z"},{"id":31,"message":"go version go1.14.4 linux/amd64","timestamp":"2021-04-20T19:36:05.9086053Z"},{"id":32,"message":"Installing missing commands","timestamp":"2021-04-20T19:36:05.9163568Z"},{"id":33,"message":"Verify run directory","timestamp":"2021-04-20T19:36:05.9163934Z"},{"id":34,"message":"Executing user command: echo \"skipping build step: no build command specified\"","timestamp":"2021-04-20T19:36:05.9164636Z"},{"id":35,"message":"skipping build step: no build command specified","timestamp":"2021-04-20T19:36:05.9165087Z"},{"id":36,"message":"Finished","timestamp":"2021-04-20T19:36:05.917412Z"}],"end":37,"ended_on":"2021-04-20T19:36:06.38889Z","name":"build","start":0,"started_on":"2021-04-20T19:35:58.238757Z","status":"success","total":37}
-   */
-  result?: Record<string, any>;
-};
-
-/**
- * Configs for deployments in a project.
- */
-export type PagesDeploymentConfigs = {
-  /**
-   * Configs for preview deploys.
-   */
-  preview?: PagesDeploymentConfigsValues | null;
-  /**
-   * Configs for production deploys.
-   */
-  production?: PagesDeploymentConfigsValues | null;
-} | null;
-
-export type PagesDeploymentConfigsValues = {
+export type PagesDeploymentConfigValues = {
   /**
    * Constellation bindings used for Pages Functions.
    *
@@ -40176,9 +39420,285 @@ export type PagesDeploymentConfigsValues = {
       /**
        * @x-auditable true
        */
-      project_id?: string;
+      project_id: string;
+    };
+  };
+  /**
+   * Whether to always use the latest compatibility date for Pages Functions.
+   *
+   * @example false
+   * @x-auditable true
+   */
+  always_use_latest_compatibility_date: boolean;
+  /**
+   * Analytics Engine bindings used for Pages Functions.
+   *
+   * @example {"ANALYTICS_ENGINE_BINDING":{"dataset":"api_analytics"}}
+   */
+  analytics_engine_datasets?: {
+    [key: string]: {
+      /**
+       * Name of the dataset.
+       *
+       * @example api_analytics
+       * @x-auditable true
+       */
+      dataset: string;
+    };
+  };
+  /**
+   * Browser bindings used for Pages Functions.
+   *
+   * @example {"BROWSER":{}}
+   */
+  browsers?: {
+    [key: string]: Record<string, any> | null;
+  };
+  /**
+   * The major version of the build image to use for Pages Functions.
+   *
+   * @example 3
+   * @x-auditable true
+   */
+  build_image_major_version: number;
+  /**
+   * Compatibility date used for Pages Functions.
+   *
+   * @example 2025-01-01
+   * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  compatibility_date: string;
+  /**
+   * Compatibility flags used for Pages Functions.
+   *
+   * @example url_standard
+   */
+  compatibility_flags: string[];
+  /**
+   * D1 databases used for Pages Functions.
+   *
+   * @example {"D1_BINDING":{"id":"445e2955-951a-43f8-a35b-a4d0c8138f63"}}
+   */
+  d1_databases?: {
+    [key: string]: {
+      /**
+       * UUID of the D1 database.
+       *
+       * @example 445e2955-951a-43f8-a35b-a4d0c8138f63
+       * @x-auditable true
+       */
+      id: string;
+    };
+  };
+  /**
+   * Durable Object namespaces used for Pages Functions.
+   *
+   * @example {"DO_BINDING":{"namespace_id":"5eb63bbbe01eeed093cb22bb8f5acdc3"}}
+   */
+  durable_object_namespaces?: {
+    [key: string]: {
+      /**
+       * ID of the Durable Object namespace.
+       *
+       * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
+       * @x-auditable true
+       */
+      namespace_id: string;
+    };
+  };
+  env_vars: PagesEnvVars;
+  /**
+   * Whether to fail open when the deployment config cannot be applied.
+   *
+   * @example true
+   * @x-auditable true
+   */
+  fail_open: boolean;
+  /**
+   * Hyperdrive bindings used for Pages Functions.
+   *
+   * @example {"HYPERDRIVE":{"id":"a76a99bc342644deb02c38d66082262a"}}
+   */
+  hyperdrive_bindings?: {
+    [key: string]: {
+      /**
+       * @example a76a99bc342644deb02c38d66082262a
+       * @x-auditable true
+       */
+      id: string;
+    };
+  };
+  /**
+   * KV namespaces used for Pages Functions.
+   *
+   * @example {"KV_BINDING":{"namespace_id":"5eb63bbbe01eeed093cb22bb8f5acdc3"}}
+   */
+  kv_namespaces?: {
+    [key: string]: {
+      /**
+       * ID of the KV namespace.
+       *
+       * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
+       * @x-auditable true
+       */
+      namespace_id: string;
+    };
+  };
+  /**
+   * Limits for Pages Functions.
+   *
+   * @example {"cpu_ms":100}
+   */
+  limits?: {
+    /**
+     * CPU time limit in milliseconds.
+     *
+     * @example 100
+     * @x-auditable true
+     */
+    cpu_ms: number;
+  };
+  /**
+   * mTLS bindings used for Pages Functions.
+   *
+   * @example {"MTLS":{"certificate_id":"d7cdd17c-916f-4cb7-aabe-585eb382ec4e"}}
+   */
+  mtls_certificates?: {
+    [key: string]: {
+      /**
+       * @example d7cdd17c-916f-4cb7-aabe-585eb382ec4e
+       * @x-auditable true
+       */
+      certificate_id: string;
+    };
+  };
+  /**
+   * Placement setting used for Pages Functions.
+   *
+   * @example {"mode":"smart"}
+   */
+  placement?: {
+    /**
+     * Placement mode.
+     *
+     * @example smart
+     * @x-auditable true
+     */
+    mode: string;
+  };
+  /**
+   * Queue Producer bindings used for Pages Functions.
+   *
+   * @example {"QUEUE_PRODUCER_BINDING":{"name":"some-queue"}}
+   */
+  queue_producers?: {
+    [key: string]: {
+      /**
+       * Name of the Queue.
+       *
+       * @example some-queue
+       * @x-auditable true
+       */
+      name: string;
+    };
+  };
+  /**
+   * R2 buckets used for Pages Functions.
+   *
+   * @example {"R2_BINDING":{"name":"some-bucket"}}
+   */
+  r2_buckets?: {
+    [key: string]: {
+      /**
+       * Jurisdiction of the R2 bucket.
+       *
+       * @example eu
+       * @x-auditable true
+       */
+      jurisdiction?: string | null;
+      /**
+       * Name of the R2 bucket.
+       *
+       * @example some-bucket
+       * @x-auditable true
+       */
+      name: string;
+    };
+  };
+  /**
+   * Services used for Pages Functions.
+   *
+   * @example {"SERVICE_BINDING":{"entrypoint":"MyHandler","environment":"production","service":"example-worker"}}
+   */
+  services?: {
+    [key: string]: {
+      /**
+       * The entrypoint to bind to.
+       *
+       * @x-auditable true
+       */
+      entrypoint?: string | null;
+      /**
+       * The Service environment.
+       *
+       * @x-auditable true
+       */
+      environment: string;
+      /**
+       * The Service name.
+       *
+       * @x-auditable true
+       */
+      service: string;
+    };
+  };
+  /**
+   * The usage model for Pages Functions.
+   *
+   * @deprecated true
+   * @example standard
+   * @x-auditable true
+   * @x-stainless-deprecation-message All new projects now use the Standard usage model.
+   */
+  usage_model: "standard" | "bundled" | "unbound";
+  /**
+   * Vectorize bindings used for Pages Functions.
+   *
+   * @example {"VECTORIZE":{"index_name":"my_index"}}
+   */
+  vectorize_bindings?: {
+    [key: string]: {
+      /**
+       * @example my_index
+       * @x-auditable true
+       */
+      index_name: string;
+    };
+  };
+  /**
+   * Hash of the Wrangler configuration used for the deployment.
+   *
+   * @example abc123def456
+   * @x-auditable true
+   */
+  wrangler_config_hash?: string;
+};
+
+export type PagesDeploymentConfigValuesRequest = {
+  /**
+   * Constellation bindings used for Pages Functions.
+   *
+   * @example {"AI_BINDING":{"project_id":"some-project-id"}}
+   */
+  ai_bindings?: {
+    [key: string]: {
+      /**
+       * @x-auditable true
+       */
+      project_id: string;
     } | null;
-  } | null;
+  };
   /**
    * Whether to always use the latest compatibility date for Pages Functions.
    *
@@ -40200,9 +39720,9 @@ export type PagesDeploymentConfigsValues = {
        * @example api_analytics
        * @x-auditable true
        */
-      dataset?: string;
+      dataset: string;
     } | null;
-  } | null;
+  };
   /**
    * Browser bindings used for Pages Functions.
    *
@@ -40210,7 +39730,7 @@ export type PagesDeploymentConfigsValues = {
    */
   browsers?: {
     [key: string]: Record<string, any> | null;
-  } | null;
+  };
   /**
    * The major version of the build image to use for Pages Functions.
    *
@@ -40232,7 +39752,7 @@ export type PagesDeploymentConfigsValues = {
    *
    * @example url_standard
    */
-  compatibility_flags?: string[] | null;
+  compatibility_flags?: string[];
   /**
    * D1 databases used for Pages Functions.
    *
@@ -40246,9 +39766,9 @@ export type PagesDeploymentConfigsValues = {
        * @example 445e2955-951a-43f8-a35b-a4d0c8138f63
        * @x-auditable true
        */
-      id?: string;
+      id: string;
     } | null;
-  } | null;
+  };
   /**
    * Durable Object namespaces used for Pages Functions.
    *
@@ -40262,10 +39782,15 @@ export type PagesDeploymentConfigsValues = {
        * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
        * @x-auditable true
        */
-      namespace_id?: string;
+      namespace_id: string;
     } | null;
-  } | null;
-  env_vars?: PagesEnvVars;
+  };
+  /**
+   * Environment variables used for builds and Pages Functions.
+   */
+  env_vars?: {
+    [key: string]: PagesPlainTextEnvVar | PagesSecretTextEnvVar | null;
+  };
   /**
    * Whether to fail open when the deployment config cannot be applied.
    *
@@ -40285,9 +39810,9 @@ export type PagesDeploymentConfigsValues = {
        * @example a76a99bc342644deb02c38d66082262a
        * @x-auditable true
        */
-      id?: string;
+      id: string;
     } | null;
-  } | null;
+  };
   /**
    * KV namespaces used for Pages Functions.
    *
@@ -40301,9 +39826,9 @@ export type PagesDeploymentConfigsValues = {
        * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
        * @x-auditable true
        */
-      namespace_id?: string;
+      namespace_id: string;
     } | null;
-  } | null;
+  };
   /**
    * Limits for Pages Functions.
    *
@@ -40316,8 +39841,8 @@ export type PagesDeploymentConfigsValues = {
      * @example 100
      * @x-auditable true
      */
-    cpu_ms?: number;
-  } | null;
+    cpu_ms: number;
+  };
   /**
    * mTLS bindings used for Pages Functions.
    *
@@ -40329,9 +39854,9 @@ export type PagesDeploymentConfigsValues = {
        * @example d7cdd17c-916f-4cb7-aabe-585eb382ec4e
        * @x-auditable true
        */
-      certificate_id?: string;
+      certificate_id: string;
     } | null;
-  } | null;
+  };
   /**
    * Placement setting used for Pages Functions.
    *
@@ -40344,8 +39869,8 @@ export type PagesDeploymentConfigsValues = {
      * @example smart
      * @x-auditable true
      */
-    mode?: string;
-  } | null;
+    mode: string;
+  };
   /**
    * Queue Producer bindings used for Pages Functions.
    *
@@ -40359,9 +39884,9 @@ export type PagesDeploymentConfigsValues = {
        * @example some-queue
        * @x-auditable true
        */
-      name?: string;
+      name: string;
     } | null;
-  } | null;
+  };
   /**
    * R2 buckets used for Pages Functions.
    *
@@ -40382,9 +39907,9 @@ export type PagesDeploymentConfigsValues = {
        * @example some-bucket
        * @x-auditable true
        */
-      name?: string;
+      name: string;
     } | null;
-  } | null;
+  };
   /**
    * Services used for Pages Functions.
    *
@@ -40409,9 +39934,9 @@ export type PagesDeploymentConfigsValues = {
        *
        * @x-auditable true
        */
-      service?: string;
+      service: string;
     } | null;
-  } | null;
+  };
   /**
    * The usage model for Pages Functions.
    *
@@ -40433,9 +39958,9 @@ export type PagesDeploymentConfigsValues = {
        * @example my_index
        * @x-auditable true
        */
-      index_name?: string;
+      index_name: string;
     } | null;
-  } | null;
+  };
   /**
    * Hash of the Wrangler configuration used for the deployment.
    *
@@ -40446,178 +39971,49 @@ export type PagesDeploymentConfigsValues = {
 };
 
 /**
- * Deployment stage name.
- *
- * @example deploy
- * @x-auditable true
+ * @example {"data":[{"line":"Cloning repository...","ts":"2021-04-20T19:35:29.0749819Z"},{"line":"From https://github.com/cloudflare/example","ts":"2021-04-20T19:35:30.0749819Z"},{"line":" * branch            209c5bb11d89533f426b2f8469bcae12fdccf71b -> FETCH_HEAD","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"HEAD is now at 209c5bb Update index.html","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"Success: Finished cloning repository files","ts":"2021-04-20T19:35:30.0749819Z"},{"line":"Installing dependencies","ts":"2021-04-20T19:35:59.0749819Z"},{"line":"Python version set to 2.7","ts":"2021-04-20T19:35:59.0931208Z"},{"line":"v12.18.0 is already installed.","ts":"2021-04-20T19:36:02.2369501Z"},{"line":"Now using node v12.18.0 (npm v6.14.4)","ts":"2021-04-20T19:36:02.6028886Z"},{"line":"Started restoring cached build plugins","ts":"2021-04-20T19:36:02.624555Z"},{"line":"Finished restoring cached build plugins","ts":"2021-04-20T19:36:02.6340688Z"},{"line":"Attempting ruby version 2.7.1, read from environment","ts":"2021-04-20T19:36:02.963095Z"},{"line":"Using ruby version 2.7.1","ts":"2021-04-20T19:36:04.2236084Z"},{"line":"Using PHP version 5.6","ts":"2021-04-20T19:36:04.5450152Z"},{"line":"5.2 is already installed.","ts":"2021-04-20T19:36:04.5740509Z"},{"line":"Using Swift version 5.2","ts":"2021-04-20T19:36:04.577035Z"},{"line":"Installing Hugo 0.54.0","ts":"2021-04-20T19:36:04.5771615Z"},{"line":"Hugo Static Site Generator v0.54.0-B1A82C61A/extended linux/amd64 BuildDate: 2019-02-01T10:04:38Z","ts":"2021-04-20T19:36:05.4786868Z"},{"line":"Started restoring cached go cache","ts":"2021-04-20T19:36:05.4794366Z"},{"line":"Finished restoring cached go cache","ts":"2021-04-20T19:36:05.481977Z"},{"line":"go version go1.14.4 linux/amd64","ts":"2021-04-20T19:36:05.9049776Z"},{"line":"go version go1.14.4 linux/amd64","ts":"2021-04-20T19:36:05.9086053Z"},{"line":"Installing missing commands","ts":"2021-04-20T19:36:05.9163568Z"},{"line":"Verify run directory","ts":"2021-04-20T19:36:05.9163934Z"},{"line":"Executing user command: echo \"skipping build step: no build command specified\"","ts":"2021-04-20T19:36:05.9164636Z"},{"line":"skipping build step: no build command specified","ts":"2021-04-20T19:36:05.9165087Z"},{"line":"Finished","ts":"2021-04-20T19:36:05.917412Z"}],"includes_container_logs":true,"total":30}
  */
-export type PagesDeploymentStageName =
-  | "queued"
-  | "initialize"
-  | "clone_repo"
-  | "build"
-  | "deploy";
-
-export type PagesDeployments = {
-  /**
-   * A list of alias URLs pointing to this deployment.
-   *
-   * @example https://branchname.projectname.pages.dev
-   */
-  aliases?: string[] | null;
-  build_config?: PagesBuildConfig;
-  /**
-   * When the deployment was created.
-   *
-   * @example 2021-03-09T00:55:03.923456Z
-   * @format date-time
-   * @x-auditable true
-   */
-  created_on?: string;
-  /**
-   * Info about what caused the deployment.
-   */
-  deployment_trigger?: {
-    /**
-     * Additional info about the trigger.
-     */
-    metadata?: {
-      /**
-       * Where the trigger happened.
-       *
-       * @example main
-       * @x-auditable true
-       */
-      branch?: string;
-      /**
-       * Hash of the deployment trigger commit.
-       *
-       * @example ad9ccd918a81025731e10e40267e11273a263421
-       * @x-auditable true
-       */
-      commit_hash?: string;
-      /**
-       * Message of the deployment trigger commit.
-       *
-       * @example Update index.html
-       * @x-auditable true
-       */
-      commit_message?: string;
-    };
-    /**
-     * What caused the deployment.
-     *
-     * @example ad_hoc
-     * @x-auditable true
-     */
-    type?: "push" | "ad_hoc";
-  };
-  env_vars?: PagesEnvVars;
-  /**
-   * Type of deploy.
-   *
-   * @example preview
-   * @x-auditable true
-   */
-  environment?: "preview" | "production";
-  /**
-   * Id of the deployment.
-   *
-   * @example f64788e9-fccd-4d4a-a28a-cb84f88f6
-   * @x-auditable true
-   */
-  id?: string;
-  /**
-   * If the deployment has been skipped.
-   *
-   * @example true
-   * @x-auditable true
-   */
-  is_skipped?: boolean;
-  latest_stage?: PagesStage;
-  /**
-   * When the deployment was last modified.
-   *
-   * @example 2021-03-09T00:58:59.045655
-   * @format date-time
-   * @x-auditable true
-   */
-  modified_on?: string;
-  /**
-   * Id of the project.
-   *
-   * @example 7b162ea7-7367-4d67-bcde-1160995d5
-   * @x-auditable true
-   */
-  project_id?: string;
-  /**
-   * Name of the project.
-   *
-   * @example ninjakittens
-   * @x-auditable true
-   */
-  project_name?: string;
-  /**
-   * Short Id (8 character) of the deployment.
-   *
-   * @example f64788e9
-   * @x-auditable true
-   */
-  short_id?: string;
-  source?: PagesSource;
-  /**
-   * List of past stages.
-   *
-   * @example {"ended_on":"2021-06-03T15:39:03.134378Z","name":"queued","started_on":"2021-06-03T15:38:15.608194Z","status":"active"}
-   * @example {"ended_on":null,"name":"initialize","started_on":null,"status":"idle"}
-   * @example {"ended_on":null,"name":"clone_repo","started_on":null,"status":"idle"}
-   * @example {"ended_on":null,"name":"build","started_on":null,"status":"idle"}
-   * @example {"ended_on":null,"name":"deploy","started_on":null,"status":"idle"}
-   */
-  stages?: PagesStage[];
-  /**
-   * The live URL to view this deployment.
-   *
-   * @example https://f64788e9.ninjakittens.pages.dev
-   * @x-auditable true
-   */
-  url?: string;
+export type PagesDeploymentLog = {
+  data: {
+    line: string;
+    ts: string;
+  }[];
+  includes_container_logs: boolean;
+  total: number;
 };
 
-export type PagesDomainObject = {
+export type PagesDeployments = PagesDeployment;
+
+export type PagesDomain = {
   /**
    * @example lets_encrypt
    * @x-auditable true
    */
-  certificate_authority?: "google" | "lets_encrypt";
+  certificate_authority: "google" | "lets_encrypt";
   /**
    * @x-auditable true
    */
-  created_on?: string;
+  created_on: string;
   /**
    * @x-auditable true
    */
-  domain_id?: string;
+  domain_id: string;
   /**
    * @x-auditable true
    */
-  id?: string;
-  /**
-   * @example example.com
-   * @x-auditable true
-   */
-  name?: string;
+  id: string;
+  name: PagesDomainName;
   /**
    * @x-auditable true
    */
-  status?:
+  status:
     | "initializing"
     | "pending"
     | "active"
     | "deactivated"
     | "blocked"
     | "error";
-  validation_data?: {
+  validation_data: {
     /**
      * @x-auditable true
      */
@@ -40625,11 +40021,11 @@ export type PagesDomainObject = {
     /**
      * @x-auditable true
      */
-    method?: "http" | "txt";
+    method: "http" | "txt";
     /**
      * @x-auditable true
      */
-    status?: "initializing" | "pending" | "active" | "deactivated" | "error";
+    status: "initializing" | "pending" | "active" | "deactivated" | "error";
     /**
      * @x-auditable true
      */
@@ -40639,44 +40035,27 @@ export type PagesDomainObject = {
      */
     txt_value?: string;
   };
-  verification_data?: {
+  verification_data: {
     /**
      * @x-auditable true
      */
     error_message?: string;
-    status?: "pending" | "active" | "deactivated" | "blocked" | "error";
+    status: "pending" | "active" | "deactivated" | "blocked" | "error";
   };
   /**
    * @x-auditable true
    */
-  zone_tag?: string;
-};
-
-export type PagesDomainResponseCollection = PagesApiResponseCommon &
-  PagesApiResponsePagination & {
-    result?: PagesDomainObject[];
-  };
-
-export type PagesDomainResponseSingle = PagesApiResponseSingle & {
-  result?: PagesDomainObject;
+  zone_tag: string;
 };
 
 /**
- * Name of the domain.
+ * The domain name.
  *
  * @example this-is-my-domain-01.com
- * @pattern ^[a-z0-9][a-z0-9-]*$
+ * @pattern ^([a-zA-Z0-9][\-a-zA-Z0-9]*\.)+[\-a-zA-Z0-9]{2,20}$
  * @x-auditable true
  */
 export type PagesDomainName = string;
-
-export type PagesDomainsPost = {
-  /**
-   * @example example.com
-   * @x-auditable true
-   */
-  name?: string;
-};
 
 /**
  * Environment variables used for builds and Pages Functions.
@@ -40686,7 +40065,7 @@ export type PagesEnvVars = {
 } | null;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -40699,7 +40078,11 @@ export type PagesMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -40718,17 +40101,12 @@ export type PagesPlainTextEnvVar = {
   value: string;
 } | null;
 
-export type PagesProjectObject = {
-  /**
-   * Configs for the project build process.
-   *
-   * @default {"web_analytics_tag":null,"web_analytics_token":null}
-   */
-  build_config?: PagesBuildConfig & (Record<string, any> | null);
+export type PagesProject = {
+  build_config?: PagesBuildConfig;
   /**
    * Most recent production deployment of the project.
    */
-  canonical_deployment?: PagesDeployments & (Record<string, any> | null);
+  canonical_deployment: PagesDeployment & (Record<string, any> | null);
   /**
    * When the project was created.
    *
@@ -40736,8 +40114,20 @@ export type PagesProjectObject = {
    * @format date-time
    * @x-auditable true
    */
-  created_on?: string;
-  deployment_configs?: PagesDeploymentConfigs;
+  created_on: string;
+  /**
+   * Configs for deployments in a project.
+   */
+  deployment_configs: {
+    /**
+     * Configs for preview deploys.
+     */
+    preview: PagesDeploymentConfigValues;
+    /**
+     * Configs for production deploys.
+     */
+    production: PagesDeploymentConfigValues;
+  };
   /**
    * A list of associated custom domains for the project.
    *
@@ -40750,13 +40140,13 @@ export type PagesProjectObject = {
    *
    * @x-auditable true
    */
-  framework?: string;
+  framework: string;
   /**
    * Version of the framework the project is using.
    *
    * @x-auditable true
    */
-  framework_version?: string;
+  framework_version: string;
   /**
    * ID of the project.
    *
@@ -40767,21 +40157,15 @@ export type PagesProjectObject = {
   /**
    * Most recent deployment of the project.
    */
-  latest_deployment?: PagesDeployments & (Record<string, any> | null);
-  /**
-   * Name of the project.
-   *
-   * @example my-pages-app
-   * @x-auditable true
-   */
-  name: string;
+  latest_deployment: PagesDeployment & (Record<string, any> | null);
+  name: PagesProjectName;
   /**
    * Name of the preview script.
    *
    * @example pages-worker--1234567-preview
    * @x-auditable true
    */
-  preview_script_name?: string;
+  preview_script_name: string;
   /**
    * Production branch of the project. Used to identify production deployments.
    *
@@ -40795,7 +40179,7 @@ export type PagesProjectObject = {
    * @example pages-worker--1234567-production
    * @x-auditable true
    */
-  production_script_name?: string;
+  production_script_name: string;
   source?: PagesSource;
   /**
    * The Cloudflare subdomain associated with the project.
@@ -40807,20 +40191,12 @@ export type PagesProjectObject = {
   /**
    * Whether the project uses functions.
    *
-   * @example false
    * @x-auditable true
    */
-  uses_functions?: boolean;
+  uses_functions: boolean | null;
 };
 
-/**
- * @example {"deployment_configs":{"production":{"compatibility_date":"2022-01-01","compatibility_flags":["url_standard"],"env_vars":{"BUILD_VERSION":{"value":"3.3"},"delete_this_env_var":null,"secret_var":{"type":"secret_text","value":"A_CMS_API_TOKEN"}}}}}
- */
-export type PagesProjectPatch = PagesProjectObject & Record<string, any>;
-
-export type PagesProjectResponse = PagesApiResponseCommon & {
-  result?: PagesProjectObject;
-};
+export type PagesProjectObject = PagesProject;
 
 /**
  * Name of the project.
@@ -40830,11 +40206,6 @@ export type PagesProjectResponse = PagesApiResponseCommon & {
  * @x-auditable true
  */
 export type PagesProjectName = string;
-
-export type PagesProjectsResponse = PagesApiResponseCommon &
-  PagesApiResponsePagination & {
-    result?: PagesDeployments[];
-  };
 
 /**
  * An encrypted environment variable.
@@ -40854,13 +40225,15 @@ export type PagesSecretTextEnvVar = {
   value: string;
 } | null;
 
+/**
+ * Configs for the project source control.
+ */
 export type PagesSource = {
-  config?: {
+  config: {
     /**
      * Whether to enable automatic deployments when pushing to the source repository.
      * When disabled, no deployments (production or preview) will be triggered automatically.
      *
-     * @default true
      * @deprecated true
      * @x-auditable true
      * @x-stainless-deprecation-message Use `production_deployments_enabled` and `preview_deployment_setting` for more granular control.
@@ -40872,38 +40245,39 @@ export type PagesSource = {
      * @example my-org
      * @x-auditable true
      */
-    owner?: string;
+    owner: string;
+    /**
+     * The owner ID of the repository.
+     *
+     * @example 12345678
+     * @x-auditable true
+     */
+    owner_id?: string;
     /**
      * A list of paths that should be excluded from triggering a preview deployment. Wildcard syntax (`*`) is supported.
      */
     path_excludes?: string[];
     /**
      * A list of paths that should be watched to trigger a preview deployment. Wildcard syntax (`*`) is supported.
-     *
-     * @default *
      */
     path_includes?: string[];
     /**
      * Whether to enable PR comments.
      *
-     * @default true
      * @x-auditable true
      */
-    pr_comments_enabled?: boolean;
+    pr_comments_enabled: boolean;
     /**
      * A list of branches that should not trigger a preview deployment. Wildcard syntax (`*`) is supported. Must be used with `preview_deployment_setting` set to `custom`.
      */
     preview_branch_excludes?: string[];
     /**
      * A list of branches that should trigger a preview deployment. Wildcard syntax (`*`) is supported. Must be used with `preview_deployment_setting` set to `custom`.
-     *
-     * @default *
      */
     preview_branch_includes?: string[];
     /**
      * Controls whether commits to preview branches trigger a preview deployment.
      *
-     * @default all
      * @x-auditable true
      */
     preview_deployment_setting?: "all" | "none" | "custom";
@@ -40913,21 +40287,27 @@ export type PagesSource = {
      * @example main
      * @x-auditable true
      */
-    production_branch?: string;
+    production_branch: string;
     /**
      * Whether to trigger a production deployment on commits to the production branch.
      *
-     * @default true
      * @x-auditable true
      */
     production_deployments_enabled?: boolean;
+    /**
+     * The ID of the repository.
+     *
+     * @example 12345678
+     * @x-auditable true
+     */
+    repo_id?: string;
     /**
      * The name of the repository.
      *
      * @example my-repo
      * @x-auditable true
      */
-    repo_name?: string;
+    repo_name: string;
   };
   /**
    * The source control management provider.
@@ -40935,7 +40315,7 @@ export type PagesSource = {
    * @example github
    * @x-auditable true
    */
-  type?: "github" | "gitlab";
+  type: "github" | "gitlab";
 };
 
 /**
@@ -40949,14 +40329,14 @@ export type PagesStage = {
    * @format date-time
    * @x-auditable true
    */
-  ended_on?: string | null;
+  ended_on: string | null;
   /**
    * The current build stage.
    *
    * @example deploy
    * @x-auditable true
    */
-  name?: "queued" | "initialize" | "clone_repo" | "build" | "deploy";
+  name: "queued" | "initialize" | "clone_repo" | "build" | "deploy";
   /**
    * When the stage started.
    *
@@ -40964,14 +40344,14 @@ export type PagesStage = {
    * @format date-time
    * @x-auditable true
    */
-  started_on?: string | null;
+  started_on: string | null;
   /**
    * State of the current stage.
    *
    * @example success
    * @x-auditable true
    */
-  status?: "success" | "idle" | "active" | "failure" | "canceled";
+  status: "success" | "idle" | "active" | "failure" | "canceled";
 };
 
 export type PayPerCrawlBotAccessMode = "charge" | "bypass";
@@ -43119,108 +42499,6 @@ export type RealtimekitMeeting = {
   updated_at: string;
 };
 
-export type RealtimekitOrganizationData = {
-  /**
-   * @example 4deeb3d8e8b5e74d5522
-   */
-  apikey: string;
-  /**
-   * @example 778-330-2389
-   */
-  contact: string;
-  /**
-   * @example 2022-05-28T08:18:34.804Z
-   * @format date-time
-   */
-  created_at: string;
-  feature_flags: string[];
-  /**
-   * ID of the organization
-   *
-   * @example bbb0e958-93ce-41c7-9745-16e7aa51c568
-   * @format uuid
-   */
-  id: string;
-  /**
-   * Must be a unique organization name
-   *
-   * @example RealtimeKit
-   */
-  name: string;
-  /**
-   * @example us-east-1
-   */
-  preferred_region: string;
-  /**
-   * @example 2022-05-28T08:18:34.804Z
-   * @format date-time
-   */
-  updated_at: string;
-  /**
-   * @example https://example.com
-   * @format uri
-   */
-  website: string;
-};
-
-export type RealtimekitOrganizationListSuccessResponse = {
-  data: RealtimekitOrganizationData[];
-  paging: {
-    /**
-     * @example 30
-     */
-    end_offset: number;
-    /**
-     * @example 1
-     */
-    start_offset: number;
-    /**
-     * @example 30
-     */
-    total_count: number;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type RealtimekitOrganizationRequest = {
-  /**
-   * @example 778-330-2389
-   */
-  contact: string;
-  feature_flags?: string[];
-  /**
-   * Must be a unique organization name
-   *
-   * @example RealtimeKit
-   */
-  name: string;
-  /**
-   * @default ap-south-1
-   * @example us-east-1
-   */
-  preferred_region?:
-    | "ap-south-1"
-    | "ap-southeast-1"
-    | "us-east-1"
-    | "eu-central-1";
-  /**
-   * @example https://example.com
-   * @format uri
-   */
-  website: string;
-};
-
-export type RealtimekitOrganizationSuccessResponse = {
-  data: RealtimekitOrganizationData;
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
 export type RealtimekitOverallStats = {
   /**
    * Total recordings minutes consumed across all sessions in the given time period.
@@ -43418,25 +42696,6 @@ export type RealtimekitParticipantsList = {
    * User id for this participant.
    */
   user_id?: string;
-};
-
-export type RealtimekitPatchOrganizationRequest = {
-  contact?: string;
-  feature_flags?: string[];
-  /**
-   * Must be a unique App name
-   */
-  name?: string;
-  preferred_region?:
-    | "ap-south-1"
-    | "ap-southeast-1"
-    | "us-east-1"
-    | "eu-central-1";
-  /**
-   * @example https://example.com
-   * @format uri
-   */
-  website?: string;
 };
 
 export type RealtimekitPatchWebhookRequest = {
@@ -52632,6 +51891,15 @@ export type TeamsDevicesAllowUpdates = boolean;
  */
 export type TeamsDevicesAllowedToLeave = boolean;
 
+export type TeamsDevicesAntivirusInputRequest = {
+  /**
+   * Number of days that the antivirus should be updated within.
+   *
+   * @example 7
+   */
+  update_window_days?: number;
+};
+
 export type TeamsDevicesApiResponseCollection = {
   errors: TeamsDevicesMessages;
   messages: TeamsDevicesMessages;
@@ -53743,6 +53011,7 @@ export type TeamsDevicesInput =
   | TeamsDevicesApplicationInputRequest
   | TeamsDevicesClientCertificateInputRequest
   | TeamsDevicesClientCertificateV2InputRequest
+  | TeamsDevicesAntivirusInputRequest
   | TeamsDevicesWorkspaceOneInputRequest
   | TeamsDevicesCrowdstrikeInputRequest
   | TeamsDevicesIntuneInputRequest
@@ -54865,6 +54134,7 @@ export type TeamsDevicesType =
   | "domain_joined"
   | "client_certificate"
   | "client_certificate_v2"
+  | "antivirus"
   | "unique_client_id"
   | "kolide"
   | "tanium_s2s"
@@ -55046,6 +54316,30 @@ export type TeamsDevicesZeroTrustAccountDeviceSettings = {
    */
   disable_for_time?: number;
   /**
+   * Controls whether the external emergency disconnect feature is enabled.
+   *
+   * @example true
+   */
+  external_emergency_signal_enabled?: boolean;
+  /**
+   * The SHA256 fingerprint (64 hexadecimal characters) of the HTTPS server certificate for the external_emergency_signal_url. If provided, the WARP client will use this value to verify the server's identity. The device will ignore any response if the server's certificate fingerprint does not exactly match this value.
+   *
+   * @example abcd1234567890abcd1234567890abcd1234567890abcd1234567890abcd1234
+   */
+  external_emergency_signal_fingerprint?: string;
+  /**
+   * The interval at which the WARP client fetches the emergency disconnect signal, formatted as a duration string (e.g., "5m", "2m30s", "1h"). Minimum 30 seconds.
+   *
+   * @example 5m
+   */
+  external_emergency_signal_interval?: string;
+  /**
+   * The HTTPS URL from which to fetch the emergency disconnect signal. Must use HTTPS and have an IPv4 or IPv6 address as the host.
+   *
+   * @example https://192.0.2.1/signal
+   */
+  external_emergency_signal_url?: string;
+  /**
    * Enable gateway proxy filtering on TCP.
    *
    * @example true
@@ -55078,32 +54372,7 @@ export type TeamsDevicesZeroTrustAccountDeviceSettingsResponse =
 
 export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
   TlsCertificatesAndHostnamesApiResponseSingle & {
-    result?: {
-      certificate_authority?: TlsCertificatesAndHostnamesSchemasCertificateAuthority;
-      cloudflare_branding?: TlsCertificatesAndHostnamesCloudflareBranding;
-      hosts?: TlsCertificatesAndHostnamesSchemasHosts;
-      id?: TlsCertificatesAndHostnamesIdentifier;
-      status?: TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus;
-      type?: TlsCertificatesAndHostnamesSchemasType;
-      /**
-       * Domain validation errors that have been received by the certificate authority (CA).
-       */
-      validation_errors?: {
-        /**
-         * A domain validation error.
-         *
-         * @example SERVFAIL looking up CAA for app.example.com
-         * @x-auditable true
-         */
-        message?: string;
-      }[];
-      validation_method?: TlsCertificatesAndHostnamesValidationMethod;
-      /**
-       * Certificates' validation records. Only present when certificate pack is in "pending_validation" status
-       */
-      validation_records?: TlsCertificatesAndHostnamesValidationRecord[];
-      validity_days?: TlsCertificatesAndHostnamesValidityDays;
-    };
+    result?: TlsCertificatesAndHostnamesCertificatePack;
   };
 
 /**
@@ -55360,6 +54629,131 @@ export type TlsCertificatesAndHostnamesCertificateAuthority =
   | "lets_encrypt"
   | "ssl_com";
 
+/**
+ * A certificate pack with all its properties.
+ */
+export type TlsCertificatesAndHostnamesCertificatePack = {
+  certificate_authority?: TlsCertificatesAndHostnamesSchemasCertificateAuthority;
+  /**
+   * Array of certificates in this pack.
+   */
+  certificates: TlsCertificatesAndHostnamesCertificatePackCertificate[];
+  cloudflare_branding?: TlsCertificatesAndHostnamesCloudflareBranding;
+  hosts: TlsCertificatesAndHostnamesSchemasHosts;
+  id: TlsCertificatesAndHostnamesIdentifier;
+  primary_certificate?: TlsCertificatesAndHostnamesPrimary;
+  status: TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus;
+  type: TlsCertificatesAndHostnamesSchemasType;
+  /**
+   * Domain validation errors that have been received by the certificate authority (CA).
+   */
+  validation_errors?: {
+    /**
+     * A domain validation error.
+     *
+     * @example SERVFAIL looking up CAA for app.example.com
+     * @x-auditable true
+     */
+    message?: string;
+  }[];
+  validation_method?: TlsCertificatesAndHostnamesValidationMethod;
+  /**
+   * Certificates' validation records.
+   */
+  validation_records?: TlsCertificatesAndHostnamesValidationRecord[];
+  validity_days?: TlsCertificatesAndHostnamesValidityDays;
+};
+
+/**
+ * An individual certificate within a certificate pack.
+ */
+export type TlsCertificatesAndHostnamesCertificatePackCertificate = {
+  /**
+   * Certificate bundle method.
+   *
+   * @example ubiquitous
+   * @x-auditable true
+   */
+  bundle_method?: string;
+  /**
+   * When the certificate from the authority expires.
+   *
+   * @example 2024-01-01T00:00:00Z
+   * @format date-time
+   * @x-auditable true
+   */
+  expires_on?: string;
+  /**
+   * Specify the region where your private key can be held locally.
+   */
+  geo_restrictions?: {
+    /**
+     * @example us
+     * @x-auditable true
+     */
+    label?: "us" | "eu" | "highest_security";
+  };
+  /**
+   * Hostnames covered by this certificate.
+   *
+   * @example example.com
+   * @example *.example.com
+   * @x-auditable true
+   */
+  hosts: string[];
+  /**
+   * Certificate identifier.
+   *
+   * @example 7e7b8deba8538af625850b7b2530034c
+   * @x-auditable true
+   */
+  id: string;
+  /**
+   * The certificate authority that issued the certificate.
+   *
+   * @example Let's Encrypt
+   * @x-auditable true
+   */
+  issuer?: string;
+  /**
+   * When the certificate was last modified.
+   *
+   * @example 2014-01-01T05:20:00Z
+   * @format date-time
+   * @x-auditable true
+   */
+  modified_on?: string;
+  /**
+   * The order/priority in which the certificate will be used.
+   *
+   * @x-auditable true
+   */
+  priority?: number;
+  /**
+   * The type of hash used for the certificate.
+   *
+   * @example ECDSAWithSHA256
+   * @x-auditable true
+   */
+  signature?: string;
+  /**
+   * Certificate status.
+   *
+   * @example active
+   * @x-auditable true
+   */
+  status: string;
+  /**
+   * When the certificate was uploaded to Cloudflare.
+   *
+   * @example 2014-01-01T05:20:00Z
+   * @format date-time
+   * @x-auditable true
+   */
+  uploaded_on?: string;
+  zone_id?: TlsCertificatesAndHostnamesIdentifier;
+};
+
 export type TlsCertificatesAndHostnamesCertificatePackQuotaResponse =
   TlsCertificatesAndHostnamesApiResponseSingle & {
     result?: {
@@ -55369,12 +54763,12 @@ export type TlsCertificatesAndHostnamesCertificatePackQuotaResponse =
 
 export type TlsCertificatesAndHostnamesCertificatePackResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
-    result?: Record<string, any>[];
+    result?: TlsCertificatesAndHostnamesCertificatePack[];
   };
 
 export type TlsCertificatesAndHostnamesCertificatePackResponseSingle =
   TlsCertificatesAndHostnamesApiResponseSingle & {
-    result?: Record<string, any>;
+    result?: TlsCertificatesAndHostnamesCertificatePack;
   };
 
 export type TlsCertificatesAndHostnamesCertificateResponseCollection =
@@ -56507,6 +55901,14 @@ export type TlsCertificatesAndHostnamesPolicy = string;
  * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPort = number;
+
+/**
+ * Identifier of the primary certificate in a pack.
+ *
+ * @example 7e7b8deba8538af625850b7b2530034c
+ * @x-auditable true
+ */
+export type TlsCertificatesAndHostnamesPrimary = string;
 
 /**
  * The order/priority in which the certificate will be used in a request. The higher priority will break ties across overlapping 'legacy_custom' certificates, but 'legacy_custom' certificates will always supercede 'sni_custom' certificates.
@@ -61496,6 +60898,10 @@ export type WorkersKvValue = string | Blob;
  */
 export type WorkersObservabilityPerformanceInformation = {
   /**
+   * The level of Adaptive Bit Rate (ABR) sampling used for the query. If empty the ABR level is 1
+   */
+  abr_level?: number;
+  /**
    * Number of uncompressed bytes read from the table.
    */
   bytes_read: number;
@@ -61653,7 +61059,7 @@ export type WorkersObservabilityQuery = {
     /**
      * Set a limit on the number of results / records returned by the query
      *
-     * @maximum 100
+     * @maximum 2000
      * @minimum 0
      */
     limit?: number;
@@ -61663,6 +61069,9 @@ export type WorkersObservabilityQuery = {
     needle?: {
       isRegex?: boolean;
       matchCase?: boolean;
+      /**
+       * @maxLength 1000
+       */
       value: string | number | boolean;
     };
     /**
@@ -61826,6 +61235,17 @@ export type WorkersObservabilityQueryResults = {
   }[];
   run: WorkersObservabilityQueryRun;
   statistics: WorkersObservabilityPerformanceInformation;
+  traces?: {
+    errors?: string[];
+    rootSpanName: string;
+    rootTransactionName: string;
+    service: string[];
+    spans: number;
+    traceDurationMs: number;
+    traceEndMs: number;
+    traceId: string;
+    traceStartMs: number;
+  }[];
 };
 
 /**
@@ -61844,6 +61264,10 @@ export type WorkersObservabilityQueryRun = {
   query: WorkersObservabilityQuery;
   statistics?: {
     /**
+     * The level of Adaptive Bit Rate (ABR) sampling used for the query. If empty the ABR level is 1
+     */
+    abr_level?: number;
+    /**
      * Number of uncompressed bytes read from the table.
      */
     bytes_read: number;
@@ -61857,19 +61281,16 @@ export type WorkersObservabilityQueryRun = {
     rows_read: number;
   };
   status: "STARTED" | "COMPLETED";
+  /**
+   * Time range for the query execution
+   */
   timeframe: {
     /**
-     * Set the start time for your query using UNIX time in milliseconds.
-     *
-     * @exclusiveMinimum true
-     * @minimum 0
+     * Start timestamp for the query timeframe (Unix timestamp in milliseconds)
      */
     from: number;
     /**
-     * Set the end time for your query using UNIX time in milliseconds.
-     *
-     * @exclusiveMinimum true
-     * @minimum 0
+     * End timestamp for the query timeframe (Unix timestamp in milliseconds)
      */
     to: number;
   };
@@ -61885,6 +61306,10 @@ export type WorkersObservabilityQueryRun = {
  * The data structure of a telemetry event
  */
 export type WorkersObservabilityTelemetryEvent = {
+  /**
+   * Cloudflare Containers event information enriches your logs so you can easily identify and debug issues.
+   */
+  $containers?: Record<string, any>;
   $metadata: {
     account?: string;
     cloudService?: string;
@@ -61939,6 +61364,7 @@ export type WorkersObservabilityTelemetryEvent = {
      */
     traceDuration?: number;
     traceId?: string;
+    transactionName?: string;
     trigger?: string;
     type?: string;
     url?: string;
@@ -61948,6 +61374,7 @@ export type WorkersObservabilityTelemetryEvent = {
    */
   $workers?:
     | {
+        durableObjectId?: string;
         entrypoint?: string;
         event?: {
           [key: string]:
@@ -61980,7 +61407,7 @@ export type WorkersObservabilityTelemetryEvent = {
           | "websocket"
           | "unknown";
         executionModel?: "durableObject" | "stateless";
-        outcome: string;
+        outcome?: string;
         requestId: string;
         scriptName: string;
         scriptVersion?: {
@@ -61998,6 +61425,7 @@ export type WorkersObservabilityTelemetryEvent = {
           timestamp: number;
         }[];
         dispatchNamespace?: string;
+        durableObjectId?: string;
         entrypoint?: string;
         event?: {
           [key: string]: string | number | boolean;
@@ -64006,6 +63434,7 @@ export type WorkersSchedule = {
 /**
  * Worker environment associated with the zone and hostname.
  *
+ * @deprecated true
  * @example production
  * @x-auditable true
  */
@@ -64446,57 +63875,84 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
      */
     script?: {
       /**
+       * Hashed script content
+       *
        * @example 13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794
        */
       etag?: string;
       /**
+       * The names of handlers exported as part of the default export.
+       *
        * @example fetch
        * @x-stainless-collection-type set
        */
       handlers?: string[];
       /**
+       * The client most recently used to deploy this Worker.
+       *
        * @example api
        */
       last_deployed_from?: string;
       /**
+       * Named exports, such as Durable Object class implementations and named entrypoints.
+       *
        * @example {"handlers":["fetch"],"name":"MyClass"}
        * @x-stainless-collection-type set
        */
       named_handlers?: {
         /**
+         * The names of handlers exported as part of the named export.
+         *
          * @example fetch
          * @x-stainless-collection-type set
          */
         handlers?: string[];
         /**
+         * The name of the exported class or entrypoint.
+         *
          * @example MyClass
          */
         name?: string;
       }[];
     };
+    /**
+     * Runtime configuration for the Worker.
+     */
     script_runtime?: {
       /**
+       * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
+       *
        * @example 2022-11-08
        */
       compatibility_date?: string;
       /**
+       * Flags that enable or disable certain features in the Workers runtime.
+       *
        * @x-stainless-collection-type set
        */
       compatibility_flags?: string[];
       /**
+       * Resource limits for the Worker.
+       *
        * @example {"cpu_ms":50}
        */
       limits?: {
         /**
+         * The amount of CPU time this Worker can use in milliseconds.
+         *
          * @example 50
          */
         cpu_ms?: number;
       };
       /**
+       * The tag of the Durable Object migration that was most recently applied for this Worker.
+       *
        * @example v1
        */
       migration_tag?: string;
       /**
+       * Usage model for the Worker invocations.
+       *
        * @example standard
        */
       usage_model?: "bundled" | "unbound" | "standard";
@@ -64506,6 +63962,8 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
 
 export type WorkersVersionItemShort = {
   /**
+   * Unique identifier for the version.
+   *
    * @example 18f97339-c287-4872-9bdd-e2135c07ec12
    */
   id?: string;
@@ -64514,23 +63972,36 @@ export type WorkersVersionItemShort = {
    */
   metadata?: {
     /**
+     * Email of the user who created the version.
+     *
      * @example user@example.com
      */
     author_email?: string;
     /**
+     * Identifier of the user who created the version.
+     *
      * @example 408cbcdfd4dda4617efef40b04d168a1
      */
     author_id?: string;
     /**
+     * When the version was created.
+     *
      * @example 2022-11-08T17:19:29.176266Z
      */
     created_on?: string;
+    /**
+     * Whether the version can be previewed.
+     */
     hasPreview?: boolean;
     /**
+     * When the version was last modified.
+     *
      * @example 2022-11-08T17:19:29.176266Z
      */
     modified_on?: string;
     /**
+     * The source of the version upload.
+     *
      * @example api
      */
     source?:
@@ -64546,6 +64017,8 @@ export type WorkersVersionItemShort = {
       | "workersci";
   };
   /**
+   * Sequential version number.
+   *
    * @example 1
    */
   number?: number;
@@ -64553,6 +64026,8 @@ export type WorkersVersionItemShort = {
 
 export type WorkersVersionItemUploaded = WorkersVersionItemFull & {
   /**
+   * Time in milliseconds spent on [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   *
    * @example 10
    */
   startup_time_ms?: number;

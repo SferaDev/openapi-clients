@@ -197,6 +197,11 @@ import {
   workersAiPostRunCfBaaiBgeM3,
   workersAiPostRunCfBaaiBgeRerankerBase,
   workersAiPostRunCfBaaiBgeSmallEnV15,
+  workersAiPostRunCfBaaiOmniBgeBaseEnV15,
+  workersAiPostRunCfBaaiOmniBgeLargeEnV15,
+  workersAiPostRunCfBaaiOmniBgeM3,
+  workersAiPostRunCfBaaiOmniBgeSmallEnV15,
+  workersAiPostRunCfBaaiRayBgeLargeEnV15,
   workersAiPostRunCfBlackForestLabsFlux1Schnell,
   workersAiPostRunCfBytedanceStableDiffusionXlLightning,
   workersAiPostWebsocketRunCfDeepgramAura,
@@ -217,12 +222,16 @@ import {
   workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b,
   workersAiPostRunCfDefogSqlcoder7b2,
   workersAiPostRunCfFacebookBartLargeCnn,
+  workersAiPostRunCfFacebookOmniBartLargeCnn,
+  workersAiPostRunCfFacebookOmniDetrResnet50,
   workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
   workersAiPostRunCfGoogleEmbeddinggemma300m,
   workersAiPostRunCfGoogleGemma2bItLora,
   workersAiPostRunCfGoogleGemma312bIt,
   workersAiPostRunCfGoogleGemma7bItLora,
+  workersAiPostRunCfGoogleOmniEmbeddinggemma300m,
   workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
+  workersAiPostRunCfHuggingfaceOmniDistilbertSst2Int8,
   workersAiPostRunCfIbmGraniteGranite40HMicro,
   workersAiPostRunCfLeonardoLucidOrigin,
   workersAiPostRunCfLeonardoPhoenix10,
@@ -232,20 +241,19 @@ import {
   workersAiPostRunCfMetaLlama27bChatInt8,
   workersAiPostRunCfMetaLlama38bInstruct,
   workersAiPostRunCfMetaLlama38bInstructAwq,
-  workersAiPostRunCfMetaLlama3170bInstruct,
-  workersAiPostRunCfMetaLlama3170bInstructPreview,
-  workersAiPostRunCfMetaLlama3170bPreview,
+  workersAiPostRunCfMetaLlama3170bInstructFp8Fast,
   workersAiPostRunCfMetaLlama318bInstructAwq,
-  workersAiPostRunCfMetaLlama318bInstructFast,
   workersAiPostRunCfMetaLlama318bInstructFp8,
-  workersAiPostRunCfMetaLlama318bPreview,
+  workersAiPostRunCfMetaLlama318bInstructFp8Fast,
   workersAiPostRunCfMetaLlama3211bVisionInstruct,
   workersAiPostRunCfMetaLlama321bInstruct,
   workersAiPostRunCfMetaLlama323bInstruct,
+  workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
   workersAiPostRunCfMetaLlama4Scout17b16eInstruct,
   workersAiPostRunCfMetaLlamaGuard38b,
   workersAiPostRunCfMetaM2m10012b,
   workersAiPostRunCfMicrosoftPhi2,
+  workersAiPostRunCfMicrosoftResnet50,
   workersAiPostRunCfMistralMistral7bInstructV01,
   workersAiPostRunCfMistralMistral7bInstructV02Lora,
   workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
@@ -264,6 +272,8 @@ import {
   workersAiPostRunCfQwenQwen1514bChatAwq,
   workersAiPostRunCfQwenQwen157bChatAwq,
   workersAiPostRunCfQwenQwen25Coder32bInstruct,
+  workersAiPostRunCfQwenQwen330bA3bFp8,
+  workersAiPostRunCfQwenQwen3Embedding06b,
   workersAiPostRunCfQwenQwq32b,
   workersAiPostRunCfRunwaymlStableDiffusionV15Img2img,
   workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting,
@@ -273,9 +283,7 @@ import {
   workersAiPostRunCfTiiuaeFalcon7bInstruct,
   workersAiPostRunCfTinyllamaTinyllama11bChatV10,
   workersAiPostRunHfGoogleGemma7bIt,
-  workersAiPostRunHfMetaLlamaMetaLlama38bInstruct,
   workersAiPostRunHfMistralMistral7bInstructV02,
-  workersAiPostRunHfMistralaiMistral7bInstructV02,
   workersAiPostRunHfNexusflowStarlingLm7bBeta,
   workersAiPostRunHfNousresearchHermes2ProMistral7b,
   workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq,
@@ -435,7 +443,7 @@ import {
   getCountryRead,
   postEventCreate,
   postEventCreateBulk,
-  postEventCreateBulkWithRelationships,
+  postDOSEventCreateBulkWithRelationships,
   getDatasetList,
   postDatasetCreate,
   deleteDatasetDelete,
@@ -699,47 +707,6 @@ import {
   dnsViewsForAnAccountDeleteInternalDnsView,
   dnsViewsForAnAccountGetInternalDnsView,
   dnsViewsForAnAccountUpdateInternalDnsView,
-  emailSecurityInvestigate,
-  emailSecurityPostBulkMessageMove,
-  emailSecurityPostPreview,
-  emailSecurityPostRelease,
-  emailSecurityGetMessage,
-  emailSecurityGetMessageDetections,
-  emailSecurityPostMessageMove,
-  emailSecurityGetMessagePreview,
-  emailSecurityGetMessageRaw,
-  emailSecurityPostReclassify,
-  emailSecurityGetMessageTrace,
-  emailSecurityListAllowPolicies,
-  emailSecurityCreateAllowPolicy,
-  emailSecurityBatchAllowPolicies,
-  emailSecurityDeleteAllowPolicy,
-  emailSecurityGetAllowPolicy,
-  emailSecurityUpdateAllowPolicy,
-  emailSecurityListBlockedSenders,
-  emailSecurityCreateBlockedSender,
-  emailSecurityBatchBlockedSenders,
-  emailSecurityDeleteBlockedSender,
-  emailSecurityGetBlockedSender,
-  emailSecurityUpdateBlockedSender,
-  emailSecurityDeleteDomains,
-  emailSecurityListDomains,
-  emailSecurityDeleteDomain,
-  emailSecurityGetDomain,
-  emailSecurityUpdateDomain,
-  emailSecurityListDisplayNames,
-  emailSecurityCreateDisplayName,
-  emailSecurityDeleteDisplayName,
-  emailSecurityGetDisplayName,
-  emailSecurityUpdateDisplayName,
-  emailSecurityBatchSendingDomainRestrictions,
-  emailSecurityListTrustedDomains,
-  emailSecurityCreateTrustedDomain,
-  emailSecurityBatchTrustedDomains,
-  emailSecurityDeleteTrustedDomain,
-  emailSecurityGetTrustedDomain,
-  emailSecurityUpdateTrustedDomain,
-  emailSecuritySubmissions,
   emailRoutingDestinationAddressesListDestinationAddresses,
   emailRoutingDestinationAddressesCreateADestinationAddress,
   emailRoutingDestinationAddressesDeleteDestinationAddress,
@@ -1211,6 +1178,8 @@ import {
   r2PutBucketSippyConfig,
   r2GetAccountLevelMetrics,
   r2CreateTempAccessCredentials,
+  getApps,
+  createApp,
   getOrgAnalytics,
   getLivestreamAnalyticsDaywise,
   getLivestreamAnalyticsComplete,
@@ -1270,10 +1239,6 @@ import {
   getWebhook,
   editWebhook,
   replaceWebhook,
-  getAllOrgs,
-  createOrg,
-  getOrg,
-  editOrg,
   registrarDomainsListDomains,
   registrarDomainsGetDomain,
   registrarDomainsUpdateDomain,
@@ -1545,6 +1510,10 @@ import {
   workerDomainGetADomain,
   durableObjectsNamespaceListNamespaces,
   durableObjectsNamespaceListObjects,
+  destinationList,
+  destinationCreate,
+  destinationsDelete,
+  destinationUpdate,
   telemetryKeysList,
   telemetryQuery,
   telemetryValuesList,
@@ -1890,6 +1859,11 @@ import {
   radarGetNetflowsTimeseriesGroup,
   radarGetNetflowsTopAses,
   radarGetNetflowsTopLocations,
+  radarGetOrigins,
+  radarGetOriginsSummary,
+  radarGetOriginsTimeseries,
+  radarGetOriginsTimeseriesGroup,
+  radarGetOriginDetails,
   radarGetQualityIndexSummary,
   radarGetQualityIndexTimeseriesGroup,
   radarGetQualitySpeedHistogram,
@@ -2855,6 +2829,16 @@ export const operationsByPath = {
     workersAiPostRunCfBaaiBgeRerankerBase,
   "POST /accounts/{account_id}/ai/run/@cf/baai/bge-small-en-v1.5":
     workersAiPostRunCfBaaiBgeSmallEnV15,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-base-en-v1.5":
+    workersAiPostRunCfBaaiOmniBgeBaseEnV15,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-large-en-v1.5":
+    workersAiPostRunCfBaaiOmniBgeLargeEnV15,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-m3":
+    workersAiPostRunCfBaaiOmniBgeM3,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/omni-bge-small-en-v1.5":
+    workersAiPostRunCfBaaiOmniBgeSmallEnV15,
+  "POST /accounts/{account_id}/ai/run/@cf/baai/ray-bge-large-en-v1.5":
+    workersAiPostRunCfBaaiRayBgeLargeEnV15,
   "POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell":
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
   "POST /accounts/{account_id}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning":
@@ -2895,6 +2879,10 @@ export const operationsByPath = {
     workersAiPostRunCfDefogSqlcoder7b2,
   "POST /accounts/{account_id}/ai/run/@cf/facebook/bart-large-cnn":
     workersAiPostRunCfFacebookBartLargeCnn,
+  "POST /accounts/{account_id}/ai/run/@cf/facebook/omni-bart-large-cnn":
+    workersAiPostRunCfFacebookOmniBartLargeCnn,
+  "POST /accounts/{account_id}/ai/run/@cf/facebook/omni-detr-resnet-50":
+    workersAiPostRunCfFacebookOmniDetrResnet50,
   "POST /accounts/{account_id}/ai/run/@cf/fblgit/una-cybertron-7b-v2-bf16":
     workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
   "POST /accounts/{account_id}/ai/run/@cf/google/embeddinggemma-300m":
@@ -2905,8 +2893,12 @@ export const operationsByPath = {
     workersAiPostRunCfGoogleGemma312bIt,
   "POST /accounts/{account_id}/ai/run/@cf/google/gemma-7b-it-lora":
     workersAiPostRunCfGoogleGemma7bItLora,
+  "POST /accounts/{account_id}/ai/run/@cf/google/omni-embeddinggemma-300m":
+    workersAiPostRunCfGoogleOmniEmbeddinggemma300m,
   "POST /accounts/{account_id}/ai/run/@cf/huggingface/distilbert-sst-2-int8":
     workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
+  "POST /accounts/{account_id}/ai/run/@cf/huggingface/omni-distilbert-sst-2-int8":
+    workersAiPostRunCfHuggingfaceOmniDistilbertSst2Int8,
   "POST /accounts/{account_id}/ai/run/@cf/ibm-granite/granite-4.0-h-micro":
     workersAiPostRunCfIbmGraniteGranite40HMicro,
   "POST /accounts/{account_id}/ai/run/@cf/leonardo/lucid-origin":
@@ -2925,26 +2917,22 @@ export const operationsByPath = {
     workersAiPostRunCfMetaLlama38bInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3-8b-instruct-awq":
     workersAiPostRunCfMetaLlama38bInstructAwq,
-  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-instruct":
-    workersAiPostRunCfMetaLlama3170bInstruct,
-  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-instruct-preview":
-    workersAiPostRunCfMetaLlama3170bInstructPreview,
-  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-preview":
-    workersAiPostRunCfMetaLlama3170bPreview,
+  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-instruct-fp8-fast":
+    workersAiPostRunCfMetaLlama3170bInstructFp8Fast,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-awq":
     workersAiPostRunCfMetaLlama318bInstructAwq,
-  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-fast":
-    workersAiPostRunCfMetaLlama318bInstructFast,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-fp8":
     workersAiPostRunCfMetaLlama318bInstructFp8,
-  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-preview":
-    workersAiPostRunCfMetaLlama318bPreview,
+  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-fp8-fast":
+    workersAiPostRunCfMetaLlama318bInstructFp8Fast,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-11b-vision-instruct":
     workersAiPostRunCfMetaLlama3211bVisionInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-1b-instruct":
     workersAiPostRunCfMetaLlama321bInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-3b-instruct":
     workersAiPostRunCfMetaLlama323bInstruct,
+  "POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.3-70b-instruct-fp8-fast":
+    workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-4-scout-17b-16e-instruct":
     workersAiPostRunCfMetaLlama4Scout17b16eInstruct,
   "POST /accounts/{account_id}/ai/run/@cf/meta/llama-guard-3-8b":
@@ -2953,6 +2941,8 @@ export const operationsByPath = {
     workersAiPostRunCfMetaM2m10012b,
   "POST /accounts/{account_id}/ai/run/@cf/microsoft/phi-2":
     workersAiPostRunCfMicrosoftPhi2,
+  "POST /accounts/{account_id}/ai/run/@cf/microsoft/resnet-50":
+    workersAiPostRunCfMicrosoftResnet50,
   "POST /accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.1":
     workersAiPostRunCfMistralMistral7bInstructV01,
   "POST /accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.2-lora":
@@ -2989,6 +2979,10 @@ export const operationsByPath = {
     workersAiPostRunCfQwenQwen157bChatAwq,
   "POST /accounts/{account_id}/ai/run/@cf/qwen/qwen2.5-coder-32b-instruct":
     workersAiPostRunCfQwenQwen25Coder32bInstruct,
+  "POST /accounts/{account_id}/ai/run/@cf/qwen/qwen3-30b-a3b-fp8":
+    workersAiPostRunCfQwenQwen330bA3bFp8,
+  "POST /accounts/{account_id}/ai/run/@cf/qwen/qwen3-embedding-0.6b":
+    workersAiPostRunCfQwenQwen3Embedding06b,
   "POST /accounts/{account_id}/ai/run/@cf/qwen/qwq-32b":
     workersAiPostRunCfQwenQwq32b,
   "POST /accounts/{account_id}/ai/run/@cf/runwayml/stable-diffusion-v1-5-img2img":
@@ -3007,12 +3001,8 @@ export const operationsByPath = {
     workersAiPostRunCfTinyllamaTinyllama11bChatV10,
   "POST /accounts/{account_id}/ai/run/@hf/google/gemma-7b-it":
     workersAiPostRunHfGoogleGemma7bIt,
-  "POST /accounts/{account_id}/ai/run/@hf/meta-llama/meta-llama-3-8b-instruct":
-    workersAiPostRunHfMetaLlamaMetaLlama38bInstruct,
   "POST /accounts/{account_id}/ai/run/@hf/mistral/mistral-7b-instruct-v0.2":
     workersAiPostRunHfMistralMistral7bInstructV02,
-  "POST /accounts/{account_id}/ai/run/@hf/mistralai/mistral-7b-instruct-v0.2":
-    workersAiPostRunHfMistralaiMistral7bInstructV02,
   "POST /accounts/{account_id}/ai/run/@hf/nexusflow/starling-lm-7b-beta":
     workersAiPostRunHfNexusflowStarlingLm7bBeta,
   "POST /accounts/{account_id}/ai/run/@hf/nousresearch/hermes-2-pro-mistral-7b":
@@ -3272,7 +3262,7 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/cloudforce-one/events/attackers": getAttackerList,
   "GET /accounts/{account_id}/cloudforce-one/events/categories":
     getCategoryList,
-  "GET /accounts/{account_id}/cloudforce-one/events/categories/all":
+  "GET /accounts/{account_id}/cloudforce-one/events/categories/catalog":
     getCategoryListComplete,
   "POST /accounts/{account_id}/cloudforce-one/events/categories/create":
     postCategoryCreate,
@@ -3289,7 +3279,7 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/cloudforce-one/events/create/bulk":
     postEventCreateBulk,
   "POST /accounts/{account_id}/cloudforce-one/events/create/bulk/relationships":
-    postEventCreateBulkWithRelationships,
+    postDOSEventCreateBulkWithRelationships,
   "GET /accounts/{account_id}/cloudforce-one/events/dataset": getDatasetList,
   "POST /accounts/{account_id}/cloudforce-one/events/dataset/create":
     postDatasetCreate,
@@ -3362,7 +3352,7 @@ export const operationsByPath = {
     patchTagUpdate,
   "GET /accounts/{account_id}/cloudforce-one/events/targetIndustries":
     getTargetIndustryList,
-  "GET /accounts/{account_id}/cloudforce-one/events/targetIndustries/all":
+  "GET /accounts/{account_id}/cloudforce-one/events/targetIndustries/catalog":
     getTargetIndustryListComplete,
   "DELETE /accounts/{account_id}/cloudforce-one/events/{dataset_id}/delete":
     deleteEventDeleteDO,
@@ -3760,88 +3750,6 @@ export const operationsByPath = {
     dnsViewsForAnAccountGetInternalDnsView,
   "PATCH /accounts/{account_id}/dns_settings/views/{view_id}":
     dnsViewsForAnAccountUpdateInternalDnsView,
-  "GET /accounts/{account_id}/email-security/investigate":
-    emailSecurityInvestigate,
-  "POST /accounts/{account_id}/email-security/investigate/move":
-    emailSecurityPostBulkMessageMove,
-  "POST /accounts/{account_id}/email-security/investigate/preview":
-    emailSecurityPostPreview,
-  "POST /accounts/{account_id}/email-security/investigate/release":
-    emailSecurityPostRelease,
-  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}":
-    emailSecurityGetMessage,
-  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/detections":
-    emailSecurityGetMessageDetections,
-  "POST /accounts/{account_id}/email-security/investigate/{postfix_id}/move":
-    emailSecurityPostMessageMove,
-  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/preview":
-    emailSecurityGetMessagePreview,
-  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/raw":
-    emailSecurityGetMessageRaw,
-  "POST /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify":
-    emailSecurityPostReclassify,
-  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/trace":
-    emailSecurityGetMessageTrace,
-  "GET /accounts/{account_id}/email-security/settings/allow_policies":
-    emailSecurityListAllowPolicies,
-  "POST /accounts/{account_id}/email-security/settings/allow_policies":
-    emailSecurityCreateAllowPolicy,
-  "POST /accounts/{account_id}/email-security/settings/allow_policies/batch":
-    emailSecurityBatchAllowPolicies,
-  "DELETE /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
-    emailSecurityDeleteAllowPolicy,
-  "GET /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
-    emailSecurityGetAllowPolicy,
-  "PATCH /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
-    emailSecurityUpdateAllowPolicy,
-  "GET /accounts/{account_id}/email-security/settings/block_senders":
-    emailSecurityListBlockedSenders,
-  "POST /accounts/{account_id}/email-security/settings/block_senders":
-    emailSecurityCreateBlockedSender,
-  "POST /accounts/{account_id}/email-security/settings/block_senders/batch":
-    emailSecurityBatchBlockedSenders,
-  "DELETE /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
-    emailSecurityDeleteBlockedSender,
-  "GET /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
-    emailSecurityGetBlockedSender,
-  "PATCH /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
-    emailSecurityUpdateBlockedSender,
-  "DELETE /accounts/{account_id}/email-security/settings/domains":
-    emailSecurityDeleteDomains,
-  "GET /accounts/{account_id}/email-security/settings/domains":
-    emailSecurityListDomains,
-  "DELETE /accounts/{account_id}/email-security/settings/domains/{domain_id}":
-    emailSecurityDeleteDomain,
-  "GET /accounts/{account_id}/email-security/settings/domains/{domain_id}":
-    emailSecurityGetDomain,
-  "PATCH /accounts/{account_id}/email-security/settings/domains/{domain_id}":
-    emailSecurityUpdateDomain,
-  "GET /accounts/{account_id}/email-security/settings/impersonation_registry":
-    emailSecurityListDisplayNames,
-  "POST /accounts/{account_id}/email-security/settings/impersonation_registry":
-    emailSecurityCreateDisplayName,
-  "DELETE /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
-    emailSecurityDeleteDisplayName,
-  "GET /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
-    emailSecurityGetDisplayName,
-  "PATCH /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
-    emailSecurityUpdateDisplayName,
-  "POST /accounts/{account_id}/email-security/settings/sending_domain_restrictions/batch":
-    emailSecurityBatchSendingDomainRestrictions,
-  "GET /accounts/{account_id}/email-security/settings/trusted_domains":
-    emailSecurityListTrustedDomains,
-  "POST /accounts/{account_id}/email-security/settings/trusted_domains":
-    emailSecurityCreateTrustedDomain,
-  "POST /accounts/{account_id}/email-security/settings/trusted_domains/batch":
-    emailSecurityBatchTrustedDomains,
-  "DELETE /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
-    emailSecurityDeleteTrustedDomain,
-  "GET /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
-    emailSecurityGetTrustedDomain,
-  "PATCH /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
-    emailSecurityUpdateTrustedDomain,
-  "GET /accounts/{account_id}/email-security/submissions":
-    emailSecuritySubmissions,
   "GET /accounts/{account_id}/email/routing/addresses":
     emailRoutingDestinationAddressesListDestinationAddresses,
   "POST /accounts/{account_id}/email/routing/addresses":
@@ -4706,6 +4614,8 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/r2/metrics": r2GetAccountLevelMetrics,
   "POST /accounts/{account_id}/r2/temp-access-credentials":
     r2CreateTempAccessCredentials,
+  "GET /accounts/{account_id}/realtime/kit/apps": getApps,
+  "POST /accounts/{account_id}/realtime/kit/apps": createApp,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/analytics/daywise":
     getOrgAnalytics,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/daywise":
@@ -4817,10 +4727,6 @@ export const operationsByPath = {
     editWebhook,
   "PUT /accounts/{account_id}/realtime/kit/{app_id}/webhooks/{webhook_id}":
     replaceWebhook,
-  "GET /accounts/{account_id}/realtimekit/orgs": getAllOrgs,
-  "POST /accounts/{account_id}/realtimekit/orgs": createOrg,
-  "GET /accounts/{account_id}/realtimekit/orgs/{org_id}": getOrg,
-  "PATCH /accounts/{account_id}/realtimekit/orgs/{org_id}": editOrg,
   "GET /accounts/{account_id}/registrar/domains": registrarDomainsListDomains,
   "GET /accounts/{account_id}/registrar/domains/{domain_name}":
     registrarDomainsGetDomain,
@@ -5290,6 +5196,14 @@ export const operationsByPath = {
     durableObjectsNamespaceListNamespaces,
   "GET /accounts/{account_id}/workers/durable_objects/namespaces/{id}/objects":
     durableObjectsNamespaceListObjects,
+  "GET /accounts/{account_id}/workers/observability/destinations":
+    destinationList,
+  "POST /accounts/{account_id}/workers/observability/destinations":
+    destinationCreate,
+  "DELETE /accounts/{account_id}/workers/observability/destinations/{slug}":
+    destinationsDelete,
+  "PATCH /accounts/{account_id}/workers/observability/destinations/{slug}":
+    destinationUpdate,
   "POST /accounts/{account_id}/workers/observability/telemetry/keys":
     telemetryKeysList,
   "POST /accounts/{account_id}/workers/observability/telemetry/query":
@@ -5832,6 +5746,12 @@ export const operationsByPath = {
     radarGetNetflowsTimeseriesGroup,
   "GET /radar/netflows/top/ases": radarGetNetflowsTopAses,
   "GET /radar/netflows/top/locations": radarGetNetflowsTopLocations,
+  "GET /radar/origins": radarGetOrigins,
+  "GET /radar/origins/summary/{dimension}": radarGetOriginsSummary,
+  "GET /radar/origins/timeseries": radarGetOriginsTimeseries,
+  "GET /radar/origins/timeseries_groups/{dimension}":
+    radarGetOriginsTimeseriesGroup,
+  "GET /radar/origins/{slug}": radarGetOriginDetails,
   "GET /radar/quality/iqi/summary": radarGetQualityIndexSummary,
   "GET /radar/quality/iqi/timeseries_groups":
     radarGetQualityIndexTimeseriesGroup,
