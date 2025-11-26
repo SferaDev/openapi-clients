@@ -23328,6 +23328,838 @@ export type DosTimestamp = string;
  */
 export type DosUuid = string;
 
+/**
+ * Account Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @minLength 32
+ */
+export type EmailSecurityAccountId = string;
+
+/**
+ * @example {"comments":"Trust all messages send from test@example.com","created_at":"2023-11-14T22:13:20Z","id":2401,"is_acceptable_sender":false,"is_exempt_recipient":false,"is_recipient":false,"is_regex":false,"is_sender":true,"is_spoof":false,"is_trusted_sender":true,"last_modified":"2023-11-14T22:13:20Z","pattern":"test@example.com","pattern_type":"EMAIL","verify_sender":true}
+ */
+export type EmailSecurityAllowPolicy = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
+   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
+   */
+  is_acceptable_sender?: boolean;
+  /**
+   * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
+   */
+  is_exempt_recipient?: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_recipient?: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_sender?: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_spoof?: boolean;
+  /**
+   * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
+   */
+  is_trusted_sender?: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern: string;
+  pattern_type: EmailSecurityPatternType;
+  /**
+   * Enforce DMARC, SPF or DKIM authentication.
+   * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
+   */
+  verify_sender: boolean;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  created_at: string;
+  id: EmailSecurityAllowPolicyId;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  last_modified: string;
+};
+
+/**
+ * The unique identifier for the allow policy.
+ *
+ * @example 2401
+ * @format int32
+ */
+export type EmailSecurityAllowPolicyId = number;
+
+export type EmailSecurityApiResponseCommon = {
+  errors: EmailSecurityMessage[];
+  messages: EmailSecurityMessage[];
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type EmailSecurityAttachment = {
+  content_type?: string | null;
+  detection?: EmailSecurityDispositionLabel & (string | null);
+  encrypted?: boolean | null;
+  name?: string | null;
+  /**
+   * @minimum 0
+   */
+  size: number;
+};
+
+/**
+ * @example {"comments":"block sender with email test@example.com","created_at":"2023-11-14T22:13:20Z","id":2402,"is_regex":false,"last_modified":"2023-11-14T22:13:20Z","pattern":"test@example.com","pattern_type":"EMAIL"}
+ */
+export type EmailSecurityBlockedSender = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern?: string;
+  pattern_type?: EmailSecurityPatternType;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  created_at: string;
+  id: EmailSecurityBlockedSenderId;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  last_modified: string;
+};
+
+/**
+ * The unique identifier for the allow policy.
+ *
+ * @example 2402
+ * @format int32
+ */
+export type EmailSecurityBlockedSenderId = number;
+
+/**
+ * @example {"comments":"Trust all messages send from test@example.com","is_acceptable_sender":false,"is_exempt_recipient":false,"is_recipient":false,"is_regex":false,"is_sender":true,"is_spoof":false,"is_trusted_sender":true,"pattern":"test@example.com","pattern_type":"EMAIL","verify_sender":true}
+ */
+export type EmailSecurityCreateAllowPolicy = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
+   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
+   */
+  is_acceptable_sender: boolean;
+  /**
+   * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
+   */
+  is_exempt_recipient: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_recipient?: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_sender?: boolean;
+  /**
+   * @deprecated true
+   * @x-auditable true
+   */
+  is_spoof?: boolean;
+  /**
+   * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
+   */
+  is_trusted_sender: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern: string;
+  pattern_type: EmailSecurityPatternType;
+  /**
+   * Enforce DMARC, SPF or DKIM authentication.
+   * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
+   */
+  verify_sender: boolean;
+};
+
+/**
+ * @example {"comments":"block sender with email test@example.com","is_regex":false,"pattern":"test@example.com","pattern_type":"EMAIL"}
+ */
+export type EmailSecurityCreateBlockedSender = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * @x-auditable true
+   */
+  is_regex: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern: string;
+  pattern_type: EmailSecurityPatternType;
+};
+
+export type EmailSecurityCreateDisplayName = {
+  /**
+   * @x-auditable true
+   */
+  email: string;
+  /**
+   * @x-auditable true
+   */
+  is_email_regex: boolean;
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  name: string;
+};
+
+/**
+ * @example {"comments":null,"is_recent":true,"is_regex":false,"is_similarity":false,"pattern":"example.com"}
+ */
+export type EmailSecurityCreateTrustedDomain = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * Select to prevent recently registered domains from triggering a
+   * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
+   */
+  is_recent: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex: boolean;
+  /**
+   * Select for partner or other approved domains that have similar
+   * spelling to your connected domains. Prevents listed domains from
+   * triggering a Spoof disposition.
+   *
+   * @x-auditable true
+   */
+  is_similarity: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern: string;
+};
+
+export type EmailSecurityCursorWithLegacyResultInfo = {
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  count: number;
+  next?: string | null;
+  /**
+   * Deprecated: Returns always 0
+   *
+   * @deprecated true
+   * @format int32
+   * @minimum 0
+   */
+  page: number;
+  /**
+   * number of items per page
+   *
+   * @format int32
+   * @minimum 0
+   */
+  per_page: number;
+  previous?: string | null;
+  /**
+   * Deprecated: Returns always 0
+   *
+   * @deprecated true
+   * @format int32
+   * @minimum 0
+   */
+  total_count: number;
+};
+
+export type EmailSecurityDeliveryMode =
+  | "DIRECT"
+  | "BCC"
+  | "JOURNAL"
+  | "API"
+  | "RETRO_SCAN";
+
+export type EmailSecurityDisplayName = {
+  /**
+   * @x-auditable true
+   */
+  email?: string;
+  /**
+   * @x-auditable true
+   */
+  is_email_regex?: boolean;
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  name?: string;
+  comments?: string | null;
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * @format int64
+   */
+  directory_id?: number | null;
+  /**
+   * @format int64
+   */
+  directory_node_id?: number | null;
+  /**
+   * @deprecated true
+   */
+  external_directory_node_id?: string | null;
+  /**
+   * @example 2403
+   * @format int32
+   */
+  id: number;
+  /**
+   * @format date-time
+   */
+  last_modified: string;
+  provenance?: string | null;
+};
+
+export type EmailSecurityDispositionLabel =
+  | "MALICIOUS"
+  | "MALICIOUS-BEC"
+  | "SUSPICIOUS"
+  | "SPOOF"
+  | "SPAM"
+  | "BULK"
+  | "ENCRYPTED"
+  | "EXTERNAL"
+  | "UNKNOWN"
+  | "NONE";
+
+/**
+ * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","dmarc_status":"good","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","regions":["GLOBAL"],"require_tls_inbound":false,"require_tls_outbound":true,"spf_status":"good","transport":"example.com"}
+ */
+export type EmailSecurityDomain = {
+  allowed_delivery_modes: EmailSecurityDeliveryMode[];
+  authorization?: {
+    authorized: boolean;
+    status_message?: string | null;
+    /**
+     * @format date-time
+     */
+    timestamp: string;
+  } | null;
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  dmarc_status?: "none" | "good" | "invalid" | null;
+  domain: string;
+  drop_dispositions: EmailSecurityDispositionLabel[];
+  emails_processed?: {
+    /**
+     * @format date-time
+     */
+    timestamp: string;
+    /**
+     * @format int32
+     * @minimum 0
+     */
+    total_emails_processed: number;
+    /**
+     * @format int32
+     * @minimum 0
+     */
+    total_emails_processed_previous: number;
+  } | null;
+  folder?: EmailSecurityScannableFolder & (string | null);
+  /**
+   * The unique identifier for the domain.
+   *
+   * @example 2400
+   * @format int32
+   */
+  id: number;
+  inbox_provider?: "Microsoft" | "Google" | null;
+  /**
+   * @format uuid
+   */
+  integration_id?: string | null;
+  /**
+   * @example 192.0.2.0/24
+   * @example 2001:db8::/32
+   */
+  ip_restrictions: string[];
+  /**
+   * @format date-time
+   */
+  last_modified: string;
+  /**
+   * @format int32
+   */
+  lookback_hops: number;
+  o365_tenant_id?: string | null;
+  regions: ("GLOBAL" | "AU" | "DE" | "IN" | "US")[];
+  require_tls_inbound?: boolean | null;
+  require_tls_outbound?: boolean | null;
+  spf_status?: "none" | "good" | "neutral" | "open" | "invalid" | null;
+  transport: string;
+};
+
+export type EmailSecurityLink = {
+  href: string;
+  text?: string | null;
+};
+
+/**
+ * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"envelope_from":"d1994@example.com","envelope_to":["email@example.com"],"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","htmltext_structure_hash":null,"id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"replyto":"email@example.com","sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
+ */
+export type EmailSecurityMailsearchMessage = {
+  action_log: void;
+  alert_id?: string | null;
+  client_recipients: string[];
+  delivery_mode?: EmailSecurityMessageDeliveryMode & (string | null);
+  detection_reasons: string[];
+  edf_hash?: string | null;
+  envelope_from?: string | null;
+  envelope_to?: string[] | null;
+  final_disposition?: EmailSecurityDispositionLabel & (string | null);
+  findings?:
+    | {
+        attachment?: string | null;
+        detail?: string | null;
+        detection?: EmailSecurityDispositionLabel & (string | null);
+        field?: string | null;
+        name?: string | null;
+        portion?: string | null;
+        reason?: string | null;
+        /**
+         * @format double
+         */
+        score?: number | null;
+        value?: string | null;
+      }[]
+    | null;
+  from?: string | null;
+  from_name?: string | null;
+  htmltext_structure_hash?: string | null;
+  is_phish_submission: boolean;
+  is_quarantined: boolean;
+  message_id?: string | null;
+  postfix_id: EmailSecurityPostfixId;
+  properties: {
+    allowlisted_pattern?: string;
+    allowlisted_pattern_type?:
+      | "quarantine_release"
+      | "acceptable_sender"
+      | "allowed_sender"
+      | "allowed_recipient"
+      | "domain_similarity"
+      | "domain_recency"
+      | "managed_acceptable_sender"
+      | "outbound_ndr";
+    blocklisted_message?: boolean;
+    blocklisted_pattern?: string;
+    whitelisted_pattern_type?:
+      | "quarantine_release"
+      | "acceptable_sender"
+      | "allowed_sender"
+      | "allowed_recipient"
+      | "domain_similarity"
+      | "domain_recency"
+      | "managed_acceptable_sender"
+      | "outbound_ndr";
+  };
+  replyto?: string | null;
+  sent_date?: string | null;
+  subject?: string | null;
+  threat_categories?: string[] | null;
+  to?: string[] | null;
+  to_name?: string[] | null;
+  ts?: string;
+  validation?: {
+    comment?: string | null;
+    dkim?: EmailSecurityValidationStatus & (string | null);
+    dmarc?: EmailSecurityValidationStatus & (string | null);
+    spf?: EmailSecurityValidationStatus & (string | null);
+  } | null;
+  /**
+   * @x-auditable true
+   */
+  id: string;
+};
+
+export type EmailSecurityMessage = {
+  /**
+   * @format int32
+   * @minimum 1000
+   */
+  code: number;
+  message: string;
+};
+
+export type EmailSecurityMessageDeliveryMode =
+  | "DIRECT"
+  | "BCC"
+  | "JOURNAL"
+  | "REVIEW_SUBMISSION"
+  | "DMARC_UNVERIFIED"
+  | "DMARC_FAILURE_REPORT"
+  | "DMARC_AGGREGATE_REPORT"
+  | "THREAT_INTEL_SUBMISSION"
+  | "SIMULATION_SUBMISSION"
+  | "API"
+  | "RETRO_SCAN";
+
+export type EmailSecurityMessageHeader = {
+  name: string;
+  value: string;
+};
+
+export type EmailSecurityPatternType = "EMAIL" | "DOMAIN" | "IP" | "UNKNOWN";
+
+/**
+ * The identifier of the message.
+ *
+ * @example 4Njp3P0STMz2c02Q
+ */
+export type EmailSecurityPostfixId = string;
+
+export type EmailSecurityReleaseResponse = {
+  delivered?: string[] | null;
+  failed?: string[] | null;
+  undelivered?: string[] | null;
+  postfix_id: EmailSecurityPostfixId;
+};
+
+export type EmailSecurityResultInfo = {
+  /**
+   * Total number of results for the requested service
+   *
+   * @example 1
+   * @format int32
+   */
+  count: number;
+  /**
+   * Current page within paginated list of results
+   *
+   * @example 1
+   * @format int32
+   */
+  page: number;
+  /**
+   * Number of results per page of results
+   *
+   * @example 20
+   * @format int32
+   */
+  per_page: number;
+  /**
+   * Total results available without any search parameters
+   *
+   * @example 2000
+   * @format int32
+   */
+  total_count: number;
+};
+
+export type EmailSecurityRetractionResponseItem = {
+  /**
+   * @format date-time
+   */
+  completed_timestamp: string;
+  destination?: string | null;
+  /**
+   * @format int32
+   */
+  item_count: number;
+  message_id?: string | null;
+  operation?: string | null;
+  recipient?: string | null;
+  status?: string | null;
+};
+
+export type EmailSecurityScannableFolder = "AllItems" | "Inbox";
+
+export type EmailSecuritySortingDirection = "asc" | "desc";
+
+export type EmailSecuritySubmission = {
+  original_disposition?: EmailSecurityDispositionLabel & (string | null);
+  original_edf_hash?: string | null;
+  outcome?: string | null;
+  outcome_disposition?: EmailSecurityDispositionLabel & (string | null);
+  requested_by?: string | null;
+  requested_disposition?: EmailSecurityDispositionLabel & (string | null);
+  /**
+   * @format date-time
+   */
+  requested_ts: string;
+  status?: string | null;
+  subject?: string | null;
+  submission_id: string;
+  type?: string | null;
+};
+
+export type EmailSecurityThreatCategory = {
+  description?: string | null;
+  /**
+   * @format int64
+   */
+  id: number;
+  name?: string | null;
+};
+
+export type EmailSecurityTraceLine = {
+  /**
+   * @format int64
+   */
+  lineno: number;
+  message: string;
+  /**
+   * @format date-time
+   */
+  ts: string;
+};
+
+/**
+ * @example {"comments":null,"created_at":"2023-11-14T22:13:20Z","id":2401,"is_recent":true,"is_regex":false,"is_similarity":false,"last_modified":"2023-11-14T22:13:20Z","pattern":"example.com"}
+ */
+export type EmailSecurityTrustedDomain = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * Select to prevent recently registered domains from triggering a
+   * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
+   */
+  is_recent?: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean;
+  /**
+   * Select for partner or other approved domains that have similar
+   * spelling to your connected domains. Prevents listed domains from
+   * triggering a Spoof disposition.
+   *
+   * @x-auditable true
+   */
+  is_similarity?: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern: string;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  created_at: string;
+  /**
+   * The unique identifier for the trusted domain.
+   *
+   * @example 2401
+   * @format int32
+   */
+  id: number;
+  /**
+   * @format date-time
+   * @x-auditable true
+   */
+  last_modified: string;
+};
+
+/**
+ * The unique identifier for the trusted domain.
+ *
+ * @example 2401
+ * @format int32
+ */
+export type EmailSecurityTrustedDomainId = number;
+
+export type EmailSecurityUpdateAllowPolicy = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
+   * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
+   */
+  is_acceptable_sender?: boolean | null;
+  /**
+   * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
+   */
+  is_exempt_recipient?: boolean | null;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean | null;
+  /**
+   * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
+   */
+  is_trusted_sender?: boolean | null;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern?: string | null;
+  pattern_type?: EmailSecurityPatternType & (string | null);
+  /**
+   * Enforce DMARC, SPF or DKIM authentication.
+   * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
+   */
+  verify_sender?: boolean | null;
+};
+
+export type EmailSecurityUpdateBlockedSender = {
+  /**
+   * @x-auditable true
+   */
+  comments?: string | null;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean | null;
+  /**
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern?: string | null;
+  pattern_type?: EmailSecurityPatternType & (string | null);
+};
+
+export type EmailSecurityUpdateTrustedDomain = {
+  /**
+   * @maxLength 1024
+   * @x-auditable true
+   */
+  comments?: string;
+  /**
+   * Select to prevent recently registered domains from triggering a
+   * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
+   */
+  is_recent?: boolean;
+  /**
+   * @x-auditable true
+   */
+  is_regex?: boolean;
+  /**
+   * Select for partner or other approved domains that have similar
+   * spelling to your connected domains. Prevents listed domains from
+   * triggering a Spoof disposition.
+   *
+   * @x-auditable true
+   */
+  is_similarity?: boolean;
+  /**
+   * @maxLength 1024
+   * @minLength 1
+   * @x-auditable true
+   */
+  pattern?: string;
+};
+
+export type EmailSecurityValidationStatus =
+  | "pass"
+  | "neutral"
+  | "fail"
+  | "error"
+  | "none";
+
 export type EmailAccountId = EmailIdentifier;
 
 export type EmailAddresses = EmailDestinationAddressProperties;

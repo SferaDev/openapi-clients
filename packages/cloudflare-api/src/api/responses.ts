@@ -252,6 +252,19 @@ export type BuildsSuccessEmpty = Schemas.BuildsAPIResponse;
 
 export type BuildsUnauthorized = Schemas.BuildsErrorResponse;
 
+export type EmailSecurityClientError = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   */
+  errors: Schemas.EmailSecurityMessage[];
+  messages: Schemas.EmailSecurityMessage[];
+  result: Record<string, any> | null;
+  /**
+   * @example false
+   */
+  success: boolean;
+};
+
 export type RealtimekitAddParticipant = {
   /**
    * Represents a participant.
