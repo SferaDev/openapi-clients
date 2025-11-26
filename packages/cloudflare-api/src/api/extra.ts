@@ -707,6 +707,47 @@ import {
   dnsViewsForAnAccountDeleteInternalDnsView,
   dnsViewsForAnAccountGetInternalDnsView,
   dnsViewsForAnAccountUpdateInternalDnsView,
+  emailSecurityInvestigate,
+  emailSecurityPostBulkMessageMove,
+  emailSecurityPostPreview,
+  emailSecurityPostRelease,
+  emailSecurityGetMessage,
+  emailSecurityGetMessageDetections,
+  emailSecurityPostMessageMove,
+  emailSecurityGetMessagePreview,
+  emailSecurityGetMessageRaw,
+  emailSecurityPostReclassify,
+  emailSecurityGetMessageTrace,
+  emailSecurityListAllowPolicies,
+  emailSecurityCreateAllowPolicy,
+  emailSecurityBatchAllowPolicies,
+  emailSecurityDeleteAllowPolicy,
+  emailSecurityGetAllowPolicy,
+  emailSecurityUpdateAllowPolicy,
+  emailSecurityListBlockedSenders,
+  emailSecurityCreateBlockedSender,
+  emailSecurityBatchBlockedSenders,
+  emailSecurityDeleteBlockedSender,
+  emailSecurityGetBlockedSender,
+  emailSecurityUpdateBlockedSender,
+  emailSecurityDeleteDomains,
+  emailSecurityListDomains,
+  emailSecurityDeleteDomain,
+  emailSecurityGetDomain,
+  emailSecurityUpdateDomain,
+  emailSecurityListDisplayNames,
+  emailSecurityCreateDisplayName,
+  emailSecurityDeleteDisplayName,
+  emailSecurityGetDisplayName,
+  emailSecurityUpdateDisplayName,
+  emailSecurityBatchSendingDomainRestrictions,
+  emailSecurityListTrustedDomains,
+  emailSecurityCreateTrustedDomain,
+  emailSecurityBatchTrustedDomains,
+  emailSecurityDeleteTrustedDomain,
+  emailSecurityGetTrustedDomain,
+  emailSecurityUpdateTrustedDomain,
+  emailSecuritySubmissions,
   emailRoutingDestinationAddressesListDestinationAddresses,
   emailRoutingDestinationAddressesCreateADestinationAddress,
   emailRoutingDestinationAddressesDeleteDestinationAddress,
@@ -3750,6 +3791,88 @@ export const operationsByPath = {
     dnsViewsForAnAccountGetInternalDnsView,
   "PATCH /accounts/{account_id}/dns_settings/views/{view_id}":
     dnsViewsForAnAccountUpdateInternalDnsView,
+  "GET /accounts/{account_id}/email-security/investigate":
+    emailSecurityInvestigate,
+  "POST /accounts/{account_id}/email-security/investigate/move":
+    emailSecurityPostBulkMessageMove,
+  "POST /accounts/{account_id}/email-security/investigate/preview":
+    emailSecurityPostPreview,
+  "POST /accounts/{account_id}/email-security/investigate/release":
+    emailSecurityPostRelease,
+  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}":
+    emailSecurityGetMessage,
+  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/detections":
+    emailSecurityGetMessageDetections,
+  "POST /accounts/{account_id}/email-security/investigate/{postfix_id}/move":
+    emailSecurityPostMessageMove,
+  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/preview":
+    emailSecurityGetMessagePreview,
+  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/raw":
+    emailSecurityGetMessageRaw,
+  "POST /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify":
+    emailSecurityPostReclassify,
+  "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/trace":
+    emailSecurityGetMessageTrace,
+  "GET /accounts/{account_id}/email-security/settings/allow_policies":
+    emailSecurityListAllowPolicies,
+  "POST /accounts/{account_id}/email-security/settings/allow_policies":
+    emailSecurityCreateAllowPolicy,
+  "POST /accounts/{account_id}/email-security/settings/allow_policies/batch":
+    emailSecurityBatchAllowPolicies,
+  "DELETE /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
+    emailSecurityDeleteAllowPolicy,
+  "GET /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
+    emailSecurityGetAllowPolicy,
+  "PATCH /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}":
+    emailSecurityUpdateAllowPolicy,
+  "GET /accounts/{account_id}/email-security/settings/block_senders":
+    emailSecurityListBlockedSenders,
+  "POST /accounts/{account_id}/email-security/settings/block_senders":
+    emailSecurityCreateBlockedSender,
+  "POST /accounts/{account_id}/email-security/settings/block_senders/batch":
+    emailSecurityBatchBlockedSenders,
+  "DELETE /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
+    emailSecurityDeleteBlockedSender,
+  "GET /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
+    emailSecurityGetBlockedSender,
+  "PATCH /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}":
+    emailSecurityUpdateBlockedSender,
+  "DELETE /accounts/{account_id}/email-security/settings/domains":
+    emailSecurityDeleteDomains,
+  "GET /accounts/{account_id}/email-security/settings/domains":
+    emailSecurityListDomains,
+  "DELETE /accounts/{account_id}/email-security/settings/domains/{domain_id}":
+    emailSecurityDeleteDomain,
+  "GET /accounts/{account_id}/email-security/settings/domains/{domain_id}":
+    emailSecurityGetDomain,
+  "PATCH /accounts/{account_id}/email-security/settings/domains/{domain_id}":
+    emailSecurityUpdateDomain,
+  "GET /accounts/{account_id}/email-security/settings/impersonation_registry":
+    emailSecurityListDisplayNames,
+  "POST /accounts/{account_id}/email-security/settings/impersonation_registry":
+    emailSecurityCreateDisplayName,
+  "DELETE /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
+    emailSecurityDeleteDisplayName,
+  "GET /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
+    emailSecurityGetDisplayName,
+  "PATCH /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}":
+    emailSecurityUpdateDisplayName,
+  "POST /accounts/{account_id}/email-security/settings/sending_domain_restrictions/batch":
+    emailSecurityBatchSendingDomainRestrictions,
+  "GET /accounts/{account_id}/email-security/settings/trusted_domains":
+    emailSecurityListTrustedDomains,
+  "POST /accounts/{account_id}/email-security/settings/trusted_domains":
+    emailSecurityCreateTrustedDomain,
+  "POST /accounts/{account_id}/email-security/settings/trusted_domains/batch":
+    emailSecurityBatchTrustedDomains,
+  "DELETE /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
+    emailSecurityDeleteTrustedDomain,
+  "GET /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
+    emailSecurityGetTrustedDomain,
+  "PATCH /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}":
+    emailSecurityUpdateTrustedDomain,
+  "GET /accounts/{account_id}/email-security/submissions":
+    emailSecuritySubmissions,
   "GET /accounts/{account_id}/email/routing/addresses":
     emailRoutingDestinationAddressesListDestinationAddresses,
   "POST /accounts/{account_id}/email/routing/addresses":
