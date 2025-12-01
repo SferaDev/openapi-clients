@@ -31169,6 +31169,8 @@ export type WebinarRegistrantStatusVariables = {
  * **Prerequisites**
  * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
+ * This API has an additional rate limit of requests per registrant, per 24-hour period. [See the Rate Limits page](/docs/api/rate-limits/) for more information.
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:registrant_status`,`webinar:update:registrant_status:admin`
