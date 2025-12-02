@@ -42420,6 +42420,63 @@ export type R2EnableSippyGcs = {
   };
 };
 
+export type R2EnableSippyS3 = {
+  /**
+   * R2 bucket to copy objects to.
+   */
+  destination?: {
+    /**
+     * ID of a Cloudflare API token.
+     * This is the value labelled "Access Key ID" when creating an API.
+     * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
+     *
+     * Sippy will use this token when writing objects to R2, so it is
+     * best to scope this token to the bucket you're enabling Sippy for.
+     */
+    accessKeyId?: string;
+    /**
+     * @x-auditable true
+     */
+    provider?: "r2";
+    /**
+     * Value of a Cloudflare API token.
+     * This is the value labelled "Secret Access Key" when creating an API.
+     * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
+     *
+     * Sippy will use this token when writing objects to R2, so it is
+     * best to scope this token to the bucket you're enabling Sippy for.
+     *
+     * @x-sensitive true
+     */
+    secretAccessKey?: string;
+  };
+  /**
+   * General S3-compatible provider to copy objects from.
+   */
+  source?: {
+    /**
+     * Access Key ID of an IAM credential (ideally scoped to a single S3 bucket).
+     */
+    accessKeyId?: string;
+    /**
+     * URL to the S3-compatible API of the bucket.
+     *
+     * @x-auditable true
+     */
+    bucketUrl?: string;
+    /**
+     * @x-auditable true
+     */
+    provider?: "s3";
+    /**
+     * Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket).
+     *
+     * @x-sensitive true
+     */
+    secretAccessKey?: string;
+  };
+};
+
 export type R2Errors = {
   /**
    * @minimum 1000
@@ -42923,15 +42980,21 @@ export type R2Sippy = {
    */
   source?: {
     /**
-     * Name of the bucket on the provider.
+     * Name of the bucket on the provider (AWS, GCS only).
      *
      * @x-auditable true
      */
-    bucket?: string;
+    bucket?: string | null;
+    /**
+     * S3-compatible URL (Generic S3-compatible providers only).
+     *
+     * @x-auditable true
+     */
+    bucketUrl?: string | null;
     /**
      * @x-auditable true
      */
-    provider?: "aws" | "gcs";
+    provider?: "aws" | "gcs" | "s3";
     /**
      * Region where the bucket resides (AWS only).
      *
