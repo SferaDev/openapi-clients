@@ -18957,6 +18957,17 @@ export type DlpEntryConfidence = {
 
 export type DlpEntryOfNewProfile = DlpNewCustomEntry | DlpNewWordListEntry;
 
+/**
+ * Computed entry field for a profile that an entry is shared into.
+ */
+export type DlpEntryProfile = {
+  /**
+   * @format uuid
+   */
+  id: string;
+  name: string;
+};
+
 export type DlpEntryUpdate = DlpEntryUpdateType & {
   enabled: boolean;
 };
@@ -18971,6 +18982,13 @@ export type DlpEntryUpdateType =
   | {
       type: "integration";
     };
+
+export type DlpEntryWithSharedProfiles = DlpEntry & {
+  /**
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  profiles: DlpEntryProfile[];
+};
 
 export type DlpExactDataEntry = {
   /**
@@ -26814,10 +26832,6 @@ export type IamCollectionPermissionGroupsResponse = IamApiResponseCollection & {
   result?: IamPermissionGroups;
 };
 
-export type IamCollectionResourceGroupsResponse = IamApiResponseCollection & {
-  result?: IamResourceGroups;
-};
-
 export type IamCollectionRoleResponse = IamApiResponseCollection & {
   result?: IamRole[];
 };
@@ -26963,26 +26977,6 @@ export type IamCreateUserGroupBody = {
    * Policies attached to the User group
    */
   policies: IamUserGroupPolicyWriteBody[];
-};
-
-/**
- * A group of scoped resources.
- */
-export type IamCreatedResourceGroupResponse = {
-  /**
-   * Identifier of the group.
-   *
-   * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
-   * @x-auditable true
-   */
-  id?: string;
-  /**
-   * Attributes associated to the resource group.
-   *
-   * @example {"editable":"false"}
-   */
-  meta?: Record<string, any>;
-  scope?: IamCreateScope;
 };
 
 /**
