@@ -23788,7 +23788,7 @@ export type EmailSecurityLink = {
 };
 
 /**
- * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"envelope_from":"d1994@example.com","envelope_to":["email@example.com"],"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","htmltext_structure_hash":null,"id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"replyto":"email@example.com","sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
+ * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"envelope_from":"d1994@example.com","envelope_to":["email@example.com"],"final_disposition":"MALICIOUS","findings":null,"from":"d1994@example.com","from_name":"Sender Name","htmltext_structure_hash":null,"id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","postfix_id_outbound":null,"properties":{},"replyto":"email@example.com","sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
  */
 export type EmailSecurityMailsearchMessage = {
   action_log: void;
@@ -23823,6 +23823,7 @@ export type EmailSecurityMailsearchMessage = {
   is_quarantined: boolean;
   message_id?: string | null;
   postfix_id: EmailSecurityPostfixId;
+  postfix_id_outbound?: string | null;
   properties: {
     allowlisted_pattern?: string;
     allowlisted_pattern_type?:
@@ -23893,6 +23894,36 @@ export type EmailSecurityMessageHeader = {
 };
 
 export type EmailSecurityPatternType = "EMAIL" | "DOMAIN" | "IP" | "UNKNOWN";
+
+export type EmailSecurityPhishGuardReport = {
+  content: string;
+  disposition: EmailSecurityDispositionLabel;
+  fields: {
+    from?: string | null;
+    postfix_id?: string | null;
+    to: string[];
+    /**
+     * @format date-time
+     */
+    ts: string;
+  };
+  /**
+   * @format int32
+   */
+  id: number;
+  priority: string;
+  tags?: EmailSecurityPhishGuardReportTag[] | null;
+  title: string;
+  /**
+   * @format date-time
+   */
+  ts: string;
+};
+
+export type EmailSecurityPhishGuardReportTag = {
+  category: string;
+  value: string;
+};
 
 /**
  * The identifier of the message.
