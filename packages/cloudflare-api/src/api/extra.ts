@@ -718,6 +718,7 @@ import {
   emailSecurityGetMessageRaw,
   emailSecurityPostReclassify,
   emailSecurityGetMessageTrace,
+  emailSecurityGetPhishguardReports,
   emailSecurityListAllowPolicies,
   emailSecurityCreateAllowPolicy,
   emailSecurityBatchAllowPolicies,
@@ -3813,6 +3814,8 @@ export const operationsByPath = {
     emailSecurityPostReclassify,
   "GET /accounts/{account_id}/email-security/investigate/{postfix_id}/trace":
     emailSecurityGetMessageTrace,
+  "GET /accounts/{account_id}/email-security/phishguard/reports":
+    emailSecurityGetPhishguardReports,
   "GET /accounts/{account_id}/email-security/settings/allow_policies":
     emailSecurityListAllowPolicies,
   "POST /accounts/{account_id}/email-security/settings/allow_policies":
