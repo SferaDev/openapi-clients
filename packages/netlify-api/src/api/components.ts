@@ -3728,7 +3728,7 @@ export type CreateSiteBuildPathParams = {
 
 export type CreateSiteBuildQueryParams = {
   /**
-   * The branch to build; defaults to main branch
+   * If no branch is specified, it is treated as a production deploy If a branch IS specified and matches the main branch, it is also production If a branch is specified and doesn't match the main branch, it is a branch deploy
    */
   branch?: string;
   /**
