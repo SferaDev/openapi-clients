@@ -124,6 +124,7 @@ import {
   ipAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMap,
   ipAddressManagementAddressMapsAddAZoneMembershipToAnAddressMap,
   ipAddressManagementListLeases,
+  ipAddressManagementPrefixesUploadLoaDocument,
   ipAddressManagementPrefixesDownloadLoaDocument,
   ipAddressManagementPrefixesListPrefixes,
   ipAddressManagementPrefixesAddPrefix,
@@ -219,6 +220,7 @@ import {
   workersAiPostRunCfBaaiOmniBgeSmallEnV15,
   workersAiPostRunCfBaaiRayBgeLargeEnV15,
   workersAiPostRunCfBlackForestLabsFlux1Schnell,
+  workersAiPostRunCfBlackForestLabsFlux2Dev,
   workersAiPostRunCfBytedanceStableDiffusionXlLightning,
   workersAiPostWebsocketRunCfDeepgramAura,
   workersAiPostWebsocketRunCfDeepgramAura1,
@@ -2751,6 +2753,8 @@ export const operationsByPath = {
   "PUT /accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}":
     ipAddressManagementAddressMapsAddAZoneMembershipToAnAddressMap,
   "GET /accounts/{account_id}/addressing/leases": ipAddressManagementListLeases,
+  "POST /accounts/{account_id}/addressing/loa_documents":
+    ipAddressManagementPrefixesUploadLoaDocument,
   "GET /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download":
     ipAddressManagementPrefixesDownloadLoaDocument,
   "GET /accounts/{account_id}/addressing/prefixes":
@@ -2922,6 +2926,8 @@ export const operationsByPath = {
     workersAiPostRunCfBaaiRayBgeLargeEnV15,
   "POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell":
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
+  "POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-2-dev":
+    workersAiPostRunCfBlackForestLabsFlux2Dev,
   "POST /accounts/{account_id}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning":
     workersAiPostRunCfBytedanceStableDiffusionXlLightning,
   "GET /accounts/{account_id}/ai/run/@cf/deepgram/aura":
