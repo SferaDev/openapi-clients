@@ -10353,6 +10353,14 @@ export type AddressingDescription = string;
  */
 export type AddressingEnabled = boolean | null;
 
+/**
+ * Name of LOA document. Max file size 10MB, and supported filetype is pdf.
+ *
+ * @example site_loa_doc.pdf
+ * @x-auditable true
+ */
+export type AddressingFilename = string;
+
 export type AddressingFullResponse = AddressingApiResponseSingle & {
   result?: AddressingAddressMaps & {
     ips?: AddressingIps;
@@ -10500,6 +10508,18 @@ export type AddressingLeasesComponentsSchemasResponseCollection =
  * @x-auditable true
  */
 export type AddressingLoaDocumentIdentifier = string | null;
+
+export type AddressingLoaUploadResponse = AddressingApiResponseSingle & {
+  result?: {
+    account_id?: AddressingAccountIdentifier;
+    created?: AddressingTimestamp;
+    filename?: AddressingFilename;
+    id?: AddressingLoaDocumentIdentifier;
+    size_bytes?: AddressingSizeBytes;
+    verified?: AddressingVerified;
+    verified_at?: AddressingVerifiedAt;
+  };
+};
 
 /**
  * Zones and Accounts which will be assigned IPs on this Address Map. A zone membership will take priority over an account membership.
@@ -10716,6 +10736,14 @@ export type AddressingSingleResponseBgp = AddressingApiResponseSingle & {
 };
 
 /**
+ * File size of the uploaded LOA document.
+ *
+ * @example 444
+ * @x-auditable true
+ */
+export type AddressingSizeBytes = number;
+
+/**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
  * @x-auditable true
@@ -10729,6 +10757,22 @@ export type AddressingTimestamp = string;
  * @x-auditable true
  */
 export type AddressingValidationState = string;
+
+/**
+ * Whether the LOA has been verified by Cloudflare staff.
+ *
+ * @example true
+ * @x-auditable true
+ */
+export type AddressingVerified = boolean;
+
+/**
+ * Timestamp of the moment the LOA was marked as validated.
+ *
+ * @format date-time
+ * @x-auditable true
+ */
+export type AddressingVerifiedAt = string | null;
 
 /**
  * Identifier of a zone.
