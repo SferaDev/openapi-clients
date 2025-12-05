@@ -139,7 +139,13 @@ export type CreateSiteSite = {
     repo_path?: string;
     repo_branch?: string;
     dir?: string;
+    /**
+     * The directory where Netlify can find your compiled functions to deploy them. Defaults to netlify/functions if not set. You can also define and override this setting in your project’s netlify.toml file.
+     */
     functions_dir?: string;
+    /**
+     * The build command to run. This is the command that Netlify runs to build your site. If a site has a netlify.toml file with a build command it will override this value.
+     */
     cmd?: string;
     allowed_branches?: string[];
     public_repo?: boolean;
@@ -149,6 +155,9 @@ export type CreateSiteSite = {
       [key: string]: string;
     };
     installation_id?: number;
+    /**
+     * When true, Netlify will not build your project automatically. You can build locally via the CLI and then publish new deploys manually via the CLI or the API.
+     */
     stop_builds?: boolean;
   };
   id_domain?: string;
@@ -169,7 +178,13 @@ export type CreateSiteSite = {
     repo_path?: string;
     repo_branch?: string;
     dir?: string;
+    /**
+     * The directory where Netlify can find your compiled functions to deploy them. Defaults to netlify/functions if not set. You can also define and override this setting in your project’s netlify.toml file.
+     */
     functions_dir?: string;
+    /**
+     * The build command to run. This is the command that Netlify runs to build your site. If a site has a netlify.toml file with a build command it will override this value.
+     */
     cmd?: string;
     allowed_branches?: string[];
     public_repo?: boolean;
@@ -179,6 +194,9 @@ export type CreateSiteSite = {
       [key: string]: string;
     };
     installation_id?: number;
+    /**
+     * When true, Netlify will not build your project automatically. You can build locally via the CLI and then publish new deploys manually via the CLI or the API.
+     */
     stop_builds?: boolean;
   };
 };
