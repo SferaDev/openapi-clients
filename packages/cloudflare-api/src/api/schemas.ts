@@ -19027,11 +19027,18 @@ export type DlpEntryUpdateType =
       type: "integration";
     };
 
-export type DlpEntryWithSharedProfiles = DlpEntry & {
+export type DlpEntryWithSharedProfiles = DlpEntryWithUploadStatus & {
   /**
    * @x-stainless-terraform-configurability computed_optional
    */
   profiles: DlpEntryProfile[];
+};
+
+export type DlpEntryWithUploadStatus = DlpEntry & {
+  /**
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  upload_status?: DlpDatasetUploadStatus;
 };
 
 export type DlpExactDataEntry = {
@@ -21695,6 +21702,39 @@ export type DnsRecordsDnsResponseReviewScanObject = {
   rejects?: DnsRecordsIdentifier[];
 };
 
+export type DnsRecordsDnsResponseAccountUsage = DnsRecordsApiResponseSingle & {
+  result?: {
+    /**
+     * Maximum number of DNS records allowed across all internal zones in the account. Only present if internal DNS is enabled.
+     *
+     * @example 1000000
+     * @minimum 0
+     */
+    internal_record_quota?: number | null;
+    /**
+     * Current number of DNS records across all internal zones in the account. Only present if internal DNS is enabled.
+     *
+     * @example 5000
+     * @minimum 0
+     */
+    internal_record_usage?: number | null;
+    /**
+     * Maximum number of DNS records allowed across all public zones in the account. Null if using zone-level quota.
+     *
+     * @example 1000000
+     * @minimum 0
+     */
+    record_quota?: number | null;
+    /**
+     * Current number of DNS records across all public zones in the account.
+     *
+     * @example 5000
+     * @minimum 0
+     */
+    record_usage?: number;
+  };
+};
+
 export type DnsRecordsDnsResponseBatch = DnsRecordsApiResponseSingle & {
   result?: DnsRecordsDnsResponseBatchObject;
 };
@@ -21730,6 +21770,25 @@ export type DnsRecordsDnsResponseSingle = DnsRecordsApiResponseSingle & {
 };
 
 export type DnsRecordsDnsResponseTriggerScan = DnsRecordsApiResponseSingle;
+
+export type DnsRecordsDnsResponseZoneUsage = DnsRecordsApiResponseSingle & {
+  result?: {
+    /**
+     * Maximum number of DNS records allowed for the zone. Null if using account-level quota.
+     *
+     * @example 200
+     * @minimum 0
+     */
+    record_quota?: number | null;
+    /**
+     * Current number of DNS records in the zone.
+     *
+     * @example 150
+     * @minimum 0
+     */
+    record_usage?: number;
+  };
+};
 
 /**
  * Identifier.
@@ -30810,7 +30869,7 @@ export type LoadBalancingLoadShedding = {
    * @x-auditable true
    */
   session_policy?: "hash";
-};
+} | null;
 
 /**
  * Controls location-based steering for non-proxied requests. See `steering_policy` to learn how steering is affected.
@@ -31218,7 +31277,7 @@ export type LoadBalancingOriginSteering = {
     | "hash"
     | "least_outstanding_requests"
     | "least_connections";
-};
+} | null;
 
 /**
  * The list of origins within this pool. Traffic directed at this pool is balanced across all currently healthy origins, provided the pool itself is healthy.
@@ -31313,7 +31372,7 @@ export type LoadBalancingPopPools = {
  *
  * @x-auditable true
  */
-export type LoadBalancingPort = number;
+export type LoadBalancingPort = number | null;
 
 /**
  * @example f1aba936b94213e5b8dca0c0dbf1f9cc
@@ -34375,6 +34434,7 @@ export type MagicIpsecTunnelAddSingleRequest = {
   automatic_return_routing?: MagicAutomaticReturnRouting;
   bgp?: MagicBgpConfig;
   cloudflare_endpoint: MagicCloudflareIpsecEndpoint;
+  custom_remote_identities?: MagicCustomRemoteIdentities;
   customer_endpoint?: MagicCustomerIpsecEndpoint;
   description?: MagicComponentsSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
@@ -41964,17 +42024,20 @@ export type R2SlurperJobResponse = {
     | {
         bucket?: string;
         endpoint?: string | null;
+        keys?: string[] | null;
         pathPrefix?: string | null;
         vendor?: "s3";
       }
     | {
         bucket?: string;
+        keys?: string[] | null;
         pathPrefix?: string | null;
         vendor?: "gcs";
       }
     | {
         bucket?: string;
         jurisdiction?: R2SlurperJurisdiction;
+        keys?: string[] | null;
         pathPrefix?: string | null;
         vendor?: "r2";
       };
@@ -43421,16 +43484,6 @@ export type RealtimekitMeeting = {
    * Specifies if Chat within a meeting should persist for a week.
    */
   persist_chat?: boolean;
-  /**
-   * The region in which this meeting should be created.
-   */
-  preferred_region?:
-    | "ap-south-1"
-    | "ap-southeast-1"
-    | "us-east-1"
-    | "eu-central-1"
-    | any
-    | null;
   /**
    * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
    */
@@ -57079,6 +57132,8 @@ export type TlsCertificatesAndHostnamesSchemasHostnames = string[];
  * @example example.com
  * @example *.example.com
  * @example www.example.com
+ * @x-stainless-collection-type set
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type TlsCertificatesAndHostnamesSchemasHosts = string[];
 
@@ -62737,6 +62792,12 @@ export type WorkersVersion = {
    * @example wrangler
    */
   source?: string;
+  /**
+   * Time in milliseconds spent on [Worker startup](https://developers.cloudflare.com/workers/platform/limits/#worker-startup-time).
+   *
+   * @example 10
+   */
+  startup_time_ms?: number;
   /**
    * Usage model for the version.
    *

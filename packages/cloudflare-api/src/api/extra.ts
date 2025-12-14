@@ -189,12 +189,13 @@ import {
   aiSearchDeleteInstances,
   aiSearchFetchInstances,
   aiSearchUpdateInstances,
-  aiSearchInstanceFiles,
+  aiSearchInstanceListItems,
+  aiSearchInstanceGetItem,
   aiSearchInstanceListJobs,
+  aiSearchInstanceCreateJob,
   aiSearchInstanceGetJob,
   aiSearchInstanceListJobLogs,
   aiSearchStats,
-  aiSearchSync,
   aiSearchListTokens,
   aiSearchCreateTokens,
   aiSearchDeleteTokens,
@@ -719,6 +720,7 @@ import {
   dnsFirewallAnalyticsByTime,
   dnsFirewallShowDnsFirewallClusterReverseDns,
   dnsFirewallUpdateDnsFirewallClusterReverseDns,
+  dnsRecordsForAnAccountGetUsage,
   dnsSettingsForAnAccountListDnsSettings,
   dnsSettingsForAnAccountUpdateDnsSettings,
   dnsViewsForAnAccountListInternalDnsViews,
@@ -1242,16 +1244,12 @@ import {
   getApps,
   createApp,
   getOrgAnalytics,
-  getLivestreamAnalyticsDaywise,
   getLivestreamAnalyticsComplete,
   fetchAllLivestreams,
   postAccountsAccountIdRealtimeKitAppIdLivestreams,
   getV2LivestreamsLivestreamSessionId,
   getV2LivestreamSessionLivestreamId,
   getV2ActiveLivestreamSessionDetails,
-  disableLivestream,
-  enableLivestream,
-  resetStreamKey,
   getAllMeetings,
   createMeeting,
   getMeeting,
@@ -2170,6 +2168,7 @@ import {
   dnsRecordsForAZoneReviewDnsScan,
   dnsRecordsForAZoneApplyDnsScanResults,
   dnsRecordsForAZoneTriggerDnsScan,
+  dnsRecordsForAZoneGetUsage,
   dnsRecordsForAZoneDeleteDnsRecord,
   dnsRecordsForAZoneDnsRecordDetails,
   dnsRecordsForAZonePatchDnsRecord,
@@ -2876,16 +2875,19 @@ export const operationsByPath = {
   "GET /accounts/{account_id}/ai-search/instances/{id}": aiSearchFetchInstances,
   "PUT /accounts/{account_id}/ai-search/instances/{id}":
     aiSearchUpdateInstances,
-  "GET /accounts/{account_id}/ai-search/instances/{id}/files":
-    aiSearchInstanceFiles,
+  "GET /accounts/{account_id}/ai-search/instances/{id}/items":
+    aiSearchInstanceListItems,
+  "GET /accounts/{account_id}/ai-search/instances/{id}/items/{item_id}":
+    aiSearchInstanceGetItem,
   "GET /accounts/{account_id}/ai-search/instances/{id}/jobs":
     aiSearchInstanceListJobs,
+  "POST /accounts/{account_id}/ai-search/instances/{id}/jobs":
+    aiSearchInstanceCreateJob,
   "GET /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}":
     aiSearchInstanceGetJob,
   "GET /accounts/{account_id}/ai-search/instances/{id}/jobs/{job_id}/logs":
     aiSearchInstanceListJobLogs,
   "GET /accounts/{account_id}/ai-search/instances/{id}/stats": aiSearchStats,
-  "PATCH /accounts/{account_id}/ai-search/instances/{id}/sync": aiSearchSync,
   "GET /accounts/{account_id}/ai-search/tokens": aiSearchListTokens,
   "POST /accounts/{account_id}/ai-search/tokens": aiSearchCreateTokens,
   "DELETE /accounts/{account_id}/ai-search/tokens/{id}": aiSearchDeleteTokens,
@@ -3825,6 +3827,8 @@ export const operationsByPath = {
     dnsFirewallShowDnsFirewallClusterReverseDns,
   "PATCH /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns":
     dnsFirewallUpdateDnsFirewallClusterReverseDns,
+  "GET /accounts/{account_id}/dns_records/usage":
+    dnsRecordsForAnAccountGetUsage,
   "GET /accounts/{account_id}/dns_settings":
     dnsSettingsForAnAccountListDnsSettings,
   "PATCH /accounts/{account_id}/dns_settings":
@@ -4791,8 +4795,6 @@ export const operationsByPath = {
   "POST /accounts/{account_id}/realtime/kit/apps": createApp,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/analytics/daywise":
     getOrgAnalytics,
-  "GET /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/daywise":
-    getLivestreamAnalyticsDaywise,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall":
     getLivestreamAnalyticsComplete,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/livestreams":
@@ -4805,12 +4807,6 @@ export const operationsByPath = {
     getV2LivestreamSessionLivestreamId,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/active-livestream-session":
     getV2ActiveLivestreamSessionDetails,
-  "PUT /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/disable":
-    disableLivestream,
-  "PUT /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/enable":
-    enableLivestream,
-  "POST /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/reset-stream-key":
-    resetStreamKey,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/meetings": getAllMeetings,
   "POST /accounts/{account_id}/realtime/kit/{app_id}/meetings": createMeeting,
   "GET /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}":
@@ -6341,6 +6337,7 @@ export const operationsByPath = {
     dnsRecordsForAZoneApplyDnsScanResults,
   "POST /zones/{zone_id}/dns_records/scan/trigger":
     dnsRecordsForAZoneTriggerDnsScan,
+  "GET /zones/{zone_id}/dns_records/usage": dnsRecordsForAZoneGetUsage,
   "DELETE /zones/{zone_id}/dns_records/{dns_record_id}":
     dnsRecordsForAZoneDeleteDnsRecord,
   "GET /zones/{zone_id}/dns_records/{dns_record_id}":
