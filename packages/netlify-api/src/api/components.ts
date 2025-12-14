@@ -3808,13 +3808,29 @@ export type CreateSiteBuildResponse = {
   created_at?: string;
 };
 
+export type CreateSiteBuildRequestBody = {
+  /**
+   * A zip file containing the site files to build.
+   * Only used with Content-Type 'multipart/form-data'.
+   * Alternatively, set Content-Type to 'application/zip' and send the zip as the raw request body (no 'zip' parameter needed).
+   *
+   * @format binary
+   */
+  zip?: Blob;
+};
+
 export type CreateSiteBuildVariables = {
+  body?: CreateSiteBuildRequestBody;
   pathParams: CreateSiteBuildPathParams;
   queryParams?: CreateSiteBuildQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Runs a build for a site. The build will be scheduled to run at the first opportunity, but it might not start immediately if insufficient account build capacity is available. Files for build could be also uploaded as a zipped site.
+ * Runs a build for a site. The build will be scheduled to run at the first opportunity, but it might not start immediately if insufficient account build capacity is available.
+ *
+ * Files for build can be uploaded as a zipped site using one of these methods:
+ * 1. Set Content-Type to 'application/zip' and send the zip file as the raw request body
+ * 2. Set Content-Type to 'multipart/form-data' and include the zip file in the 'zip' field
  */
 export const createSiteBuild = (
   variables: CreateSiteBuildVariables,
@@ -3823,7 +3839,7 @@ export const createSiteBuild = (
   fetch<
     CreateSiteBuildResponse,
     CreateSiteBuildError,
-    undefined,
+    CreateSiteBuildRequestBody,
     {},
     CreateSiteBuildQueryParams,
     CreateSiteBuildPathParams
@@ -4038,6 +4054,94 @@ export const unlinkSiteRepo = (
     ...variables,
     signal,
   });
+
+export type EnableSitePathParams = {
+  siteId: string;
+};
+
+export type EnableSiteError = Fetcher.ErrorWrapper<
+  | {
+      status: 422;
+      payload: {
+        /**
+         * @format int64
+         */
+        code?: number;
+        message: string;
+      };
+    }
+  | {
+      status: Exclude<ClientErrorStatus | ServerErrorStatus, 204 | 422>;
+      payload: {
+        /**
+         * @format int64
+         */
+        code?: number;
+        message: string;
+      };
+    }
+>;
+
+export type EnableSiteVariables = {
+  pathParams: EnableSitePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Re-enables a site that was previously disabled by the user. Sites that were disabled for usage exceeded or marked as spam cannot be re-enabled via this endpoint.
+ */
+export const enableSite = (
+  variables: EnableSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<undefined, EnableSiteError, undefined, {}, {}, EnableSitePathParams>({
+    url: "/sites/{siteId}/enable",
+    method: "put",
+    ...variables,
+    signal,
+  });
+
+export type DisableSitePathParams = {
+  siteId: string;
+};
+
+export type DisableSiteQueryParams = {
+  /**
+   * Reason for disabling the site
+   */
+  reason: string;
+};
+
+export type DisableSiteError = Fetcher.ErrorWrapper<{
+  status: Exclude<ClientErrorStatus | ServerErrorStatus, 204>;
+  payload: {
+    /**
+     * @format int64
+     */
+    code?: number;
+    message: string;
+  };
+}>;
+
+export type DisableSiteVariables = {
+  pathParams: DisableSitePathParams;
+  queryParams: DisableSiteQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Disables a site, preventing it from serving content. The site can be re-enabled later using the enable endpoint.
+ */
+export const disableSite = (
+  variables: DisableSiteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DisableSiteError,
+    undefined,
+    {},
+    DisableSiteQueryParams,
+    DisableSitePathParams
+  >({ url: "/sites/{siteId}/disable", method: "put", ...variables, signal });
 
 export type GetSiteBuildPathParams = {
   buildId: string;
@@ -9912,6 +10016,8 @@ export const operationsByTag = {
     updateSite,
     deleteSite,
     unlinkSiteRepo,
+    enableSite,
+    disableSite,
     createSiteInTeam,
     listSitesForAccount,
   },
