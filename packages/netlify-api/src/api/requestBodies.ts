@@ -5,6 +5,76 @@
  */
 export type UpdateSiteMetadataMetadata = Record<string, any>;
 
+/**
+ * Deploy files can be provided in two ways:
+ * 1. As a JSON object using 'files' (a hash mapping file paths to SHA1 digests), OR
+ * 2. As a zip file using one of these methods:
+ *    - Set Content-Type to 'application/zip' and send the zip file as the raw request body
+ *    - Include the zip file content in the 'zip' field of this JSON object with Content-Type 'application/json'
+ */
+export type CreateSiteDeployDeploy = {
+  /**
+   * A hash mapping file paths to SHA1 digests of the file contents.
+   */
+  files?: Record<string, any>;
+  /**
+   * A zip file containing the site files to deploy. Alternative to 'files'.
+   * To use this field, set Content-Type to 'application/json' and include the zip content here.
+   * Alternatively, you can set Content-Type to 'application/zip' and send the zip as the raw request body (not as JSON).
+   *
+   * @format binary
+   */
+  zip?: Blob;
+  draft?: boolean;
+  async?: boolean;
+  functions?: Record<string, any>;
+  function_schedules?: {
+    name?: string;
+    cron?: string;
+  }[];
+  functions_config?: {
+    [key: string]: {
+      display_name?: string;
+      generator?: string;
+      build_data?: Record<string, any>;
+      routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+        methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
+        prefer_static?: boolean;
+      }[];
+      excluded_routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+      }[];
+      priority?: number;
+      traffic_rules?: {
+        action?: {
+          type?: string;
+          config?: {
+            to?: string;
+            rate_limit_config?: {
+              algorithm?: "sliding_window";
+              window_size?: number;
+              window_limit?: number;
+            };
+            aggregate?: {
+              keys?: {
+                type?: "ip" | "domain";
+              }[];
+            };
+          };
+        };
+      };
+    };
+  };
+  branch?: string;
+  framework?: string;
+  framework_version?: string;
+};
+
 export type CreateHookBySiteIdHook = {
   id?: string;
   site_id?: string;
@@ -199,58 +269,6 @@ export type CreateSiteSite = {
      */
     stop_builds?: boolean;
   };
-};
-
-export type CreateSiteDeployDeploy = {
-  files?: Record<string, any>;
-  draft?: boolean;
-  async?: boolean;
-  functions?: Record<string, any>;
-  function_schedules?: {
-    name?: string;
-    cron?: string;
-  }[];
-  functions_config?: {
-    [key: string]: {
-      display_name?: string;
-      generator?: string;
-      build_data?: Record<string, any>;
-      routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-        methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
-        prefer_static?: boolean;
-      }[];
-      excluded_routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-      }[];
-      priority?: number;
-      traffic_rules?: {
-        action?: {
-          type?: string;
-          config?: {
-            to?: string;
-            rate_limit_config?: {
-              algorithm?: "sliding_window";
-              window_size?: number;
-              window_limit?: number;
-            };
-            aggregate?: {
-              keys?: {
-                type?: "ip" | "domain";
-              }[];
-            };
-          };
-        };
-      };
-    };
-  };
-  branch?: string;
-  framework?: string;
-  framework_version?: string;
 };
 
 export type CreateSplitTestBranchTests = {
