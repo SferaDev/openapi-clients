@@ -652,6 +652,72 @@ export const updateArchivedFile = (
     UpdateArchivedFilePathParams
   >({ url: "/archive_files/{fileId}", method: "patch", ...variables, signal });
 
+export type MeetingLocalArchivingArchiveTokenPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingLocalArchivingArchiveTokenError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingLocalArchivingArchiveTokenResponse = {
+  /**
+   * The number of seconds the archive token is valid for before it expires. This value always returns `120`.
+   *
+   * @format int64
+   * @example 120
+   */
+  expire_in?: 120;
+  /**
+   * The archive token.
+   *
+   * @example 2njt50mj
+   */
+  token?: string;
+};
+
+export type MeetingLocalArchivingArchiveTokenVariables = {
+  pathParams: MeetingLocalArchivingArchiveTokenPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a meeting's archive token to allow local archiving. The archive token allows a meeting SDK app or bot to get archive permission to access the meeting's raw audio and video media stream in real-time.
+ *
+ * **Prerequisites:**
+ * * A Pro or higher plan for the meeting host.
+ * * The **Archive meetings and webinars** account setting enabled in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_archiving`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_archiving_token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingLocalArchivingArchiveToken = (
+  variables: MeetingLocalArchivingArchiveTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingLocalArchivingArchiveTokenResponse,
+    MeetingLocalArchivingArchiveTokenError,
+    undefined,
+    {},
+    {},
+    MeetingLocalArchivingArchiveTokenPathParams
+  >({
+    url: "/meetings/{meetingId}/jointoken/local_archiving",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
 export type GetArchivedFilesPathParams = {
   /**
    * The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. After a meeting ends, a new UUID is generated for the next meeting instance.
@@ -5277,6 +5343,127 @@ export const deviceUpdate = (
     DeviceUpdatePathParams
   >({ url: "/h323/devices/{deviceId}", method: "patch", ...variables, signal });
 
+export type MeetingAppAddPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingAppAddError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingAppAddResponse = {
+  /**
+   * The [meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in **long** format(represented as int64 data type in JSON), also known as the meeting number.
+   *
+   * @format int64
+   * @example 92674392836
+   */
+  id?: number;
+  /**
+   * For scheduled meetings only. Meeting start date-time in UTC/GMT, such as `2020-03-31T12:02:00Z`.
+   *
+   * @format date-time
+   * @example 2022-03-25T07:29:29Z
+   */
+  start_time?: string;
+  /**
+   * The app's ID.
+   *
+   * @example fdgsfh2ey82fuh
+   */
+  app_id?: string;
+};
+
+export type MeetingAppAddVariables = {
+  pathParams: MeetingAppAddPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Add an auto-open app in a meeting. This endpoint lets a developer auto-open an app in a specific meeting. This is only for configuring an app to automatically open before a given session. This can't open the app while a meeting or webinar is in session.
+ *
+ * **Prerequisites**:
+ * * The meeting must not be a live meeting.
+ * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:open_app`,`meeting:write:open_app:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingAppAdd = (
+  variables: MeetingAppAddVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingAppAddResponse,
+    MeetingAppAddError,
+    undefined,
+    {},
+    {},
+    MeetingAppAddPathParams
+  >({
+    url: "/meetings/{meetingId}/open_apps",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingAppDeletePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingAppDeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingAppDeleteVariables = {
+  pathParams: MeetingAppDeletePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a meeting auto-open app.
+ *
+ * **Prerequisites**:
+ * * The meeting must not be a live meeting.
+ * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:open_app`,`meeting:delete:open_app:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingAppDelete = (
+  variables: MeetingAppDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingAppDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingAppDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/open_apps",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
 export type DeleteMeetingChatMessageByIdPathParams = {
   /**
    * The meeting's ID.
@@ -5652,6 +5839,2086 @@ export const inMeetingControl = (
     signal,
   });
 
+export type MeetingLocalRecordingJoinTokenPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingLocalRecordingJoinTokenQueryParams = {
+  /**
+   * Whether to bypass the waiting room.
+   *
+   * @example true
+   */
+  bypass_waiting_room?: boolean;
+};
+
+export type MeetingLocalRecordingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingLocalRecordingJoinTokenResponse = {
+  /**
+   * The number of seconds the join token is valid for before it expires. This value always returns `120`.
+   *
+   * @format int64
+   * @example 120
+   */
+  expire_in?: 120;
+  /**
+   * The join token.
+   *
+   * @example 2njt50mj
+   */
+  token?: string;
+};
+
+export type MeetingLocalRecordingJoinTokenVariables = {
+  pathParams: MeetingLocalRecordingJoinTokenPathParams;
+  queryParams?: MeetingLocalRecordingJoinTokenQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a meeting's join token to allow for local recording. The join token lets a recording bot implemented using Zoom Meeting SDK to connect to a Zoom meeting. The recording bot can then automatically start locally recording. This supports both regular and raw local recording types.
+ *
+ * **Prerequisites:**
+ * * The **Local recording** user setting enabled in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_recording`,`meeting_token:read:local_recording`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_recording_token`,`meeting:read:local_recording_token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingLocalRecordingJoinToken = (
+  variables: MeetingLocalRecordingJoinTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingLocalRecordingJoinTokenResponse,
+    MeetingLocalRecordingJoinTokenError,
+    undefined,
+    {},
+    MeetingLocalRecordingJoinTokenQueryParams,
+    MeetingLocalRecordingJoinTokenPathParams
+  >({
+    url: "/meetings/{meetingId}/jointoken/local_recording",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingTokenPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingTokenQueryParams = {
+  /**
+   * The meeting token type.
+   * * `closed_caption_token` - The third-party closed caption API token.
+   *
+   * This defaults to `closed_caption_token`.
+   *
+   * @example closed_caption_token
+   * @default closed_caption_token
+   */
+  type?: "closed_caption_token";
+};
+
+export type MeetingTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingTokenResponse = {
+  /**
+   * The generated meeting token.
+   *
+   * @example https://example.com/closedcaption?id=200610693&ns=GZHkEA==&expire=86400&spparams=id%2Cns%2Cexpire&signature=nYtXJqRKCW
+   */
+  token?: string;
+};
+
+export type MeetingTokenVariables = {
+  pathParams: MeetingTokenPathParams;
+  queryParams?: MeetingTokenQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a meeting's [closed caption token (caption URL)](https://support.zoom.us/hc/en-us/articles/115002212983-Using-a-third-party-closed-captioning-service). This token lets you use a third-party service to stream text to their closed captioning software to the Zoom meeting.
+ *
+ * **Prerequisites:**
+ * * The **Closed captioning** setting enabled in the Zoom web portal.
+ * * The **Allow use of caption API Token to integrate with third-party closed captioning services** setting enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:token`,`meeting:read:token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingToken = (
+  variables: MeetingTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingTokenResponse,
+    MeetingTokenError,
+    undefined,
+    {},
+    MeetingTokenQueryParams,
+    MeetingTokenPathParams
+  >({
+    url: "/meetings/{meetingId}/token",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type AddBatchRegistrantsPathParams = {
+  /**
+   * Unique identifier of the meeting (Meeting Number).
+   *
+   * @example 91498058927
+   */
+  meetingId: string;
+};
+
+export type AddBatchRegistrantsError = Fetcher.ErrorWrapper<undefined>;
+
+export type AddBatchRegistrantsResponse = {
+  registrants?: {
+    /**
+     * Email address of the registrant.
+     *
+     * @example jchill@example.com
+     */
+    email?: string;
+    /**
+     * Unique URL using which registrant can join the meeting.
+     *
+     * @example https://example.com/j/11111
+     */
+    join_url?: string;
+    /**
+     * Unique identifier of the registrant.
+     *
+     * @example 9tboDiHUQAeOnbmudzWa5g
+     */
+    registrant_id?: string;
+    /**
+     * The participant PIN code is used to authenticate audio participants before they join the meeting.
+     *
+     * @format int64
+     * @example 380303
+     */
+    participant_pin_code?: number;
+  }[];
+};
+
+export type AddBatchRegistrantsRequestBody = {
+  /**
+   * If a meeting was scheduled with approval_type `1` (manual approval), but you would like to automatically approve the registrants that are added via this API, you can set the value of this field to `true`.
+   *
+   * You **cannot** use this field to change approval setting for a meeting  that was originally scheduled with approval_type `0` (automatic approval).
+   *
+   * @example true
+   */
+  auto_approve?: boolean;
+  /**
+   * Send confirmation Email to Registrants
+   *
+   * @example true
+   */
+  registrants_confirmation_email?: boolean;
+  registrants?: {
+    /**
+     * Email address of the registrant.
+     *
+     * @format email
+     * @example jchill@example.com
+     */
+    email: string;
+    /**
+     * First name of the registrant.
+     *
+     * @example Jill
+     */
+    first_name: string;
+    /**
+     * Last name of the registrant.
+     *
+     * @example Chill
+     */
+    last_name?: string;
+  }[];
+};
+
+export type AddBatchRegistrantsVariables = {
+  body?: AddBatchRegistrantsRequestBody;
+  pathParams: AddBatchRegistrantsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Register up to 30 registrants at once for a meeting that requires [registration](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
+ *
+ *
+ * **Prerequisites:**
+ *
+ * * The meeting host must be a Licensed user.
+ * * The meeting must require registration and should be of type `2`, i.e., they should be scheduled meetings. Instant meetings and Recurring meetings are not supported by this API.
+ *
+ *
+ *
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_registrants`,`meeting:write:batch_registrants:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
+ */
+export const addBatchRegistrants = (
+  variables: AddBatchRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    AddBatchRegistrantsResponse,
+    AddBatchRegistrantsError,
+    AddBatchRegistrantsRequestBody,
+    {},
+    {},
+    AddBatchRegistrantsPathParams
+  >({
+    url: "/meetings/{meetingId}/batch_registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingInvitationPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingInvitationError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingInvitationResponse = {
+  /**
+     * Meeting invitation.
+     *
+     * @example Jill Chill is inviting you to a scheduled Zoom meeting.
+    
+    Topic: My Meeting
+    Time: Mar 25, 2022 03:32 PM America, Los_Angeles
+    
+    Join Zoom Meeting
+    https://zoom.us/j/55544443210?pwd=8pEkRweVXPV3Ob2KJYgFTRlDtl1gSn.1
+    
+    Meeting ID: 555 4444 3210
+    Passcode: 123456
+    One tap mobile
+    +5678901234,,55544443210#,,,,*123456# US (gg)
+    
+    Dial by your location
+    +1 15550100 US (gg)
+    Meeting ID: 555 4444 3210
+    Passcode: 123456
+    Find your local number: https://zoom.us/u/ab12cdef34jh
+    
+    Join by SIP
+    5550100@zoomcrc.com
+    
+    Join by H.323
+    192.0.2.1 (US West)
+    Meeting ID: 555 4444 3210
+    Passcode: 123456
+    
+     */
+  invitation?: string;
+  /**
+   * A list of SIP phone addresses.
+   */
+  sip_links?: string[];
+};
+
+export type MeetingInvitationVariables = {
+  pathParams: MeetingInvitationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the meeting invitation note for a specific meeting.
+ *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:invitation`,`meeting:read:invitation:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingInvitation = (
+  variables: MeetingInvitationVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingInvitationResponse,
+    MeetingInvitationError,
+    undefined,
+    {},
+    {},
+    MeetingInvitationPathParams
+  >({
+    url: "/meetings/{meetingId}/invitation",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingInviteLinksCreatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingInviteLinksCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingInviteLinksCreateResponse = {
+  /**
+   * The attendee list.
+   *
+   * @maxItems 500
+   * @minItems 1
+   */
+  attendees?: {
+    /**
+     * The URL to join the meeting.
+     *
+     * @example https://example.com/j/11111
+     */
+    join_url?: string;
+    /**
+     * The user's display name.
+     *
+     * @example Jill Chill
+     */
+    name?: string;
+  }[];
+};
+
+export type MeetingInviteLinksCreateRequestBody = {
+  /**
+   * The attendees list.
+   *
+   * @maxItems 500
+   * @minItems 1
+   */
+  attendees?: {
+    /**
+     * User display name.
+     *
+     * @maxLength 64
+     * @example Jill Chill
+     */
+    name: string;
+    /**
+     * Whether to disable participant video when joining the meeting. If not provided or set to `false`, the participant video will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_video?: boolean;
+    /**
+     * Whether to disable participant audio when joining the meeting. If not provided or set to `false`, the participant audio will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_audio?: boolean;
+  }[];
+  /**
+   * The invite link's expiration time, in seconds.
+   *
+   * This value defaults to `7200`.
+   *
+   * @maximum 7776000
+   * @minimum 0
+   * @format int64
+   * @example 1000
+   * @default 7200
+   */
+  ttl?: number;
+};
+
+export type MeetingInviteLinksCreateVariables = {
+  body?: MeetingInviteLinksCreateRequestBody;
+  pathParams: MeetingInviteLinksCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a batch of invitation links for a meeting.
+ *
+ * **Prerequisites**:
+ * * The `ttl` value, in seconds, defines the invite link's expiration time. It must be between `0` or no expiration and `7776000` or 90 days, and has a default value of `7200` or 2 hours.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:invite_links`,`meeting:write:invite_links:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingInviteLinksCreate = (
+  variables: MeetingInviteLinksCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingInviteLinksCreateResponse,
+    MeetingInviteLinksCreateError,
+    MeetingInviteLinksCreateRequestBody,
+    {},
+    {},
+    MeetingInviteLinksCreatePathParams
+  >({
+    url: "/meetings/{meetingId}/invite_links",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantsPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a long format integer, not an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingRegistrantsQueryParams = {
+  /**
+   * The meeting or webinar occurrence ID.
+   *
+   * @example 1648194360000
+   */
+  occurrence_id?: string;
+  /**
+   * Query by the registrant's status.
+   * * `pending` - The registration is pending.
+   * * `approved` - The registrant is approved.
+   * * `denied` - The registration is denied.
+   *
+   * @example pending
+   * @default approved
+   */
+  status?: "pending" | "approved" | "denied";
+  /**
+   * The number of records returned within a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * **Deprecated.** We will no longer support this field in a future release. Instead, use the `next_page_token` for pagination.
+   *
+   * @example 1
+   * @default 1
+   */
+  page_number?: number;
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
+   */
+  next_page_token?: string;
+};
+
+export type MeetingRegistrantsError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantsResponse = {
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example w7587w4eiyfsudgf
+   */
+  next_page_token?: string;
+  /**
+   * The number of pages returned for the request made.
+   *
+   * @example 1
+   */
+  page_count?: number;
+  /**
+   * **Deprecated.** We will no longer support this field in a future release. Instead, use the `next_page_token` for pagination.
+   *
+   * @example 1
+   * @deprecated true
+   * @default 1
+   */
+  page_number?: number;
+  /**
+   * The number of records returned with a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * The total number of all the records available across pages.
+   *
+   * @example 20
+   */
+  total_records?: number;
+  /**
+   * List of registrant objects.
+   */
+  registrants?: {
+    /**
+     * The registrant's address.
+     *
+     * @example 1800 Amphibious Blvd.
+     */
+    address?: string;
+    /**
+     * The registrant's city.
+     *
+     * @example Mountain View
+     */
+    city?: string;
+    /**
+     * The registrant's questions and comments.
+     *
+     * @example Looking forward to the discussion.
+     */
+    comments?: string;
+    /**
+     * The registrant's two-letter [country code](/docs/api/rest/other-references/abbreviation-lists/#countries).
+     *
+     * @example US
+     */
+    country?: string;
+    /**
+     * Information about custom questions.
+     */
+    custom_questions?: {
+      /**
+       * The title of the custom question.
+       *
+       * @example What do you hope to learn from this?
+       */
+      title?: string;
+      /**
+       * The custom question's response value. This has a limit of 128 characters.
+       *
+       * @maxLength 128
+       * @example Look forward to learning how you come up with new recipes and what other services you offer.
+       */
+      value?: string;
+    }[];
+    /**
+     * The registrant's email address. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for return value details.
+     *
+     * @maxLength 128
+     * @format email
+     * @example jchill@example.com
+     */
+    email: string;
+    /**
+     * The registrant's first name.
+     *
+     * @maxLength 64
+     * @example Jill
+     */
+    first_name: string;
+    /**
+     * The registrant's industry.
+     *
+     * @example Food
+     */
+    industry?: string;
+    /**
+     * The registrant's job title.
+     *
+     * @example Chef
+     */
+    job_title?: string;
+    /**
+     * The registrant's last name.
+     *
+     * @maxLength 64
+     * @example Chill
+     */
+    last_name?: string;
+    /**
+     * The registrant's number of employees.
+     * * `1-20`
+     * * `21-50`
+     * * `51-100`
+     * * `101-250`
+     * * `251-500`
+     * * `501-1,000`
+     * * `1,001-5,000`
+     * * `5,001-10,000`
+     * * `More than 10,000`
+     *
+     * @example 1-20
+     */
+    no_of_employees?:
+      | ""
+      | "1-20"
+      | "21-50"
+      | "51-100"
+      | "101-250"
+      | "251-500"
+      | "501-1,000"
+      | "1,001-5,000"
+      | "5,001-10,000"
+      | "More than 10,000";
+    /**
+     * The registrant's organization.
+     *
+     * @example Cooking Org
+     */
+    org?: string;
+    /**
+     * The registrant's phone number.
+     *
+     * @example 5550100
+     */
+    phone?: string;
+    /**
+     * The registrant's purchasing time frame.
+     * * `Within a month`
+     * * `1-3 months`
+     * * `4-6 months`
+     * * `More than 6 months`
+     * * `No timeframe`
+     *
+     * @example 1-3 months
+     */
+    purchasing_time_frame?:
+      | ""
+      | "Within a month"
+      | "1-3 months"
+      | "4-6 months"
+      | "More than 6 months"
+      | "No timeframe";
+    /**
+     * The registrant's role in the purchase process.
+     * * `Decision Maker`
+     * * `Evaluator/Recommender`
+     * * `Influencer`
+     * * `Not involved`
+     *
+     * @example Influencer
+     */
+    role_in_purchase_process?:
+      | ""
+      | "Decision Maker"
+      | "Evaluator/Recommender"
+      | "Influencer"
+      | "Not involved";
+    /**
+     * The registrant's state or province.
+     *
+     * @example CA
+     */
+    state?: string;
+    /**
+     * The status of the registrant's registration.
+     *   `approved` - User has been successfully approved for the webinar.
+     *   `pending` - The registration is still pending.
+     *   `denied` - User has been denied from joining the webinar.
+     *
+     * @example approved
+     */
+    status?: "approved" | "denied" | "pending";
+    /**
+     * The registrant's ZIP or postal code.
+     *
+     * @example 94045
+     */
+    zip?: string;
+    /**
+     * Registrant ID.
+     *
+     * @example 9tboDiHUQAeOnbmudzWa5g
+     */
+    id?: string;
+    /**
+     * The time when the registrant registered.
+     *
+     * @format date-time
+     * @example 2022-03-22T05:59:09Z
+     */
+    create_time?: string;
+    /**
+     * The URL that an approved registrant can use to join the meeting or webinar.
+     *
+     * @format string
+     * @example https://example.com/j/11111
+     */
+    join_url?: string;
+    /**
+     * The participant PIN code is used to authenticate audio participants before they join the meeting.
+     *
+     * @format int64
+     * @example 380303
+     */
+    participant_pin_code?: number;
+  }[];
+};
+
+export type MeetingRegistrantsVariables = {
+  pathParams: MeetingRegistrantsPathParams;
+  queryParams?: MeetingRegistrantsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List users that have registered for a meeting. A host or a user with admin permission can require [registration for a Zoom meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
+ *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registrants`,`meeting:read:list_registrants:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const meetingRegistrants = (
+  variables: MeetingRegistrantsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingRegistrantsResponse,
+    MeetingRegistrantsError,
+    undefined,
+    {},
+    MeetingRegistrantsQueryParams,
+    MeetingRegistrantsPathParams
+  >({
+    url: "/meetings/{meetingId}/registrants",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantCreatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingRegistrantCreateQueryParams = {
+  /**
+   * A comma-separated list of meeting occurrence IDs. You can get this value with the [Get a meeting](/docs/api-reference/zoom-api/methods#operation/meeting) API.
+   *
+   * @example 1648194360000,1648367160000
+   */
+  occurrence_ids?: string;
+};
+
+export type MeetingRegistrantCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantCreateResponse = {
+  /**
+   * The meeting ID.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  id?: number;
+  /**
+   * The URL the registrant can use to join the meeting.
+   *
+   * The API will not return this field if the meeting was [created](/docs/api-reference/zoom-api/methods#operation/meetingCreate) with the `approval_type` field value of `1` (manual approval).
+   *
+   * @example https://example.com/j/11111
+   */
+  join_url?: string;
+  /**
+   * The registrant's ID.
+   *
+   * @example fdgsfh2ey82fuh
+   */
+  registrant_id?: string;
+  /**
+   * The meeting's start time.
+   *
+   * @format date-time
+   * @example 2021-07-13T21:44:51Z
+   */
+  start_time?: string;
+  /**
+   * The meeting's topic.
+   *
+   * @maxLength 200
+   * @example My Meeting
+   */
+  topic?: string;
+  /**
+   * Array of occurrence objects.
+   */
+  occurrences?: {
+    /**
+     * Duration.
+     *
+     * @example 60
+     */
+    duration?: number;
+    /**
+     * Occurrence ID: Unique Identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
+     *
+     * @example 1648194360000
+     */
+    occurrence_id?: string;
+    /**
+     * Start time.
+     *
+     * @format date-time
+     * @example 2022-03-25T07:46:00Z
+     */
+    start_time?: string;
+    /**
+     * Occurrence status.
+     *
+     * @example available
+     */
+    status?: string;
+  }[];
+  /**
+   * The participant PIN code is used to authenticate audio participants before they join the meeting.
+   *
+   * @format int64
+   * @example 380303
+   */
+  participant_pin_code?: number;
+};
+
+export type MeetingRegistrantCreateRequestBody = {
+  /**
+   * The registrant's first name.
+   *
+   * @maxLength 64
+   * @example Jill
+   */
+  first_name: string;
+  /**
+   * The registrant's last name.
+   *
+   * @maxLength 64
+   * @example Chill
+   */
+  last_name?: string;
+  /**
+   * The registrant's email address.
+   *
+   * @maxLength 128
+   * @format email
+   * @example jchill@example.com
+   */
+  email: string;
+  /**
+   * The registrant's address.
+   *
+   * @example 1800 Amphibious Blvd.
+   */
+  address?: string;
+  /**
+   * The registrant's city.
+   *
+   * @example Mountain View
+   */
+  city?: string;
+  /**
+   * The registrant's state or province.
+   *
+   * @example CA
+   */
+  state?: string;
+  /**
+   * The registrant's ZIP or postal code.
+   *
+   * @example 94045
+   */
+  zip?: string;
+  /**
+   * The registrant's two-letter [country code](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries).
+   *
+   * @example US
+   */
+  country?: string;
+  /**
+   * The registrant's phone number.
+   *
+   * @example 5550100
+   */
+  phone?: string;
+  /**
+   * The registrant's questions and comments.
+   *
+   * @example Looking forward to the discussion.
+   */
+  comments?: string;
+  /**
+   * Information about custom questions.
+   */
+  custom_questions?: {
+    /**
+     * The title of the custom question.
+     *
+     * @example What do you hope to learn from this?
+     */
+    title?: string;
+    /**
+     * The custom question's response value. This has a limit of 128 characters.
+     *
+     * @maxLength 128
+     * @example Look forward to learning how you come up with new recipes and what other services you offer.
+     */
+    value?: string;
+  }[];
+  /**
+   * The registrant's industry.
+   *
+   * @example Food
+   */
+  industry?: string;
+  /**
+   * The registrant's job title.
+   *
+   * @example Chef
+   */
+  job_title?: string;
+  /**
+   * The registrant's number of employees:
+   * * `1-20`
+   * * `21-50`
+   * * `51-100`
+   * * `101-500`
+   * * `500-1,000`
+   * * `1,001-5,000`
+   * * `5,001-10,000`
+   * * `More than 10,000`
+   *
+   * @example 1-20
+   */
+  no_of_employees?:
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-500"
+    | "500-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
+  /**
+   * The registrant's organization.
+   *
+   * @example Cooking Org
+   */
+  org?: string;
+  /**
+   * The registrant's purchasing time frame:
+   * * `Within a month`
+   * * `1-3 months`
+   * * `4-6 months`
+   * * `More than 6 months`
+   * * `No timeframe`
+   *
+   * @example 1-3 months
+   */
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
+  /**
+   * The registrant's role in the purchase process:
+   * * `Decision Maker`
+   * * `Evaluator/Recommender`
+   * * `Influencer`
+   * * `Not involved`
+   *
+   * @example Influencer
+   */
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
+  /**
+   * The registrant's language preference for confirmation emails:
+   * * `en-US` &mdash; English (US)
+   * * `de-DE` &mdash; German (Germany)
+   * * `es-ES` &mdash; Spanish (Spain)
+   * * `fr-FR` &mdash; French (France)
+   * * `jp-JP` &mdash; Japanese
+   * * `pt-PT` &mdash; Portuguese (Portugal)
+   * * `ru-RU` &mdash; Russian
+   * * `zh-CN` &mdash; Chinese (PRC)
+   * * `zh-TW` &mdash; Chinese (Taiwan)
+   * * `ko-KO` &mdash; Korean
+   * * `it-IT` &mdash; Italian (Italy)
+   * * `vi-VN` &mdash; Vietnamese
+   * * `pl-PL` &mdash; Polish
+   * * `Tr-TR` &mdash; Turkish
+   *
+   * @example en-US
+   */
+  language?:
+    | "en-US"
+    | "de-DE"
+    | "es-ES"
+    | "fr-FR"
+    | "jp-JP"
+    | "pt-PT"
+    | "ru-RU"
+    | "zh-CN"
+    | "zh-TW"
+    | "ko-KO"
+    | "it-IT"
+    | "vi-VN"
+    | "pl-PL"
+    | "Tr-TR";
+  /**
+   * If a meeting was scheduled with the `approval_type` field value of `1` (manual approval) but you want to automatically approve meeting registrants, set the value of this field to `true`.
+   *
+   * **Note:** You cannot use this field to change approval setting for a meeting originally scheduled with the `approval_type` field value of `0` (automatic approval).
+   *
+   * @example true
+   */
+  auto_approve?: boolean;
+};
+
+export type MeetingRegistrantCreateVariables = {
+  body?: MeetingRegistrantCreateRequestBody;
+  pathParams: MeetingRegistrantCreatePathParams;
+  queryParams?: MeetingRegistrantCreateQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Create and submit a user's registration to a meeting. See [Customizing webinar registration](https://support.zoom.us/hc/en-us/articles/202835649-Customizing-webinar-registration) for details on how to set the requirements for these fields. Note that there is a maximum limit of 4,999 registrants per meeting and users will see an error if the meeting's capacity is reached.
+ *
+ *  **Prerequisites:**
+ * * The host must be a **Licensed** user type.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:registrant`,`meeting:write:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingRegistrantCreate = (
+  variables: MeetingRegistrantCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingRegistrantCreateResponse,
+    MeetingRegistrantCreateError,
+    MeetingRegistrantCreateRequestBody,
+    {},
+    MeetingRegistrantCreateQueryParams,
+    MeetingRegistrantCreatePathParams
+  >({
+    url: "/meetings/{meetingId}/registrants",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantsQuestionsGetPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingRegistrantsQuestionsGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantsQuestionsGetResponse = {
+  /**
+   * Array of custom questions for registrants.
+   */
+  custom_questions?: {
+    /**
+     * Answer choices for the question. Can not be used for `short` question type as this type of question requires registrants to type out the answer.
+     */
+    answers?: string[];
+    /**
+     * Whether or not the custom question is required to be answered by participants or not.
+     *
+     * @example true
+     */
+    required?: boolean;
+    /**
+     * Title of the custom question.
+     *
+     * @example How are you?
+     */
+    title?: string;
+    /**
+     * Type of the question being asked.
+     *
+     * @example short
+     */
+    type?: "short" | "single";
+  }[];
+  /**
+   * Array of registrant questions.
+   */
+  questions?: {
+    /**
+     * Field name of the question.
+     *
+     * @example last_name
+     */
+    field_name?:
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
+    /**
+     * Whether or not the displayed fields are required to be filled out by registrants.
+     *
+     * @example true
+     */
+    required?: boolean;
+  }[];
+};
+
+export type MeetingRegistrantsQuestionsGetVariables = {
+  pathParams: MeetingRegistrantsQuestionsGetPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
+ *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registration_questions`,`meeting:read:list_registration_questions:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingRegistrantsQuestionsGet = (
+  variables: MeetingRegistrantsQuestionsGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingRegistrantsQuestionsGetResponse,
+    MeetingRegistrantsQuestionsGetError,
+    undefined,
+    {},
+    {},
+    MeetingRegistrantsQuestionsGetPathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/questions",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantQuestionUpdatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingRegistrantQuestionUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantQuestionUpdateRequestBody = {
+  /**
+   * Array of Registrant Custom Questions
+   */
+  custom_questions?: {
+    /**
+     * Answer choices for the question. Can not be used for `short` question type as this type of question requires registrants to type out the answer.
+     */
+    answers?: string[];
+    /**
+     * Indicates whether or not the custom question is required to be answered by participants or not.
+     *
+     * @example true
+     */
+    required?: boolean;
+    /**
+     * Title of the custom question.
+     *
+     * @example How are you?
+     */
+    title?: string;
+    /**
+     * The type of question being asked.
+     *
+     * @example short
+     */
+    type?: "short" | "single";
+  }[];
+  /**
+   * Array of registrant questions.
+   */
+  questions?: {
+    /**
+     * The question's field name.
+     *
+     * @example last_name
+     */
+    field_name?:
+      | "last_name"
+      | "address"
+      | "city"
+      | "country"
+      | "zip"
+      | "state"
+      | "phone"
+      | "industry"
+      | "org"
+      | "job_title"
+      | "purchasing_time_frame"
+      | "role_in_purchase_process"
+      | "no_of_employees"
+      | "comments";
+    /**
+     * Indicates whether or not the displayed fields are required to be filled out by registrants.
+     *
+     * @example true
+     */
+    required?: boolean;
+  }[];
+};
+
+export type MeetingRegistrantQuestionUpdateVariables = {
+  body?: MeetingRegistrantQuestionUpdateRequestBody;
+  pathParams: MeetingRegistrantQuestionUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
+ *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registration_question`,`meeting:update:registration_question:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingRegistrantQuestionUpdate = (
+  variables: MeetingRegistrantQuestionUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingRegistrantQuestionUpdateError,
+    MeetingRegistrantQuestionUpdateRequestBody,
+    {},
+    {},
+    MeetingRegistrantQuestionUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/questions",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantStatusPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a `long` format integer, not as a simple integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingRegistrantStatusQueryParams = {
+  /**
+   * The meeting or webinar occurrence ID.
+   *
+   * @example 1648194360000
+   */
+  occurrence_id?: string;
+};
+
+export type MeetingRegistrantStatusError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantStatusRequestBody = {
+  /**
+   * Registrant status.
+   *  `approve` - Approve registrant.
+   *  `cancel` - Cancel previously approved registrant's registration.
+   *  `deny` - Deny registrant.
+   *
+   * @example approve
+   */
+  action: "approve" | "cancel" | "deny";
+  /**
+   * List of registrants.
+   *
+   * @maximum 30
+   */
+  registrants?: {
+    /**
+     * @example jchill@example.com
+     */
+    email?: string;
+    /**
+     * @example 9tboDiHUQAeOnbmudzWa5g
+     */
+    id?: string;
+  }[];
+};
+
+export type MeetingRegistrantStatusVariables = {
+  body: MeetingRegistrantStatusRequestBody;
+  pathParams: MeetingRegistrantStatusPathParams;
+  queryParams?: MeetingRegistrantStatusQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a meeting registrant's status by either approving, cancelling or denying a registrant from joining the meeting.
+ *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
+ *
+ * This API has an additional rate limit of requests per registrant, per 24-hour period. [See the Rate Limits page](/docs/api/rate-limits/) for more information.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const meetingRegistrantStatus = (
+  variables: MeetingRegistrantStatusVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingRegistrantStatusError,
+    MeetingRegistrantStatusRequestBody,
+    {},
+    MeetingRegistrantStatusQueryParams,
+    MeetingRegistrantStatusPathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/status",
+    method: "put",
+    ...variables,
+    signal,
+  });
+
+export type MeetingRegistrantGetPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+  /**
+   * The registrant ID.
+   *
+   * @example 9tboDiHUQAeOnbmudzWa5g
+   */
+  registrantId: string;
+};
+
+export type MeetingRegistrantGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingRegistrantGetResponse = {
+  /**
+   * The registrant's address.
+   *
+   * @example 1800 Amphibious Blvd.
+   */
+  address?: string;
+  /**
+   * The registrant's city.
+   *
+   * @example Mountain View
+   */
+  city?: string;
+  /**
+   * The registrant's questions and comments.
+   *
+   * @example Looking forward to the discussion.
+   */
+  comments?: string;
+  /**
+   * The registrant's two-letter [country code](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+   *
+   * @example US
+   */
+  country?: string;
+  /**
+   * Information about custom questions.
+   */
+  custom_questions?: {
+    /**
+     * The title of the custom question.
+     *
+     * @example What do you hope to learn from this?
+     */
+    title?: string;
+    /**
+     * The custom question's response value. This has a limit of 128 characters.
+     *
+     * @maxLength 128
+     * @example Look forward to learning how you come up with new recipes and what other services you offer.
+     */
+    value?: string;
+  }[];
+  /**
+   * The registrant's email address. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for return value details.
+   *
+   * @maxLength 128
+   * @format email
+   * @example jchill@example.com
+   */
+  email: string;
+  /**
+   * The registrant's first name.
+   *
+   * @maxLength 64
+   * @example Jill
+   */
+  first_name: string;
+  /**
+   * The registrant's industry.
+   *
+   * @example Food
+   */
+  industry?: string;
+  /**
+   * The registrant's job title.
+   *
+   * @example Chef
+   */
+  job_title?: string;
+  /**
+   * The registrant's last name.
+   *
+   * @maxLength 64
+   * @example Chill
+   */
+  last_name?: string;
+  /**
+   * The registrant's number of employees.
+   * * `1-20`
+   * * `21-50`
+   * * `51-100`
+   * * `101-250`
+   * * `251-500`
+   * * `501-1,000`
+   * * `1,001-5,000`
+   * * `5,001-10,000`
+   * * `More than 10,000`
+   *
+   * @example 1-20
+   */
+  no_of_employees?:
+    | ""
+    | "1-20"
+    | "21-50"
+    | "51-100"
+    | "101-250"
+    | "251-500"
+    | "501-1,000"
+    | "1,001-5,000"
+    | "5,001-10,000"
+    | "More than 10,000";
+  /**
+   * The registrant's organization.
+   *
+   * @example Cooking Org
+   */
+  org?: string;
+  /**
+   * The registrant's phone number.
+   *
+   * @example 5550100
+   */
+  phone?: string;
+  /**
+   * The registrant's purchasing time frame.
+   * * `Within a month`
+   * * `1-3 months`
+   * * `4-6 months`
+   * * `More than 6 months`
+   * * `No timeframe`
+   *
+   * @example 1-3 months
+   */
+  purchasing_time_frame?:
+    | ""
+    | "Within a month"
+    | "1-3 months"
+    | "4-6 months"
+    | "More than 6 months"
+    | "No timeframe";
+  /**
+   * The registrant's role in the purchase process.
+   * * `Decision Maker`
+   * * `Evaluator/Recommender`
+   * * `Influencer`
+   * * `Not involved`
+   *
+   * @example Influencer
+   */
+  role_in_purchase_process?:
+    | ""
+    | "Decision Maker"
+    | "Evaluator/Recommender"
+    | "Influencer"
+    | "Not involved";
+  /**
+   * The registrant's state or province.
+   *
+   * @example CA
+   */
+  state?: string;
+  /**
+   * The registrant's registration status.
+   * * `approved` - The registrant is approved to join the meeting.
+   * * `pending` - The registrant's registration is pending.
+   * * `denied` - The registrant was declined to join the meeting.
+   *
+   * @example approved
+   */
+  status?: "approved" | "pending" | "denied";
+  /**
+   * The registrant's ZIP or postal code.
+   *
+   * @example 94045
+   */
+  zip?: string;
+  /**
+   * @example 9tboDiHUQAeOnbmudzWa5g
+   */
+  id?: string;
+  /**
+   * The registrant's registration date and time.
+   *
+   * @format date-time
+   * @example 2022-03-22T05:58:44Z
+   */
+  create_time?: string;
+  /**
+   * The URL with which the approved registrant can join the meeting.
+   *
+   * @format url
+   * @example https://example.com/j/11111
+   */
+  join_url?: string;
+  /**
+   * The participant PIN code is used to authenticate audio participants before they join the meeting.
+   *
+   * @format int64
+   * @example 380303
+   */
+  participant_pin_code?: number;
+};
+
+export type MeetingRegistrantGetVariables = {
+  pathParams: MeetingRegistrantGetPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve details on a specific user who has registered for the meeting. A host or a user with administrative permissions can require [registration for Zoom meetings](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
+ *
+ * **Prerequisites:**
+ * * The account must have a Meeting plan
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:registrant`,`meeting:read:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingRegistrantGet = (
+  variables: MeetingRegistrantGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingRegistrantGetResponse,
+    MeetingRegistrantGetError,
+    undefined,
+    {},
+    {},
+    MeetingRegistrantGetPathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/{registrantId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingregistrantdeletePathParams = {
+  /**
+   * The meeting ID.
+   *
+   * @example 91498058927
+   */
+  meetingId: number;
+  /**
+   * The meeting registrant ID.
+   *
+   * @example 9tboDiHUQAeOnbmudzWa5g
+   */
+  registrantId: string;
+};
+
+export type MeetingregistrantdeleteQueryParams = {
+  /**
+   * The meeting occurrence ID.
+   *
+   * @example approved
+   */
+  occurrence_id?: string;
+};
+
+export type MeetingregistrantdeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingregistrantdeleteVariables = {
+  pathParams: MeetingregistrantdeletePathParams;
+  queryParams?: MeetingregistrantdeleteQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a meeting registrant.
+ *
+ * **Prerequisites**:
+ * * Host user type must be Pro or higher plan.
+ * * Registration must be enabled for the meeting.
+ * * For recurring meetings:
+ *   * The `registration_type` must be 2 or 3 to require the `occurrence_id` field.
+ *   * If the `registration_type` is 1, the `occurrence_id` is not needed, as registrants can attend any occurrence.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:registrant`,`meeting:delete:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingregistrantdelete = (
+  variables: MeetingregistrantdeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingregistrantdeleteError,
+    undefined,
+    {},
+    MeetingregistrantdeleteQueryParams,
+    MeetingregistrantdeletePathParams
+  >({
+    url: "/meetings/{meetingId}/registrants/{registrantId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export type MeetingLiveStreamingJoinTokenPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingLiveStreamingJoinTokenError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingLiveStreamingJoinTokenResponse = {
+  /**
+   * The number of seconds the join token is valid for before it expires. This value always returns `120`.
+   *
+   * @format int64
+   * @example 120
+   */
+  expire_in?: 120;
+  /**
+   * The join token.
+   *
+   * @example 2njt50mj
+   */
+  token?: string;
+};
+
+export type MeetingLiveStreamingJoinTokenVariables = {
+  pathParams: MeetingLiveStreamingJoinTokenPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a meeting's join token to allow live streaming. The join token allows a recording bot implemented using Zoom meeting SDK to connect to a Zoom meeting &quot;hosted by the issuer of the token&quot;, and can call the streaming method automatically. It supports both regular live streaming, and raw streaming.
+ *
+ * **Prerequisites:**
+ * * A Pro or higher plan for the meeting host.
+ * * The **Allow livestreaming of meetings** user setting enabled in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:live_streaming`,`meeting_token:read:live_streaming`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:live_streaming_token`,`meeting:read:live_streaming_token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingLiveStreamingJoinToken = (
+  variables: MeetingLiveStreamingJoinTokenVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingLiveStreamingJoinTokenResponse,
+    MeetingLiveStreamingJoinTokenError,
+    undefined,
+    {},
+    {},
+    MeetingLiveStreamingJoinTokenPathParams
+  >({
+    url: "/meetings/{meetingId}/jointoken/live_streaming",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type GetMeetingLiveStreamDetailsPathParams = {
+  /**
+   * Unique identifier of the meeting.
+   *
+   * @example 93398114182
+   */
+  meetingId: string;
+};
+
+export type GetMeetingLiveStreamDetailsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetMeetingLiveStreamDetailsResponse = {
+  /**
+   * Live streaming page URL. This is the URL using which anyone can view the livestream of the meeting.
+   *
+   * @example https://example.com/livestream/123
+   */
+  page_url?: string;
+  /**
+   * Stream Key.
+   *
+   * @example contact-ic@example.com
+   */
+  stream_key?: string;
+  /**
+   * Stream URL.
+   *
+   * @example https://example.com/livestream
+   */
+  stream_url?: string;
+  /**
+   * The number of pixels in each dimension that the video camera can display.
+   *
+   * @example 720p
+   */
+  resolution?: string;
+};
+
+export type GetMeetingLiveStreamDetailsVariables = {
+  pathParams: GetMeetingLiveStreamDetailsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform. Get a meeting's livestream configuration details such as Stream URL, Stream Key and Page URL.
+ *
+ *
+ * **Prerequisites:**
+ *
+ * * Meeting host must be a licensed user with a Pro or higher plan.
+ *
+ * * Live streaming details must have been [configured](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service#h_01589a6f-a40a-4e18-a448-cb746e52ebc5) for the meeting.
+ *
+ *
+ *
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:livestream`,`meeting:read:livestream:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const getMeetingLiveStreamDetails = (
+  variables: GetMeetingLiveStreamDetailsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetMeetingLiveStreamDetailsResponse,
+    GetMeetingLiveStreamDetailsError,
+    undefined,
+    {},
+    {},
+    GetMeetingLiveStreamDetailsPathParams
+  >({
+    url: "/meetings/{meetingId}/livestream",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingLiveStreamUpdatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingLiveStreamUpdateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingLiveStreamUpdateRequestBody = {
+  /**
+   * The live stream page URL.
+   *
+   * @maxLength 1024
+   * @format uri
+   * @example https://example.com/livestream/123
+   */
+  page_url: string;
+  /**
+   * Stream name and key.
+   *
+   * @maxLength 512
+   * @example contact-it@example.com
+   */
+  stream_key: string;
+  /**
+   * Streaming URL.
+   *
+   * @maxLength 1024
+   * @example https://example.com/livestream
+   */
+  stream_url: string;
+  /**
+   * The number of pixels in each dimension that the video camera can display, required when a user enables 1080p. Use a value of `720p` or `1080p`
+   *
+   * @example 720p
+   */
+  resolution?: string;
+};
+
+export type MeetingLiveStreamUpdateVariables = {
+  body: MeetingLiveStreamUpdateRequestBody;
+  pathParams: MeetingLiveStreamUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a meeting's livestream information. Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform.
+ *
+ * **Prerequisites:**
+ * * Meeting host must have a Pro license.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream`,`meeting:update:livestream:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingLiveStreamUpdate = (
+  variables: MeetingLiveStreamUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingLiveStreamUpdateError,
+    MeetingLiveStreamUpdateRequestBody,
+    {},
+    {},
+    MeetingLiveStreamUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/livestream",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+export type MeetingLiveStreamStatusUpdatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingLiveStreamStatusUpdateError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingLiveStreamStatusUpdateRequestBody = {
+  /**
+   * The meeting's livestream status.
+   * * `start` - Start a livestream.
+   * * `stop` - Stop an ongoing livestream.
+   * * `mode` - Control a livestream view at runtime.
+   *
+   * @example start
+   */
+  action?: "start" | "stop" | "mode";
+  /**
+   * The meeting's livestreaming settings.
+   */
+  settings?: {
+    /**
+     * Whether to display the name of the active speaker during a meeting's livestream. Use this field if you pass the `start` value for the `action` field.
+     *
+     * @example true
+     */
+    active_speaker_name?: boolean;
+    /**
+     * The display name of the meeting's livestream. Use this field if you pass the `start` value for the `action` field.
+     *
+     * @maxLength 50
+     * @minLength 1
+     * @example Jill Chill
+     */
+    display_name?: string;
+    /**
+     * The layout of the meeting's livestream. Use this field if you pass the `start` or `mode` value for the `action` field.
+     * * `follow_host` - Follow host view.
+     * * `gallery_view` - Gallery view.
+     * * `speaker_view` - Speaker view.
+     *
+     * @example follow_host
+     * @default follow_host
+     */
+    layout?: "follow_host" | "gallery_view" | "speaker_view";
+    /**
+     * The livestream's closed caption type for this session. Use this field if you pass the `start` or `mode` value for the `action` field.
+     * * `burnt-in` - Burnt in captions.
+     * * `embedded` - Embedded captions.
+     * * `off` - Turn off captions.
+     *
+     * @example burnt-in
+     * @default burnt-in
+     */
+    close_caption?: "burnt-in" | "embedded" | "off";
+  };
+};
+
+export type MeetingLiveStreamStatusUpdateVariables = {
+  body?: MeetingLiveStreamStatusUpdateRequestBody;
+  pathParams: MeetingLiveStreamStatusUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform. Update the status of a meeting's livestream.
+ *
+ * **Prerequisites:**
+ * * Meeting host must have a Pro license.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream_status`,`meeting:update:livestream_status:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingLiveStreamStatusUpdate = (
+  variables: MeetingLiveStreamStatusUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingLiveStreamStatusUpdateError,
+    MeetingLiveStreamStatusUpdateRequestBody,
+    {},
+    {},
+    MeetingLiveStreamStatusUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/livestream/status",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
 export type MeetingRTMSStatusUpdatePathParams = {
   /**
    * The meeting's ID.
@@ -5729,188 +7996,6 @@ export const meetingRTMSStatusUpdate = (
   >({
     url: "/live_meetings/{meetingId}/rtms_app/status",
     method: "patch",
-    ...variables,
-    signal,
-  });
-
-export type ListmeetingsummariesQueryParams = {
-  /**
-   * The number of records returned within a single API call.
-   *
-   * @maximum 300
-   * @example 30
-   * @default 30
-   */
-  page_size?: number;
-  /**
-   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
-   *
-   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
-   */
-  next_page_token?: string;
-  /**
-   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
-   *
-   * @format date-time
-   * @example 2023-10-19T07:00:00Z
-   */
-  from?: string;
-  /**
-   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
-   *
-   * @format date-time
-   * @example 2023-10-20T07:00:00Z
-   */
-  to?: string;
-};
-
-export type ListmeetingsummariesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListmeetingsummariesResponse = {
-  /**
-   * The number of records returned with a single API call.
-   *
-   * @maximum 300
-   * @example 30
-   * @default 30
-   */
-  page_size?: number;
-  /**
-   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
-   *
-   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
-   */
-  next_page_token?: string;
-  /**
-   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
-   *
-   * @format date-time
-   * @example 2023-10-19T07:00:00Z
-   */
-  from?: string;
-  /**
-   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
-   *
-   * @format date-time
-   * @example 2023-10-20T07:00:00Z
-   */
-  to?: string;
-  /**
-   * List of meeting summary objects.
-   */
-  summaries?: {
-    /**
-     * The ID of the user who is set as the meeting host.
-     *
-     * @example 30R7kT7bTIKSNUFEuH_Qlg
-     */
-    meeting_host_id?: string;
-    /**
-     * The meeting host's email address.
-     *
-     * @format email
-     * @example jchill@example.com
-     */
-    meeting_host_email?: string;
-    /**
-     * Unique meeting ID. Each meeting instance generates its own meeting UUID. After a meeting ends, a new UUID is generated for the next instance of the meeting. Retrieve a list of UUIDs from past meeting instances using the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API. [Double encode](/docs/api/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
-     *
-     * @example aDYlohsHRtCd4ii1uC2+hA==
-     */
-    meeting_uuid?: string;
-    /**
-     * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-) - the meeting's unique identifier in **long** format, represented as int64 data type in JSON, also known as the meeting number.
-     *
-     * @format int64
-     * @example 97763643886
-     */
-    meeting_id?: number;
-    /**
-     * Meeting topic.
-     *
-     * @example My Meeting
-     */
-    meeting_topic?: string;
-    /**
-     * The meeting's start date and time.
-     *
-     * @format date-time
-     * @example 2019-07-15T23:24:52Z
-     */
-    meeting_start_time?: string;
-    /**
-     * The meeting's end date and time.
-     *
-     * @format date-time
-     * @example 2020-07-15T23:30:19Z
-     */
-    meeting_end_time?: string;
-    /**
-     * The summary's start date and time.
-     *
-     * @format date-time
-     * @example 2019-07-15T23:24:52Z
-     */
-    summary_start_time?: string;
-    /**
-     * The summary's end date and time.
-     *
-     * @format date-time
-     * @example 2020-07-15T23:30:19Z
-     */
-    summary_end_time?: string;
-    /**
-     * The date and time when the meeting summary was created.
-     *
-     * @format date-time
-     * @example 2019-07-15T23:24:52Z
-     */
-    summary_created_time?: string;
-    /**
-     * The date and time when the meeting summary was last modified.
-     *
-     * @format date-time
-     * @example 2020-07-15T23:30:19Z
-     */
-    summary_last_modified_time?: string;
-  }[];
-};
-
-export type ListmeetingsummariesVariables = {
-  queryParams?: ListmeetingsummariesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve a list of all meeting or webinar summaries available for an account.
- *
- * **Prerequisites**
- * * The host must have a Pro, Business, or higher subscription plan.
- * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
- * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
- * * End-to-End Encrypted (E2EE) meetings do not support summaries.
- *
- * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_summaries:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const listmeetingsummaries = (
-  variables: ListmeetingsummariesVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    ListmeetingsummariesResponse,
-    ListmeetingsummariesError,
-    undefined,
-    {},
-    ListmeetingsummariesQueryParams,
-    {}
-  >({
-    url: "/meetings/meeting_summaries",
-    method: "get",
     ...variables,
     signal,
   });
@@ -8254,4202 +10339,6 @@ export const meetingUpdate = (
     MeetingUpdatePathParams
   >({ url: "/meetings/{meetingId}", method: "patch", ...variables, signal });
 
-export type CreateBatchPollsPathParams = {
-  /**
-   * @example 93398114182
-   */
-  meetingId: string;
-};
-
-export type CreateBatchPollsError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateBatchPollsResponse = {
-  polls?: {
-    /**
-     * Whether to allow meeting participants to answer poll questions anonymously:
-     * * `true` &mdash; Anonymous polls enabled.
-     * * `false` &mdash; Participants cannot answer poll questions anonymously.
-     *
-     * @example true
-     */
-    anonymous?: boolean;
-    /**
-     * Meeting Poll ID
-     *
-     * @example QalIoKWLTJehBJ8e1xRrbQ
-     */
-    id?: string;
-    /**
-     * The type of poll:
-     * * `1` &mdash; Poll.
-     * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-     * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
-     *
-     * @example 2
-     */
-    poll_type?: 1 | 2 | 3;
-    /**
-     * The information about the poll's questions.
-     */
-    questions?: {
-      /**
-       * The allowed maximum number of characters. This field only returns for `short_answer` and `long_answer` polls.
-       *
-       * @example 200
-       */
-      answer_max_character?: number;
-      /**
-       * The allowed minimum number of characters. This field only returns for `short_answer` and `long_answer` polls.
-       *
-       * @example 1
-       */
-      answer_min_character?: number;
-      /**
-       * Whether participants must answer the question:
-       * * `true` &mdash; The participant must answer the question.
-       * * `false` &mdash; The participant does not need to answer the question.
-       *
-       * @example false
-       */
-      answer_required?: boolean;
-      /**
-       * The poll question's available answers.
-       */
-      answers?: string[];
-      /**
-       * Whether the correct answer is case sensitive. This field only returns for `fill_in_the_blank` polls:
-       * * `true` &mdash; The answer is case-sensitive.
-       * * `false` &mdash; The answer is not case-sensitive.
-       *
-       * @example false
-       * @default false
-       */
-      case_sensitive?: boolean;
-      /**
-       * The poll question's title. For `fill_in_the_blank` polls, this field is the poll's question.
-       *
-       * @example How useful was this meeting?
-       */
-      name?: string;
-      /**
-       * The information about the prompt questions. This object only returns for `matching` and `rank_order` polls.
-       */
-      prompts?: {
-        /**
-         * The question prompt's title.
-         *
-         * @example How are you?
-         */
-        prompt_question?: string;
-        /**
-         * The question prompt's correct answers.
-         */
-        prompt_right_answers?: string[];
-      }[];
-      /**
-       * The high score label for the `rating_max_value` field. This field only returns for `rating_scale` polls.
-       *
-       * @example Extremely Likely
-       */
-      rating_max_label?: string;
-      /**
-       * The rating scale's maximum value. This field only returns for `rating_scale` polls.
-       *
-       * @maximum 10
-       * @example 4
-       */
-      rating_max_value?: number;
-      /**
-       * The low score label for the `rating_min_value` field. This field only returns for `rating_scale` polls.
-       *
-       * @example Not likely
-       */
-      rating_min_label?: string;
-      /**
-       * The rating scale's minimum value. This field only returns for `rating_scale` polls.
-       *
-       * @example 0
-       */
-      rating_min_value?: number;
-      /**
-       * The poll question's correct answer(s).
-       */
-      right_answers?: string[];
-      /**
-       * Whether to display the radio selection as a drop-down box:
-       * * `true` &mdash; Show as a drop-down box.
-       * * `false` &mdash; Do not show as a drop-down box.
-       *
-       * @example false
-       */
-      show_as_dropdown?: boolean;
-      /**
-       * The poll's question and answer type:
-       * * `single` &mdash; Single choice.
-       * * `multiple` &mdash; Multiple choice.
-       * * `matching` &mdash; Matching.
-       * * `rank_order` &mdash; Rank order.
-       * * `short_answer` &mdash; Short answer.
-       * * `long_answer` &mdash; Long answer.
-       * * `fill_in_the_blank` &mdash; Fill in the blank.
-       * * `rating_scale` &mdash; Rating scale.
-       *
-       * @example single
-       */
-      type?:
-        | "single"
-        | "multiple"
-        | "matching"
-        | "rank_order"
-        | "short_answer"
-        | "long_answer"
-        | "fill_in_the_blank"
-        | "rating_scale";
-    }[];
-    /**
-     * The status of the meeting poll:
-     *  `notstart` - Poll not started
-     *  `started` - Poll started
-     *  `ended` - Poll ended
-     *  `sharing` - Sharing poll results
-     *
-     * @example notstart
-     */
-    status?: "notstart" | "started" | "ended" | "sharing";
-    /**
-     * The title for the poll.
-     *
-     * @example Learn something new
-     */
-    title?: string;
-  }[];
-};
-
-export type CreateBatchPollsRequestBody = {
-  /**
-   * The information about the meeting's polls.
-   *
-   * @maxItems 25
-   * @minItems 1
-   */
-  polls?: {
-    /**
-     * Whether to allow meeting participants to answer poll questions anonymously:
-     * * `true` &mdash; Anonymous polls enabled.
-     * * `false` &mdash; Participants cannot answer poll questions anonymously.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    anonymous?: boolean;
-    /**
-     * The type of poll:
-     * * `1` &mdash; Poll.
-     * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-     * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
-     *
-     *  This value defaults to `1`.
-     *
-     * @example 2
-     * @default 1
-     */
-    poll_type?: 1 | 2 | 3;
-    /**
-     * The information about the poll's questions.
-     *
-     * @minLength 1
-     */
-    questions?: {
-      /**
-       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
-       * * For `short_answer` polls, a maximum of 500 characters.
-       * * For `long_answer` polls, a maximum of 2,000 characters.
-       *
-       * @example 200
-       */
-      answer_max_character?: number;
-      /**
-       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
-       *
-       * @minimum 1
-       * @example 1
-       */
-      answer_min_character?: number;
-      /**
-       * Whether participants must answer the question:
-       * * `true` &mdash; The participant must answer the question.
-       * * `false` &mdash; The participant does not need to answer the question.
-       *
-       * **Note:**
-       * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-       * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      answer_required?: boolean;
-      /**
-       * The poll question's available answers. This field requires a **minimum** of two answers.
-       *
-       * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-       * * For `matching` polls, you can only provide a maximum of 16 answers.
-       * * For `rank_order` polls, you can only provide a maximum of seven answers.
-       *
-       * @minItems 2
-       */
-      answers?: string[];
-      /**
-       * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-       * * `true` &mdash; The answer is case-sensitive.
-       * * `false` &mdash; The answer is not case-sensitive.
-       *
-       * This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      case_sensitive?: boolean;
-      /**
-       * The poll question's title, up to 1024 characters.
-       *
-       * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-       *
-       * @maxLength 1024
-       * @example How useful was this meeting?
-       */
-      name?: string;
-      /**
-       * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-       */
-      prompts?: {
-        /**
-         * The question prompt's title.
-         *
-         * @example How are you?
-         */
-        prompt_question?: string;
-        /**
-         * The question prompt's correct answers:
-         * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-         * * For `rank_order` polls, you can only provide one correct answer.
-         */
-        prompt_right_answers?: string[];
-      }[];
-      /**
-       * The high score label for the `rating_max_value` field.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @example Extremely Likely
-       */
-      rating_max_label?: string;
-      /**
-       * The rating scale's maximum value, up to a maximum value of 10.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @maximum 10
-       * @example 4
-       */
-      rating_max_value?: number;
-      /**
-       * The low score label for the `rating_min_value` field.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @example Not likely
-       */
-      rating_min_label?: string;
-      /**
-       * The rating scale's minimum value. This value cannot be less than zero.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @minimum 1
-       * @example 1
-       */
-      rating_min_value?: number;
-      /**
-       * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
-       *
-       *  For `single` and `matching` polls, this field only accepts one answer.
-       *
-       * @minItems 1
-       */
-      right_answers?: string[];
-      /**
-       * Whether to display the radio selection as a drop-down box:
-       * * `true` &mdash; Show as a drop-down box.
-       * * `false` &mdash; Do not show as a drop-down box.
-       *
-       * This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      show_as_dropdown?: boolean;
-      /**
-       * The poll's question and answer type:
-       * * `single` &mdash; Single choice.
-       * * `multiple` &mdash; Multiple choice.
-       * * `matching` &mdash; Matching.
-       * * `rank_order` &mdash; Rank order.
-       * * `short_answer` &mdash; Short answer.
-       * * `long_answer` &mdash; Long answer.
-       * * `fill_in_the_blank` &mdash; Fill in the blank.
-       * * `rating_scale` &mdash; Rating scale.
-       *
-       * @example single
-       */
-      type?:
-        | "single"
-        | "multiple"
-        | "matching"
-        | "rank_order"
-        | "short_answer"
-        | "long_answer"
-        | "fill_in_the_blank"
-        | "rating_scale";
-    }[];
-    /**
-     * The poll's title, up to 64 characters.
-     *
-     * @maxLength 64
-     * @example Learn something new
-     */
-    title?: string;
-  }[];
-};
-
-export type CreateBatchPollsVariables = {
-  body?: CreateBatchPollsRequestBody;
-  pathParams: CreateBatchPollsPathParams;
-} & FetcherExtraProps;
-
-/**
- * Polls allow the meeting host to survey attendees. Create batch [polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) for a meeting.
- *
- *
- *
- * **Prerequisites**:
- *
- * * Host user type must be **Pro** or higher plan.
- * * Polling feature must be enabled in the host's account.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_polls`,`meeting:write:batch_polls:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const createBatchPolls = (
-  variables: CreateBatchPollsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    CreateBatchPollsResponse,
-    CreateBatchPollsError,
-    CreateBatchPollsRequestBody,
-    {},
-    {},
-    CreateBatchPollsPathParams
-  >({
-    url: "/meetings/{meetingId}/batch_polls",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type AddBatchRegistrantsPathParams = {
-  /**
-   * Unique identifier of the meeting (Meeting Number).
-   *
-   * @example 91498058927
-   */
-  meetingId: string;
-};
-
-export type AddBatchRegistrantsError = Fetcher.ErrorWrapper<undefined>;
-
-export type AddBatchRegistrantsResponse = {
-  registrants?: {
-    /**
-     * Email address of the registrant.
-     *
-     * @example jchill@example.com
-     */
-    email?: string;
-    /**
-     * Unique URL using which registrant can join the meeting.
-     *
-     * @example https://example.com/j/11111
-     */
-    join_url?: string;
-    /**
-     * Unique identifier of the registrant.
-     *
-     * @example 9tboDiHUQAeOnbmudzWa5g
-     */
-    registrant_id?: string;
-    /**
-     * The participant PIN code is used to authenticate audio participants before they join the meeting.
-     *
-     * @format int64
-     * @example 380303
-     */
-    participant_pin_code?: number;
-  }[];
-};
-
-export type AddBatchRegistrantsRequestBody = {
-  /**
-   * If a meeting was scheduled with approval_type `1` (manual approval), but you would like to automatically approve the registrants that are added via this API, you can set the value of this field to `true`.
-   *
-   * You **cannot** use this field to change approval setting for a meeting  that was originally scheduled with approval_type `0` (automatic approval).
-   *
-   * @example true
-   */
-  auto_approve?: boolean;
-  /**
-   * Send confirmation Email to Registrants
-   *
-   * @example true
-   */
-  registrants_confirmation_email?: boolean;
-  registrants?: {
-    /**
-     * Email address of the registrant.
-     *
-     * @format email
-     * @example jchill@example.com
-     */
-    email: string;
-    /**
-     * First name of the registrant.
-     *
-     * @example Jill
-     */
-    first_name: string;
-    /**
-     * Last name of the registrant.
-     *
-     * @example Chill
-     */
-    last_name?: string;
-  }[];
-};
-
-export type AddBatchRegistrantsVariables = {
-  body?: AddBatchRegistrantsRequestBody;
-  pathParams: AddBatchRegistrantsPathParams;
-} & FetcherExtraProps;
-
-/**
- * Register up to 30 registrants at once for a meeting that requires [registration](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
- *
- *
- * **Prerequisites:**
- *
- * * The meeting host must be a Licensed user.
- * * The meeting must require registration and should be of type `2`, i.e., they should be scheduled meetings. Instant meetings and Recurring meetings are not supported by this API.
- *
- *
- *
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_registrants`,`meeting:write:batch_registrants:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
- */
-export const addBatchRegistrants = (
-  variables: AddBatchRegistrantsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    AddBatchRegistrantsResponse,
-    AddBatchRegistrantsError,
-    AddBatchRegistrantsRequestBody,
-    {},
-    {},
-    AddBatchRegistrantsPathParams
-  >({
-    url: "/meetings/{meetingId}/batch_registrants",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type MeetingInvitationPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingInvitationError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingInvitationResponse = {
-  /**
-     * Meeting invitation.
-     *
-     * @example Jill Chill is inviting you to a scheduled Zoom meeting.
-    
-    Topic: My Meeting
-    Time: Mar 25, 2022 03:32 PM America, Los_Angeles
-    
-    Join Zoom Meeting
-    https://zoom.us/j/55544443210?pwd=8pEkRweVXPV3Ob2KJYgFTRlDtl1gSn.1
-    
-    Meeting ID: 555 4444 3210
-    Passcode: 123456
-    One tap mobile
-    +5678901234,,55544443210#,,,,*123456# US (gg)
-    
-    Dial by your location
-    +1 15550100 US (gg)
-    Meeting ID: 555 4444 3210
-    Passcode: 123456
-    Find your local number: https://zoom.us/u/ab12cdef34jh
-    
-    Join by SIP
-    5550100@zoomcrc.com
-    
-    Join by H.323
-    192.0.2.1 (US West)
-    Meeting ID: 555 4444 3210
-    Passcode: 123456
-    
-     */
-  invitation?: string;
-  /**
-   * A list of SIP phone addresses.
-   */
-  sip_links?: string[];
-};
-
-export type MeetingInvitationVariables = {
-  pathParams: MeetingInvitationPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve the meeting invitation note for a specific meeting.
- *
- * **Prerequisites**:
- * * Host user must have a Zoom Meetings Basic license or higher.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:invitation`,`meeting:read:invitation:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingInvitation = (
-  variables: MeetingInvitationVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingInvitationResponse,
-    MeetingInvitationError,
-    undefined,
-    {},
-    {},
-    MeetingInvitationPathParams
-  >({
-    url: "/meetings/{meetingId}/invitation",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingInviteLinksCreatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingInviteLinksCreateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingInviteLinksCreateResponse = {
-  /**
-   * The attendee list.
-   *
-   * @maxItems 500
-   * @minItems 1
-   */
-  attendees?: {
-    /**
-     * The URL to join the meeting.
-     *
-     * @example https://example.com/j/11111
-     */
-    join_url?: string;
-    /**
-     * The user's display name.
-     *
-     * @example Jill Chill
-     */
-    name?: string;
-  }[];
-};
-
-export type MeetingInviteLinksCreateRequestBody = {
-  /**
-   * The attendees list.
-   *
-   * @maxItems 500
-   * @minItems 1
-   */
-  attendees?: {
-    /**
-     * User display name.
-     *
-     * @maxLength 64
-     * @example Jill Chill
-     */
-    name: string;
-    /**
-     * Whether to disable participant video when joining the meeting. If not provided or set to `false`, the participant video will follow the meeting's default settings.
-     *
-     * @example false
-     * @default false
-     */
-    disable_video?: boolean;
-    /**
-     * Whether to disable participant audio when joining the meeting. If not provided or set to `false`, the participant audio will follow the meeting's default settings.
-     *
-     * @example false
-     * @default false
-     */
-    disable_audio?: boolean;
-  }[];
-  /**
-   * The invite link's expiration time, in seconds.
-   *
-   * This value defaults to `7200`.
-   *
-   * @maximum 7776000
-   * @minimum 0
-   * @format int64
-   * @example 1000
-   * @default 7200
-   */
-  ttl?: number;
-};
-
-export type MeetingInviteLinksCreateVariables = {
-  body?: MeetingInviteLinksCreateRequestBody;
-  pathParams: MeetingInviteLinksCreatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Create a batch of invitation links for a meeting.
- *
- * **Prerequisites**:
- * * The `ttl` value, in seconds, defines the invite link's expiration time. It must be between `0` or no expiration and `7776000` or 90 days, and has a default value of `7200` or 2 hours.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:invite_links`,`meeting:write:invite_links:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingInviteLinksCreate = (
-  variables: MeetingInviteLinksCreateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingInviteLinksCreateResponse,
-    MeetingInviteLinksCreateError,
-    MeetingInviteLinksCreateRequestBody,
-    {},
-    {},
-    MeetingInviteLinksCreatePathParams
-  >({
-    url: "/meetings/{meetingId}/invite_links",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type MeetingLiveStreamingJoinTokenPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingLiveStreamingJoinTokenError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingLiveStreamingJoinTokenResponse = {
-  /**
-   * The number of seconds the join token is valid for before it expires. This value always returns `120`.
-   *
-   * @format int64
-   * @example 120
-   */
-  expire_in?: 120;
-  /**
-   * The join token.
-   *
-   * @example 2njt50mj
-   */
-  token?: string;
-};
-
-export type MeetingLiveStreamingJoinTokenVariables = {
-  pathParams: MeetingLiveStreamingJoinTokenPathParams;
-} & FetcherExtraProps;
-
-/**
- * Get a meeting's join token to allow live streaming. The join token allows a recording bot implemented using Zoom meeting SDK to connect to a Zoom meeting &quot;hosted by the issuer of the token&quot;, and can call the streaming method automatically. It supports both regular live streaming, and raw streaming.
- *
- * **Prerequisites:**
- * * A Pro or higher plan for the meeting host.
- * * The **Allow livestreaming of meetings** user setting enabled in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:live_streaming`,`meeting_token:read:live_streaming`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:live_streaming_token`,`meeting:read:live_streaming_token:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingLiveStreamingJoinToken = (
-  variables: MeetingLiveStreamingJoinTokenVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingLiveStreamingJoinTokenResponse,
-    MeetingLiveStreamingJoinTokenError,
-    undefined,
-    {},
-    {},
-    MeetingLiveStreamingJoinTokenPathParams
-  >({
-    url: "/meetings/{meetingId}/jointoken/live_streaming",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingLocalArchivingArchiveTokenPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingLocalArchivingArchiveTokenError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingLocalArchivingArchiveTokenResponse = {
-  /**
-   * The number of seconds the archive token is valid for before it expires. This value always returns `120`.
-   *
-   * @format int64
-   * @example 120
-   */
-  expire_in?: 120;
-  /**
-   * The archive token.
-   *
-   * @example 2njt50mj
-   */
-  token?: string;
-};
-
-export type MeetingLocalArchivingArchiveTokenVariables = {
-  pathParams: MeetingLocalArchivingArchiveTokenPathParams;
-} & FetcherExtraProps;
-
-/**
- * Get a meeting's archive token to allow local archiving. The archive token allows a meeting SDK app or bot to get archive permission to access the meeting's raw audio and video media stream in real-time.
- *
- * **Prerequisites:**
- * * A Pro or higher plan for the meeting host.
- * * The **Archive meetings and webinars** account setting enabled in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_archiving`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_archiving_token:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingLocalArchivingArchiveToken = (
-  variables: MeetingLocalArchivingArchiveTokenVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingLocalArchivingArchiveTokenResponse,
-    MeetingLocalArchivingArchiveTokenError,
-    undefined,
-    {},
-    {},
-    MeetingLocalArchivingArchiveTokenPathParams
-  >({
-    url: "/meetings/{meetingId}/jointoken/local_archiving",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingLocalRecordingJoinTokenPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingLocalRecordingJoinTokenQueryParams = {
-  /**
-   * Whether to bypass the waiting room.
-   *
-   * @example true
-   */
-  bypass_waiting_room?: boolean;
-};
-
-export type MeetingLocalRecordingJoinTokenError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingLocalRecordingJoinTokenResponse = {
-  /**
-   * The number of seconds the join token is valid for before it expires. This value always returns `120`.
-   *
-   * @format int64
-   * @example 120
-   */
-  expire_in?: 120;
-  /**
-   * The join token.
-   *
-   * @example 2njt50mj
-   */
-  token?: string;
-};
-
-export type MeetingLocalRecordingJoinTokenVariables = {
-  pathParams: MeetingLocalRecordingJoinTokenPathParams;
-  queryParams?: MeetingLocalRecordingJoinTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get a meeting's join token to allow for local recording. The join token lets a recording bot implemented using Zoom Meeting SDK to connect to a Zoom meeting. The recording bot can then automatically start locally recording. This supports both regular and raw local recording types.
- *
- * **Prerequisites:**
- * * The **Local recording** user setting enabled in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_recording`,`meeting_token:read:local_recording`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_recording_token`,`meeting:read:local_recording_token:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingLocalRecordingJoinToken = (
-  variables: MeetingLocalRecordingJoinTokenVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingLocalRecordingJoinTokenResponse,
-    MeetingLocalRecordingJoinTokenError,
-    undefined,
-    {},
-    MeetingLocalRecordingJoinTokenQueryParams,
-    MeetingLocalRecordingJoinTokenPathParams
-  >({
-    url: "/meetings/{meetingId}/jointoken/local_recording",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type GetMeetingLiveStreamDetailsPathParams = {
-  /**
-   * Unique identifier of the meeting.
-   *
-   * @example 93398114182
-   */
-  meetingId: string;
-};
-
-export type GetMeetingLiveStreamDetailsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetMeetingLiveStreamDetailsResponse = {
-  /**
-   * Live streaming page URL. This is the URL using which anyone can view the livestream of the meeting.
-   *
-   * @example https://example.com/livestream/123
-   */
-  page_url?: string;
-  /**
-   * Stream Key.
-   *
-   * @example contact-ic@example.com
-   */
-  stream_key?: string;
-  /**
-   * Stream URL.
-   *
-   * @example https://example.com/livestream
-   */
-  stream_url?: string;
-  /**
-   * The number of pixels in each dimension that the video camera can display.
-   *
-   * @example 720p
-   */
-  resolution?: string;
-};
-
-export type GetMeetingLiveStreamDetailsVariables = {
-  pathParams: GetMeetingLiveStreamDetailsPathParams;
-} & FetcherExtraProps;
-
-/**
- * Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform. Get a meeting's livestream configuration details such as Stream URL, Stream Key and Page URL.
- *
- *
- * **Prerequisites:**
- *
- * * Meeting host must be a licensed user with a Pro or higher plan.
- *
- * * Live streaming details must have been [configured](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service#h_01589a6f-a40a-4e18-a448-cb746e52ebc5) for the meeting.
- *
- *
- *
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:livestream`,`meeting:read:livestream:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const getMeetingLiveStreamDetails = (
-  variables: GetMeetingLiveStreamDetailsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetMeetingLiveStreamDetailsResponse,
-    GetMeetingLiveStreamDetailsError,
-    undefined,
-    {},
-    {},
-    GetMeetingLiveStreamDetailsPathParams
-  >({
-    url: "/meetings/{meetingId}/livestream",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingLiveStreamUpdatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingLiveStreamUpdateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingLiveStreamUpdateRequestBody = {
-  /**
-   * The live stream page URL.
-   *
-   * @maxLength 1024
-   * @format uri
-   * @example https://example.com/livestream/123
-   */
-  page_url: string;
-  /**
-   * Stream name and key.
-   *
-   * @maxLength 512
-   * @example contact-it@example.com
-   */
-  stream_key: string;
-  /**
-   * Streaming URL.
-   *
-   * @maxLength 1024
-   * @example https://example.com/livestream
-   */
-  stream_url: string;
-  /**
-   * The number of pixels in each dimension that the video camera can display, required when a user enables 1080p. Use a value of `720p` or `1080p`
-   *
-   * @example 720p
-   */
-  resolution?: string;
-};
-
-export type MeetingLiveStreamUpdateVariables = {
-  body: MeetingLiveStreamUpdateRequestBody;
-  pathParams: MeetingLiveStreamUpdatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Update a meeting's livestream information. Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform.
- *
- * **Prerequisites:**
- * * Meeting host must have a Pro license.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream`,`meeting:update:livestream:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingLiveStreamUpdate = (
-  variables: MeetingLiveStreamUpdateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingLiveStreamUpdateError,
-    MeetingLiveStreamUpdateRequestBody,
-    {},
-    {},
-    MeetingLiveStreamUpdatePathParams
-  >({
-    url: "/meetings/{meetingId}/livestream",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export type MeetingLiveStreamStatusUpdatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingLiveStreamStatusUpdateError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingLiveStreamStatusUpdateRequestBody = {
-  /**
-   * The meeting's livestream status.
-   * * `start` - Start a livestream.
-   * * `stop` - Stop an ongoing livestream.
-   * * `mode` - Control a livestream view at runtime.
-   *
-   * @example start
-   */
-  action?: "start" | "stop" | "mode";
-  /**
-   * The meeting's livestreaming settings.
-   */
-  settings?: {
-    /**
-     * Whether to display the name of the active speaker during a meeting's livestream. Use this field if you pass the `start` value for the `action` field.
-     *
-     * @example true
-     */
-    active_speaker_name?: boolean;
-    /**
-     * The display name of the meeting's livestream. Use this field if you pass the `start` value for the `action` field.
-     *
-     * @maxLength 50
-     * @minLength 1
-     * @example Jill Chill
-     */
-    display_name?: string;
-    /**
-     * The layout of the meeting's livestream. Use this field if you pass the `start` or `mode` value for the `action` field.
-     * * `follow_host` - Follow host view.
-     * * `gallery_view` - Gallery view.
-     * * `speaker_view` - Speaker view.
-     *
-     * @example follow_host
-     * @default follow_host
-     */
-    layout?: "follow_host" | "gallery_view" | "speaker_view";
-    /**
-     * The livestream's closed caption type for this session. Use this field if you pass the `start` or `mode` value for the `action` field.
-     * * `burnt-in` - Burnt in captions.
-     * * `embedded` - Embedded captions.
-     * * `off` - Turn off captions.
-     *
-     * @example burnt-in
-     * @default burnt-in
-     */
-    close_caption?: "burnt-in" | "embedded" | "off";
-  };
-};
-
-export type MeetingLiveStreamStatusUpdateVariables = {
-  body?: MeetingLiveStreamStatusUpdateRequestBody;
-  pathParams: MeetingLiveStreamStatusUpdatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Zoom allows users to [livestream a meeting](https://support.zoom.us/hc/en-us/articles/115001777826-Live-Streaming-Meetings-or-Webinars-Using-a-Custom-Service) to a custom platform. Update the status of a meeting's livestream.
- *
- * **Prerequisites:**
- * * Meeting host must have a Pro license.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream_status`,`meeting:update:livestream_status:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingLiveStreamStatusUpdate = (
-  variables: MeetingLiveStreamStatusUpdateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingLiveStreamStatusUpdateError,
-    MeetingLiveStreamStatusUpdateRequestBody,
-    {},
-    {},
-    MeetingLiveStreamStatusUpdatePathParams
-  >({
-    url: "/meetings/{meetingId}/livestream/status",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export type GetameetingsummaryPathParams = {
-  /**
-   * The meeting's universally unique ID (UUID). When you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
-   *
-   * @example aDYlohsHRtCd4ii1uC2+hA==
-   */
-  meetingId: string;
-};
-
-export type GetameetingsummaryError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetameetingsummaryResponse = {
-  /**
-   * The ID of the user who is set as the meeting host.
-   *
-   * @example 30R7kT7bTIKSNUFEuH_Qlg
-   */
-  meeting_host_id?: string;
-  /**
-   * The meeting host's email address.
-   *
-   * @format email
-   * @example jchill@example.com
-   */
-  meeting_host_email?: string;
-  /**
-   * The unique meeting ID.
-   *
-   * Each meeting instance generates its own meeting UUID. After a meeting ends, a new UUID is generated for the next instance of the meeting.
-   *
-   *  Use the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API to retrieve a list of UUIDs from past meeting instances. [Double encode](/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
-   *
-   * @example aDYlohsHRtCd4ii1uC2+hA==
-   */
-  meeting_uuid?: string;
-  /**
-   * [The meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-)
-   * The meeting's unique identifier in **long** format, represented as int64 data type in JSON. Also known as the meeting number.
-   *
-   * @format int64
-   * @example 97763643886
-   */
-  meeting_id?: number;
-  /**
-   * The meeting topic.
-   *
-   * @example My Meeting
-   */
-  meeting_topic?: string;
-  /**
-   * The meeting's start date and time.
-   *
-   * @format date-time
-   * @example 2019-07-15T23:24:52Z
-   */
-  meeting_start_time?: string;
-  /**
-   * The meeting's end date and time.
-   *
-   * @format date-time
-   * @example 2020-07-15T23:30:19Z
-   */
-  meeting_end_time?: string;
-  /**
-   * The summary's start date and time.
-   *
-   * @format date-time
-   * @example 2019-07-15T23:24:52Z
-   */
-  summary_start_time?: string;
-  /**
-   * The summary's end date and time.
-   *
-   * @format date-time
-   * @example 2020-07-15T23:30:19Z
-   */
-  summary_end_time?: string;
-  /**
-   * The date and time when the meeting summary was created.
-   *
-   * @format date-time
-   * @example 2019-07-15T23:24:52Z
-   */
-  summary_created_time?: string;
-  /**
-   * The date and time when the meeting summary was last modified.
-   *
-   * @format date-time
-   * @example 2020-07-15T23:30:19Z
-   */
-  summary_last_modified_time?: string;
-  /**
-   * The user ID of the user who last modified the meeting summary.
-   *
-   * @example Lfi0BlBQTM-bbktE9BRUvA
-   */
-  summary_last_modified_user_id?: string;
-  /**
-   * The user email of the user who last modified the meeting summary.
-   *
-   * @example user@example.com
-   */
-  summary_last_modified_user_email?: string;
-  /**
-   * The summary title.
-   *
-   * @example Meeting summary for my meeting
-   */
-  summary_title?: string;
-  /**
-   * The summary overview.
-   *
-   * @example Meeting overview
-   * @deprecated true
-   */
-  summary_overview?: string;
-  /**
-   * The summary content details.
-   *
-   * @deprecated true
-   */
-  summary_details?: {
-    /**
-     * The summary label.
-     *
-     * @example Meeting overview
-     */
-    label?: string;
-    /**
-     * The summary content.
-     *
-     * @example Meeting overview
-     */
-    summary?: string;
-  }[];
-  /**
-   * The next steps.
-   *
-   * @deprecated true
-   */
-  next_steps?: string[];
-  /**
-   * The edited summary content.
-   *
-   * @deprecated true
-   */
-  edited_summary?: {
-    /**
-     * The user edited summary overview.
-     *
-     * @example Meeting overview
-     */
-    summary_overview?: string;
-    /**
-     * The user edited summary details.
-     *
-     * @example Meeting overview
-     */
-    summary_details?: string;
-    /**
-     * The user edited next steps.
-     */
-    next_steps?: string[];
-  };
-  /**
-     * The complete meeting summary in Markdown format. This unified field is used for all summaries. For compatibility, the legacy fields `summary_overview`, `summary_details`, `next_steps`, and `edited_summary` are still returned, but are deprecated and will not be supported in the future.
-     *
-     * @example ## Key takeaways
-    - Mobile app performance issues are affecting user retention.
-    - New onboarding flow received positive feedback from beta testers.
-    - Need to prioritize accessibility improvements.
-    - Customer support response time has improved by 25%.
-    
-    ## Discussed topics
-    ### Mobile App Performance
-    Discussion of recent performance metrics and user complaints
-    - **Details**
-        - Sarah (Product): Reports of app crashes increased 15% this month
-        - Mike (Engineering): Memory optimization needed in latest release
-        - Tom (QA): Identified memory leak in photo upload feature
-    - **Conclusion**
-        - Implement performance monitoring tools
-        - Prioritize memory optimization in next sprint
-    
-    ### Onboarding Flow
-    Review of beta testing results for new user onboarding
-    - **Details**
-        - Rachel (UX): 90% completion rate in beta testing
-        - David (Product): Positive feedback on simplified registration
-    - **Conclusion**
-        - Ready for full rollout next month
-        - Need to monitor analytics post-launch
-    
-    ### Accessibility Compliance
-    Discussion of current accessibility status and needed improvements
-    - **Details**
-        - Lisa (Design): Screen reader compatibility issues identified
-        - John (Engineering): WCAG compliance at 80%
-    - **Conclusion**
-        - Create accessibility improvement roadmap
-        - Schedule external audit
-    
-    ## Challenges
-    * Resource constraints for performance optimization
-    * Integration testing environment stability issues
-    * Lack of accessibility expertise in the team
-    
-    ## Action items
-    - **Sarah**
-      - Prepare performance monitoring implementation plan
-      - Schedule follow-up meeting with engineering team
-    - **Mike**
-      - Investigate memory leak fix
-      - Document performance optimization guidelines
-    - **Lisa**
-      - Create accessibility improvement proposal
-      - Research accessibility testing tools
-    - **Rachel**
-      - Prepare onboarding analytics dashboard
-      - Document beta testing findings
-     */
-  summary_content?: string;
-  /**
-   * The URL to view the full summary document in Zoom Docs.
-   *
-   * @format uri
-   * @example https://docs.zoom.us/doc/1aBcDeFgHiJkLmNoPqRsTu
-   */
-  summary_doc_url?: string;
-};
-
-export type GetameetingsummaryVariables = {
-  pathParams: GetameetingsummaryPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve the summary of a meeting or webinar.
- *
- * **Prerequisites**
- * - The host must have a Pro, Business, or higher subscription plan.
- * - For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
- * - For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
- * - End-to-End Encrypted (E2EE) meetings do not support summaries.
- *
- * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:summary`,`meeting:read:summary:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const getameetingsummary = (
-  variables: GetameetingsummaryVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetameetingsummaryResponse,
-    GetameetingsummaryError,
-    undefined,
-    {},
-    {},
-    GetameetingsummaryPathParams
-  >({
-    url: "/meetings/{meetingId}/meeting_summary",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type DeletemeetingorwebinarsummaryPathParams = {
-  /**
-   * The meeting's universally unique ID (UUID). When you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
-   *
-   * @example aDYlohsHRtCd4ii1uC2+hA==
-   */
-  meetingId: string;
-};
-
-export type DeletemeetingorwebinarsummaryError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type DeletemeetingorwebinarsummaryVariables = {
-  pathParams: DeletemeetingorwebinarsummaryPathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete the summary of a meeting or webinar.
- *
- * **Prerequisites**
- * * The host must have a Pro, Business, or higher subscription plan.
- * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
- * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
- * * End-to-End Encrypted (E2EE) meetings do not support summaries.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:write`,`meeting_summary:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:summary`,`meeting:delete:summary:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const deletemeetingorwebinarsummary = (
-  variables: DeletemeetingorwebinarsummaryVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeletemeetingorwebinarsummaryError,
-    undefined,
-    {},
-    {},
-    DeletemeetingorwebinarsummaryPathParams
-  >({
-    url: "/meetings/{meetingId}/meeting_summary",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export type MeetingAppAddPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingAppAddError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingAppAddResponse = {
-  /**
-   * The [meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in **long** format(represented as int64 data type in JSON), also known as the meeting number.
-   *
-   * @format int64
-   * @example 92674392836
-   */
-  id?: number;
-  /**
-   * For scheduled meetings only. Meeting start date-time in UTC/GMT, such as `2020-03-31T12:02:00Z`.
-   *
-   * @format date-time
-   * @example 2022-03-25T07:29:29Z
-   */
-  start_time?: string;
-  /**
-   * The app's ID.
-   *
-   * @example fdgsfh2ey82fuh
-   */
-  app_id?: string;
-};
-
-export type MeetingAppAddVariables = {
-  pathParams: MeetingAppAddPathParams;
-} & FetcherExtraProps;
-
-/**
- * Add an auto-open app in a meeting. This endpoint lets a developer auto-open an app in a specific meeting. This is only for configuring an app to automatically open before a given session. This can't open the app while a meeting or webinar is in session.
- *
- * **Prerequisites**:
- * * The meeting must not be a live meeting.
- * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:open_app`,`meeting:write:open_app:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingAppAdd = (
-  variables: MeetingAppAddVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingAppAddResponse,
-    MeetingAppAddError,
-    undefined,
-    {},
-    {},
-    MeetingAppAddPathParams
-  >({
-    url: "/meetings/{meetingId}/open_apps",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type MeetingAppDeletePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingAppDeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingAppDeleteVariables = {
-  pathParams: MeetingAppDeletePathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete a meeting auto-open app.
- *
- * **Prerequisites**:
- * * The meeting must not be a live meeting.
- * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:open_app`,`meeting:delete:open_app:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingAppDelete = (
-  variables: MeetingAppDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingAppDeleteError,
-    undefined,
-    {},
-    {},
-    MeetingAppDeletePathParams
-  >({
-    url: "/meetings/{meetingId}/open_apps",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export type MeetingPollsPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingPollsQueryParams = {
-  /**
-   * Whether to query for polls with the **Anonymous** option enabled:
-   * * `true` &mdash; Query for polls with the **Anonymous** option enabled.
-   * * `false` &mdash; Do not query for polls with the **Anonymous** option enabled.
-   *
-   * @example true
-   */
-  anonymous?: boolean;
-};
-
-export type MeetingPollsError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingPollsResponse = {
-  /**
-   * An array of polls.
-   */
-  polls?: {
-    /**
-     * The poll ID.
-     *
-     * @example QalIoKWLTJehBJ8e1xRrbQ
-     */
-    id?: string;
-    /**
-     * The meeting poll's status.
-     * `notstart` - Poll not started
-     * `started` - Poll started
-     * `ended` - Poll ended
-     * `sharing` - Sharing poll results
-     * `deactivated` - Poll deactivated
-     *
-     * @example notstart
-     */
-    status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
-    /**
-     * Whether meeting participants can answer poll questions anonymously.
-     *
-     * This value defaults to `false`.
-     *
-     * @example true
-     * @default false
-     */
-    anonymous?: boolean;
-    /**
-     * The type of poll.
-     * * `1` - Poll.
-     * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
-     * * `3` - Quiz. This feature must be enabled in your Zoom account.
-     *
-     *  This value defaults to `1`.
-     *
-     * @example 2
-     */
-    poll_type?: 1 | 2 | 3;
-    /**
-     * Information about the poll's questions.
-     */
-    questions?: {
-      /**
-       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
-       * * For `short_answer` polls, a maximum of 500 characters.
-       * * For `long_answer` polls, a maximum of 2,000 characters.
-       *
-       * @example 200
-       */
-      answer_max_character?: number;
-      /**
-       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
-       *
-       * @minimum 1
-       * @example 1
-       */
-      answer_min_character?: number;
-      /**
-       * Whether participants must answer the question:
-       * * `true` &mdash; The participant must answer the question.
-       * * `false` &mdash; The participant does not need to answer the question.
-       *
-       * **Note:**
-       * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-       * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      answer_required?: boolean;
-      /**
-       * The poll question's available answers. This field requires a **minimum** of two answers.
-       *
-       * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-       * * For `matching` polls, you can only provide a maximum of 16 answers.
-       * * For `rank_order` polls, you can only provide a maximum of seven answers.
-       *
-       * @minItems 2
-       */
-      answers?: string[];
-      /**
-       * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-       * * `true` &mdash; The answer is case-sensitive.
-       * * `false` &mdash; The answer is not case-sensitive.
-       *
-       * This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      case_sensitive?: boolean;
-      /**
-       * The poll question, up to 1024 characters.
-       *
-       * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-       *
-       * @maxLength 1024
-       * @example How useful was this meeting?
-       */
-      name?: string;
-      /**
-       * Information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-       */
-      prompts?: {
-        /**
-         * The question prompt's title.
-         *
-         * @example How are you?
-         */
-        prompt_question?: string;
-        /**
-         * The question prompt's correct answers:
-         * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-         * * For `rank_order` polls, you can only provide one correct answer.
-         */
-        prompt_right_answers?: string[];
-      }[];
-      /**
-       * The high score label for the `rating_max_value` field.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @example Extremely Likely
-       */
-      rating_max_label?: string;
-      /**
-       * The rating scale's maximum value, up to a maximum value of 10.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @maximum 10
-       * @example 4
-       */
-      rating_max_value?: number;
-      /**
-       * The low score label for the `rating_min_value` field.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @example Not likely
-       */
-      rating_min_label?: string;
-      /**
-       * The rating scale's minimum value. This value cannot be less than zero.
-       *
-       * This field only applies to the `rating_scale` poll.
-       *
-       * @minimum 0
-       * @example 0
-       */
-      rating_min_value?: number;
-      /**
-       * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
-       *
-       *  For `single` and `matching` polls, this field only accepts one answer.
-       *
-       * @minItems 1
-       */
-      right_answers?: string[];
-      /**
-       * Whether to display the radio selection as a drop-down box:
-       * * `true` &mdash; Show as a drop-down box.
-       * * `false` &mdash; Do not show as a drop-down box.
-       *
-       * This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      show_as_dropdown?: boolean;
-      /**
-       * The poll's question and answer type:
-       * * `single` &mdash; Single choice.
-       * * `multiple` &mdash; Multiple choice.
-       * * `matching` &mdash; Matching.
-       * * `rank_order` &mdash; Rank order.
-       * * `short_answer` &mdash; Short answer.
-       * * `long_answer` &mdash; Long answer.
-       * * `fill_in_the_blank` &mdash; Fill in the blank.
-       * * `rating_scale` &mdash; Rating scale.
-       *
-       * @example single
-       */
-      type?:
-        | "single"
-        | "multiple"
-        | "matching"
-        | "rank_order"
-        | "short_answer"
-        | "long_answer"
-        | "fill_in_the_blank"
-        | "rating_scale";
-    }[];
-    /**
-     * The poll's title, up to 64 characters.
-     *
-     * @maxLength 64
-     * @example Learn something new
-     */
-    title?: string;
-  }[];
-  /**
-   * The number of all records available across pages
-   *
-   * @example 1
-   */
-  total_records?: number;
-};
-
-export type MeetingPollsVariables = {
-  pathParams: MeetingPollsPathParams;
-  queryParams?: MeetingPollsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Polls allow the meeting host to survey attendees. List all [polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) of a meeting.
- *
- *
- *
- * **Prerequisites**:
- *
- * * Host user type must be **Pro** or higher plan.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_polls`,`meeting:read:list_polls:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingPolls = (
-  variables: MeetingPollsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingPollsResponse,
-    MeetingPollsError,
-    undefined,
-    {},
-    MeetingPollsQueryParams,
-    MeetingPollsPathParams
-  >({
-    url: "/meetings/{meetingId}/polls",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingPollCreatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingPollCreateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingPollCreateResponse = {
-  /**
-   * The meeting poll ID
-   *
-   * @example QalIoKWLTJehBJ8e1xRrbQ
-   */
-  id?: string;
-  /**
-   * The status of the meeting poll:
-   *  `notstart` - Poll not started
-   *  `started` - Poll started
-   *  `ended` - Poll ended
-   *  `sharing` - Sharing poll results
-   *
-   * @example notstart
-   */
-  status?: "notstart" | "started" | "ended" | "sharing";
-  /**
-   * Whether meeting participants answer poll questions anonymously.
-   *
-   * This value defaults to `false`.
-   *
-   * @example true
-   * @default false
-   */
-  anonymous?: boolean;
-  /**
-   * The type of poll:
-   * * `1` &mdash; Poll.
-   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
-   *
-   *  This value defaults to `1`.
-   *
-   * @example 2
-   */
-  poll_type?: 1 | 2 | 3;
-  /**
-   * The information about the poll's questions.
-   */
-  questions?: {
-    /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
-     * * For `short_answer` polls, a maximum of 500 characters.
-     * * For `long_answer` polls, a maximum of 2,000 characters.
-     *
-     * @example 200
-     */
-    answer_max_character?: number;
-    /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
-     *
-     * @minimum 1
-     * @example 1
-     */
-    answer_min_character?: number;
-    /**
-     * Whether participants must answer the question:
-     * * `true` &mdash; The participant must answer the question.
-     * * `false` &mdash; The participant does not need to answer the question.
-     *
-     * **Note:**
-     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    answer_required?: boolean;
-    /**
-     * The poll question's available answers. This field requires a **minimum** of two answers.
-     *
-     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-     * * For `matching` polls, you can only provide a maximum of 16 answers.
-     * * For `rank_order` polls, you can only provide a maximum of seven answers.
-     *
-     * @minItems 2
-     */
-    answers?: string[];
-    /**
-     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-     * * `true` &mdash; The answer is case-sensitive.
-     * * `false` &mdash; The answer is not case-sensitive.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    case_sensitive?: boolean;
-    /**
-     * The poll question, up to 1024 characters.
-     *
-     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-     *
-     * @maxLength 1024
-     * @example How useful was this meeting?
-     */
-    name?: string;
-    /**
-     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-     */
-    prompts?: {
-      /**
-       * The question prompt's title.
-       *
-       * @example How are you?
-       */
-      prompt_question?: string;
-      /**
-       * The question prompt's correct answers:
-       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-       * * For `rank_order` polls, you can only provide one correct answer.
-       */
-      prompt_right_answers?: string[];
-    }[];
-    /**
-     * The high score label for the `rating_max_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Extremely Likely
-     */
-    rating_max_label?: string;
-    /**
-     * The rating scale's maximum value, up to a maximum value of 10.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @maximum 10
-     * @example 4
-     */
-    rating_max_value?: number;
-    /**
-     * The low score label for the `rating_min_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Not likely
-     */
-    rating_min_label?: string;
-    /**
-     * The rating scale's minimum value. This value cannot be less than zero.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @minimum 0
-     * @example 0
-     */
-    rating_min_value?: number;
-    /**
-     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
-     *
-     *  For `single` and `matching` polls, this field only accepts one answer.
-     *
-     * @minItems 1
-     */
-    right_answers?: string[];
-    /**
-     * Whether to display the radio selection as a drop-down box:
-     * * `true` &mdash; Show as a drop-down box.
-     * * `false` &mdash; Do not show as a drop-down box.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_as_dropdown?: boolean;
-    /**
-     * The poll's question and answer type:
-     * * `single` &mdash; Single choice.
-     * * `multiple` &mdash; Multiple choice.
-     * * `matching` &mdash; Matching.
-     * * `rank_order` &mdash; Rank order.
-     * * `short_answer` &mdash; Short answer.
-     * * `long_answer` &mdash; Long answer.
-     * * `fill_in_the_blank` &mdash; Fill in the blank.
-     * * `rating_scale` &mdash; Rating scale.
-     *
-     * @example single
-     */
-    type?:
-      | "single"
-      | "multiple"
-      | "matching"
-      | "rank_order"
-      | "short_answer"
-      | "long_answer"
-      | "fill_in_the_blank"
-      | "rating_scale";
-  }[];
-  /**
-   * The poll's title, up to 64 characters.
-   *
-   * @maxLength 64
-   * @example Learn something new
-   */
-  title?: string;
-};
-
-export type MeetingPollCreateRequestBody = {
-  /**
-   * Whether meeting participants answer poll questions anonymously.
-   *
-   * This value defaults to `false`.
-   *
-   * @example true
-   * @default false
-   */
-  anonymous?: boolean;
-  /**
-   * The type of poll:
-   * * `1` &mdash; Poll.
-   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
-   *
-   *  This value defaults to `1`.
-   *
-   * @example 2
-   */
-  poll_type?: 1 | 2 | 3;
-  /**
-   * The information about the poll's questions.
-   */
-  questions?: {
-    /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
-     * * For `short_answer` polls, a maximum of 500 characters.
-     * * For `long_answer` polls, a maximum of 2,000 characters.
-     *
-     * @example 200
-     */
-    answer_max_character?: number;
-    /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
-     *
-     * @minimum 1
-     * @example 1
-     */
-    answer_min_character?: number;
-    /**
-     * Whether participants must answer the question:
-     * * `true` &mdash; The participant must answer the question.
-     * * `false` &mdash; The participant does not need to answer the question.
-     *
-     * **Note:**
-     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    answer_required?: boolean;
-    /**
-     * The poll question's available answers. This field requires a **minimum** of two answers.
-     *
-     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-     * * For `matching` polls, you can only provide a maximum of 16 answers.
-     * * For `rank_order` polls, you can only provide a maximum of seven answers.
-     *
-     * @minItems 2
-     */
-    answers?: string[];
-    /**
-     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-     * * `true` &mdash; The answer is case-sensitive.
-     * * `false` &mdash; The answer is not case-sensitive.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    case_sensitive?: boolean;
-    /**
-     * The poll question, up to 1024 characters.
-     *
-     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-     *
-     * @maxLength 1024
-     * @example How useful was this meeting?
-     */
-    name?: string;
-    /**
-     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-     */
-    prompts?: {
-      /**
-       * The question prompt's title.
-       *
-       * @example How are you?
-       */
-      prompt_question?: string;
-      /**
-       * The question prompt's correct answers:
-       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-       * * For `rank_order` polls, you can only provide one correct answer.
-       */
-      prompt_right_answers?: string[];
-    }[];
-    /**
-     * The high score label for the `rating_max_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Extremely Likely
-     */
-    rating_max_label?: string;
-    /**
-     * The rating scale's maximum value, up to a maximum value of 10.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @maximum 10
-     * @example 4
-     */
-    rating_max_value?: number;
-    /**
-     * The low score label for the `rating_min_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Not likely
-     */
-    rating_min_label?: string;
-    /**
-     * The rating scale's minimum value. This value cannot be less than zero.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @minimum 0
-     * @example 0
-     */
-    rating_min_value?: number;
-    /**
-     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
-     *
-     *  For `single` and `matching` polls, this field only accepts one answer.
-     *
-     * @minItems 1
-     */
-    right_answers?: string[];
-    /**
-     * Whether to display the radio selection as a drop-down box:
-     * * `true` &mdash; Show as a drop-down box.
-     * * `false` &mdash; Do not show as a drop-down box.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_as_dropdown?: boolean;
-    /**
-     * The poll's question and answer type:
-     * * `single` &mdash; Single choice.
-     * * `multiple` &mdash; Multiple choice.
-     * * `matching` &mdash; Matching.
-     * * `rank_order` &mdash; Rank order.
-     * * `short_answer` &mdash; Short answer.
-     * * `long_answer` &mdash; Long answer.
-     * * `fill_in_the_blank` &mdash; Fill in the blank.
-     * * `rating_scale` &mdash; Rating scale.
-     *
-     * @example single
-     */
-    type?:
-      | "single"
-      | "multiple"
-      | "matching"
-      | "rank_order"
-      | "short_answer"
-      | "long_answer"
-      | "fill_in_the_blank"
-      | "rating_scale";
-  }[];
-  /**
-   * The poll's title, up to 64 characters.
-   *
-   * @maxLength 64
-   * @example Learn something new
-   */
-  title?: string;
-};
-
-export type MeetingPollCreateVariables = {
-  body?: MeetingPollCreateRequestBody;
-  pathParams: MeetingPollCreatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Polls allow the meeting host to survey attendees. Create a [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) for a meeting.
- *
- *
- *
- * **Prerequisites**:
- *
- * * Host user type must be **Pro** or higher plan.
- * * Polling feature must be enabled in the host's account.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:poll`,`meeting:write:poll:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingPollCreate = (
-  variables: MeetingPollCreateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingPollCreateResponse,
-    MeetingPollCreateError,
-    MeetingPollCreateRequestBody,
-    {},
-    {},
-    MeetingPollCreatePathParams
-  >({
-    url: "/meetings/{meetingId}/polls",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type MeetingPollGetPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a `long` format integer, not a simple integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-  /**
-   * The poll ID.
-   *
-   * @example QalIoKWLTJehBJ8e1xRrbQ
-   */
-  pollId: string;
-};
-
-export type MeetingPollGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingPollGetResponse = {
-  /**
-   * The meeting poll ID.
-   *
-   * @example QalIoKWLTJehBJ8e1xRrbQ
-   */
-  id?: string;
-  /**
-   * The meeting poll's status.
-   * `notstart` - Poll not started
-   * `started` - Poll started
-   * `ended` - Poll ended
-   * `sharing` - Sharing poll results
-   * `deactivated` - Poll deactivated
-   *
-   * @example notstart
-   */
-  status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
-  /**
-   * Whether meeting participants answer poll questions anonymously.
-   *
-   * This value defaults to `false`.
-   *
-   * @example true
-   * @default false
-   */
-  anonymous?: boolean;
-  /**
-   * The poll's type.
-   * * `1` - Poll.
-   * * `2` - Advanced poll. This feature must be enabled in your Zoom account.
-   * * `3` - Quiz. This feature must be enabled in your Zoom account.
-   *
-   *  This value defaults to `1`.
-   *
-   * @example 2
-   */
-  poll_type?: 1 | 2 | 3;
-  /**
-   * Information about the poll's questions.
-   */
-  questions?: {
-    /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
-     * * For `short_answer` polls, a maximum of 500 characters.
-     * * For `long_answer` polls, a maximum of 2,000 characters.
-     *
-     * @example 200
-     */
-    answer_max_character?: number;
-    /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one-character minimum value.
-     *
-     * @minimum 1
-     * @example 1
-     */
-    answer_min_character?: number;
-    /**
-     * Whether participants must answer the question.
-     * * `true` - The participant must answer the question.
-     * * `false` - The participant does not need to answer the question.
-     *
-     * **Note:**
-     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    answer_required?: boolean;
-    /**
-     * The poll question's available answers. This field requires a **minimum** of two answers.
-     *
-     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-     * * For `matching` polls, you can only provide a maximum of 16 answers.
-     * * For `rank_order` polls, you can only provide a maximum of seven answers.
-     *
-     * @minItems 2
-     */
-    answers?: string[];
-    /**
-     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-     * * `true` &mdash; The answer is case-sensitive.
-     * * `false` &mdash; The answer is not case-sensitive.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    case_sensitive?: boolean;
-    /**
-     * The poll question, up to 1024 characters.
-     *
-     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-     *
-     * @maxLength 1024
-     * @example How useful was this meeting?
-     */
-    name?: string;
-    /**
-     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-     */
-    prompts?: {
-      /**
-       * The question prompt's title.
-       *
-       * @example How are you?
-       */
-      prompt_question?: string;
-      /**
-       * The question prompt's correct answers:
-       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-       * * For `rank_order` polls, you can only provide one correct answer.
-       */
-      prompt_right_answers?: string[];
-    }[];
-    /**
-     * The high score label for the `rating_max_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Extremely Likely
-     */
-    rating_max_label?: string;
-    /**
-     * The rating scale's maximum value, up to a maximum value of 10.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @maximum 10
-     * @example 4
-     */
-    rating_max_value?: number;
-    /**
-     * The low score label for the `rating_min_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Not likely
-     */
-    rating_min_label?: string;
-    /**
-     * The rating scale's minimum value. This value cannot be less than zero.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @minimum 0
-     * @example 0
-     */
-    rating_min_value?: number;
-    /**
-     * The poll question's correct answer(s). This field is required if the poll's `type` value is `3` (Quiz).
-     *
-     *  For `single` and `matching` polls, this field only accepts one answer.
-     *
-     * @minItems 1
-     */
-    right_answers?: string[];
-    /**
-     * Whether to display the radio selection as a drop-down box.
-     * * `true` - Show as a drop-down box.
-     * * `false` - Do not show as a drop-down box.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_as_dropdown?: boolean;
-    /**
-     * The poll's question and answer type.
-     * * `single` - Single choice.
-     * * `multiple` - Multiple choice.
-     * * `matching` - Matching.
-     * * `rank_order` - Rank order.
-     * * `short_answer` - Short answer.
-     * * `long_answer` - Long answer.
-     * * `fill_in_the_blank` - Fill in the blank.
-     * * `rating_scale` - Rating scale.
-     *
-     * @example single
-     */
-    type?:
-      | "single"
-      | "multiple"
-      | "matching"
-      | "rank_order"
-      | "short_answer"
-      | "long_answer"
-      | "fill_in_the_blank"
-      | "rating_scale";
-  }[];
-  /**
-   * The poll's title, up to 64 characters.
-   *
-   * @maxLength 64
-   * @example Learn something new
-   */
-  title?: string;
-};
-
-export type MeetingPollGetVariables = {
-  pathParams: MeetingPollGetPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
- *
- * **Prerequisites**:
- * * Host must have Pro or higher plan.
- * * Enable the **Meeting Polls/Quizzes** setting in the Zoom web portal.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:poll`,`meeting:read:poll:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingPollGet = (
-  variables: MeetingPollGetVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingPollGetResponse,
-    MeetingPollGetError,
-    undefined,
-    {},
-    {},
-    MeetingPollGetPathParams
-  >({
-    url: "/meetings/{meetingId}/polls/{pollId}",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingPollUpdatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-  /**
-   * The poll ID.
-   *
-   * @example QalIoKWLTJehBJ8e1xRrbQ
-   */
-  pollId: string;
-};
-
-export type MeetingPollUpdateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingPollUpdateRequestBody = {
-  /**
-   * Whether meeting participants answer poll questions anonymously.
-   *
-   * This value defaults to `false`.
-   *
-   * @example true
-   * @default false
-   */
-  anonymous?: boolean;
-  /**
-   * The type of poll.
-   * * `1` - Poll.
-   * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
-   * * `3` - Quiz. This feature must be enabled in your Zoom account.
-   *
-   *  This value defaults to `1`.
-   *
-   * @example 2
-   */
-  poll_type?: 1 | 2 | 3;
-  /**
-   * The information about the poll's questions.
-   */
-  questions?: {
-    /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
-     * * For `short_answer` polls, a maximum of 500 characters.
-     * * For `long_answer` polls, a maximum of 2,000 characters.
-     *
-     * @example 200
-     */
-    answer_max_character?: number;
-    /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one character minimum value.
-     *
-     * @minimum 1
-     * @example 1
-     */
-    answer_min_character?: number;
-    /**
-     * Whether participants must answer the question.
-     * * `true` - The participant must answer the question.
-     * * `false` - The participant does not need to answer the question.
-     *
-     * **Note:**
-     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
-     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    answer_required?: boolean;
-    /**
-     * The poll question's available answers. This field requires a **minimum** of two answers.
-     *
-     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
-     * * For `matching` polls, you can only provide a maximum of 16 answers.
-     * * For `rank_order` polls, you can only provide a maximum of seven answers.
-     *
-     * @minItems 2
-     */
-    answers?: string[];
-    /**
-     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-     * * `true` - The answer is case-sensitive.
-     * * `false` - The answer is not case-sensitive.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    case_sensitive?: boolean;
-    /**
-     * The poll question, up to 1024 characters.
-     *
-     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
-     *
-     * @maxLength 1024
-     * @example How useful was this meeting?
-     */
-    name?: string;
-    /**
-     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You must provide a minimum of two prompts, up to a maximum of 10 prompts.
-     */
-    prompts?: {
-      /**
-       * The question prompt's title.
-       *
-       * @example How are you?
-       */
-      prompt_question?: string;
-      /**
-       * The question prompt's correct answers:
-       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
-       * * For `rank_order` polls, you can only provide one correct answer.
-       */
-      prompt_right_answers?: string[];
-    }[];
-    /**
-     * The high score label for the `rating_max_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Extremely Likely
-     */
-    rating_max_label?: string;
-    /**
-     * The rating scale's maximum value, up to a maximum value of 10.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @maximum 10
-     * @example 4
-     */
-    rating_max_value?: number;
-    /**
-     * The low score label for the `rating_min_value` field.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @example Not likely
-     */
-    rating_min_label?: string;
-    /**
-     * The rating scale's minimum value. This value cannot be less than zero.
-     *
-     * This field only applies to the `rating_scale` poll.
-     *
-     * @minimum 0
-     * @example 0
-     */
-    rating_min_value?: number;
-    /**
-     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
-     *
-     *  For `single` and `matching` polls, this field only accepts one answer.
-     *
-     * @minItems 1
-     */
-    right_answers?: string[];
-    /**
-     * Whether to display the radio selection as a drop-down box.
-     * * `true` - Show as a drop-down box.
-     * * `false` - Do not show as a drop-down box.
-     *
-     * This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_as_dropdown?: boolean;
-    /**
-     * The poll's question and answer type.
-     * * `single` - Single choice.
-     * * `multiple` - Multiple choice.
-     * * `matching` - Matching.
-     * * `rank_order` - Rank order.
-     * * `short_answer` - Short answer.
-     * * `long_answer` - Long answer.
-     * * `fill_in_the_blank` - Fill in the blank.
-     * * `rating_scale` - Rating scale.
-     *
-     * @example single
-     */
-    type?:
-      | "single"
-      | "multiple"
-      | "matching"
-      | "rank_order"
-      | "short_answer"
-      | "long_answer"
-      | "fill_in_the_blank"
-      | "rating_scale";
-  }[];
-  /**
-   * The poll's title, up to 64 characters.
-   *
-   * @maxLength 64
-   * @example Learn something new
-   */
-  title?: string;
-};
-
-export type MeetingPollUpdateVariables = {
-  body?: MeetingPollUpdateRequestBody;
-  pathParams: MeetingPollUpdatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Polls allow the meeting host to survey attendees. Update information of a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
- *
- * **Prerequisites**:
- * * Host user type must be **Pro** or higher plan.
- * * The **Meeting Polls/Quizzes** setting enabled in the Zoom web portal.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:poll`,`meeting:update:poll:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingPollUpdate = (
-  variables: MeetingPollUpdateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingPollUpdateError,
-    MeetingPollUpdateRequestBody,
-    {},
-    {},
-    MeetingPollUpdatePathParams
-  >({
-    url: "/meetings/{meetingId}/polls/{pollId}",
-    method: "put",
-    ...variables,
-    signal,
-  });
-
-export type MeetingPollDeletePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-  /**
-   * The poll ID
-   *
-   * @example QalIoKWLTJehBJ8e1xRrbQ
-   */
-  pollId: string;
-};
-
-export type MeetingPollDeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingPollDeleteVariables = {
-  pathParams: MeetingPollDeletePathParams;
-} & FetcherExtraProps;
-
-/**
- * Polls allow the meeting host to survey attendees. Delete a meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
- *
- * **Prerequisites**:
- *
- * * Host user type must be **Pro**.
- * * Polling feature should be enabled in the host's account.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:poll`,`meeting:delete:poll:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingPollDelete = (
-  variables: MeetingPollDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingPollDeleteError,
-    undefined,
-    {},
-    {},
-    MeetingPollDeletePathParams
-  >({
-    url: "/meetings/{meetingId}/polls/{pollId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantsPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a long format integer, not an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingRegistrantsQueryParams = {
-  /**
-   * The meeting or webinar occurrence ID.
-   *
-   * @example 1648194360000
-   */
-  occurrence_id?: string;
-  /**
-   * Query by the registrant's status.
-   * * `pending` - The registration is pending.
-   * * `approved` - The registrant is approved.
-   * * `denied` - The registration is denied.
-   *
-   * @example pending
-   * @default approved
-   */
-  status?: "pending" | "approved" | "denied";
-  /**
-   * The number of records returned within a single API call.
-   *
-   * @maximum 300
-   * @example 30
-   * @default 30
-   */
-  page_size?: number;
-  /**
-   * **Deprecated.** We will no longer support this field in a future release. Instead, use the `next_page_token` for pagination.
-   *
-   * @example 1
-   * @default 1
-   */
-  page_number?: number;
-  /**
-   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
-   *
-   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
-   */
-  next_page_token?: string;
-};
-
-export type MeetingRegistrantsError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantsResponse = {
-  /**
-   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
-   *
-   * @example w7587w4eiyfsudgf
-   */
-  next_page_token?: string;
-  /**
-   * The number of pages returned for the request made.
-   *
-   * @example 1
-   */
-  page_count?: number;
-  /**
-   * **Deprecated.** We will no longer support this field in a future release. Instead, use the `next_page_token` for pagination.
-   *
-   * @example 1
-   * @deprecated true
-   * @default 1
-   */
-  page_number?: number;
-  /**
-   * The number of records returned with a single API call.
-   *
-   * @maximum 300
-   * @example 30
-   * @default 30
-   */
-  page_size?: number;
-  /**
-   * The total number of all the records available across pages.
-   *
-   * @example 20
-   */
-  total_records?: number;
-  /**
-   * List of registrant objects.
-   */
-  registrants?: {
-    /**
-     * The registrant's address.
-     *
-     * @example 1800 Amphibious Blvd.
-     */
-    address?: string;
-    /**
-     * The registrant's city.
-     *
-     * @example Mountain View
-     */
-    city?: string;
-    /**
-     * The registrant's questions and comments.
-     *
-     * @example Looking forward to the discussion.
-     */
-    comments?: string;
-    /**
-     * The registrant's two-letter [country code](/docs/api/rest/other-references/abbreviation-lists/#countries).
-     *
-     * @example US
-     */
-    country?: string;
-    /**
-     * Information about custom questions.
-     */
-    custom_questions?: {
-      /**
-       * The title of the custom question.
-       *
-       * @example What do you hope to learn from this?
-       */
-      title?: string;
-      /**
-       * The custom question's response value. This has a limit of 128 characters.
-       *
-       * @maxLength 128
-       * @example Look forward to learning how you come up with new recipes and what other services you offer.
-       */
-      value?: string;
-    }[];
-    /**
-     * The registrant's email address. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for return value details.
-     *
-     * @maxLength 128
-     * @format email
-     * @example jchill@example.com
-     */
-    email: string;
-    /**
-     * The registrant's first name.
-     *
-     * @maxLength 64
-     * @example Jill
-     */
-    first_name: string;
-    /**
-     * The registrant's industry.
-     *
-     * @example Food
-     */
-    industry?: string;
-    /**
-     * The registrant's job title.
-     *
-     * @example Chef
-     */
-    job_title?: string;
-    /**
-     * The registrant's last name.
-     *
-     * @maxLength 64
-     * @example Chill
-     */
-    last_name?: string;
-    /**
-     * The registrant's number of employees.
-     * * `1-20`
-     * * `21-50`
-     * * `51-100`
-     * * `101-250`
-     * * `251-500`
-     * * `501-1,000`
-     * * `1,001-5,000`
-     * * `5,001-10,000`
-     * * `More than 10,000`
-     *
-     * @example 1-20
-     */
-    no_of_employees?:
-      | ""
-      | "1-20"
-      | "21-50"
-      | "51-100"
-      | "101-250"
-      | "251-500"
-      | "501-1,000"
-      | "1,001-5,000"
-      | "5,001-10,000"
-      | "More than 10,000";
-    /**
-     * The registrant's organization.
-     *
-     * @example Cooking Org
-     */
-    org?: string;
-    /**
-     * The registrant's phone number.
-     *
-     * @example 5550100
-     */
-    phone?: string;
-    /**
-     * The registrant's purchasing time frame.
-     * * `Within a month`
-     * * `1-3 months`
-     * * `4-6 months`
-     * * `More than 6 months`
-     * * `No timeframe`
-     *
-     * @example 1-3 months
-     */
-    purchasing_time_frame?:
-      | ""
-      | "Within a month"
-      | "1-3 months"
-      | "4-6 months"
-      | "More than 6 months"
-      | "No timeframe";
-    /**
-     * The registrant's role in the purchase process.
-     * * `Decision Maker`
-     * * `Evaluator/Recommender`
-     * * `Influencer`
-     * * `Not involved`
-     *
-     * @example Influencer
-     */
-    role_in_purchase_process?:
-      | ""
-      | "Decision Maker"
-      | "Evaluator/Recommender"
-      | "Influencer"
-      | "Not involved";
-    /**
-     * The registrant's state or province.
-     *
-     * @example CA
-     */
-    state?: string;
-    /**
-     * The status of the registrant's registration.
-     *   `approved` - User has been successfully approved for the webinar.
-     *   `pending` - The registration is still pending.
-     *   `denied` - User has been denied from joining the webinar.
-     *
-     * @example approved
-     */
-    status?: "approved" | "denied" | "pending";
-    /**
-     * The registrant's ZIP or postal code.
-     *
-     * @example 94045
-     */
-    zip?: string;
-    /**
-     * Registrant ID.
-     *
-     * @example 9tboDiHUQAeOnbmudzWa5g
-     */
-    id?: string;
-    /**
-     * The time when the registrant registered.
-     *
-     * @format date-time
-     * @example 2022-03-22T05:59:09Z
-     */
-    create_time?: string;
-    /**
-     * The URL that an approved registrant can use to join the meeting or webinar.
-     *
-     * @format string
-     * @example https://example.com/j/11111
-     */
-    join_url?: string;
-    /**
-     * The participant PIN code is used to authenticate audio participants before they join the meeting.
-     *
-     * @format int64
-     * @example 380303
-     */
-    participant_pin_code?: number;
-  }[];
-};
-
-export type MeetingRegistrantsVariables = {
-  pathParams: MeetingRegistrantsPathParams;
-  queryParams?: MeetingRegistrantsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * List users that have registered for a meeting. A host or a user with admin permission can require [registration for a Zoom meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
- *
- * **Prerequisites**:
- * * Host user type must be **Pro** or higher plan.
- * * Registration must be enabled for the meeting.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registrants`,`meeting:read:list_registrants:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const meetingRegistrants = (
-  variables: MeetingRegistrantsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingRegistrantsResponse,
-    MeetingRegistrantsError,
-    undefined,
-    {},
-    MeetingRegistrantsQueryParams,
-    MeetingRegistrantsPathParams
-  >({
-    url: "/meetings/{meetingId}/registrants",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantCreatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingRegistrantCreateQueryParams = {
-  /**
-   * A comma-separated list of meeting occurrence IDs. You can get this value with the [Get a meeting](/docs/api-reference/zoom-api/methods#operation/meeting) API.
-   *
-   * @example 1648194360000,1648367160000
-   */
-  occurrence_ids?: string;
-};
-
-export type MeetingRegistrantCreateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantCreateResponse = {
-  /**
-   * The meeting ID.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  id?: number;
-  /**
-   * The URL the registrant can use to join the meeting.
-   *
-   * The API will not return this field if the meeting was [created](/docs/api-reference/zoom-api/methods#operation/meetingCreate) with the `approval_type` field value of `1` (manual approval).
-   *
-   * @example https://example.com/j/11111
-   */
-  join_url?: string;
-  /**
-   * The registrant's ID.
-   *
-   * @example fdgsfh2ey82fuh
-   */
-  registrant_id?: string;
-  /**
-   * The meeting's start time.
-   *
-   * @format date-time
-   * @example 2021-07-13T21:44:51Z
-   */
-  start_time?: string;
-  /**
-   * The meeting's topic.
-   *
-   * @maxLength 200
-   * @example My Meeting
-   */
-  topic?: string;
-  /**
-   * Array of occurrence objects.
-   */
-  occurrences?: {
-    /**
-     * Duration.
-     *
-     * @example 60
-     */
-    duration?: number;
-    /**
-     * Occurrence ID: Unique Identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
-     *
-     * @example 1648194360000
-     */
-    occurrence_id?: string;
-    /**
-     * Start time.
-     *
-     * @format date-time
-     * @example 2022-03-25T07:46:00Z
-     */
-    start_time?: string;
-    /**
-     * Occurrence status.
-     *
-     * @example available
-     */
-    status?: string;
-  }[];
-  /**
-   * The participant PIN code is used to authenticate audio participants before they join the meeting.
-   *
-   * @format int64
-   * @example 380303
-   */
-  participant_pin_code?: number;
-};
-
-export type MeetingRegistrantCreateRequestBody = {
-  /**
-   * The registrant's first name.
-   *
-   * @maxLength 64
-   * @example Jill
-   */
-  first_name: string;
-  /**
-   * The registrant's last name.
-   *
-   * @maxLength 64
-   * @example Chill
-   */
-  last_name?: string;
-  /**
-   * The registrant's email address.
-   *
-   * @maxLength 128
-   * @format email
-   * @example jchill@example.com
-   */
-  email: string;
-  /**
-   * The registrant's address.
-   *
-   * @example 1800 Amphibious Blvd.
-   */
-  address?: string;
-  /**
-   * The registrant's city.
-   *
-   * @example Mountain View
-   */
-  city?: string;
-  /**
-   * The registrant's state or province.
-   *
-   * @example CA
-   */
-  state?: string;
-  /**
-   * The registrant's ZIP or postal code.
-   *
-   * @example 94045
-   */
-  zip?: string;
-  /**
-   * The registrant's two-letter [country code](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries).
-   *
-   * @example US
-   */
-  country?: string;
-  /**
-   * The registrant's phone number.
-   *
-   * @example 5550100
-   */
-  phone?: string;
-  /**
-   * The registrant's questions and comments.
-   *
-   * @example Looking forward to the discussion.
-   */
-  comments?: string;
-  /**
-   * Information about custom questions.
-   */
-  custom_questions?: {
-    /**
-     * The title of the custom question.
-     *
-     * @example What do you hope to learn from this?
-     */
-    title?: string;
-    /**
-     * The custom question's response value. This has a limit of 128 characters.
-     *
-     * @maxLength 128
-     * @example Look forward to learning how you come up with new recipes and what other services you offer.
-     */
-    value?: string;
-  }[];
-  /**
-   * The registrant's industry.
-   *
-   * @example Food
-   */
-  industry?: string;
-  /**
-   * The registrant's job title.
-   *
-   * @example Chef
-   */
-  job_title?: string;
-  /**
-   * The registrant's number of employees:
-   * * `1-20`
-   * * `21-50`
-   * * `51-100`
-   * * `101-500`
-   * * `500-1,000`
-   * * `1,001-5,000`
-   * * `5,001-10,000`
-   * * `More than 10,000`
-   *
-   * @example 1-20
-   */
-  no_of_employees?:
-    | ""
-    | "1-20"
-    | "21-50"
-    | "51-100"
-    | "101-500"
-    | "500-1,000"
-    | "1,001-5,000"
-    | "5,001-10,000"
-    | "More than 10,000";
-  /**
-   * The registrant's organization.
-   *
-   * @example Cooking Org
-   */
-  org?: string;
-  /**
-   * The registrant's purchasing time frame:
-   * * `Within a month`
-   * * `1-3 months`
-   * * `4-6 months`
-   * * `More than 6 months`
-   * * `No timeframe`
-   *
-   * @example 1-3 months
-   */
-  purchasing_time_frame?:
-    | ""
-    | "Within a month"
-    | "1-3 months"
-    | "4-6 months"
-    | "More than 6 months"
-    | "No timeframe";
-  /**
-   * The registrant's role in the purchase process:
-   * * `Decision Maker`
-   * * `Evaluator/Recommender`
-   * * `Influencer`
-   * * `Not involved`
-   *
-   * @example Influencer
-   */
-  role_in_purchase_process?:
-    | ""
-    | "Decision Maker"
-    | "Evaluator/Recommender"
-    | "Influencer"
-    | "Not involved";
-  /**
-   * The registrant's language preference for confirmation emails:
-   * * `en-US` &mdash; English (US)
-   * * `de-DE` &mdash; German (Germany)
-   * * `es-ES` &mdash; Spanish (Spain)
-   * * `fr-FR` &mdash; French (France)
-   * * `jp-JP` &mdash; Japanese
-   * * `pt-PT` &mdash; Portuguese (Portugal)
-   * * `ru-RU` &mdash; Russian
-   * * `zh-CN` &mdash; Chinese (PRC)
-   * * `zh-TW` &mdash; Chinese (Taiwan)
-   * * `ko-KO` &mdash; Korean
-   * * `it-IT` &mdash; Italian (Italy)
-   * * `vi-VN` &mdash; Vietnamese
-   * * `pl-PL` &mdash; Polish
-   * * `Tr-TR` &mdash; Turkish
-   *
-   * @example en-US
-   */
-  language?:
-    | "en-US"
-    | "de-DE"
-    | "es-ES"
-    | "fr-FR"
-    | "jp-JP"
-    | "pt-PT"
-    | "ru-RU"
-    | "zh-CN"
-    | "zh-TW"
-    | "ko-KO"
-    | "it-IT"
-    | "vi-VN"
-    | "pl-PL"
-    | "Tr-TR";
-  /**
-   * If a meeting was scheduled with the `approval_type` field value of `1` (manual approval) but you want to automatically approve meeting registrants, set the value of this field to `true`.
-   *
-   * **Note:** You cannot use this field to change approval setting for a meeting originally scheduled with the `approval_type` field value of `0` (automatic approval).
-   *
-   * @example true
-   */
-  auto_approve?: boolean;
-};
-
-export type MeetingRegistrantCreateVariables = {
-  body?: MeetingRegistrantCreateRequestBody;
-  pathParams: MeetingRegistrantCreatePathParams;
-  queryParams?: MeetingRegistrantCreateQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Create and submit a user's registration to a meeting. See [Customizing webinar registration](https://support.zoom.us/hc/en-us/articles/202835649-Customizing-webinar-registration) for details on how to set the requirements for these fields. Note that there is a maximum limit of 4,999 registrants per meeting and users will see an error if the meeting's capacity is reached.
- *
- *  **Prerequisites:**
- * * The host must be a **Licensed** user type.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:registrant`,`meeting:write:registrant:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingRegistrantCreate = (
-  variables: MeetingRegistrantCreateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingRegistrantCreateResponse,
-    MeetingRegistrantCreateError,
-    MeetingRegistrantCreateRequestBody,
-    {},
-    MeetingRegistrantCreateQueryParams,
-    MeetingRegistrantCreatePathParams
-  >({
-    url: "/meetings/{meetingId}/registrants",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantsQuestionsGetPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingRegistrantsQuestionsGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantsQuestionsGetResponse = {
-  /**
-   * Array of custom questions for registrants.
-   */
-  custom_questions?: {
-    /**
-     * Answer choices for the question. Can not be used for `short` question type as this type of question requires registrants to type out the answer.
-     */
-    answers?: string[];
-    /**
-     * Whether or not the custom question is required to be answered by participants or not.
-     *
-     * @example true
-     */
-    required?: boolean;
-    /**
-     * Title of the custom question.
-     *
-     * @example How are you?
-     */
-    title?: string;
-    /**
-     * Type of the question being asked.
-     *
-     * @example short
-     */
-    type?: "short" | "single";
-  }[];
-  /**
-   * Array of registrant questions.
-   */
-  questions?: {
-    /**
-     * Field name of the question.
-     *
-     * @example last_name
-     */
-    field_name?:
-      | "last_name"
-      | "address"
-      | "city"
-      | "country"
-      | "zip"
-      | "state"
-      | "phone"
-      | "industry"
-      | "org"
-      | "job_title"
-      | "purchasing_time_frame"
-      | "role_in_purchase_process"
-      | "no_of_employees"
-      | "comments";
-    /**
-     * Whether or not the displayed fields are required to be filled out by registrants.
-     *
-     * @example true
-     */
-    required?: boolean;
-  }[];
-};
-
-export type MeetingRegistrantsQuestionsGetVariables = {
-  pathParams: MeetingRegistrantsQuestionsGetPathParams;
-} & FetcherExtraProps;
-
-/**
- * List registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
- *
- * **Prerequisites**:
- * * Host user type must be **Pro** or higher plan.
- * * Registration must be enabled for the meeting.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registration_questions`,`meeting:read:list_registration_questions:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingRegistrantsQuestionsGet = (
-  variables: MeetingRegistrantsQuestionsGetVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingRegistrantsQuestionsGetResponse,
-    MeetingRegistrantsQuestionsGetError,
-    undefined,
-    {},
-    {},
-    MeetingRegistrantsQuestionsGetPathParams
-  >({
-    url: "/meetings/{meetingId}/registrants/questions",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantQuestionUpdatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingRegistrantQuestionUpdateError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantQuestionUpdateRequestBody = {
-  /**
-   * Array of Registrant Custom Questions
-   */
-  custom_questions?: {
-    /**
-     * Answer choices for the question. Can not be used for `short` question type as this type of question requires registrants to type out the answer.
-     */
-    answers?: string[];
-    /**
-     * Indicates whether or not the custom question is required to be answered by participants or not.
-     *
-     * @example true
-     */
-    required?: boolean;
-    /**
-     * Title of the custom question.
-     *
-     * @example How are you?
-     */
-    title?: string;
-    /**
-     * The type of question being asked.
-     *
-     * @example short
-     */
-    type?: "short" | "single";
-  }[];
-  /**
-   * Array of registrant questions.
-   */
-  questions?: {
-    /**
-     * The question's field name.
-     *
-     * @example last_name
-     */
-    field_name?:
-      | "last_name"
-      | "address"
-      | "city"
-      | "country"
-      | "zip"
-      | "state"
-      | "phone"
-      | "industry"
-      | "org"
-      | "job_title"
-      | "purchasing_time_frame"
-      | "role_in_purchase_process"
-      | "no_of_employees"
-      | "comments";
-    /**
-     * Indicates whether or not the displayed fields are required to be filled out by registrants.
-     *
-     * @example true
-     */
-    required?: boolean;
-  }[];
-};
-
-export type MeetingRegistrantQuestionUpdateVariables = {
-  body?: MeetingRegistrantQuestionUpdateRequestBody;
-  pathParams: MeetingRegistrantQuestionUpdatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Update registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
- *
- * **Prerequisites**:
- * * Host user type must be **Pro** or higher plan.
- * * Registration must be enabled for the meeting.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registration_question`,`meeting:update:registration_question:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingRegistrantQuestionUpdate = (
-  variables: MeetingRegistrantQuestionUpdateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingRegistrantQuestionUpdateError,
-    MeetingRegistrantQuestionUpdateRequestBody,
-    {},
-    {},
-    MeetingRegistrantQuestionUpdatePathParams
-  >({
-    url: "/meetings/{meetingId}/registrants/questions",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantStatusPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a `long` format integer, not as a simple integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingRegistrantStatusQueryParams = {
-  /**
-   * The meeting or webinar occurrence ID.
-   *
-   * @example 1648194360000
-   */
-  occurrence_id?: string;
-};
-
-export type MeetingRegistrantStatusError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantStatusRequestBody = {
-  /**
-   * Registrant status.
-   *  `approve` - Approve registrant.
-   *  `cancel` - Cancel previously approved registrant's registration.
-   *  `deny` - Deny registrant.
-   *
-   * @example approve
-   */
-  action: "approve" | "cancel" | "deny";
-  /**
-   * List of registrants.
-   *
-   * @maximum 30
-   */
-  registrants?: {
-    /**
-     * @example jchill@example.com
-     */
-    email?: string;
-    /**
-     * @example 9tboDiHUQAeOnbmudzWa5g
-     */
-    id?: string;
-  }[];
-};
-
-export type MeetingRegistrantStatusVariables = {
-  body: MeetingRegistrantStatusRequestBody;
-  pathParams: MeetingRegistrantStatusPathParams;
-  queryParams?: MeetingRegistrantStatusQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Update a meeting registrant's status by either approving, cancelling or denying a registrant from joining the meeting.
- *
- * **Prerequisites**:
- * * Host user type must be **Pro** or higher plan.
- * * Registration must be enabled for the meeting.
- *
- * This API has an additional rate limit of requests per registrant, per 24-hour period. [See the Rate Limits page](/docs/api/rate-limits/) for more information.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const meetingRegistrantStatus = (
-  variables: MeetingRegistrantStatusVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingRegistrantStatusError,
-    MeetingRegistrantStatusRequestBody,
-    {},
-    MeetingRegistrantStatusQueryParams,
-    MeetingRegistrantStatusPathParams
-  >({
-    url: "/meetings/{meetingId}/registrants/status",
-    method: "put",
-    ...variables,
-    signal,
-  });
-
-export type MeetingRegistrantGetPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-  /**
-   * The registrant ID.
-   *
-   * @example 9tboDiHUQAeOnbmudzWa5g
-   */
-  registrantId: string;
-};
-
-export type MeetingRegistrantGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingRegistrantGetResponse = {
-  /**
-   * The registrant's address.
-   *
-   * @example 1800 Amphibious Blvd.
-   */
-  address?: string;
-  /**
-   * The registrant's city.
-   *
-   * @example Mountain View
-   */
-  city?: string;
-  /**
-   * The registrant's questions and comments.
-   *
-   * @example Looking forward to the discussion.
-   */
-  comments?: string;
-  /**
-   * The registrant's two-letter [country code](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
-   *
-   * @example US
-   */
-  country?: string;
-  /**
-   * Information about custom questions.
-   */
-  custom_questions?: {
-    /**
-     * The title of the custom question.
-     *
-     * @example What do you hope to learn from this?
-     */
-    title?: string;
-    /**
-     * The custom question's response value. This has a limit of 128 characters.
-     *
-     * @maxLength 128
-     * @example Look forward to learning how you come up with new recipes and what other services you offer.
-     */
-    value?: string;
-  }[];
-  /**
-   * The registrant's email address. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for return value details.
-   *
-   * @maxLength 128
-   * @format email
-   * @example jchill@example.com
-   */
-  email: string;
-  /**
-   * The registrant's first name.
-   *
-   * @maxLength 64
-   * @example Jill
-   */
-  first_name: string;
-  /**
-   * The registrant's industry.
-   *
-   * @example Food
-   */
-  industry?: string;
-  /**
-   * The registrant's job title.
-   *
-   * @example Chef
-   */
-  job_title?: string;
-  /**
-   * The registrant's last name.
-   *
-   * @maxLength 64
-   * @example Chill
-   */
-  last_name?: string;
-  /**
-   * The registrant's number of employees.
-   * * `1-20`
-   * * `21-50`
-   * * `51-100`
-   * * `101-250`
-   * * `251-500`
-   * * `501-1,000`
-   * * `1,001-5,000`
-   * * `5,001-10,000`
-   * * `More than 10,000`
-   *
-   * @example 1-20
-   */
-  no_of_employees?:
-    | ""
-    | "1-20"
-    | "21-50"
-    | "51-100"
-    | "101-250"
-    | "251-500"
-    | "501-1,000"
-    | "1,001-5,000"
-    | "5,001-10,000"
-    | "More than 10,000";
-  /**
-   * The registrant's organization.
-   *
-   * @example Cooking Org
-   */
-  org?: string;
-  /**
-   * The registrant's phone number.
-   *
-   * @example 5550100
-   */
-  phone?: string;
-  /**
-   * The registrant's purchasing time frame.
-   * * `Within a month`
-   * * `1-3 months`
-   * * `4-6 months`
-   * * `More than 6 months`
-   * * `No timeframe`
-   *
-   * @example 1-3 months
-   */
-  purchasing_time_frame?:
-    | ""
-    | "Within a month"
-    | "1-3 months"
-    | "4-6 months"
-    | "More than 6 months"
-    | "No timeframe";
-  /**
-   * The registrant's role in the purchase process.
-   * * `Decision Maker`
-   * * `Evaluator/Recommender`
-   * * `Influencer`
-   * * `Not involved`
-   *
-   * @example Influencer
-   */
-  role_in_purchase_process?:
-    | ""
-    | "Decision Maker"
-    | "Evaluator/Recommender"
-    | "Influencer"
-    | "Not involved";
-  /**
-   * The registrant's state or province.
-   *
-   * @example CA
-   */
-  state?: string;
-  /**
-   * The registrant's registration status.
-   * * `approved` - The registrant is approved to join the meeting.
-   * * `pending` - The registrant's registration is pending.
-   * * `denied` - The registrant was declined to join the meeting.
-   *
-   * @example approved
-   */
-  status?: "approved" | "pending" | "denied";
-  /**
-   * The registrant's ZIP or postal code.
-   *
-   * @example 94045
-   */
-  zip?: string;
-  /**
-   * @example 9tboDiHUQAeOnbmudzWa5g
-   */
-  id?: string;
-  /**
-   * The registrant's registration date and time.
-   *
-   * @format date-time
-   * @example 2022-03-22T05:58:44Z
-   */
-  create_time?: string;
-  /**
-   * The URL with which the approved registrant can join the meeting.
-   *
-   * @format url
-   * @example https://example.com/j/11111
-   */
-  join_url?: string;
-  /**
-   * The participant PIN code is used to authenticate audio participants before they join the meeting.
-   *
-   * @format int64
-   * @example 380303
-   */
-  participant_pin_code?: number;
-};
-
-export type MeetingRegistrantGetVariables = {
-  pathParams: MeetingRegistrantGetPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve details on a specific user who has registered for the meeting. A host or a user with administrative permissions can require [registration for Zoom meetings](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
- *
- * **Prerequisites:**
- * * The account must have a Meeting plan
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:registrant`,`meeting:read:registrant:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingRegistrantGet = (
-  variables: MeetingRegistrantGetVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingRegistrantGetResponse,
-    MeetingRegistrantGetError,
-    undefined,
-    {},
-    {},
-    MeetingRegistrantGetPathParams
-  >({
-    url: "/meetings/{meetingId}/registrants/{registrantId}",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingregistrantdeletePathParams = {
-  /**
-   * The meeting ID.
-   *
-   * @example 91498058927
-   */
-  meetingId: number;
-  /**
-   * The meeting registrant ID.
-   *
-   * @example 9tboDiHUQAeOnbmudzWa5g
-   */
-  registrantId: string;
-};
-
-export type MeetingregistrantdeleteQueryParams = {
-  /**
-   * The meeting occurrence ID.
-   *
-   * @example approved
-   */
-  occurrence_id?: string;
-};
-
-export type MeetingregistrantdeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingregistrantdeleteVariables = {
-  pathParams: MeetingregistrantdeletePathParams;
-  queryParams?: MeetingregistrantdeleteQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Delete a meeting registrant.
- *
- * **Prerequisites**:
- * * Host user type must be Pro or higher plan.
- * * Registration must be enabled for the meeting.
- * * For recurring meetings:
- *   * The `registration_type` must be 2 or 3 to require the `occurrence_id` field.
- *   * If the `registration_type` is 1, the `occurrence_id` is not needed, as registrants can attend any occurrence.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:registrant`,`meeting:delete:registrant:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingregistrantdelete = (
-  variables: MeetingregistrantdeleteVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingregistrantdeleteError,
-    undefined,
-    {},
-    MeetingregistrantdeleteQueryParams,
-    MeetingregistrantdeletePathParams
-  >({
-    url: "/meetings/{meetingId}/registrants/{registrantId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
 export type GetSipDialingWithPasscodePathParams = {
   /**
    * The meeting's ID.
@@ -12592,625 +10481,6 @@ export const meetingStatus = (
   >({
     url: "/meetings/{meetingId}/status",
     method: "put",
-    ...variables,
-    signal,
-  });
-
-export type MeetingSurveyGetPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a long-format integer and **not** a simple integer. Meeting IDs can be more than 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingSurveyGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingSurveyGetResponse = {
-  /**
-   * Information about the customized meeting survey.
-   */
-  custom_survey?: {
-    /**
-     * The survey's title, up to 64 characters.
-     *
-     * @maxLength 64
-     * @example Learn something new
-     */
-    title?: string;
-    /**
-     * Allow participants to anonymously answer survey questions.
-     *
-     *  This value defaults to `true`.
-     *
-     * @example false
-     * @default false
-     */
-    anonymous?: boolean;
-    /**
-     * Whether to display the number in the question name.
-     *
-     *  This value defaults to `true`.
-     *
-     * @example false
-     * @default false
-     */
-    numbered_questions?: boolean;
-    /**
-     * Whether to display the question type in the question name.
-     *
-     *  This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_question_type?: boolean;
-    /**
-     * The survey's feedback, up to 320 characters.
-     *
-     *  This value defaults to `Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.`.
-     *
-     * @maxLength 320
-     * @example Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.
-     */
-    feedback?: string;
-    /**
-     * Information about the meeting survey's questions.
-     *
-     * @maxItems 100
-     * @minItems 1
-     */
-    questions?: {
-      /**
-       * The survey question, up to 420 characters.
-       *
-       * @example How useful was this meeting?
-       */
-      name?: string;
-      /**
-       * The survey's question and answer type.
-       * * `single` - Single choice.
-       * * `multiple` - Multiple choice.
-       * * `matching` - Matching.
-       * * `rank_order` - Rank order
-       * * `short_answer` - Short answer
-       * * `long_answer` - Long answer.
-       * * `fill_in_the_blank` - Fill in the blank
-       * * `rating_scale` - Rating scale.
-       *
-       * @example single
-       */
-      type?:
-        | "single"
-        | "multiple"
-        | "matching"
-        | "rank_order"
-        | "short_answer"
-        | "long_answer"
-        | "fill_in_the_blank"
-        | "rating_scale";
-      /**
-       * Whether participants must answer the question.
-       * * `true` - The participant must answer the question.
-       * * `false` - The participant does not need to answer the question.
-       *
-       *  This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      answer_required?: boolean;
-      /**
-       * Whether to display the radio selection as a drop-down box.
-       * * `true` - Show as a drop-down box.
-       * * `false` - Do not show as a drop-down box.
-       *
-       *  This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      show_as_dropdown?: boolean;
-      /**
-       * The survey question's available answers. This field requires a **minimum** of two answers.
-       *
-       * * For `single` and `multiple` questions, you can only provide a maximum of 50 answers.
-       * * For `matching` polls, you can only provide a maximum of 16 answers.
-       * * For `rank_order` polls, you can only provide a maximum of seven answers.
-       *
-       * @minItems 2
-       */
-      answers?: string[];
-      /**
-       * Information about the prompt questions. This field only applies to `matching` and `rank_order` questions. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-       *
-       * @maxItems 10
-       * @minItems 2
-       */
-      prompts?: {
-        /**
-         * The question prompt's title.
-         *
-         * @maxLength 200
-         * @example How are you?
-         */
-        prompt_question?: string;
-      }[];
-      /**
-       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` questions. You must provide at least a **one** character minimum value.
-       *
-       * @minimum 1
-       * @example 1
-       */
-      answer_min_character?: number;
-      /**
-       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` questions.
-       * * For `short_answer` question, a maximum of 500 characters.
-       * * For `long_answer` question, a maximum of 2,000 characters.
-       *
-       * @example 200
-       */
-      answer_max_character?: number;
-      /**
-       * The rating scale's minimum value. This value cannot be less than zero.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @minimum 0
-       * @example 1
-       */
-      rating_min_value?: number;
-      /**
-       * The rating scale's maximum value, up to a maximum value of 10.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maximum 10
-       * @example 4
-       */
-      rating_max_value?: number;
-      /**
-       * The low score label used for the `rating_min_value` field, up to 50 characters.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maxLength 50
-       * @example Not likely
-       */
-      rating_min_label?: string;
-      /**
-       * The high score label used for the `rating_max_value` field, up to 50 characters.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maxLength 50
-       * @example Extremely Likely
-       */
-      rating_max_label?: string;
-    }[];
-  };
-  /**
-   * Whether the **Show in the browser when the meeting ends** option is enabled.
-   * * `true` - Enabled.
-   * * `false` - Disabled.
-   *
-   *  This value defaults to `true`.
-   *
-   * @example true
-   * @default true
-   */
-  show_in_the_browser?: boolean;
-  /**
-   * The link to the third party meeting survey.
-   *
-   * @maxLength 64
-   * @example https://example.com
-   */
-  third_party_survey?: string;
-};
-
-export type MeetingSurveyGetVariables = {
-  pathParams: MeetingSurveyGetPathParams;
-} & FetcherExtraProps;
-
-/**
- * Display information about a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host has a **Pro** license. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled on the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:survey`,`meeting:read:survey:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingSurveyGet = (
-  variables: MeetingSurveyGetVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingSurveyGetResponse,
-    MeetingSurveyGetError,
-    undefined,
-    {},
-    {},
-    MeetingSurveyGetPathParams
-  >({
-    url: "/meetings/{meetingId}/survey",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingSurveyDeletePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingSurveyDeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingSurveyDeleteVariables = {
-  pathParams: MeetingSurveyDeletePathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).
- *
- *  **Prerequisites:**
- * * The host must be a **Pro** user type.
- * * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature enabled in the host's account.
- * * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:survey`,`meeting:delete:survey:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingSurveyDelete = (
-  variables: MeetingSurveyDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingSurveyDeleteError,
-    undefined,
-    {},
-    {},
-    MeetingSurveyDeletePathParams
-  >({
-    url: "/meetings/{meetingId}/survey",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export type MeetingSurveyUpdatePathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, store it as a long-format integer and **not** a simple integer. Meeting IDs can be over 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingSurveyUpdateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingSurveyUpdateRequestBody = {
-  /**
-   * Information about the customized meeting survey.
-   */
-  custom_survey?: {
-    /**
-     * The survey's title, up to 64 characters.
-     *
-     * @maxLength 64
-     * @example Learn something new
-     */
-    title?: string;
-    /**
-     * Allow participants to anonymously answer survey questions.
-     *
-     *  This value defaults to `true`.
-     *
-     * @example false
-     * @default false
-     */
-    anonymous?: boolean;
-    /**
-     * Whether to display the number in the question name.
-     *
-     *  This value defaults to `true`.
-     *
-     * @example false
-     * @default false
-     */
-    numbered_questions?: boolean;
-    /**
-     * Whether to display the question type in the question name.
-     *
-     *  This value defaults to `false`.
-     *
-     * @example false
-     * @default false
-     */
-    show_question_type?: boolean;
-    /**
-     * The survey's feedback, up to 320 characters.
-     *
-     *  This value defaults to `Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.`.
-     *
-     * @maxLength 320
-     * @example Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.
-     */
-    feedback?: string;
-    /**
-     * Information about the meeting survey's questions.
-     *
-     * @maxItems 100
-     * @minItems 1
-     */
-    questions?: {
-      /**
-       * The survey question, up to 420 characters.
-       *
-       * @example How useful was this meeting?
-       */
-      name?: string;
-      /**
-       * The survey's question and answer type.
-       * * `single` - Single choice.
-       * * `multiple` - Multiple choice.
-       * * `matching` - Matching.
-       * * `rank_order` - Rank order
-       * * `short_answer` - Short answer
-       * * `long_answer` - Long answer.
-       * * `fill_in_the_blank` - Fill in the blank
-       * * `rating_scale` - Rating scale.
-       *
-       * @example single
-       */
-      type?:
-        | "single"
-        | "multiple"
-        | "matching"
-        | "rank_order"
-        | "short_answer"
-        | "long_answer"
-        | "fill_in_the_blank"
-        | "rating_scale";
-      /**
-       * Whether participants must answer the question.
-       * * `true` - The participant must answer the question.
-       * * `false` - The participant does not need to answer the question.
-       *
-       *  This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      answer_required?: boolean;
-      /**
-       * Whether to display the radio selection as a drop-down box.
-       * * `true` - Show as a drop-down box.
-       * * `false` - Do not show as a drop-down box.
-       *
-       *  This value defaults to `false`.
-       *
-       * @example false
-       * @default false
-       */
-      show_as_dropdown?: boolean;
-      /**
-       * The survey question's available answers. This field requires a **minimum** of two answers.
-       *
-       * * For `single` and `multiple` questions, you can only provide a maximum of 50 answers.
-       * * For `matching` polls, you can only provide a maximum of 16 answers.
-       * * For `rank_order` polls, you can only provide a maximum of seven answers.
-       *
-       * @minItems 2
-       */
-      answers?: string[];
-      /**
-       * Information about the prompt questions. This field only applies to `matching` and `rank_order` questions. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
-       *
-       * @maxItems 10
-       * @minItems 2
-       */
-      prompts?: {
-        /**
-         * The question prompt's title.
-         *
-         * @maxLength 200
-         * @example How are you?
-         */
-        prompt_question?: string;
-      }[];
-      /**
-       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` questions. You must provide at least a **one** character minimum value.
-       *
-       * @minimum 1
-       * @example 1
-       */
-      answer_min_character?: number;
-      /**
-       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` questions.
-       * * For `short_answer` question, a maximum of 500 characters.
-       * * For `long_answer` question, a maximum of 2,000 characters.
-       *
-       * @example 200
-       */
-      answer_max_character?: number;
-      /**
-       * The rating scale's minimum value. This value cannot be less than zero.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @minimum 0
-       * @example 1
-       */
-      rating_min_value?: number;
-      /**
-       * The rating scale's maximum value, up to a maximum value of 10.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maximum 10
-       * @example 4
-       */
-      rating_max_value?: number;
-      /**
-       * The low score label used for the `rating_min_value` field, up to 50 characters.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maxLength 50
-       * @example Not likely
-       */
-      rating_min_label?: string;
-      /**
-       * The high score label used for the `rating_max_value` field, up to 50 characters.
-       *
-       *  This field only applies to the `rating_scale` survey.
-       *
-       * @maxLength 50
-       * @example Extremely Likely
-       */
-      rating_max_label?: string;
-    }[];
-  };
-  /**
-   * Whether the **Show in the browser when the meeting ends** option is enabled.
-   * * `true` - Enabled.
-   * * `false` - Disabled.
-   *
-   *  This value defaults to `true`.
-   *
-   * @example true
-   * @default true
-   */
-  show_in_the_browser?: boolean;
-  /**
-   * The link to the third party meeting survey.
-   *
-   * @maxLength 64
-   * @example https://example.com
-   */
-  third_party_survey?: string;
-};
-
-export type MeetingSurveyUpdateVariables = {
-  body?: MeetingSurveyUpdateRequestBody;
-  pathParams: MeetingSurveyUpdatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Update a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host must be a **Pro** user type. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled in the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:survey`,`meeting:update:survey:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingSurveyUpdate = (
-  variables: MeetingSurveyUpdateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    MeetingSurveyUpdateError,
-    MeetingSurveyUpdateRequestBody,
-    {},
-    {},
-    MeetingSurveyUpdatePathParams
-  >({
-    url: "/meetings/{meetingId}/survey",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export type MeetingTokenPathParams = {
-  /**
-   * The meeting's ID.
-   *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
-   *
-   * @format int64
-   * @example 85746065
-   */
-  meetingId: number;
-};
-
-export type MeetingTokenQueryParams = {
-  /**
-   * The meeting token type.
-   * * `closed_caption_token` - The third-party closed caption API token.
-   *
-   * This defaults to `closed_caption_token`.
-   *
-   * @example closed_caption_token
-   * @default closed_caption_token
-   */
-  type?: "closed_caption_token";
-};
-
-export type MeetingTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingTokenResponse = {
-  /**
-   * The generated meeting token.
-   *
-   * @example https://example.com/closedcaption?id=200610693&ns=GZHkEA==&expire=86400&spparams=id%2Cns%2Cexpire&signature=nYtXJqRKCW
-   */
-  token?: string;
-};
-
-export type MeetingTokenVariables = {
-  pathParams: MeetingTokenPathParams;
-  queryParams?: MeetingTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get a meeting's [closed caption token (caption URL)](https://support.zoom.us/hc/en-us/articles/115002212983-Using-a-third-party-closed-captioning-service). This token lets you use a third-party service to stream text to their closed captioning software to the Zoom meeting.
- *
- * **Prerequisites:**
- * * The **Closed captioning** setting enabled in the Zoom web portal.
- * * The **Allow use of caption API Token to integrate with third-party closed captioning services** setting enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:token`,`meeting:read:token:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
- */
-export const meetingToken = (
-  variables: MeetingTokenVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingTokenResponse,
-    MeetingTokenError,
-    undefined,
-    {},
-    MeetingTokenQueryParams,
-    MeetingTokenPathParams
-  >({
-    url: "/meetings/{meetingId}/token",
-    method: "get",
     ...variables,
     signal,
   });
@@ -13612,119 +10882,6 @@ export const pastMeetingParticipants = (
     signal,
   });
 
-export type ListPastMeetingPollsPathParams = {
-  /**
-   * The meeting's ID or universally unique ID (UUID).
-   * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
-   * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
-   */
-  meetingId: string;
-};
-
-export type ListPastMeetingPollsError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListPastMeetingPollsResponse = {
-  /**
-   * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in **long** format(represented as int64 data type in JSON), also known as the meeting number.
-   *
-   * @format int64
-   * @example 93398114182
-   */
-  id?: number;
-  questions?: {
-    /**
-     * Email address of the user who submitted answers to the poll. If the user is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for details.
-     *
-     * @example jchill@example.com
-     */
-    email?: string;
-    /**
-     * Name of the user who submitted answers to the poll. If `anonymous` option is enabled for a poll, the participant's polling information will be kept anonymous and the value of `name` field will be `Anonymous Attendee`.
-     *
-     * @example Jill Chill
-     */
-    name?: string;
-    question_details?: {
-      /**
-       * Answer submitted by the user.
-       *
-       * @example Good
-       */
-      answer?: string;
-      /**
-       * Date and time at which the answer to the poll was submitted.
-       *
-       * @format date-time
-       * @example 2022-03-26T05:37:59Z
-       */
-      date_time?: string;
-      /**
-       * Unique identifier of the poll.
-       *
-       * @example QalIoKWLTJehBJ8e1xRrbQ
-       */
-      polling_id?: string;
-      /**
-       * Question asked during the poll.
-       *
-       * @example How are you?
-       */
-      question?: string;
-    }[];
-  }[];
-  /**
-   * The start time of the meeting.
-   *
-   * @format date-time
-   * @example 2022-03-26T05:37:59Z
-   */
-  start_time?: string;
-  /**
-   * Meeting UUID.
-   *
-   * @example Vg8IdgluR5WDeWIkpJlElQ==
-   */
-  uuid?: string;
-};
-
-export type ListPastMeetingPollsVariables = {
-  pathParams: ListPastMeetingPollsPathParams;
-} & FetcherExtraProps;
-
-/**
- * [Polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) allow the meeting host to survey attendees. List poll results of a meeting.
- *
- *
- *
- * **Prerequisites**:
- *
- * * Host user type must be **Pro**.
- * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_poll_results`,`meeting:read:list_poll_results:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const listPastMeetingPolls = (
-  variables: ListPastMeetingPollsVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    ListPastMeetingPollsResponse,
-    ListPastMeetingPollsError,
-    undefined,
-    {},
-    {},
-    ListPastMeetingPollsPathParams
-  >({
-    url: "/past_meetings/{meetingId}/polls",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
 export type ListPastMeetingQAPathParams = {
   /**
    * The meeting's ID or universally unique ID (UUID).
@@ -13821,180 +10978,6 @@ export const listPastMeetingQA = (
   >({
     url: "/past_meetings/{meetingId}/qa",
     method: "get",
-    ...variables,
-    signal,
-  });
-
-export type ListMeetingTemplatesPathParams = {
-  /**
-   * The user ID retrievable from the [List users](/api-reference/zoom-api/methods#operation/users) API.
-   *
-   * @example 30R7kT7bTIKSNUFEuH_Qlg
-   */
-  userId: string;
-};
-
-export type ListMeetingTemplatesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListMeetingTemplatesResponse = {
-  templates?: {
-    /**
-     * The template ID.
-     *
-     * @example AdxbhxCzKgSiWAw
-     */
-    id?: string;
-    /**
-     * The template name.
-     *
-     * @example My meeting template
-     */
-    name?: string;
-    /**
-     * The template type:
-     *
-     * `1`: Meeting template
-     *
-     * `2`: Admin meeting template
-     *
-     * @example 1
-     */
-    type?: number;
-  }[];
-  /**
-   * Total records found for this request.
-   *
-   * @example 1
-   */
-  total_records?: number;
-};
-
-export type ListMeetingTemplatesVariables = {
-  pathParams: ListMeetingTemplatesPathParams;
-} & FetcherExtraProps;
-
-/**
- * List available [meeting templates](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
- *
- * **Prerequisites**:
- * * Host user must have a Zoom Meetings Basic license or higher.
- *
- * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const listMeetingTemplates = (
-  variables: ListMeetingTemplatesVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    ListMeetingTemplatesResponse,
-    ListMeetingTemplatesError,
-    undefined,
-    {},
-    {},
-    ListMeetingTemplatesPathParams
-  >({
-    url: "/users/{userId}/meeting_templates",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export type MeetingTemplateCreatePathParams = {
-  /**
-   * The user ID retrievable from the [List users](/docs/api/rest/reference/user/methods/#operation/users) API.
-   *
-   * @example 30R7kT7bTIKSNUFEuH_Qlg
-   */
-  userId: string;
-};
-
-export type MeetingTemplateCreateError = Fetcher.ErrorWrapper<undefined>;
-
-export type MeetingTemplateCreateResponse = {
-  /**
-   * The template ID.
-   *
-   * @example AdxbhxCzKgSiWAw
-   */
-  id?: string;
-  /**
-   * The template name.
-   *
-   * @example My Meeting Template
-   */
-  name?: string;
-};
-
-export type MeetingTemplateCreateRequestBody = {
-  /**
-   * The meeting ID - the meeting number in long (int64) format.
-   *
-   * @format int64
-   * @example 96172769962
-   */
-  meeting_id?: number;
-  /**
-   * The template name.
-   *
-   * @example My Meeting Template
-   */
-  name?: string;
-  /**
-   * If the field is set to `true`, the recurrence meeting template will be saved as the scheduled meeting.
-   *
-   * @example false
-   * @default false
-   */
-  save_recurrence?: boolean;
-  /**
-   * Overwrite an existing meeting template if the template is created from same existing meeting.
-   *
-   * @example false
-   * @default false
-   */
-  overwrite?: boolean;
-};
-
-export type MeetingTemplateCreateVariables = {
-  body?: MeetingTemplateCreateRequestBody;
-  pathParams: MeetingTemplateCreatePathParams;
-} & FetcherExtraProps;
-
-/**
- * Create a meeting template from an existing meeting.
- *
- * **Prerequisites**
- * * Host user must have a Zoom Meetings Basic license or higher.
- * * You can only create up to 40 meeting templates.
- *
- * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
- *
- * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
- *
- * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:template`,`meeting:write:template:admin`
- *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
- */
-export const meetingTemplateCreate = (
-  variables: MeetingTemplateCreateVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    MeetingTemplateCreateResponse,
-    MeetingTemplateCreateError,
-    MeetingTemplateCreateRequestBody,
-    {},
-    {},
-    MeetingTemplateCreatePathParams
-  >({
-    url: "/users/{userId}/meeting_templates",
-    method: "post",
     ...variables,
     signal,
   });
@@ -16440,6 +13423,12 @@ export type ListUpcomingMeetingResponse = {
      * @example true
      */
     is_host?: boolean;
+    /**
+     * Whether the meeting is scheduled as an all-day event.
+     *
+     * @example false
+     */
+    is_all_day?: boolean;
   }[];
 };
 
@@ -16578,6 +13567,1801 @@ export const userPACs = (variables: UserPACsVariables, signal?: AbortSignal) =>
   fetch<UserPACsResponse, UserPACsError, undefined, {}, {}, UserPACsPathParams>(
     { url: "/users/{userId}/pac", method: "get", ...variables, signal },
   );
+
+export type CreateBatchPollsPathParams = {
+  /**
+   * @example 93398114182
+   */
+  meetingId: string;
+};
+
+export type CreateBatchPollsError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateBatchPollsResponse = {
+  polls?: {
+    /**
+     * Whether to allow meeting participants to answer poll questions anonymously:
+     * * `true` &mdash; Anonymous polls enabled.
+     * * `false` &mdash; Participants cannot answer poll questions anonymously.
+     *
+     * @example true
+     */
+    anonymous?: boolean;
+    /**
+     * Meeting Poll ID
+     *
+     * @example QalIoKWLTJehBJ8e1xRrbQ
+     */
+    id?: string;
+    /**
+     * The type of poll:
+     * * `1` &mdash; Poll.
+     * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
+     * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+     *
+     * @example 2
+     */
+    poll_type?: 1 | 2 | 3;
+    /**
+     * The information about the poll's questions.
+     */
+    questions?: {
+      /**
+       * The allowed maximum number of characters. This field only returns for `short_answer` and `long_answer` polls.
+       *
+       * @example 200
+       */
+      answer_max_character?: number;
+      /**
+       * The allowed minimum number of characters. This field only returns for `short_answer` and `long_answer` polls.
+       *
+       * @example 1
+       */
+      answer_min_character?: number;
+      /**
+       * Whether participants must answer the question:
+       * * `true` &mdash; The participant must answer the question.
+       * * `false` &mdash; The participant does not need to answer the question.
+       *
+       * @example false
+       */
+      answer_required?: boolean;
+      /**
+       * The poll question's available answers.
+       */
+      answers?: string[];
+      /**
+       * Whether the correct answer is case sensitive. This field only returns for `fill_in_the_blank` polls:
+       * * `true` &mdash; The answer is case-sensitive.
+       * * `false` &mdash; The answer is not case-sensitive.
+       *
+       * @example false
+       * @default false
+       */
+      case_sensitive?: boolean;
+      /**
+       * The poll question's title. For `fill_in_the_blank` polls, this field is the poll's question.
+       *
+       * @example How useful was this meeting?
+       */
+      name?: string;
+      /**
+       * The information about the prompt questions. This object only returns for `matching` and `rank_order` polls.
+       */
+      prompts?: {
+        /**
+         * The question prompt's title.
+         *
+         * @example How are you?
+         */
+        prompt_question?: string;
+        /**
+         * The question prompt's correct answers.
+         */
+        prompt_right_answers?: string[];
+      }[];
+      /**
+       * The high score label for the `rating_max_value` field. This field only returns for `rating_scale` polls.
+       *
+       * @example Extremely Likely
+       */
+      rating_max_label?: string;
+      /**
+       * The rating scale's maximum value. This field only returns for `rating_scale` polls.
+       *
+       * @maximum 10
+       * @example 4
+       */
+      rating_max_value?: number;
+      /**
+       * The low score label for the `rating_min_value` field. This field only returns for `rating_scale` polls.
+       *
+       * @example Not likely
+       */
+      rating_min_label?: string;
+      /**
+       * The rating scale's minimum value. This field only returns for `rating_scale` polls.
+       *
+       * @example 0
+       */
+      rating_min_value?: number;
+      /**
+       * The poll question's correct answer(s).
+       */
+      right_answers?: string[];
+      /**
+       * Whether to display the radio selection as a drop-down box:
+       * * `true` &mdash; Show as a drop-down box.
+       * * `false` &mdash; Do not show as a drop-down box.
+       *
+       * @example false
+       */
+      show_as_dropdown?: boolean;
+      /**
+       * The poll's question and answer type:
+       * * `single` &mdash; Single choice.
+       * * `multiple` &mdash; Multiple choice.
+       * * `matching` &mdash; Matching.
+       * * `rank_order` &mdash; Rank order.
+       * * `short_answer` &mdash; Short answer.
+       * * `long_answer` &mdash; Long answer.
+       * * `fill_in_the_blank` &mdash; Fill in the blank.
+       * * `rating_scale` &mdash; Rating scale.
+       *
+       * @example single
+       */
+      type?:
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
+    }[];
+    /**
+     * The status of the meeting poll:
+     *  `notstart` - Poll not started
+     *  `started` - Poll started
+     *  `ended` - Poll ended
+     *  `sharing` - Sharing poll results
+     *
+     * @example notstart
+     */
+    status?: "notstart" | "started" | "ended" | "sharing";
+    /**
+     * The title for the poll.
+     *
+     * @example Learn something new
+     */
+    title?: string;
+  }[];
+};
+
+export type CreateBatchPollsRequestBody = {
+  /**
+   * The information about the meeting's polls.
+   *
+   * @maxItems 25
+   * @minItems 1
+   */
+  polls?: {
+    /**
+     * Whether to allow meeting participants to answer poll questions anonymously:
+     * * `true` &mdash; Anonymous polls enabled.
+     * * `false` &mdash; Participants cannot answer poll questions anonymously.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    anonymous?: boolean;
+    /**
+     * The type of poll:
+     * * `1` &mdash; Poll.
+     * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
+     * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+     *
+     *  This value defaults to `1`.
+     *
+     * @example 2
+     * @default 1
+     */
+    poll_type?: 1 | 2 | 3;
+    /**
+     * The information about the poll's questions.
+     *
+     * @minLength 1
+     */
+    questions?: {
+      /**
+       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+       * * For `short_answer` polls, a maximum of 500 characters.
+       * * For `long_answer` polls, a maximum of 2,000 characters.
+       *
+       * @example 200
+       */
+      answer_max_character?: number;
+      /**
+       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+       *
+       * @minimum 1
+       * @example 1
+       */
+      answer_min_character?: number;
+      /**
+       * Whether participants must answer the question:
+       * * `true` &mdash; The participant must answer the question.
+       * * `false` &mdash; The participant does not need to answer the question.
+       *
+       * **Note:**
+       * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+       * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      answer_required?: boolean;
+      /**
+       * The poll question's available answers. This field requires a **minimum** of two answers.
+       *
+       * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+       * * For `matching` polls, you can only provide a maximum of 16 answers.
+       * * For `rank_order` polls, you can only provide a maximum of seven answers.
+       *
+       * @minItems 2
+       */
+      answers?: string[];
+      /**
+       * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+       * * `true` &mdash; The answer is case-sensitive.
+       * * `false` &mdash; The answer is not case-sensitive.
+       *
+       * This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      case_sensitive?: boolean;
+      /**
+       * The poll question's title, up to 1024 characters.
+       *
+       * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+       *
+       * @maxLength 1024
+       * @example How useful was this meeting?
+       */
+      name?: string;
+      /**
+       * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+       */
+      prompts?: {
+        /**
+         * The question prompt's title.
+         *
+         * @example How are you?
+         */
+        prompt_question?: string;
+        /**
+         * The question prompt's correct answers:
+         * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+         * * For `rank_order` polls, you can only provide one correct answer.
+         */
+        prompt_right_answers?: string[];
+      }[];
+      /**
+       * The high score label for the `rating_max_value` field.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @example Extremely Likely
+       */
+      rating_max_label?: string;
+      /**
+       * The rating scale's maximum value, up to a maximum value of 10.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @maximum 10
+       * @example 4
+       */
+      rating_max_value?: number;
+      /**
+       * The low score label for the `rating_min_value` field.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @example Not likely
+       */
+      rating_min_label?: string;
+      /**
+       * The rating scale's minimum value. This value cannot be less than zero.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @minimum 1
+       * @example 1
+       */
+      rating_min_value?: number;
+      /**
+       * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+       *
+       *  For `single` and `matching` polls, this field only accepts one answer.
+       *
+       * @minItems 1
+       */
+      right_answers?: string[];
+      /**
+       * Whether to display the radio selection as a drop-down box:
+       * * `true` &mdash; Show as a drop-down box.
+       * * `false` &mdash; Do not show as a drop-down box.
+       *
+       * This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      show_as_dropdown?: boolean;
+      /**
+       * The poll's question and answer type:
+       * * `single` &mdash; Single choice.
+       * * `multiple` &mdash; Multiple choice.
+       * * `matching` &mdash; Matching.
+       * * `rank_order` &mdash; Rank order.
+       * * `short_answer` &mdash; Short answer.
+       * * `long_answer` &mdash; Long answer.
+       * * `fill_in_the_blank` &mdash; Fill in the blank.
+       * * `rating_scale` &mdash; Rating scale.
+       *
+       * @example single
+       */
+      type?:
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
+    }[];
+    /**
+     * The poll's title, up to 64 characters.
+     *
+     * @maxLength 64
+     * @example Learn something new
+     */
+    title?: string;
+  }[];
+};
+
+export type CreateBatchPollsVariables = {
+  body?: CreateBatchPollsRequestBody;
+  pathParams: CreateBatchPollsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Polls allow the meeting host to survey attendees. Create batch [polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) for a meeting.
+ *
+ *
+ *
+ * **Prerequisites**:
+ *
+ * * Host user type must be **Pro** or higher plan.
+ * * Polling feature must be enabled in the host's account.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_polls`,`meeting:write:batch_polls:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const createBatchPolls = (
+  variables: CreateBatchPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    CreateBatchPollsResponse,
+    CreateBatchPollsError,
+    CreateBatchPollsRequestBody,
+    {},
+    {},
+    CreateBatchPollsPathParams
+  >({
+    url: "/meetings/{meetingId}/batch_polls",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingPollsPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingPollsQueryParams = {
+  /**
+   * Whether to query for polls with the **Anonymous** option enabled:
+   * * `true` &mdash; Query for polls with the **Anonymous** option enabled.
+   * * `false` &mdash; Do not query for polls with the **Anonymous** option enabled.
+   *
+   * @example true
+   */
+  anonymous?: boolean;
+};
+
+export type MeetingPollsError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingPollsResponse = {
+  /**
+   * An array of polls.
+   */
+  polls?: {
+    /**
+     * The poll ID.
+     *
+     * @example QalIoKWLTJehBJ8e1xRrbQ
+     */
+    id?: string;
+    /**
+     * The meeting poll's status.
+     * `notstart` - Poll not started
+     * `started` - Poll started
+     * `ended` - Poll ended
+     * `sharing` - Sharing poll results
+     * `deactivated` - Poll deactivated
+     *
+     * @example notstart
+     */
+    status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
+    /**
+     * Whether meeting participants can answer poll questions anonymously.
+     *
+     * This value defaults to `false`.
+     *
+     * @example true
+     * @default false
+     */
+    anonymous?: boolean;
+    /**
+     * The type of poll.
+     * * `1` - Poll.
+     * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
+     * * `3` - Quiz. This feature must be enabled in your Zoom account.
+     *
+     *  This value defaults to `1`.
+     *
+     * @example 2
+     */
+    poll_type?: 1 | 2 | 3;
+    /**
+     * Information about the poll's questions.
+     */
+    questions?: {
+      /**
+       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+       * * For `short_answer` polls, a maximum of 500 characters.
+       * * For `long_answer` polls, a maximum of 2,000 characters.
+       *
+       * @example 200
+       */
+      answer_max_character?: number;
+      /**
+       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+       *
+       * @minimum 1
+       * @example 1
+       */
+      answer_min_character?: number;
+      /**
+       * Whether participants must answer the question:
+       * * `true` &mdash; The participant must answer the question.
+       * * `false` &mdash; The participant does not need to answer the question.
+       *
+       * **Note:**
+       * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+       * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      answer_required?: boolean;
+      /**
+       * The poll question's available answers. This field requires a **minimum** of two answers.
+       *
+       * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+       * * For `matching` polls, you can only provide a maximum of 16 answers.
+       * * For `rank_order` polls, you can only provide a maximum of seven answers.
+       *
+       * @minItems 2
+       */
+      answers?: string[];
+      /**
+       * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+       * * `true` &mdash; The answer is case-sensitive.
+       * * `false` &mdash; The answer is not case-sensitive.
+       *
+       * This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      case_sensitive?: boolean;
+      /**
+       * The poll question, up to 1024 characters.
+       *
+       * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+       *
+       * @maxLength 1024
+       * @example How useful was this meeting?
+       */
+      name?: string;
+      /**
+       * Information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+       */
+      prompts?: {
+        /**
+         * The question prompt's title.
+         *
+         * @example How are you?
+         */
+        prompt_question?: string;
+        /**
+         * The question prompt's correct answers:
+         * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+         * * For `rank_order` polls, you can only provide one correct answer.
+         */
+        prompt_right_answers?: string[];
+      }[];
+      /**
+       * The high score label for the `rating_max_value` field.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @example Extremely Likely
+       */
+      rating_max_label?: string;
+      /**
+       * The rating scale's maximum value, up to a maximum value of 10.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @maximum 10
+       * @example 4
+       */
+      rating_max_value?: number;
+      /**
+       * The low score label for the `rating_min_value` field.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @example Not likely
+       */
+      rating_min_label?: string;
+      /**
+       * The rating scale's minimum value. This value cannot be less than zero.
+       *
+       * This field only applies to the `rating_scale` poll.
+       *
+       * @minimum 0
+       * @example 0
+       */
+      rating_min_value?: number;
+      /**
+       * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+       *
+       *  For `single` and `matching` polls, this field only accepts one answer.
+       *
+       * @minItems 1
+       */
+      right_answers?: string[];
+      /**
+       * Whether to display the radio selection as a drop-down box:
+       * * `true` &mdash; Show as a drop-down box.
+       * * `false` &mdash; Do not show as a drop-down box.
+       *
+       * This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      show_as_dropdown?: boolean;
+      /**
+       * The poll's question and answer type:
+       * * `single` &mdash; Single choice.
+       * * `multiple` &mdash; Multiple choice.
+       * * `matching` &mdash; Matching.
+       * * `rank_order` &mdash; Rank order.
+       * * `short_answer` &mdash; Short answer.
+       * * `long_answer` &mdash; Long answer.
+       * * `fill_in_the_blank` &mdash; Fill in the blank.
+       * * `rating_scale` &mdash; Rating scale.
+       *
+       * @example single
+       */
+      type?:
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
+    }[];
+    /**
+     * The poll's title, up to 64 characters.
+     *
+     * @maxLength 64
+     * @example Learn something new
+     */
+    title?: string;
+  }[];
+  /**
+   * The number of all records available across pages
+   *
+   * @example 1
+   */
+  total_records?: number;
+};
+
+export type MeetingPollsVariables = {
+  pathParams: MeetingPollsPathParams;
+  queryParams?: MeetingPollsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Polls allow the meeting host to survey attendees. List all [polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) of a meeting.
+ *
+ *
+ *
+ * **Prerequisites**:
+ *
+ * * Host user type must be **Pro** or higher plan.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_polls`,`meeting:read:list_polls:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingPolls = (
+  variables: MeetingPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingPollsResponse,
+    MeetingPollsError,
+    undefined,
+    {},
+    MeetingPollsQueryParams,
+    MeetingPollsPathParams
+  >({
+    url: "/meetings/{meetingId}/polls",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingPollCreatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingPollCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingPollCreateResponse = {
+  /**
+   * The meeting poll ID
+   *
+   * @example QalIoKWLTJehBJ8e1xRrbQ
+   */
+  id?: string;
+  /**
+   * The status of the meeting poll:
+   *  `notstart` - Poll not started
+   *  `started` - Poll started
+   *  `ended` - Poll ended
+   *  `sharing` - Sharing poll results
+   *
+   * @example notstart
+   */
+  status?: "notstart" | "started" | "ended" | "sharing";
+  /**
+   * Whether meeting participants answer poll questions anonymously.
+   *
+   * This value defaults to `false`.
+   *
+   * @example true
+   * @default false
+   */
+  anonymous?: boolean;
+  /**
+   * The type of poll:
+   * * `1` &mdash; Poll.
+   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
+   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+   *
+   *  This value defaults to `1`.
+   *
+   * @example 2
+   */
+  poll_type?: 1 | 2 | 3;
+  /**
+   * The information about the poll's questions.
+   */
+  questions?: {
+    /**
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+     * * For `short_answer` polls, a maximum of 500 characters.
+     * * For `long_answer` polls, a maximum of 2,000 characters.
+     *
+     * @example 200
+     */
+    answer_max_character?: number;
+    /**
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+     *
+     * @minimum 1
+     * @example 1
+     */
+    answer_min_character?: number;
+    /**
+     * Whether participants must answer the question:
+     * * `true` &mdash; The participant must answer the question.
+     * * `false` &mdash; The participant does not need to answer the question.
+     *
+     * **Note:**
+     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    answer_required?: boolean;
+    /**
+     * The poll question's available answers. This field requires a **minimum** of two answers.
+     *
+     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+     * * For `matching` polls, you can only provide a maximum of 16 answers.
+     * * For `rank_order` polls, you can only provide a maximum of seven answers.
+     *
+     * @minItems 2
+     */
+    answers?: string[];
+    /**
+     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+     * * `true` &mdash; The answer is case-sensitive.
+     * * `false` &mdash; The answer is not case-sensitive.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    case_sensitive?: boolean;
+    /**
+     * The poll question, up to 1024 characters.
+     *
+     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+     *
+     * @maxLength 1024
+     * @example How useful was this meeting?
+     */
+    name?: string;
+    /**
+     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+     */
+    prompts?: {
+      /**
+       * The question prompt's title.
+       *
+       * @example How are you?
+       */
+      prompt_question?: string;
+      /**
+       * The question prompt's correct answers:
+       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+       * * For `rank_order` polls, you can only provide one correct answer.
+       */
+      prompt_right_answers?: string[];
+    }[];
+    /**
+     * The high score label for the `rating_max_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Extremely Likely
+     */
+    rating_max_label?: string;
+    /**
+     * The rating scale's maximum value, up to a maximum value of 10.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @maximum 10
+     * @example 4
+     */
+    rating_max_value?: number;
+    /**
+     * The low score label for the `rating_min_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Not likely
+     */
+    rating_min_label?: string;
+    /**
+     * The rating scale's minimum value. This value cannot be less than zero.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @minimum 0
+     * @example 0
+     */
+    rating_min_value?: number;
+    /**
+     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+     *
+     *  For `single` and `matching` polls, this field only accepts one answer.
+     *
+     * @minItems 1
+     */
+    right_answers?: string[];
+    /**
+     * Whether to display the radio selection as a drop-down box:
+     * * `true` &mdash; Show as a drop-down box.
+     * * `false` &mdash; Do not show as a drop-down box.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_as_dropdown?: boolean;
+    /**
+     * The poll's question and answer type:
+     * * `single` &mdash; Single choice.
+     * * `multiple` &mdash; Multiple choice.
+     * * `matching` &mdash; Matching.
+     * * `rank_order` &mdash; Rank order.
+     * * `short_answer` &mdash; Short answer.
+     * * `long_answer` &mdash; Long answer.
+     * * `fill_in_the_blank` &mdash; Fill in the blank.
+     * * `rating_scale` &mdash; Rating scale.
+     *
+     * @example single
+     */
+    type?:
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
+  }[];
+  /**
+   * The poll's title, up to 64 characters.
+   *
+   * @maxLength 64
+   * @example Learn something new
+   */
+  title?: string;
+};
+
+export type MeetingPollCreateRequestBody = {
+  /**
+   * Whether meeting participants answer poll questions anonymously.
+   *
+   * This value defaults to `false`.
+   *
+   * @example true
+   * @default false
+   */
+  anonymous?: boolean;
+  /**
+   * The type of poll:
+   * * `1` &mdash; Poll.
+   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
+   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+   *
+   *  This value defaults to `1`.
+   *
+   * @example 2
+   */
+  poll_type?: 1 | 2 | 3;
+  /**
+   * The information about the poll's questions.
+   */
+  questions?: {
+    /**
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+     * * For `short_answer` polls, a maximum of 500 characters.
+     * * For `long_answer` polls, a maximum of 2,000 characters.
+     *
+     * @example 200
+     */
+    answer_max_character?: number;
+    /**
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+     *
+     * @minimum 1
+     * @example 1
+     */
+    answer_min_character?: number;
+    /**
+     * Whether participants must answer the question:
+     * * `true` &mdash; The participant must answer the question.
+     * * `false` &mdash; The participant does not need to answer the question.
+     *
+     * **Note:**
+     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    answer_required?: boolean;
+    /**
+     * The poll question's available answers. This field requires a **minimum** of two answers.
+     *
+     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+     * * For `matching` polls, you can only provide a maximum of 16 answers.
+     * * For `rank_order` polls, you can only provide a maximum of seven answers.
+     *
+     * @minItems 2
+     */
+    answers?: string[];
+    /**
+     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+     * * `true` &mdash; The answer is case-sensitive.
+     * * `false` &mdash; The answer is not case-sensitive.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    case_sensitive?: boolean;
+    /**
+     * The poll question, up to 1024 characters.
+     *
+     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+     *
+     * @maxLength 1024
+     * @example How useful was this meeting?
+     */
+    name?: string;
+    /**
+     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+     */
+    prompts?: {
+      /**
+       * The question prompt's title.
+       *
+       * @example How are you?
+       */
+      prompt_question?: string;
+      /**
+       * The question prompt's correct answers:
+       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+       * * For `rank_order` polls, you can only provide one correct answer.
+       */
+      prompt_right_answers?: string[];
+    }[];
+    /**
+     * The high score label for the `rating_max_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Extremely Likely
+     */
+    rating_max_label?: string;
+    /**
+     * The rating scale's maximum value, up to a maximum value of 10.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @maximum 10
+     * @example 4
+     */
+    rating_max_value?: number;
+    /**
+     * The low score label for the `rating_min_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Not likely
+     */
+    rating_min_label?: string;
+    /**
+     * The rating scale's minimum value. This value cannot be less than zero.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @minimum 0
+     * @example 0
+     */
+    rating_min_value?: number;
+    /**
+     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+     *
+     *  For `single` and `matching` polls, this field only accepts one answer.
+     *
+     * @minItems 1
+     */
+    right_answers?: string[];
+    /**
+     * Whether to display the radio selection as a drop-down box:
+     * * `true` &mdash; Show as a drop-down box.
+     * * `false` &mdash; Do not show as a drop-down box.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_as_dropdown?: boolean;
+    /**
+     * The poll's question and answer type:
+     * * `single` &mdash; Single choice.
+     * * `multiple` &mdash; Multiple choice.
+     * * `matching` &mdash; Matching.
+     * * `rank_order` &mdash; Rank order.
+     * * `short_answer` &mdash; Short answer.
+     * * `long_answer` &mdash; Long answer.
+     * * `fill_in_the_blank` &mdash; Fill in the blank.
+     * * `rating_scale` &mdash; Rating scale.
+     *
+     * @example single
+     */
+    type?:
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
+  }[];
+  /**
+   * The poll's title, up to 64 characters.
+   *
+   * @maxLength 64
+   * @example Learn something new
+   */
+  title?: string;
+};
+
+export type MeetingPollCreateVariables = {
+  body?: MeetingPollCreateRequestBody;
+  pathParams: MeetingPollCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Polls allow the meeting host to survey attendees. Create a [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) for a meeting.
+ *
+ *
+ *
+ * **Prerequisites**:
+ *
+ * * Host user type must be **Pro** or higher plan.
+ * * Polling feature must be enabled in the host's account.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:poll`,`meeting:write:poll:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingPollCreate = (
+  variables: MeetingPollCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingPollCreateResponse,
+    MeetingPollCreateError,
+    MeetingPollCreateRequestBody,
+    {},
+    {},
+    MeetingPollCreatePathParams
+  >({
+    url: "/meetings/{meetingId}/polls",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export type MeetingPollGetPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a `long` format integer, not a simple integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+  /**
+   * The poll ID.
+   *
+   * @example QalIoKWLTJehBJ8e1xRrbQ
+   */
+  pollId: string;
+};
+
+export type MeetingPollGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingPollGetResponse = {
+  /**
+   * The meeting poll ID.
+   *
+   * @example QalIoKWLTJehBJ8e1xRrbQ
+   */
+  id?: string;
+  /**
+   * The meeting poll's status.
+   * `notstart` - Poll not started
+   * `started` - Poll started
+   * `ended` - Poll ended
+   * `sharing` - Sharing poll results
+   * `deactivated` - Poll deactivated
+   *
+   * @example notstart
+   */
+  status?: "notstart" | "started" | "ended" | "sharing" | "deactivated";
+  /**
+   * Whether meeting participants answer poll questions anonymously.
+   *
+   * This value defaults to `false`.
+   *
+   * @example true
+   * @default false
+   */
+  anonymous?: boolean;
+  /**
+   * The poll's type.
+   * * `1` - Poll.
+   * * `2` - Advanced poll. This feature must be enabled in your Zoom account.
+   * * `3` - Quiz. This feature must be enabled in your Zoom account.
+   *
+   *  This value defaults to `1`.
+   *
+   * @example 2
+   */
+  poll_type?: 1 | 2 | 3;
+  /**
+   * Information about the poll's questions.
+   */
+  questions?: {
+    /**
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
+     * * For `short_answer` polls, a maximum of 500 characters.
+     * * For `long_answer` polls, a maximum of 2,000 characters.
+     *
+     * @example 200
+     */
+    answer_max_character?: number;
+    /**
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one-character minimum value.
+     *
+     * @minimum 1
+     * @example 1
+     */
+    answer_min_character?: number;
+    /**
+     * Whether participants must answer the question.
+     * * `true` - The participant must answer the question.
+     * * `false` - The participant does not need to answer the question.
+     *
+     * **Note:**
+     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    answer_required?: boolean;
+    /**
+     * The poll question's available answers. This field requires a **minimum** of two answers.
+     *
+     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+     * * For `matching` polls, you can only provide a maximum of 16 answers.
+     * * For `rank_order` polls, you can only provide a maximum of seven answers.
+     *
+     * @minItems 2
+     */
+    answers?: string[];
+    /**
+     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+     * * `true` &mdash; The answer is case-sensitive.
+     * * `false` &mdash; The answer is not case-sensitive.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    case_sensitive?: boolean;
+    /**
+     * The poll question, up to 1024 characters.
+     *
+     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+     *
+     * @maxLength 1024
+     * @example How useful was this meeting?
+     */
+    name?: string;
+    /**
+     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+     */
+    prompts?: {
+      /**
+       * The question prompt's title.
+       *
+       * @example How are you?
+       */
+      prompt_question?: string;
+      /**
+       * The question prompt's correct answers:
+       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+       * * For `rank_order` polls, you can only provide one correct answer.
+       */
+      prompt_right_answers?: string[];
+    }[];
+    /**
+     * The high score label for the `rating_max_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Extremely Likely
+     */
+    rating_max_label?: string;
+    /**
+     * The rating scale's maximum value, up to a maximum value of 10.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @maximum 10
+     * @example 4
+     */
+    rating_max_value?: number;
+    /**
+     * The low score label for the `rating_min_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Not likely
+     */
+    rating_min_label?: string;
+    /**
+     * The rating scale's minimum value. This value cannot be less than zero.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @minimum 0
+     * @example 0
+     */
+    rating_min_value?: number;
+    /**
+     * The poll question's correct answer(s). This field is required if the poll's `type` value is `3` (Quiz).
+     *
+     *  For `single` and `matching` polls, this field only accepts one answer.
+     *
+     * @minItems 1
+     */
+    right_answers?: string[];
+    /**
+     * Whether to display the radio selection as a drop-down box.
+     * * `true` - Show as a drop-down box.
+     * * `false` - Do not show as a drop-down box.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_as_dropdown?: boolean;
+    /**
+     * The poll's question and answer type.
+     * * `single` - Single choice.
+     * * `multiple` - Multiple choice.
+     * * `matching` - Matching.
+     * * `rank_order` - Rank order.
+     * * `short_answer` - Short answer.
+     * * `long_answer` - Long answer.
+     * * `fill_in_the_blank` - Fill in the blank.
+     * * `rating_scale` - Rating scale.
+     *
+     * @example single
+     */
+    type?:
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
+  }[];
+  /**
+   * The poll's title, up to 64 characters.
+   *
+   * @maxLength 64
+   * @example Learn something new
+   */
+  title?: string;
+};
+
+export type MeetingPollGetVariables = {
+  pathParams: MeetingPollGetPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
+ *
+ * **Prerequisites**:
+ * * Host must have Pro or higher plan.
+ * * Enable the **Meeting Polls/Quizzes** setting in the Zoom web portal.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:poll`,`meeting:read:poll:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingPollGet = (
+  variables: MeetingPollGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingPollGetResponse,
+    MeetingPollGetError,
+    undefined,
+    {},
+    {},
+    MeetingPollGetPathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingPollUpdatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+  /**
+   * The poll ID.
+   *
+   * @example QalIoKWLTJehBJ8e1xRrbQ
+   */
+  pollId: string;
+};
+
+export type MeetingPollUpdateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingPollUpdateRequestBody = {
+  /**
+   * Whether meeting participants answer poll questions anonymously.
+   *
+   * This value defaults to `false`.
+   *
+   * @example true
+   * @default false
+   */
+  anonymous?: boolean;
+  /**
+   * The type of poll.
+   * * `1` - Poll.
+   * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
+   * * `3` - Quiz. This feature must be enabled in your Zoom account.
+   *
+   *  This value defaults to `1`.
+   *
+   * @example 2
+   */
+  poll_type?: 1 | 2 | 3;
+  /**
+   * The information about the poll's questions.
+   */
+  questions?: {
+    /**
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
+     * * For `short_answer` polls, a maximum of 500 characters.
+     * * For `long_answer` polls, a maximum of 2,000 characters.
+     *
+     * @example 200
+     */
+    answer_max_character?: number;
+    /**
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one character minimum value.
+     *
+     * @minimum 1
+     * @example 1
+     */
+    answer_min_character?: number;
+    /**
+     * Whether participants must answer the question.
+     * * `true` - The participant must answer the question.
+     * * `false` - The participant does not need to answer the question.
+     *
+     * **Note:**
+     * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
+     * * When the poll's `type` value is the `2` (Advanced Poll) or `3` (Quiz) values, this value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    answer_required?: boolean;
+    /**
+     * The poll question's available answers. This field requires a **minimum** of two answers.
+     *
+     * * For `single` and `multiple` polls, you can only provide a maximum of 10 answers.
+     * * For `matching` polls, you can only provide a maximum of 16 answers.
+     * * For `rank_order` polls, you can only provide a maximum of seven answers.
+     *
+     * @minItems 2
+     */
+    answers?: string[];
+    /**
+     * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
+     * * `true` - The answer is case-sensitive.
+     * * `false` - The answer is not case-sensitive.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    case_sensitive?: boolean;
+    /**
+     * The poll question, up to 1024 characters.
+     *
+     * For `fill_in_the_blank` polls, this field is the poll's question. For each value that the user must fill in, ensure that there are the same number of `right_answers` values.
+     *
+     * @maxLength 1024
+     * @example How useful was this meeting?
+     */
+    name?: string;
+    /**
+     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You must provide a minimum of two prompts, up to a maximum of 10 prompts.
+     */
+    prompts?: {
+      /**
+       * The question prompt's title.
+       *
+       * @example How are you?
+       */
+      prompt_question?: string;
+      /**
+       * The question prompt's correct answers:
+       * * For `matching` polls, you must provide a minimum of two correct answers, up to a maximum of 10 correct answers.
+       * * For `rank_order` polls, you can only provide one correct answer.
+       */
+      prompt_right_answers?: string[];
+    }[];
+    /**
+     * The high score label for the `rating_max_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Extremely Likely
+     */
+    rating_max_label?: string;
+    /**
+     * The rating scale's maximum value, up to a maximum value of 10.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @maximum 10
+     * @example 4
+     */
+    rating_max_value?: number;
+    /**
+     * The low score label for the `rating_min_value` field.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @example Not likely
+     */
+    rating_min_label?: string;
+    /**
+     * The rating scale's minimum value. This value cannot be less than zero.
+     *
+     * This field only applies to the `rating_scale` poll.
+     *
+     * @minimum 0
+     * @example 0
+     */
+    rating_min_value?: number;
+    /**
+     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+     *
+     *  For `single` and `matching` polls, this field only accepts one answer.
+     *
+     * @minItems 1
+     */
+    right_answers?: string[];
+    /**
+     * Whether to display the radio selection as a drop-down box.
+     * * `true` - Show as a drop-down box.
+     * * `false` - Do not show as a drop-down box.
+     *
+     * This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_as_dropdown?: boolean;
+    /**
+     * The poll's question and answer type.
+     * * `single` - Single choice.
+     * * `multiple` - Multiple choice.
+     * * `matching` - Matching.
+     * * `rank_order` - Rank order.
+     * * `short_answer` - Short answer.
+     * * `long_answer` - Long answer.
+     * * `fill_in_the_blank` - Fill in the blank.
+     * * `rating_scale` - Rating scale.
+     *
+     * @example single
+     */
+    type?:
+      | "single"
+      | "multiple"
+      | "matching"
+      | "rank_order"
+      | "short_answer"
+      | "long_answer"
+      | "fill_in_the_blank"
+      | "rating_scale";
+  }[];
+  /**
+   * The poll's title, up to 64 characters.
+   *
+   * @maxLength 64
+   * @example Learn something new
+   */
+  title?: string;
+};
+
+export type MeetingPollUpdateVariables = {
+  body?: MeetingPollUpdateRequestBody;
+  pathParams: MeetingPollUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Polls allow the meeting host to survey attendees. Update information of a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
+ *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * The **Meeting Polls/Quizzes** setting enabled in the Zoom web portal.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:poll`,`meeting:update:poll:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingPollUpdate = (
+  variables: MeetingPollUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingPollUpdateError,
+    MeetingPollUpdateRequestBody,
+    {},
+    {},
+    MeetingPollUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "put",
+    ...variables,
+    signal,
+  });
+
+export type MeetingPollDeletePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+  /**
+   * The poll ID
+   *
+   * @example QalIoKWLTJehBJ8e1xRrbQ
+   */
+  pollId: string;
+};
+
+export type MeetingPollDeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingPollDeleteVariables = {
+  pathParams: MeetingPollDeletePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Polls allow the meeting host to survey attendees. Delete a meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
+ *
+ * **Prerequisites**:
+ *
+ * * Host user type must be **Pro**.
+ * * Polling feature should be enabled in the host's account.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:poll`,`meeting:delete:poll:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingPollDelete = (
+  variables: MeetingPollDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingPollDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingPollDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/polls/{pollId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export type ListPastMeetingPollsPathParams = {
+  /**
+   * The meeting's ID or universally unique ID (UUID).
+   * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
+   * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   */
+  meetingId: string;
+};
+
+export type ListPastMeetingPollsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListPastMeetingPollsResponse = {
+  /**
+   * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in **long** format(represented as int64 data type in JSON), also known as the meeting number.
+   *
+   * @format int64
+   * @example 93398114182
+   */
+  id?: number;
+  questions?: {
+    /**
+     * Email address of the user who submitted answers to the poll. If the user is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for details.
+     *
+     * @example jchill@example.com
+     */
+    email?: string;
+    /**
+     * Name of the user who submitted answers to the poll. If `anonymous` option is enabled for a poll, the participant's polling information will be kept anonymous and the value of `name` field will be `Anonymous Attendee`.
+     *
+     * @example Jill Chill
+     */
+    name?: string;
+    question_details?: {
+      /**
+       * Answer submitted by the user.
+       *
+       * @example Good
+       */
+      answer?: string;
+      /**
+       * Date and time at which the answer to the poll was submitted.
+       *
+       * @format date-time
+       * @example 2022-03-26T05:37:59Z
+       */
+      date_time?: string;
+      /**
+       * Unique identifier of the poll.
+       *
+       * @example QalIoKWLTJehBJ8e1xRrbQ
+       */
+      polling_id?: string;
+      /**
+       * Question asked during the poll.
+       *
+       * @example How are you?
+       */
+      question?: string;
+    }[];
+  }[];
+  /**
+   * The start time of the meeting.
+   *
+   * @format date-time
+   * @example 2022-03-26T05:37:59Z
+   */
+  start_time?: string;
+  /**
+   * Meeting UUID.
+   *
+   * @example Vg8IdgluR5WDeWIkpJlElQ==
+   */
+  uuid?: string;
+};
+
+export type ListPastMeetingPollsVariables = {
+  pathParams: ListPastMeetingPollsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * [Polls](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings) allow the meeting host to survey attendees. List poll results of a meeting.
+ *
+ *
+ *
+ * **Prerequisites**:
+ *
+ * * Host user type must be **Pro**.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_poll_results`,`meeting:read:list_poll_results:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const listPastMeetingPolls = (
+  variables: ListPastMeetingPollsVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListPastMeetingPollsResponse,
+    ListPastMeetingPollsError,
+    undefined,
+    {},
+    {},
+    ListPastMeetingPollsPathParams
+  >({
+    url: "/past_meetings/{meetingId}/polls",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
 export type ReportSignInSignOutActivitiesQueryParams = {
   /**
@@ -21497,6 +20281,1054 @@ export const updateSIPPhonePhones = (
     signal,
   });
 
+export type ListmeetingsummariesQueryParams = {
+  /**
+   * The number of records returned within a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
+   */
+  next_page_token?: string;
+  /**
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
+   *
+   * @format date-time
+   * @example 2023-10-19T07:00:00Z
+   */
+  from?: string;
+  /**
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
+   *
+   * @format date-time
+   * @example 2023-10-20T07:00:00Z
+   */
+  to?: string;
+};
+
+export type ListmeetingsummariesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListmeetingsummariesResponse = {
+  /**
+   * The number of records returned with a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * Use the next page token to paginate through a large set of results. The next page token returns whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
+   */
+  next_page_token?: string;
+  /**
+   * The start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
+   *
+   * @format date-time
+   * @example 2023-10-19T07:00:00Z
+   */
+  from?: string;
+  /**
+   * The end date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` UTC format, used to retrieve the meeting summaries' creation date range.
+   *
+   * @format date-time
+   * @example 2023-10-20T07:00:00Z
+   */
+  to?: string;
+  /**
+   * List of meeting summary objects.
+   */
+  summaries?: {
+    /**
+     * The ID of the user who is set as the meeting host.
+     *
+     * @example 30R7kT7bTIKSNUFEuH_Qlg
+     */
+    meeting_host_id?: string;
+    /**
+     * The meeting host's email address.
+     *
+     * @format email
+     * @example jchill@example.com
+     */
+    meeting_host_email?: string;
+    /**
+     * Unique meeting ID. Each meeting instance generates its own meeting UUID. After a meeting ends, a new UUID is generated for the next instance of the meeting. Retrieve a list of UUIDs from past meeting instances using the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API. [Double encode](/docs/api/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+     *
+     * @example aDYlohsHRtCd4ii1uC2+hA==
+     */
+    meeting_uuid?: string;
+    /**
+     * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-) - the meeting's unique identifier in **long** format, represented as int64 data type in JSON, also known as the meeting number.
+     *
+     * @format int64
+     * @example 97763643886
+     */
+    meeting_id?: number;
+    /**
+     * Meeting topic.
+     *
+     * @example My Meeting
+     */
+    meeting_topic?: string;
+    /**
+     * The meeting's start date and time.
+     *
+     * @format date-time
+     * @example 2019-07-15T23:24:52Z
+     */
+    meeting_start_time?: string;
+    /**
+     * The meeting's end date and time.
+     *
+     * @format date-time
+     * @example 2020-07-15T23:30:19Z
+     */
+    meeting_end_time?: string;
+    /**
+     * The summary's start date and time.
+     *
+     * @format date-time
+     * @example 2019-07-15T23:24:52Z
+     */
+    summary_start_time?: string;
+    /**
+     * The summary's end date and time.
+     *
+     * @format date-time
+     * @example 2020-07-15T23:30:19Z
+     */
+    summary_end_time?: string;
+    /**
+     * The date and time when the meeting summary was created.
+     *
+     * @format date-time
+     * @example 2019-07-15T23:24:52Z
+     */
+    summary_created_time?: string;
+    /**
+     * The date and time when the meeting summary was last modified.
+     *
+     * @format date-time
+     * @example 2020-07-15T23:30:19Z
+     */
+    summary_last_modified_time?: string;
+  }[];
+};
+
+export type ListmeetingsummariesVariables = {
+  queryParams?: ListmeetingsummariesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve a list of all meeting or webinar summaries available for an account.
+ *
+ * **Prerequisites**
+ * * The host must have a Pro, Business, or higher subscription plan.
+ * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * * End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_summaries:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const listmeetingsummaries = (
+  variables: ListmeetingsummariesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListmeetingsummariesResponse,
+    ListmeetingsummariesError,
+    undefined,
+    {},
+    ListmeetingsummariesQueryParams,
+    {}
+  >({
+    url: "/meetings/meeting_summaries",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type GetameetingsummaryPathParams = {
+  /**
+   * The meeting's universally unique ID (UUID). When you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   *
+   * @example aDYlohsHRtCd4ii1uC2+hA==
+   */
+  meetingId: string;
+};
+
+export type GetameetingsummaryError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetameetingsummaryResponse = {
+  /**
+   * The ID of the user who is set as the meeting host.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
+   */
+  meeting_host_id?: string;
+  /**
+   * The meeting host's email address.
+   *
+   * @format email
+   * @example jchill@example.com
+   */
+  meeting_host_email?: string;
+  /**
+   * The unique meeting ID.
+   *
+   * Each meeting instance generates its own meeting UUID. After a meeting ends, a new UUID is generated for the next instance of the meeting.
+   *
+   *  Use the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API to retrieve a list of UUIDs from past meeting instances. [Double encode](/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+   *
+   * @example aDYlohsHRtCd4ii1uC2+hA==
+   */
+  meeting_uuid?: string;
+  /**
+   * [The meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-)
+   * The meeting's unique identifier in **long** format, represented as int64 data type in JSON. Also known as the meeting number.
+   *
+   * @format int64
+   * @example 97763643886
+   */
+  meeting_id?: number;
+  /**
+   * The meeting topic.
+   *
+   * @example My Meeting
+   */
+  meeting_topic?: string;
+  /**
+   * The meeting's start date and time.
+   *
+   * @format date-time
+   * @example 2019-07-15T23:24:52Z
+   */
+  meeting_start_time?: string;
+  /**
+   * The meeting's end date and time.
+   *
+   * @format date-time
+   * @example 2020-07-15T23:30:19Z
+   */
+  meeting_end_time?: string;
+  /**
+   * The summary's start date and time.
+   *
+   * @format date-time
+   * @example 2019-07-15T23:24:52Z
+   */
+  summary_start_time?: string;
+  /**
+   * The summary's end date and time.
+   *
+   * @format date-time
+   * @example 2020-07-15T23:30:19Z
+   */
+  summary_end_time?: string;
+  /**
+   * The date and time when the meeting summary was created.
+   *
+   * @format date-time
+   * @example 2019-07-15T23:24:52Z
+   */
+  summary_created_time?: string;
+  /**
+   * The date and time when the meeting summary was last modified.
+   *
+   * @format date-time
+   * @example 2020-07-15T23:30:19Z
+   */
+  summary_last_modified_time?: string;
+  /**
+   * The user ID of the user who last modified the meeting summary.
+   *
+   * @example Lfi0BlBQTM-bbktE9BRUvA
+   */
+  summary_last_modified_user_id?: string;
+  /**
+   * The user email of the user who last modified the meeting summary.
+   *
+   * @example user@example.com
+   */
+  summary_last_modified_user_email?: string;
+  /**
+   * The summary title.
+   *
+   * @example Meeting summary for my meeting
+   */
+  summary_title?: string;
+  /**
+   * The summary overview.
+   *
+   * @example Meeting overview
+   * @deprecated true
+   */
+  summary_overview?: string;
+  /**
+   * The summary content details.
+   *
+   * @deprecated true
+   */
+  summary_details?: {
+    /**
+     * The summary label.
+     *
+     * @example Meeting overview
+     */
+    label?: string;
+    /**
+     * The summary content.
+     *
+     * @example Meeting overview
+     */
+    summary?: string;
+  }[];
+  /**
+   * The next steps.
+   *
+   * @deprecated true
+   */
+  next_steps?: string[];
+  /**
+   * The edited summary content.
+   *
+   * @deprecated true
+   */
+  edited_summary?: {
+    /**
+     * The user edited summary overview.
+     *
+     * @example Meeting overview
+     */
+    summary_overview?: string;
+    /**
+     * The user edited summary details.
+     *
+     * @example Meeting overview
+     */
+    summary_details?: string;
+    /**
+     * The user edited next steps.
+     */
+    next_steps?: string[];
+  };
+  /**
+     * The complete meeting summary in Markdown format. This unified field is used for all summaries. For compatibility, the legacy fields `summary_overview`, `summary_details`, `next_steps`, and `edited_summary` are still returned, but are deprecated and will not be supported in the future.
+     *
+     * @example ## Key takeaways
+    - Mobile app performance issues are affecting user retention.
+    - New onboarding flow received positive feedback from beta testers.
+    - Need to prioritize accessibility improvements.
+    - Customer support response time has improved by 25%.
+    
+    ## Discussed topics
+    ### Mobile App Performance
+    Discussion of recent performance metrics and user complaints
+    - **Details**
+        - Sarah (Product): Reports of app crashes increased 15% this month
+        - Mike (Engineering): Memory optimization needed in latest release
+        - Tom (QA): Identified memory leak in photo upload feature
+    - **Conclusion**
+        - Implement performance monitoring tools
+        - Prioritize memory optimization in next sprint
+    
+    ### Onboarding Flow
+    Review of beta testing results for new user onboarding
+    - **Details**
+        - Rachel (UX): 90% completion rate in beta testing
+        - David (Product): Positive feedback on simplified registration
+    - **Conclusion**
+        - Ready for full rollout next month
+        - Need to monitor analytics post-launch
+    
+    ### Accessibility Compliance
+    Discussion of current accessibility status and needed improvements
+    - **Details**
+        - Lisa (Design): Screen reader compatibility issues identified
+        - John (Engineering): WCAG compliance at 80%
+    - **Conclusion**
+        - Create accessibility improvement roadmap
+        - Schedule external audit
+    
+    ## Challenges
+    * Resource constraints for performance optimization
+    * Integration testing environment stability issues
+    * Lack of accessibility expertise in the team
+    
+    ## Action items
+    - **Sarah**
+      - Prepare performance monitoring implementation plan
+      - Schedule follow-up meeting with engineering team
+    - **Mike**
+      - Investigate memory leak fix
+      - Document performance optimization guidelines
+    - **Lisa**
+      - Create accessibility improvement proposal
+      - Research accessibility testing tools
+    - **Rachel**
+      - Prepare onboarding analytics dashboard
+      - Document beta testing findings
+     */
+  summary_content?: string;
+  /**
+   * The URL to view the full summary document in Zoom Docs.
+   *
+   * @format uri
+   * @example https://docs.zoom.us/doc/1aBcDeFgHiJkLmNoPqRsTu
+   */
+  summary_doc_url?: string;
+};
+
+export type GetameetingsummaryVariables = {
+  pathParams: GetameetingsummaryPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the summary of a meeting or webinar.
+ *
+ * **Prerequisites**
+ * - The host must have a Pro, Business, or higher subscription plan.
+ * - For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * - For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * - End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * Learn more about [enabling or disabling AI Companion meeting summaries](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0057960).
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:summary`,`meeting:read:summary:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const getameetingsummary = (
+  variables: GetameetingsummaryVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    GetameetingsummaryResponse,
+    GetameetingsummaryError,
+    undefined,
+    {},
+    {},
+    GetameetingsummaryPathParams
+  >({
+    url: "/meetings/{meetingId}/meeting_summary",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type DeletemeetingorwebinarsummaryPathParams = {
+  /**
+   * The meeting's universally unique ID (UUID). When you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   *
+   * @example aDYlohsHRtCd4ii1uC2+hA==
+   */
+  meetingId: string;
+};
+
+export type DeletemeetingorwebinarsummaryError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type DeletemeetingorwebinarsummaryVariables = {
+  pathParams: DeletemeetingorwebinarsummaryPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete the summary of a meeting or webinar.
+ *
+ * **Prerequisites**
+ * * The host must have a Pro, Business, or higher subscription plan.
+ * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * * End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:write`,`meeting_summary:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:summary`,`meeting:delete:summary:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const deletemeetingorwebinarsummary = (
+  variables: DeletemeetingorwebinarsummaryVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    DeletemeetingorwebinarsummaryError,
+    undefined,
+    {},
+    {},
+    DeletemeetingorwebinarsummaryPathParams
+  >({
+    url: "/meetings/{meetingId}/meeting_summary",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export type MeetingSurveyGetPathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a long-format integer and **not** a simple integer. Meeting IDs can be more than 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingSurveyGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingSurveyGetResponse = {
+  /**
+   * Information about the customized meeting survey.
+   */
+  custom_survey?: {
+    /**
+     * The survey's title, up to 64 characters.
+     *
+     * @maxLength 64
+     * @example Learn something new
+     */
+    title?: string;
+    /**
+     * Allow participants to anonymously answer survey questions.
+     *
+     *  This value defaults to `true`.
+     *
+     * @example false
+     * @default false
+     */
+    anonymous?: boolean;
+    /**
+     * Whether to display the number in the question name.
+     *
+     *  This value defaults to `true`.
+     *
+     * @example false
+     * @default false
+     */
+    numbered_questions?: boolean;
+    /**
+     * Whether to display the question type in the question name.
+     *
+     *  This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_question_type?: boolean;
+    /**
+     * The survey's feedback, up to 320 characters.
+     *
+     *  This value defaults to `Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.`.
+     *
+     * @maxLength 320
+     * @example Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.
+     */
+    feedback?: string;
+    /**
+     * Information about the meeting survey's questions.
+     *
+     * @maxItems 100
+     * @minItems 1
+     */
+    questions?: {
+      /**
+       * The survey question, up to 420 characters.
+       *
+       * @example How useful was this meeting?
+       */
+      name?: string;
+      /**
+       * The survey's question and answer type.
+       * * `single` - Single choice.
+       * * `multiple` - Multiple choice.
+       * * `matching` - Matching.
+       * * `rank_order` - Rank order
+       * * `short_answer` - Short answer
+       * * `long_answer` - Long answer.
+       * * `fill_in_the_blank` - Fill in the blank
+       * * `rating_scale` - Rating scale.
+       *
+       * @example single
+       */
+      type?:
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
+      /**
+       * Whether participants must answer the question.
+       * * `true` - The participant must answer the question.
+       * * `false` - The participant does not need to answer the question.
+       *
+       *  This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      answer_required?: boolean;
+      /**
+       * Whether to display the radio selection as a drop-down box.
+       * * `true` - Show as a drop-down box.
+       * * `false` - Do not show as a drop-down box.
+       *
+       *  This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      show_as_dropdown?: boolean;
+      /**
+       * The survey question's available answers. This field requires a **minimum** of two answers.
+       *
+       * * For `single` and `multiple` questions, you can only provide a maximum of 50 answers.
+       * * For `matching` polls, you can only provide a maximum of 16 answers.
+       * * For `rank_order` polls, you can only provide a maximum of seven answers.
+       *
+       * @minItems 2
+       */
+      answers?: string[];
+      /**
+       * Information about the prompt questions. This field only applies to `matching` and `rank_order` questions. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+       *
+       * @maxItems 10
+       * @minItems 2
+       */
+      prompts?: {
+        /**
+         * The question prompt's title.
+         *
+         * @maxLength 200
+         * @example How are you?
+         */
+        prompt_question?: string;
+      }[];
+      /**
+       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` questions. You must provide at least a **one** character minimum value.
+       *
+       * @minimum 1
+       * @example 1
+       */
+      answer_min_character?: number;
+      /**
+       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` questions.
+       * * For `short_answer` question, a maximum of 500 characters.
+       * * For `long_answer` question, a maximum of 2,000 characters.
+       *
+       * @example 200
+       */
+      answer_max_character?: number;
+      /**
+       * The rating scale's minimum value. This value cannot be less than zero.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @minimum 0
+       * @example 1
+       */
+      rating_min_value?: number;
+      /**
+       * The rating scale's maximum value, up to a maximum value of 10.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maximum 10
+       * @example 4
+       */
+      rating_max_value?: number;
+      /**
+       * The low score label used for the `rating_min_value` field, up to 50 characters.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maxLength 50
+       * @example Not likely
+       */
+      rating_min_label?: string;
+      /**
+       * The high score label used for the `rating_max_value` field, up to 50 characters.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maxLength 50
+       * @example Extremely Likely
+       */
+      rating_max_label?: string;
+    }[];
+  };
+  /**
+   * Whether the **Show in the browser when the meeting ends** option is enabled.
+   * * `true` - Enabled.
+   * * `false` - Disabled.
+   *
+   *  This value defaults to `true`.
+   *
+   * @example true
+   * @default true
+   */
+  show_in_the_browser?: boolean;
+  /**
+   * The link to the third party meeting survey.
+   *
+   * @maxLength 64
+   * @example https://example.com
+   */
+  third_party_survey?: string;
+};
+
+export type MeetingSurveyGetVariables = {
+  pathParams: MeetingSurveyGetPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Display information about a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host has a **Pro** license. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled on the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:survey`,`meeting:read:survey:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingSurveyGet = (
+  variables: MeetingSurveyGetVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingSurveyGetResponse,
+    MeetingSurveyGetError,
+    undefined,
+    {},
+    {},
+    MeetingSurveyGetPathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingSurveyDeletePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingSurveyDeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingSurveyDeleteVariables = {
+  pathParams: MeetingSurveyDeletePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).
+ *
+ *  **Prerequisites:**
+ * * The host must be a **Pro** user type.
+ * * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature enabled in the host's account.
+ * * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:survey`,`meeting:delete:survey:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingSurveyDelete = (
+  variables: MeetingSurveyDeleteVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingSurveyDeleteError,
+    undefined,
+    {},
+    {},
+    MeetingSurveyDeletePathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export type MeetingSurveyUpdatePathParams = {
+  /**
+   * The meeting's ID.
+   *
+   *  When storing this value in your database, store it as a long-format integer and **not** a simple integer. Meeting IDs can be over 10 digits.
+   *
+   * @format int64
+   * @example 85746065
+   */
+  meetingId: number;
+};
+
+export type MeetingSurveyUpdateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingSurveyUpdateRequestBody = {
+  /**
+   * Information about the customized meeting survey.
+   */
+  custom_survey?: {
+    /**
+     * The survey's title, up to 64 characters.
+     *
+     * @maxLength 64
+     * @example Learn something new
+     */
+    title?: string;
+    /**
+     * Allow participants to anonymously answer survey questions.
+     *
+     *  This value defaults to `true`.
+     *
+     * @example false
+     * @default false
+     */
+    anonymous?: boolean;
+    /**
+     * Whether to display the number in the question name.
+     *
+     *  This value defaults to `true`.
+     *
+     * @example false
+     * @default false
+     */
+    numbered_questions?: boolean;
+    /**
+     * Whether to display the question type in the question name.
+     *
+     *  This value defaults to `false`.
+     *
+     * @example false
+     * @default false
+     */
+    show_question_type?: boolean;
+    /**
+     * The survey's feedback, up to 320 characters.
+     *
+     *  This value defaults to `Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.`.
+     *
+     * @maxLength 320
+     * @example Thank you so much for taking the time to complete the survey. Your feedback really makes a difference.
+     */
+    feedback?: string;
+    /**
+     * Information about the meeting survey's questions.
+     *
+     * @maxItems 100
+     * @minItems 1
+     */
+    questions?: {
+      /**
+       * The survey question, up to 420 characters.
+       *
+       * @example How useful was this meeting?
+       */
+      name?: string;
+      /**
+       * The survey's question and answer type.
+       * * `single` - Single choice.
+       * * `multiple` - Multiple choice.
+       * * `matching` - Matching.
+       * * `rank_order` - Rank order
+       * * `short_answer` - Short answer
+       * * `long_answer` - Long answer.
+       * * `fill_in_the_blank` - Fill in the blank
+       * * `rating_scale` - Rating scale.
+       *
+       * @example single
+       */
+      type?:
+        | "single"
+        | "multiple"
+        | "matching"
+        | "rank_order"
+        | "short_answer"
+        | "long_answer"
+        | "fill_in_the_blank"
+        | "rating_scale";
+      /**
+       * Whether participants must answer the question.
+       * * `true` - The participant must answer the question.
+       * * `false` - The participant does not need to answer the question.
+       *
+       *  This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      answer_required?: boolean;
+      /**
+       * Whether to display the radio selection as a drop-down box.
+       * * `true` - Show as a drop-down box.
+       * * `false` - Do not show as a drop-down box.
+       *
+       *  This value defaults to `false`.
+       *
+       * @example false
+       * @default false
+       */
+      show_as_dropdown?: boolean;
+      /**
+       * The survey question's available answers. This field requires a **minimum** of two answers.
+       *
+       * * For `single` and `multiple` questions, you can only provide a maximum of 50 answers.
+       * * For `matching` polls, you can only provide a maximum of 16 answers.
+       * * For `rank_order` polls, you can only provide a maximum of seven answers.
+       *
+       * @minItems 2
+       */
+      answers?: string[];
+      /**
+       * Information about the prompt questions. This field only applies to `matching` and `rank_order` questions. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+       *
+       * @maxItems 10
+       * @minItems 2
+       */
+      prompts?: {
+        /**
+         * The question prompt's title.
+         *
+         * @maxLength 200
+         * @example How are you?
+         */
+        prompt_question?: string;
+      }[];
+      /**
+       * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` questions. You must provide at least a **one** character minimum value.
+       *
+       * @minimum 1
+       * @example 1
+       */
+      answer_min_character?: number;
+      /**
+       * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` questions.
+       * * For `short_answer` question, a maximum of 500 characters.
+       * * For `long_answer` question, a maximum of 2,000 characters.
+       *
+       * @example 200
+       */
+      answer_max_character?: number;
+      /**
+       * The rating scale's minimum value. This value cannot be less than zero.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @minimum 0
+       * @example 1
+       */
+      rating_min_value?: number;
+      /**
+       * The rating scale's maximum value, up to a maximum value of 10.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maximum 10
+       * @example 4
+       */
+      rating_max_value?: number;
+      /**
+       * The low score label used for the `rating_min_value` field, up to 50 characters.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maxLength 50
+       * @example Not likely
+       */
+      rating_min_label?: string;
+      /**
+       * The high score label used for the `rating_max_value` field, up to 50 characters.
+       *
+       *  This field only applies to the `rating_scale` survey.
+       *
+       * @maxLength 50
+       * @example Extremely Likely
+       */
+      rating_max_label?: string;
+    }[];
+  };
+  /**
+   * Whether the **Show in the browser when the meeting ends** option is enabled.
+   * * `true` - Enabled.
+   * * `false` - Disabled.
+   *
+   *  This value defaults to `true`.
+   *
+   * @example true
+   * @default true
+   */
+  show_in_the_browser?: boolean;
+  /**
+   * The link to the third party meeting survey.
+   *
+   * @maxLength 64
+   * @example https://example.com
+   */
+  third_party_survey?: string;
+};
+
+export type MeetingSurveyUpdateVariables = {
+  body?: MeetingSurveyUpdateRequestBody;
+  pathParams: MeetingSurveyUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host must be a **Pro** user type. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled in the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:survey`,`meeting:update:survey:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const meetingSurveyUpdate = (
+  variables: MeetingSurveyUpdateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    undefined,
+    MeetingSurveyUpdateError,
+    MeetingSurveyUpdateRequestBody,
+    {},
+    {},
+    MeetingSurveyUpdatePathParams
+  >({
+    url: "/meetings/{meetingId}/survey",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
 export type TspError = Fetcher.ErrorWrapper<undefined>;
 
 export type TspResponse = {
@@ -22272,6 +22104,180 @@ export const userTSPUpdate = (
   >({
     url: "/users/{userId}/tsp/{tspId}",
     method: "patch",
+    ...variables,
+    signal,
+  });
+
+export type ListMeetingTemplatesPathParams = {
+  /**
+   * The user ID retrievable from the [List users](/api-reference/zoom-api/methods#operation/users) API.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
+   */
+  userId: string;
+};
+
+export type ListMeetingTemplatesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListMeetingTemplatesResponse = {
+  templates?: {
+    /**
+     * The template ID.
+     *
+     * @example AdxbhxCzKgSiWAw
+     */
+    id?: string;
+    /**
+     * The template name.
+     *
+     * @example My meeting template
+     */
+    name?: string;
+    /**
+     * The template type:
+     *
+     * `1`: Meeting template
+     *
+     * `2`: Admin meeting template
+     *
+     * @example 1
+     */
+    type?: number;
+  }[];
+  /**
+   * Total records found for this request.
+   *
+   * @example 1
+   */
+  total_records?: number;
+};
+
+export type ListMeetingTemplatesVariables = {
+  pathParams: ListMeetingTemplatesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List available [meeting templates](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
+ *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const listMeetingTemplates = (
+  variables: ListMeetingTemplatesVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    ListMeetingTemplatesResponse,
+    ListMeetingTemplatesError,
+    undefined,
+    {},
+    {},
+    ListMeetingTemplatesPathParams
+  >({
+    url: "/users/{userId}/meeting_templates",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export type MeetingTemplateCreatePathParams = {
+  /**
+   * The user ID retrievable from the [List users](/docs/api/rest/reference/user/methods/#operation/users) API.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
+   */
+  userId: string;
+};
+
+export type MeetingTemplateCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type MeetingTemplateCreateResponse = {
+  /**
+   * The template ID.
+   *
+   * @example AdxbhxCzKgSiWAw
+   */
+  id?: string;
+  /**
+   * The template name.
+   *
+   * @example My Meeting Template
+   */
+  name?: string;
+};
+
+export type MeetingTemplateCreateRequestBody = {
+  /**
+   * The meeting ID - the meeting number in long (int64) format.
+   *
+   * @format int64
+   * @example 96172769962
+   */
+  meeting_id?: number;
+  /**
+   * The template name.
+   *
+   * @example My Meeting Template
+   */
+  name?: string;
+  /**
+   * If the field is set to `true`, the recurrence meeting template will be saved as the scheduled meeting.
+   *
+   * @example false
+   * @default false
+   */
+  save_recurrence?: boolean;
+  /**
+   * Overwrite an existing meeting template if the template is created from same existing meeting.
+   *
+   * @example false
+   * @default false
+   */
+  overwrite?: boolean;
+};
+
+export type MeetingTemplateCreateVariables = {
+  body?: MeetingTemplateCreateRequestBody;
+  pathParams: MeetingTemplateCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a meeting template from an existing meeting.
+ *
+ * **Prerequisites**
+ * * Host user must have a Zoom Meetings Basic license or higher.
+ * * You can only create up to 40 meeting templates.
+ *
+ * [Learn more about creating and managing meeting templates](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0067229).
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:template`,`meeting:write:template:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const meetingTemplateCreate = (
+  variables: MeetingTemplateCreateVariables,
+  signal?: AbortSignal,
+) =>
+  fetch<
+    MeetingTemplateCreateResponse,
+    MeetingTemplateCreateError,
+    MeetingTemplateCreateRequestBody,
+    {},
+    {},
+    MeetingTemplateCreatePathParams
+  >({
+    url: "/users/{userId}/meeting_templates",
+    method: "post",
     ...variables,
     signal,
   });
@@ -32422,6 +32428,7 @@ export const operationsByTag = {
     listArchivedFiles,
     getArchivedFileStatistics,
     updateArchivedFile,
+    meetingLocalArchivingArchiveToken,
     getArchivedFiles,
     deleteArchivedFiles,
   },
@@ -32460,34 +32467,18 @@ export const operationsByTag = {
     changeDeviceAssociation,
   },
   h323Devices: { deviceList, deviceCreate, deviceDelete, deviceUpdate },
-  meetings: {
+  inMeetingApps: { meetingAppAdd, meetingAppDelete },
+  inMeetingFeatures: {
     deleteMeetingChatMessageById,
     updateMeetingChatMessageById,
     inMeetingControl,
-    meetingRTMSStatusUpdate,
-    listmeetingsummaries,
-    meeting,
-    meetingDelete,
-    meetingUpdate,
-    createBatchPolls,
+    meetingLocalRecordingJoinToken,
+    meetingToken,
+  },
+  invitationRegistration: {
     addBatchRegistrants,
     meetingInvitation,
     meetingInviteLinksCreate,
-    meetingLiveStreamingJoinToken,
-    meetingLocalArchivingArchiveToken,
-    meetingLocalRecordingJoinToken,
-    getMeetingLiveStreamDetails,
-    meetingLiveStreamUpdate,
-    meetingLiveStreamStatusUpdate,
-    getameetingsummary,
-    deletemeetingorwebinarsummary,
-    meetingAppAdd,
-    meetingAppDelete,
-    meetingPolls,
-    meetingPollCreate,
-    meetingPollGet,
-    meetingPollUpdate,
-    meetingPollDelete,
     meetingRegistrants,
     meetingRegistrantCreate,
     meetingRegistrantsQuestionsGet,
@@ -32495,24 +32486,38 @@ export const operationsByTag = {
     meetingRegistrantStatus,
     meetingRegistrantGet,
     meetingregistrantdelete,
+  },
+  liveStreaming: {
+    meetingLiveStreamingJoinToken,
+    getMeetingLiveStreamDetails,
+    meetingLiveStreamUpdate,
+    meetingLiveStreamStatusUpdate,
+  },
+  meetings: {
+    meetingRTMSStatusUpdate,
+    meeting,
+    meetingDelete,
+    meetingUpdate,
     getSipDialingWithPasscode,
     meetingStatus,
-    meetingSurveyGet,
-    meetingSurveyDelete,
-    meetingSurveyUpdate,
-    meetingToken,
     pastMeetingDetails,
     pastMeetings,
     pastMeetingParticipants,
-    listPastMeetingPolls,
     listPastMeetingQA,
-    listMeetingTemplates,
-    meetingTemplateCreate,
     meetings,
     meetingCreate,
     listUpcomingMeeting,
   },
   pac: { userPACs },
+  polls: {
+    createBatchPolls,
+    meetingPolls,
+    meetingPollCreate,
+    meetingPollGet,
+    meetingPollUpdate,
+    meetingPollDelete,
+    listPastMeetingPolls,
+  },
   reports: {
     reportSignInSignOutActivities,
     getBillingReport,
@@ -32544,6 +32549,12 @@ export const operationsByTag = {
     deleteSIPPhonePhones,
     updateSIPPhonePhones,
   },
+  summaries: {
+    listmeetingsummaries,
+    getameetingsummary,
+    deletemeetingorwebinarsummary,
+  },
+  surveys: { meetingSurveyGet, meetingSurveyDelete, meetingSurveyUpdate },
   tsp: {
     tsp,
     tspUpdate,
@@ -32554,6 +32565,7 @@ export const operationsByTag = {
     userTSPDelete,
     userTSPUpdate,
   },
+  templates: { listMeetingTemplates, meetingTemplateCreate },
   trackingField: {
     trackingfieldList,
     trackingfieldCreate,
