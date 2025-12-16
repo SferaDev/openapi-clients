@@ -67597,6 +67597,19 @@ export type ZeroTrustGatewayRuleSettings = {
     ipv6?: string;
   } | null;
   /**
+   * Configure whether a copy of the HTTP request will be sent to storage when the rule matches.
+   *
+   * @x-stainless-terraform-configurability optional
+   */
+  forensic_copy?: {
+    /**
+     * Enable sending the copy to storage.
+     *
+     * @x-auditable true
+     */
+    enabled?: boolean;
+  } | null;
+  /**
    * Ignore category matches at CNAME domains in a response. When off, evaluate categories in this rule against all CNAME domain categories in the response. Settable only for `dns` and `dns_resolver` rules.
    *
    * @example true
@@ -67968,7 +67981,10 @@ export type ZeroTrustGatewaySchemasType =
   | "URL"
   | "DOMAIN"
   | "EMAIL"
-  | "IP";
+  | "IP"
+  | "CATEGORY"
+  | "LOCATION"
+  | "DEVICE";
 
 /**
  * Identify the API resource with a UUID.
