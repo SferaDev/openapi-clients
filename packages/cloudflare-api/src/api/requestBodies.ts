@@ -164,6 +164,10 @@ export type RealtimekitAddParticipantBody = {
   preset_name: string;
 };
 
+export type RealtimekitCreateApp = {
+  name: string;
+};
+
 export type RealtimekitCreateMeetingBody = {
   ai_config?: Schemas.RealtimekitAIConfig;
   /**
@@ -178,16 +182,6 @@ export type RealtimekitCreateMeetingBody = {
    * @default false
    */
   persist_chat?: boolean;
-  /**
-   * The region in which this meeting should be created.
-   */
-  preferred_region?:
-    | "ap-south-1"
-    | "ap-southeast-1"
-    | "us-east-1"
-    | "eu-central-1"
-    | any
-    | null;
   /**
    * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
    *
@@ -227,11 +221,11 @@ export type RealtimekitCreatePollBody = {
   /**
    * Different options for the question
    */
-  options?: string[];
+  options: string[];
   /**
    * Question of the poll
    */
-  question?: string;
+  question: string;
 };
 
 export type RealtimekitCreatePresetBody = Schemas.RealtimekitPreset;
@@ -256,15 +250,15 @@ export type RealtimekitEditParticipantBody = {
 };
 
 export type RealtimekitKickParticipantsBody = {
-  custom_participant_ids?: string[];
-  participant_ids?: string[];
+  custom_participant_ids: string[];
+  participant_ids: string[];
 };
 
 export type RealtimekitMuteAllParticipantsBody = {
   /**
    * if false, participants won't be able to unmute themselves after they are muted
    */
-  allow_unmute?: boolean;
+  allow_unmute: boolean;
 };
 
 export type RealtimekitStartRecording = {
@@ -316,7 +310,7 @@ export type RealtimekitStartTrackRecordingBody = {
   /**
    * ID of the meeting to record.
    */
-  meeting_id?: string;
+  meeting_id: string;
 };
 
 export type RealtimekitUpdateMeetingBody = {
@@ -333,14 +327,6 @@ export type RealtimekitUpdateMeetingBody = {
    * @default false
    */
   persist_chat?: boolean;
-  /**
-   * The region in which this meeting should be created.
-   */
-  preferred_region?:
-    | "ap-south-1"
-    | "ap-southeast-1"
-    | "us-east-1"
-    | "eu-central-1";
   /**
    * Specifies if the meeting should start getting recorded as soon as someone joins the meeting.
    *
