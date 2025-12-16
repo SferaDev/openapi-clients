@@ -726,8 +726,26 @@ export type Deploy = {
   }[];
 };
 
+/**
+ * Deploy files can be provided in two ways:
+ * 1. As a JSON object using 'files' (a hash mapping file paths to SHA1 digests), OR
+ * 2. As a zip file using one of these methods:
+ *    - Set Content-Type to 'application/zip' and send the zip file as the raw request body
+ *    - Include the zip file content in the 'zip' field of this JSON object with Content-Type 'application/json'
+ */
 export type DeployFiles = {
+  /**
+   * A hash mapping file paths to SHA1 digests of the file contents.
+   */
   files?: Record<string, any>;
+  /**
+   * A zip file containing the site files to deploy. Alternative to 'files'.
+   * To use this field, set Content-Type to 'application/json' and include the zip content here.
+   * Alternatively, you can set Content-Type to 'application/zip' and send the zip as the raw request body (not as JSON).
+   *
+   * @format binary
+   */
+  zip?: Blob;
   draft?: boolean;
   async?: boolean;
   functions?: Record<string, any>;
